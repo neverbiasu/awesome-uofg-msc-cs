@@ -5,6 +5,8 @@
  * Interactive login + Automated course material download
  */
 
+require('dotenv').config();
+
 const fs = require('fs');
 const path = require('path');
 const puppeteer = require('puppeteer');
@@ -42,6 +44,118 @@ const COURSES = {
 };
 
 const DOWNLOAD_PATH = path.join(__dirname, '..', 'downloads');
+
+const { pipeline } = require('stream');
+const { promisify } = require('util');
+const streamPipeline = promisify(pipeline);
+
+function sanitizeFilename(name) {
+  if (!name) return 'download.bin';
+  // remove path separators and control chars, replace spaces with underscore
+  let s = String(name).trim();
+  s = s.replace(/\s+/g, '_');
+  s = s.replace(/[\\/:*?"<>|\u0000-\u001F]/g, '');
+  // limit length
+  if (s.length > 200) s = s.slice(0, 200);
+  return s || 'download.bin';
+}
+
+function getFilenameFromContentDisposition(header) {
+  if (!header) return null;
+  const match = /filename\*=UTF-8''([^;]+)|filename="?([^";]+)"?/.exec(header);
+  if (match) return decodeURIComponent(match[1] || match[2]);
+  return null;
+}
+
+async function findRealFileLinkFromHtml(page, html, baseUrl) {
+  // look for pluginfile.php or links containing common extensions
+  const hrefMatch = html.match(/href=\"([^\"]*(?:pluginfile|\.pdf|\.pptx|\.docx|\.zip)[^\"]*)\"/i);
+  if (hrefMatch && hrefMatch[1]) {
+    const found = hrefMatch[1];
+    try {
+      return new URL(found, baseUrl).toString();
+    } catch (e) {
+      return found;
+    }
+  }
+  // fallback: try to find any link with pluginfile
+  const pluginMatch = html.match(/(https?:\/\/[^'"\s]*pluginfile[^'"\s]*)/i);
+  if (pluginMatch) return pluginMatch[1];
+  return null;
+}
+
+async function downloadViaFetch(page, url, filename) {
+  // Ensure download directory exists
+  if (!fs.existsSync(DOWNLOAD_PATH)) fs.mkdirSync(DOWNLOAD_PATH, { recursive: true });
+
+  // Use logged-in page cookies to fetch the file directly (avoids PDF viewer interception)
+  const cookies = await page.cookies();
+  const cookieHeader = cookies.map(c => `${c.name}=${c.value}`).join('; ');
+
+  // Try to fetch the URL
+  console.log(`Attempting fetch download: ${url}`);
+  let res;
+  try {
+    res = await fetch(url, {
+      headers: {
+        cookie: cookieHeader,
+        'User-Agent': 'Mozilla/5.0 (compatible)'
+      },
+      redirect: 'follow'
+    });
+  } catch (err) {
+    throw new Error(`Fetch request error: ${err.message}`);
+  }
+
+  if (!res) throw new Error('No response from fetch');
+
+  // If response is HTML, try to locate real file link inside and re-fetch
+  const contentType = res.headers.get('content-type') || '';
+  if (contentType.includes('text/html')) {
+    const body = await res.text();
+    const realLink = await findRealFileLinkFromHtml(page, body, url);
+    if (realLink) {
+      console.log(`Found embedded file link in HTML: ${realLink} - retrying fetch`);
+      res = await fetch(realLink, {
+        headers: { cookie: cookieHeader, 'User-Agent': 'Mozilla/5.0 (compatible)' },
+        redirect: 'follow'
+      });
+    } else {
+      throw new Error('Response is HTML and no downloadable link found inside');
+    }
+  }
+
+  if (!res.ok) {
+    throw new Error(`Fetch failed: ${res.status} ${res.statusText}`);
+  }
+
+  // Determine filename: Content-Disposition > passed filename > URL path
+  let outName = null;
+  const cd = res.headers.get('content-disposition');
+  if (cd) outName = getFilenameFromContentDisposition(cd);
+  if (!outName && filename && filename !== 'unknown') outName = filename;
+  if (!outName) {
+    try {
+      const parsed = new URL(res.url || url);
+      outName = decodeURIComponent(path.basename(parsed.pathname)) || 'download.bin';
+    } catch (e) {
+      outName = 'download.bin';
+    }
+  }
+
+  outName = sanitizeFilename(outName);
+  const dest = path.join(DOWNLOAD_PATH, outName);
+
+  // Stream to file
+  try {
+    await streamPipeline(res.body, fs.createWriteStream(dest));
+  } catch (err) {
+    throw new Error(`Failed to write file: ${err.message}`);
+  }
+
+  console.log(`Saved file to ${dest}`);
+  return dest;
+}
 
 class CompleteMoodleScraper {
   constructor() {
@@ -294,24 +408,24 @@ class CompleteMoodleScraper {
 
   async downloadAllFilesFromTable() {
     console.log('📥 Downloading all files from table...');
-    
+
     // Find all download links in tables
     const downloadLinks = await this.page.evaluate(() => {
       const tables = document.querySelectorAll('table');
       const links = [];
-      
+
       tables.forEach(table => {
         const tableLinks = table.querySelectorAll('a[href]');
         tableLinks.forEach(link => {
           // Filter for file download links (typically have file extensions or resource paths)
           const href = link.href;
           const text = link.textContent.trim();
-          
-          if (href.includes('/mod/resource/') || 
+
+          if (href.includes('/mod/resource/') ||
               href.includes('/pluginfile.php/') ||
               href.match(/\.(pdf|doc|docx|ppt|pptx|xls|xlsx|zip|txt|csv)$/i) ||
               link.querySelector('img[src*="icon"]')) {
-            
+
             links.push({
               url: href,
               text: text,
@@ -320,48 +434,58 @@ class CompleteMoodleScraper {
           }
         });
       });
-      
+
       return links;
     });
-    
+
     console.log(`Found ${downloadLinks.length} downloadable files`);
-    
+
     if (downloadLinks.length === 0) {
       console.log('❌ No downloadable files found in tables');
       return [];
     }
-    
+
     const downloadedFiles = [];
-    
+
     for (let i = 0; i < downloadLinks.length; i++) {
       const link = downloadLinks[i];
-      console.log(`Downloading ${i + 1}/${downloadLinks.length}: ${link.text}`);
-      
+      console.log(`Downloading ${i + 1}/${downloadLinks.length}: ${link.text} -> ${link.url}`);
+
       try {
-        // Create a new page for each download to avoid navigation issues
-        const downloadPage = await this.browser.newPage();
-        
-        // Set download behavior for this page too
-        const client = await downloadPage.target().createCDPSession();
-        await client.send('Page.setDownloadBehavior', {
-          behavior: 'allow',
-          downloadPath: DOWNLOAD_PATH
-        });
-        
-        // Navigate to download link
-        await downloadPage.goto(link.url, { waitUntil: 'networkidle2' });
-        
-        // Wait a moment for download to start
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        
-        await downloadPage.close();
-        downloadedFiles.push(link);
-        
-      } catch (error) {
-        console.log(`❌ Failed to download ${link.text}: ${error.message}`);
+        // Prefer direct fetch using authenticated cookies to avoid in-browser PDF viewer
+        const saved = await downloadViaFetch(this.page, link.url, link.filename);
+        console.log(`✅ Saved via fetch: ${saved}`);
+        downloadedFiles.push({ ...link, savedPath: saved });
+      } catch (fetchErr) {
+        console.log(`⚠️ Fetch download failed for ${link.url}: ${fetchErr.message}`);
+        console.log('Fallback: attempt in-browser download...');
+
+        try {
+          const downloadPage = await this.browser.newPage();
+          const client = await downloadPage.target().createCDPSession();
+          await client.send('Page.setDownloadBehavior', {
+            behavior: 'allow',
+            downloadPath: DOWNLOAD_PATH
+          });
+
+          const response = await downloadPage.goto(link.url, { waitUntil: 'networkidle2' });
+          // log status for debugging
+          try {
+            console.log('Response status:', response && response.status());
+          } catch (e) {
+            // ignore if response is null
+          }
+
+          // Wait a moment for download to start
+          await new Promise(resolve => setTimeout(resolve, 2000));
+          await downloadPage.close();
+          downloadedFiles.push(link);
+        } catch (err) {
+          console.log(`❌ Failed fallback download for ${link.text}: ${err.message}`);
+        }
       }
     }
-    
+
     console.log(`✅ Downloaded ${downloadedFiles.length} files to ${DOWNLOAD_PATH}`);
     return downloadedFiles;
   }
@@ -423,33 +547,52 @@ class CompleteMoodleScraper {
 
 async function main() {
   console.log('🎓 UofG Moodle Complete Material Scraper');
-  console.log('=========================================\n');
+  console.log('=========================================');
 
-  const email = await askQuestion('Enter your UofG email address: ');
-  const password = await askQuestion('Enter your password: ');
+  // Read credentials from environment (.env) or prompt if missing.
+  let email = process.env.MOODLE_USER || process.env.UOFG_EMAIL || process.env.EMAIL;
+  let password = process.env.MOODLE_PASS || process.env.UOFG_PASSWORD || process.env.PASSWORD;
+
+  if (!email) {
+    email = await askQuestion('Enter your UofG email address: ');
+  }
+  if (!password) {
+    password = await askQuestion('Enter your password: ');
+  }
   
   const scraper = new CompleteMoodleScraper();
   
   try {
     await scraper.initialize();
     await scraper.login(email, password);
-    await scraper.navigateToMyCourses();
-    
-    const courseCode = await scraper.selectCourse();
-    await scraper.navigateToCourse(courseCode);
-    
-    const foundResources = await scraper.findAndClickResources();
-    
-    if (foundResources) {
-      const downloadedFiles = await scraper.downloadAllFilesFromTable();
-      await scraper.organizeMaterials(courseCode, downloadedFiles);
-      
-      console.log('\n🎉 Material collection complete!');
-      console.log(`Check the ${COURSES[courseCode].localPath} folder for your materials.`);
-    } else {
-      console.log('❌ Could not find Resources section. Please check the course structure.');
+
+    let keepRunning = true;
+
+    while (keepRunning) {
+      await scraper.navigateToMyCourses();
+
+      const courseCode = await scraper.selectCourse();
+      await scraper.navigateToCourse(courseCode);
+
+      const foundResources = await scraper.findAndClickResources();
+
+      if (foundResources) {
+        const downloadedFiles = await scraper.downloadAllFilesFromTable();
+        await scraper.organizeMaterials(courseCode, downloadedFiles);
+        console.log(`\n🎉 Material collection for ${courseCode} complete!`);
+        console.log(`Check the ${COURSES[courseCode].localPath} folder for your materials.`);
+      } else {
+        console.log('❌ Could not find Resources section. Please check the course structure.');
+      }
+
+      const again = await askQuestion('\nDo you want to scrape another course? (y/n): ');
+      if (!again || !['y', 'yes'].includes(again.toLowerCase().trim())) {
+        keepRunning = false;
+      } else {
+        console.log('\n🔁 Preparing to scrape another course. You may navigate in the browser if needed.');
+      }
     }
-    
+
   } catch (error) {
     console.error('❌ Error:', error.message);
   } finally {
