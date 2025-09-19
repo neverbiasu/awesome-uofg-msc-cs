@@ -14,12 +14,6 @@ export default function HomePage() {
         >
           📝 Course Notes & Handbook
         </Link>
-        <Link
-          href="/docs"
-          className="text-fd-foreground font-semibold underline"
-        >
-          📚 Documentation
-        </Link>
       </div>
     </main>
   );
