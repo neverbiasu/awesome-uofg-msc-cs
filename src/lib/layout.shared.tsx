@@ -20,11 +20,17 @@ export function baseOptions(): BaseLayoutProps {
           >
             <circle cx={12} cy={12} r={12} fill="currentColor" />
           </svg>
-          My App
+          UofG MSc CS
         </>
       ),
     },
     // see https://fumadocs.dev/docs/ui/navigation/links
-    links: [],
+    links: [
+      {
+        text: 'Notes',
+        url: '/notes',
+        active: 'nested-url',
+      },
+    ],
   };
 }
