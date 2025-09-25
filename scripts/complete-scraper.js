@@ -1,16 +1,22 @@
 #!/usr/bin/env node
 
 /**
- * Complete UofG Moodle Material Scraper
+ * Complete UofG Moodle Material Scraper (ES6 module)
  * Interactive login + Automated course material download
  */
 
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
 
-const fs = require('fs');
-const path = require('path');
-const puppeteer = require('puppeteer');
-const readline = require('readline');
+import fs from 'fs';
+import path from 'path';
+import puppeteer from 'puppeteer';
+import readline from 'readline';
+import { pipeline } from 'stream/promises';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -33,6 +39,10 @@ const COURSES = {
     name: 'Data Science and Systems',
     localPath: 'materials/semester-1/COMPSCI5089-data-science-systems'
   },
+  'COMPSCI5092': {
+    name: 'Research and Professional Skills',
+    localPath: 'materials/semester-1/COMPSCI5092-research-professional-skills'
+  },
   'COMPSCI5100': {
     name: 'Machine Learning & AI',
     localPath: 'materials/semester-1/COMPSCI5100-ml-ai'
@@ -45,17 +55,11 @@ const COURSES = {
 
 const DOWNLOAD_PATH = path.join(__dirname, '..', 'downloads');
 
-const { pipeline } = require('stream');
-const { promisify } = require('util');
-const streamPipeline = promisify(pipeline);
-
 function sanitizeFilename(name) {
   if (!name) return 'download.bin';
-  // remove path separators and control chars, replace spaces with underscore
   let s = String(name).trim();
   s = s.replace(/\s+/g, '_');
   s = s.replace(/[\\/:*?"<>|\u0000-\u001F]/g, '');
-  // limit length
   if (s.length > 200) s = s.slice(0, 200);
   return s || 'download.bin';
 }
@@ -68,7 +72,6 @@ function getFilenameFromContentDisposition(header) {
 }
 
 async function findRealFileLinkFromHtml(page, html, baseUrl) {
-  // look for pluginfile.php or links containing common extensions
   const hrefMatch = html.match(/href=\"([^\"]*(?:pluginfile|\.pdf|\.pptx|\.docx|\.zip)[^\"]*)\"/i);
   if (hrefMatch && hrefMatch[1]) {
     const found = hrefMatch[1];
@@ -78,21 +81,17 @@ async function findRealFileLinkFromHtml(page, html, baseUrl) {
       return found;
     }
   }
-  // fallback: try to find any link with pluginfile
   const pluginMatch = html.match(/(https?:\/\/[^'"\s]*pluginfile[^'"\s]*)/i);
   if (pluginMatch) return pluginMatch[1];
   return null;
 }
 
 async function downloadViaFetch(page, url, filename) {
-  // Ensure download directory exists
   if (!fs.existsSync(DOWNLOAD_PATH)) fs.mkdirSync(DOWNLOAD_PATH, { recursive: true });
 
-  // Use logged-in page cookies to fetch the file directly (avoids PDF viewer interception)
   const cookies = await page.cookies();
   const cookieHeader = cookies.map(c => `${c.name}=${c.value}`).join('; ');
 
-  // Try to fetch the URL
   console.log(`Attempting fetch download: ${url}`);
   let res;
   try {
@@ -109,7 +108,6 @@ async function downloadViaFetch(page, url, filename) {
 
   if (!res) throw new Error('No response from fetch');
 
-  // If response is HTML, try to locate real file link inside and re-fetch
   const contentType = res.headers.get('content-type') || '';
   if (contentType.includes('text/html')) {
     const body = await res.text();
@@ -129,7 +127,6 @@ async function downloadViaFetch(page, url, filename) {
     throw new Error(`Fetch failed: ${res.status} ${res.statusText}`);
   }
 
-  // Determine filename: Content-Disposition > passed filename > URL path
   let outName = null;
   const cd = res.headers.get('content-disposition');
   if (cd) outName = getFilenameFromContentDisposition(cd);
@@ -146,9 +143,9 @@ async function downloadViaFetch(page, url, filename) {
   outName = sanitizeFilename(outName);
   const dest = path.join(DOWNLOAD_PATH, outName);
 
-  // Stream to file
   try {
-    await streamPipeline(res.body, fs.createWriteStream(dest));
+    // res.body should be a Node stream in modern Node; pipeline from stream/promises handles it
+    await pipeline(res.body, fs.createWriteStream(dest));
   } catch (err) {
     throw new Error(`Failed to write file: ${err.message}`);
   }
@@ -174,14 +171,12 @@ class CompleteMoodleScraper {
     
     this.page = await this.browser.newPage();
     
-    // Set download behavior
     const client = await this.page.target().createCDPSession();
     await client.send('Page.setDownloadBehavior', {
       behavior: 'allow',
       downloadPath: DOWNLOAD_PATH
     });
 
-    // Ensure download directory exists
     if (!fs.existsSync(DOWNLOAD_PATH)) {
       fs.mkdirSync(DOWNLOAD_PATH, { recursive: true });
     }
@@ -191,15 +186,12 @@ class CompleteMoodleScraper {
     console.log('🔐 Starting login process...');
     
     try {
-      // Navigate to Moodle
       await this.page.goto('https://moodle.gla.ac.uk/login/index.php', { waitUntil: 'networkidle2' });
 
-      // Click UofG login button
       console.log('Clicking UofG email login button...');
       await this.page.waitForSelector('button[name="_eventId_AzureAuthn"], .button--full');
       await this.page.click('button[name="_eventId_AzureAuthn"], .button--full');
 
-      // Enter email
       console.log('Entering email address...');
       await this.page.waitForNavigation({ waitUntil: 'networkidle2' });
       await this.page.waitForSelector('input[type="email"], #i0116');
@@ -208,7 +200,6 @@ class CompleteMoodleScraper {
       const nextButton = await this.page.$('input[type="submit"], #idSIButton9');
       if (nextButton) await nextButton.click();
 
-      // Enter password
       console.log('Entering password...');
       await this.page.waitForNavigation({ waitUntil: 'networkidle2' });
       await this.page.waitForSelector('input[type="password"], #i0118');
@@ -217,7 +208,6 @@ class CompleteMoodleScraper {
       const signInButton = await this.page.$('input[type="submit"], #idSIButton9');
       if (signInButton) await signInButton.click();
 
-      // Handle MFA manually
       console.log('\n⚠️  Please complete any MFA verification in the browser...');
       console.log('The script will wait up to 2 minutes for you to complete authentication.');
       
@@ -247,19 +237,17 @@ class CompleteMoodleScraper {
     console.log('Please complete any MFA verification in the browser if prompted.');
     
     let attempts = 0;
-    const maxAttempts = 40; // Increase timeout to 2 minutes
+    const maxAttempts = 40;
     
     while (attempts < maxAttempts) {
       const currentUrl = this.page.url();
       
       if (currentUrl.includes('moodle.gla.ac.uk')) {
-        // Wait a bit more to ensure page loads
         await new Promise(resolve => setTimeout(resolve, 2000));
         console.log('✅ Successfully reached Moodle');
         return;
       }
       
-      // Give user feedback every 10 attempts (30 seconds)
       if (attempts % 10 === 0 && attempts > 0) {
         console.log(`Still waiting... (${attempts * 3}s elapsed)`);
         if (currentUrl.includes('microsoft.com') || currentUrl.includes('login.microsoftonline.com')) {
@@ -278,7 +266,6 @@ class CompleteMoodleScraper {
   async navigateToMyCourses() {
     console.log('📚 Navigating to My Courses...');
     
-    // Try to find "My courses" link
     const myCoursesSelectors = [
       'a[href*="/my/courses"]',
       'a[href*="courses"]',
@@ -295,12 +282,9 @@ class CompleteMoodleScraper {
           console.log('✅ Navigated to courses page');
           return;
         }
-      } catch (e) {
-        // Try next selector
-      }
+      } catch (e) {}
     }
     
-    // If direct navigation fails, try going to /my/courses.php
     console.log('Direct navigation to courses page...');
     await this.page.goto('https://moodle.gla.ac.uk/my/courses.php', { waitUntil: 'networkidle2' });
   }
@@ -313,7 +297,7 @@ class CompleteMoodleScraper {
       console.log(`${index + 1}. ${key} - ${COURSES[key].name}`);
     });
     
-    const choice = await askQuestion('\nEnter course number (1-4): ');
+    const choice = await askQuestion(`\nEnter course number (1-${courseKeys.length}): `);
     const courseIndex = parseInt(choice) - 1;
     
     if (courseIndex < 0 || courseIndex >= courseKeys.length) {
@@ -329,20 +313,8 @@ class CompleteMoodleScraper {
   async navigateToCourse(courseCode) {
     console.log(`🎯 Looking for course: ${COURSES[courseCode].name}`);
     
-    // Look for course link on the page
     const courseName = COURSES[courseCode].name;
     
-    // Try multiple approaches to find the course
-    const courseSelectors = [
-      `a[title*="${courseName}"]`,
-      `a[href*="${courseCode}"]`,
-      `a:contains("${courseName}")`,
-      `a:contains("${courseCode}")`,
-      `.coursename a:contains("${courseName}")`,
-      `.course-title a:contains("${courseName}")`
-    ];
-    
-    // Use evaluate to find course link by text content
     const courseLink = await this.page.evaluate((courseName, courseCode) => {
       const links = Array.from(document.querySelectorAll('a'));
       const foundLink = links.find(link => 
@@ -366,18 +338,14 @@ class CompleteMoodleScraper {
   async findAndClickResources() {
     console.log('🔍 Looking for Activities section with Resources...');
     
-    // Find h3 with "Activities" text and look for Resources link
     const resourcesLink = await this.page.evaluate(() => {
       const headings = Array.from(document.querySelectorAll('h3'));
       const activitiesHeading = headings.find(h => h.textContent.trim() === 'Activities');
       
       if (activitiesHeading) {
-        // Look for Resources link in the same container/div
         const container = activitiesHeading.closest('div') || activitiesHeading.parentElement;
         const resourcesLink = container.querySelector('a[href*="resource"]');
         if (resourcesLink) return resourcesLink.href;
-        
-        // Also check for text content
         const allLinksInContainer = container.querySelectorAll('a');
         const resourceLink = Array.from(allLinksInContainer).find(link => 
           link.textContent.toLowerCase().includes('resources')
@@ -385,7 +353,6 @@ class CompleteMoodleScraper {
         if (resourceLink) return resourceLink.href;
       }
       
-      // Fallback: look for any Resources link on the page
       const allLinks = Array.from(document.querySelectorAll('a'));
       const resourceLink = allLinks.find(link => 
         link.textContent.toLowerCase().includes('resources') ||
@@ -409,7 +376,6 @@ class CompleteMoodleScraper {
   async downloadAllFilesFromTable() {
     console.log('📥 Downloading all files from table...');
 
-    // Find all download links in tables
     const downloadLinks = await this.page.evaluate(() => {
       const tables = document.querySelectorAll('table');
       const links = [];
@@ -417,7 +383,6 @@ class CompleteMoodleScraper {
       tables.forEach(table => {
         const tableLinks = table.querySelectorAll('a[href]');
         tableLinks.forEach(link => {
-          // Filter for file download links (typically have file extensions or resource paths)
           const href = link.href;
           const text = link.textContent.trim();
 
@@ -452,7 +417,6 @@ class CompleteMoodleScraper {
       console.log(`Downloading ${i + 1}/${downloadLinks.length}: ${link.text} -> ${link.url}`);
 
       try {
-        // Prefer direct fetch using authenticated cookies to avoid in-browser PDF viewer
         const saved = await downloadViaFetch(this.page, link.url, link.filename);
         console.log(`✅ Saved via fetch: ${saved}`);
         downloadedFiles.push({ ...link, savedPath: saved });
@@ -469,14 +433,9 @@ class CompleteMoodleScraper {
           });
 
           const response = await downloadPage.goto(link.url, { waitUntil: 'networkidle2' });
-          // log status for debugging
           try {
             console.log('Response status:', response && response.status());
-          } catch (e) {
-            // ignore if response is null
-          }
-
-          // Wait a moment for download to start
+          } catch (e) {}
           await new Promise(resolve => setTimeout(resolve, 2000));
           await downloadPage.close();
           downloadedFiles.push(link);
@@ -496,7 +455,6 @@ class CompleteMoodleScraper {
     const coursePath = COURSES[courseCode].localPath;
     const fullCoursePath = path.join(__dirname, '..', coursePath);
     
-    // Ensure course directories exist
     const subdirs = ['lectures', 'resources', 'datasets'];
     subdirs.forEach(subdir => {
       const dirPath = path.join(fullCoursePath, subdir);
@@ -505,16 +463,12 @@ class CompleteMoodleScraper {
       }
     });
     
-    // List downloaded files
     const downloadedFilesList = fs.readdirSync(DOWNLOAD_PATH);
     console.log(`Found ${downloadedFilesList.length} files in downloads folder`);
     
-    // Move files to appropriate course folder
     downloadedFilesList.forEach(filename => {
       const sourcePath = path.join(DOWNLOAD_PATH, filename);
-      
-      // Determine destination based on file type
-      let destSubdir = 'resources'; // default
+      let destSubdir = 'resources';
       
       if (filename.toLowerCase().includes('lecture') || 
           filename.toLowerCase().includes('slide') ||
@@ -545,11 +499,71 @@ class CompleteMoodleScraper {
   }
 }
 
+async function interactiveLogin() {
+  console.log('🎓 UofG Moodle Interactive Login Tool');
+  console.log('=====================================');
+  console.log('This mode will help you complete the login process manually when MFA is required.\n');
+
+  let email = process.env.MOODLE_USER || process.env.UOFG_EMAIL || process.env.EMAIL;
+  let password = process.env.MOODLE_PASS || process.env.UOFG_PASSWORD || process.env.PASSWORD;
+
+  if (!email) {
+    email = await askQuestion('Enter your UofG email address: ');
+  }
+  if (!password) {
+    password = await askQuestion('Enter your password: ');
+  }
+
+  const scraper = new CompleteMoodleScraper();
+  
+  try {
+    await scraper.initialize();
+    await scraper.login(email, password);
+
+    console.log('\nWhat would you like to do next?');
+    console.log('1. Navigate to a specific course');
+    console.log('2. Stay on dashboard');
+    console.log('3. Exit');
+    
+    const choice = await askQuestion('Enter your choice (1-3): ');
+    
+    if (choice === '1') {
+      console.log('\nAvailable courses:');
+      console.log('- COMPSCI4084 (Programming and Systems Development)');
+      console.log('- COMPSCI5089 (Data Science and Systems)');
+      console.log('- COMPSCI5092 (Research and Professional Skills)');
+      console.log('- COMPSCI5100 (Machine Learning & AI)');
+      console.log('- HANDBOOK (MSc (IT+) & MSc (CS+) Handbook - 2025/26)');
+      
+      const courseCode = await askQuestion('Enter course code (e.g., COMPSCI4084 or HANDBOOK): ');
+      
+      console.log(`Navigating to ${courseCode}...`);
+      console.log('You can now manually navigate to your course in the browser.');
+    }
+    
+    if (choice !== '3') {
+      await askQuestion('Press Enter when you want to close the browser: ');
+    }
+
+  } catch (error) {
+    console.error('Error during login process:', error.message);
+  } finally {
+    await scraper.close();
+  }
+}
+
 async function main() {
   console.log('🎓 UofG Moodle Complete Material Scraper');
   console.log('=========================================');
 
-  // Read credentials from environment (.env) or prompt if missing.
+  // Check for interactive mode flag
+  const args = process.argv.slice(2);
+  const isInteractiveMode = args.includes('--interactive') || args.includes('-i');
+
+  if (isInteractiveMode) {
+    return await interactiveLogin();
+  }
+
   let email = process.env.MOODLE_USER || process.env.UOFG_EMAIL || process.env.EMAIL;
   let password = process.env.MOODLE_PASS || process.env.UOFG_PASSWORD || process.env.PASSWORD;
 
@@ -600,8 +614,8 @@ async function main() {
   }
 }
 
-if (require.main === module) {
+if (process.argv[1] === __filename) {
   main().catch(console.error);
 }
 
-module.exports = { CompleteMoodleScraper };
+export { CompleteMoodleScraper };
