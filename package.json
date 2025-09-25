@@ -8,16 +8,21 @@
     "start": "next start",
     "postinstall": "fumadocs-mdx",
     "lint": "eslint",
-    "scrape:complete": "node scripts/complete-scraper.js",
-    "scrape:interactive": "node scripts/interactive-login.js"
+    "scrape:moodle": "node scripts/complete-scraper.js",
+    "extract:materials": "node scripts/extract-materials.js"
   },
   "dependencies": {
+    "adm-zip": "^0.5.16",
     "fumadocs-core": "15.7.12",
     "fumadocs-mdx": "11.10.0",
     "fumadocs-ui": "15.7.12",
+    "mammoth": "^1.11.0",
     "next": "15.5.3",
+    "pdf2pic": "^3.2.0",
+    "pdfjs-dist": "^5.4.149",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
