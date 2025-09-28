@@ -1,0 +1,99 @@
+---
+title: "Python 基础"
+description: "变量与类型、运算符、序列/映射、字符串与格式化、输入输出、代码风格与类型提示"
+---
+
+## 概要
+- 目标：熟悉核心内置类型与常用操作；打牢表达式与 I/O、字符串格式化与代码风格基础。
+- 适用：后续条件/循环、数据处理与面向对象的基础。
+
+## 学习目标
+1. 识别与使用核心内置类型；熟悉切片与容器操作。
+2. 掌握比较与逻辑运算、链式比较与短路；避免 `is` 误用。
+3. 能进行输入/输出与格式化，遵循 PEP 8 与类型提示基本规范。
+
+## 关键知识点
+
+### 1. 基础类型与数据结构
+- 数值：int/float/complex；布尔：bool；空值：None。
+- 字符串：不可变；切片、拼接、格式化。
+- 序列：list（可变）、tuple（不可变）、range。
+- 映射与集合：dict、set。
+```python
+x, y = 10, 3
+print(x // y, x % y, x ** y)
+
+s = "ProgSD"
+print(s[:3], s[-2:])
+print(f"{s} length={len(s)}")
+
+info = {"name": "Alice", "score": 90}
+keys = set(info)
+```
+
+### 2. 名称绑定与可变性
+```python
+def append_item(x, bucket=None):
+    bucket = [] if bucket is None else bucket
+    bucket.append(x)
+    return bucket
+```
+> 避免将 list/dict/set 作为函数默认值；使用 `None` 占位并在函数体内初始化。
+
+### 3. 运算符与表达式
+- 比较：`==`、`!=`、`<`、`<=`、`>`、`>=`；链式比较：`0 < x < 10`。
+- 逻辑：`and` / `or` / `not`（短路）。
+- 同一性 vs 相等性：`is` 与 `==`。
+```python
+user = None
+name = (user and user.get("name")) or "anonymous"
+```
+
+### 4. 序列操作与推导式
+```python
+squares = [i * i for i in range(10) if i % 2 == 0]
+lookup = {ch: ord(ch) for ch in "abc"}
+```
+
+### 5. 字符串处理与格式化
+```python
+name, score = "Bob", 87.5
+print(f"{name:>10s} | {score:6.2f}")
+```
+
+### 6. 输入与输出（基础）
+```python
+raw = input().strip()
+try:
+    val = int(raw)
+    print("OK", val)
+except ValueError:
+    print("INVALID")
+```
+
+### 7. 代码风格与类型提示
+```python
+from typing import Iterable, List
+
+def head(xs: Iterable[int], n: int = 5) -> List[int]:
+    return list(xs)[:n]
+```
+
+## 最佳实践
+- 选择合适的数据结构表达意图；避免共享可变对象导致隐藏副作用。
+- 对输入做显式校验与异常处理；输出统一用 f-string。
+- 遵循 PEP 8；保持类型提示与文档同步。
+
+## 自我检查
+- [ ] 能解释 list/tuple/dict/set 的差异与场景。
+- [ ] 能写出纯函数并完成基本数据处理。
+- [ ] 能使用 f-string 进行对齐与数值格式化。
+
+---
+
+## 参考材料 / 内容依据
+- 讲义：python-Basics.pptx  
+  `../../../../materials/semester-1/COMPSCI4084-programming-systems/lectures/python-Basics.pptx`
+
+## 更新记录
+- 最后更新：2025-09-28
