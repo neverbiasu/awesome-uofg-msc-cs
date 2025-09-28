@@ -1,0 +1,161 @@
+---
+title: "Using Git and GitHub"
+description: "本地-远程闭环、分支与合并、提交规范、冲突解决、.gitignore 与常见问题"
+---
+
+# 使用 Git 和 GitHub
+
+## 概要
+- 目标：完成“本地开发 → 版本管理 → 远程协作”的最小闭环；掌握分支与合并、冲突解决与忽略规则。
+- 适用：本课程 tAPP/Lab 与后续项目协作。
+
+## 关键知识点（速览）
+1) 初次配置：`user.name` 与 `user.email`；默认分支建议使用 `main`。
+2) 本地闭环：`git init/clone → add → commit → log/status`。
+3) 远程协作：`git remote add`（建议 SSH）；`git push/pull` 与 `-u` 设上游。
+4) 分支与合并：`git branch/switch/merge`；理解快进合并与冲突处理。
+5) 提交信息规范：一行概要（`<=` 50 字符，祈使语），必要时附详细说明。
+6) 忽略规则：`.gitignore` 仅忽略未跟踪文件；已跟踪需先 `git rm --cached`。
+
+---
+
+## 基础操作闭环（从零到远程）
+
+### 1. 安装与配置（一次性）
+```bash
+# macOS 推荐：
+brew install git
+
+# 基本身份配置（全局）
+git config --global user.name "你的姓名"
+git config --global user.email "你的邮箱"
+
+# 默认分支名设为 main（新仓库生效）
+git config --global init.defaultBranch main
+```
+
+### 2. 新建或克隆
+```bash
+# 新建并初始化
+mkdir demo && cd demo
+git init  # 将使用默认分支 main（若已按上面配置）
+
+# 或：从远程克隆（推荐 SSH）
+# 在 GitHub 上复制 SSH 地址，如 git@github.com:org/repo.git
+git clone git@github.com:org/repo.git
+```
+
+### 3. 修改、暂存、提交
+```bash
+echo "hello" > README.md
+git status              # 查看变更
+git add README.md       # 暂存
+git commit -m "init: add README"  # 提交
+```
+
+### 4. 连接远程与推送
+```bash
+# 如果是本地 init 的仓库，先添加远程
+git remote add origin git@github.com:org/repo.git
+
+# 首次推送并设置上游（-u）
+git push -u origin main
+
+# 之后可简化为：
+git push
+```
+
+### 5. 拉取更新
+```bash
+# 获取并合并远程 main
+git pull --ff-only origin main
+```
+
+---
+
+## 分支与合并
+```bash
+# 新建并切换到分支 feature/login
+git switch -c feature/login
+
+# 提交若干变更后，切回 main 并合并
+git switch main
+git merge feature/login   # 尽量保持小步提交与频繁合并
+
+# 删除已合并分支
+git branch -d feature/login
+```
+- 建议：以功能为单位创建分支（如 `feature/…`、`fix/…`）。
+- 合并策略：优先快进（fast-forward）；需要保持历史整洁时再考虑 rebase（团队约定优先）。
+
+---
+
+## 提交信息规范（建议）
+- 结构：
+  - 概要行（`<=` 50 字符，祈使语）：如 `feat: add login form`。
+  - 空行
+  - 详细说明（可选）：动机、变化点、兼容性影响。
+- 同类修改归一提交；避免将无关文件混入。
+
+---
+
+## .gitignore（常用片段）
+```text
+# macOS
+.DS_Store
+
+# Node
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# IDE / Editor
+.vscode/
+.idea/
+```
+> 已被 Git 跟踪的文件不会因新增 `.gitignore` 自动忽略；需先执行 `git rm --cached <path>` 再提交。
+
+---
+
+## 冲突解决（流程）
+1) 执行合并或拉取时发生冲突，使用 `git status` 查看冲突文件。
+2) 打开文件，依据标记手动合并：
+```text
+<<<<<<< HEAD
+本地修改
+=======
+远程修改
+>>>>>>> origin/main
+```
+3) 编辑并保存后，`git add <冲突文件>` 标记已解决；
+4) `git commit` 完成合并；如为 `git pull` 触发的冲突，完成提交后即完成拉取。
+
+---
+
+## 常见问题（FAQ）
+- 推送提示需要先设置上游：`git push -u origin main` 后续可直接 `git push`。
+- 远程默认分支叫 `master`：可在 GitHub 仓库设置中改为 `main`，本地执行 `git branch -m master main && git fetch origin && git branch -u origin/main main`。
+- HTTPS 频繁输密码：改用 SSH（生成密钥 `ssh-keygen -t ed25519` 并添加到 GitHub）。
+- 合并杂乱：小步提交、早拉取（pull often）、及时合并；必要时 `git log --oneline --graph` 辅助查看。
+
+---
+
+## 自检清单（实践）
+- [ ] 能从零创建仓库并推送到 GitHub（SSH）。
+- [ ] 能在功能分支上完成修改并合并回 `main`。
+- [ ] 按规范撰写提交信息，并配置 `.gitignore`。
+- [ ] 能独立解决一次简单合并冲突。
+
+---
+
+## 参考材料 / 内容依据
+- 课程讲义：Using_Git_and_GitHub.pptx  
+  `../../../../materials/semester-1/COMPSCI4084-programming-systems/lectures/Using_Git_and_GitHub.pptx`
+- 实践材料：Git_and_GitHub_-_Practical_Exercises.md（或 .docx）  
+  `../../../../materials/semester-1/COMPSCI4084-programming-systems/resources/Git_and_GitHub_-_Practical_Exercises.md`
+
+## 更新记录
+- 最后更新：2025-09-28
