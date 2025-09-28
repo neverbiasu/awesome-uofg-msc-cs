@@ -4,95 +4,137 @@ description: "类与对象、封装（name mangling）、继承 vs 组合、数�
 ---
 
 ## 概要
-- 目标：理解类/对象、封装、继承与组合，并能用数据类表达数据模型。
-- 适用：需要抽象与复用的程序结构设计与实现。
-
-# Object-Oriented Programming (OOP) in Python
+- 目标：理解类/对象、封装、继承与组合，并能用合适的对象模型表达问题与约束。
+- 范围：类定义与实例、构造器与方法、属性与封装、继承与方法重写、组合、常见 dunder 方法与表示、简单数据类。
 
 ## 学习目标
-- 能定义类与构造器，理解实例属性/方法与 `self`。
-- 了解封装与 name mangling；会区分继承与组合的适用场景。
-- 熟悉常见 dunder 方法（`__str__`/`__repr__`）与数据类用法。
+1. 定义类与构造器，创建对象并调用实例/类方法。
+2. 正确使用属性与封装，理解单/双下划线与 name mangling。
+3. 掌握继承/重写/super 与组合的取舍，能实现 `__str__/__repr__/__eq__`。
 
-## 类与对象（最小可用示例）
+## 关键知识点
+
+### 1. 类、实例与构造器
 ```python
-class Dog:
-    def __init__(self, name: str, age: int):
-        self.name = name
-        self.age = age
-
-    def bark(self) -> str:
-        return "Woof!"
-
+class Account:
+    def __init__(self, owner: str, balance: float = 0.0):
+        self.owner = owner
+        self.balance = balance
+    def deposit(self, amount: float) -> None:
+        self.balance += amount
     def __str__(self) -> str:
-        return f"Dog(name={self.name}, age={self.age})"
+        return f"Account({self.owner}, balance={self.balance:.2f})"
 
-# 使用
-dog = Dog("Buddy", 3)
-print(dog)
+acc = Account("Alice", 100)
+acc.deposit(25)
+print(acc)  # Account(Alice, balance=125.00)
 ```
+- 要点：`__init__` 初始化实例状态；实例方法第一个参数约定为 `self`。
 
-## 封装与 name mangling（私有约定）
+---
+
+### 2. 属性、封装与 name mangling
 ```python
-class Cat:
-    def __init__(self, name: str, age: int):
-        self.__name = name   # 私有属性（名称改写）
-        self.__age = age
+class SafeBox:
+    def __init__(self, password: str):
+        self._hint = "4 digits"          # 约定的“受保护”属性
+        self.__password = password        # 触发 name mangling → _SafeBox__password
+    def check(self, guess: str) -> bool:
+        return guess == self.__password
 
-    def speak(self) -> str:
-        return "Meow!"
-
-c = Cat("Whiskers", 2)
-# 访问改写后的名称（不建议，仅示范）
-# print(c._Cat__name)
+box = SafeBox("1234")
+print(box._hint)
+print(box._SafeBox__password)  # 不建议：仅演示 name mangling 的效果
 ```
-> Python 依赖约定而非强封装；双下划线触发名称改写以避免子类冲突。
+- 要点：单下划线是约定；双下划线会改写名称以减少子类/外部误用。
+- 可用 `@property` 暴露只读/计算属性，控制不变量。
 
-## 继承 vs 组合（选型）
+---
+
+### 3. 继承与方法重写（多态）
 ```python
 class Animal:
     def speak(self) -> str:
         return "..."
-
 class Dog(Animal):
+    def speak(self) -> str:  # 重写
+        return "woof"
+class Cat(Animal):
     def speak(self) -> str:
-        return "Woof!"
+        return "meow"
 
+def chorus(pets: list[Animal]) -> None:
+    for p in pets:
+        print(p.speak())
+
+chorus([Dog(), Cat()])  # 多态调用
+```
+- 要点：子类可重写父类方法；必要时用 `super().__init__()` 初始化父类部分。
+
+---
+
+### 4. 组合优先于继承
+```python
 class Engine:
     def start(self) -> str:
-        return "Engine starts"
-
+        return "engine on"
 class Car:
-    def __init__(self):
-        self.engine = Engine()  # 组合
-    def start(self) -> str:
-        return self.engine.start()
-```
-- 经验法则：优先组合，继承用于“是一个（is-a）”的稳定层次结构。
+    def __init__(self, engine: Engine):
+        self.engine = engine
+    def drive(self) -> str:
+        return self.engine.start() + ", driving"
 
-## 数据类与不可变对象
+print(Car(Engine()).drive())
+```
+- 要点：当“有一个”优于“是一个”时使用组合，降低耦合、提升可复用性。
+
+---
+
+### 5. 常见 dunder 方法：__str__/__repr__/__eq__
+```python
+class Point:
+    def __init__(self, x: int, y: int):
+        self.x, self.y = x, y
+    def __repr__(self) -> str:  # 面向开发者，可重现对象
+        return f"Point(x={self.x}, y={self.y})"
+    def __str__(self) -> str:   # 面向用户
+        return f"({self.x}, {self.y})"
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, Point):
+            return NotImplemented
+        return (self.x, self.y) == (other.x, other.y)
+
+print(Point(1,2) == Point(1,2))  # True（值相等）
+```
+- 要点：`__repr__` 应尽量“可重建”；`__eq__` 定义值语义，避免用 `is` 比较值。
+
+---
+
+### 6. 数据类（dataclass）与不可变对象
 ```python
 from dataclasses import dataclass
 
 @dataclass(frozen=True)
-class Point:
-    x: int
-    y: int
+class User:
+    name: str
+    email: str
 
-p = Point(1, 2)
-# p.x = 3  # will raise FrozenInstanceError
+u = User("Alice", "a@example.com")
+print(u)           # User(name='Alice', email='a@example.com')
+# u.name = "Bob"   # 会报错：frozen 数据类不可变
 ```
-
-## 自我检查
-- [ ] 能实现带 `__str__` 的实体类并打印友好表示。
-- [ ] 能解释 name mangling 作用与局限。
-- [ ] 能为一个问题给出“继承”与“组合”的对比实现与理由。
+- 要点：数据类自动生成 `__init__/__repr__/__eq__` 等；`frozen=True` 帮助表达不可变对象。
 
 ---
 
-## 参考材料 / 内容依据
-- 讲义：OOP_in_Python.pptx  
-  `../../../../materials/semester-1/COMPSCI4084-programming-systems/lectures/OOP_in_Python.pptx`
+## 最佳实践
+- 单一职责：类聚焦一种抽象；方法短小且命名表达意图。
+- 组合优先于继承；继承仅在“是一个”且有稳定层次时使用。
+- 避免暴露可变内部状态；使用属性访问或返回副本。
+- 为对象实现 `__repr__`（调试友好）、按需实现 `__eq__`（值语义）。
+- 谨慎使用双下划线私有化，避免过度增加测试与扩展成本。
+
+---
 
 ## 更新记录
 - 最后更新：2025-09-28

@@ -14,6 +14,18 @@ description: "变量与类型、运算符、序列/映射、字符串与格式�
 
 ## 关键知识点
 
+### 0. 变量与命名
+- 变量通过赋值创建；名称应具描述性，避免使用内置名与保留字（如 `for`、`class`）。
+- 赋值示例：
+```python
+y = 20
+number1, number2 = 100, 20
+answer = number1 + number2
+print(answer)
+```
+- 字符串与数字的区别：参与计算前需显式转换；拼接前可用 `str(x)`。
+- 多行字符串：使用三引号 `""" ... """`，或使用换行符 `\n`。
+
 ### 1. 基础类型与数据结构
 - 数值：int/float/complex；布尔：bool；空值：None。
 - 字符串：不可变；切片、拼接、格式化。
@@ -60,8 +72,14 @@ lookup = {ch: ord(ch) for ch in "abc"}
 name, score = "Bob", 87.5
 print(f"{name:>10s} | {score:6.2f}")
 ```
+- 也可使用百分号格式化：
+```python
+x, y = 42, 3.1415926
+print("%d" % x)        # 十进制整数
+print("%5.2f" % y)     # 宽度>=5，小数2位
+```
 
-### 6. 输入与输出（基础）
+### 6. 输入与输出
 ```python
 raw = input().strip()
 try:
@@ -79,21 +97,50 @@ def head(xs: Iterable[int], n: int = 5) -> List[int]:
     return list(xs)[:n]
 ```
 
+### 8. 字符串常用方法（strip/split/case）
+- 去空白与指定字符：`strip()`/`lstrip()`/`rstrip()`
+```python
+s = "  hello.  "
+print(s.strip())     # "hello."
+print(s.rstrip("."))# "  hello"
+```
+- 拆分：`split(sep, maxsplit=None)`
+```python
+text = "a b c d"
+print(text.split())         # ['a','b','c','d']
+print("a.b.c".split(".", 1)) # ['a','b.c']
+```
+- 大小写：`lower()/upper()/title()`
+```python
+msg = "Hello WORLD"
+print(msg.lower()); print(msg.upper()); print(msg.title())
+```
+- 索引与切片回顾（字符串不可变）：
+```python
+s = "Python"
+print(s[0], s[-1])  # P n
+print(s[1:4])       # yth
+```
+
+### 9. 正则表达式入门（re 模块）
+- 常用函数：`findall`、`search`、`split`、`sub`
+```python
+import re
+text = "ab1 cd2 ef3"
+print(re.findall(r"\d", text))         # ['1','2','3']
+print(re.search(r"cd\d", text).group()) # 'cd2'
+print(re.split(r"\s+", text))           # ['ab1','cd2','ef3']
+print(re.sub(r"\d", "*", text))        # 'ab* cd* ef*'
+```
+
+---
+
 ## 最佳实践
 - 选择合适的数据结构表达意图；避免共享可变对象导致隐藏副作用。
 - 对输入做显式校验与异常处理；输出统一用 f-string。
 - 遵循 PEP 8；保持类型提示与文档同步。
 
-## 自我检查
-- [ ] 能解释 list/tuple/dict/set 的差异与场景。
-- [ ] 能写出纯函数并完成基本数据处理。
-- [ ] 能使用 f-string 进行对齐与数值格式化。
-
 ---
-
-## 参考材料 / 内容依据
-- 讲义：python-Basics.pptx  
-  `../../../../materials/semester-1/COMPSCI4084-programming-systems/lectures/python-Basics.pptx`
 
 ## 更新记录
 - 最后更新：2025-09-28
