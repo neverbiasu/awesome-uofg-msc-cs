@@ -1,104 +1,85 @@
 ---
 title: "Conda"
-description: "环境与包管理、与系统 Python/pip 协作、VS Code 解释器、复现与迁移、常见风险与最佳实践"
+description: "环境与包管理、环境生命周期、包安装与更新、导出与复现、最佳实践"
 ---
-
-# Conda
 
 ## 概要
-- 目标：为课程/项目创建可复现的隔离环境；以 conda-forge 为主渠道，配合 pip；在 VS Code 中选择对应解释器。
-- 适用：本课程 Lab、后续课程与项目开发。
+- 目标：掌握 Conda 的环境与包管理，能创建、激活、导出与复现环境。
+- 范围：安装与更新、环境管理、包管理、导出/导入 YAML、避免在 base 环境开发。
 
-## 关键知识点（速览）
-1) 环境生命周期：create → activate → install → export → lock/复现。
-2) 通道优先级：优先使用 conda-forge；避免混装默认 channel 与 conda-forge 造成冲突。
-3) pip 协作：能在已激活的 conda 环境中 `pip install`，但尽量优先 conda 包。
-4) VS Code：为工作区绑定正确的 Python 解释器（Command Palette: Python: Select Interpreter）。
-5) 复现与迁移：`conda env export` 导出；`conda create -n <name> --file` 或 `conda env create -f` 复现。
+## 学习目标
+1. 正确安装并验证 Conda，完成更新。
+2. 用指定 Python 版本创建并激活环境，管理/克隆/删除环境。
+3. 安装、更新、卸载常用包；导出 environment.yml 并在新机器复现。
+
+## 关键知识点
+
+### 1. 安装与验证
+- 核心概念：Anaconda / Miniconda 安装后，用命令验证并保持更新。
+- 命令
+```bash
+conda --version
+conda update conda
+```
+- 注意事项/最佳实践：安装后首要验证；更新可能较慢，耐心等待。
+- 小结：先验再用，保持 Conda 最新可减少兼容问题。
 
 ---
 
-## 安装与基础配置
-
-### 1. 安装 Miniconda（推荐）
-- 访问官方下载安装 Miniconda，对比 Anaconda 更轻量：
-  https://docs.conda.io/en/latest/miniconda.html
-
-### 2. 设置 conda-forge 为默认通道（可选但推荐）
+### 2. 创建与激活环境（指定 Python 版本）
+- 核心概念：独立环境隔离依赖，避免项目之间相互影响。
+- 命令
 ```bash
-conda config --add channels conda-forge
-conda config --set channel_priority strict
-```
-> 若此前已装过包，设置优先级后遇到冲突，可新建环境避免“升降级地狱”。
-
----
-
-## 环境生命周期
-
-### 新建与激活
-```bash
-conda create -n progsd-py "python>=3.11,<3.13" -y
-conda activate progsd-py
-```
-
-### 安装常用包
-```bash
-# 优先使用 conda-forge 上的包
-conda install -c conda-forge numpy pandas matplotlib jupyterlab -y
-
-# 频道没有的再用 pip（需在已激活的环境中）
-pip install some-package-only-on-pypi
-```
-
-### 导出与复现
-```bash
-# 方式 A：导出为 environment.yml（含 channels）
-conda env export --no-builds > environment.yml
-
-# 在另一台机器复现
-conda env create -f environment.yml
-
-# 方式 B：导出显式依赖（精确锁定版本与构建）
-conda list --explicit > conda-linux-64.lock
-conda create -n progsd-repro --file conda-linux-64.lock -y
-```
-
-### 清理
-```bash
-# 删除环境（需先退出）
+conda create --name myenv python=4.14
+conda activate myenv
 conda deactivate
-conda env remove -n progsd-py
 ```
+- 使用场景：按项目/课程一环境；不同项目可并行维护。
+- 小结：每个项目一环境；退出环境再切换或删除。
 
 ---
 
-## VS Code 中的解释器与终端
-- 使用命令面板：Python: Select Interpreter，选择 `progsd-py` 对应解释器。
-- 若 `.vscode/settings.json` 设定了 `python.defaultInterpreterPath`，确保路径指向当前环境。
-- 在 VS Code 内新建终端会继承当前解释器；否则请手动 `conda activate`。
+### 3. 管理环境（列出/删除/克隆）
+- 命令
+```bash
+conda env list
+conda remove --name myenv --all
+conda create --name newenv --clone myenv
+```
+- 注意事项：删除需加 `--all`；克隆可快速复制依赖状态。
+- 小结：列出/删除/克隆覆盖典型生命周期操作。
 
 ---
 
-## 常见问题与最佳实践
-- 避免在 base 环境安装课程依赖；为每门课/项目单独建环境。
-- 优先 conda-forge；混用 pip 时留意二进制依赖（如 `mkl`, `openmp`）。
-- Mac 上 Apple Silicon 与 x86 包不可混装；如需 x86 兼容，单独创建 `arch` 对应环境。
-- 碰到求解冲突：尝试新建干净环境；或用 `mamba` 加速与改进求解（可选）。
+### 4. 包管理（安装/更新/移除）
+- 命令
+```bash
+conda install numpy
+conda update numpy
+conda remove numpy
+```
+- 注意事项：按需安装最小集合，减少求解时间与冲突。
+- 小结：安装/更新/移除三步，保持环境精简可控。
 
 ---
 
-## 自检清单（实践）
-- [ ] 已创建并激活 `progsd-py` 环境，且在 VS Code 中选中该解释器。
-- [ ] 使用 conda 安装了基础科学计算包；仅对缺失包使用 pip。
-- [ ] 成功导出了 environment.yml，并在另一环境/机器复现。
+### 5. 导出与复现（YAML）
+- 命令
+```bash
+conda env export > environment.yml
+conda env create -f environment.yml
+```
+- 使用场景：团队共享、跨机迁移、课堂复现实验环境。
+- 小结：`environment.yml` 是可复现的环境说明书，应纳入版本控制。
 
 ---
 
-## 参考材料 / 内容依据
-- 课程讲义：Using_Conda_and_Google_Colab.pptx  
-  `../../../../materials/semester-1/COMPSCI4084-programming-systems/lectures/Using_Conda_and_Google_Colab.pptx`
-- 实践材料：Conda_-_Practical_Exercises.docx（或 .md）  
-  `../../../../materials/semester-1/COMPSCI4084-programming-systems/resources/Conda_-_Practical_Exercises.docx`
+## 最佳实践
+- 为每个项目单独创建环境，避免污染 base。
+- 定期更新环境与包；升级前备份或导出 environment.yml。
+- 在项目仓库记录环境信息与使用方法（README + environment.yml）。
+
+---
 
 ## 更新记录
 - 最后更新：2025-09-28

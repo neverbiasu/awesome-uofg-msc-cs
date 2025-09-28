@@ -4,48 +4,75 @@ description: "Git/GitHub、Conda 环境、Python 基础与决策综合练习（�
 ---
 
 ## 概要
-- 目标：将 Git/Conda 与 Python 基础综合练习，打通从环境到代码到协作的闭环。
-- 适用：为 Week 2 考核做准备，形成可复现的实践套路。
+- 目标：将 Git/Conda 与 Python 基础（含决策）综合练习，打通从环境到代码到协作的闭环。
+- 范围：严格对齐原始练习材料（Git Practical、Conda Practical、Python Basics & Decision Making）。
 
 ## 学习目标
-- 通过动手实践熟悉工具链与基本语法，形成可复现开发流程。
+1. 能独立完成 Git 初始配置、仓库初始化、README 提交与远端关联。
+2. 能使用 Conda 创建/激活/停用环境，安装/更新/移除包，并用 YAML 复现环境。
+3. 能完成 Python 基础与条件分支的小型编程练习，注意输入校验与输出格式。
 
-## 任务清单
-### 1. Git/GitHub（Practical Exercises）
-- 初始化仓库并推送到远端；创建 feature 分支；提交并发起 PR。
-- 制造并解决一个轻量冲突，记录解决步骤与结论。
+## 实操任务（与原文对齐）
 
-### 2. Conda 环境（Practical Exercises）
-- 创建 `progsd` 环境并安装核心依赖；导出 environment.yml；
-- 在 VS Code 选择解释器并运行一个最小脚本。
+### A. Git & GitHub — Practical Exercises
+1. 配置 Git 与 GitHub
+   - 安装 Git，并配置 `user.name` 与 `user.email`。
+   - 如无账号，注册 GitHub 账户。
+2. 初始化本地仓库
+   - 新建项目目录并初始化 Git 仓库。
+   - 创建 `README.md`（若不存在会报错，请先创建，如使用 `echo`）。
+   - 将 `README.md` 添加并提交。
+3. 连接到 GitHub 远程仓库
+   - 在 GitHub 上创建一个空仓库（不要初始化任何文件）。
+   - 将本地仓库关联到远程（示例）：`git remote add origin https://github.com/Mireilla/mireilla_project.git`。
+   - 推送首个提交并设置上游：`git push -u origin main`。
+4. 分支与合并
+   - 创建并切换到 `feature` 分支：`git branch feature` → `git checkout feature`。
+   - 进行修改并提交：`git add mireilla_file.txt` → `git commit -m "Added new file in feature branch"`。
+   - 切回 `main` 并合并：`git checkout main` → `git merge feature`。
+5. 在 GitHub 上协作
+   - Fork 一个现有仓库。
+   - 本地克隆你的 fork（示例）：`git clone https://github.com/yourusername/SomeProject.git`。
+   - 做出更改并推送到你的 fork。
+   - 向原仓库发起 Pull Request。
 
-### 3. Python 基础与决策（Lab Exercises）
-- 编写“成绩到等级”程序：输入校验、边界测试、对齐输出。
-- 扩展：支持批量处理并输出汇总统计（均值/最大/最小）。
+### B. Conda — Practical Exercises
+1. 安装与配置 Conda
+   - 安装 Miniconda 或 Anaconda。
+   - 验证安装：`conda --version`。
+   - 更新 Conda：`conda update conda`。
+2. 创建与激活环境
+   - 创建名为 `data_science` 的环境并指定 Python 3.8：`conda create --name data_science python=3.8`。
+   - 激活环境：`conda activate data_science`。
+   - 停用环境：`conda deactivate`。
+3. 安装与管理包
+   - 安装 `numpy pandas matplotlib`。
+   - 更新 `pandas` 到最新版本。
+   - 移除 `matplotlib`。
+4. 导出与共享环境
+   - 导出环境到 `data_science_env.yml`：`conda env export > data_science_env.yml`。
+   - 从 YAML 创建新环境：`conda env create -f data_science_env.yml`。
 
-## 进阶挑战（可选）
-- 实现一个命令行工具：
-  - `grades --input file.csv --pass 50`，输出统计报告与排名前 N。
-  - 结构化输出（JSON/CSV 二选一），确保可重定向到文件。
+### C. Python Basics — Exercises
+1. Day old Bread：面包单价 £3.49，隔夜面包 60% 折扣。读取购买数量，输出原价、折扣与总价（两位小数，对齐显示）。
+2. Length and Slicing：读取一段字符串，显示长度；再读入起止下标，输出切片结果。
+3. Upper or Lower case name：读取名；若长度 < 5，继续读姓，拼接后转为大写；否则输出名的小写。
+4. Pig Latin：按规则转换（辅音开头 → 移至尾部并加 `ay`；元音开头 → 加 `way`），输出小写结果。
+
+### D. Decision Making — Exercises
+1. Umbrella or no umbrella：询问是否下雨（忽略大小写）；若是再问是否有风；“是且有风”→ “It's too windy for an umbrella”，否则 “Take an umbrella”；不下雨则 “Enjoy your day”。
+2. Your age：读取年龄：`>= 18` → “你可以投票/you can vote”；`== 17` → “你可以学开车/You can learn how to drive”；`== 16` → “你可以买彩票/you can buy a lottery ticket”；否则 “你可以去讨糖/You can go Trick-or-Treating”。
+3. Even or Odd：读取整数，判断奇偶并输出。
+4. Vowel or Consonant：读取字母：`a/e/i/o/u` → vowel；`y` → sometimes vowel/consonant；其他 → consonant。
+5. Name the shape：读取边数（3–10），输出图形名称；范围外给出错误提示。
+6. Classifying Triangles：读三边长，输出 `equilateral`/`isosceles`/`scalene` 类型。
+7. Find the area：显示菜单：1) Square 2) Triangle；根据选择读取参数并计算面积，其他输入给出错误提示。
 
 ## 提交建议
-- 小步提交，信息清晰；`.gitignore` 忽略环境与临时文件。
-- 在 README 记录环境与运行方法，确保可复现。
-
-## 自我检查
-- [ ] 是否从零到 PR 完成一次闭环并解决过冲突？
-- [ ] 是否能在干净环境按 README 成功运行你的程序？
-- [ ] 程序是否覆盖非法输入与边界值，输出是否对齐/可读？
+- 小步提交，信息清晰；使用 `.gitignore` 忽略环境与临时文件。
+- 在 `README` 记录环境与运行方法，确保可复现。
 
 ---
-
-## 参考材料 / 内容依据
-- Git 实践：Git_and_GitHub_-_Practical_Exercises.docx（或 .md）  
-  `../../../../materials/semester-1/COMPSCI4084-programming-systems/resources/Git_and_GitHub_-_Practical_Exercises.docx`
-- Conda 实践：Conda_-_Practical_Exercises.docx（或 .md）  
-  `../../../../materials/semester-1/COMPSCI4084-programming-systems/resources/Conda_-_Practical_Exercises.docx`
-- Python Lab：Lab_Exercises_-python_basics_-decision_making.pdf  
-  `../../../../materials/semester-1/COMPSCI4084-programming-systems/resources/Lab_Exercises_-python_basics_-decision_making.pdf`
 
 ## 更新记录
 - 最后更新：2025-09-28

@@ -1,106 +1,82 @@
 ---
 title: "Colab"
-description: "Step-by-step 实操：创建笔记本、启用 GPU、安装依赖、绘图、Drive 挂载与文件 IO、协作与版本历史、R 内核"
+description: "在浏览器中编写/运行/分享代码；启用 GPU/TPU；文件与协作；最小 R 运行时"
 ---
 
 ## 概要
-- 目标：在 Colab 快速完成从创建到分享的完整闭环；掌握 GPU/依赖安装/绘图/Drive 挂载与协作历史。
-- 适用：临时 GPU 计算、可分享的可运行教学/实验、快速验证原型。
+- 目标：快速上手 Google Colab（云端 Jupyter 环境），完成从创建到分享与协作的闭环。
+- 范围：创建与运行、GPU/TPU、依赖安装、Drive 文件、协作与修订、最小 R 支持。
 
 ## 学习目标
-1. 在 3 分钟内从零创建可运行的 Colab 笔记本并完成基础演示。
-2. 掌握启用 GPU、安装第三方库、绘图与数据读写的基本操作。
-3. 学会共享协作与版本历史；了解在 Colab 中使用 R 的最小路径。
+1. 创建并运行一个最小 Colab 笔记本，包含代码与 Markdown 单元。
+2. 启用 GPU/TPU 并运行简要的数值/绘图示例。
+3. 挂载 Google Drive，完成文件读写；掌握共享与版本历史。
 
 ## 关键知识点
 
-### 1. 快速上手（Getting Started）
-- 核心概念：打开 Colab、创建新笔记本、运行首个 Python/Markdown 单元。
-- 步骤
-  1) 打开网址：colab.research.google.com。
-  2) 新建笔记本并命名为“Introduction to Google Colab”。
-  3) 添加代码单元并运行：
+### 1. 创建与运行（Getting Started）
+- 步骤：访问 https://colab.research.google.com → 新建“New Notebook” → 运行示例代码。
 ```python
 print("Hello, Colab!")
 ```
-  4) 添加 Markdown 单元，简要说明本笔记本用途。
-- 注意事项/最佳实践：首个代码单元建议放置“依赖安装”，保证一键运行可复现。
+- 说明：在 Markdown 单元记录用途与步骤；首个代码单元建议放依赖安装命令。
 
 ---
 
-### 2. 启用硬件加速与绘图（GPU、NumPy、Matplotlib）
-- 步骤
-  1) 菜单 Runtime → Change runtime type → Hardware accelerator 选择 GPU（或 TPU）。
-  2) 安装依赖并执行简单计算与绘图：
+### 2. 硬件加速（GPU/TPU）与绘图
+- 步骤：Runtime → Change runtime type → Hardware accelerator 选择 GPU（或 TPU）。
+- 安装与绘图：
 ```bash
 pip -q install numpy matplotlib
 ```
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
-
 arr = np.random.rand(100) * 10
 plt.plot(arr)
 plt.title("Random * 10")
 plt.show()
 ```
-- 最佳实践：固定关键库版本（如 `numpy==1.26.*`），降低环境漂移；绘图前确保已 `import matplotlib.pyplot as plt`。
+- 提示：固定关键库版本可降低环境漂移；绘图需先导入 `matplotlib.pyplot`。
 
 ---
 
-### 3. 协作与修订历史（Share & Revision History）
-- 步骤
-  1) 右上角“Share”设置共享邮箱与权限。
-  2) 双方在不同单元协作编辑与运行。
-  3) 通过“File → Revision history”查看与回溯更改。
+### 3. 协作与版本历史
+- 共享：右上角 Share → 添加协作者邮箱与权限。
+- 历史：File → Revision history 查看并回滚。
 
 ---
 
-### 4. Drive 挂载与文件 IO
+### 4. 挂载 Drive 与文件 IO
 ```python
 from google.colab import drive
 drive.mount('/content/drive')
-
 base = '/content/drive/MyDrive'
 import os; os.listdir(base)
-
 with open(f"{base}/colab-demo.txt", "w") as f:
     f.write("Saved from Colab.")
 ```
-> 会话结束临时文件会丢失；关键数据落盘至 Drive 或远端存储。
+- 注意：运行时重置会清空临时存储；重要文件应写入 Drive。
 
 ---
 
-### 5. 在 Colab 使用 R（最小示例）
+### 5. R 运行时（最小示例）
 ```bash
 apt-get -y update && apt-get -y install r-base
 R -e "install.packages('IRkernel'); IRkernel::installspec(user = FALSE)"
 ```
-- 切换：Runtime → Change runtime type → 选择 R → Save。
-- R 示例：
+- 切换 Runtime → Change runtime type → 选择 R；运行：
 ```r
 print("Hello, R in Colab!")
-
-data(mtcars)
-head(mtcars)
 ```
 
 ---
 
-## 自检清单（实践）
-- [ ] 创建“Introduction to Google Colab”并运行 Hello。
-- [ ] 启用 GPU、安装 `numpy/matplotlib` 并绘图。
-- [ ] 挂载 Drive、读写测试文件。
-- [ ] 共享并在修订历史中看到更改记录。
-- [ ] 启用 R 并运行最小示例。
+## 最佳实践
+- 固定依赖与可复现环境
+- 持久化重要文件并管理共享
 
 ---
-
-## 参考材料 / 内容依据
-- 实践材料：Step-by-step_proactical_exercises_-_Google_Colab.docx（或 .md）  
-  `../../../../materials/semester-1/COMPSCI4084-programming-systems/resources/Step-by-step_proactical_exercises_-_Google_Colab.docx`
-- 讲义：Using_Conda_and_Google_Colab.pptx  
-  `../../../../materials/semester-1/COMPSCI4084-programming-systems/lectures/Using_Conda_and_Google_Colab.pptx`
 
 ## 更新记录
 - 最后更新：2025-09-28
