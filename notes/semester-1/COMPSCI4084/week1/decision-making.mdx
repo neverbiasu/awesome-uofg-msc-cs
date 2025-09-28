@@ -1,0 +1,88 @@
+---
+title: "Python - Decision Making"
+description: "if/elif/else、真值与短路、比较与逻辑运算、三元表达式、早返回与数据校验"
+---
+
+## 概要
+- 目标：掌握 if/elif/else、条件表达式与短路求值，提升分支逻辑的清晰性。
+- 适用：输入校验、分级判定、边界处理等常见任务。
+
+# Python - Decision Making
+
+## 学习目标
+- 能正确编写 `if/elif/else` 并处理多分支。
+- 理解真值与短路求值；避免过度嵌套，用早返回简化逻辑。
+- 熟练使用比较与逻辑运算，以及条件表达式（`X if cond else Y`）。
+
+## 关键知识点与示例
+
+### 1. if/elif/else 基本形态
+```python
+x = 75
+if x >= 85:
+    grade = "A"
+elif x >= 60:
+    grade = "B"
+else:
+    grade = "C"
+```
+
+### 2. 真值与短路（truthiness & short-circuit）
+- 空序列/映射、`0`、`None` 视为假；非空/非零多为真。
+```python
+name = input().strip()
+msg = name or "anonymous"  # name 为空字符串时返回备用
+```
+
+### 3. 比较与链式比较
+```python
+x = 7
+ok = 0 < x < 10  # 等价于 x>0 and x<10
+```
+
+### 4. 条件表达式（ternary）
+```python
+age = 18
+label = "adult" if age >= 18 else "minor"
+```
+
+### 5. 早返回与输入校验
+```python
+def ratio(a: float, b: float) -> float | None:
+    if b == 0:
+        return None  # 早返回，避免 ZeroDivisionError
+    return a / b
+```
+
+### 6. 防御式编程（边界与异常）
+```python
+raw = input().strip()
+try:
+    val = int(raw)
+    assert 0 <= val <= 100
+except (ValueError, AssertionError):
+    print("INVALID")
+else:
+    print("OK")
+```
+
+## 常见陷阱与建议
+- 使用 `==` 比较值，避免用 `is` 比较基础类型。
+- 对可能为 `None` 的对象访问属性/方法时使用短路保护：`user and user.get("name")`。
+- 将嵌套条件拆分为卫语句（guard clauses），提升可读性。
+
+## 自我检查
+- [ ] 能写出包含 `if/elif/else` 的评分函数，并覆盖边界值。
+- [ ] 能解释短路求值与真值表，并举例说明。
+- [ ] 能将嵌套条件改写为早返回或卫语句。
+
+---
+
+## 参考材料 / 内容依据
+- 讲义：Python_-_Decision_making.pptx  
+  `../../../../materials/semester-1/COMPSCI4084-programming-systems/lectures/Python_-_Decision_making.pptx`
+- 实践材料：Lab_Exercises_-python_basics_-decision_making.pdf  
+  `../../../../materials/semester-1/COMPSCI4084-programming-systems/resources/Lab_Exercises_-python_basics_-decision_making.pdf`
+
+## 更新记录
+- 最后更新：2025-09-28

@@ -1,0 +1,98 @@
+---
+title: "Object-Oriented Programming (OOP) in Python"
+description: "类与对象、封装（name mangling）、继承 vs 组合、数据类与不可变对象、dunder 方法与表示"
+---
+
+## 概要
+- 目标：理解类/对象、封装、继承与组合，并能用数据类表达数据模型。
+- 适用：需要抽象与复用的程序结构设计与实现。
+
+# Object-Oriented Programming (OOP) in Python
+
+## 学习目标
+- 能定义类与构造器，理解实例属性/方法与 `self`。
+- 了解封装与 name mangling；会区分继承与组合的适用场景。
+- 熟悉常见 dunder 方法（`__str__`/`__repr__`）与数据类用法。
+
+## 类与对象（最小可用示例）
+```python
+class Dog:
+    def __init__(self, name: str, age: int):
+        self.name = name
+        self.age = age
+
+    def bark(self) -> str:
+        return "Woof!"
+
+    def __str__(self) -> str:
+        return f"Dog(name={self.name}, age={self.age})"
+
+# 使用
+dog = Dog("Buddy", 3)
+print(dog)
+```
+
+## 封装与 name mangling（私有约定）
+```python
+class Cat:
+    def __init__(self, name: str, age: int):
+        self.__name = name   # 私有属性（名称改写）
+        self.__age = age
+
+    def speak(self) -> str:
+        return "Meow!"
+
+c = Cat("Whiskers", 2)
+# 访问改写后的名称（不建议，仅示范）
+# print(c._Cat__name)
+```
+> Python 依赖约定而非强封装；双下划线触发名称改写以避免子类冲突。
+
+## 继承 vs 组合（选型）
+```python
+class Animal:
+    def speak(self) -> str:
+        return "..."
+
+class Dog(Animal):
+    def speak(self) -> str:
+        return "Woof!"
+
+class Engine:
+    def start(self) -> str:
+        return "Engine starts"
+
+class Car:
+    def __init__(self):
+        self.engine = Engine()  # 组合
+    def start(self) -> str:
+        return self.engine.start()
+```
+- 经验法则：优先组合，继承用于“是一个（is-a）”的稳定层次结构。
+
+## 数据类与不可变对象
+```python
+from dataclasses import dataclass
+
+@dataclass(frozen=True)
+class Point:
+    x: int
+    y: int
+
+p = Point(1, 2)
+# p.x = 3  # will raise FrozenInstanceError
+```
+
+## 自我检查
+- [ ] 能实现带 `__str__` 的实体类并打印友好表示。
+- [ ] 能解释 name mangling 作用与局限。
+- [ ] 能为一个问题给出“继承”与“组合”的对比实现与理由。
+
+---
+
+## 参考材料 / 内容依据
+- 讲义：OOP_in_Python.pptx  
+  `../../../../materials/semester-1/COMPSCI4084-programming-systems/lectures/OOP_in_Python.pptx`
+
+## 更新记录
+- 最后更新：2025-09-28
