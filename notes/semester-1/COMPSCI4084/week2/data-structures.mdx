@@ -1,0 +1,467 @@
+---
+title: "Python 数据结构"
+description: "深入理解 Python 列表、元组、字典的创建、访问、修改与遍历操作"
+---
+
+## 概要
+- 本文档介绍 Python 中三种核心数据结构：列表（List）、元组（Tuple）、字典（Dictionary）。
+- 涵盖数据结构的创建、访问、修改、遍历及实际应用场景。
+- 重点理解可变与不可变数据结构的差异，以及如何选择合适的数据结构。
+
+## 学习目标
+1. 掌握列表的创建、索引、切片、增删改查操作。
+2. 理解元组的不可变性及其使用场景。
+3. 掌握字典的键值对存储、访问、更新与遍历。
+4. 能够根据实际需求选择合适的数据结构。
+5. 熟练使用循环结构遍历各种数据结构。
+
+## 关键知识点
+
+### 1. 列表（List）基础
+
+#### 1.1 动机
+- 单一变量只能存储一个值，当需要管理多个相关数据时（如班级学生名单、颜色选项、测量数据等），需要一种能将多个值组织在一起的数据结构。
+- 列表是 Python 中最常用的集合类型，提供灵活的数据存储与操作能力。
+
+#### 1.2 核心概念
+- **列表（List）**：用方括号 `[]` 定义的可变有序集合。
+- **可变性（Mutable）**：列表内容可在程序运行时修改。
+- **可迭代性（Iterable）**：列表可以被循环遍历。
+- **索引（Index）**：列表元素从 0 开始编号，支持负数索引（从末尾访问）。
+- **异构性**：同一列表可存储不同类型数据（字符串、整数、浮点数、甚至其他列表）。
+
+#### 1.3 使用场景
+- 存储同类数据集合（学生名单、成绩、颜色选项）。
+- 需要频繁增删改操作的数据。
+- 需要保持元素顺序的场景。
+- 嵌套列表用于表示二维数据（如矩阵、表格）。
+
+#### 1.4 示例
+
+```python
+# 创建列表
+colors = ["red", "blue", "green"]
+mixed_data = [42, "hello", 3.14, True]
+nested_list = [1, 2, ["a", "b", "c"], 4]
+
+# 访问元素（索引从 0 开始）
+print(colors[0])        # 输出: red
+print(colors[-1])       # 输出: green（负索引从末尾访问）
+print(nested_list[2])   # 输出: ["a", "b", "c"]
+print(nested_list[2][0]) # 输出: a（访问嵌套列表元素）
+
+# 修改元素
+colors[1] = "purple"
+print(colors)           # 输出: ["red", "purple", "green"]
+
+# 切片操作
+numbers = [0, 1, 2, 3, 4, 5]
+print(numbers[1:4])     # 输出: [1, 2, 3]
+print(numbers[:3])      # 输出: [0, 1, 2]
+print(numbers[3:])      # 输出: [3, 4, 5]
+```
+
+#### 1.5 注意事项与最佳实践
+- **索引越界**：访问不存在的索引会引发 `IndexError`，使用前检查列表长度。
+- **浅拷贝与深拷贝**：`list2 = list1` 只创建引用，修改 `list2` 会影响 `list1`，使用 `list2 = list1.copy()` 或 `list2 = list1[:]` 创建副本。
+- **列表命名**：避免使用 `list` 作为变量名（会覆盖内置类型）。
+- **空列表检查**：使用 `if my_list:` 检查列表是否为空（空列表为 `False`）。
+
+#### 1.6 小结
+列表是 Python 中最灵活的数据结构，支持动态修改和多种操作。掌握索引、切片、嵌套列表的访问是使用列表的基础。
+
+---
+
+### 2. 列表操作方法
+
+#### 2.1 动机
+- 列表创建后需要进行增删改查操作：添加新元素、删除不需要的元素、排序、查找特定值等。
+- Python 提供了丰富的列表方法（methods）来简化这些操作。
+
+#### 2.2 核心概念
+- **方法（Method）**：与对象关联的函数，使用 `object.method()` 语法调用。
+- **增加元素**：`append()`, `insert()`。
+- **删除元素**：`remove()`, `pop()`, `del`。
+- **排序与反转**：`sort()`, `reverse()`。
+- **查找与计数**：`index()`, `count()`, `in` 运算符。
+
+#### 2.3 使用场景
+- **append()**：在列表末尾添加单个元素（如收集用户输入）。
+- **insert()**：在指定位置插入元素（如在列表头部插入）。
+- **remove()**：删除列表中第一个匹配的值。
+- **pop()**：删除并返回指定索引的元素（默认删除最后一个）。
+- **sort()**：对列表进行排序（仅适用于同类型元素）。
+- **index()**：查找元素首次出现的位置。
+- **in 运算符**：检查元素是否存在于列表中。
+
+#### 2.4 示例
+
+```python
+# 添加元素
+fruits = ["apple", "banana"]
+fruits.append("orange")        # 在末尾添加
+print(fruits)                  # 输出: ["apple", "banana", "orange"]
+
+fruits.insert(1, "grape")      # 在索引 1 处插入
+print(fruits)                  # 输出: ["apple", "grape", "banana", "orange"]
+
+# 删除元素
+fruits.remove("banana")        # 删除第一个 "banana"
+print(fruits)                  # 输出: ["apple", "grape", "orange"]
+
+last_fruit = fruits.pop()      # 删除并返回最后一个元素
+print(last_fruit)              # 输出: orange
+print(fruits)                  # 输出: ["apple", "grape"]
+
+del fruits[0]                  # 删除索引 0 的元素
+print(fruits)                  # 输出: ["grape"]
+
+# 排序与反转
+numbers = [3, 1, 4, 1, 5]
+numbers.sort()                 # 原地排序（升序）
+print(numbers)                 # 输出: [1, 1, 3, 4, 5]
+
+numbers.reverse()              # 原地反转
+print(numbers)                 # 输出: [5, 4, 3, 1, 1]
+
+# 查找与检查
+colors = ["red", "blue", "green", "blue"]
+print("blue" in colors)        # 输出: True
+print(colors.index("blue"))    # 输出: 1（首次出现位置）
+print(colors.count("blue"))    # 输出: 2（出现次数）
+```
+
+#### 2.5 注意事项与最佳实践
+- **remove() vs pop()**：`remove()` 根据值删除，`pop()` 根据索引删除并返回值。
+- **sort() 返回 None**：`sort()` 和 `reverse()` 原地修改列表，返回 `None`，不要写 `sorted_list = my_list.sort()`。
+- **sorted() 函数**：如需保留原列表，使用 `new_list = sorted(my_list)`。
+- **混合类型列表排序**：`sort()` 无法对包含不同类型的列表排序（如 `[1, "a", 3]`）。
+- **index() 找不到会报错**：使用前先用 `in` 检查元素是否存在。
+
+#### 2.6 小结
+列表方法提供了强大的数据操作能力。理解原地修改（`sort()`, `reverse()`）与返回新对象（`sorted()`）的区别，以及各方法的适用场景，是高效使用列表的关键。
+
+---
+
+### 3. 列表与循环
+
+#### 3.1 动机
+- 列表的核心用途之一是批量处理数据，循环结构使我们能逐个访问列表元素或通过索引操作元素。
+- 不同循环模式适用于不同场景：直接遍历元素、通过索引访问、条件遍历等。
+
+#### 3.2 核心概念
+- **for 循环遍历元素**：`for item in list:` 直接访问每个元素。
+- **for 循环遍历索引**：`for i in range(len(list)):` 通过索引访问和修改元素。
+- **while 循环**：适用于条件驱动的遍历场景。
+- **enumerate()**：同时获取索引和值。
+
+#### 3.3 使用场景
+- **直接遍历元素**：仅需读取元素值（如打印、累加）。
+- **遍历索引**：需要修改元素或访问相邻元素。
+- **enumerate()**：同时需要索引和值（如显示序号）。
+- **while 循环**：条件遍历（如查找第一个满足条件的元素）。
+
+#### 3.4 示例
+
+```python
+# 直接遍历元素（推荐用于只读操作）
+colors = ["red", "blue", "green"]
+for color in colors:
+    print(f"I like {color}")
+# 输出:
+# I like red
+# I like blue
+# I like green
+
+# 通过索引遍历（可修改元素）
+numbers = [1, 2, 3, 4]
+for i in range(len(numbers)):
+    numbers[i] = numbers[i] * 2
+print(numbers)  # 输出: [2, 4, 6, 8]
+
+# 跳过部分元素（遍历索引 1 到末尾）
+data = [10, 20, 30, 40]
+for i in range(1, len(data)):  # 从索引 1 开始
+    print(data[i])
+# 输出: 20, 30, 40
+
+# 使用 enumerate()（同时获取索引和值）
+fruits = ["apple", "banana", "cherry"]
+for index, fruit in enumerate(fruits):
+    print(f"{index}: {fruit}")
+# 输出:
+# 0: apple
+# 1: banana
+# 2: cherry
+
+# while 循环条件遍历
+numbers = [5, 10, 15, 20, 25]
+i = 0
+while i < len(numbers) and numbers[i] < 20:
+    print(numbers[i])
+    i += 1
+# 输出: 5, 10, 15
+```
+
+#### 2.5 注意事项与最佳实践
+- **优先使用直接遍历**：如果不需要索引，使用 `for item in list` 更 Pythonic。
+- **避免循环中修改列表长度**：在遍历时添加/删除元素可能导致跳过元素或索引错误，使用列表副本或列表推导式。
+- **enumerate() 起始索引**：`enumerate(list, start=1)` 可从 1 开始编号。
+- **range(len()) 替代方案**：如需索引，考虑使用 `enumerate()` 代替 `range(len())`。
+
+#### 3.6 小结
+选择合适的循环模式能提高代码可读性和效率。直接遍历用于只读，索引遍历用于修改，`enumerate()` 兼顾两者，`while` 用于条件驱动。
+
+---
+
+### 4. 元组（Tuple）
+
+#### 4.1 动机
+- 有些数据在创建后不应被修改（如配置参数、坐标点、数据库记录），使用不可变数据结构可防止意外修改。
+- 元组比列表占用更少内存，且可用作字典的键（列表不可以）。
+
+#### 4.2 核心概念
+- **元组（Tuple）**：用圆括号 `()` 定义的不可变有序集合。
+- **不可变性（Immutable）**：创建后无法修改、添加或删除元素。
+- **可迭代性（Iterable）**：可以被循环遍历。
+- **元组解包（Unpacking）**：将元组元素赋值给多个变量。
+- **单元素元组**：需要在元素后加逗号 `(item,)`。
+
+#### 4.3 使用场景
+- 存储不应更改的数据（如 RGB 颜色值、地理坐标）。
+- 函数返回多个值（实际返回一个元组）。
+- 作为字典的键（字典键必须是不可变类型）。
+- 提高性能（元组比列表更快，占用内存更少）。
+
+#### 4.4 示例
+
+```python
+# 创建元组
+rgb_color = (255, 0, 128)
+coordinates = (10.5, 20.3)
+menu_items = ("Start", "Options", "Exit")
+
+# 访问元组元素（与列表相同）
+print(rgb_color[0])     # 输出: 255
+print(coordinates[-1])  # 输出: 20.3
+
+# 元组解包
+x, y = coordinates
+print(f"x: {x}, y: {y}")  # 输出: x: 10.5, y: 20.3
+
+# 函数返回多个值（实际返回元组）
+def get_user_info():
+    return "Alice", 25, "Engineer"
+
+name, age, job = get_user_info()
+print(name, age, job)  # 输出: Alice 25 Engineer
+
+# 单元素元组（需要逗号）
+single = (42,)     # 元组
+not_tuple = (42)   # 整数，不是元组
+print(type(single))     # 输出: <class 'tuple'>
+print(type(not_tuple))  # 输出: <class 'int'>
+
+# 遍历元组
+for item in menu_items:
+    print(item)
+# 输出: Start, Options, Exit
+
+# ❌ 尝试修改元组会报错
+# rgb_color[0] = 200  # TypeError: 'tuple' object does not support item assignment
+```
+
+#### 4.5 注意事项与最佳实践
+- **不可变性是元组的核心特性**：如需修改数据，使用列表；如需保护数据，使用元组。
+- **元组不是完全不可变**：如果元组包含可变对象（如列表），该对象的内容仍可修改（但元组本身的引用不变）。
+- **括号可省略**：`t = 1, 2, 3` 等价于 `t = (1, 2, 3)`，但建议保留括号以提高可读性。
+- **作为字典键**：元组可作为字典键（如 `{(0, 0): "origin", (1, 0): "right"}`），列表不可以。
+
+#### 4.6 小结
+元组是不可变的有序集合，适用于需要保护数据完整性的场景。掌握元组解包和与列表的区别，能帮助你选择正确的数据结构。
+
+---
+
+### 5. 字典（Dictionary）
+
+#### 5.1 动机
+- 列表和元组通过数字索引访问元素，但很多场景需要通过有意义的键（如姓名、学号、产品 ID）来查找数据。
+- 字典提供键值对（key-value pair）存储，实现快速查找和灵活的数据组织。
+
+#### 5.2 核心概念
+- **字典（Dictionary）**：用花括号 `{}` 定义的键值对集合，格式为 `{key1: value1, key2: value2}`。
+- **键（Key）**：必须是不可变类型（字符串、整数、浮点数、元组），且在字典中唯一。
+- **值（Value）**：可以是任意类型（整数、字符串、列表、字典等）。
+- **无序性**：字典不保证元素顺序（Python 3.7+ 保持插入顺序，但不应依赖）。
+- **可变性（Mutable）**：可以添加、修改、删除键值对。
+
+#### 5.3 使用场景
+- 存储关联数据（如学生成绩：`{"Alice": 85, "Bob": 92}`）。
+- 配置参数存储（如 `{"host": "localhost", "port": 8080}`）。
+- 数据统计（如单词频率统计：`{"hello": 3, "world": 2}`）。
+- 嵌套字典表示复杂数据（如用户信息：`{"user1": {"name": "Alice", "age": 25}}`）。
+
+#### 5.4 示例
+
+```python
+# 创建字典
+student_grades = {"Alice": 85, "Bob": 92, "Charlie": 78}
+prices = {1: 9.99, 2: 15.50, 3: 7.25}  # 键可以是整数
+config = {"host": "localhost", "port": 8080, "debug": True}
+
+# 访问值（通过键）
+print(student_grades["Alice"])  # 输出: 85
+print(prices[2])                # 输出: 15.50
+
+# 安全访问（避免 KeyError）
+print(student_grades.get("David"))         # 输出: None
+print(student_grades.get("David", 0))      # 输出: 0（提供默认值）
+
+# 修改值
+student_grades["Alice"] = 90
+print(student_grades)  # 输出: {"Alice": 90, "Bob": 92, "Charlie": 78}
+
+# 添加新键值对
+student_grades["David"] = 88
+print(student_grades)  # 输出: {"Alice": 90, "Bob": 92, "Charlie": 78, "David": 88}
+
+# 删除键值对
+removed_grade = student_grades.pop("Charlie")
+print(removed_grade)        # 输出: 78
+print(student_grades)       # 输出: {"Alice": 90, "Bob": 92, "David": 88}
+
+# 检查键是否存在
+print("Alice" in student_grades)    # 输出: True
+print("Charlie" in student_grades)  # 输出: False
+
+# 获取所有键、值、键值对
+print(student_grades.keys())    # 输出: dict_keys(["Alice", "Bob", "David"])
+print(student_grades.values())  # 输出: dict_values([90, 92, 88])
+print(student_grades.items())   # 输出: dict_items([("Alice", 90), ("Bob", 92), ("David", 88)])
+```
+
+#### 5.5 注意事项与最佳实践
+- **使用 get() 避免 KeyError**：访问可能不存在的键时，用 `dict.get(key, default)` 代替 `dict[key]`。
+- **键必须唯一**：相同键会覆盖之前的值（`{"a": 1, "a": 2}` 结果为 `{"a": 2}`）。
+- **键必须不可变**：列表不能作为键，元组可以。
+- **值可以重复**：多个键可以对应相同的值。
+- **检查键存在再操作**：使用 `if key in dict:` 避免错误。
+
+#### 5.6 权衡与替代
+- **字典 vs 列表**：需要快速查找且有明确键时用字典；需要保持顺序且通过索引访问时用列表。
+- **字典 vs 类**：数据结构简单时用字典；需要方法和复杂行为时定义类。
+
+#### 5.7 小结
+字典通过键值对实现高效查找和灵活数据组织。掌握字典的创建、访问、修改及安全操作方法，是处理关联数据的基础。
+
+---
+
+### 6. 字典与循环
+
+#### 6.1 动机
+- 字典常需批量处理：遍历所有键值对、查找满足条件的条目、统计数据等。
+- 不同循环模式适用于不同场景：只遍历键、只遍历值、同时遍历键和值。
+
+#### 6.2 核心概念
+- **遍历键**：`for key in dict:` 或 `for key in dict.keys()`。
+- **遍历值**：`for value in dict.values()`。
+- **遍历键值对**：`for key, value in dict.items()`（推荐）。
+- **while 循环**：条件驱动的字典操作（如统计唯一输入）。
+
+#### 6.3 使用场景
+- **遍历键**：需要根据键查找或修改值。
+- **遍历值**：仅关心值（如统计最大值、求和）。
+- **遍历键值对**：同时需要键和值（如格式化输出、过滤数据）。
+- **while 循环**：动态构建字典（如统计用户输入）。
+
+#### 6.4 示例
+
+```python
+# 遍历键（默认行为）
+grades = {"Alice": 85, "Bob": 92, "Charlie": 78}
+for name in grades:
+    print(f"{name}: {grades[name]}")
+# 输出:
+# Alice: 85
+# Bob: 92
+# Charlie: 78
+
+# 遍历键（显式使用 keys()）
+for name in grades.keys():
+    print(name)
+# 输出: Alice, Bob, Charlie
+
+# 遍历值
+for grade in grades.values():
+    print(grade)
+# 输出: 85, 92, 78
+
+# 遍历键值对（推荐）
+for name, grade in grades.items():
+    print(f"{name} scored {grade}")
+# 输出:
+# Alice scored 85
+# Bob scored 92
+# Charlie scored 78
+
+# 统计最高分
+max_grade = max(grades.values())
+print(f"Highest grade: {max_grade}")  # 输出: Highest grade: 92
+
+# while 循环动态统计（统计唯一输入直到收集 3 个）
+unique_words = {}
+while len(unique_words) < 3:
+    word = input("Enter a word: ")
+    if word in unique_words:
+        unique_words[word] += 1
+    else:
+        unique_words[word] = 1
+
+print("Word counts:")
+for word, count in unique_words.items():
+    print(f"{word}: {count}")
+```
+
+#### 6.5 注意事项与最佳实践
+- **优先使用 items()**：需要键和值时，`dict.items()` 比分别访问键再查值更高效。
+- **避免遍历时修改字典大小**：在循环中添加/删除键可能导致错误，使用字典副本或列表推导式。
+- **检查值是否存在**：用 `if value in dict.values()` 检查值（较慢，适用于小字典）。
+- **in 运算符默认检查键**：`"Alice" in grades` 检查键，不检查值。
+
+#### 6.6 小结
+字典循环的核心是选择合适的遍历模式。`items()` 适用于大多数场景，`keys()` 和 `values()` 用于特定需求，`while` 循环适用于条件驱动的字典构建。
+
+---
+
+## 最佳实践
+
+1. **选择合适的数据结构**：
+   - 需要修改数据且关心顺序 → **列表**
+   - 数据不可变且关心顺序 → **元组**
+   - 需要通过键快速查找 → **字典**
+
+2. **列表操作优化**：
+   - 避免在循环中使用 `append()` 构建大列表，优先使用列表推导式：`[x*2 for x in range(100)]`
+   - 删除多个元素时使用列表推导式而非循环中 `remove()`
+
+3. **字典使用规范**：
+   - 使用 `get()` 方法避免 `KeyError`
+   - 使用 `setdefault()` 或 `defaultdict` 简化计数逻辑
+
+4. **元组使用建议**：
+   - 函数返回多个值时使用元组
+   - 配置参数、常量数据使用元组保护
+
+5. **循环遍历原则**：
+   - 不需要修改数据 → 直接遍历元素
+   - 需要修改数据 → 遍历索引或使用 `enumerate()`
+   - 同时需要索引和值 → 使用 `enumerate()`
+
+6. **代码可读性**：
+   - 使用有意义的变量名（`student_grades` 而非 `d`）
+   - 复杂嵌套结构添加注释说明数据结构
+
+---
+
+## 更新记录
+- 最后更新：2025-10-01
