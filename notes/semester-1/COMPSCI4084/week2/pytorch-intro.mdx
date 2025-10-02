@@ -1,0 +1,327 @@
+---
+title: "PyTorch 入门"
+description: "PyTorch 基础：安装、Tensor、自动求导（autograd）、构建模型（nn.Module）、损失函数与优化器、训练循环与设备管理（CPU/GPU）"
+---
+
+## 概要
+- 本文档为 PyTorch 的入门速查，覆盖安装要点、张量（Tensor）与常用操作、自动求导机制、如何用 `nn.Module` 定义模型、常见损失函数与优化器、训练循环的标准流程以及在 CPU/GPU 间移动模型/数据的实践技巧。
+- 目标是让你能快速搭起一个最小可训练模型并理解训练流程的每一步。
+
+## 学习目标
+1. 安装并验证 PyTorch 环境。
+2. 理解并能操作 PyTorch 的 `Tensor`（创建、索引、形状变换、设备移动）。
+3. 掌握 `autograd` 自动求导的基本用法（`requires_grad`、`backward()`）。
+4. 能用 `nn.Module` 定义前向网络并查看参数。
+5. 使用合适的损失函数与优化器执行参数更新。
+6. 实现标准训练循环（forward → loss → backward → step）并在 CPU/GPU 上运行。
+
+## 关键知识点
+
+### 1. PyTorch 简介与安装
+
+#### 动机
+- 需要一个支持动态图（eager execution）、与 Python 紧密集成且在研究与生产中广泛使用的深度学习库。
+
+#### 核心概念
+- PyTorch 是一个基于张量（Tensor）的深度学习库，提供自动微分（autograd）、神经网络模块（torch.nn）和优化器（torch.optim）。
+- 常见安装方式：conda（推荐用于 Anaconda 环境）或 pip。
+
+#### 使用场景/模式
+- 研究实验、快速原型、训练/微调模型以及在生产中推理（配合 TorchScript/ONNX）。
+
+#### 示例（安装验证）
+
+```python
+# 在 Python REPL 中验证安装
+import torch
+print(torch.__version__)
+print('CUDA 可用: ', torch.cuda.is_available())
+```
+
+#### 注意事项/最佳实践
+- 在 Conda 环境中安装可避免与系统依赖冲突。若需要 GPU 支持，按官方指南选择匹配的 CUDA 版本。
+- 在共享项目中，用 `requirements.txt` 或 `environment.yml` 锁定依赖版本。
+
+#### 小结
+先确认正确安装并能导入 `torch`，再继续学习张量与模型构建。
+
+---
+
+### 2. 张量（Tensor）与基本操作
+
+#### 动机
+- 张量是所有计算的基本单元；掌握张量创建、索引和形状变换是后续模型实现的基础。
+
+#### 核心概念
+- `torch.tensor`, `torch.zeros`, `torch.ones`, `torch.arange`, `torch.linspace` 等用于创建张量。
+- 张量支持 N 维、广播（broadcasting）、形状变换（`reshape` / `view`）、拼接（`cat` / `stack`）。
+- 张量可放在不同设备（CPU/GPU），用 `.to(device)` 或 `.cuda()` / `.cpu()` 切换。
+
+#### 使用场景/模式
+- 数据准备、模型输入、参数表示、以及与 NumPy 的互操作（`tensor.numpy()` 与 `torch.from_numpy()`）。
+
+#### 示例
+
+```python
+import torch
+
+# 创建张量
+x = torch.linspace(-10, 10, steps=100)   # 连续线性序列
+A = torch.tensor([[1.0, 2.0], [3.0, 4.0]])
+zeros = torch.zeros(3, 4)
+
+# 基本运算
+y = x * 2 + 1
+B = A.t()  # 转置
+
+# 形状变换
+z = torch.arange(6)
+z = z.reshape(2, 3)  # 或 z.view(2, 3)
+
+# 在 GPU（若可用）上创建/转移张量
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+A = A.to(device)
+
+# 与 NumPy 互操作
+import numpy as np
+arr = np.arange(5)
+t = torch.from_numpy(arr)
+print(t)
+```
+
+#### 注意事项/最佳实践
+- 在 GPU 上训练时，确保模型参数与输入都在同一设备上，否则会抛出设备不一致错误。
+- 避免不必要的设备拷贝（频繁用 `.cpu()` / `.cuda()` 会影响性能）。
+
+#### 小结
+张量操作是 PyTorch 使用的核心，熟悉常用创建与变换 API 能让你更快实现模型和数据流水线。
+
+---
+
+### 3. 自动求导（autograd）与梯度
+
+#### 动机
+- 训练神经网络需要计算损失相对于参数的梯度，`autograd` 自动构建计算图并自动求导，减少手工微分的错误。
+
+#### 核心概念
+- `requires_grad=True` 会让张量在前向计算时记录操作以便反向传播。
+- `loss.backward()` 会在计算图上反向传播并累积梯度到叶子张量的 `.grad` 属性。
+- 使用 `torch.no_grad()` 或 `with torch.no_grad():` 在推理时关闭梯度记录以节省内存。
+
+#### 使用场景/模式
+- 模型训练时开启梯度；评估/推理时关闭梯度。
+
+#### 示例
+
+```python
+import torch
+
+# 简单标量自动求导
+x = torch.tensor(2.0, requires_grad=True)
+y = x ** 2 + 3 * x
+
+# 反向传播
+y.backward()  # dy/dx = 2*x + 3
+print(x.grad)  # 输出: tensor([7.])
+
+# 禁用梯度计算（推理）
+with torch.no_grad():
+    y2 = x * 2
+```
+
+#### 注意事项/最佳实践
+- 每次 `backward()` 前通常需要 `optimizer.zero_grad()` 清零梯度，否则会累加上一次梯度。
+- 对于复杂训练策略（如多次反向传播或梯度裁剪），要谨慎管理计算图与 `retain_graph` 参数。
+
+#### 小结
+autograd 让反向传播简单可靠，但要注意梯度累加与在推理时关闭梯度记录。
+
+---
+
+### 4. 用 `nn.Module` 定义模型（网络结构）
+
+#### 动机
+- `nn.Module` 提供组织参数（weights/biases）和定义前向逻辑的统一方式，便于模型复用与保存。
+
+#### 核心概念
+- 通过继承 `torch.nn.Module` 并实现 `__init__`（定义层）与 `forward()`（前向计算）来创建模型。
+- 模块的参数会自动出现在 `model.parameters()` 里，方便传给优化器。
+
+#### 使用场景/模式
+- 定义从线性回归、全连接网络（MLP）到卷积神经网络（CNN）、Transformer 等模型结构。
+
+#### 示例
+
+```python
+import torch
+import torch.nn as nn
+
+class SimpleNet(nn.Module):
+    def __init__(self, in_features=784, hidden=128, out_features=10):
+        super().__init__()
+        self.fc1 = nn.Linear(in_features, hidden)
+        self.act = nn.ReLU()
+        self.fc2 = nn.Linear(hidden, out_features)
+
+    def forward(self, x):
+        x = self.fc1(x)
+        x = self.act(x)
+        x = self.fc2(x)
+        return x
+
+model = SimpleNet()
+print(sum(p.numel() for p in model.parameters()))  # 参数总数
+```
+
+#### 注意事项/最佳实践
+- 把可复用的层或子模块封装成单独的 `nn.Module` 类，有利于代码复用与测试。
+- 在 `forward` 中只写前向逻辑，不要在 `forward` 中修改模型参数。
+
+#### 小结
+`nn.Module` 是组织模型代码与参数管理的核心抽象，掌握其使用能让模型结构清晰且易于扩展。
+
+---
+
+### 5. 损失函数与优化器
+
+#### 动机
+- 损失函数衡量预测与真实值的差距，优化器根据梯度调整参数以最小化损失。
+
+#### 核心概念
+- 常见损失：`nn.CrossEntropyLoss`（分类）、`nn.MSELoss`（回归）。
+- 常见优化器：`torch.optim.SGD`, `torch.optim.Adam` 等。
+- 使用 `optimizer.zero_grad()`, `loss.backward()`, `optimizer.step()` 的标准步骤来更新参数。
+
+#### 使用场景/模式
+- 选择损失函数要与任务类型匹配（分类/回归/多标签等）。
+
+#### 示例
+
+```python
+import torch
+import torch.nn as nn
+import torch.optim as optim
+
+model = SimpleNet()
+criterion = nn.CrossEntropyLoss()
+optimizer = optim.SGD(model.parameters(), lr=0.01)
+
+# 假数据示例
+inputs = torch.randn(16, 784)
+labels = torch.randint(0, 10, (16,))
+
+# forward
+outputs = model(inputs)
+loss = criterion(outputs, labels)
+
+# backward + step
+optimizer.zero_grad()
+loss.backward()
+optimizer.step()
+```
+
+#### 注意事项/最佳实践
+- 学习率（lr）对收敛影响最大，训练时常需调参或使用学习率调度器（`torch.optim.lr_scheduler`）。
+- 对于深层模型，Adam 常能提供更稳定的训练起点，SGD（带 momentum）在大规模训练中表现优异。
+
+#### 小结
+选择合适的损失与优化器，并按标准步骤更新参数，是训练深度模型的核心流程。
+
+---
+
+### 6. 标准训练循环（训练/验证/测试）
+
+#### 动机
+- 训练循环实现模型从数据中学习：前向传递计算损失、反向传播计算梯度、优化器更新参数，同时定期在验证集上评估泛化性能。
+
+#### 核心概念
+- 训练阶段要调用 `model.train()`（开启 dropout、batchnorm 的训练行为），验证/测试阶段使用 `model.eval()` 并在 `torch.no_grad()` 下关闭梯度计算。
+- 常见步骤：数据加载 → `model(inputs)` → `loss` → `backward()` → `optimizer.step()` → `scheduler.step()`（可选）。
+
+#### 使用场景/模式
+- 小批量（mini-batch）训练；每个 epoch 遍历整个训练集并在验证集上评估。
+
+#### 示例（简化版训练循环）
+
+```python
+for epoch in range(5):
+    model.train()
+    for batch_inputs, batch_labels in train_loader:
+        batch_inputs = batch_inputs.to(device)
+        batch_labels = batch_labels.to(device)
+
+        optimizer.zero_grad()
+        outputs = model(batch_inputs)
+        loss = criterion(outputs, batch_labels)
+        loss.backward()
+        optimizer.step()
+
+    # 验证
+    model.eval()
+    with torch.no_grad():
+        val_loss = 0.0
+        for v_inputs, v_labels in val_loader:
+            v_inputs = v_inputs.to(device)
+            v_labels = v_labels.to(device)
+            v_outputs = model(v_inputs)
+            val_loss += criterion(v_outputs, v_labels).item()
+    print(f'Epoch {epoch} val_loss: {val_loss}')
+```
+
+#### 注意事项/最佳实践
+- 使用 `DataLoader`（`torch.utils.data.DataLoader`）组织和并行加载数据。
+- 在训练时保持随机种子可复现性（`torch.manual_seed()`），但在分布式或 GPU 环境中可能仍有不确定性。
+- 定期保存模型检查点（`torch.save(model.state_dict(), path)`）。
+
+#### 小结
+标准训练循环包含训练与验证两部分，合理的评估与检查点策略有助于调参与故障恢复。
+
+---
+
+### 7. 设备管理（CPU/GPU）与性能提示
+
+#### 动机
+- GPU 能显著加速大多数深度学习任务，但需正确管理设备移动与内存以避免错误与性能问题。
+
+#### 核心概念
+- 使用 `device = torch.device('cuda')` 将张量与模型移动到 GPU：`model.to(device)`、`tensor.to(device)`。
+- 避免在训练循环中频繁在设备间拷贝数据。
+
+#### 使用场景/模式
+- 单 GPU / 多 GPU（使用 `nn.DataParallel` 或 `torch.distributed`）训练；CPU 仅用于小规模试验或推理。
+
+#### 示例
+
+```python
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+model.to(device)
+
+# 在训练循环内
+for batch_inputs, batch_labels in train_loader:
+    batch_inputs = batch_inputs.to(device)
+    batch_labels = batch_labels.to(device)
+    outputs = model(batch_inputs)
+    # ...
+```
+
+#### 注意事项/最佳实践
+- 在多 GPU 场景下使用 `torch.nn.DataParallel`（简单）或 `torch.distributed`（更高性能与可扩展性）。
+- 监控 GPU 显存（`nvidia-smi`）并调整 batch size 以避免 OOM（out-of-memory）。
+- 对 I/O 瓶颈使用多线程 `DataLoader`（`num_workers>0`）加速数据加载。
+
+#### 小结
+正确的设备管理与数据加载策略能显著提升训练速度并减少故障。
+
+---
+
+## 最佳实践（速查）
+
+- 在推理/验证时用 `with torch.no_grad()` 关闭梯度以节省内存。
+- 在训练循环中先 `optimizer.zero_grad()`，再 `loss.backward()`，然后 `optimizer.step()`。
+- 保存模型参数使用 `model.state_dict()`，加载时用 `model.load_state_dict()`。
+- 在需要跨平台复现实验时记录 `torch` 和 `cuda` 版本、随机种子与数据划分方式。
+
+---
+
+## 更新记录
+- 最后更新：2025-10-01
