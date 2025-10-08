@@ -1,0 +1,10 @@
+如何在仓库中创建并提交 README？	echo "内容" > README.md; git add README.md; git commit -m "add README"
+如何将本地仓库关联到远程并推送？	git init; git remote add origin <url>; git push -u origin main
+首次推送时 -u 参数的作用是什么？	设置上游分支以简化后续推送
+在开发中应如何组织分支命名？	遵循约定如 feature/<name>、fix/<name>
+合并分支前的常规步骤是什么？	切换到目标分支并更新后再合并
+实验练习提交应遵循哪些原则？	小步提交；提交信息清晰
+README 中应包含哪些关键信息？	环境配置与运行方法
+.gitignore 通常应忽略哪些内容？	环境文件、临时文件、编译产物
+如何使用 environment.yml 复现 Conda 环境？	conda env create -f environment.yml
+激活环境后命令行提示符通常会显示什么？	(<env>) 前缀

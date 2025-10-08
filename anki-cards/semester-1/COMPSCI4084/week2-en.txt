@@ -1,0 +1,110 @@
+What is the keyword to define Python function?	def
+What are the three types of function parameters?	Positional parameters, keyword parameters, default parameters
+How to define parameter with default value?	def func(x, y=10):
+What does function return without return statement?	None
+What is Python's scope rule?	LEGB (Local, Enclosing, Global, Built-in)
+How to modify global variable inside function?	Use global keyword
+What is the pitfall of mutable default arguments?	Share same object, accumulate side effects
+How to avoid mutable default argument problem?	Use None and create new object inside function
+Purpose of docstring?	Document function purpose, parameters, and return value
+Purpose of *args?	Accept arbitrary number of positional arguments
+Purpose of **kwargs?	Accept arbitrary number of keyword arguments
+What is the limitation of lambda function?	Can only contain single expression
+Rule when mixing positional and keyword arguments?	Positional arguments must come before keyword arguments
+Purpose of return statement?	Return value and end function execution
+How to return multiple values?	Return tuple (separated by commas)
+
+What does list mutability mean?	Content can be modified at runtime
+What access methods do lists support?	Indexing and slicing
+Difference between append() and insert()?	Append adds to end vs insert at specific position
+Difference between remove() and pop()?	Remove by value vs pop by index and return
+What does sort() return?	None (sorts in-place)
+Purpose of enumerate()?	Return both index and element simultaneously
+Core difference between list and tuple?	List is mutable vs tuple is immutable
+Requirement for tuple as dictionary key?	Tuple is immutable type
+How to define single-element tuple?	(item,) requires comma
+What condition must dictionary keys satisfy?	Immutable and unique
+Advantage of dict.get()?	Avoid KeyError, can provide default value
+How to iterate over dictionary key-value pairs?	for key, value in dict.items()
+How to check if key exists?	Use in operator
+Advantage of list comprehension?	Concise and efficient
+Difference between shallow copy and deep copy?	Shallow copy only copies references, deep copy recursively copies
+
+What is the output range of range(n)?	0 to n-1 (excludes n)
+Characteristic of range(start, stop)?	From start to stop-1 (left-closed, right-open)
+Purpose of range step parameter?	Control step size, can be negative for reverse
+When to use for loop?	Known iteration count or traversing collections
+When to use while loop?	Unknown iteration count with conditional looping
+Purpose of break statement?	Immediately exit current loop
+Purpose of continue statement?	Skip current iteration, enter next iteration
+Execution characteristic of nested loop?	For each outer iteration, inner loop executes completely
+Common pitfall of while loop?	Forgetting to update condition causing infinite loop
+Does range include stop value?	No (left-closed, right-open interval)
+How to loop in reverse?	range(start, stop, -1) with negative step
+enumerate() starting from 1?	enumerate(list, start=1)
+Risk of modifying list length in loop?	May skip elements or cause index errors
+Principle for choosing for vs while?	Use for for known count, while for unknown count
+
+Difference between text and binary files?	Text uses character encoding, binary reads/writes raw bytes
+Recommended way to open text file?	open(file, encoding='utf-8')
+Purpose of with statement?	Auto-close file, executes even with exceptions
+Difference between read() and readline()?	Read entire file vs read one line
+How to iterate over large file line by line?	for line in f line iteration
+Recommended parameters for opening CSV files?	newline='' and encoding='utf-8'
+Does write() auto-append newline?	No, need explicit \n
+Purpose of try/except?	Catch and handle exceptions
+What does FileNotFoundError indicate?	File does not exist
+What does PermissionError indicate?	Insufficient file permissions
+Characteristic of finally block?	Executes regardless of exception occurrence
+Purpose of parameterized queries?	Prevent SQL injection
+How to safely read files?	Use with open() as f context manager
+Advantage of csv.writer?	Auto-handles quotes, escapes, and delimiters
+How to get command-line arguments?	sys.argv list
+
+What is the purpose of SQLite primary key?	Uniquely identify each record in table
+How to connect to SQLite database?	sqlite3.connect('db.db')
+What is needed to execute SQL statement?	Cursor object
+How to save database changes?	conn.commit()
+What placeholder does parameterized query use?	Question mark (?)
+Why use parameterized queries?	Prevent SQL injection attacks
+What does cursor.execute() return?	Cursor object itself
+How to get query results?	cursor.fetchall() or fetchone()
+Purpose of transaction?	Ensure atomicity of group operations
+Purpose of conn.rollback()?	Rollback uncommitted changes
+Common SQLite data types?	INTEGER, REAL, TEXT, BLOB
+Purpose of NOT NULL constraint?	Ensure column cannot be empty
+Purpose of INNER JOIN?	Return matching rows from both tables
+How to get last inserted record ID?	cursor.lastrowid
+When to use executemany()?	Batch insert data
+
+What is PyTorch's core data structure?	Tensor
+How to check if CUDA is available?	torch.cuda.is_available()
+Purpose of requires_grad=True?	Enable gradient tracking for backpropagation
+Purpose of loss.backward()?	Backpropagate to compute gradients
+Purpose of optimizer.zero_grad()?	Zero gradients (avoid accumulation)
+Purpose of optimizer.step()?	Update parameters based on gradients
+Two methods that must be implemented in nn.Module?	__init__ and forward
+Difference between model.train() and model.eval()?	Training mode vs evaluation mode
+Purpose of torch.no_grad()?	Disable gradient computation to save memory
+How to move model to GPU?	model.to(device)
+What is CrossEntropyLoss suitable for?	Classification tasks
+What is MSELoss suitable for?	Regression tasks
+Characteristic of Adam optimizer?	Adaptive learning rate, stable training
+How to save model parameters?	torch.save(model.state_dict(), path)
+Purpose of DataLoader?	Batch loading and parallelizing data
+
+Characteristic of local variables?	Only visible within function, destroyed after function returns
+Characteristic of global variables?	Visible throughout entire program
+Definition of side effect?	Function modifies state outside its local environment
+Common types of side effects?	Modify global variables, I/O operations, modify mutable parameters
+Characteristic of pure function?	Same input produces same output, no side effects
+How to avoid modifying passed-in list?	Return new list instead of modifying original
+What is variable shadowing?	Local variable has same name as global variable
+Purpose of global keyword?	Modify global variable inside function
+Why should global be avoided?	Increases side effects, reduces testability
+Variable pitfall in Jupyter Notebook?	Cells execute in arbitrary order causing inconsistent state
+How to reset Notebook state?	Restart & Run All
+Purpose of %who or %whos?	View all current variables
+Advantages of pure functions?	Easy to test, debug, and reuse
+How to name functions with side effects?	Use prefixes like update_, set_
+Best way to share variables?	Through parameter passing and return values

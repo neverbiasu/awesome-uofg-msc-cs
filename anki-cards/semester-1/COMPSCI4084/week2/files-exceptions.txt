@@ -1,0 +1,15 @@
+文本文件与二进制文件的区别?	文本用字符编码,二进制读写原始字节
+打开文本文件的推荐写法?	open(file, encoding='utf-8')
+with 语句的作用?	自动关闭文件,即使异常也会执行
+read() 与 readline() 的区别?	读取全文 vs 读取一行
+如何逐行遍历大文件?	for line in f 逐行迭代
+CSV 文件打开的推荐参数?	newline='' 和 encoding='utf-8'
+write() 是否自动换行?	不会,需显式使用 \n
+try/except 的作用?	捕获并处理异常
+FileNotFoundError 表示?	文件不存在
+PermissionError 表示?	文件权限不足
+finally 块的特性?	无论是否异常都会执行
+参数化查询的作用?	防止 SQL 注入
+如何安全读取文件?	使用 with open() as f 上下文管理器
+csv.writer 的优势?	自动处理引号、转义和分隔符
+如何获取命令行参数?	sys.argv 列表

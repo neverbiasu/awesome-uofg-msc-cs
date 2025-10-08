@@ -1,0 +1,14 @@
+range(n) 的输出范围?	0 到 n-1(不包含n)
+range(start, stop) 的特性?	从 start 到 stop-1(左闭右开)
+range 的 step 参数作用?	控制步长,可为负数实现倒序
+for 循环的适用场景?	已知迭代次数或遍历集合
+while 循环的适用场景?	未知迭代次数的条件循环
+break 语句的作用?	立即退出当前循环
+continue 语句的作用?	跳过本次迭代,进入下一次迭代
+嵌套循环的执行特点?	外层每迭代一次,内层完整执行所有迭代
+while 循环的常见陷阱?	忘记更新条件导致死循环
+range 是否包含 stop 值?	不包含(左闭右开区间)
+如何倒序循环?	range(start, stop, -1) step为负数
+enumerate() 从1开始编号?	enumerate(list, start=1)
+循环中修改列表长度的风险?	可能跳过元素或索引错误
+for 与 while 的选择原则?	已知次数用 for,未知次数用 while

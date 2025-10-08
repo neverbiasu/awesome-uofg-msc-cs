@@ -1,0 +1,12 @@
+ProgSD 采用的教学模式是？	Modified Team-Based Learning
+ProgSD 的四个核心教学目标有哪些？	编程技能提升；自主学习；系统开发工具；Linux 管理
+Modified Team-Based Learning 的三个阶段是？	课前准备；课堂活动；实验辅导
+课堂活动常见三个步骤是？	个人思考；小组讨论；团队提交
+实验考试占总成绩比例是多少？	40%
+实验考试通常属于什么形式？	开卷考试
+所有评估练习合计的大致占比是？	40%
+同行评议（tAPP）在成绩中占比是多少？	5%
+实验评估中团队间如何处理学术诚信？	实验可互助但评估需遵守学术诚信
+课程推荐的参考教材示例有哪些？	Python Data Analytics；Linux Shell Scripting；Shell Scripting Guide
+课程在第 1 周主要覆盖哪些主题？	Python 基础；决策结构；OOP；Git；Conda；Google Colab
+课程学习成果一般覆盖多少方面？	8 项

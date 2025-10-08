@@ -1,0 +1,15 @@
+SQLite 中主键的作用是?	唯一标识表中的每条记录
+如何连接 SQLite 数据库?	sqlite3.connect('db.db')
+执行 SQL 语句需要什么?	游标对象(cursor)
+如何保存数据库更改?	conn.commit()
+参数化查询使用什么占位符?	问号(?)
+为什么要用参数化查询?	防止 SQL 注入攻击
+cursor.execute() 的返回值是?	游标对象本身
+如何获取查询结果?	cursor.fetchall() 或 fetchone()
+事务的作用是?	保证一组操作的原子性
+conn.rollback() 的作用?	回滚未提交的更改
+SQLite 的常见数据类型?	INTEGER、REAL、TEXT、BLOB
+NOT NULL 约束的作用?	确保列不能为空
+INNER JOIN 的作用?	返回两表匹配的行
+如何获取最后插入记录的 ID?	cursor.lastrowid
+executemany() 的适用场景?	批量插入数据
