@@ -1,0 +1,166 @@
+---
+title: NumPy
+description: NumPy 数组创建、索引、运算、形状变换与文件读写（dtypes、广播、矩阵乘法、堆叠/拆分）
+---
+
+## 概要
+- 目标：掌握 NumPy 的核心数据结构 `ndarray`，能创建、索引、变形、进行矢量化运算并在文件间读写数组。
+- 范围：包含数组创建函数、dtype、广播、矩阵乘法、堆叠/拆分、视图与拷贝、掩码与 fancy indexing；不覆盖线性代数高级分解（如 SVD 细节）。
+
+## 学习目标
+1. 能使用 `array/zeros/ones/arange/linspace` 创建不同形状与 dtype 的数组。
+2. 理解并应用数组索引、切片、布尔掩码和 fancy indexing 提取/修改数据。
+3. 熟练使用广播进行元素级运算，并使用 `dot()` 做矩阵乘法。
+4. 能改变数组的形状（`reshape`, `ravel`, `transpose`）并理解 view 与 copy 的区别。
+5. 能把数组保存为文本或二进制文件并重新加载。
+
+## 关键知识点
+### 1. 数组创建与 dtype
+- **动机**：用更高效的内存与向量化运算替代 Python 列表循环。
+- **核心概念**：`np.array`, `np.zeros`, `np.ones`, `np.arange`, `np.linspace`, `np.random`，以及 `dtype` 明确数据类型。
+- **示例**：
+```python
+import numpy as np
+# 基本创建
+a = np.array([1, 2, 3])            # dtype 推断为 int
+b = np.array([1.0, 2.0, 3.0])      # float
+c = np.array([(1,2),(3,4)], dtype=np.int64)  # 指定 dtype
+z = np.zeros((2,3))
+ones = np.ones(4, dtype=float)
+r = np.arange(0, 10, 2)            # [0,2,4,6,8]
+ls = np.linspace(0, 1, 5)          # 等间隔的 5 个值
+```
+- **注意事项/最佳实践**：尽量在创建时指定 `dtype` 以避免隐式类型转换导致的性能或精度问题。
+- **小结**：掌握常用创建函数能快速构造分析数据。
+
+---
+### 2. 索引、切片、掩码与 fancy indexing
+- **动机**：高效选取或修改数组的子集。
+- **核心概念**：整数索引、切片 `a[start:stop:step]`、布尔掩码、整数数组索引（fancy indexing）。
+- **示例**：
+```python
+arr = np.arange(12).reshape(3,4)
+# 位置索引
+row1 = arr[0]
+val = arr[1,2]
+# 切片
+sub = arr[:, 1:3]
+# 布尔掩码
+mask = arr % 2 == 0
+evens = arr[mask]
+# fancy indexing
+idx = [0,2]
+sel = arr[idx]  # 选择第 0 行和第 2 行
+```
+- **注意事项**：布尔掩码会返回一维数组；fancy indexing 总是返回数组的拷贝（不是 view）。
+- **小结**：选择适合的索引方式可使代码简洁且高效。
+
+---
+### 3. 广播与元素级运算
+- **动机**：用矢量化表达式替代显式循环，提高性能。
+- **核心概念**：不同形状数组按规则对齐并扩展以进行逐元素运算。
+- **示例**：
+```python
+A = np.array([[1,2,3],[4,5,6]])  # shape (2,3)
+v = np.array([1,0,1])           # shape (3,)
+# 广播：v 会沿 axis=0 扩展
+res = A + v  # 每行都加 v
+# 标量运算
+res2 = A * 2
+```
+- **注意事项**：广播成功的前提是两个数组的维度从尾部开始相容（维度相等或其中一个为1）。滥用广播可能导致意外形状结果。
+- **小结**：广播是写出简洁矢量化代码的关键。
+
+---
+### 4. 矩阵乘法与线性代数常用变换
+- **动机**：很多数据分析/机器学习操作需要矩阵乘积、转置与逆。
+- **核心概念**：`np.dot` 或 `@` 为矩阵乘法；`transpose()`, `trace()`, `linalg.inv()` 等工具。
+- **示例**：
+```python
+A = np.arange(6).reshape(2,3)
+B = np.ones((3,2))
+M = A.dot(B)       # 或 A @ B  -> shape (2,2)
+T = A.T
+# 仅对方阵求逆
+C = np.array([[1.,2.],[3.,4.]])
+invC = np.linalg.inv(C)
+tr = np.trace(C)
+```
+- **注意事项**：请确保矩阵可逆（行列式非零）；高维线性代数请使用专门库并留意数值稳定性。
+- **小结**：掌握 `dot`/`@` 和常用线性代数函数满足基本矩阵运算需求。
+
+---
+### 5. 形状变换、堆叠与拆分
+- **动机**：为算法或可视化准备合适形状的数据。
+- **核心概念**：`reshape`, `ravel`, `reshape(-1, n)`, `vstack`, `hstack`, `column_stack`, `hsplit`, `vsplit`, `split`。
+- **示例**：
+```python
+x = np.arange(12)
+M = x.reshape(3,4)
+flat = M.ravel()
+# 堆叠
+a = np.array([[1,2],[3,4]])
+b = np.array([[5,6]])
+vs = np.vstack([a,b])
+hs = np.hstack([a, a])
+# 分割
+left, right = np.hsplit(M, [2])
+```
+- **注意事项**：`reshape` 返回新视图或拷贝取决于内存布局；使用 `-1` 作为维度可自动推断。
+- **小结**：灵活变形和堆叠是数据准备的常用操作。
+
+---
+### 6. 视图 (view) 与拷贝 (copy)
+- **动机**：理解修改数组会否影响原数组，避免难以察觉的副作用。
+- **核心概念**：简单赋值只是引用，切片通常返回 view，`copy()` 创建独立副本。
+- **示例**：
+```python
+a = np.arange(6)
+b = a          # 引用
+s = a[1:4]     # view（通常）
+c = a[1:4].copy()  # 独立拷贝
+s[0] = 99
+# 观察 a 的变化
+```
+- **注意事项**：当性能重要且你只读取数据时，可利用 view 避免内存复制；当要独立修改时必须 `copy()`。
+- **小结**：明确何时复制以避免隐藏的 bug 或不必要的内存占用。
+
+---
+### 7. 掩码、ufunc 与迭代
+- **动机**：在数组上执行高效元素级函数与有条件的批量修改。
+- **核心概念**：ufunc（如 `np.sqrt`, `np.sin`）对数组广播执行；掩码用于条件选择与赋值。
+- **示例**：
+```python
+x = np.array([1,4,9,16])
+print(np.sqrt(x))
+A = np.arange(9)
+mask = (A % 2 == 0)
+A[mask] = -1  # 将偶数替换为 -1
+```
+- **注意事项**：尽量使用内置 ufunc 代替 Python 循环以获得性能优势。
+- **小结**：ufunc + 掩码组合是数组运算的利器。
+
+---
+### 8. 保存与加载数组
+- **动机**：在磁盘与内存间持久化中间结果或共享数据。
+- **核心概念**：文本格式 `savetxt/loadtxt` 与二进制 `save/load`（.npy）更高效且保留 dtype。
+- **示例**：
+```python
+np.savetxt('arr.txt', np.arange(6))
+a = np.loadtxt('arr.txt')
+# 二进制
+np.save('arr.npy', np.arange(6))
+b = np.load('arr.npy')
+```
+- **注意事项**：对于大型数组推荐二进制格式以节省空间和 I/O 时间。
+- **小结**：选择合适的持久化方式便于数据复现与共享。
+
+## 最佳实践
+- 优先使用 NumPy 内置函数（ufunc）替代 Python 循环以获得速度优势。
+- 明确 `dtype` 避免隐式转换的精度或内存问题。
+- 对可能被修改的切片使用 `.copy()` 以避免不期望的副作用。
+- 在内存与性能受限时，尽量复用 view 而不是创建拷贝。
+
+---
+## 更新记录
+- 2025-10-08：根据课程材料初版创建。

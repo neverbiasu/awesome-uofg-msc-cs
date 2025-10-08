@@ -1,0 +1,54 @@
+---
+title: 日期与缺失数据
+description: 使用 pandas 解析日期、处理 dayfirst、保留原始日期列以及处理缺失值（dropna/fillna/均值/中位数替换）
+---
+
+## 概要
+- 目标：掌握如何把字符串日期解析为 `datetime`，并学会常见的缺失值处理策略，以便进行时间序列分析与可靠的聚合。
+- 范围：`parse_dates`, `dayfirst`, `dt.to_period`, 复制原始日期列备份、`dropna`, `fillna`（常数/均值/中位数）等。
+
+## 学习目标
+1. 能使用 `pd.read_csv(..., parse_dates=[...], dayfirst=True)` 正确解析不同地区日期格式。
+2. 学会备份原始日期列并用 `dt.to_period('M')` 抽取月周期以便按月分组。
+3. 掌握缺失值检测与处理函数（`isnull`, `notnull`, `dropna`, `fillna`）并选择合适策略。
+
+## 关键知识点
+### 1. 解析日期与 dayfirst
+- **动机**：将日期解析为 `datetime` 方便索引、过滤与按时间分组。
+- **核心概念**：`parse_dates` 自动将列解析为 `datetime`；`dayfirst=True` 用于 `DD/MM/YYYY` 格式数据。
+- **示例**：
+```python
+import pandas as pd
+# 解析时指定列
+df = pd.read_csv('shopping.csv', parse_dates=['Date'], dayfirst=True)
+# 备份原始日期
+df['Date_original'] = df['Date']
+# 转为月周期
+df['Month'] = df['Date_original'].dt.to_period('M')
+```
+- **小结**：提前解析日期能减少后续处理错误并提升可读性。
+
+---
+### 2. 处理缺失值
+- **动机**：缺失值会影响聚合统计与可视化，需要有策略地处理。
+- **核心概念**：检测 `df.isnull().sum()`，删除 `dropna()`，或用 `fillna()` 填充常数/均值/中位数。
+- **示例**：
+```python
+# 检查缺失值数量
+df.isnull().sum()
+# 用均值填充数量列
+df['Price'].fillna(df['Price'].mean(), inplace=True)
+# 或按列指定默认值
+df.fillna({'Quantity':0, 'Product':'Unknown'}, inplace=True)
+```
+- **注意事项**：填充策略应基于业务语义，随机填充可能引入偏差。
+- **小结**：合理的缺失值策略有利于输出稳定的分析结果。
+
+## 最佳实践
+- 在数据处理流水线第一步就记录原始日期列以便审计与错误回溯。
+- 对关键数值列优先使用中位数填充来降低极端值影响。
+- 对时间序列数据优先考虑插值（`interpolate`）而不是盲目填充固定值。
+
+---
+## 更新记录
+- 2025-10-08：根据课程材料创建初版示例。

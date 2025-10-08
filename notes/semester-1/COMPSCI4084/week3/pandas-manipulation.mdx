@@ -1,0 +1,89 @@
+---
+title: Pandas 操作
+description: Pandas 的数据合并、重塑、透视、分组聚合与映射/替换常用技巧（merge, concat, pivot, groupby）
+---
+
+## 概要
+- 目标：掌握 Pandas 用于清洗与整合数据的常见操作，包括合并、连接、透视、去重与分组聚合。
+- 范围：`merge`, `concat`, `join`, `pivot`, `stack`/`unstack`, `groupby`, `map`/`replace` 与 `drop_duplicates` 等。
+
+## 学习目标
+1. 能使用 `merge`/`join`/`concat` 在不同键或索引上组合数据集。
+2. 掌握 `pivot`/`stack`/`unstack` 在长/宽格式间切换以便报表与可视化。
+3. 熟练进行分组聚合（`groupby`）与常见聚合函数（`sum`, `mean`, `count`）。
+4. 使用 `map`/`replace`/`rename` 执行列值替换与映射。
+5. 能检测并删除重复记录，按需保留特定行。
+
+## 关键知识点
+### 1. 合并与连接（merge / concat / join）
+- **动机**：不同来源的数据表通常需要基于共享键合并成分析友好的表格。
+- **核心概念**：`pd.merge(left, right, on='key', how='inner|left|right|outer')`；`pd.concat([df1,df2], axis=0|1)`；`join` 基于索引操作。
+- **示例**：
+```python
+import pandas as pd
+left = pd.DataFrame({'id':[1,2,3],'v':[10,20,30]})
+right = pd.DataFrame({'id':[2,3,4],'w':[200,300,400]})
+m = pd.merge(left, right, on='id', how='inner')
+# concat 行拼接
+cat = pd.concat([left, right], ignore_index=True, sort=False)
+```
+- **注意事项**：当列名冲突时使用 `suffixes=('_l','_r')`；大表合并前确保键列无重复或已索引以提速。
+- **小结**：合理选择合并方式决定数据集完整性与行数。
+
+---
+### 2. 透视与重塑（pivot / stack / unstack）
+- **动机**：为不同的报表或分析视角调整表格形状。
+- **核心概念**：`pivot()` 将长表转为宽表；`stack()/unstack()` 在多级索引间切换维度；`melt()` 为逆操作（宽转长）。
+- **示例**：
+```python
+df = pd.DataFrame({'city':['A','A','B','B'],'month':[1,2,1,2],'sales':[10,20,5,7]})
+wide = df.pivot(index='city', columns='month', values='sales')
+stacked = wide.stack()
+```
+- **注意事项**：pivot 需要唯一索引/列组合，否则先用 `groupby` 聚合。
+- **小结**：灵活重塑数据可简化后续可视化步骤。
+
+---
+### 3. 分组聚合（groupby）
+- **动机**：按类别汇总指标（如月销售求和）。
+- **核心概念**：`df.groupby(['col']).agg({'val':['sum','mean']})`，分组-应用-合并三步法。
+- **示例**：
+```python
+grp = df.groupby('city')['sales'].sum().reset_index()
+```
+- **注意事项**：groupby 结果为分组对象，可链式调用聚合函数、过滤与变换。
+- **小结**：groupby 是强大的聚合与分组计算工具。
+
+---
+### 4. 映射与替换（map / replace / rename）
+- **动机**：修正错误标签或补充字典映射值。
+- **核心概念**：`series.map(dict)` 创建新列；`df['col'].replace(mapping)` 直接替换；`rename(columns={})` 重命名列。
+- **示例**：
+```python
+d = {'A':100,'B':200}
+df['price'] = df['type'].map(d)
+df['type'] = df['type'].replace({'rosso':'red','verde':'green'})
+```
+- **注意事项**：`map` 对未命中值会产生 NaN，可用 `fillna` 填充。
+- **小结**：映射适合静态映射表，replace 适合批量替换。
+
+---
+### 5. 去重与删除（duplicated / drop_duplicates / drop）
+- **动机**：清理合并或抓取数据后的冗余记录。
+- **核心概念**：`df.duplicated()` 返回布尔标识，`df.drop_duplicates(subset=[...], keep='first|last|False')` 删除重复行。
+- **示例**：
+```python
+dups = df[df.duplicated()]
+df_clean = df.drop_duplicates(subset=['id'], keep='first')
+```
+- **注意事项**：删除前先检查重复的样式与原因，避免误删。
+- **小结**：合理去重保证分析数据质量。
+
+## 最佳实践
+- 使用明确的 `on`/`subset` 参数防止误匹配。
+- 在合并或重塑大型表格前做数据采样和索引以验证预期。
+- groupby 后使用 `reset_index()` 方便后续列操作和保存。
+
+---
+## 更新记录
+- 2025-10-08：根据课程材料创建初版（merge/concat/pivot/groupby/map/replace 示例）。

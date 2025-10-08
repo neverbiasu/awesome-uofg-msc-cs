@@ -1,0 +1,89 @@
+---
+title: Week 3 总览
+description: Week 3 精简学习笔记（Data Processing, NumPy, Pandas, 数据可视化）
+---
+
+## 概要
+- 本周采用 tAPP + Lab 的形式，聚焦数据处理、操作与可视化。
+- 主题覆盖：NumPy 数组操作；Pandas 数据结构、读写与清洗；Matplotlib 可视化；自定义 Python 包。
+
+## 本周安排（按顺序）
+| Session | 主题 | 说明 |
+|---|---|---|
+| Class 4 | NumPy, Pandas 数据结构与操作, 自定义包 | 数组运算, DataFrame 操作, fancy indexing, 日期与缺失数据处理 |
+| Class 5 | 数据可视化 | Matplotlib 绘图基础：折线图, 散点图, 柱状图, 直方图等 |
+
+## 学习目标
+1. 掌握 NumPy 数组创建、索引、切片与广播机制。
+2. 熟练使用 Pandas 进行数据读写、筛选、清洗与转换。
+3. 理解并处理日期格式与缺失数据（NaN）。
+4. 创建自定义 Python 包以复用数据分析代码。
+5. 使用 Matplotlib 绘制基础图表并定制样式。
+
+## 关键知识点
+- **NumPy 核心**：
+  - ndarray 创建（array, arange, zeros, ones）, shape 与 dtype 属性。
+  - 索引与切片：整数索引, 布尔掩码（masking）, fancy indexing（整数数组索引）。
+  - 数组运算与广播（broadcasting）规则。
+- **Pandas 数据操作**：
+  - Series 与 DataFrame 数据结构；读写 CSV/Excel/JSON。
+  - 数据选择：loc（标签）, iloc（位置）, 布尔索引。
+  - 数据清洗：处理缺失值（dropna, fillna）, 数据类型转换。
+  - 日期处理：pd.to_datetime(), date_range, 时间序列索引。
+- **自定义包（Package）**：
+  - 目录结构与 __init__.py；模块导入与相对导入。
+- **数据可视化（Matplotlib）**：
+  - pyplot 接口：plot, scatter, bar, hist, pie。
+  - 图表元素定制：标题, 坐标轴标签, 图例, 网格。
+  - 子图布局（subplots）与多图展示。
+
+## 实践清单（自检）
+- [ ] 创建 NumPy 数组, 使用布尔掩码筛选满足条件的元素。
+- [ ] 用 Pandas 读取 CSV 文件, 查看数据描述统计（describe）, 处理缺失值。
+- [ ] 将日期字符串列转换为 datetime 类型, 提取年/月/日信息。
+- [ ] 创建一个简单的自定义包（如 mydata_package）, 包含数据加载与清洗函数。
+- [ ] 绘制一组数据的折线图与散点图, 添加标题与坐标轴标签。
+- [ ] 使用 subplots 在一个画布上展示多张子图。
+
+## 评估提醒
+- tAPP 每周参与计分（总 5%）。
+- Lab Exercise Week 3 Python (15%) 已于 10 月 10 日完成, 覆盖 Week 2–3 内容。
+
+## 内容索引（Week 3 子页）
+| 模块 | 页面 |
+|---|---|
+| NumPy 库 | [NumPy](./numpy.mdx) |
+| Pandas 数据结构与读写 | [Pandas 读写](./pandas-io.mdx) |
+| Pandas 数据操作 | [Pandas 操作](./pandas-manipulation.mdx) |
+| 自定义 Python 包 | [自定义包](./custom-package.mdx) |
+| 日期与缺失数据处理 | [日期与缺失数据](./date-missing-data.mdx) |
+| 数据可视化 | [Matplotlib](./matplotlib.mdx) |
+| 实验练习 | [实验练习](./lab-exercises.mdx) |
+
+## 材料索引
+
+> 注意：下列链接仅指向仓库内已存在的 Markdown（.md）版本，作为笔记内容的唯一溯源。
+
+### Pre-reading Material - Class 4
+- [NumPy Library (slides, MD)](../../../../materials/semester-1/COMPSCI4084-programming-systems/lectures/Numpy_Library.md)
+- [Pandas - Data Structures, Reading & Writing (slides, MD)](../../../../materials/semester-1/COMPSCI4084-programming-systems/lectures/Pandas-reading_and_writing.md)
+- [Pandas - Data Manipulation (slides, MD)](../../../../materials/semester-1/COMPSCI4084-programming-systems/lectures/Data_Manipulation.md)
+- [Python - Creating a Custom Package, fancy indexing and masking (slides, MD)](../../../../materials/semester-1/COMPSCI4084-programming-systems/lectures/Introduction_to_Python_Package.md)
+- [More data manipulation - date format and missing data (slides, MD)](../../../../materials/semester-1/COMPSCI4084-programming-systems/lectures/More_Data_Manipulation_-_date_format_and_missing_data.md)
+- [Handling date and missing data - final PPT slide practical task solution (MD)](../../../../materials/semester-1/COMPSCI4084-programming-systems/resources/Practical_Task_solution_-_handling_dates_and_missing_data.md)
+
+### Python Lab Material - Class 4
+- [Lab4 Exercises (MD)](../../../../materials/semester-1/COMPSCI4084-programming-systems/resources/Lab4_-Exercises.md)
+- [How to create custom package (MD)](../../../../materials/semester-1/COMPSCI4084-programming-systems/resources/Creating_a_custom_package.md)
+- [Lab4_1 - Creating a Custom Package for Data Analysis (MD)](../../../../materials/semester-1/COMPSCI4084-programming-systems/resources/Lab_4_-_Creating_a_Custom_Package_for_Data_Analysis.md)
+- [Lab4_2 More List, Arrays and indexing exercises (MD)](../../../../materials/semester-1/COMPSCI4084-programming-systems/resources/Lab_4_2_-_Lists_and_Arrays_and_indexing_Exercises.md)
+
+### Pre-reading Material - Class 5
+- [Data Visualisation with Matplotlib (slides, MD)](../../../../materials/semester-1/COMPSCI4084-programming-systems/lectures/Data_Visualisation_with_Matplotlib.md)
+
+### Python Lab Material - Class 5
+- [Lab5 Exercises (MD)](../../../../materials/semester-1/COMPSCI4084-programming-systems/resources/Lab_exercise_5.md)
+
+---
+更新记录
+- 2025-10-08：创建初版。
