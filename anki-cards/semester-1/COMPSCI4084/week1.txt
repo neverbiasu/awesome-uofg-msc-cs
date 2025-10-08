@@ -1,0 +1,85 @@
+如何启用硬件加速（GPU/TPU）？	Runtime → Change runtime type → Hardware accelerator → 选择 GPU 或 TPU
+为什么要固定依赖版本？	降低环境漂移，保证可复现性
+如何在 Colab 挂载 Google Drive？	from google.colab import drive; drive.mount('/content/drive')
+Colab 运行时重置会导致什么？	临时存储清空，需重新挂载并恢复依赖
+如何查看笔记本的版本历史？	File → Revision history（用于回滚与审查）
+如何共享 Colab 笔记本？	Share → 添加协作者并设置权限
+在 Colab 中安装 Python 包的建议？	在首单元写依赖安装命令并固定版本（pip/conda）
+如何安全保存重要文件？	将重要文件写入 Google Drive，避免运行时丢失
+如何在 Colab 中运行 R？	安装 r-base 并切换 Runtime → Change runtime type → 选择 R
+
+Conda 的主要作用是什么？	环境与包管理，隔离项目依赖
+如何验证 Conda 已安装？	conda --version
+如何创建指定 Python 版本的环境？	conda create --name <env> python=<version>
+如何激活/停用环境？	conda activate <env> / conda deactivate
+如何导出/复现环境？	conda env export > environment.yml
+如何从 environment.yml 创建环境？	conda env create -f environment.yml
+如何克隆或删除环境？	conda create --name <new> --clone <old> ; conda remove --name <env> --all
+为什么避免在 base 环境开发？	避免污染基础环境，保持依赖隔离
+environment.yml 应放哪里？	项目仓库根目录并纳入版本控制
+Anaconda 与 Miniconda 的差异？	Anaconda 含大量预装包；Miniconda 仅最小安装
+Conda 管理包的基本命令？	conda install <pkg> ; conda update <pkg> ; conda remove <pkg>
+
+如何配置 Git 用户信息？	git config --global user.name "Name" ; git config --global user.email "you@example.com"
+如何设置默认初始化分支为 main？	git config --global init.defaultBranch main
+如何初始化或克隆仓库？	git init ; git clone <repo>
+常用工作流命令有哪些？	git status ; git add <file> ; git commit -m "msg" ; git push
+如何首次推送并设置上游？	git push -u origin <branch>
+如何创建/切换/合并分支？	git switch -c <branch> ; git switch <branch> ; git merge <branch>
+如何处理冲突的基本步骤？	查看冲突 -> 编辑文件 -> git add <file> -> git commit
+冲突标记的格式是什么？	<<<<<<< HEAD / ======= / >>>>>>> <branch>
+.gitignore 的作用与注意？	忽略不需版本控制的本地/临时文件；已跟踪需用 git rm --cached
+为什么建议使用 SSH？	避免频繁输入密码，提升安全性（ssh-keygen -t ed25519）
+何时用 git pull --ff-only？	仅在可快进合并时拉取以避免产生合并提交
+提交信息写法建议？	简短（<=50 字）、祈使语、必要时加详细描述
+小步提交的好处？	便于回滚、代码审查与定位问题
+
+Python 基本数值类型有哪些？	int, float, complex
+布尔类型是什么？	bool（True/False）
+常见容器类型（可变/不可变）？	list（可变）、tuple（不可变）、dict、set
+字符串是否可变？	不可变
+列表与元组的区别？	列表可变；元组不可变（可用于作为 dict 键）
+字典键必须满足？	必须是不可变类型
+集合的特点？	无序且元素唯一
+常用算术运算符？	//（整数除法）、%（取余）、**（幂运算）
+字符串切片语法示例？	s[0:3] 或 s[:3] ; s[-2:] 表示最后两个字符
+len() 的作用？	返回序列或集合的长度
+列表/字典推导式简写？	[expr for x in seq if cond] ; {k: v for x in seq}
+f-string 的基本用法？	f"text {var}"
+格式化浮点保留两位？	f"{var:.2f}"
+input() 返回类型？	str（需显式转换为 int/float）
+strip(), split() 常用用途？	strip 去首尾空白；split 按分隔符拆分
+常用字符串方法？	lower(), upper(), title()
+正则模块与常用函数？	re.findall, re.search, re.sub
+正则元字符示例？	\d 表示数字；\s 表示空白
+为何避免使用可变默认参数？	可变对象将在多次调用间共享，造成副作用
+如何避免可变默认参数问题？	使用 None 作为默认并在函数内创建新对象
+PEP8 的作用？	规范代码风格，提高可读性
+类型提示能带来什么好处？	提高可读性，并让 IDE 提示更准确
+
+条件语句基本结构？	if / elif / else
+链式比较示例？	0 < x < 10
+is 与 == 的区别？	is 比较同一性；== 比较值相等
+短路求值的用法？	and/or 用于安全访问与默认值选择
+条件表达式（三元运算）语法？	expr1 if cond else expr2
+守卫式（早返回）用途？	在函数顶部排除无效输入，使主逻辑更清晰
+组织多个条件的建议？	按互斥或优先级从高到低排列，必要时提取为函数
+
+如何定义类与构造器？	class C: def __init__(self,...)
+实例方法首参应为？	self
+如何使用 @property？	将方法暴露为只读或计算属性
+name mangling 的行为？	双下划线会被改写为 _ClassName__attr 以避免冲突
+如何实现继承与调用父构造器？	class Sub(Parent): super().__init__(...)
+方法重写与 super() 的用途？	子类重写父方法并可通过 super() 调用父实现
+__str__ 与 __repr__ 的推荐用途？	__str__ 面向用户；__repr__ 可重现且用于调试
+如何实现相等比较？	实现 __eq__ 并在需要时返回 NotImplemented
+dataclass 的优势？	自动生成常用方法（__init__/__repr__/__eq__）
+frozen=True 有何作用？	使实例不可变，便于作为键与线程安全
+组合优于继承的场景？	当代表“有一个”关系或需要松耦合时使用组合
+设计原则提示（单一职责）？	每个类应只负责一种抽象
+
+实验环境准备：包含哪些步骤？	创建并激活环境、安装依赖、导出 environment.yml
+实验提交的良好实践？	小步提交、清晰提交信息、包含运行/重现说明
+README 中应包含的核心内容？	环境配置、运行步骤、依赖与示例命令
+.gitignore 建议忽略项？	env/ .venv/ __pycache__/ *.pyc
+实验中如何保证可复现性？	固定依赖版本并提交 environment.yml 与 README

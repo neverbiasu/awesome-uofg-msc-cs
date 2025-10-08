@@ -1,0 +1,110 @@
+Python 函数的定义关键字是?	def
+函数参数的三种类型是?	位置参数、关键字参数、默认参数
+如何定义带默认值的参数?	def func(x, y=10):
+函数没有 return 语句返回什么?	None
+Python 中的作用域规则是?	LEGB(局部、闭包、全局、内置)
+如何在函数内修改全局变量?	使用 global 关键字
+可变默认参数的陷阱是?	共享同一对象,会累积副作用
+如何避免可变默认参数问题?	使用 None 并在函数内创建新对象
+docstring 的作用是?	说明函数用途、参数和返回值
+*args 的作用是?	接收任意数量的位置参数
+**kwargs 的作用是?	接收任意数量的关键字参数
+lambda 函数的限制是?	只能包含单个表达式
+混合使用位置和关键字参数时的规则?	位置参数必须在关键字参数之前
+return 语句的作用是?	返回值并结束函数执行
+如何返回多个值?	返回元组(用逗号分隔)
+
+列表的可变性是指?	内容可在运行时修改
+列表支持的访问方式有?	索引访问和切片
+append() 与 insert() 的区别?	末尾添加 vs 指定位置插入
+remove() 与 pop() 的区别?	按值删除 vs 按索引删除并返回
+sort() 的返回值是?	None(原地排序)
+enumerate() 的作用是?	同时返回索引和元素
+列表与元组的核心区别?	列表可变 vs 元组不可变
+元组作为字典键的要求?	元组是不可变类型
+单元素元组的定义方式?	(item,) 需要逗号
+字典的键必须满足什么条件?	不可变且唯一
+dict.get() 的优势是?	避免 KeyError,可提供默认值
+如何遍历字典的键值对?	for key, value in dict.items()
+如何检查键是否存在?	使用 in 运算符
+列表推导式的优势?	简洁且高效
+浅拷贝与深拷贝的区别?	浅拷贝仅复制引用,深拷贝递归复制
+
+range(n) 的输出范围?	0 到 n-1(不包含n)
+range(start, stop) 的特性?	从 start 到 stop-1(左闭右开)
+range 的 step 参数作用?	控制步长,可为负数实现倒序
+for 循环的适用场景?	已知迭代次数或遍历集合
+while 循环的适用场景?	未知迭代次数的条件循环
+break 语句的作用?	立即退出当前循环
+continue 语句的作用?	跳过本次迭代,进入下一次迭代
+嵌套循环的执行特点?	外层每迭代一次,内层完整执行所有迭代
+while 循环的常见陷阱?	忘记更新条件导致死循环
+range 是否包含 stop 值?	不包含(左闭右开区间)
+如何倒序循环?	range(start, stop, -1) step为负数
+enumerate() 从1开始编号?	enumerate(list, start=1)
+循环中修改列表长度的风险?	可能跳过元素或索引错误
+for 与 while 的选择原则?	已知次数用 for,未知次数用 while
+
+文本文件与二进制文件的区别?	文本用字符编码,二进制读写原始字节
+打开文本文件的推荐写法?	open(file, encoding='utf-8')
+with 语句的作用?	自动关闭文件,即使异常也会执行
+read() 与 readline() 的区别?	读取全文 vs 读取一行
+如何逐行遍历大文件?	for line in f 逐行迭代
+CSV 文件打开的推荐参数?	newline='' 和 encoding='utf-8'
+write() 是否自动换行?	不会,需显式使用 \n
+try/except 的作用?	捕获并处理异常
+FileNotFoundError 表示?	文件不存在
+PermissionError 表示?	文件权限不足
+finally 块的特性?	无论是否异常都会执行
+参数化查询的作用?	防止 SQL 注入
+如何安全读取文件?	使用 with open() as f 上下文管理器
+csv.writer 的优势?	自动处理引号、转义和分隔符
+如何获取命令行参数?	sys.argv 列表
+
+SQLite 中主键的作用是?	唯一标识表中的每条记录
+如何连接 SQLite 数据库?	sqlite3.connect('db.db')
+执行 SQL 语句需要什么?	游标对象(cursor)
+如何保存数据库更改?	conn.commit()
+参数化查询使用什么占位符?	问号(?)
+为什么要用参数化查询?	防止 SQL 注入攻击
+cursor.execute() 的返回值是?	游标对象本身
+如何获取查询结果?	cursor.fetchall() 或 fetchone()
+事务的作用是?	保证一组操作的原子性
+conn.rollback() 的作用?	回滚未提交的更改
+SQLite 的常见数据类型?	INTEGER、REAL、TEXT、BLOB
+NOT NULL 约束的作用?	确保列不能为空
+INNER JOIN 的作用?	返回两表匹配的行
+如何获取最后插入记录的 ID?	cursor.lastrowid
+executemany() 的适用场景?	批量插入数据
+
+PyTorch 的核心数据结构是?	张量(Tensor)
+如何检查 CUDA 是否可用?	torch.cuda.is_available()
+requires_grad=True 的作用?	启用梯度追踪用于反向传播
+loss.backward() 的作用?	反向传播计算梯度
+optimizer.zero_grad() 的作用?	清零梯度(避免累加)
+optimizer.step() 的作用?	根据梯度更新参数
+nn.Module 的两个必须实现的方法?	__init__ 和 forward
+model.train() 与 model.eval() 的区别?	训练模式 vs 评估模式
+torch.no_grad() 的作用?	关闭梯度计算节省内存
+如何将模型移至 GPU?	model.to(device)
+CrossEntropyLoss 适用于?	分类任务
+MSELoss 适用于?	回归任务
+Adam 优化器的特点?	自适应学习率,训练稳定
+如何保存模型参数?	torch.save(model.state_dict(), path)
+DataLoader 的作用?	批量加载和并行化数据
+
+局部变量的特性?	仅在函数内可见,函数返回后销毁
+全局变量的特性?	整个程序可见
+副作用的定义?	函数修改了其局部环境之外的状态
+常见的副作用类型?	修改全局变量、I/O操作、修改可变参数
+纯函数的特性?	相同输入产生相同输出,无副作用
+如何避免修改传入的列表?	返回新列表而非修改原列表
+变量遮蔽是什么?	局部变量与全局变量同名
+global 关键字的作用?	在函数内修改全局变量
+为什么应避免使用 global?	增加副作用,降低可测试性
+Jupyter Notebook 的变量陷阱?	单元格任意顺序执行导致状态不一致
+如何重置 Notebook 状态?	Restart & Run All
+%who 或 %whos 的作用?	查看当前所有变量
+纯函数的优势?	易于测试、调试和复用
+如何命名有副作用的函数?	使用 update_、set_ 等前缀
+最佳的变量共享方式?	通过参数传递和返回值

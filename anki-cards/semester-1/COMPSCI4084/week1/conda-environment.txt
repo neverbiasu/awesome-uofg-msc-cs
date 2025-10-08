@@ -1,0 +1,13 @@
+Conda 的主要用途是什么？	环境与包管理
+如何检查 Conda 是否已安装？	conda --version
+如何创建带指定 Python 版本的 Conda 环境？	conda create --name 环境名 python=版本号
+如何激活已创建的 Conda 环境？	conda activate 环境名
+如何停用当前 Conda 环境？	conda deactivate
+如何列出所有 Conda 环境？	conda env list
+如何删除 Conda 环境及其所有包？	conda remove --name 环境名 --all
+如何克隆一个 Conda 环境？	conda create --name 新环境名 --clone 旧环境名
+如何将 Conda 环境导出为 YAML 文件？	conda env export > environment.yml
+如何从 environment.yml 创建环境？	conda env create -f environment.yml
+为什么不建议在 base 环境进行开发？	避免污染基础环境，保持隔离
+Anaconda 与 Miniconda 的主要区别是什么？	Anaconda 含大量预装包，Miniconda 精简安装
+使用 Conda 环境的好处有哪些？	隔离依赖；避免冲突；便于复现

@@ -1,0 +1,15 @@
+PyTorch 的核心数据结构是?	张量(Tensor)
+如何检查 CUDA 是否可用?	torch.cuda.is_available()
+requires_grad=True 的作用?	启用梯度追踪用于反向传播
+loss.backward() 的作用?	反向传播计算梯度
+optimizer.zero_grad() 的作用?	清零梯度(避免累加)
+optimizer.step() 的作用?	根据梯度更新参数
+nn.Module 的两个必须实现的方法?	__init__ 和 forward
+model.train() 与 model.eval() 的区别?	训练模式 vs 评估模式
+torch.no_grad() 的作用?	关闭梯度计算节省内存
+如何将模型移至 GPU?	model.to(device)
+CrossEntropyLoss 适用于?	分类任务
+MSELoss 适用于?	回归任务
+Adam 优化器的特点?	自适应学习率,训练稳定
+如何保存模型参数?	torch.save(model.state_dict(), path)
+DataLoader 的作用?	批量加载和并行化数据

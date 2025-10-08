@@ -1,0 +1,85 @@
+How to enable hardware acceleration (GPU/TPU)?	Runtime → Change runtime type → Hardware accelerator → Select GPU or TPU
+Why fix dependency versions?	Reduce environment drift and ensure reproducibility
+How to mount Google Drive in Colab?	from google.colab import drive; drive.mount('/content/drive')
+What happens when Colab runtime resets?	Temporary storage clears, need to remount and restore dependencies
+How to view notebook revision history?	File → Revision history (for rollback and review)
+How to share a Colab notebook?	Share → Add collaborators and set permissions
+Best practice for installing packages in Colab?	Write dependency installation commands with fixed versions in first cell (pip/conda)
+How to safely save important files?	Write important files to Google Drive to avoid runtime loss
+How to run R in Colab?	Install r-base and switch Runtime → Change runtime type → Select R
+
+What is the main purpose of Conda?	Environment and package management, isolating project dependencies
+How to verify Conda is installed?	conda --version
+How to create environment with specific Python version?	conda create --name <env> python=<version>
+How to activate/deactivate environment?	conda activate <env> / conda deactivate
+How to export/reproduce environment?	conda env export > environment.yml
+How to create environment from environment.yml?	conda env create -f environment.yml
+How to clone or remove environment?	conda create --name <new> --clone <old> ; conda remove --name <env> --all
+Why avoid developing in base environment?	Avoid polluting base environment, maintain dependency isolation
+Where should environment.yml be placed?	Project repository root and include in version control
+Difference between Anaconda and Miniconda?	Anaconda includes many pre-installed packages; Miniconda is minimal installation
+Basic commands for Conda package management?	conda install <pkg> ; conda update <pkg> ; conda remove <pkg>
+
+How to configure Git user information?	git config --global user.name "Name" ; git config --global user.email "you@example.com"
+How to set default initial branch to main?	git config --global init.defaultBranch main
+How to initialize or clone repository?	git init ; git clone <repo>
+What are common workflow commands?	git status ; git add <file> ; git commit -m "msg" ; git push
+How to push for first time and set upstream?	git push -u origin <branch>
+How to create/switch/merge branches?	git switch -c <branch> ; git switch <branch> ; git merge <branch>
+Basic steps to handle conflicts?	View conflicts -> Edit files -> git add <file> -> git commit
+What is the format of conflict markers?	<<<<<<< HEAD / ======= / >>>>>>> <branch>
+Purpose and notes about .gitignore?	Ignore local/temporary files not needed in version control; already tracked files need git rm --cached
+Why is SSH recommended?	Avoid frequent password entry, enhance security (ssh-keygen -t ed25519)
+When to use git pull --ff-only?	Only pull when fast-forward merge is possible to avoid creating merge commits
+Best practices for commit messages?	Concise (<=50 chars), imperative mood, add detailed description if necessary
+Benefits of small commits?	Easier rollback, code review, and issue location
+
+What are Python's basic numeric types?	int, float, complex
+What is the boolean type?	bool (True/False)
+Common container types (mutable/immutable)?	list (mutable), tuple (immutable), dict, set
+Is string mutable?	Immutable
+Difference between list and tuple?	List is mutable; tuple is immutable (can be used as dict keys)
+What must dictionary keys satisfy?	Must be immutable type
+What is the characteristic of set?	Unordered with unique elements
+Common arithmetic operators?	// (floor division), % (modulo), ** (exponentiation)
+String slicing syntax examples?	s[0:3] or s[:3] ; s[-2:] means last two characters
+Purpose of len()?	Returns length of sequence or collection
+List/dict comprehension shorthand?	[expr for x in seq if cond] ; {k: v for x in seq}
+Basic usage of f-string?	f"text {var}"
+Format float to two decimal places?	f"{var:.2f}"
+What type does input() return?	str (needs explicit conversion to int/float)
+Common uses of strip(), split()?	strip removes leading/trailing whitespace; split splits by delimiter
+Common string methods?	lower(), upper(), title()
+Regex module and common functions?	re.findall, re.search, re.sub
+Regex metacharacter examples?	\d represents digit; \s represents whitespace
+Why avoid mutable default arguments?	Mutable objects are shared across multiple calls, causing side effects
+How to avoid mutable default argument problem?	Use None as default and create new object inside function
+Purpose of PEP8?	Standardize code style, improve readability
+Benefits of type hints?	Improve readability and enhance IDE suggestions
+
+Basic structure of conditional statements?	if / elif / else
+Chain comparison example?	0 < x < 10
+Difference between is and ==?	is compares identity; == compares value equality
+Usage of short-circuit evaluation?	and/or for safe access and default value selection
+Conditional expression (ternary) syntax?	expr1 if cond else expr2
+Purpose of guard clauses (early return)?	Exclude invalid inputs at function top, making main logic clearer
+Suggestions for organizing multiple conditions?	Arrange by mutual exclusion or priority from high to low, extract to functions if necessary
+
+How to define class and constructor?	class C: def __init__(self,...)
+What should be the first parameter of instance method?	self
+How to use @property?	Expose method as read-only or computed attribute
+Behavior of name mangling?	Double underscore rewritten as _ClassName__attr to avoid conflicts
+How to implement inheritance and call parent constructor?	class Sub(Parent): super().__init__(...)
+Purpose of method overriding and super()?	Subclass overrides parent method and can call parent implementation via super()
+Recommended uses of __str__ and __repr__?	__str__ for end users; __repr__ reproducible and for debugging
+How to implement equality comparison?	Implement __eq__ and return NotImplemented when appropriate
+Advantages of dataclass?	Auto-generates common methods (__init__/__repr__/__eq__)
+What does frozen=True do?	Makes instance immutable, suitable as keys and thread-safe
+When to favor composition over inheritance?	When representing "has-a" relationship or needing loose coupling
+Design principle hint (single responsibility)?	Each class should be responsible for only one abstraction
+
+Lab environment preparation steps?	Create and activate environment, install dependencies, export environment.yml
+Good practices for lab submission?	Small commits, clear commit messages, include run/reproduction instructions
+Core content for README?	Environment setup, running steps, dependencies, and example commands
+Recommended .gitignore items?	env/ .venv/ __pycache__/ *.pyc
+How to ensure reproducibility in labs?	Fix dependency versions and commit environment.yml with README

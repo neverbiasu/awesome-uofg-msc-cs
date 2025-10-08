@@ -1,0 +1,9 @@
+Colab 的访问网址是什么？	https://colab.research.google.com
+如何在 Colab 中启用硬件加速（GPU/TPU）？	Runtime → Change runtime type → 选择 Hardware accelerator
+在 Colab 中安装 Python 包的推荐命令是？	pip install 包名（必要时加 -q 静默）
+如何在 Colab 中挂载 Google Drive 以持久存储？	from google.colab import drive; drive.mount('/content/drive')
+挂载后在 Colab 中访问 Drive 的路径通常是什么？	/content/drive/MyDrive
+为什么在 Colab 中要固定依赖库版本？	降低环境漂移并保证可复现性
+Colab 的 Markdown 单元通常用于什么？	记录用途与步骤说明
+重要文件在 Colab 环境中应放在哪里以避免丢失？	Google Drive
+Colab 适合的使用场景有哪些？	快速实验、GPU/TPU 加速、协作开发
