@@ -17,7 +17,7 @@ arr = np.array([1,2,3])
 print(np.all(arr != 0))  # True
 ```
 
-- 题：元素逐位比较两个数组（>, >=, <, <=）
+- 题：元素逐位比较两个数组 (`>`, `>=`, `<`, `<=`)
 - 要点：直接使用比较运算符得到布尔数组
 - 参考：
 ```python
@@ -34,24 +34,27 @@ arr = np.concatenate([np.zeros(8), np.ones(5), np.repeat(5,10)])
 ```
 
 ### Pandas 练习（DataFrame 示例）
-- 题：选择前三行；筛选 attempts > 2；计算行列数；选择 score 在 [14,20] 区间；修改特定行的 score；计算均值
+- 题：选择前三行；筛选 `attempts > 2`；计算行列数；选择 score 在 [14,20] 区间；修改特定行的 score；计算均值
 - 要点：使用 `df.head(3)`, `df[df['attempts']>2]`, `df.shape`, `df[(df['score']>=14)&(df['score']<=20)]`, `df.loc['c','score']=11.5`, `df['score'].mean()`。
 - 参考：
 ```python
 import pandas as pd
 import numpy as np
+
 labels = list('abcdefghij')
-assessment_results = {'name': ['Anastasia','Paul','Kathe','Joseph','Linda','Michael','Matt','Laurentine','Chirstian','Jonas'],
-                      'score':[12.5,10,16.5,np.nan,9,20,14.5,np.nan,8,19],
-                      'attempts':[1,3,2,3,2,3,1,1,2,1],
-                      'qualify':['yes','no','yes','no','no','yes','yes','no','no','yes']}
+assessment_results = {
+    'name': ['Anastasia','Paul','Kathe','Joseph','Linda','Michael','Matt','Laurentine','Chirstian','Jonas'],
+    'score': [12.5, 10, 16.5, np.nan, 9, 20, 14.5, np.nan, 8, 19],
+    'attempts': [1, 3, 2, 3, 2, 3, 1, 1, 2, 1],
+    'qualify': ['yes','no','yes','no','no','yes','yes','no','no','yes']
+}
 
 df = pd.DataFrame(assessment_results, index=labels)
 print(df.head(3))
-print(df[df['attempts']>2])
+print(df[df['attempts'] > 2])
 print(df.shape)
-print(df[(df['score']>=14)&(df['score']<=20)])
-df.loc['c','score'] = 11.5
+print(df[(df['score'] >= 14) & (df['score'] <= 20)])
+df.loc['c', 'score'] = 11.5
 print(df['score'].mean())
 ```
 
