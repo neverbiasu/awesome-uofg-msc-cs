@@ -4,7 +4,7 @@ description: NumPy 数组创建、索引、运算、形状变换与文件读写�
 ---
 
 ## 概要
-- 目标：掌握 NumPy 的核心数据结构 `ndarray`，能创建、索引、变形、进行矢量化运算并在文件间读写数组。
+- 目标：掌握 NumPy 的核心数据结构（数组 / `array`），能创建、索引、变形、进行矢量化运算并在文件间读写数组。
 - 范围：包含数组创建函数、dtype、广播、矩阵乘法、堆叠/拆分、视图与拷贝、掩码与 fancy indexing；不覆盖线性代数高级分解（如 SVD 细节）。
 
 ## 学习目标
@@ -29,6 +29,8 @@ z = np.zeros((2,3))
 ones = np.ones(4, dtype=float)
 r = np.arange(0, 10, 2)            # [0,2,4,6,8]
 ls = np.linspace(0, 1, 5)          # 等间隔的 5 个值
+randint = np.random.randint(0, 10, size=(2,3))  # 随机整数矩阵
+normal = np.random.normal(loc=0.0, scale=1.0, size=(3,))  # 正态分布向量
 ```
 - **注意事项/最佳实践**：尽量在创建时指定 `dtype` 以避免隐式类型转换导致的性能或精度问题。
 - **小结**：掌握常用创建函数能快速构造分析数据。
@@ -41,10 +43,10 @@ ls = np.linspace(0, 1, 5)          # 等间隔的 5 个值
 ```python
 arr = np.arange(12).reshape(3,4)
 # 位置索引
-row1 = arr[0]
-val = arr[1,2]
+row1 = arr[0] # 第一行
+val = arr[1,2] # 第二行，第三列
 # 切片
-sub = arr[:, 1:3]
+sub = arr[:, 1:3] # 第一到二行的所有列
 # 布尔掩码
 mask = arr % 2 == 0
 evens = arr[mask]
@@ -79,30 +81,42 @@ res2 = A * 2
 ```python
 A = np.arange(6).reshape(2,3)
 B = np.ones((3,2))
+# 矩阵乘法
 M = A.dot(B)       # 或 A @ B  -> shape (2,2)
+# 矩阵转置
 T = A.T
+T = np.transpose(A)
 # 仅对方阵求逆
 C = np.array([[1.,2.],[3.,4.]])
+# 求 C 的逆并生成 2x3 的随机整数矩阵
 invC = np.linalg.inv(C)
+# 计算矩阵 C 的迹（对角线元素之和）
 tr = np.trace(C)
+# 逐元素 vs 矩阵乘法
+A = np.array([[1,2],[3,4]])
+B = np.array([[2,0],[1,2]])
+elem = A * B   # 逐元素乘法 -> [[2,0],[3,8]]
+mat = A @ B    # 矩阵乘法 -> [[4,4],[10,8]]
 ```
-- **注意事项**：请确保矩阵可逆（行列式非零）；高维线性代数请使用专门库并留意数值稳定性。
+- **注意事项**：算术运算（`+`, `-`, `*`, `/` 等）默认执行逐元素（element-wise）操作；请确保矩阵可逆（行列式非零）；高维线性代数请使用专门库并留意数值稳定性。
 - **小结**：掌握 `dot`/`@` 和常用线性代数函数满足基本矩阵运算需求。
 
 ---
 ### 5. 形状变换、堆叠与拆分
 - **动机**：为算法或可视化准备合适形状的数据。
-- **核心概念**：`reshape`, `ravel`, `reshape(-1, n)`, `vstack`, `hstack`, `column_stack`, `hsplit`, `vsplit`, `split`。
+- **核心概念**：`reshape`, `ravel`, `reshape(-1, n)`, `vstack`, `hstack`, `column_stack`, `vsplit`, `hsplit`, `split`。
 - **示例**：
 ```python
 x = np.arange(12)
+# 形变成3x4的矩阵
 M = x.reshape(3,4)
+# 展平成一维向量
 flat = M.ravel()
 # 堆叠
 a = np.array([[1,2],[3,4]])
 b = np.array([[5,6]])
-vs = np.vstack([a,b])
-hs = np.hstack([a, a])
+vs = np.vstack([a,b]) # 垂直方向
+hs = np.hstack([a, a]) # 水平方向
 # 分割
 left, right = np.hsplit(M, [2])
 ```
@@ -163,4 +177,4 @@ b = np.load('arr.npy')
 
 ---
 ## 更新记录
-- 2025-10-08：根据课程材料初版创建。
+- 2025-10-09：根据材料和文档进行更新
