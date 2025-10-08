@@ -143,6 +143,7 @@ Example:
 - ❌ Use excessive emojis (minimal颜文字 acceptable)
 - ❌ Include abstract or vague checklist items
 - ❌ Reference materials that don't exist as .md files
+ - ❌ Do not automatically or arbitrarily add redundant suffixes or long descriptions to child page filenames (for example, do not rename `numpy` to `numpy-library.mdx`); child page filenames should be concise and clear, e.g., `numpy.mdx`.
 
 ## File Paths Reference
 
