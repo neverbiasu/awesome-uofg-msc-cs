@@ -1,0 +1,18 @@
+read_csv 解析日期列用？	parse_dates
+处理日月颠倒需设置？	dayfirst
+如何保留原始日期值？	复制到新列
+提取按月周期的方法是？	dt.to_period('M')
+提取年份字段用？	dt.year
+统计缺失值数量用？	isnull
+isna 与 isnull 区别？	别名
+筛选非缺失值函数是？	notnull
+删除含缺失的行使用？	dropna
+只删除特定列缺失用？	dropna(subset=...)
+用固定值填充缺失用？	fillna
+按列字典填充用？	fillna(dict)
+按均值填充代码示例？	fillna(mean)
+缓解极端值影响可用？	中位数填充
+缺失策略应依据什么？	业务语义
+时间序列更平滑填充法？	interpolate
+向前填充缺失方法？	ffill
+记录填充方式需在哪？	数据字典

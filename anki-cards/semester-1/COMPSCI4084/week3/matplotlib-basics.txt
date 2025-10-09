@@ -1,0 +1,24 @@
+Matplotlib 常用接口模块是？	pyplot
+绘制折线使用的函数？	plot
+设置图表标题请用？	title
+添加 x 轴标签的函数？	xlabel
+添加 y 轴标签的函数？	ylabel
+显示图例的函数是？	legend
+散点透明度参数名？	alpha
+散点颜色参数名？	c
+柱状图误差条参数是？	yerr
+误差条端帽参数名？	capsize
+直方图分箱数量参数？	bins
+直方图归一化参数？	density
+绘制饼图的函数是？	pie
+一次生成多子图函数？	subplots
+在同一画布分格函数？	subplot
+共享 x 轴子图参数？	sharex
+避免标签重叠的函数？	tight_layout
+显示绘图窗口使用？	show
+散点大小参数叫什么？	s
+控制画布尺寸参数？	figsize
+保存图片函数是？	savefig
+打开网格线的函数？	grid
+统一样式可用？	plt.style.use
+绘制箱线图可用？	plot(kind='box')

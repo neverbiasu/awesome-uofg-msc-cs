@@ -1,0 +1,29 @@
+NumPy 的核心数组类型是？	ndarray
+创建数组时指定类型参数？	dtype
+生成等差/等距序列函数？	arange/linspace
+快速生成全零/全一数组？	np.zeros/np.ones
+布尔掩码筛选结果是什么？	满足条件值
+切片与整数索引返回差异？	切片视图,整数拷贝
+广播成功需要满足什么？	尾轴相容
+矩阵乘法推荐符号是？	@
+reshape 中 -1 的作用是？	自动推断
+保存/加载二进制数组用？	np.save/np.load
+read_csv 常用参数有哪些？	parse_dates/sep
+读取 Excel 文件的函数是？	read_excel
+DataFrame 写入 SQLite 使用？	to_sql
+写出 CSV 去掉索引参数？	index=False
+按键或索引合并 DataFrame？	merge/join
+长表转宽表函数？	pivot
+groupby 的三步概括是？	分组→agg→合并
+删除重复行函数？	drop_duplicates
+解析日月颠倒日期需设置？	dayfirst
+提取按月周期的方法是？	dt.to_period('M')
+缺失值常用处理函数？	dropna/ffill
+构成包必须包含哪个文件？	__init__.py
+包内相对导入写法？	from .模块
+绘制折线使用的函数？	plot
+设置坐标轴标签函数？	xlabel/ylabel
+一次生成多子图函数？	subplots
+保存图像函数？	savefig
+检查数组是否全非零用？	np.all
+统计缺失数量使用？	isnull().sum()
