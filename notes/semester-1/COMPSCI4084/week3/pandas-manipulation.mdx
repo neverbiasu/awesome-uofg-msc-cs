@@ -15,75 +15,118 @@ description: Pandas 的数据合并、重塑、透视、分组聚合与映射/�
 5. 能检测并删除重复记录，按需保留特定行。
 
 ## 关键知识点
-### 1. 合并与连接（merge / concat / join）
-- **动机**：不同来源的数据表通常需要基于共享键合并成分析友好的表格。
-- **核心概念**：`pd.merge(left, right, on='key', how='inner|left|right|outer')`；`pd.concat([df1,df2], axis=0|1)`；`join` 基于索引操作。
-- **示例**：
+### 1. 合并与连接（merge / concat / join / combine_first）
+- **动机**：把来源不同的数据按公共键或索引整合到同一张表，或用一个数据集补齐另一个的缺失值。
+- **核心概念**：`merge` 基于列键；`join` 基于索引；`concat` 沿行/列堆叠；`combine_first` 用第二个对象填补缺失值。
+- **使用场景/模式**：
+	- `merge(..., how=inner|left|right|outer)` 控制交集、左全保留、右全保留或并集，inner是默认值。
+	- `merge(left_index=True, right_index=True)` / `df1.join(df2)` 专注索引对齐。
+	- `concat([df1, df2], axis=0|1, keys=[...])` 纵向拼接（axis=1）或横向拼接，可用 keys 形成分层索引。
+	- `df_a.combine_first(df_b)` 在索引重叠时优先保留 `df_a` 的非缺失值。
+- **示例**
 ```python
 import pandas as pd
-left = pd.DataFrame({'id':[1,2,3],'v':[10,20,30]})
-right = pd.DataFrame({'id':[2,3,4],'w':[200,300,400]})
-m = pd.merge(left, right, on='id', how='inner')
-# concat 行拼接
-cat = pd.concat([left, right], ignore_index=True, sort=False)
+left = pd.DataFrame({'id':[1,2,3],'val':[10,20,30]})
+right = pd.DataFrame({'id':[2,3,4],'score':[200,300,400]})
+inner = pd.merge(left, right, on='id', how='inner')  # 只保留 id=2,3
+outer = pd.merge(left, right, on='id', how='outer')  # 并集，缺失填 NaN
+stacked = pd.concat([left, right], axis=0, ignore_index=True)
+filled = left.set_index('id')['val'].combine_first(right.set_index('id')['score'])
 ```
-- **注意事项**：当列名冲突时使用 `suffixes=('_l','_r')`；大表合并前确保键列无重复或已索引以提速。
-- **小结**：合理选择合并方式决定数据集完整性与行数。
+- **注意事项/最佳实践**：合并前确认键列无重复；`combine_first` 仅在索引对齐时生效。
+- **权衡与替代**：按列键灵活合并选 `merge`，只改索引合并时用 `join`，简单堆叠选 `concat`，缺失互补选 `combine_first`。
+- **小结**：先判断键来源，再挑选合适的合并模式确保数据完整与来源可追溯。
 
 ---
 ### 2. 透视与重塑（pivot / stack / unstack）
-- **动机**：为不同的报表或分析视角调整表格形状。
-- **核心概念**：`pivot()` 将长表转为宽表；`stack()/unstack()` 在多级索引间切换维度；`melt()` 为逆操作（宽转长）。
-- **示例**：
+- **动机**：将日志式长表转换成宽表报表，或在行、列、层次索引之间切换以便后续分析。
+- **核心概念**：`pivot(index, columns, values)` 长转宽；`stack()` 列转行；`unstack(level)` 行转列，均保持标签信息。
+- **使用场景/模式**：
+	- 透视长到宽：`pivot(index='city', columns='month', values='sales')`。
+	- 多级索引切换：`df.stack()` 把列压成第二层索引；`stacked.unstack()` 恢复宽表。
+	- 有重复组合时先 `groupby(...).sum().unstack()` 聚合再透视。
+- **示例**
 ```python
 df = pd.DataFrame({'city':['A','A','B','B'],'month':[1,2,1,2],'sales':[10,20,5,7]})
 wide = df.pivot(index='city', columns='month', values='sales')
-stacked = wide.stack()
+# 结果: index=city, columns=month, values=sales
+# city  1   2
+# A    10  20
+# B     5   7
+stacked = wide.stack()  # city-month 的多级索引 Series
+restored = stacked.unstack()  # 回到宽表
 ```
-- **注意事项**：pivot 需要唯一索引/列组合，否则先用 `groupby` 聚合。
-- **小结**：灵活重塑数据可简化后续可视化步骤。
+- **注意事项/最佳实践**：`pivot` 要求 (index, columns) 对唯一；`stack/unstack` 会填补 NaN，必要时 `fill_value`；多级列可用 `df.columns.to_flat_index()` 展平。
+- **权衡与替代**：需要聚合时选 `pivot_table`；仅改变形状不关心标签时可用 NumPy reshape。
+- **小结**：掌握三参数和堆栈操作，可在长宽表与多级索引之间高效切换。
 
 ---
 ### 3. 分组聚合（groupby）
-- **动机**：按类别汇总指标（如月销售求和）。
-- **核心概念**：`df.groupby(['col']).agg({'val':['sum','mean']})`，分组-应用-合并三步法。
-- **示例**：
+- **动机**：按类别/层级汇总指标，如按颜色求均价、按城市与月份求销售总量。
+- **核心概念**：分组（Splitting）→ 应用函数（Applying）→ 合并结果（Combining）；`agg`, `sum`, `mean`, `count` 等聚合函数。
+- **使用场景/模式**：
+	- 单列分组：`df.groupby('color')['price'].mean()`。
+	- 多列分组：`df.groupby(['city','month'])['sales'].sum()`。
+	- 多函数聚合：`df.groupby('color')['price'].agg(['sum','mean','count'])`。
+- **示例**
 ```python
-grp = df.groupby('city')['sales'].sum().reset_index()
+df = pd.DataFrame({
+		'color':['red','blue','red','blue'],
+		'price1':[10,20,15,25]
+})
+summary = df.groupby('color')['price1'].agg(['sum','mean','count'])
+result = summary.reset_index()
 ```
-- **注意事项**：groupby 结果为分组对象，可链式调用聚合函数、过滤与变换。
-- **小结**：groupby 是强大的聚合与分组计算工具。
+- **注意事项/最佳实践**：GroupBy 返回分组对象，需显式聚合；聚合后常使用 `reset_index()` 便于继续处理；大数据集可先做采样验证逻辑。
+- **权衡与替代**：交叉表需求可用 `pivot_table`；复杂逐行逻辑可考虑 `apply`，但性能较低。
+- **小结**：合理设置分组键与聚合函数，能快速得到层次化统计结果。
 
 ---
 ### 4. 映射与替换（map / replace / rename）
-- **动机**：修正错误标签或补充字典映射值。
-- **核心概念**：`series.map(dict)` 创建新列；`df['col'].replace(mapping)` 直接替换；`rename(columns={})` 重命名列。
-- **示例**：
+- **动机**：依据映射表补充数值列、统一标签语言或调整列/索引名称。
+- **核心概念**：`Series.map` 按字典生成新列；`Series.replace` 按映射替换现有值；`DataFrame.rename(columns/index=...)` 重命名标签。
+- **使用场景/模式**：
+	- `map`：从类别列派生价格、得分等新列。
+	- `replace`：修正错拼/外语标签。
+	- `rename`：对列名或索引做统一命名。
+- **示例**
 ```python
-d = {'A':100,'B':200}
-df['price'] = df['type'].map(d)
-df['type'] = df['type'].replace({'rosso':'red','verde':'green'})
+df = pd.DataFrame({'item':['ball','mug'],'color':['rosso','verde']})
+price_map = {'ball':5,'mug':10}
+df['price'] = df['item'].map(price_map)
+df['color'] = df['color'].replace({'rosso':'red','verde':'green'})
+df = df.rename(columns={'item':'product'})
 ```
-- **注意事项**：`map` 对未命中值会产生 NaN，可用 `fillna` 填充。
-- **小结**：映射适合静态映射表，replace 适合批量替换。
+- **注意事项/最佳实践**：`map` 未命中返回 NaN，必要时 `fillna`；`replace` 支持字典或列表；`rename` 默认返回新对象，需 `inplace=True` 才地修改。
+- **权衡与替代**：简单映射选 `map`/`replace`，涉及自定义逻辑再用 `apply`。
+- **小结**：先构建映射表，再用 map/replace/rename 快速统一字段含义。
 
 ---
-### 5. 去重与删除（duplicated / drop_duplicates / drop）
-- **动机**：清理合并或抓取数据后的冗余记录。
-- **核心概念**：`df.duplicated()` 返回布尔标识，`df.drop_duplicates(subset=[...], keep='first|last|False')` 删除重复行。
-- **示例**：
+### 5. 去重与删除（duplicated / drop_duplicates / drop / del）
+- **动机**：合并后常出现重复记录或无用列，需要清理以保证数据质量。
+- **核心概念**：`duplicated` 检测重复，`drop_duplicates` 删除重复行，`drop`/`del` 删除指定行列。
+- **使用场景/模式**：
+	- 查看重复：`df[df.duplicated()]`。
+	- 保留首个重复：`df.drop_duplicates(keep='first')`。
+	- 删除列：`df.drop('col', axis=1)` 或 `del df['col']`。
+- **示例**
 ```python
-dups = df[df.duplicated()]
-df_clean = df.drop_duplicates(subset=['id'], keep='first')
+df = pd.DataFrame({'color':['white','white','red'],'value':[1,1,2]})
+duplicates = df[df.duplicated()]  # 查看重复
+clean = df.drop_duplicates()       # 去重后仅保留唯一行
+df.drop('value', axis=1, inplace=True)  # 删除列
 ```
-- **注意事项**：删除前先检查重复的样式与原因，避免误删。
-- **小结**：合理去重保证分析数据质量。
+- **注意事项/最佳实践**：删除前检查重复成因，必要时指定 `subset`；`drop` 默认返回新对象，需 `inplace=True` 才原地操作。
+- **权衡与替代**：简单重复用 `drop_duplicates`，复杂规则可结合布尔索引过滤。
+- **小结**：先定位重复，再用 drop 系列指令精准保留所需记录。
 
 ## 最佳实践
-- 使用明确的 `on`/`subset` 参数防止误匹配。
-- 在合并或重塑大型表格前做数据采样和索引以验证预期。
-- groupby 后使用 `reset_index()` 方便后续列操作和保存。
+- 合并前确认键列唯一且已索引，必要时先采样验证 join 结果。
+- 透视前处理重复组合；`stack/unstack` 后及时填补缺失或重命名多级列。
+- groupby 结果常用 `reset_index()` 转回普通列并保存统计说明。
+- 删除或替换前先备份/查看重复，确保不会误删关键信息。
 
 ---
 ## 更新记录
+- 2025-10-09：补充 join/combine_first、pivot 三参数说明、groupby 多聚合与去重操作要点，统一模板结构。
 - 2025-10-08：根据课程材料创建初版（merge/concat/pivot/groupby/map/replace 示例）。
