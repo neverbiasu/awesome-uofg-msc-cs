@@ -1,0 +1,29 @@
+按键合并 DataFrame 用？	merge
+merge 默认连接类型是？	inner
+列名冲突可用哪个参数？	suffixes
+行方向拼接多个表用？	concat
+concat 行拼接时 axis 取？	0
+按列拼接多个表 axis 取？	1
+基于索引合并可用？	join
+join 默认基于什么？	索引
+concat 重建索引用？	ignore_index=True
+将长表转宽表的函数是？	pivot
+宽表转长表常用函数？	melt
+stack/unstack 的作用是？	层级互转
+pivot 失败常见原因？	索引重复
+unstack 生成的列是什么？	多级列
+将列设为索引用？	set_index
+逆操作恢复列用？	reset_index
+groupby 的三步概括是？	分组应用合并
+获取每组和可调用？	sum
+聚合后恢复普通列用？	reset_index
+多函数聚合用？	agg
+对分组列变换用？	transform
+批量替换取值使用？	replace
+按映射生成新列用？	map
+map 缺失值默认是什么？	NaN
+重命名列的函数是？	rename
+删除重复行的函数是？	drop_duplicates
+duplicated 返回什么？	布尔序列
+保留最后一条重复行选？	keep='last'
+完全删除重复组选项？	keep=False

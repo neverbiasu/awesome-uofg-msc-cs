@@ -1,0 +1,16 @@
+检查数组是否全非零用？	np.all
+检测数组是否含零用？	np.any
+批量生成重复值可用？	np.repeat
+拼接不同段数组用？	np.concatenate
+切片取偶数位使用？	arr[::2]
+DataFrame 取前三行用？	head(3)
+筛选 attempts>2 应用？	布尔过滤
+快速得知行列数查看？	shape
+筛选 score 落入区间可用？	between
+修改特定单元格用？	loc
+定位多行多列更新用？	loc[:, cols]
+统计缺失数量使用？	isnull().sum()
+DataFrame 均值函数是？	mean
+实验绘图需强调哪两项？	标签图例
+多子图布局函数？	subplots
+保存图像命令是？	savefig

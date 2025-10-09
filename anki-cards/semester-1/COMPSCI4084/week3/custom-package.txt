@@ -1,0 +1,15 @@
+Python 模块指的是什么？	单个py文件
+构成包必须包含哪个文件？	__init__.py
+如何在包顶层暴露函数？	__init__ 导入
+__all__ 的作用是？	限制导出
+__init__.py 应避免什么？	重量级逻辑
+包内相对导入写法是？	from .模块
+跨子包导入写法？	from ..subpackage import x
+直接运行包模块应使用？	python -m
+包内重用 io 函数可写？	from .io import load_csv
+本地可编辑安装命令是？	pip install -e .
+封装重复清洗代码的好处？	提高复用
+包目录推荐结构是？	模块按职责
+共享常量应放在哪？	utils
+包顶层导入应保持？	轻量
+测试包行为建议用？	pytest

@@ -1,0 +1,26 @@
+Pandas 一维带标签结构是？	Series
+DataFrame 本质类似于？	列字典
+read_csv 指定自定义列名用？	names
+read_csv 自动解析日期参数？	parse_dates
+DD/MM/YYYY 需额外设置什么？	dayfirst
+read_csv 仅读前 N 行参数？	nrows
+read_csv 跳过前几行参数？	skiprows
+read_csv 指定分隔符参数？	sep
+正则分隔需设置哪个引擎？	engine='python'
+read_csv 禁用首行列名用？	header=None
+读取 Excel 的函数是？	read_excel
+写 Excel 时去掉索引怎么做？	index=False
+读写 Excel 需要安装什么？	openpyxl
+抓取网页表格的函数是？	read_html
+read_html 返回的数据结构？	表格列表
+分块读取大文件参数？	chunksize
+如何创建 SQLite 引擎？	create_engine
+DataFrame 写入数据库使用？	to_sql
+to_sql 追加写入选项是？	if_exists='append'
+覆盖写入选项是？	if_exists='replace'
+读取 SQL 查询使用？	read_sql
+to_csv 去掉索引参数是？	index=False
+to_csv 指定编码的参数？	encoding
+to_csv 设置分隔符用？	sep
+to_csv 指定行索引名用？	index_label
+输出 HTML 表格函数？	to_html

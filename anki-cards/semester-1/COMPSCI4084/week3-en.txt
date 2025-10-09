@@ -1,0 +1,138 @@
+What is the core array type in NumPy?	ndarray
+Parameter to specify data type when creating array?	dtype
+Functions to generate evenly spaced sequences?	arange/linspace
+Quick functions to create all-zero/all-one arrays?	np.zeros/np.ones
+What does boolean masking selection return?	values meeting condition
+Difference between slicing and integer indexing return?	slice view, integer copy
+What must be satisfied for successful broadcasting?	trailing axes compatible
+Recommended symbol for matrix multiplication?	@
+What does -1 do in reshape?	auto infer dimension
+Functions to save/load binary arrays?	np.save/np.load
+What is Pandas' one-dimensional labeled structure?	Series
+What is DataFrame essentially similar to?	dictionary of columns
+Parameter to specify custom column names in read_csv?	names
+Parameter to auto-parse dates in read_csv?	parse_dates
+What extra setting needed for DD/MM/YYYY format?	dayfirst
+Parameter to read only first N rows in read_csv?	nrows
+Parameter to skip first few rows in read_csv?	skiprows
+Parameter to specify delimiter in read_csv?	sep
+Which engine needed for regex delimiter?	engine='python'
+How to disable header row in read_csv?	header=None
+Function to read Excel files?	read_excel
+How to remove index when writing Excel?	index=False
+What package needed for reading/writing Excel?	openpyxl
+Function to scrape HTML tables?	read_html
+What data structure does read_html return?	list of tables
+Parameter to read large file in chunks?	chunksize
+How to create SQLite engine?	create_engine
+Function to write DataFrame to database?	to_sql
+Option for append mode in to_sql?	if_exists='append'
+Option for overwrite mode in to_sql?	if_exists='replace'
+Function to read SQL query?	read_sql
+Parameter to remove index in to_csv?	index=False
+Parameter to specify encoding in to_csv?	encoding
+Parameter to set delimiter in to_csv?	sep
+Parameter to specify row index name in to_csv?	index_label
+Function to output HTML table?	to_html
+Function to merge DataFrames by key?	merge
+Default join type in merge?	inner
+Parameter for handling column name conflicts?	suffixes
+Function to concatenate multiple tables row-wise?	concat
+Value of axis for row-wise concatenation in concat?	0
+Value of axis for column-wise concatenation?	1
+Function for index-based merging?	join
+What does join default to?	index
+Parameter to rebuild index in concat?	ignore_index=True
+Function to convert long to wide table?	pivot
+Common function to convert wide to long table?	melt
+What do stack/unstack do?	interchange levels
+Common cause of pivot failure?	duplicate index
+What does unstack generate for columns?	multi-level columns
+Function to set column as index?	set_index
+Reverse operation to restore column?	reset_index
+Three-step summary of groupby?	split-apply-combine
+Function to get sum of each group?	sum
+Function to restore normal columns after aggregation?	reset_index
+Function for multi-function aggregation?	agg
+Function to transform grouped columns?	transform
+Function for batch value replacement?	replace
+Function to generate new column by mapping?	map
+Default for missing values in map?	NaN
+Function to rename columns?	rename
+Function to remove duplicate rows?	drop_duplicates
+What does duplicated return?	boolean Series
+Option to keep last duplicate row?	keep='last'
+Option to remove all duplicate groups?	keep=False
+What does a Python module refer to?	single .py file
+Which file must be included to form a package?	__init__.py
+How to expose functions at package top level?	import in __init__
+What is the purpose of __all__?	limit exports
+What should __init__.py avoid?	heavyweight logic
+Syntax for relative import within package?	from .module
+Syntax for cross-subpackage import?	from ..subpackage import x
+Command to run package module directly?	python -m
+How to reuse io function within package?	from .io import load_csv
+Command for local editable installation?	pip install -e .
+Benefit of encapsulating repetitive cleaning code?	improve reusability
+Recommended package directory structure?	modules by responsibility
+Where should shared constants be placed?	utils
+What should top-level package imports maintain?	lightweight
+Recommended tool for testing package behavior?	pytest
+Parameter to parse date columns in read_csv?	parse_dates
+Setting needed to handle day-month swap?	dayfirst
+How to preserve original date values?	copy to new column
+Method to extract monthly period?	dt.to_period('M')
+Attribute to extract year field?	dt.year
+Function to count missing values?	isnull
+Difference between isna and isnull?	alias
+Function to filter non-missing values?	notnull
+Function to delete rows with missing values?	dropna
+How to delete only specific column missing values?	dropna(subset=...)
+Function to fill missing with fixed value?	fillna
+How to fill by column dictionary?	fillna(dict)
+Example code to fill with mean?	fillna(mean)
+Method to mitigate extreme value impact?	median fill
+What should missing strategy depend on?	business semantics
+Smoother fill method for time series?	interpolate
+Method for forward fill?	ffill
+Where should fill method be recorded?	data dictionary
+Common interface module in Matplotlib?	pyplot
+Function to plot line chart?	plot
+Function to set chart title?	title
+Function to add x-axis label?	xlabel
+Function to add y-axis label?	ylabel
+Function to display legend?	legend
+Parameter name for scatter transparency?	alpha
+Parameter name for scatter color?	c
+Parameter for error bars in bar chart?	yerr
+Parameter name for error bar caps?	capsize
+Parameter for number of bins in histogram?	bins
+Parameter to normalize histogram?	density
+Function to draw pie chart?	pie
+Function to generate multiple subplots at once?	subplots
+Function to divide canvas for multiple plots?	subplot
+Parameter to share x-axis in subplots?	sharex
+Function to avoid label overlap?	tight_layout
+Function to display plot window?	show
+What is scatter size parameter called?	s
+Parameter to control canvas size?	figsize
+Function to save figure?	savefig
+Function to turn on grid lines?	grid
+Function to apply uniform style?	plt.style.use
+Function to plot box plot?	plot(kind='box')
+Function to check if array all non-zero?	np.all
+Function to detect if array contains zero?	np.any
+Function to batch generate repeated values?	np.repeat
+Function to concatenate different array segments?	np.concatenate
+How to slice even positions?	arr[::2]
+Function to get first three rows of DataFrame?	head(3)
+How to filter attempts>2?	boolean filtering
+How to quickly check number of rows and columns?	shape
+Function to filter score within range?	between
+Function to modify specific cell?	loc
+Function to locate and update multiple rows/columns?	loc[:, cols]
+Function to count missing values?	isnull().sum()
+Function for DataFrame mean?	mean
+Two items to emphasize in lab plots?	labels and legend
+Function for multi-subplot layout?	subplots
+Command to save image?	savefig

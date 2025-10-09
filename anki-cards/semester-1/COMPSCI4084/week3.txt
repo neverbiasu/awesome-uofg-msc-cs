@@ -1,0 +1,138 @@
+NumPy 的核心数组类型是？	ndarray
+创建数组时指定类型参数？	dtype
+生成等差/等距序列函数？	arange/linspace
+快速生成全零/全一数组？	np.zeros/np.ones
+布尔掩码筛选结果是什么？	满足条件值
+切片与整数索引返回差异？	切片视图,整数拷贝
+广播成功需要满足什么？	尾轴相容
+矩阵乘法推荐符号是？	@
+reshape 中 -1 的作用是？	自动推断
+保存/加载二进制数组用？	np.save/np.load
+Pandas 一维带标签结构是？	Series
+DataFrame 本质类似于？	列字典
+read_csv 指定自定义列名用？	names
+read_csv 自动解析日期参数？	parse_dates
+DD/MM/YYYY 需额外设置什么？	dayfirst
+read_csv 仅读前 N 行参数？	nrows
+read_csv 跳过前几行参数？	skiprows
+read_csv 指定分隔符参数？	sep
+正则分隔需设置哪个引擎？	engine='python'
+read_csv 禁用首行列名用？	header=None
+读取 Excel 的函数是？	read_excel
+写 Excel 时去掉索引怎么做？	index=False
+读写 Excel 需要安装什么？	openpyxl
+抓取网页表格的函数是？	read_html
+read_html 返回的数据结构？	表格列表
+分块读取大文件参数？	chunksize
+如何创建 SQLite 引擎？	create_engine
+DataFrame 写入数据库使用？	to_sql
+to_sql 追加写入选项是？	if_exists='append'
+覆盖写入选项是？	if_exists='replace'
+读取 SQL 查询使用？	read_sql
+to_csv 去掉索引参数是？	index=False
+to_csv 指定编码的参数？	encoding
+to_csv 设置分隔符用？	sep
+to_csv 指定行索引名用？	index_label
+输出 HTML 表格函数？	to_html
+按键合并 DataFrame 用？	merge
+merge 默认连接类型是？	inner
+列名冲突可用哪个参数？	suffixes
+行方向拼接多个表用？	concat
+concat 行拼接时 axis 取？	0
+按列拼接多个表 axis 取？	1
+基于索引合并可用？	join
+join 默认基于什么？	索引
+concat 重建索引用？	ignore_index=True
+将长表转宽表的函数是？	pivot
+宽表转长表常用函数？	melt
+stack/unstack 的作用是？	层级互转
+pivot 失败常见原因？	索引重复
+unstack 生成的列是什么？	多级列
+将列设为索引用？	set_index
+逆操作恢复列用？	reset_index
+groupby 的三步概括是？	分组应用合并
+获取每组和可调用？	sum
+聚合后恢复普通列用？	reset_index
+多函数聚合用？	agg
+对分组列变换用？	transform
+批量替换取值使用？	replace
+按映射生成新列用？	map
+map 缺失值默认是什么？	NaN
+重命名列的函数是？	rename
+删除重复行的函数是？	drop_duplicates
+duplicated 返回什么？	布尔序列
+保留最后一条重复行选？	keep='last'
+完全删除重复组选项？	keep=False
+Python 模块指的是什么？	单个py文件
+构成包必须包含哪个文件？	__init__.py
+如何在包顶层暴露函数？	__init__ 导入
+__all__ 的作用是？	限制导出
+__init__.py 应避免什么？	重量级逻辑
+包内相对导入写法是？	from .模块
+跨子包导入写法？	from ..subpackage import x
+直接运行包模块应使用？	python -m
+包内重用 io 函数可写？	from .io import load_csv
+本地可编辑安装命令是？	pip install -e .
+封装重复清洗代码的好处？	提高复用
+包目录推荐结构是？	模块按职责
+共享常量应放在哪？	utils
+包顶层导入应保持？	轻量
+测试包行为建议用？	pytest
+read_csv 解析日期列用？	parse_dates
+处理日月颠倒需设置？	dayfirst
+如何保留原始日期值？	复制到新列
+提取按月周期的方法是？	dt.to_period('M')
+提取年份字段用？	dt.year
+统计缺失值数量用？	isnull
+isna 与 isnull 区别？	别名
+筛选非缺失值函数是？	notnull
+删除含缺失的行使用？	dropna
+只删除特定列缺失用？	dropna(subset=...)
+用固定值填充缺失用？	fillna
+按列字典填充用？	fillna(dict)
+按均值填充代码示例？	fillna(mean)
+缓解极端值影响可用？	中位数填充
+缺失策略应依据什么？	业务语义
+时间序列更平滑填充法？	interpolate
+向前填充缺失方法？	ffill
+记录填充方式需在哪？	数据字典
+Matplotlib 常用接口模块是？	pyplot
+绘制折线使用的函数？	plot
+设置图表标题请用？	title
+添加 x 轴标签的函数？	xlabel
+添加 y 轴标签的函数？	ylabel
+显示图例的函数是？	legend
+散点透明度参数名？	alpha
+散点颜色参数名？	c
+柱状图误差条参数是？	yerr
+误差条端帽参数名？	capsize
+直方图分箱数量参数？	bins
+直方图归一化参数？	density
+绘制饼图的函数是？	pie
+一次生成多子图函数？	subplots
+在同一画布分格函数？	subplot
+共享 x 轴子图参数？	sharex
+避免标签重叠的函数？	tight_layout
+显示绘图窗口使用？	show
+散点大小参数叫什么？	s
+控制画布尺寸参数？	figsize
+保存图片函数是？	savefig
+打开网格线的函数？	grid
+统一样式可用？	plt.style.use
+绘制箱线图可用？	plot(kind='box')
+检查数组是否全非零用？	np.all
+检测数组是否含零用？	np.any
+批量生成重复值可用？	np.repeat
+拼接不同段数组用？	np.concatenate
+切片取偶数位使用？	arr[::2]
+DataFrame 取前三行用？	head(3)
+筛选 attempts>2 应用？	布尔过滤
+快速得知行列数查看？	shape
+筛选 score 落入区间可用？	between
+修改特定单元格用？	loc
+定位多行多列更新用？	loc[:, cols]
+统计缺失数量使用？	isnull().sum()
+DataFrame 均值函数是？	mean
+实验绘图需强调哪两项？	标签图例
+多子图布局函数？	subplots
+保存图像命令是？	savefig
