@@ -7,8 +7,21 @@ import {
 
 // You can customise Zod schemas for frontmatter and `meta.json` here
 // see https://fumadocs.dev/docs/mdx/collections#define-docs
+
+// Notes configuration
 export const docs = defineDocs({
   dir: 'notes',
+  docs: {
+    schema: frontmatterSchema,
+  },
+  meta: {
+    schema: metaSchema,
+  },
+});
+
+// Quizzes configuration
+export const quizzes = defineDocs({
+  dir: 'quizzes',
   docs: {
     schema: frontmatterSchema,
   },

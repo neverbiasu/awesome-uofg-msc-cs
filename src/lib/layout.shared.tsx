@@ -31,6 +31,11 @@ export function baseOptions(): BaseLayoutProps {
         url: '/notes',
         active: 'nested-url',
       },
+      {
+        text: 'Quizzes',
+        url: '/quizzes',
+        active: 'nested-url',
+      },
     ],
   };
 }
