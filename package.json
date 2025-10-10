@@ -12,17 +12,30 @@
     "extract:materials": "node scripts/extract-materials.js"
   },
   "dependencies": {
+    "@ai-sdk/openai-compatible": "^1.0.20",
+    "@ai-sdk/react": "^2.0.66",
+    "@radix-ui/react-presence": "^1.1.5",
     "adm-zip": "^0.5.16",
+    "ai": "^5.0.66",
     "fumadocs-core": "15.7.12",
     "fumadocs-mdx": "11.10.0",
     "fumadocs-ui": "15.7.12",
+    "hast-util-to-jsx-runtime": "^2.3.6",
+    "lucide-react": "^0.544.0",
     "mammoth": "^1.11.0",
     "next": "15.5.3",
     "pdf2pic": "^3.2.0",
     "pdfjs-dist": "^5.4.149",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "xml2js": "^0.6.2"
+    "react-remove-scroll": "^2.7.1",
+    "remark": "^15.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-rehype": "^11.1.2",
+    "tailwind-merge": "^3.3.1",
+    "unist-util-visit": "^5.0.0",
+    "xml2js": "^0.6.2",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
