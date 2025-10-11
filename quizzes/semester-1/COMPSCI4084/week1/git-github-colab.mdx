@@ -1,0 +1,356 @@
+---
+title: "COMPSCI5089 - Week 2 Quiz: Git, GitHub, Google Colab & Conda"
+description: "版本控制、协作工具和环境管理基础知识测试"
+---
+
+## Quiz 信息
+- **课程**: COMPSCI5089 - Introduction to Data Science and Systems
+- **主题**: Git, GitHub, Google Colab & Conda
+- **完成时间**: 2025-09-24 15:27
+- **用时**: 11 分 29 秒
+- **得分**: 13/16 (81.25%)
+- **状态**: Finished
+
+## 成绩概览
+```
+总题数: 16
+正确: 13 ✓
+错误: 3 ✗
+准确率: 81.25%
+```
+
+## 错题分析
+
+### 问题 3: Git add 命令的作用
+**状态**: ❌ 错误
+
+**题目**:
+What does the `git add` command do?
+## 全部题目记录（1—16）
+
+**错题索引**: 3, 9, 10
+
+### 1
+**题目**: What is Git?
+
+**选项**:
+- [ ] a. A project management tool
+- [x] b. A version control system
+- [ ] c. A programming language
+- [ ] d. A code editor
+
+**你的答案**: b. A version control system
+
+**判定**: ✅
+
+**Mark**: 1.00 / 1.00
+
+**解析**: Git 是一个分布式版本控制系统，用于跟踪文件（尤其是代码）的变更并支持协作开发。
+
+---
+
+### 2
+**题目**: What command is used to create a new Git repository?
+
+**选项**:
+- [ ] a. git start
+- [ ] b. git create
+- [x] c. git init
+- [ ] d. git new
+
+**你的答案**: c. git init
+
+**判定**: ✅
+
+**Mark**: 1.00 / 1.00
+
+**解析**: `git init` 在当前目录中初始化一个新的 Git 仓库（创建 `.git` 目录）。
+
+---
+
+### 3
+**题目**: What does the git add command do?
+
+**选项**:
+- [x] a. It adds a new file to the repository.
+- [ ] b. It deletes a file from the repository.
+- [ ] c. It stages changes to be committed.
+- [ ] d. It commits changes to the repository.
+
+**你的答案**: a. It adds a new file to the repository.
+
+**判定**: ❌
+
+**Mark**: 0.00 / 1.00
+
+**正确答案**: c. It stages changes to be committed.
+
+**解析**: `git add` 用于把工作区的更改（新增/修改/删除）放入暂存区（staging area），准备下一次 `git commit`。它并不等同于提交。
+
+---
+
+### 4
+**题目**: How do you push changes to a remote repository on GitHub?
+
+**选项**:
+- [ ] a. git pull
+- [ ] b. git send
+- [x] c. git push
+- [ ] d. git upload
+
+**你的答案**: c. git push
+
+**判定**: ✅
+
+**Mark**: 1.00 / 1.00
+
+**解析**: `git push` 将本地分支上的提交推送到远程仓库（例如 GitHub）。
+
+---
+
+### 5
+**题目**: What command is used to check the status of your Git repository?
+
+**选项**:
+- [ ] a. git check
+- [ ] b. git inspect
+- [x] c. git status
+- [ ] d. git info
+
+**你的答案**: c. git status
+
+**判定**: ✅
+
+**Mark**: 1.00 / 1.00
+
+**解析**: `git status` 显示工作目录和暂存区的当前状态，列出已更改但未暂存的文件以及已暂存等待提交的文件。
+
+---
+
+### 6
+**题目**: What is the purpose of GitHub Pages?
+
+**选项**:
+- [ ] a. To automate workflows
+- [ ] b. To host code repositories
+- [ ] c. To provide a platform for project management
+- [x] d. To host static websites directly from a GitHub repository
+
+**你的答案**: d. To host static websites directly from a GitHub repository
+
+**判定**: ✅
+
+**Mark**: 1.00 / 1.00
+
+**解析**: GitHub Pages 可以直接从仓库托管静态网站，常用于项目主页或文档站点。
+
+---
+
+### 7
+**题目**: Which of the following is a key feature of Google Colab?
+
+**选项**:
+- [x] a. Provides free access to GPUs and TPUs
+- [ ] b. Requires installation on your local machine
+- [ ] c. Does not support Python
+- [ ] d. Cannot be used for machine learning tasks
+
+**你的答案**: a. Provides free access to GPUs and TPUs
+
+**判定**: ✅
+
+**Mark**: 1.00 / 1.00
+
+**解析**: Google Colab 提供免费的 GPU/TPU 资源，并基于云端运行 Jupyter 风格的笔记本，方便机器学习实验。
+
+---
+
+### 8
+**题目**: How can you share a Google Colab notebook with others?
+
+**选项**:
+- [x] a. By sharing a Google Drive link or direct notebook link
+- [ ] b. By saving it as a .txt file
+- [ ] c. By exporting it to a CSV file
+- [ ] d. By printing the notebook
+
+**你的答案**: a. By sharing a Google Drive link or direct notebook link
+
+**判定**: ✅
+
+**Mark**: 1.00 / 1.00
+
+**解析**: Colab 笔记本可通过 Google Drive 链接或直接分享链接进行协作和共享。
+
+---
+
+### 9
+**题目**: Which of the following is NOT a feature of Google Colab?
+
+**选项**:
+- [ ] a. Auto-saving to Google Drive
+- [ ] b. Real-time collaboration
+- [ ] c. GPU and TPU support
+- [ ] d. Native support for R programming language.
+
+**你的答案**: (未记录)
+
+**判定**: ❌
+
+**Mark**: 0.00 / 1.00
+
+**正确答案**: d. Native support for R programming language.
+
+**解析**: Colab 原生以 Python 为主，R 语言通常需要通过额外配置（如 rpy2）或使用 RStudio Cloud 等替代方案。
+
+---
+
+### 10
+**题目**: How can you access files stored in Google Drive from a Google Colab notebook?
+
+**选项**:
+- [ ] a. By copying files directly to Colab.
+- [ ] b. By clicking "File > Open"
+- [ ] c. By exporting the notebook to Google Drive.
+- [ ] d. By connecting to Google Drive using `from google.colab import drive` and mounting the drive
+
+**你的答案**: (未记录)
+
+**判定**: ❌
+
+**Mark**: 0.00 / 1.00
+
+**正确答案**: d. By connecting to Google Drive using `from google.colab import drive` and mounting the drive
+
+**解析**: 使用下面代码挂载 Drive：
+
+```python
+from google.colab import drive
+drive.mount('/content/drive')
+```
+
+挂载后可通过 `/content/drive/MyDrive/` 访问个人 Google Drive 文件。
+
+---
+
+### 11
+**题目**: What command is used to create a new Conda environment?
+
+**选项**:
+- [ ] a. conda new
+- [ ] b. conda start
+- [x] c. conda create
+- [ ] d. conda init
+
+**你的答案**: c. conda create
+
+**判定**: ✅
+
+**Mark**: 1.00 / 1.00
+
+**解析**: `conda create` 用于创建新的环境，例如 `conda create --name myenv python=3.10`。
+
+---
+
+### 12
+**题目**: How do you activate a Conda environment?
+
+**选项**:
+- [ ] a. conda run `<env_name>`
+- [ ] b. conda start `<env_name>`
+- [ ] c. conda open `<env_name>`
+- [x] d. conda activate `<env_name>`
+
+
+**你的答案**: d. conda activate `<env_name>`
+
+**判定**: ✅
+
+**Mark**: 1.00 / 1.00
+
+**解析**: 使用 `conda activate myenv` 激活指定环境，随后在该环境内安装或运行包。
+
+---
+
+### 13
+**题目**: What does the following command do?
+
+```
+conda env list
+```
+
+**选项**:
+- [ ] a. Lists all environment variables
+- [x] b. Lists all Conda environments
+- [ ] c. Lists all available Conda commands
+- [ ] d. Lists all installed packages
+
+**你的答案**: b. Lists all Conda environments
+
+**判定**: ✅
+
+**Mark**: 1.00 / 1.00
+
+**解析**: `conda env list` 或 `conda info --envs` 会列出所有已创建的 Conda 环境。
+
+---
+
+### 14
+**题目**: How can you export an environment to a YAML file?
+
+**选项**:
+- [ ] a. conda export > env.yml
+- [ ] b. conda save env.yml
+- [ ] c. conda env save environment.yml
+- [x] d. conda env export > environment.yml
+
+**你的答案**: d. conda env export > environment.yml
+
+**判定**: ✅
+
+**Mark**: 1.00 / 1.00
+
+**解析**: `conda env export > environment.yml` 将当前环境的包信息导出为 YAML 文件，便于共享和重建环境。
+
+---
+
+
+### 15
+**题目**: How do you remove a Conda environment?
+
+**选项**:
+- [ ] a. conda destroy `<env_name>`
+- [ ] b. conda delete --name `<env_name>`
+- [ ] c. conda deactivate `<env_name>`
+- [x] d. conda remove --name `<env_name>` --all
+
+**你的答案**: d. conda remove --name `<env_name>` --all
+
+**判定**: ✅
+
+**Mark**: 1.00 / 1.00
+
+**解析**: `conda remove --name myenv --all` 会删除指定环境及其所有包。
+
+---
+
+
+### 16
+**题目**: How do you install a package in a Conda environment?
+
+**选项**:
+- [x] a. conda install `<package_name>`
+- [ ] b. conda add `<package_name>`
+- [ ] c. conda get `<package_name>`
+- [ ] d. conda fetch `<package_name>`
+
+**你的答案**: a. conda install `<package_name>`
+
+**判定**: ✅
+
+**Mark**: 1.00 / 1.00
+
+**解析**: `conda install package_name` 在当前激活的 Conda 环境中安装指定包。
+
+---
+
