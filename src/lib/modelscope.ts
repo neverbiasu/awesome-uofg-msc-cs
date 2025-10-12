@@ -1,0 +1,51 @@
+const MODELSCOPE_MODELS = [
+  'ZhipuAI/GLM-4.6',
+  'iic/Tongyi-DeepResearch-30B-A3B',
+  'Qwen/Qwen3-Next-80B-A3B-Instruct',
+  'Qwen/Qwen3-Next-80B-A3B-Thinking',
+  'deepseek-ai/DeepSeek-V3.1',
+  'Qwen/Qwen3-32B',
+  'Qwen/Qwen3-8B',
+  'Qwen/Qwen3-0.6B',
+  'Qwen/Qwen3-235B-A22B-Instruct-2507',
+  'ZhipuAI/GLM-4.5',
+  'deepseek-ai/DeepSeek-R1-0528',
+  'Qwen/Qwen3-30B-A3B-Instruct-2507',
+  'Qwen/Qwen2.5-7B-Instruct',
+  'Qwen/Qwen3-Coder-30B-A3B-Instruct',
+  'Qwen/Qwen3-4B',
+  'Qwen/Qwen3-235B-A22B',
+  'Qwen/Qwen3-1.7B',
+  'Qwen/Qwen3-14B',
+  'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B',
+  'Qwen/Qwen3-235B-A22B-Thinking-2507',
+  'Qwen/Qwen3-30B-A3B',
+  'deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B',
+  'deepseek-ai/DeepSeek-R1-Distill-Qwen-32B',
+  'Qwen/Qwen3-30B-A3B-Thinking-2507',
+  'Qwen/Qwen2.5-72B-Instruct',
+  'Qwen/QwQ-32B',
+  'deepseek-ai/DeepSeek-R1-Distill-Llama-70B',
+  'Qwen/Qwen2.5-32B-Instruct',
+  'Qwen/Qwen2.5-14B-Instruct',
+  'deepseek-ai/DeepSeek-R1-Distill-Qwen-14B',
+  'Qwen/Qwen2.5-Coder-32B-Instruct',
+  'XGenerationLab/XiYanSQL-QwenCoder-32B-2504',
+  'XGenerationLab/XiYanSQL-QwenCoder-32B-2412',
+  'deepseek-ai/DeepSeek-R1-Distill-Llama-8B',
+  'Qwen/Qwen2.5-Coder-7B-Instruct',
+  'Qwen/Qwen2.5-7B-Instruct-1M',
+  'LLM-Research/Llama-4-Scout-17B-16E-Instruct',
+  'Qwen/Qwen2.5-14B-Instruct-1M',
+  'LLM-Research/Llama-4-Maverick-17B-128E-Instruct',
+  'Menlo/Jan-nano',
+  'Qwen/Qwen2.5-Coder-14B-Instruct',
+  'Qwen/QwQ-32B-Preview',
+] as const;
+
+export const ModelscopeModelList = MODELSCOPE_MODELS;
+export const DEFAULT_MODELSCOPE_MODEL = MODELSCOPE_MODELS[0];
+
+export type ModelscopeModel = (typeof MODELSCOPE_MODELS)[number];
+
+export default ModelscopeModelList;
