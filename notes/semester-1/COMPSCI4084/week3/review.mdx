@@ -1,0 +1,151 @@
+---
+title: "Week 3 复习检查表"
+description: "Week 3 重点复盘与自查清单"
+course: "COMPSCI4084"
+week: "3"
+---
+
+## 概要
+- 复习目标：系统巩固 NumPy、Pandas、Matplotlib 的数据处理链条，确保能独立完成 Week 3 相关 tAPP 与 Lab 评估。
+- 重点主题：NumPy 数组操作 · Pandas 数据读写与变换 · Matplotlib 图表绘制 · 自定义包与数据清洗流程。
+- 推荐节奏：先复盘 NumPy → Pandas 读写与操作 → 日期缺失处理 → 可视化与实验题串联演练。
+
+## 目录
+- [概要](#概要)
+- [模块：NumPy 库](#模块numpy-库)
+- [模块：Pandas 数据结构与读写](#模块pandas-数据结构与读写)
+- [模块：Pandas 数据操作](#模块pandas-数据操作)
+- [模块：自定义 Python 包](#模块自定义-python-包)
+- [模块：日期与缺失数据处理](#模块日期与缺失数据处理)
+- [模块：数据可视化](#模块数据可视化)
+- [模块：实验练习](#模块实验练习)
+- [更新记录](#更新记录)
+
+## 模块：NumPy 库
+> 模块参考：[NumPy](./numpy.mdx)（参考资料：[NumPy Library (slides, MD)](../../../../materials/semester-1/COMPSCI4084-programming-systems/lectures/Numpy_Library.md)）
+
+| 序号 | 知识点 | 掌握要点 | 重要程度 |
+|---|---|---|---|
+| 1 | NumPy 数组构造函数选择 | 针对目标 dtype 与形状选择 `array/zeros/ones/arange/linspace` 构造数据 | ⭐⭐☆ |
+| 2 | 随机数生成与种子控制 | 使用 `rand`/`randint`/`normal` 并通过设定随机种子复现实验结果 | ⭐⭐☆ |
+| 3 | 视图与拷贝的差异 | 区分切片 view 与 fancy 索引 copy，预测修改是否影响原数组 | ⭐⭐⭐ |
+| 4 | 广播与 ufunc 运算 | 检查形状兼容并使用广播/ufunc 取代显式循环 | ⭐⭐⭐ |
+| 5 | 矩阵乘法运算符语义 | 了解 `*` 与 `@` 的区别并检查矩阵乘法的输入输出维度 | ⭐⭐☆ |
+| 6 | 数组形状调整操作 | 熟练使用 `transpose/reshape/vstack/hsplit` 等操作管理维度 | ⭐⭐☆ |
+| 7 | 数组持久化策略 | 根据数据规模选择 `save/load` 或 `savetxt/loadtxt` 保存与加载数组 | ⭐⭐☆ |
+
+**补充思考：**
+- fancy indexing 返回拷贝，Lab4 Task7 的堆叠/拆分要留意返回对象形态。
+- 评估题常结合广播与掩码筛选，注意测试边界（空数组或含 NaN）。
+
+---
+
+## 模块：Pandas 数据结构与读写
+> 模块参考：[Pandas 读写](./pandas-io.mdx)（参考资料：[Pandas - Data Structures, Reading & Writing (slides, MD)](../../../../materials/semester-1/COMPSCI4084-programming-systems/lectures/Pandas-reading_and_writing.md)）
+
+| 序号 | 知识点 | 掌握要点 | 重要程度 |
+|---|---|---|---|
+| 1 | CSV 读取参数配置 | 在 `read_csv` 中设置 `names/header/parse_dates/dayfirst` 还原列与日期格式 | ⭐⭐⭐ |
+| 2 | 不规则文本文件导入技巧 | 使用 `skiprows`、`nrows`、`sep` 等参数应对不规则文本结构 | ⭐⭐☆ |
+| 3 | 大型 CSV 分块读取 | 借助 `chunksize` 或 `iterator` 控制内存并逐块处理 | ⭐⭐☆ |
+| 4 | Excel 与 HTML 读写能力 | 熟练应用 `read_excel/to_excel/read_html/to_html` 并配置所需引擎 | ⭐⭐☆ |
+| 5 | SQLite 数据读写流程 | 通过 `read_sql`/`to_sql` 搭配 `if_exists`、`dtype` 安全互通数据 | ⭐⭐⭐ |
+| 6 | CSV 导出参数控制 | 设置 `index/header/encoding` 避免额外索引或乱码 | ⭐⭐☆ |
+
+**补充思考：**
+- Lab4 需要按列解析日期，导入阶段的参数配置直接影响后续聚合。
+- 评估中常混合 Excel/HTML/CSV，注意依赖额外引擎与异常编码的兜底方案。
+
+---
+
+## 模块：Pandas 数据操作
+> 模块参考：[Pandas 操作](./pandas-manipulation.mdx)（参考资料：[Pandas - Data Manipulation (slides, MD)](../../../../materials/semester-1/COMPSCI4084-programming-systems/lectures/Data_Manipulation.md)）
+
+| 序号 | 知识点 | 掌握要点 | 重要程度 |
+|---|---|---|---|
+| 1 | 数据整合方法选择 | 根据场景选择 `merge`、`join`、`concat`、`combine_first` 并解释差异 | ⭐⭐⭐ |
+| 2 | 基于索引的合并策略 | 通过 `set_index` 或 `left_index/right_index=True` 在索引层面完成合并 | ⭐⭐⭐ |
+| 3 | 分层索引的 concat 设计 | 在 `concat` 时使用 `keys`/`axis` 构建可追踪的分层索引 | ⭐⭐☆ |
+| 4 | 长宽表转换操作 | 利用 `pivot/pivot_table/stack/unstack` 在长宽表之间切换 | ⭐⭐⭐ |
+| 5 | GroupBy 聚合与复用 | 掌握 `agg/sum/mean/count` 及 `transform` 的组合用法 | ⭐⭐⭐ |
+| 6 | 标签映射与重命名技巧 | 使用 `map`、`replace`、`rename` 统一标签或映射数值 | ⭐⭐☆ |
+| 7 | 重复与缺失清理流程 | 使用 `duplicated/drop_duplicates/drop/dropna` 清理重复记录与冗余列 | ⭐⭐☆ |
+
+**补充思考：**
+- `merge` 默认内连接，题目若不说明需判断是并集还是交集，避免数据量骤增。
+- 评估常给出重复行或错误标签，记得先 `duplicated()` 诊断再决定保留策略。
+
+---
+
+## 模块：自定义 Python 包
+> 模块参考：[自定义包](./custom-package.mdx)（参考资料：[Python - Creating a Custom Package (slides, MD)](../../../../materials/semester-1/COMPSCI4084-programming-systems/lectures/Introduction_to_Python_Package.md)）
+
+| 序号 | 知识点 | 掌握要点 | 重要程度 |
+|---|---|---|---|
+| 1 | 包目录结构规划 | 搭建包含 `__init__.py` 的包目录并说明各模块职责 | ⭐⭐☆ |
+| 2 | 顶层 API 暴露策略 | 在 `__init__.py` 中暴露公共 API 或配置 `__all__` | ⭐⭐☆ |
+| 3 | 模块导入路径管理 | 在包内部选择合适的相对导入或绝对导入避免循环引用 | ⭐⭐☆ |
+| 4 | 职责拆分与模块化 | 将 IO/清洗/可视化拆分为独立模块并保持单一职责 | ⭐⭐☆ |
+| 5 | 包的本地开发流程 | 使用 `pip install -e .` 或 `python -m package.module` 完成本地调试 | ⭐⭐☆ |
+
+**补充思考：**
+- 在 `__init__` 中避免执行耗时逻辑，否则包导入时会拖慢脚本启动。
+- Lab4 包练习要求目录命名与导入路径一致，提交前务必在全新环境验证。 
+
+---
+
+## 模块：日期与缺失数据处理
+> 模块参考：[日期与缺失数据](./date-missing-data.mdx)（参考资料：[More Data Manipulation - date format and missing data (slides, MD)](../../../../materials/semester-1/COMPSCI4084-programming-systems/lectures/More_Data_Manipulation_-_date_format_and_missing_data.md)）
+
+| 序号 | 知识点 | 掌握要点 | 重要程度 |
+|---|---|---|---|
+| 1 | 日期解析参数配置 | 使用 `parse_dates` 与 `dayfirst=True` 解析多种日期格式并得到 `datetime` | ⭐⭐⭐ |
+| 2 | 日期特征派生 | 保留原始日期列并提取 `dt.to_period('M')/dt.year/dt.month` 等周期字段 | ⭐⭐☆ |
+| 3 | 时间索引与切片 | 通过 `set_index('Date')`、时间切片与重采样定位时间窗口 | ⭐⭐☆ |
+| 4 | 缺失值处理方法组合 | 灵活使用 `isnull/notnull/dropna/fillna/interpolate` 区分删除与填充策略影响 | ⭐⭐⭐ |
+| 5 | 填充值策略选择 | 依据列类型选择均值/中位数/常数等填充值并记录处理策略 | ⭐⭐☆ |
+
+**补充思考：**
+- 解析失败通常源于混合格式，必要时先清洗原始字符串再 `parse_dates`。
+- Assessments 常考缺失值填充对平均值的影响，建议比较填充前后差异。
+
+---
+
+## 模块：数据可视化
+> 模块参考：[Matplotlib](./matplotlib.mdx)（参考资料：[Data Visualisation with Matplotlib (slides, MD)](../../../../materials/semester-1/COMPSCI4084-programming-systems/lectures/Data_Visualisation_with_Matplotlib.md)）
+
+| 序号 | 知识点 | 掌握要点 | 重要程度 |
+|---|---|---|---|
+| 1 | 折线图基础配置 | 绘制折线图并完善标题、轴标签、图例等元素 | ⭐⭐⭐ |
+| 2 | 散点图参数编码 | 使用 `s`、`c`、`alpha` 等参数为散点图添加额外维度 | ⭐⭐☆ |
+| 3 | 误差条与柱状图变体 | 创建带误差条的柱状/堆叠/水平条形图表达对比与置信区间 | ⭐⭐☆ |
+| 4 | 多图子图布局 | 熟练运用 `subplot/subplots` 在单个画布呈现多视角 | ⭐⭐☆ |
+| 5 | 常见统计图形绘制能力 | 绘制饼图、箱线图、直方图与多线叠加等常见图表 | ⭐⭐☆ |
+| 6 | 图表输出与导出调优 | 使用 `tight_layout`、`figsize`、`dpi`、`savefig` 调整输出效果 | ⭐⭐☆ |
+
+**补充思考：**
+- Lab5 多题要求组合图，务必检查 x 轴刻度与字体大小，避免覆盖。
+- 考核可能要求在同一图层叠加多曲线，注意图例顺序与颜色编码一致性。
+
+---
+
+## 模块：实验练习
+> 模块参考：[Week 3 实验练习](./lab-exercises.mdx)（参考资料：[Lab4 Exercises (MD)](../../../../materials/semester-1/COMPSCI4084-programming-systems/resources/Lab4_-Exercises.md)）
+
+| 序号 | 知识点 | 掌握要点 | 重要程度 |
+|---|---|---|---|
+| 1 | Lab4 NumPy 任务要点 | 掌握全零检测、比较、堆叠拆分、公共元素等数组操作 | ⭐⭐⭐ |
+| 2 | Lab4 Pandas 操作要点 | 熟悉筛选、统计、缺失值更新与单元格修改等 DataFrame 流程 | ⭐⭐⭐ |
+| 3 | Lab4 包构建与索引练习 | 完成 Lab4_1 包结构搭建与 Lab4_2 索引练习联动 | ⭐⭐☆ |
+| 4 | Lab5 绘图任务总结 | 运用 Matplotlib API 实现多线图、散点、误差条、饼图、堆叠柱等图表 | ⭐⭐☆ |
+| 5 | 实验结果复盘记录 | 梳理练习代码、易错点与改进建议形成复盘笔记 | ⭐⭐☆ |
+
+**补充思考：**
+- Lab 练习与评估题高度重合，确保在独立环境下也能跑通。
+- 总结每题所用 API，可在考前快速浏览形成肌肉记忆。
+
+---
+
+---
+更新记录
+- 2025-10-09：创建首版复习检查表。
