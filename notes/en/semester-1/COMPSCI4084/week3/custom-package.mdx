@@ -1,0 +1,89 @@
+---
+title: Custom Packages
+description: How to organize a Python package (directory structure, __init__.py, module imports, relative imports) with a practical example (creating a simple data loading/cleaning package).
+---
+
+## Overview
+- **Goal**: To teach you how to encapsulate repetitive data loading and cleaning code into a reusable Python package, improving project structure and maintainability.
+- **Scope**: Covers the difference between packages and modules, the role of `__init__.py`, package directory structure, relative/absolute imports, and installation/local development methods.
+
+## Learning Objectives
+1. Understand the concepts of packages and modules and be able to create a basic package structure.
+2. Be able to write an `__init__.py` file to expose common interfaces and organize module imports.
+3. Become proficient in using relative imports to reuse code within a package.
+4. Be able to use the package in a project and install it for local development using `pip install -e .` (optional).
+
+## Key Concepts
+### 1. Packages and Modules Basics
+- **Motivation**: Splitting code improves readability and reusability, avoiding script repetition.
+- **Core Concepts**: A **module** is a single `.py` file. A **package** is a directory containing an `__init__.py` file, and can contain sub-packages and modules.
+- **Example**:
+```text
+mydata_package/
+  __init__.py
+  io.py
+  clean.py
+  utils.py
+```
+- **Summary**: Use packages to organize functions with clear responsibilities into modules.
+
+---
+### 2. `__init__.py` and Exposing Interfaces
+- **Motivation**: Provide a top-level API for the package through `__init__.py`, hiding implementation details.
+- **Core Concepts**: Import common functions in `__init__.py` or set `__all__` to simplify usage like `from mypkg import func`.
+- **Example**:
+```python
+# mydata_package/__init__.py
+from .io import load_csv
+from .clean import clean_df
+__all__ = ['load_csv', 'clean_df']
+```
+- **Notes**: Avoid placing heavyweight initialization code (like long I/O operations) in `__init__.py`.
+- **Summary**: A well-crafted `__init__.py` can create a good package user experience.
+
+---
+### 3. Relative and Absolute Imports
+- **Motivation**: Maintain stable and refactorable paths when calling other modules within a package.
+- **Core Concepts**: `from .module import func` (same level); `from ..subpackage import x` (parent level); absolute import `from mypkg.module import func`.
+- **Example**:
+```python
+# In clean.py
+from .io import load_csv
+```
+- **Notes**: Relative imports may fail when a script is run directly. It is recommended to execute as a package (`python -m mydata_package`) or install for local development with `pip install -e .`.
+- **Summary**: Choose the appropriate import style to ensure the package works in different contexts.
+
+---
+### 4. Example Package: Simple Data Loading and Cleaning
+- **Motivation**: Encapsulate common `read_csv + simple cleaning` logic into a function for reuse across multiple notebooks or scripts.
+- **Example Code**:
+```python
+# mydata_package/io.py
+import pandas as pd
+
+def load_csv(path, parse_dates=None, dayfirst=False):
+    return pd.read_csv(path, parse_dates=parse_dates, dayfirst=dayfirst)
+
+# mydata_package/clean.py
+def clean_df(df):
+    # Example of filling missing values
+    df = df.copy()
+    df.fillna({'Quantity':0, 'Price':0}, inplace=True)
+    return df
+```
+- **Usage**:
+```python
+from mydata_package import load_csv, clean_df
+df = load_csv('shopping.csv', parse_dates=['Date'], dayfirst=True)
+df = clean_df(df)
+```
+- **Summary**: A small package can significantly reduce repetitive code in notebooks.
+
+## Best Practices
+- Keep top-level imports in the package lightweight to avoid slow startup times from importing too many dependencies.
+- Write tests (e.g., with `pytest`) to cover the main paths and boundary cases of your API.
+- Maintain reproducible installation metadata in `setup.cfg` or `pyproject.toml` for easy team sharing.
+
+---
+## Update History
+- 2025-10-08: Created initial version based on course materials and exercises.

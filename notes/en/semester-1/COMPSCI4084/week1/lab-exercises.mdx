@@ -1,0 +1,78 @@
+---
+title: "Lab Exercises"
+description: "Comprehensive exercises for Git/GitHub, Conda environments, and Python basics with decision making (in preparation for Week 2 assessment)."
+---
+
+## Overview
+- **Goal**: Integrate Git/Conda with Python fundamentals (including decision making) to complete a workflow from environment setup to code and collaboration.
+- **Scope**: Strictly aligns with the original exercise materials (Git Practical, Conda Practical, Python Basics & Decision Making).
+
+## Learning Objectives
+1. Independently perform initial Git configuration, repository initialization, README commit, and remote association.
+2. Use Conda to create/activate/deactivate environments, install/update/remove packages, and reproduce an environment from a YAML file.
+3. Complete small programming exercises in Python basics and conditional branching, paying attention to input validation and output formatting.
+
+## Practical Tasks (Aligned with original materials)
+
+### A. Git & GitHub — Practical Exercises
+1.  **Configure Git & GitHub**
+    *   Install Git and configure `user.name` and `user.email`.
+    *   Register for a GitHub account if you don't have one.
+2.  **Initialize a Local Repository**
+    *   Create a new project directory and initialize a Git repository.
+    *   Create a `README.md` file (if it doesn't exist, commands might fail; create it first, e.g., with `echo`).
+    *   Add and commit `README.md`.
+3.  **Connect to a GitHub Remote Repository**
+    *   Create an empty repository on GitHub (do not initialize with any files).
+    *   Associate the local repository with the remote (e.g., `git remote add origin https://github.com/Mireilla/mireilla_project.git`).
+    *   Push the first commit and set the upstream branch: `git push -u origin main`.
+4.  **Branching and Merging**
+    *   Create and switch to a `feature` branch: `git branch feature` → `git checkout feature`.
+    *   Make changes and commit them: `git add mireilla_file.txt` → `git commit -m "Added new file in feature branch"`.
+    *   Switch back to `main` and merge: `git checkout main` → `git merge feature`.
+5.  **Collaborating on GitHub**
+    *   Fork an existing repository.
+    *   Clone your fork locally (e.g., `git clone https://github.com/yourusername/SomeProject.git`).
+    *   Make changes and push them to your fork.
+    *   Open a Pull Request to the original repository.
+
+### B. Conda — Practical Exercises
+1.  **Install and Configure Conda**
+    *   Install Miniconda or Anaconda.
+    *   Verify the installation: `conda --version`.
+    *   Update Conda: `conda update conda`.
+2.  **Create and Activate an Environment**
+    *   Create an environment named `data_science` with Python 3.8: `conda create --name data_science python=3.8`.
+    *   Activate the environment: `conda activate data_science`.
+    *   Deactivate the environment: `conda deactivate`.
+3.  **Install and Manage Packages**
+    *   Install `numpy`, `pandas`, and `matplotlib`.
+    *   Update `pandas` to the latest version.
+    *   Remove `matplotlib`.
+4.  **Export and Share an Environment**
+    *   Export the environment to `data_science_env.yml`: `conda env export > data_science_env.yml`.
+    *   Create a new environment from the YAML file: `conda env create -f data_science_env.yml`.
+
+### C. Python Basics — Exercises
+1.  **Day-old Bread**: A loaf of bread costs £3.49. Day-old bread is discounted by 60%. Read the number of loaves purchased, then display the regular price, the discount, and the total cost (formatted to two decimal places and aligned).
+2.  **Length and Slicing**: Read a string, display its length. Then, read start and end indices and output the sliced result.
+3.  **Upper or Lower case name**: Read a first name. If its length is less than 5, read a last name, concatenate them, and convert to uppercase. Otherwise, output the first name in lowercase.
+4.  **Pig Latin**: Convert a word according to the rules (if it starts with a consonant, move it to the end and add `ay`; if it starts with a vowel, add `way`). Output the result in lowercase.
+
+### D. Decision Making — Exercises
+1.  **Umbrella or no umbrella**: Ask if it is raining (case-insensitive). If yes, ask if it is windy. If "yes" and windy, print "It's too windy for an umbrella". Otherwise, "Take an umbrella". If not raining, print "Enjoy your day".
+2.  **Your age**: Read an age: `>= 18` → "You can vote"; `== 17` → "You can learn how to drive"; `== 16` → "You can buy a lottery ticket"; otherwise "You can go Trick-or-Treating".
+3.  **Even or Odd**: Read an integer and determine if it's odd or even, then print the result.
+4.  **Vowel or Consonant**: Read a letter: `a/e/i/o/u` → vowel; `y` → sometimes a vowel, sometimes a consonant; others → consonant.
+5.  **Name the shape**: Read the number of sides (3–10) and print the name of the shape. Provide an error message for inputs outside this range.
+6.  **Classifying Triangles**: Read the lengths of three sides and output whether the triangle is `equilateral`, `isosceles`, or `scalene`.
+7.  **Find the area**: Display a menu: 1) Square 2) Triangle. Based on the choice, read the required parameters, calculate the area, and handle other inputs with an error message.
+
+## Submission Advice
+- Commit small and often with clear messages. Use `.gitignore` to exclude environment and temporary files.
+- Document the environment and running instructions in your `README` to ensure reproducibility.
+
+---
+
+## Update History
+- Last updated: 2025-09-28

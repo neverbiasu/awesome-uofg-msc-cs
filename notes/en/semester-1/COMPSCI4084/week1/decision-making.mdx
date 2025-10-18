@@ -1,0 +1,99 @@
+---
+title: "Python - Decision Making"
+description: "if/elif/else, truthiness and short-circuiting, comparison and logical operators, ternary expressions, early returns, and data validation."
+---
+
+## Overview
+- **Goal**: Master `if/elif/else`, conditional expressions, and short-circuit evaluation to improve the clarity of branching logic.
+- **Applicable for**: Common tasks like input validation, graded evaluations, and handling boundary conditions.
+
+## Learning Objectives
+- Write correct `if/elif/else` statements to handle multiple branches.
+- Understand truthiness and short-circuiting rules to avoid redundant checks.
+- Use conditional expressions ("ternary operators") and guard clauses for more concise code.
+
+## Key Concepts
+
+### 1. Basic `if / elif / else` Structure
+```python
+score = 85
+if score >= 90:
+    grade = "A"
+elif score >= 80:
+    grade = "B"
+elif score >= 70:
+    grade = "C"
+else:
+    grade = "D"
+```
+- **Recommendation**: Arrange conditions in descending order (or in mutually exclusive ranges); avoid overlapping conditions.
+
+---
+
+### 2. Truthiness & Short-Circuiting
+```python
+items = []
+if items:  # Empty containers are False, non-empty are True
+    first = items[0]
+else:
+    first = None
+
+user = None
+# `and`/`or` short-circuiting
+name = (user and user.get("name")) or "anonymous"
+```
+- **Rules**: `None`, `0`, `""`, `[]`, `{}`, `set()` are `False`; most other objects are `True`.
+
+---
+
+### 3. Comparison & Logical Operators
+- **Chained comparison**: `0 < x < 10`
+- **Equality vs. Identity**: Use `==` for value comparison; use `is` only for object identity.
+```python
+x = 5
+if 0 < x < 10:
+    pass
+
+s1 = "a" * 3; s2 = "aaa"
+print(s1 == s2)  # True (values are equal)
+print(s1 is s2)  # Implementation-dependent, not guaranteed to be True; don't use `is` for value comparison
+```
+
+---
+
+### 4. Conditional Expressions ("Ternary Operator")
+```python
+age = 19
+status = "adult" if age >= 18 else "minor"
+```
+- **Use Case**: For simple assignment branches; use multi-line `if` for complex logic.
+
+---
+
+### 5. Guard Clauses (Early Return)
+```python
+def parse_score(raw: str) -> int | None:
+    if raw is None:
+        return None
+    raw = raw.strip()
+    if not raw.isdigit():
+        return None
+    val = int(raw)
+    if not (0 <= val <= 100):
+        return None
+    return val
+```
+- **Idea**: Handle invalid or boundary cases first to make the main path clearer and flatter.
+
+---
+
+## Best Practices
+- Organize conditions in a mutually exclusive order. Extract complex conditions into functions to improve testability.
+- Use truthiness and short-circuiting to simplify null checks and value retrieval.
+- Use `==` for value comparison; only use `is` when checking for the exact same object.
+- Use conditional expressions for simple branches; keep complex branches in multi-line `if` statements for readability.
+
+---
+
+## Update History
+- Last updated: 2025-09-28

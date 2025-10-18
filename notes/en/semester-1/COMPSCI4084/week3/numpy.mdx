@@ -1,0 +1,180 @@
+---
+title: NumPy
+description: NumPy array creation, indexing, operations, shape manipulation, and file I/O (dtypes, broadcasting, matrix multiplication, stacking/splitting).
+---
+
+## Overview
+- **Goal**: Master NumPy's core data structure (the `array`) to be able to create, index, reshape, perform vectorized operations on, and read/write arrays from files.
+- **Scope**: Includes array creation functions, `dtype`, broadcasting, matrix multiplication, stacking/splitting, views vs. copies, masking, and fancy indexing. Does not cover advanced linear algebra decompositions (like SVD details).
+
+## Learning Objectives
+1. Be able to use `array/zeros/ones/arange/linspace` to create arrays of different shapes and `dtype`s.
+2. Understand and apply array indexing, slicing, boolean masking, and fancy indexing to extract/modify data.
+3. Become proficient in using broadcasting for element-wise operations and `dot()` for matrix multiplication.
+4. Be able to change an array's shape (`reshape`, `ravel`, `transpose`) and understand the difference between a view and a copy.
+5. Be able to save arrays to text or binary files and load them back.
+
+## Key Concepts
+### 1. Array Creation and `dtype`
+- **Motivation**: To replace Python list loops with more memory-efficient and vectorized operations.
+- **Core Concepts**: `np.array`, `np.zeros`, `np.ones`, `np.arange`, `np.linspace`, `np.random`, and `dtype` for specifying data types.
+- **Example**:
+```python
+import numpy as np
+# Basic creation
+a = np.array([1, 2, 3])            # dtype is inferred as int
+b = np.array([1.0, 2.0, 3.0])      # float
+c = np.array([(1,2),(3,4)], dtype=np.int64)  # Specify dtype
+z = np.zeros((2,3))
+ones = np.ones(4, dtype=float)
+r = np.arange(0, 10, 2)            # [0,2,4,6,8]
+ls = np.linspace(0, 1, 5)          # 5 evenly spaced values
+randint = np.random.randint(0, 10, size=(2,3))  # Matrix of random integers
+normal = np.random.normal(loc=0.0, scale=1.0, size=(3,))  # Vector from a normal distribution
+```
+- **Notes/Best Practices**: Try to specify the `dtype` at creation to avoid performance or precision issues from implicit type conversions.
+- **Summary**: Mastering common creation functions allows for the rapid construction of data for analysis.
+
+---
+### 2. Indexing, Slicing, Masking, and Fancy Indexing
+- **Motivation**: To efficiently select or modify subsets of an array.
+- **Core Concepts**: Integer indexing, slicing `a[start:stop:step]`, boolean masking, and integer array indexing (fancy indexing).
+- **Example**:
+```python
+arr = np.arange(12).reshape(3,4)
+# Positional indexing
+row1 = arr[0] # First row
+val = arr[1,2] # Second row, third column
+# Slicing
+sub = arr[:, 1:3] # All rows of columns 1 and 2
+# Boolean masking
+mask = arr % 2 == 0
+evens = arr[mask]
+# Fancy indexing
+idx = [0,2]
+sel = arr[idx]  # Selects the 0th and 2nd rows
+```
+- **Notes**: Boolean masking returns a 1D array. Fancy indexing always returns a copy of the array, not a view.
+- **Summary**: Choosing the right indexing method can make code both concise and efficient.
+
+---
+### 3. Broadcasting and Element-wise Operations
+- **Motivation**: To improve performance by replacing explicit loops with vectorized expressions.
+- **Core Concepts**: Arrays of different shapes are aligned and expanded according to rules to perform element-wise operations.
+- **Example**:
+```python
+A = np.array([[1,2,3],[4,5,6]])  # shape (2,3)
+v = np.array([1,0,1])           # shape (3,)
+# Broadcasting: v will be stretched along axis=0
+res = A + v  # v is added to each row of A
+# Scalar operation
+res2 = A * 2
+```
+- **Notes**: Broadcasting succeeds if, for each dimension (starting from the end), the dimension sizes are equal or one of them is 1. Misusing broadcasting can lead to unexpected shapes.
+- **Summary**: Broadcasting is key to writing concise, vectorized code.
+
+---
+### 4. Matrix Multiplication and Common Linear Algebra Transforms
+- **Motivation**: Many data analysis/machine learning operations require matrix products, transposes, and inverses.
+- **Core Concepts**: `np.dot` or `@` for matrix multiplication; tools like `transpose()`, `trace()`, `linalg.inv()`.
+- **Example**:
+```python
+A = np.arange(6).reshape(2,3)
+B = np.ones((3,2))
+# Matrix multiplication
+M = A.dot(B)       # or A @ B  -> shape (2,2)
+# Matrix transpose
+T = A.T
+T = np.transpose(A)
+# Inverse is only for square matrices
+C = np.array([[1.,2.],[3.,4.]])
+# Find the inverse of C and generate a 2x3 random integer matrix
+invC = np.linalg.inv(C)
+# Calculate the trace of matrix C (sum of diagonal elements)
+tr = np.trace(C)
+# Element-wise vs. Matrix Multiplication
+A = np.array([[1,2],[3,4]])
+B = np.array([[2,0],[1,2]])
+elem = A * B   # Element-wise product -> [[2,0],[3,8]]
+mat = A @ B    # Matrix product -> [[4,4],[10,8]]
+```
+- **Notes**: Arithmetic operators (`+`, `-`, `*`, `/`, etc.) perform element-wise operations by default. Ensure a matrix is invertible (non-zero determinant). For high-dimensional linear algebra, use specialized libraries and be mindful of numerical stability.
+- **Summary**: Mastering `dot`/`@` and common linear algebra functions meets basic matrix operation needs.
+
+---
+### 5. Shape Manipulation, Stacking, and Splitting
+- **Motivation**: To prepare data in the right shape for algorithms or visualization.
+- **Core Concepts**: `reshape`, `ravel`, `reshape(-1, n)`, `vstack`, `hstack`, `column_stack`, `vsplit`, `hsplit`, `split`.
+- **Example**:
+```python
+x = np.arange(12)
+# Reshape into a 3x4 matrix
+M = x.reshape(3,4)
+# Flatten into a 1D vector
+flat = M.ravel()
+# Stacking
+a = np.array([[1,2],[3,4]])
+b = np.array([[5,6]])
+vs = np.vstack([a,b]) # Vertically
+hs = np.hstack([a, a]) # Horizontally
+# Splitting
+left, right = np.hsplit(M, [2])
+```
+- **Notes**: `reshape` returns a new view or a copy depending on memory layout. Using `-1` for a dimension allows it to be inferred automatically.
+- **Summary**: Flexible reshaping and stacking are common operations in data preparation.
+
+---
+### 6. Views vs. Copies
+- **Motivation**: To understand whether modifying an array will affect the original, avoiding hard-to-find side effects.
+- **Core Concepts**: Simple assignment is just a reference. Slicing usually returns a view. `copy()` creates an independent duplicate.
+- **Example**:
+```python
+a = np.arange(6)
+b = a          # Reference
+s = a[1:4]     # View (usually)
+c = a[1:4].copy()  # Independent copy
+s[0] = 99
+# Observe the change in a
+```
+- **Notes**: When performance is critical and you are only reading data, you can leverage views to avoid memory duplication. When you need to modify independently, you must use `copy()`.
+- **Summary**: Be explicit about when to copy to avoid hidden bugs or unnecessary memory usage.
+
+---
+### 7. Masking, Ufuncs, and Iteration
+- **Motivation**: To perform efficient element-wise functions and conditional bulk modifications on arrays.
+- **Core Concepts**: Ufuncs (like `np.sqrt`, `np.sin`) are broadcast over the array. Masks are used for conditional selection and assignment.
+- **Example**:
+```python
+x = np.array([1,4,9,16])
+print(np.sqrt(x))
+A = np.arange(9)
+mask = (A % 2 == 0)
+A[mask] = -1  # Replace even numbers with -1
+```
+- **Notes**: Always prefer built-in ufuncs over Python loops for performance.
+- **Summary**: The combination of ufuncs and masking is a powerful tool for array computation.
+
+---
+### 8. Saving and Loading Arrays
+- **Motivation**: To persist intermediate results or share data between disk and memory.
+- **Core Concepts**: Text format `savetxt/loadtxt` and binary format `save/load` (.npy), which is more efficient and preserves `dtype`.
+- **Example**:
+```python
+np.savetxt('arr.txt', np.arange(6))
+a = np.loadtxt('arr.txt')
+# Binary
+np.save('arr.npy', np.arange(6))
+b = np.load('arr.npy')
+```
+- **Notes**: For large arrays, the binary format is recommended to save space and I/O time.
+- **Summary**: Choose the appropriate persistence method for data reproducibility and sharing.
+
+## Best Practices
+- Prefer NumPy's built-in functions (ufuncs) over Python loops for speed.
+- Be explicit about `dtype` to avoid precision or memory issues from implicit conversions.
+- Use `.copy()` on slices that might be modified to avoid unexpected side effects.
+- When memory and performance are constrained, reuse views instead of creating copies where possible.
+
+---
+## Update History
+- 2025-10-09: Updated based on materials and documentation.
