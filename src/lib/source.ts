@@ -1,15 +1,17 @@
 import { docs, quizzes } from '@/.source';
 import { loader } from 'fumadocs-core/source';
+import type { InferPageType } from 'fumadocs-core/source';
 
-// See https://fumadocs.vercel.app/docs/headless/source-api for more info
-
-// Notes source
-export const source = loader({
+// Notes source - single loader for all content
+const docsLoader = loader({
   baseUrl: '/notes',
   source: docs.toFumadocsSource(),
 });
 
-// Quizzes source
+export const source = docsLoader;
+export type Page = InferPageType<typeof source>;
+
+// Quizzes source (no i18n as quizzes are only in one language)
 export const quizzesSource = loader({
   baseUrl: '/quizzes',
   source: quizzes.toFumadocsSource(),

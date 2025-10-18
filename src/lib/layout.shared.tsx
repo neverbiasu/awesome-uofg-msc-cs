@@ -7,7 +7,7 @@ import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
  * Home Layout: app/(home)/layout.tsx
  * Docs Layout: app/docs/layout.tsx
  */
-export function baseOptions(): BaseLayoutProps {
+export function baseOptions(locale: string = 'en'): BaseLayoutProps {
   return {
     nav: {
       title: (
@@ -28,12 +28,12 @@ export function baseOptions(): BaseLayoutProps {
     links: [
       {
         text: 'Notes',
-        url: '/notes',
+        url: `/${locale}/notes`,
         active: 'nested-url',
       },
       {
         text: 'Quizzes',
-        url: '/quizzes',
+        url: `/${locale}/quizzes`,
         active: 'nested-url',
       },
     ],

@@ -1,6 +1,16 @@
 import Link from 'next/link';
 
-export default function HomePage() {
+type Params = {
+  lang: string;
+};
+
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<Params>;
+}) {
+  const { lang } = await params;
+
   return (
     <main className="flex flex-1 flex-col justify-center text-center">
       <h1 className="mb-4 text-2xl font-bold">UofG MSc Computing Science</h1>
@@ -9,7 +19,7 @@ export default function HomePage() {
       </p>
       <div className="flex flex-col gap-4 items-center">
         <Link
-          href="/notes"
+          href={`/${lang}/notes`}
           className="text-fd-foreground font-semibold underline"
         >
           📝 Course Notes & Handbook
