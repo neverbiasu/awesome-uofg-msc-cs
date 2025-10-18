@@ -1,0 +1,85 @@
+---
+title: "Conda"
+description: "Environment and package management, environment lifecycle, package installation and updates, exporting for reproducibility, and best practices."
+---
+
+## Overview
+- **Goal**: Master Conda for environment and package management, including creating, activating, exporting, and reproducing environments.
+- **Scope**: Covers installation, updates, environment management, package management, exporting/importing YAML files, and avoiding development in the base environment.
+
+## Learning Objectives
+1. Correctly install, verify, and update Conda.
+2. Create and activate an environment with a specific Python version, and manage/clone/delete environments.
+3. Install, update, and uninstall common packages; export an `environment.yml` file to reproduce the environment on a new machine.
+
+## Key Concepts
+
+### 1. Installation & Verification
+- **Core Concept**: After installing Anaconda/Miniconda, verify the installation via the command line and keep it updated.
+- **Commands**:
+```bash
+conda --version
+conda update conda
+```
+- **Notes/Best Practices**: Always verify after installation. Updates can be slow, so be patient.
+- **Summary**: Verify first, then use. Keeping Conda updated reduces compatibility issues.
+
+---
+
+### 2. Creating & Activating Environments (with a specific Python version)
+- **Core Concept**: Isolate dependencies in separate environments to prevent conflicts between projects.
+- **Commands**:
+```bash
+conda create --name myenv python=3.9
+conda activate myenv
+conda deactivate
+```
+- **Use Case**: Create one environment per project or course. Different projects can be maintained in parallel.
+- **Summary**: One environment per project. Deactivate an environment before switching to or deleting another.
+
+---
+
+### 3. Managing Environments (list/remove/clone)
+- **Commands**:
+```bash
+conda env list
+conda remove --name myenv --all
+conda create --name newenv --clone myenv
+```
+- **Notes**: The `--all` flag is required to remove an environment completely. Cloning quickly duplicates a dependency state.
+- **Summary**: Listing, removing, and cloning cover typical lifecycle operations.
+
+---
+
+### 4. Package Management (install/update/remove)
+- **Commands**:
+```bash
+conda install numpy
+conda update numpy
+conda remove numpy
+```
+- **Notes**: Install a minimal set of required packages to reduce solver time and conflicts.
+- **Summary**: The install/update/remove trio keeps environments lean and manageable.
+
+---
+
+### 5. Exporting & Reproducing (YAML)
+- **Commands**:
+```bash
+conda env export > environment.yml
+conda env create -f environment.yml
+```
+- **Use Case**: Sharing with a team, migrating across machines, or reproducing a class experiment environment.
+- **Summary**: The `environment.yml` file is a reproducible recipe for your environment and should be committed to version control.
+
+---
+
+## Best Practices
+- Create a separate environment for each project to avoid polluting the base environment.
+- Regularly update your environments and packages. Before upgrading, back up or export `environment.yml`.
+- Document environment information and usage instructions in your project's repository (README + `environment.yml`).
+
+---
+
+## Update History
+- Last updated: 2025-09-28

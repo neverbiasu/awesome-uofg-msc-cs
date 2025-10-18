@@ -1,0 +1,147 @@
+---
+title: "Python Basics"
+description: "Variables and types, operators, sequences/mappings, string formatting, input/output, code style, and type hints."
+---
+
+## Overview
+- **Goal**: Familiarize with core built-in types and common operations. Build a solid foundation in expressions, I/O, string formatting, and code style.
+- **Applicable for**: The foundation for subsequent topics like conditionals, loops, data processing, and object-oriented programming.
+
+## Learning Objectives
+1. Identify and use core built-in types; become familiar with slicing and container operations.
+2. Master comparison and logical operators, chained comparisons, and short-circuiting; avoid misuse of `is`.
+3. Perform input/output and formatting, and follow basic PEP 8 and type hinting conventions.
+
+## Key Concepts
+
+### 0. Variables and Naming
+- Variables are created by assignment. Names should be descriptive. Avoid using built-in names and reserved words (like `for`, `class`).
+- **Assignment Examples**:
+```python
+y = 20
+number1, number2 = 100, 20
+animal = number1 + number2
+print(animal)
+```
+- **Strings vs. Numbers**: Explicit conversion is needed before calculation. Use `str(x)` before concatenation.
+- **Multi-line Strings**: Use triple quotes `""" ... """` or the newline character `\n`.
+
+### 1. Basic Types and Data Structures
+- **Numeric**: `int`, `float`, `complex`; **Boolean**: `bool`; **Null**: `None`.
+- **Strings**: Immutable; support slicing, concatenation, and formatting.
+- **Sequences**: `list` (mutable), `tuple` (immutable), `range`.
+- **Mappings & Sets**: `dict`, `set`.
+```python
+x, y = 10, 3
+print(x // y, x % y, x ** y)
+
+s = "ProgSD"
+print(s[:3], s[-2:])
+print(f"{s} length={len(s)}")
+
+info = {"name": "Alice", "score": 90}
+keys = set(info)
+```
+
+### 2. Name Binding and Mutability
+```python
+def append_item(x, bucket=None):
+    if bucket is None:
+        bucket = []
+    bucket.append(x)
+    return bucket
+```
+> Avoid using mutable objects like `list`, `dict`, or `set` as default function arguments. Use `None` as a placeholder and initialize inside the function body.
+
+### 3. Operators and Expressions
+- **Comparison**: `==`, `!=`, `<`, `<=`, `>`, `>=`; **Chained comparison**: `0 < x < 10`.
+- **Logical**: `and` / `or` / `not` (short-circuiting).
+- **Identity vs. Equality**: `is` vs. `==`.
+```python
+user = None
+name = (user and user.get("name")) or "anonymous"
+```
+
+### 4. Sequence Operations and Comprehensions
+```python
+squares = [i * i for i in range(10) if i % 2 == 0]
+lookup = {ch: ord(ch) for ch in "abc"}
+```
+
+### 5. String Handling and Formatting
+```python
+name, score = "Bob", 87.5
+print(f"{name:>10s} | {score:6.2f}")
+```
+- You can also use the modulo operator for formatting:
+```python
+x, y = 42, 3.1415926
+print("%d" % x)        # Decimal integer
+print("%5.2f" % y)     # Width >= 5, 2 decimal places
+```
+
+### 6. Input and Output
+```python
+raw = input().strip()
+try:
+    val = int(raw)
+    print("OK", val)
+except ValueError:
+    print("INVALID")
+```
+
+### 7. Code Style and Type Hinting
+```python
+from typing import Iterable, List
+
+def head(xs: Iterable[int], n: int = 5) -> List[int]:
+    return list(xs)[:n]
+```
+
+### 8. Common String Methods (strip/split/case)
+- **Removing whitespace and characters**: `strip()`, `lstrip()`, `rstrip()`
+```python
+s = "  hello.  "
+print(s.strip())     # "hello."
+print(s.rstrip(".")) # "  hello"
+```
+- **Splitting**: `split(sep, maxsplit=None)`
+```python
+text = "a b c d"
+print(text.split())         # ['a','b','c','d']
+print("a.b.c".split(".", 1)) # ['a','b.c']
+```
+- **Case conversion**: `lower()`, `upper()`, `title()`
+```python
+msg = "Hello WORLD"
+print(msg.lower()); print(msg.upper()); print(msg.title())
+```
+- **Indexing and Slicing Review** (strings are immutable):
+```python
+s = "Python"
+print(s[0], s[-1])  # P n
+print(s[1:4])       # yth
+```
+
+### 9. Introduction to Regular Expressions (`re` module)
+- **Common functions**: `findall`, `search`, `split`, `sub`
+```python
+import re
+text = "ab1 cd2 ef3"
+print(re.findall(r"\d", text))         # ['1','2','3']
+print(re.search(r"cd\d", text).group()) # 'cd2'
+print(re.split(r"\s+", text))           # ['ab1','cd2','ef3']
+print(re.sub(r"\d", "*", text))        # 'ab* cd* ef*'
+```
+
+---
+
+## Best Practices
+- Choose the right data structure to express your intent. Avoid sharing mutable objects to prevent hidden side effects.
+- Explicitly validate inputs and handle exceptions. Use f-strings for uniform output formatting.
+- Follow PEP 8. Keep type hints and documentation in sync.
+
+---
+
+## Update History
+- Last updated: 2025-09-28

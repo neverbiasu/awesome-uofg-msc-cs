@@ -1,0 +1,373 @@
+---
+title: "Lab Exercises (Lab 2)"
+description: "A summary of Week 2 lab exercises covering loops, functions, data structures, random, and Turtle graphics, with sample solutions and grading criteria."
+---
+
+## Overview
+- This page summarizes all the exercises from Lab 2 (covering loops, functions, lists/dictionaries/tuples/arrays, random, and Turtle graphics) and provides key points for solutions, short examples, and grading criteria for each category.
+- **Goal**: To help you quickly understand the key concepts, implementation methods, and common pitfalls for each problem, enabling you to complete the lab efficiently and pass automated/manual grading.
+
+## Learning Objectives
+1. Master `for`/`while` loops and branching control to implement sequence generation, conditional loops, and user interaction.
+2. Be able to encapsulate reusable logic in functions and organize data flow through parameters and return values.
+3. Master CRUD operations and iteration patterns for lists, tuples, and dictionaries to implement a simple management menu.
+4. Use the `random` standard library to implement random selection and number-guessing games with appropriate user interaction.
+5. Become familiar with basic Turtle graphics operations to produce repeatable or randomized drawings.
+6. Be able to convert exercises into testable functions and write basic automated tests or manual checkpoints.
+
+## Key Concepts
+
+### 1. `for` Loops and Simple Output (Exercises 1–3)
+
+#### Motivation
+- These exercises test your mastery of loop counting, conditional branching, and string output—common introductory problems for assessing combined loop and conditional structures.
+
+#### Core Concepts
+- `for i in range(n)`, string repetition, and conditional statements (`if/else`).
+- **Input Validation**: Converting user input to `int` and handling potential `ValueError`.
+
+#### Example (Exercise 1)
+
+```python
+# Exercise 1: Repeat a name based on user input or print "Too high" three times.
+name = input('Enter your name: ')
+try:
+    n = int(input('Enter a number: '))
+except ValueError:
+    print('Please enter an integer.')
+else:
+    if n < 10:
+        for _ in range(n):
+            print(name)
+    else:
+        for _ in range(3):
+            print('Too high')
+```
+
+#### Notes/Best Practices
+- Input conversion must be wrapped in exception handling to prevent crashes.
+- Clarify the problem's definition of boundary conditions (e.g., what happens when the number is exactly 10).
+
+#### Summary
+- **Key concepts**: `range`, loop count control, input validation, conditional branching.
+
+---
+
+### 2. `while` Loops with Accumulation / Guessing Games (Exercises 4–6)
+
+#### Motivation
+- To test your ability to use `while` loops for an indefinite number of interactions, accumulating values, or guessing until a condition is met.
+
+#### Core Concepts
+- `while` loops, state variables, counters (`attempts`), and interactive loops.
+
+#### Example (Exercise 5: Number Guessing)
+
+```python
+compnum = 50
+attempts = 0
+while True:
+    try:
+        guess = int(input('Enter your guess: '))
+    except ValueError:
+        print('Please enter an integer.')
+        continue
+    attempts += 1
+    if guess == compnum:
+        print(f'Well done, you took {attempts} attempts')
+        break
+    elif guess < compnum:
+        print('Too low')
+    else:
+        print('Too high')
+```
+
+#### Notes/Best Practices
+- Ensure the loop's termination condition is reachable to avoid infinite loops.
+- Validate the type and range of user input.
+
+#### Summary
+- **Key concepts**: `while` loops, interactive state management, counters, and input error handling.
+
+---
+
+### 3. Functions and Structuring (Exercise 7)
+
+#### Motivation
+- Decompose code into small functions to improve readability and testability. Exercise 7 requires reading a value in one function and passing it to a counting function.
+
+#### Core Concepts
+- Function definition (`def`), parameter passing, return values, and the order of function calls.
+
+#### Example
+
+```python
+def read_num():
+    while True:
+        try:
+            return int(input('Enter a number: '))
+        except ValueError:
+            print('Please enter an integer.')
+
+def count_to(n):
+    for i in range(1, n + 1):
+        print(i)
+
+num = read_num()
+count_to(num)
+```
+
+#### Notes/Best Practices
+- Functions should be small and have a single responsibility (Single Responsibility Principle).
+- Separating I/O from logic makes it easier to write unit tests (e.g., by wrapping `input()` in its own function).
+
+#### Summary
+- **Key concepts**: Function encapsulation, separation of concerns, and improving testability.
+
+---
+
+### 4. List Management Menu (Exercise 8) — A Mini CRUD App
+
+#### Motivation
+- Implement an interactive menu to manage a list of names, testing list operations, menu loops, indexing, and user experience design.
+
+#### Core Concepts
+- List methods: `append`, `remove`, index assignment, and `enumerate` for displaying numbered items.
+- **Menu Loop**: Continuously display the menu until the user chooses to quit.
+
+#### Example (Menu Skeleton)
+
+```python
+names = []
+
+def show_menu():
+    print('\nMenu:')
+    print('1. Add name')
+    print('2. Change name')
+    print('3. Delete name')
+    print('4. View names')
+    print('5. Quit')
+
+while True:
+    show_menu()
+    choice = input('Choose an option: ')
+    if choice == '1':
+        names.append(input('Enter name to add: '))
+    elif choice == '2':
+        idx = int(input('Enter index to change: '))
+        names[idx] = input('Enter new name: ')
+    elif choice == '3':
+        idx = int(input('Enter index to delete: '))
+        names.pop(idx)
+    elif choice == '4':
+        for i, n in enumerate(names):
+            print(i, n)
+    elif choice == '5':
+        break
+    else:
+        print('Invalid option')
+```
+
+#### Notes/Best Practices
+- Perform range checks on indices.
+- **User Experience**: Provide clear feedback after an operation and return to the menu.
+- The menu logic can be broken down into functions for easier testing.
+
+#### Summary
+- **Key concepts**: List CRUD, menu loops, input validation, and user-friendly prompts.
+
+---
+
+### 5. Random Exercises (Exercises 9–12)
+
+#### Motivation
+- Use the `random` module to implement random selection and simple game logic, testing probabilistic behavior and branch handling.
+
+#### Core Concepts
+- `random.choice`, `random.randint`, and basic probability/guessing interaction logic.
+
+#### Example (Exercise 9: Random Fruit)
+
+```python
+import random
+fruits = ['apple', 'banana', 'orange', 'pear', 'kiwi']
+print(random.choice(fruits))
+```
+
+#### Example (Exercise 11: Guessing Game, Two Chances)
+
+```python
+import random
+num = random.randint(1, 5)
+first = int(input('Guess a number (1-5): '))
+if first == num:
+    print('Well done')
+else:
+    hint = 'too low' if first < num else 'too high'
+    print(hint)
+    second = int(input('Second guess: '))
+    if second == num:
+        print('Correct')
+    else:
+        print('You lose')
+```
+
+#### Notes/Best Practices
+- Clearly state the random range in prompts to the user.
+- Check the range of user input.
+
+#### Summary
+- **Key concepts**: `random` module usage, prompts, and control flow design.
+
+---
+
+### 6. Turtle Graphics (Exercises 13–15)
+
+#### Motivation
+- A graphical way to understand loops, angles, randomness, and state changes. Ideal for visualizing and debugging loop/geometric logic.
+
+#### Core Concepts
+- `turtle` module: `forward()`, `right()`/`left()`, `pencolor()`, `penup()`/`pendown()`.
+
+#### Example (Draw a regular octagon with random colors for each side)
+
+```python
+import turtle, random
+colors = ['red','green','blue','orange','purple','yellow']
+for _ in range(8):
+    turtle.pencolor(random.choice(colors))
+    turtle.forward(100)
+    turtle.right(45)
+
+turtle.done()
+```
+
+#### Notes/Best Practices
+- In non-interactive environments (like auto-graders), you may need to skip Turtle or save the drawing as an image for assertion.
+- Control the loop step and angle to ensure the shape is closed.
+
+#### Summary
+- **Key concepts**: Loop control, geometric angles, randomized colors, and graphics parameters.
+
+---
+
+### 7. Advanced Lists/Dictionaries/Tuples/Arrays (Exercises 16–25)
+
+#### Motivation
+- To test proficiency with common data structures: searching, sorting, merging, deleting, and formatting output.
+
+#### Core Concepts
+- List indexing and searching, `list.sort()`/`sorted()`, `dict` basic operations, `tuple` immutability, and array (or list-based) sorting and formatting.
+
+#### Example (Exercise 16)
+
+```python
+nums = [123, 456, 789, 234]
+x = int(input('Enter a three-digit number: '))
+if x in nums:
+    print('Position:', nums.index(x))
+else:
+    print("That's not in the list")
+```
+
+#### Notes/Best Practices
+- When the problem requires preserving the original list, use `sorted()` instead of `list.sort()`.
+- Tuples are immutable; they can be indexed like lists but do not support assignment.
+- To display a float with two decimal places, use `format(value, '.2f')` or an f-string: `f"{v:.2f}"`.
+
+#### Summary
+- **Key concepts**: List searching and indexing, sorting, formatting, and basic dictionary operations.
+
+---
+
+### 8. 2D Lists and Table Operations (Exercises 26–30)
+
+#### Motivation
+- To simulate a 2D table (rows/columns) and practice row/column indexing, updating, and deleting data.
+
+#### Core Concepts
+- 2D lists (a list of lists), accessed and modified via `data[row][col]`.
+- Common operations like displaying a whole row, appending elements, and deleting rows or columns.
+
+#### Example (Accessing/Modifying)
+
+```python
+matrix = [
+    [0, 2, 5, 8],
+    [3, 7, 4, 1],
+    [1, 6, 9, 2],
+    [4, 2, 0, 3]
+]
+row = int(input('Which row? '))
+col = int(input('Which column? '))
+print('Value:', matrix[row][col])
+# Modify
+matrix[row][col] = int(input('New value: '))
+```
+
+#### Notes/Best Practices
+- Validate row and column indices to avoid `IndexError`.
+- For frequent complex queries on tabular data, consider using `pandas.DataFrame` to improve development efficiency.
+
+#### Summary
+- **Key concepts**: 2D indexing, row/column operations, boundary checks, and data consistency.
+
+---
+
+## Sample Solutions (Reference)
+- This section provides brief reference implementations for a few exercises (to understand the approach, not the only answer).
+- It is recommended to break each problem into small functions with docstrings for automated testing.
+
+**Example: Exercise 9 (Random Fruit) Solution Reference:**
+
+```python
+# exercise_9.py
+import random
+
+def random_fruit():
+    fruits = ['apple', 'banana', 'orange', 'pear', 'kiwi']
+    return random.choice(fruits)
+
+if __name__ == '__main__':
+    print(random_fruit())
+```
+
+**Example: Exercise 8 (Name Management Menu) Recommended Function Splitting:**
+
+```python
+# name_manager.py (core function examples)
+
+def add_name(names, name):
+    names.append(name)
+
+def change_name(names, index, new_name):
+    names[index] = new_name
+
+def delete_name(names, index):
+    return names.pop(index)
+```
+
+## Grading Criteria (for Instructors/Auto-graders)
+- **Correctness (60%)**: The program completes the functionality as described and gives the correct output for valid inputs.
+- **Robustness (20%)**: Handles illegal inputs gracefully (non-integers, out-of-bounds indices, empty lists, etc.).
+- **Code Quality (10%)**: Clear structure, functional decomposition, appropriate comments, and standard variable naming.
+- **User Experience (10%)**: Clear interactive prompts, friendly menu, and helpful error messages.
+
+For automated testing, it's recommended to abstract I/O into injectable functions (e.g., passing a substitute for `input()` or writing logic with clear return values) to facilitate simulation with `pytest`.
+
+## Common Pitfalls and Debugging Tips
+- Forgetting input validation, leading to `ValueError`/`IndexError`. Use `try/except` when reading integers.
+- Modifying a list while iterating over it, which can cause elements to be skipped (when deleting, it's better to iterate backward or create a new list).
+- Turtle not running in a headless CI environment (requires special handling for training/auto-grading).
+- Confusing the semantic differences between `list.sort()` (in-place, returns `None`) and `sorted()` (returns a new list).
+
+## Practice Checklist (Check off before submission)
+- [ ] Complete Exercises 1–6 (loop-related)
+- [ ] Complete Exercises 7–8 (functions and menus)
+- [ ] Complete Exercises 9–12 (random exercises, with prompts)
+- [ ] Complete Exercises 13–15 (Turtle graphics) or provide a text-based alternative
+- [ ] Complete Exercises 16–25 (data structure exercises)
+- [ ] Complete Exercises 26–30 (2D list operations)
+
+## Update History
+- Last updated: 2025-10-01

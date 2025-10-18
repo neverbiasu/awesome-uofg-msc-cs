@@ -1,0 +1,462 @@
+---
+title: "Python Data Structures"
+description: "A deep dive into creating, accessing, modifying, and iterating through Python lists, tuples, and dictionaries."
+---
+
+## Overview
+- This document introduces three core Python data structures: Lists, Tuples, and Dictionaries.
+- It covers their creation, access, modification, iteration, and practical use cases.
+- Key focus is on understanding the differences between mutable and immutable data structures and how to choose the right one.
+
+## Learning Objectives
+1. Master list creation, indexing, slicing, and CRUD (Create, Read, Update, Delete) operations.
+2. Understand the immutability of tuples and their use cases.
+3. Master dictionary key-value storage, access, updates, and iteration.
+4. Be able to choose the appropriate data structure for a given task.
+5. Become proficient in using loops to iterate over various data structures.
+
+## Key Concepts
+
+### 1. List Basics
+
+#### 1.1 Motivation
+- A single variable can only store one value. When you need to manage multiple related pieces of data (like a class roster, color options, or measurement data), you need a data structure that can hold multiple values together.
+- Lists are the most common collection type in Python, offering flexible data storage and manipulation.
+
+#### 1.2 Core Concepts
+- **List**: A mutable, ordered collection defined with square brackets `[]`.
+- **Mutability**: The contents of a list can be changed during program execution.
+- **Iterability**: A list can be looped over.
+- **Index**: List elements are numbered starting from 0. Negative indexing is supported (accessing from the end).
+- **Heterogeneity**: A single list can store different data types (strings, integers, floats, even other lists).
+
+#### 1.3 Use Cases
+- Storing a collection of similar items (student names, grades, color options).
+- Data that requires frequent additions, deletions, or modifications.
+- Scenarios where element order must be maintained.
+- Nested lists for representing 2D data (like matrices or tables).
+
+#### 1.4 Examples
+
+```python
+# Create a list
+colors = ["red", "blue", "green"]
+mixed_data = [42, "hello", 3.14, True]
+nested_list = [1, 2, ["a", "b", "c"], 4]
+
+# Access elements (index starts at 0)
+print(colors[0])        # Output: red
+print(colors[-1])       # Output: green (negative index from the end)
+print(nested_list[2])   # Output: ["a", "b", "c"]
+print(nested_list[2][0]) # Output: a (accessing nested list element)
+
+# Modify an element
+colors[1] = "purple"
+print(colors)           # Output: ["red", "purple", "green"]
+
+# Slicing
+numbers = [0, 1, 2, 3, 4, 5]
+print(numbers[1:4])     # Output: [1, 2, 3]
+print(numbers[:3])      # Output: [0, 1, 2]
+print(numbers[3:])      # Output: [3, 4, 5]
+```
+
+#### 1.5 Notes and Best Practices
+- **IndexError**: Accessing a non-existent index will raise an `IndexError`. Check the list length before access.
+- **Shallow vs. Deep Copy**: `list2 = list1` only creates a reference. Modifying `list2` will affect `list1`. Use `list2 = list1.copy()` or `list2 = list1[:]` to create a copy.
+- **List Naming**: Avoid using `list` as a variable name, as it shadows the built-in type.
+- **Empty List Check**: Use `if my_list:` to check if a list is empty (an empty list evaluates to `False`).
+
+#### 1.6 Summary
+Lists are Python's most flexible data structure, supporting dynamic modification and a wide range of operations. Mastering indexing, slicing, and nested list access is fundamental.
+
+---
+### 2. List Methods
+
+#### 2.1 Motivation
+- After creating a list, you often need to perform operations like adding new elements, removing unwanted ones, sorting, or finding specific values.
+- Python provides a rich set of list methods to simplify these tasks.
+
+#### 2.2 Core Concepts
+- **Method**: A function associated with an object, called using `object.method()` syntax.
+- **Adding elements**: `append()`, `insert()`.
+- **Removing elements**: `remove()`, `pop()`, `del`.
+- **Sorting and Reversing**: `sort()`, `reverse()`.
+- **Finding and Counting**: `index()`, `count()`, `in` operator.
+
+#### 2.3 Use Cases
+- `append()`: Add a single element to the end of a list (e.g., collecting user input).
+- `insert()`: Insert an element at a specific position (e.g., at the beginning).
+- `remove()`: Delete the first matching value in a list.
+- `pop()`: Remove and return an element at a specific index (defaults to the last one).
+- `sort()`: Sort the list in place (only for lists with elements of the same type).
+- `index()`: Find the first occurrence of an element.
+- `in` operator: Check if an element exists in the list.
+
+#### 2.4 Examples
+
+```python
+# Add elements
+fruits = ["apple", "banana"]
+fruits.append("orange")        # Add to the end
+print(fruits)                  # Output: ["apple", "banana", "orange"]
+
+fruits.insert(1, "grape")      # Insert at index 1
+print(fruits)                  # Output: ["apple", "grape", "banana", "orange"]
+
+# Remove elements
+fruits.remove("banana")        # Remove the first "banana"
+print(fruits)                  # Output: ["apple", "grape", "orange"]
+
+last_fruit = fruits.pop()      # Remove and return the last element
+print(last_fruit)              # Output: orange
+print(fruits)                  # Output: ["apple", "grape"]
+
+del fruits[0]                  # Delete element at index 0
+print(fruits)                  # Output: ["grape"]
+
+# Sort and reverse
+numbers = [3, 1, 4, 1, 5]
+numbers.sort()                 # In-place sort (ascending)
+print(numbers)                 # Output: [1, 1, 3, 4, 5]
+
+numbers.reverse()              # In-place reverse
+print(numbers)                 # Output: [5, 4, 3, 1, 1]
+
+# Find and check
+colors = ["red", "blue", "green", "blue"]
+print("blue" in colors)        # Output: True
+print(colors.index("blue"))    # Output: 1 (first occurrence)
+print(colors.count("blue"))    # Output: 2 (number of occurrences)
+```
+
+#### 2.5 Notes and Best Practices
+- **`remove()` vs. `pop()`**: `remove()` deletes by value, `pop()` deletes by index and returns the value.
+- **`sort()` returns `None`**: `sort()` and `reverse()` modify the list in-place and return `None`. Don't write `sorted_list = my_list.sort()`.
+- **`sorted()` function**: To keep the original list, use `new_list = sorted(my_list)`.
+- **Sorting Mixed-Type Lists**: `sort()` cannot sort lists containing different types (e.g., `[1, "a", 3]`)
+- **`index()` raises an error if not found**: Use `in` to check for existence before calling `index()`.
+
+#### 2.6 Summary
+List methods provide powerful data manipulation capabilities. Understanding the difference between in-place modification (`sort()`, `reverse()`) and returning a new object (`sorted()`), as well as the use cases for each method, is key to using lists effectively.
+
+---
+### 3. Lists and Loops
+
+#### 3.1 Motivation
+- One of the core uses of lists is to process data in bulk. Loops allow us to access each element individually or by index.
+- Different loop patterns are suitable for different scenarios: direct element iteration, index-based access, conditional iteration, etc.
+
+#### 3.2 Core Concepts
+- **`for` loop over elements**: `for item in list:` directly accesses each element.
+- **`for` loop over indices**: `for i in range(len(list)):` accesses and modifies elements by index.
+- **`while` loop**: Suitable for condition-driven iteration.
+- **`enumerate()`**: Get both the index and the value simultaneously.
+
+#### 3.3 Use Cases
+- **Direct element iteration**: When you only need to read element values (e.g., printing, summing).
+- **Index iteration**: When you need to modify elements or access adjacent elements.
+- **`enumerate()`**: When you need both the index and the value (e.g., displaying a numbered list).
+- **`while` loop**: For conditional iteration (e.g., finding the first element that meets a condition).
+
+#### 3.4 Examples
+
+```python
+# Direct element iteration (recommended for read-only operations)
+colors = ["red", "blue", "green"]
+for color in colors:
+    print(f"I like {color}")
+# Output:
+# I like red
+# I like blue
+# I like green
+
+# Iteration by index (allows modification)
+numbers = [1, 2, 3, 4]
+for i in range(len(numbers)):
+    numbers[i] = numbers[i] * 2
+print(numbers)  # Output: [2, 4, 6, 8]
+
+# Skipping elements (iterate from index 1 to the end)
+data = [10, 20, 30, 40]
+for i in range(1, len(data)):  # Start from index 1
+    print(data[i])
+# Output: 20, 30, 40
+
+# Using enumerate() (get index and value)
+fruits = ["apple", "banana", "cherry"]
+for index, fruit in enumerate(fruits):
+    print(f"{index}: {fruit}")
+# Output:
+# 0: apple
+# 1: banana
+# 2: cherry
+
+# Conditional iteration with a while loop
+numbers = [5, 10, 15, 20, 25]
+i = 0
+while i < len(numbers) and numbers[i] < 20:
+    print(numbers[i])
+    i += 1
+# Output: 5, 10, 15
+```
+
+#### 3.5 Notes and Best Practices
+- **Prefer direct iteration**: If you don't need the index, `for item in list` is more Pythonic.
+- **Avoid modifying list length in a loop**: Adding/removing elements while iterating can cause skipped elements or index errors. Use a copy of the list or a list comprehension instead.
+- **`enumerate()` start index**: `enumerate(list, start=1)` can start numbering from 1.
+- **`range(len())` alternative**: If you need the index, consider `enumerate()` instead of `range(len())`.
+
+#### 3.6 Summary
+Choosing the right loop pattern improves code readability and efficiency. Use direct iteration for read-only tasks, index iteration for modifications, `enumerate()` for both, and `while` for condition-driven scenarios.
+
+---
+### 4. Tuples
+
+#### 4.1 Motivation
+- Some data should not be modified after creation (e.g., configuration parameters, coordinates, database records). Using an immutable data structure prevents accidental changes.
+- Tuples use less memory than lists and can be used as dictionary keys (lists cannot).
+
+#### 4.2 Core Concepts
+- **Tuple**: An immutable, ordered collection defined with parentheses `()`.
+- **Immutability**: Cannot be modified, and elements cannot be added or removed after creation.
+- **Iterability**: Can be looped over.
+- **Tuple Unpacking**: Assigning tuple elements to multiple variables.
+- **Single-element tuple**: Requires a trailing comma `(item,)`.
+
+#### 4.3 Use Cases
+- Storing data that should not change (e.g., RGB color values, geographic coordinates).
+- Functions returning multiple values (they actually return a single tuple).
+- As dictionary keys (dictionary keys must be immutable).
+- Performance improvements (tuples are faster and use less memory than lists).
+
+#### 4.4 Examples
+
+```python
+# Create a tuple
+rgb_color = (255, 0, 128)
+coordinates = (10.5, 20.3)
+menu_items = ("Start", "Options", "Exit")
+
+# Access tuple elements (same as lists)
+print(rgb_color[0])     # Output: 255
+print(coordinates[-1])  # Output: 20.3
+
+# Tuple unpacking
+x, y = coordinates
+print(f"x: {x}, y: {y}")  # Output: x: 10.5, y: 20.3
+
+# Function returning multiple values (as a tuple)
+def get_user_info():
+    return "Alice", 25, "Engineer"
+
+name, age, job = get_user_info()
+print(name, age, job)  # Output: Alice 25 Engineer
+
+# Single-element tuple (requires a comma)
+single = (42,)     # This is a tuple
+not_tuple = (42)   # This is an integer, not a tuple
+print(type(single))     # Output: <class 'tuple'>
+print(type(not_tuple))  # Output: <class 'int'>
+
+# Iterate over a tuple
+for item in menu_items:
+    print(item)
+# Output: Start, Options, Exit
+
+# ❌ Attempting to modify a tuple will raise an error
+# rgb_color[0] = 200  # TypeError: 'tuple' object does not support item assignment
+```
+
+#### 4.5 Notes and Best Practices
+- **Immutability is the core feature**: Use a list if you need to modify data; use a tuple to protect data.
+- **Tuples are not entirely immutable**: If a tuple contains a mutable object (like a list), that object's content can still be changed (though the reference in the tuple remains constant).
+- **Parentheses can be omitted**: `t = 1, 2, 3` is equivalent to `t = (1, 2, 3)`, but it's good practice to keep the parentheses for readability.
+- **As dictionary keys**: Tuples can be used as dictionary keys (e.g., `{(0, 0): "origin", (1, 0): "right"}`), whereas lists cannot.
+
+#### 4.6 Summary
+Tuples are immutable ordered collections, suitable for scenarios where data integrity needs to be protected. Mastering tuple unpacking and understanding their differences from lists will help you choose the right data structure.
+
+---
+### 5. Dictionaries
+
+#### 5.1 Motivation
+- Lists and tuples access elements by a numeric index, but many scenarios require looking up data by a meaningful key (like a name, ID, or product code).
+- Dictionaries provide key-value pair storage, enabling fast lookups and flexible data organization.
+
+#### 5.2 Core Concepts
+- **Dictionary**: A collection of key-value pairs defined with curly braces `{}`, in the format `{key1: value1, key2: value2}`.
+- **Key**: Must be an immutable type (string, integer, float, tuple) and must be unique within the dictionary.
+- **Value**: Can be any type (integer, string, list, another dictionary, etc.).
+- **Unordered**: Dictionaries do not guarantee element order (Python 3.7+ maintains insertion order, but you shouldn't rely on it).
+- **Mutability**: You can add, modify, or delete key-value pairs.
+
+#### 5.3 Use Cases
+- Storing associated data (e.g., student grades: `{"Alice": 85, "Bob": 92}`).
+- Storing configuration parameters (e.g., `{"host": "localhost", "port": 8080}`).
+- Data counting (e.g., word frequency: `{"hello": 3, "world": 2}`).
+- Representing complex data with nested dictionaries (e.g., user info: `{"user1": {"name": "Alice", "age": 25}}`).
+
+#### 5.4 Examples
+
+```python
+# Create a dictionary
+student_grades = {"Alice": 85, "Bob": 92, "Charlie": 78}
+prices = {1: 9.99, 2: 15.50, 3: 7.25}  # Keys can be integers
+config = {"host": "localhost", "port": 8080, "debug": True}
+
+# Access values (by key)
+print(student_grades["Alice"])  # Output: 85
+print(prices[2])                # Output: 15.50
+
+# Safe access (to avoid KeyError)
+print(student_grades.get("David"))         # Output: None
+print(student_grades.get("David", 0))      # Output: 0 (provides a default value)
+
+# Modify a value
+student_grades["Alice"] = 90
+print(student_grades)  # Output: {"Alice": 90, "Bob": 92, "Charlie": 78}
+
+# Add a new key-value pair
+student_grades["David"] = 88
+print(student_grades)  # Output: {"Alice": 90, "Bob": 92, "Charlie": 78, "David": 88}
+
+# Remove a key-value pair
+removed_grade = student_grades.pop("Charlie")
+print(removed_grade)        # Output: 78
+print(student_grades)       # Output: {"Alice": 90, "Bob": 92, "David": 88}
+
+# Check if a key exists
+print("Alice" in student_grades)    # Output: True
+print("Charlie" in student_grades)  # Output: False
+
+# Get all keys, values, and key-value pairs
+print(student_grades.keys())    # Output: dict_keys(["Alice", "Bob", "David"])
+print(student_grades.values())  # Output: dict_values([90, 92, 88])
+print(student_grades.items())   # Output: dict_items([("Alice", 90), ("Bob", 92), ("David", 88)])
+```
+
+#### 5.5 Notes and Best Practices
+- **Use `get()` to avoid `KeyError`**: When accessing a key that may not exist, use `dict.get(key, default)` instead of `dict[key]`.
+- **Keys must be unique**: A duplicate key will overwrite the previous value (`{"a": 1, "a": 2}` results in `{"a": 2}`).
+- **Keys must be immutable**: Lists cannot be keys; tuples can.
+- **Values can be duplicated**: Multiple keys can map to the same value.
+- **Check for key existence before operating**: Use `if key in dict:` to avoid errors.
+
+#### 5.6 Trade-offs and Alternatives
+- **Dictionary vs. List**: Use a dictionary for fast lookups with meaningful keys; use a list for ordered data accessed by index.
+- **Dictionary vs. Class**: Use a dictionary for simple data structures; define a class when you need methods and complex behavior.
+
+#### 5.7 Summary
+Dictionaries enable efficient lookups and flexible data organization through key-value pairs. Mastering their creation, access, modification, and safe handling is fundamental for working with associated data.
+
+---
+### 6. Dictionaries and Loops
+
+#### 6.1 Motivation
+- Dictionaries often require bulk processing: iterating over all key-value pairs, finding entries that meet a condition, or aggregating data.
+- Different loop patterns are suitable for different scenarios: iterating over keys only, values only, or both keys and values.
+
+#### 6.2 Core Concepts
+- **Iterating over keys**: `for key in dict:` or `for key in dict.keys()`.
+- **Iterating over values**: `for value in dict.values()`.
+- **Iterating over key-value pairs**: `for key, value in dict.items()` (recommended).
+- **`while` loop**: For condition-driven dictionary operations (e.g., collecting unique inputs).
+
+#### 6.3 Use Cases
+- **Iterating over keys**: When you need to look up or modify values based on their keys.
+- **Iterating over values**: When you only care about the values (e.g., finding the max value, summing them up).
+- **Iterating over key-value pairs**: When you need both the key and the value (e.g., formatted output, filtering data).
+- **`while` loop**: For dynamically building a dictionary (e.g., counting user inputs).
+
+#### 6.4 Examples
+
+```python
+# Iterate over keys (default behavior)
+grades = {"Alice": 85, "Bob": 92, "Charlie": 78}
+for name in grades:
+    print(f"{name}: {grades[name]}")
+# Output:
+# Alice: 85
+# Bob: 92
+# Charlie: 78
+
+# Iterate over keys (explicitly using keys())
+for name in grades.keys():
+    print(name)
+# Output: Alice, Bob, Charlie
+
+# Iterate over values
+for grade in grades.values():
+    print(grade)
+# Output: 85, 92, 78
+
+# Iterate over key-value pairs (recommended)
+for name, grade in grades.items():
+    print(f"{name} scored {grade}")
+# Output:
+# Alice scored 85
+# Bob scored 92
+# Charlie scored 78
+
+# Find the highest score
+max_grade = max(grades.values())
+print(f"Highest grade: {max_grade}")  # Output: Highest grade: 92
+
+# Dynamically count unique inputs with a while loop (until 3 are collected)
+unique_words = {}
+while len(unique_words) < 3:
+    word = input("Enter a word: ")
+    if word in unique_words:
+        unique_words[word] += 1
+    else:
+        unique_words[word] = 1
+
+print("Word counts:")
+for word, count in unique_words.items():
+    print(f"{word}: {count}")
+```
+
+#### 6.5 Notes and Best Practices
+- **Prefer `items()`**: When you need both keys and values, `dict.items()` is more efficient than accessing keys and then looking up values.
+- **Avoid changing dictionary size while iterating**: Adding or deleting keys in a loop can cause errors. Use a copy of the dictionary or a dictionary comprehension.
+- **Check for value existence**: Use `if value in dict.values()` to check for a value (this is slower and best for small dictionaries).
+- **`in` operator checks keys by default**: `"Alice" in grades` checks for the key, not the value.
+
+#### 6.6 Summary
+The key to dictionary loops is choosing the right iteration pattern. `items()` is suitable for most scenarios, `keys()` and `values()` for specific needs, and `while` loops for condition-driven dictionary construction.
+
+---
+
+## Best Practices
+
+1.  **Choose the Right Data Structure**:
+    *   Need to modify data and care about order → **List**
+    *   Data is immutable and order matters → **Tuple**
+    *   Need fast lookups by key → **Dictionary**
+
+2.  **List Operation Optimization**:
+    *   Avoid using `append()` in a loop to build large lists. Prefer list comprehensions: `[x*2 for x in range(100)]`.
+    *   When removing multiple elements, use a list comprehension instead of `remove()` in a loop.
+
+3.  **Dictionary Usage Guidelines**:
+    *   Use the `get()` method to avoid `KeyError`.
+    *   Use `setdefault()` or `defaultdict` to simplify counting logic.
+
+4.  **Tuple Usage Recommendations**:
+    *   Use tuples when a function needs to return multiple values.
+    *   Use tuples for configuration parameters and constant data to protect them.
+
+5.  **Looping Principles**:
+    *   If you don't need to modify data → iterate directly over elements.
+    *   If you need to modify data → iterate over indices or use `enumerate()`.
+    *   If you need both index and value → use `enumerate()`.
+
+6.  **Code Readability**:
+    *   Use meaningful variable names (`student_grades` instead of `d`).
+    *   Add comments to explain complex nested structures.
+
+---
+
+## Update History
+- Last updated: 2025-10-01

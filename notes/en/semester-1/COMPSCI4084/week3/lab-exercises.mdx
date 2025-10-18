@@ -1,0 +1,84 @@
+---
+title: Week 3 Lab Exercises
+description: This page collects lab exercises and reference solution points for Week 3 (NumPy / Pandas / Matplotlib).
+---
+
+## Overview
+- This page lists the exercises from Lab 4 and Lab 5 and provides key solution ideas and reference code snippets to help with review and self-assessment.
+
+## Exercise Points and Reference Implementations
+### NumPy Exercises
+- **Problem**: Test if no element in an array is zero (`all`).
+- **Key Point**: Use `np.all(arr != 0)` or `not np.any(arr == 0)` to check.
+- **Reference**:
+```python
+import numpy as np
+arr = np.array([1, 2, 3])
+print(np.all(arr != 0))  # True
+```
+
+- **Problem**: Perform element-wise comparison of two arrays (`>`, `>=`, `<`, `<=`).
+- **Key Point**: Directly use comparison operators to get a boolean array.
+- **Reference**:
+```python
+a = np.array([45, 67, 23])
+b = np.array([56, 23, 89])
+print(a > b)
+```
+
+- **Problem**: Create a 1D array composed of 8 zeros, 5 ones, and 10 fives.
+- **Key Point**: Use `np.concatenate` or `np.repeat`.
+- **Reference**:
+```python
+arr = np.concatenate([np.zeros(8), np.ones(5), np.repeat(5, 10)])
+```
+
+### Pandas Exercises (DataFrame Example)
+- **Problems**: Select the first three rows; filter for `attempts > 2`; get the number of rows and columns; select scores in the range [14, 20]; modify the score of a specific row; calculate the mean score.
+- **Key Points**: Use `df.head(3)`, `df[df['attempts'] > 2]`, `df.shape`, `df[(df['score'] >= 14) & (df['score'] <= 20)]`, `df.loc['c', 'score'] = 11.5`, `df['score'].mean()`.
+- **Reference**:
+```python
+import pandas as pd
+import numpy as np
+
+labels = list('abcdefghij')
+assessment_results = {
+    'name': ['Anastasia', 'Paul', 'Kathe', 'Joseph', 'Linda', 'Michael', 'Matt', 'Laurentine', 'Chirstian', 'Jonas'],
+    'score': [12.5, 10, 16.5, np.nan, 9, 20, 14.5, np.nan, 8, 19],
+    'attempts': [1, 3, 2, 3, 2, 3, 1, 1, 2, 1],
+    'qualify': ['yes', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'no', 'no', 'yes']
+}
+
+df = pd.DataFrame(assessment_results, index=labels)
+print(df.head(3))
+print(df[df['attempts'] > 2])
+print(df.shape)
+print(df[(df['score'] >= 14) & (df['score'] <= 20)])
+df.loc['c', 'score'] = 11.5
+print(df['score'].mean())
+```
+
+### Matplotlib Exercises
+- **Problems**: Draw line plots, plots with multiple series, subplots, bar charts, error bars, scatter plots, etc.
+- **Key Points**: Use APIs like `plt.plot`, `plt.legend`, `plt.bar` + `yerr`, `plt.subplots`.
+- **Reference**:
+```python
+import matplotlib.pyplot as plt
+x = list(range(1, 31))
+y = [2 * i for i in x]
+plt.plot(x, y, label='y=2x')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Example Plot')
+plt.legend()
+plt.show()
+```
+
+## Tips and Grading Points
+- **NumPy problems** focus on vectorized solutions and correct use of indexing/slicing/masking.
+- **Pandas problems** focus on the use of indexing, boolean filtering, and handling of missing values.
+- **Matplotlib problems** focus on chart clarity (labels/legends) and subplot layout.
+
+---
+## Update History
+- 2025-10-08: Organized reference points based on Lab 4 and Lab 5 exercises.

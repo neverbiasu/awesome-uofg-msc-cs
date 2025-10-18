@@ -1,0 +1,133 @@
+---
+title: Pandas Manipulation
+description: Common techniques for data merging, reshaping, pivoting, grouping, aggregation, and mapping/replacing in Pandas (merge, concat, pivot, groupby).
+---
+
+## Overview
+- **Goal**: Master common Pandas operations for cleaning and integrating data, including merging, joining, pivoting, removing duplicates, and grouping/aggregating.
+- **Scope**: Covers `merge`, `concat`, `join`, `pivot`, `stack`/`unstack`, `groupby`, `map`/`replace`, and `drop_duplicates`.
+
+## Learning Objectives
+1. Be able to use `merge`/`join`/`concat` to combine datasets on different keys or indexes.
+2. Master `pivot`/`stack`/`unstack` to switch between long and wide formats for reporting and visualization.
+3. Become proficient in group-wise aggregation (`groupby`) with common aggregation functions (`sum`, `mean`, `count`).
+4. Use `map`/`replace`/`rename` to perform column value substitution and mapping.
+5. Be able to detect and remove duplicate records, keeping specific rows as needed.
+
+## Key Concepts
+### 1. Merging and Joining (`merge` / `concat` / `join` / `combine_first`)
+- **Motivation**: To integrate data from different sources into a single table based on common keys or indexes, or to fill missing values in one dataset with another.
+- **Core Concepts**: `merge` is based on column keys; `join` is based on indexes; `concat` stacks along rows/columns; `combine_first` fills missing values using a second object.
+- **Use Cases/Patterns**:
+	- `merge(..., how=inner|left|right|outer)` controls intersection, left-join, right-join, or union. `inner` is the default.
+	- `merge(left_index=True, right_index=True)` / `df1.join(df2)` focuses on index alignment.
+	- `concat([df1, df2], axis=0|1, keys=[...])` for vertical or horizontal stacking. `keys` can create a hierarchical index.
+	- `df_a.combine_first(df_b)` preferentially keeps non-missing values from `df_a` where indexes overlap.
+- **Example**
+```python
+import pandas as pd
+left = pd.DataFrame({'id':[1,2,3],'val':[10,20,30]})
+right = pd.DataFrame({'id':[2,3,4],'score':[200,300,400]})
+inner = pd.merge(left, right, on='id', how='inner')  # Keeps only id=2,3
+outer = pd.merge(left, right, on='id', how='outer')  # Union, fills missing with NaN
+stacked = pd.concat([left, right], axis=0, ignore_index=True)
+filled = left.set_index('id')['val'].combine_first(right.set_index('id')['score'])
+```
+- **Notes/Best Practices**: Before merging, ensure key columns have no duplicates. `combine_first` only works when indexes are aligned.
+- **Trade-offs and Alternatives**: For flexible merging on column keys, choose `merge`. For index-only merges, use `join`. For simple stacking, choose `concat`. For filling missing data, choose `combine_first`.
+- **Summary**: First, identify the source of the keys, then select the appropriate merge pattern to ensure data integrity and traceability.
+
+---
+### 2. Pivoting and Reshaping (`pivot` / `stack` / `unstack`)
+- **Motivation**: To convert long-format log-style tables into wide-format reports, or to switch between rows, columns, and hierarchical indexes for subsequent analysis.
+- **Core Concepts**: `pivot(index, columns, values)` for long-to-wide; `stack()` for column-to-row; `unstack(level)` for row-to-column, all while preserving labels.
+- **Use Cases/Patterns**:
+	- **Pivoting long to wide**: `pivot(index='city', columns='month', values='sales')`.
+	- **Multi-level index switching**: `df.stack()` pushes columns into a second-level index; `stacked.unstack()` restores the wide format.
+	- For duplicate combinations, first aggregate with `groupby(...).sum().unstack()` before pivoting.
+- **Example**
+```python
+df = pd.DataFrame({'city':['A','A','B','B'],'month':[1,2,1,2],'sales':[10,20,5,7]})
+wide = df.pivot(index='city', columns='month', values='sales')
+# Result: index=city, columns=month, values=sales
+# month   1   2
+# city         
+# A      10  20
+# B       5   7
+stacked = wide.stack()  # A multi-indexed Series with city-month
+restored = stacked.unstack()  # Back to wide format
+```
+- **Notes/Best Practices**: `pivot` requires that `(index, columns)` pairs are unique. `stack`/`unstack` will fill with `NaN` where necessary; use `fill_value` if needed. Multi-level columns can be flattened with `df.columns.to_flat_index()`.
+- **Trade-offs and Alternatives**: For aggregation needs, choose `pivot_table`. For just changing shape without regard to labels, NumPy's `reshape` can be used.
+- **Summary**: Master the three parameters and stack/unstack operations to efficiently switch between long/wide formats and multi-level indexes.
+
+---
+### 3. Grouping and Aggregation (`groupby`)
+- **Motivation**: To summarize metrics by category or level, such as calculating the average price by color or total sales by city and month.
+- **Core Concepts**: Splitting → Applying a function → Combining results. `agg`, `sum`, `mean`, `count` are common aggregation functions.
+- **Use Cases/Patterns**:
+	- **Single-column grouping**: `df.groupby('color')['price'].mean()`.
+	- **Multi-column grouping**: `df.groupby(['city','month'])['sales'].sum()`.
+	- **Multiple function aggregation**: `df.groupby('color')['price'].agg(['sum','mean','count'])`.
+- **Example**
+```python
+df = pd.DataFrame({
+		'color':['red','blue','red','blue'],
+		'price1':[10,20,15,25]
+})
+summary = df.groupby('color')['price1'].agg(['sum','mean','count'])
+result = summary.reset_index()
+```
+- **Notes/Best Practices**: `groupby` returns a groupby object and requires explicit aggregation. It's common to use `reset_index()` after aggregation to facilitate further processing. For large datasets, consider sampling to validate logic first.
+- **Trade-offs and Alternatives**: For cross-tabulation needs, `pivot_table` can be used. For complex row-wise logic, consider `apply`, but be aware of its lower performance.
+- **Summary**: By setting the grouping keys and aggregation functions correctly, you can quickly obtain hierarchical statistical results.
+
+---
+### 4. Mapping and Replacing (`map` / `replace` / `rename`)
+- **Motivation**: To supplement numerical columns based on a mapping table, unify labels, or adjust column/index names.
+- **Core Concepts**: `Series.map` generates a new column based on a dictionary; `Series.replace` substitutes existing values based on a mapping; `DataFrame.rename(columns/index=...)` renames labels.
+- **Use Cases/Patterns**:
+	- `map`: Derive new columns like price or score from a categorical column.
+	- `replace`: Correct misspelled or foreign-language labels.
+	- `rename`: Standardize column names or index labels.
+- **Example**
+```python
+df = pd.DataFrame({'item':['ball','mug'],'color':['rosso','verde']})
+price_map = {'ball':5,'mug':10}
+df['price'] = df['item'].map(price_map)
+df['color'] = df['color'].replace({'rosso':'red','verde':'green'})
+df = df.rename(columns={'item':'product'})
+```
+- **Notes/Best Practices**: `map` returns `NaN` for un-mapped keys; use `fillna` if necessary. `replace` supports dictionaries or lists. `rename` returns a new object by default; use `inplace=True` for in-place modification.
+- **Trade-offs and Alternatives**: For simple mappings, choose `map`/`replace`. For custom logic, use `apply`.
+- **Summary**: First, build a mapping table, then use `map`/`replace`/`rename` to quickly standardize field meanings.
+
+---
+### 5. Deduplication and Deletion (`duplicated` / `drop_duplicates` / `drop` / `del`)
+- **Motivation**: Merged data often contains duplicate records or useless columns that need to be cleaned to ensure data quality.
+- **Core Concepts**: `duplicated` detects duplicates, `drop_duplicates` removes duplicate rows, and `drop`/`del` removes specified rows or columns.
+- **Use Cases/Patterns**:
+	- **View duplicates**: `df[df.duplicated()]`.
+	- **Keep the first duplicate**: `df.drop_duplicates(keep='first')`.
+	- **Delete a column**: `df.drop('col', axis=1)` or `del df['col']`.
+- **Example**
+```python
+df = pd.DataFrame({'color':['white','white','red'],'value':[1,1,2]})
+duplicates = df[df.duplicated()]  # View duplicates
+clean = df.drop_duplicates()       # Keep only unique rows after deduplication
+df.drop('value', axis=1, inplace=True)  # Delete a column
+```
+- **Notes/Best Practices**: Before deleting, check the cause of duplicates and specify a `subset` if necessary. `drop` returns a new object by default; use `inplace=True` for in-place operations.
+- **Trade-offs and Alternatives**: Use `drop_duplicates` for simple duplicates; for complex rules, combine with boolean indexing for filtering.
+- **Summary**: First, locate duplicates, then use the `drop` series of commands to precisely retain the desired records.
+
+## Best Practices
+- Before merging, confirm that key columns are unique and indexed. If necessary, validate the join result on a sample first.
+- Handle duplicate combinations before pivoting. After `stack`/`unstack`, promptly fill missing values or rename multi-level columns.
+- The result of a `groupby` is often converted back to regular columns with `reset_index()` and a statistical summary is saved.
+- Before deleting or replacing, back up or view duplicates to ensure no critical information is accidentally deleted.
+
+---
+## Update History
+- 2025-10-09: Added details on `join`/`combine_first`, the three parameters of `pivot`, multi-aggregation with `groupby`, and deduplication operations, and unified the template structure.
+- 2025-10-08: Created initial version with examples for `merge`/`concat`/`pivot`/`groupby`/`map`/`replace` based on course materials.
