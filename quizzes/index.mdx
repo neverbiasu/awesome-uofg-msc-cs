@@ -1,91 +1,22 @@
 ---
-title: "Quiz 记录与复习"
-description: "记录所有课程 quiz 完成情况与错题分析"
+title: 课程测验
+description: MSc Computing Science 课程测验
 ---
 
-## 概要
-本目录用于记录所有课程的 quiz 完成情况,包括:
-- Quiz 成绩记录
-- 错题分析与知识点总结
-- 复习计划追踪
-- 知识薄弱点识别
+import { Card, Cards } from 'fumadocs-ui/components/card';
 
-## 目录结构
-```
-quizzes/
-├── index.mdx                          # 本文件,总览
-├── semester-1/                        # 第一学期
-│   ├── index.mdx
-│   ├── COMPSCI4084/
-│   │   ├── index.mdx
-│   │   ├── week1/                     # 按周次组织
-│   │   │   └── <quiz-topic>.mdx
-│   │   └── week2/
-│   ├── COMPSCI5089/
-│   │   ├── index.mdx
-│   │   └── week1/
-│   │       └── git-github-colab.mdx   # quiz 文件名不含周次
-│   ├── COMPSCI5100/
-│   └── research-professional-skills/
-└── semester-2/                        # 第二学期
-    └── index.mdx
-```
+# 课程测验
 
-**组织原则**:
-- Quiz 按周次分目录存放 (`week1/`, `week2/`, ...)
-- 文件名使用主题名称,不包含周次信息
-- 周次信息在目录名和索引文件中体现
+这里是格拉斯哥大学 MSc Computing Science 项目的所有课程测验。
 
-## 第一学期 Quiz 统计
+## 第一学期课程
 
-| 课程 | Quiz 数量 | 平均分 | 待复习 |
-|------|----------|--------|--------|
-| [COMPSCI4084](./semester-1/COMPSCI4084) | - | - | - |
-| [COMPSCI5089](./semester-1/COMPSCI5089) | 1 | 81.25% | 3 题 |
-| [COMPSCI5100](./semester-1/COMPSCI5100) | - | - | - |
-| [Research Professional Skills](./semester-1/research-professional-skills) | - | - | - |
+<Cards>
+  <Card title="COMPSCI4084" description="Programming and Systems Development" href="/quizzes/semester-1/COMPSCI4084" />
+</Cards>
 
-## 第二学期 Quiz 统计
+## 第二学期
 
-| 课程 | Quiz 数量 | 平均分 | 待复习 |
-|------|----------|--------|--------|
-| 待更新 | - | - | - |
-
-## 整体学习分析
-
-### 需要加强的知识领域
-1. **Google Colab 功能** - COMPSCI5089
-   - 原生 R 语言支持识别
-   - Google Drive 文件访问方法
-
-2. **Git 操作** - COMPSCI5089
-   - `git add` 命令的具体作用
-
-### 已掌握的知识领域
-1. **版本控制基础** - Git 基本概念与命令
-2. **Conda 环境管理** - 环境创建、激活、导出等操作
-3. **GitHub 功能** - Pages 托管、协作等功能
-
-## 使用指南
-
-### 记录新 quiz
-1. 在对应课程目录创建新文件: `week-X-quiz-Y.mdx`
-2. 使用 `/docs/templates/quiz-template.mdx` 作为模板
-3. 重点记录错题和需要加强的知识点
-4. 更新本页的统计表格
-
-### 复习流程
-1. 查看错题分析,识别知识薄弱点
-2. 查阅相关课程笔记和材料
-3. 完成相关练习题
-4. 标记复习完成状态
-
-### 统计更新
-- 每完成一个 quiz 后更新对应课程的统计
-- 定期(每周)更新整体学习分析
-- 在复习后更新"待复习"数量
-
----
-
-更新记录
-- 2025-10-02: 创建 quiz 记录系统,添加 COMPSCI5089 Week 2 Quiz
+<Cards>
+  <Card title="Semester 2" description="第二学期课程待更新" href="/quizzes/semester-2" />
+</Cards>

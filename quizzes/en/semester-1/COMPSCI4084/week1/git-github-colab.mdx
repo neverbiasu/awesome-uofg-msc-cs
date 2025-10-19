@@ -1,0 +1,355 @@
+---
+title: "COMPSCI4084 - Week 1 Quiz: Git, GitHub, Google Colab & Conda"
+description: "Basic knowledge test on version control, collaboration tools, and environment management"
+---
+
+## Quiz Information
+- **Course**: COMPSCI4084 - Programming and Systems Development
+- **Topic**: Git, GitHub, Google Colab & Conda
+- **Completion Time**: 2025-09-24 15:27
+- **Duration**: 11 minutes 29 seconds
+- **Score**: 13/16 (81.25%)
+- **Status**: Finished
+
+## Score Overview
+```
+Total Questions: 16
+Correct: 13 ✓
+Incorrect: 3 ✗
+Accuracy: 81.25%
+```
+
+## Analysis of Incorrect Answers
+
+### Question 3: Role of Git add command
+**Status**: ❌ Incorrect
+
+**Question**:
+What does the `git add` command do?
+## All Question Records (1-16)
+
+**Incorrect Question Index**: 3, 9, 10
+
+### 1
+**Question**: What is Git?
+
+**Options**:
+- [ ] a. A project management tool
+- [x] b. A version control system
+- [ ] c. A programming language
+- [ ] d. A code editor
+
+**Your Answer**: b. A version control system
+
+**Verdict**: ✅
+
+**Mark**: 1.00 / 1.00
+
+**Explanation**: Git is a distributed version control system used to track changes in files (especially code) and support collaborative development.
+
+---
+
+### 2
+**Question**: What command is used to create a new Git repository?
+
+**Options**:
+- [ ] a. git start
+- [ ] b. git create
+- [x] c. git init
+- [ ] d. git new
+
+**Your Answer**: c. git init
+
+**Verdict**: ✅
+
+**Mark**: 1.00 / 1.00
+
+**Explanation**: `git init` initializes a new Git repository in the current directory (creates the `.git` directory).
+
+---
+
+### 3
+**Question**: What does the git add command do?
+
+**Options**:
+- [x] a. It adds a new file to the repository.
+- [ ] b. It deletes a file from the repository.
+- [ ] c. It stages changes to be committed.
+- [ ] d. It commits changes to the repository.
+
+**Your Answer**: a. It adds a new file to the repository.
+
+**Verdict**: ❌
+
+**Mark**: 0.00 / 1.00
+
+**Correct Answer**: c. It stages changes to be committed.
+
+**Explanation**: `git add` is used to put changes in the working directory (additions/modifications/deletions) into the staging area, preparing for the next `git commit`. It is not equivalent to committing.
+
+---
+
+### 4
+**Question**: How do you push changes to a remote repository on GitHub?
+
+**Options**:
+- [ ] a. git pull
+- [ ] b. git send
+- [x] c. git push
+- [ ] d. git upload
+
+**Your Answer**: c. git push
+
+**Verdict**: ✅
+
+**Mark**: 1.00 / 1.00
+
+**Explanation**: `git push` pushes commits on the local branch to a remote repository (e.g., GitHub).
+
+---
+
+### 5
+**Question**: What command is used to check the status of your Git repository?
+
+**Options**:
+- [ ] a. git check
+- [ ] b. git inspect
+- [x] c. git status
+- [ ] d. git info
+
+**Your Answer**: c. git status
+
+**Verdict**: ✅
+
+**Mark**: 1.00 / 1.00
+
+**Explanation**: `git status` shows the current state of the working directory and staging area, listing files that have been changed but not staged, and files that have been staged and are waiting to be committed.
+
+---
+
+### 6
+**Question**: What is the purpose of GitHub Pages?
+
+**Options**:
+- [ ] a. To automate workflows
+- [ ] b. To host code repositories
+- [ ] c. To provide a platform for project management
+- [x] d. To host static websites directly from a GitHub repository
+
+**Your Answer**: d. To host static websites directly from a GitHub repository
+
+**Verdict**: ✅
+
+**Mark**: 1.00 / 1.00
+
+**Explanation**: GitHub Pages can host static websites directly from a repository, often used for project homepages or documentation sites.
+
+---
+
+### 7
+**Question**: Which of the following is a key feature of Google Colab?
+
+**Options**:
+- [x] a. Provides free access to GPUs and TPUs
+- [ ] b. Requires installation on your local machine
+- [ ] c. Does not support Python
+- [ ] d. Cannot be used for machine learning tasks
+
+**Your Answer**: a. Provides free access to GPUs and TPUs
+
+**Verdict**: ✅
+
+**Mark**: 1.00 / 1.00
+
+**Explanation**: Google Colab provides free GPU/TPU resources and runs Jupyter-style notebooks in the cloud, facilitating machine learning experiments.
+
+---
+
+### 8
+**Question**: How can you share a Google Colab notebook with others?
+
+**Options**:
+- [x] a. By sharing a Google Drive link or direct notebook link
+- [ ] b. By saving it as a .txt file
+- [ ] c. By exporting it to a CSV file
+- [ ] d. By printing the notebook
+
+**Your Answer**: a. By sharing a Google Drive link or direct notebook link
+
+**Verdict**: ✅
+
+**Mark**: 1.00 / 1.00
+
+**Explanation**: Colab notebooks can be collaborated on and shared via Google Drive links or direct sharing links.
+
+---
+
+### 9
+**Question**: Which of the following is NOT a feature of Google Colab?
+
+**Options**:
+- [ ] a. Auto-saving to Google Drive
+- [ ] b. Real-time collaboration
+- [ ] c. GPU and TPU support
+- [ ] d. Native support for R programming language.
+
+**Your Answer**: (Not recorded)
+
+**Verdict**: ❌
+
+**Mark**: 0.00 / 1.00
+
+**Correct Answer**: d. Native support for R programming language.
+
+**Explanation**: Colab is primarily Python-centric. R language usually requires additional configuration (like rpy2) or alternative solutions like RStudio Cloud.
+
+---
+
+### 10
+**Question**: How can you access files stored in Google Drive from a Google Colab notebook?
+
+**Options**:
+- [ ] a. By copying files directly to Colab.
+- [ ] b. By clicking "File > Open"
+- [ ] c. By exporting the notebook to Google Drive.
+- [ ] d. By connecting to Google Drive using `from google.colab import drive` and mounting the drive
+
+**Your Answer**: (Not recorded)
+
+**Verdict**: ❌
+
+**Mark**: 0.00 / 1.00
+
+**Correct Answer**: d. By connecting to Google Drive using `from google.colab import drive` and mounting the drive
+
+**Explanation**: Mount Drive using the following code:
+
+```python
+from google.colab import drive
+drive.mount('/content/drive')
+```
+
+After mounting, you can access personal Google Drive files via `/content/drive/MyDrive/`.
+
+---
+
+### 11
+**Question**: What command is used to create a new Conda environment?
+
+**Options**:
+- [ ] a. conda new
+- [ ] b. conda start
+- [x] c. conda create
+- [ ] d. conda init
+
+**Your Answer**: c. conda create
+
+**Verdict**: ✅
+
+**Mark**: 1.00 / 1.00
+
+**Explanation**: `conda create` is used to create new environments, for example, `conda create --name myenv python=3.10`.
+
+---
+
+### 12
+**Question**: How do you activate a Conda environment?
+
+**Options**:
+- [ ] a. conda run `<env_name>`
+- [ ] b. conda start `<env_name>`
+- [ ] c. conda open `<env_name>`
+- [x] d. conda activate `<env_name>`
+
+
+**Your Answer**: d. conda activate `<env_name>`
+
+**Verdict**: ✅
+
+**Mark**: 1.00 / 1.00
+
+**Explanation**: Use `conda activate myenv` to activate the specified environment, then install or run packages within that environment.
+
+---
+
+### 13
+**Question**: What does the following command do?
+
+```
+conda env list
+```
+
+**Options**:
+- [ ] a. Lists all environment variables
+- [x] b. Lists all Conda environments
+- [ ] c. Lists all available Conda commands
+- [ ] d. Lists all installed packages
+
+**Your Answer**: b. Lists all Conda environments
+
+**Verdict**: ✅
+
+**Mark**: 1.00 / 1.00
+
+**Explanation**: `conda env list` or `conda info --envs` will list all created Conda environments.
+
+---
+
+### 14
+**Question**: How can you export an environment to a YAML file?
+
+**Options**:
+- [ ] a. conda export > env.yml
+- [ ] b. conda save env.yml
+- [ ] c. conda env save environment.yml
+- [x] d. conda env export > environment.yml
+
+**Your Answer**: d. conda env export > environment.yml
+
+**Verdict**: ✅
+
+**Mark**: 1.00 / 1.00
+
+**Explanation**: `conda env export > environment.yml` exports the package information of the current environment to a YAML file, facilitating sharing and recreating environments.
+
+---
+
+
+### 15
+**Question**: How do you remove a Conda environment?
+
+**Options**:
+- [ ] a. conda destroy `<env_name>`
+- [ ] b. conda delete --name `<env_name>`
+- [ ] c. conda deactivate `<env_name>`
+- [x] d. conda remove --name `<env_name>` --all
+
+**Your Answer**: d. conda remove --name `<env_name>` --all
+
+**Verdict**: ✅
+
+**Mark**: 1.00 / 1.00
+
+**Explanation**: `conda remove --name myenv --all` will delete the specified environment and all its packages.
+
+---
+
+
+### 16
+**Question**: How do you install a package in a Conda environment?
+
+**Options**:
+- [x] a. conda install `<package_name>`
+- [ ] b. conda add `<package_name>`
+- [ ] c. conda get `<package_name>`
+- [ ] d. conda fetch `<package_name>`
+
+**Your Answer**: a. conda install `<package_name>`
+
+**Verdict**: ✅
+
+**Mark**: 1.00 / 1.00
+
+**Explanation**: `conda install package_name` installs the specified package in the currently active Conda environment.
+
+---
