@@ -1,0 +1,91 @@
+---
+title: "Quiz Records and Review"
+description: "Track completion status and analyze incorrect answers for all course quizzes"
+---
+
+## Overview
+This directory is used to record the completion status of all course quizzes, including:
+- Quiz score records
+- Analysis of incorrect answers and knowledge point summaries
+- Review plan tracking
+- Identification of knowledge weaknesses
+
+## Directory Structure
+```
+quizzes/
+├── index.mdx                          # This file, overview
+├── semester-1/                        # First semester
+│   ├── index.mdx
+│   ├── COMPSCI4084/
+│   │   ├── index.mdx
+│   │   ├── week1/                     # Organized by week
+│   │   │   └── <quiz-topic>.mdx
+│   │   └── week2/
+│   ├── COMPSCI5089/
+│   │   ├── index.mdx
+│   │   └── week1/
+│   │       └── git-github-colab.mdx   # Quiz filename does not include the week number
+│   ├── COMPSCI5100/
+│   └── research-professional-skills/
+└── semester-2/                        # Second semester
+    └── index.mdx
+```
+
+**Organization Principles**:
+- Quizzes are stored in directories by week (`week1/`, `week2/`, ...)
+- Filenames use the topic name and do not include week information
+- Week information is reflected in the directory name and index files
+
+## Semester 1 Quiz Statistics
+
+| Course | Quiz Count | Average Score | To Review |
+|------|----------|--------|--------|
+| [COMPSCI4084](./semester-1/COMPSCI4084) | - | - | - |
+| [COMPSCI5089](./semester-1/COMPSCI5089) | 1 | 81.25% | 3 questions |
+| [COMPSCI5100](./semester-1/COMPSCI5100) | - | - | - |
+| [Research Professional Skills](./semester-1/research-professional-skills) | - | - | - |
+
+## Semester 2 Quiz Statistics
+
+| Course | Quiz Count | Average Score | To Review |
+|------|----------|--------|--------|
+| To be updated | - | - | - |
+
+## Overall Learning Analysis
+
+### Knowledge Areas to Strengthen
+1. **Google Colab Features** - COMPSCI5089
+   - Recognition of native R language support
+   - Methods for accessing Google Drive files
+
+2. **Git Operations** - COMPSCI5089
+   - The specific function of the `git add` command
+
+### Mastered Knowledge Areas
+1. **Version Control Basics** - Basic Git concepts and commands
+2. **Conda Environment Management** - Environment creation, activation, export, etc.
+3. **GitHub Features** - Pages hosting, collaboration, etc.
+
+## Usage Guide
+
+### Recording a New Quiz
+1. Create a new file in the corresponding course directory: `week-X-quiz-Y.mdx`
+2. Use `/docs/templates/quiz-template.mdx` as a template
+3. Focus on recording incorrect answers and knowledge points that need reinforcement
+4. Update the statistics table on this page
+
+### Review Process
+1. Review the analysis of incorrect answers to identify weak knowledge points
+2. Consult relevant course notes and materials
+3. Complete related practice problems
+4. Mark the review as complete
+
+### Statistics Update
+- Update the statistics for the corresponding course after completing each quiz
+- Regularly (weekly) update the overall learning analysis
+- Update the "To Review" count after reviewing
+
+---
+
+Update Log
+- 2025-10-02: Created the quiz recording system, added COMPSCI5089 Week 2 Quiz
