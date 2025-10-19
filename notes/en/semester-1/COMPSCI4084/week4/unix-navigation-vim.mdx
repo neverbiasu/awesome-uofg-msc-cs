@@ -1,0 +1,96 @@
+---
+title: "Unix File System Navigation and Vim"
+description: "Navigating the Unix file system and basic operations in the Vim text editor."
+---
+
+## Overview
+- **Goal**: To become proficient in navigating the Unix file system and performing basic text editing with Vim.
+- **Scope**: Covers file system structure, navigation commands, file manipulation, and the essential modes and commands of Vim.
+
+## Learning Objectives
+1. **Understand** the structure of the Unix file system, including the root directory and special directories like `.` and `..`.
+2. **Master** commands for navigating and manipulating the file system (`ls`, `cd`, `pwd`, `mkdir`, `cp`, `mv`, `rm`).
+3. **Understand** the modal nature of Vim (Normal, Insert, Visual modes).
+4. **Be able to** create, edit, save, and exit files using Vim.
+
+### 1. File System Navigation
+- **Motivation**: The command line is a powerful way to interact with your files, and navigation is the first skill required.
+- **Core Concepts**:
+  - **Root Directory (`/`)**: The top-level directory of the file system.
+  - **Working Directory**: The directory you are currently in. Display with `pwd`.
+  - **Home Directory (`~`)**: Your personal directory.
+  - **Parent Directory (`..`)**: The directory one level up.
+  - **Current Directory (`.`)**: The directory you are in right now.
+  - **Absolute Path**: A path starting from the root directory (e.g., `/home/user/file.txt`).
+  - **Relative Path**: A path starting from the current directory (e.g., `../documents/file.txt`).
+- **Commands**:
+  - `pwd`: Print Working Directory.
+  - `ls`: List directory contents. Common options: `-l` (long format), `-a` (show hidden files).
+  - `cd [path]`: Change Directory. `cd` with no arguments takes you to your home directory.
+- **Summary**: Effective navigation relies on understanding absolute/relative paths and using `pwd`, `ls`, and `cd` fluently.
+
+---
+
+### 2. File and Directory Manipulation
+- **Motivation**: Creating, organizing, and cleaning up files and directories are fundamental tasks.
+- **Commands**:
+  - `mkdir [name]`: Create a new directory.
+  - `touch [file]`: Create a new empty file or update the timestamp of an existing file.
+  - `cp [source] [destination]`: Copy a file. Use `cp -r` to copy a directory.
+  - `mv [source] [destination]`: Move or rename a file/directory.
+  - `rm [file]`: Remove a file. Use `rm -r` to remove a directory and its contents.
+- **Example**:
+  ```bash
+  # Create a directory and navigate into it
+  mkdir my_project
+  cd my_project
+
+  # Create a file
+  touch notes.txt
+
+  # Copy the file
+  cp notes.txt notes_backup.txt
+
+  # Rename the backup
+  mv notes_backup.txt old_notes.txt
+
+  # Remove the original
+  rm notes.txt
+  ```
+- **Notes/Best Practices**:
+  - Be extremely careful with `rm`, especially with the `-r` (recursive) and `-f` (force) flags. There is no trash bin on the command line.
+  - Use `mv` to rename files in place (e.g., `mv old_name.txt new_name.txt`).
+- **Summary**: `mkdir`, `touch`, `cp`, `mv`, and `rm` are the essential tools for managing your file system structure.
+
+---
+
+### 3. Introduction to Vim
+- **Motivation**: Vim is a highly efficient, keyboard-centric text editor installed on virtually every Unix-like system.
+- **Core Concepts**:
+  - **Modal Editor**: Vim operates in different modes. The main ones are:
+    - **Normal Mode**: Default mode for navigation and commands. Press `Esc` to return here.
+    - **Insert Mode**: For typing text. Enter with `i`, `a`, `o`, etc.
+    - **Visual Mode**: For selecting text. Enter with `v`.
+- **Basic Workflow**:
+  1. Open a file: `vim filename.txt`
+  2. Press `i` to enter Insert Mode.
+  3. Type your text.
+  4. Press `Esc` to return to Normal Mode.
+  5. Type `:wq` and press `Enter` to write (save) and quit.
+- **Essential Normal Mode Commands**:
+  - `:w`: Write (save) the file.
+  - `:q`: Quit. Use `:q!` to quit without saving.
+  - `dd`: Delete the current line.
+  - `yy`: Yank (copy) the current line.
+  - `p`: Paste the copied/deleted line.
+  - `u`: Undo.
+- **Summary**: The key to Vim is understanding its modal nature. Start by learning how to switch between Normal and Insert modes and how to save and quit.
+
+## Best Practices
+- **Use relative paths for portability**: When working within a project, use relative paths (`../`, `./`) to refer to files.
+- **Create aliases for common `rm` operations**: Consider creating an alias for `rm` to be `rm -i` (interactive) in your shell configuration to prevent accidental deletions.
+- **Embrace the Vim philosophy**: Spend time in Normal mode; it's where Vim's power lies. Avoid staying in Insert mode unnecessarily.
+
+---
+## Update History
+- 2025-10-19: Created initial version.

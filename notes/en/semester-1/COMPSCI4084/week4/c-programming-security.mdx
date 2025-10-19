@@ -1,0 +1,235 @@
+---
+title: "C Language Basics and Security"
+description: "Core C syntax, data types, memory management, pointers, and security considerations"
+---
+
+## Overview
+- **Goal**: To master the core syntax and programming concepts of the C language, understand its differences from high-level languages, and build basic secure coding awareness.
+- **Scope**: Covers basic C syntax, data types, control flow, functions, pointers, memory management, and common security vulnerabilities. Does not delve into specific libraries or advanced concurrency models.
+
+## Learning Objectives
+1. **Master** C's basic data types, variables, operators, and expressions.
+2. **Understand** the use of control flow statements (`if`, `for`, `while`, `switch`).
+3. **Be able to** define and call functions, understanding parameter passing and return values.
+4. **Master** the core concepts of pointers, including declaration, dereferencing, pointer arithmetic, and their relationship with arrays.
+5. **Understand** stack and heap memory allocation mechanisms and be able to use `malloc` and `free` for dynamic memory management.
+6. **Be able to identify** common C security vulnerabilities like buffer overflows and format string bugs.
+
+### 1. Differences Between C and High-Level Languages
+- **Motivation**: Understand why C remains central in performance-sensitive and low-level development.
+- **Core Concepts**:
+  - **Compiled vs. Interpreted**: C is a compiled language; code is compiled into native machine code before execution, resulting in high performance. Python/Java are interpreted or semi-compiled, requiring an interpreter or virtual machine at runtime.
+  - **Manual Memory Management**: C requires programmers to manage memory manually (`malloc`/`free`), whereas Java/Python have automatic garbage collection (GC). This gives C great flexibility but also introduces risks of memory leaks and dangling pointers.
+  - **Direct Memory Access**: Through pointers, C can directly read and write memory addresses, making it highly efficient for system programming and embedded development, but also prone to security issues.
+- **Use Cases/Patterns**:
+  - **System Software**: Operating system kernels (Linux), device drivers.
+  - **Embedded Systems**: IoT devices, microcontrollers.
+  - **High-Performance Computing**: Scientific computing, game engines.
+- **Summary**: C offers unparalleled low-level control and performance at the cost of the safety and ease-of-use of high-level languages.
+
+---
+
+### 2. Basic Syntax and Data Types
+- **Motivation**: The fundamental building blocks of a C program.
+- **Core Concepts**:
+  - **Data Types**: `int`, `char`, `float`, `double`, `void`. `_Bool` is used for boolean values.
+  - **Variable Declaration**: `type name = value;`, e.g., `int age = 30;`.
+  - **Constants**: Defined using the `const` keyword, e.g., `const int MAX_USERS = 100;`.
+  - **Operators**: Arithmetic (`+`, `-`, `*`, `/`, `%`), Relational (`==`, `!=`, `>`, `<`), Logical (`&&`, `||`, `!`), Bitwise (`&`, `|`, `^`, `~`, `<<`, `>>`).
+- **Example**:
+  ```c
+  #include <stdio.h>
+  #include <stdbool.h> // For the bool type
+
+  int main() {
+      // Description: Demonstrates basic data types and operators
+      int a = 10;
+      double b = 20.5;
+      char c = 'A';
+      bool is_active = true;
+
+      double sum = a + b;
+      printf("Sum: %f\n", sum); // Output: Sum: 30.500000
+
+      if (is_active && a > 5) {
+          printf("Condition is true.\n");
+      }
+      return 0;
+  }
+  ```
+- **Notes/Best Practices**:
+  - Variables must be declared before use.
+  - Be aware that integer division truncates the decimal part, e.g., `5 / 2` results in `2`.
+  - Use `<stdbool.h>` for more intuitive `true` and `false` values.
+- **Summary**: C's basic syntax is concise, but the behavior of its data types and operators requires precise understanding to avoid unexpected errors.
+
+---
+
+### 3. Functions and Control Flow
+- **Motivation**: To organize code, implement logic reuse, and enable conditional execution.
+- **Core Concepts**:
+  - **Function Definition**: `return_type function_name(parameters) { ... }`.
+  - **`if-else`**: Conditional branching.
+  - **`for`, `while`, `do-while`**: Loops.
+  - **`switch`**: Multi-way branching.
+- **Example**:
+  ```c
+  #include <stdio.h>
+
+  // Function declaration (prototype)
+  int max(int a, int b);
+
+  int main() {
+      int result = max(10, 20);
+      printf("The maximum is: %d\n", result); // Output: 20
+      return 0;
+  }
+
+  // Function definition
+  // Description: Returns the larger of two integers
+  int max(int a, int b) {
+      if (a > b) {
+          return a;
+      } else {
+          return b;
+      }
+  }
+  ```
+- **Notes/Best Practices**:
+  - It's best to declare functions (prototypes) at the top of the file before they are used to avoid compiler warnings.
+  - The `main` function is the program's entry point; its return of `0` indicates normal exit.
+- **Summary**: Functions are the basic unit of code organization in C, and control flow statements determine the execution path.
+
+---
+
+### 4. Pointers and Memory
+- **Motivation**: To achieve direct and efficient access to memory, which is C's most powerful and dangerous feature.
+- **Core Concepts**:
+  - **Pointer**: A variable that stores a memory address.
+  - **Declaration**: `type *pointer_name;`, e.g., `int *p;`.
+  - **Address-of operator `&`**: Gets the memory address of a variable. `p = &var;`.
+  - **Dereference operator `*`**: Accesses the value at the address a pointer points to. `value = *p;`.
+  - **`NULL` pointer**: A pointer that does not point to any valid address.
+  - **Pointer Arithmetic**: Incrementing/decrementing a pointer moves it by the size of its pointed-to type. E.g., `p++` increases the address by `sizeof(int)`.
+- **Example**:
+  ```c
+  #include <stdio.h>
+
+  int main() {
+      int var = 10;
+      int *p; // Declare an integer pointer
+
+      p = &var; // p stores the address of var
+
+      printf("Address of var: %p\n", &var);
+      printf("Address stored in p: %p\n", p);
+      printf("Value of *p: %d\n", *p); // Dereference to get var's value
+
+      *p = 20; // Modify var's value through the pointer
+      printf("New value of var: %d\n", var); // Output: 20
+
+      return 0;
+  }
+  ```
+- **Notes/Best Practices**:
+  - **Never dereference an uninitialized or `NULL` pointer**. This will cause a program crash (segmentation fault).
+  - The pointer type must match the type of the variable it points to.
+  - Be extremely careful with pointer arithmetic to avoid out-of-bounds access.
+- **Summary**: Pointers are the essence of C, providing low-level memory access, but they must be used with caution to ensure program stability and security.
+
+---
+
+### 5. Dynamic Memory Allocation
+- **Motivation**: To allocate and free memory at runtime as needed, rather than at compile time.
+- **Core Concepts**:
+  - **Stack**: Used for storing local variables and function call information. Managed automatically by the compiler, fast allocation/deallocation, but limited in size.
+  - **Heap**: A region of memory available for dynamic allocation by the program. Managed manually by the programmer, larger in size but with higher allocation/deallocation overhead.
+  - **`malloc(size_t size)`**: Allocates a specified size (in bytes) of memory on the heap and returns a `void*` pointer.
+  - **`free(void *ptr)`**: Frees the memory allocated by `malloc`.
+- **Example**:
+  ```c
+  #include <stdio.h>
+  #include <stdlib.h> // malloc and free are defined here
+
+  int main() {
+      int *arr;
+      int n = 5;
+
+      // Allocate memory for 5 integers on the heap
+      arr = (int*) malloc(n * sizeof(int));
+
+      if (arr == NULL) {
+          printf("Memory allocation failed!\n");
+          return 1; // Exit with an error
+      }
+
+      // Use the allocated memory
+      for (int i = 0; i < n; i++) {
+          arr[i] = i + 1;
+      }
+
+      printf("Array elements: ");
+      for (int i = 0; i < n; i++) {
+          printf("%d ", arr[i]);
+      }
+      printf("\n");
+
+      // Free the memory
+      free(arr);
+      arr = NULL; // Avoid dangling pointer
+
+      return 0;
+  }
+  ```
+- **Notes/Best Practices**:
+  - Always check if the return value of `malloc` is `NULL` to handle allocation failures.
+  - **For every `malloc`, there must be a `free`**. Failure to do so causes memory leaks.
+  - After `free`, set the pointer to `NULL` to prevent it from becoming a dangling pointer.
+  - **Do not `free` the same memory block twice** (double free), as this leads to undefined behavior.
+- **Summary**: Dynamic memory management is key to handling variable-sized data in C, but it requires the programmer to take on the responsibility of precisely managing memory lifecycles.
+
+---
+
+### 6. Common Security Vulnerabilities
+- **Motivation**: C's flexibility makes it susceptible to serious security vulnerabilities that must be understood and prevented.
+- **Core Concepts**:
+  - **Buffer Overflow**: Occurs when data written to a buffer (like an array) exceeds its capacity. An attacker can exploit this to overwrite adjacent memory and execute malicious code.
+    - **Dangerous Functions**: `gets()`, `strcpy()`, `strcat()`, `sprintf()` which do not perform bounds checking.
+    - **Safe Alternatives**: `fgets()`, `strncpy()`, `strncat()`, `snprintf()` which accept a buffer size argument.
+  - **Format String Bug**: Arises when the format string part of functions like `printf` can be controlled by a user. An attacker can use format specifiers like `%n` (write to memory) and `%x` (read from memory) to steal information or modify memory.
+- **Example**:
+  ```c
+  // Buffer Overflow Example
+  #include <stdio.h>
+  #include <string.h>
+
+  void vulnerable_function(char *input) {
+      char buffer[10];
+      // If input is longer than 9 chars, strcpy will overflow buffer
+      strcpy(buffer, input);
+      printf("You entered: %s\n", buffer);
+  }
+
+  // Format String Bug Example
+  void format_string_bug(char *input) {
+      // If input is "%x %x %x", printf will read and display data from the stack
+      printf(input);
+  }
+  ```
+- **Notes/Best Practices**:
+  - **Never trust user input**: Strictly validate the length and format of all external input.
+  - **Use safe functions**: Prefer bounds-checking functions like `strncpy`.
+  - **Enable compile-time security options**: Such as `-fstack-protector` (stack canaries) and ASLR (Address Space Layout Randomization).
+- **Summary**: Security is paramount in C programming. Understanding the principles of classic vulnerabilities like buffer overflows and cultivating the habit of using safe functions and validating input is crucial.
+
+## Best Practices
+- **Always initialize variables**: Avoid using uninitialized variables, whose values are unpredictable.
+- **Use pointers cautiously**: Ensure a pointer is valid (not `NULL` and not freed) before using it.
+- **Manage memory precisely**: Ensure every `malloc` has a matching `free` and handle allocation failures.
+- **Prefer safe functions**: Avoid dangerous string and I/O functions like `gets` and `strcpy`.
+- **Keep code simple**: Write clear, understandable code. Complex code is more likely to hide bugs.
+- **Utilize compiler warnings**: Set the compiler warning level to maximum (e.g., `gcc -Wall`) and fix all warnings.
+
+---
+## Update History
+- 2025-10-19: Created initial version.
