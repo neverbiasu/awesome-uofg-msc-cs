@@ -25,11 +25,11 @@ const { provider } = defineI18nUI(i18n, {
 
 type LayoutProps = {
   children: ReactNode;
-  params: Promise<{ lang: string }> | { lang: string };
+  params: Promise<{ lang: string }>;
 };
 
 export default async function Layout({ children, params }: LayoutProps) {
-  const { lang } = (await params) as { lang: string };
+  const { lang } = await params;
 
   return (
     <RootProvider i18n={provider(lang)}>
