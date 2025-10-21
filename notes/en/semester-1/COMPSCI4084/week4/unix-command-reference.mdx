@@ -1,0 +1,106 @@
+---
+title: "Unix Command Reference"
+description: "A quick reference guide (cheatsheet) for common and essential UNIX/Linux commands, covering file operations, process management, permissions, and more."
+---
+
+## Overview
+- **Goal**: To provide a quick and easy-to-use reference for the most common UNIX commands.
+- **Scope**: Covers commands for file management, process management, file permissions, SSH, searching, system info, and compression.
+
+## Learning Objectives
+1. **Quickly find** the syntax for basic file and directory commands.
+2. **Look up** how to view and manage running processes.
+3. **Reference** the syntax for changing file permissions using `chmod`.
+4. **Find** common commands for searching, system information, and archiving.
+
+## Key Knowledge Points
+
+### 1. File Commands
+- `ls`: Directory listing.
+- `ls -al`: Formatted listing with hidden files.
+- `cd dir`: Change directory to `dir`.
+- `cd`: Change to home directory.
+- `pwd`: Show current directory.
+- `mkdir dir`: Create a directory `dir`.
+- `rm file`: Delete `file`.
+- `rm -r dir`: Delete directory `dir`.
+- `rm -f file`: Force remove `file`.
+- `rm -rf dir`: Force remove directory `dir` (*use with caution*).
+- `cp file1 file2`: Copy `file1` to `file2`.
+- `cp -r dir1 dir2`: Copy `dir1` to `dir2`.
+- `mv file1 file2`: Rename or move `file1` to `file2`.
+- `ln -s file link`: Create a symbolic link `link` to `file`.
+- `touch file`: Create or update `file`.
+- `cat > file`: Places standard input into `file`.
+- `more file`: Output the contents of `file` page by page.
+- `head file`: Output the first 10 lines of `file`.
+- `tail file`: Output the last 10 lines of `file`.
+- `tail -f file`: Output the contents of `file` as it grows.
+
+---
+
+### 2. Process Management
+- `ps`: Display your currently active processes.
+- `top`: Display all running processes in real-time.
+- `kill pid`: Kill process with ID `pid`.
+- `killall proc`: Kill all processes named `proc` (*use with caution*).
+- `bg`: Lists stopped or background jobs; resumes a stopped job in the background.
+- `fg`: Brings the most recent job to the foreground.
+
+---
+
+### 3. File Permissions
+- `chmod octal file`: Change the permissions of `file` to `octal`.
+- The octal value is calculated by summing the values for user, group, and world:
+  - `4`: read (r)
+  - `2`: write (w)
+  - `1`: execute (x)
+- **Examples**:
+  - `chmod 777 file`: read, write, execute for all (owner, group, world).
+  - `chmod 755 file`: rwx for owner, r-x for group and world.
+
+---
+
+### 4. SSH
+- `ssh user@host`: Connect to `host` as `user`.
+- `ssh -p port user@host`: Connect to `host` on port `port` as `user`.
+- `ssh-copy-id user@host`: Add your key to `host` for `user` to enable passwordless login.
+
+---
+
+### 5. Searching
+- `grep pattern files`: Search for `pattern` in `files`.
+- `grep -r pattern dir`: Search recursively for `pattern` in `dir`.
+- `find dir -name pattern`: Find files named `pattern` in `dir`.
+
+---
+
+### 6. System Info
+- `date`: Show the current date and time.
+- `cal`: Show this month's calendar.
+- `uptime`: Show current uptime.
+- `whoami`: Show who you are logged in as.
+- `man command`: Show the manual for `command`.
+- `df`: Show disk usage.
+- `du`: Show directory space usage.
+- `free`: Show memory and swap usage.
+
+---
+
+### 7. Compression
+- `tar cf file.tar files`: Create a tar archive named `file.tar` containing `files`.
+- `tar xf file.tar`: Extract the files from `file.tar`.
+- `zip file.zip files`: Create a zip archive.
+- `unzip file.zip`: Extract a zip archive.
+
+---
+
+## Best Practices
+- **Use `man`**: When in doubt, `man <command>` provides the most detailed and accurate information.
+- **Be Cautious with `rm`**: Especially `rm -rf`, as it deletes files permanently without confirmation.
+- **Tab Completion**: Use the `Tab` key to autocomplete commands and filenames to save time and prevent typos.
+
+---
+## Update History
+- 2025-10-20: Created based on the `fwunixref.md` source material as part of a major refactoring.
+

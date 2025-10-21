@@ -1,0 +1,84 @@
+---
+title: "Shell: Pipes, I/O Redirection, and Fundamentals"
+description: "A guide to controlling input and output in the UNIX shell using I/O redirection and pipes, plus an introduction to shell variables and metacharacters."
+---
+
+## Overview
+- **Goal**: To master the control of data flow in the shell by redirecting I/O to files and piping it between commands.
+- **Scope**: Covers standard I/O streams, redirection (`>`, `>>`, `<`), pipes (`|`), and basic shell concepts like variables and quoting.
+
+## Learning Objectives
+1. **Understand** the three standard streams: `stdin`, `stdout`, and `stderr`.
+2. **Use** redirection operators to read input from files and write output to files.
+3. **Use** the pipe operator (`|`) to chain commands together for complex data processing.
+4. **Understand** the basics of shell variables and the importance of quoting.
+
+## Key Knowledge Points
+
+### 1. Standard I/O Streams
+- **Motivation**: Every command you run in the shell operates with three standard data streams, which allows for predictable input and output handling.
+- **Core Concepts**:
+  - **`stdin` (Standard Input)**: File descriptor `0`. The default source of input for a command, typically the keyboard.
+  - **`stdout` (Standard Output)**: File descriptor `1`. The default destination for a command's normal output, typically the screen.
+  - **`stderr` (Standard Error)**: File descriptor `2`. The default destination for a command's error messages, also typically the screen.
+- **Summary**: Understanding these three streams is the key to controlling where your data comes from and where it goes.
+
+---
+
+### 2. I/O Redirection
+- **Motivation**: To save a command's output to a file, or have it read input from a file, instead of interacting with the terminal.
+- **Core Concepts**:
+  - **`>` (Redirect stdout)**: Sends the standard output of a command to a file, **overwriting** the file if it exists.
+    - `ls -l > file_listing.txt`
+  - **`>>` (Append stdout)**: Appends the standard output of a command to the end of a file, creating it if it doesn't exist.
+    - `echo "Log entry at $(date)" >> system.log`
+  - **`<` (Redirect stdin)**: Makes a command read its standard input from a file instead of the keyboard.
+    - `sort < unsorted_names.txt`
+  - **`2>` (Redirect stderr)**: Redirects standard error to a file. This is useful for separating error messages from normal output.
+    - `find / -name "*.log" > results.txt 2> errors.log`
+- **Summary**: Redirection operators give you file-level control over a command's input and output.
+
+---
+
+### 3. The Pipe (`|`)
+- **Motivation**: To connect multiple commands together, feeding the output of one directly as the input to another, without needing temporary files. This embodies the UNIX philosophy of small, single-purpose tools that combine to perform complex tasks.
+- **Core Concepts**:
+  - The pipe `|` operator takes the `stdout` of the command on its left and uses it as the `stdin` for the command on its right.
+  - Any number of commands can be chained together to form a "pipeline".
+  - Commands in a pipeline run concurrently, with data streaming between them.
+- **Example**: A common pattern is to fetch data, search for something specific, and then format the result.
+  ```bash
+  # Fetch web content, find lines with a pattern, and extract the first few
+  curl -s https://www.bbc.co.uk/weather/2648579 | grep "wr-day__weather-type-description" | head -n 3
+  ```
+- **Summary**: Pipes are a powerful feature for creating sophisticated data processing workflows on the command line.
+
+---
+
+### 4. Shell Fundamentals: Variables and Quoting
+- **Motivation**: To write more complex and robust commands or scripts, you must understand how the shell interprets variables and special characters (metacharacters).
+- **Core Concepts**:
+  - **Variables**: Store data. Assign with `MY_VAR="some value"` (no spaces around `=`) and reference with `$MY_VAR`.
+  - **Metacharacters**: Characters with special meaning to the shell, like `*`, `$`, `|`, `>`.
+  - **Quoting**: Controls how the shell interprets metacharacters.
+    - **Double Quotes (`"`)**: Weak quoting. Allows variable substitution (`$VAR`) but prevents other special characters (like spaces or `*`) from being interpreted.
+    - **Single Quotes (`'`)**: Strong quoting. Disables all special meanings; everything is treated as a literal string.
+    - **Backslash (`\`)**: Escapes the single next character, removing its special meaning.
+- **Example**:
+  ```
+  GREETING="Hello World"
+  echo "Weak Quoting: $GREETING"   # Output: Weak Quoting: Hello World
+  echo 'Strong Quoting: $GREETING' # Output: Strong Quoting: $GREETING
+  ```
+
+---
+
+## Best Practices
+- **Build Pipelines Step-by-Step**: When creating a complex pipeline, run the first command, check its output, then add the next command, and so on. This makes debugging much easier.
+- **Always Quote Variables**: When using a variable, enclose it in double quotes (e.g., `echo "$MY_VAR"`) to prevent unexpected behavior if the variable contains spaces or other special characters.
+- **Know When to Overwrite vs. Append**: Use `>` when you want to create a fresh file, and `>>` when you want to add to an existing file, such as a log.
+
+---
+## Update History
+- 2025-10-20: Created by merging `Input_Output_and_Shell_Fundamentals.md` and `2_pipes.md` as part of a major refactoring.
+
