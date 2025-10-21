@@ -1,0 +1,106 @@
+---
+title: "Unix 命令参考"
+description: "一个针对常用和核心 UNIX/Linux 命令的快速参考指南（速查表），涵盖文件操作、进程管理、权限等。"
+---
+
+## 概要
+- **目标**：为最常见的 UNIX 命令提供一个快速、易于使用的参考。
+- **范围**：涵盖文件管理、进程管理、文件权限、SSH、搜索、系统信息和压缩等命令。
+
+## 学习目标
+1. **快速查找** 基本文件和目录命令的语法。
+2. **查阅** 如何查看和管理正在运行的进程。
+3. **参考** 使用 `chmod` 更改文件权限的语法。
+4. **找到** 用于搜索、系统信息和归档的常用命令。
+
+## 关键知识点
+
+### 1. 文件命令
+- `ls`: 列出目录内容。
+- `ls -al`: 带格式列出所有文件（包括隐藏文件）。
+- `cd dir`: 切换到 `dir` 目录。
+- `cd`: 切换到主目录。
+- `pwd`: 显示当前目录。
+- `mkdir dir`: 创建一个名为 `dir` 的目录。
+- `rm file`: 删除 `file` 文件。
+- `rm -r dir`: 删除 `dir` 目录。
+- `rm -f file`: 强制删除 `file` 文件。
+- `rm -rf dir`: 强制删除 `dir` 目录（*请谨慎使用*）。
+- `cp file1 file2`: 将 `file1` 复制到 `file2`。
+- `cp -r dir1 dir2`: 将 `dir1` 复制到 `dir2`。
+- `mv file1 file2`: 重命名或移动 `file1` 到 `file2`。
+- `ln -s file link`: 为 `file` 创建一个名为 `link` 的符号链接。
+- `touch file`: 创建或更新 `file` 文件。
+- `cat > file`: 将标准输入存入 `file`。
+- `more file`: 分页显示 `file` 的内容。
+- `head file`: 显示 `file` 的前10行。
+- `tail file`: 显示 `file` 的后10行。
+- `tail -f file`: 实时显示 `file` 增长的内容。
+
+---
+
+### 2. 进程管理
+- `ps`: 显示您当前活动的进程。
+- `top`: 实时显示所有正在运行的进程。
+- `kill pid`: 终止ID为 `pid` 的进程。
+- `killall proc`: 终止所有名为 `proc` 的进程（*请谨慎使用*）。
+- `bg`: 列出已停止或后台的作业；在后台恢复一个已停止的作业。
+- `fg`: 将最近的作业带到前台。
+
+---
+
+### 3. 文件权限
+- `chmod octal file`: 将 `file` 的权限更改为 `octal`。
+- 八进制值是通过将用户、组和所有其他人的权限值相加计算得出的：
+  - `4`: 读 (r)
+  - `2`: 写 (w)
+  - `1`: 执行 (x)
+- **示例**：
+  - `chmod 777 file`: 为所有人（所有者、组、其他）设置读、写、执行权限。
+  - `chmod 755 file`: 为所有者设置 rwx，为组和其他人设置 r-x。
+
+---
+
+### 4. SSH
+- `ssh user@host`: 以 `user` 用户连接到 `host`。
+- `ssh -p port user@host`: 在 `port` 端口上以 `user` 用户连接到 `host`。
+- `ssh-copy-id user@host`: 将您的公钥添加到 `host` 的 `user` 用户下，以实现免密登录。
+
+---
+
+### 5. 搜索
+- `grep pattern files`: 在 `files` 文件中搜索 `pattern`。
+- `grep -r pattern dir`: 在 `dir` 目录中递归搜索 `pattern`。
+- `find dir -name pattern`: 在 `dir` 目录中查找名为 `pattern` 的文件。
+
+---
+
+### 6. 系统信息
+- `date`: 显示当前日期和时间。
+- `cal`: 显示本月日历。
+- `uptime`: 显示当前运行时间。
+- `whoami`: 显示您当前登录的用户名。
+- `man command`: 显示 `command` 的手册页。
+- `df`: 显示磁盘使用情况。
+- `du`: 显示目录空间使用情况。
+- `free`: 显示内存和交换空间使用情况。
+
+---
+
+### 7. 压缩
+- `tar cf file.tar files`: 创建一个名为 `file.tar` 的 tar 归档文件，其中包含 `files`。
+- `tar xf file.tar`: 从 `file.tar` 中提取文件。
+- `zip file.zip files`: 创建一个 zip 压缩文件。
+- `unzip file.zip`: 解压一个 zip 文件。
+
+---
+
+## 最佳实践
+- **使用 `man`**：如有疑问，`man <command>` 能提供最详细、最准确的信息。
+- **谨慎使用 `rm`**：特别是 `rm -rf`，因为它会永久删除文件且没有确认提示。
+- **Tab 自动补全**：使用 `Tab` 键自动补全命令和文件名，以节省时间并防止拼写错误。
+
+---
+## 更新记录
+- 2025-10-20：作为重大重构的一部分，基于 `fwunixref.md` 源材料创建。
+

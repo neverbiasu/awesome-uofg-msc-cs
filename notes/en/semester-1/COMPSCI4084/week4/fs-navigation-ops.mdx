@@ -1,0 +1,114 @@
+---
+title: "File System: Navigation and Operations"
+description: "A comprehensive guide to the UNIX file system, covering directory navigation, file and directory manipulation, and methods for accessing a UNIX environment."
+---
+
+## Overview
+- **Goal**: To master navigation of the UNIX file system and the commands for creating, deleting, copying, and moving files and directories.
+- **Scope**: Covers accessing a UNIX terminal, the file system hierarchy, core navigation and manipulation commands, and file compression.
+
+## Learning Objectives
+1. **Identify** and use various methods to access a UNIX terminal (e.g., SSH, WSL).
+2. **Understand** the file system hierarchy, including special directories (`/`, `~`, `.`, `..`) and the difference between absolute and relative paths.
+3. **Master** core navigation commands (`pwd`, `ls`, `cd`).
+4. **Master** file and directory manipulation commands (`mkdir`, `rm`, `cp`, `mv`).
+5. **Be able to** compress and decompress files using `zip` and `unzip`.
+
+## Key Knowledge Points
+
+### 1. Accessing the UNIX Terminal
+- **Motivation**: Before you can manage a file system, you need to access the command-line environment.
+- **Core Concepts**:
+  - **SSH (Secure Shell)**: The standard way to connect to a remote Linux server. The command is typically `ssh your_username@remote_host.com`.
+  - **WSL (Windows Subsystem for Linux)**: For Windows users, WSL provides a complete Linux environment that can be accessed by running `wsl.exe`.
+  - **macOS/Linux Terminals**: Both operating systems provide a built-in terminal application for direct access to a Unix-like shell.
+- **Summary**: Whether your machine is local or remote, tools like SSH, WSL, and built-in terminals provide the entry point to the UNIX shell.
+
+---
+
+### 2. The File System Hierarchy
+- **Motivation**: To navigate effectively, you must first understand the map. The UNIX file system is a hierarchical tree structure.
+- **Core Concepts**:
+  - **Root Directory (`/`)**: The single, top-level directory of the entire file system.
+  - **Home Directory (`~`)**: Your personal directory where you have full permissions to create and manage files.
+  - **Current Directory (`.`)**: A shorthand reference to the directory you are currently in.
+  - **Parent Directory (`..`)**: A shorthand reference to the directory one level above your current location.
+  - **Absolute Path**: A path that starts from the root directory (e.g., `/home/user/documents`). It is unambiguous regardless of your current location.
+  - **Relative Path**: A path that starts from your current directory (e.g., `../images` or `./notes`).
+- **Summary**: Understanding the tree structure and the difference between absolute and relative paths is fundamental to all file system operations.
+
+---
+
+### 3. Core Navigation Commands
+- **Motivation**: These three commands are the essential tools for orienting yourself and moving around within the file system.
+- **Core Concepts**:
+  - **`pwd` (Print Working Directory)**: Shows you the absolute path of the directory you are currently in.
+  - **`ls` (List)**: Lists the contents (files and subdirectories) of the current directory. Common options include:
+    - `ls -l`: Long format, showing permissions, owner, size, and modification date.
+    - `ls -a`: Shows all files, including hidden files (those starting with a dot `.`)
+  - **`cd` (Change Directory)**: Used to move to a different directory. 
+    - `cd /home/user`: Navigates to an absolute path.
+    - `cd ../project`: Navigates to a relative path.
+    - `cd`: With no arguments, navigates to your home directory (`~`).
+- **Summary**: Use `pwd` to know where you are, `ls` to see what's around you, and `cd` to move.
+
+---
+
+### 4. File and Directory Manipulation
+- **Motivation**: These commands allow you to create, organize, and remove the files and directories that make up the file system.
+- **Core Concepts**:
+  - `mkdir dir`: Creates a new directory named `dir`.
+  - `cp source destination`: Copies a file or directory. Use `cp -r` to copy a directory and its contents recursively.
+  - `mv source destination`: Moves or renames a file or directory.
+  - `rm file`: Removes (deletes) a file. Use `rm -r dir` to recursively remove a directory.
+- **Notes/Best Practices**:
+  - Be extremely careful with `rm`, especially with the `-r` (recursive) and `-f` (force) flags. There is no trash bin on the command line; deletions are permanent.
+  - `mv` is the standard way to rename files (e.g., `mv old-name.txt new-name.txt`).
+- **Example Workflow**:
+  ```bash
+  # Create a project directory and enter it
+  mkdir my_project && cd my_project
+
+  # Create a notes file
+  touch notes.txt
+
+  # Copy it for a backup
+  cp notes.txt notes.bak
+
+  # Create an archive directory and move the backup into it
+  mkdir archive
+  mv notes.bak archive/
+
+  # Remove the original file
+  rm notes.txt
+  ```
+
+---
+
+### 5. Archiving and Compression
+- **Motivation**: To bundle multiple files into a single archive for easier transfer or storage.
+- **Core Concepts**:
+  - `zip archive.zip files...`: Compresses one or more `files` into a single `archive.zip`.
+  - `unzip archive.zip`: Extracts the contents of `archive.zip` into the current directory.
+- **Example**:
+  ```bash
+  # Zip an entire directory
+  zip -r project_archive.zip my_project/
+
+  # Unzip the archive into a new location
+  mkdir restored_project
+  cd restored_project
+  unzip ../project_archive.zip
+  ```
+
+---
+
+## Best Practices
+- **Confirm Location**: Always use `pwd` to be sure of your current directory before running destructive commands like `rm`.
+- **Use Tab Completion**: Press the `Tab` key to autocomplete filenames and directory names. This reduces typos and saves time.
+- **Be Wary of `rm -rf`**: This command forcefully and recursively deletes files. A small typo can wipe out important data. Double-check your command before pressing Enter.
+
+---
+## Update History
+- 2025-10-20: Created by merging `Exploring_Files_and_Directories...`, `0_getting_started.md`, and `1_files.md` as part of a major refactoring.
+
