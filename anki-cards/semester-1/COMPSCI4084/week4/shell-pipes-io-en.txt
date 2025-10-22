@@ -1,0 +1,16 @@
+What are the three standard I/O streams?	stdin, stdout, and stderr.
+What is stdin (Standard Input)?	File descriptor 0, default input source (keyboard).
+What is stdout (Standard Output)?	File descriptor 1, default output destination (screen).
+What is stderr (Standard Error)?	File descriptor 2, default error message destination (screen).
+What is the purpose of the > redirection operator?	Sends stdout to a file, overwriting it.
+What is the purpose of the >> redirection operator?	Appends stdout to the end of a file.
+What is the purpose of the < redirection operator?	Makes a command read stdin from a file.
+What is the purpose of the 2> redirection operator?	Redirects stderr to a file.
+What is the purpose of the pipe | operator?	Sends stdout of one command to stdin of another.
+What is the Unix philosophy embodied by pipes?	Small, single-purpose tools combining for complex tasks.
+How do you assign a value to a shell variable?	VAR="value" (no spaces around =).
+How do you reference a shell variable?	$VAR
+What is "weak quoting" in the shell?	Double quotes ("), allows variable substitution.
+What is "strong quoting" in the shell?	Single quotes ('), treats everything as a literal string.
+What is the purpose of a backslash (\) in the shell?	Escapes the single next character, removing its special meaning.
+Why should shell variables always be double-quoted when referenced?	To prevent issues if the variable contains spaces or special characters.

@@ -1,0 +1,18 @@
+Why is fgets() safer than gets() for reading strings?	It limits the number of characters read, preventing buffer overflows.
+What are common fopen() modes?	"r" (read), "w" (write), "a" (append).
+In C, what does the & operator do?	Gets the memory address of a variable (address-of).
+In C, what does the * operator do when used with a pointer?	Accesses the value at the pointer's address (dereference).
+What is a common vulnerability related to pointer misuse?	Buffer overflows, null pointer dereferences, dangling pointers.
+What is a classic security bug related to conditional operators in C?	Using assignment = instead of equality ==.
+What is the purpose of bitwise operators in a security context?	Used in cryptography, network packet manipulation, permission flags.
+What is the purpose of a Makefile?	To automate the build (compilation) process of a project.
+What are the three parts of a Makefile rule?	Target, dependencies, command.
+In a Makefile, what character must a command line be indented with?	A Tab character.
+How does make decide if a target needs to be rebuilt?	It checks if any dependency is newer than its target.
+What is a best practice for C string handling to prevent buffer overflows?	Use fgets() and snprintf() instead of gets() and strcpy().
+What should you always do before dereferencing a pointer?	Check if it is NULL.
+What is snprintf() used for in C?	Safe string formatting with a size limit.
+What is a null pointer dereference?	Attempting to access memory at a NULL address, causing a crash.
+What is a dangling pointer?	A pointer to deallocated memory.
+What is the target in a Makefile rule?	The file to be created (e.g., an executable).
+What are dependencies in a Makefile rule?	Files the target depends on (e.g., source files).

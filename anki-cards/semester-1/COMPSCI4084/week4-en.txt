@@ -1,0 +1,104 @@
+What are the core features of Unix?	Multi-user, multi-tasking, hierarchical directory, portability.
+What are the three main components of the Unix structure?	Kernel, Shell, and Utilities.
+What is the role of the Kernel in Unix?	Schedules programs, manages data access, and performs all hardware access.
+What is the role of the Shell in Unix?	Acts as the user's interface to the kernel, interpreting commands.
+What is a process in Unix?	Every running program on the system.
+What command lists currently running processes?	ps
+What command is used to terminate a process?	kill
+What is 'swapping' in Unix memory management?	Writing a user's program to disk to free up main memory.
+What is 'disk thrashing'?	When the OS spends most time shuttling programs between memory and disk due to overload.
+What is the Unix philosophy regarding tools?	Small, single-purpose programs that do one thing well.
+What command lists directory contents?	ls
+What command lists directory contents, including hidden files, in long format?	ls -al
+What command changes the current directory?	cd
+What command shows the current working directory?	pwd
+What command creates a new directory?	mkdir
+What command deletes a file?	rm
+What command recursively deletes a directory?	rm -r
+What command copies files?	cp
+What command moves or renames files?	mv
+What command creates a symbolic link?	ln -s
+What command creates or updates a file's timestamp?	touch
+What command displays file content page by page?	more or less
+What command displays the last 10 lines of a file?	tail
+What command displays currently active processes?	ps
+What command kills a process by its ID?	kill pid
+What command changes file permissions?	chmod
+What octal value represents read permission?	4
+What octal value represents write permission?	2
+What octal value represents execute permission?	1
+What does chmod 755 file mean?	Owner rwx, group r-x, world r-x.
+What command connects to a remote host via SSH?	ssh user@host
+What command searches for a pattern in files?	grep
+What command shows the manual page for a command?	man
+What command shows disk usage?	df
+What command creates a tar archive?	tar cf
+What command extracts a zip archive?	unzip
+What is SSH used for?	To connect to a remote Linux server.
+What is WSL?	Windows Subsystem for Linux, provides a Linux environment on Windows.
+What is the root directory in Unix?	The single, top-level directory of the entire file system.
+What character represents the user's home directory?	~
+What character represents the current directory?	.
+What character represents the parent directory?	..
+What is an absolute path?	A path that starts from the root directory (/).
+What is a relative path?	A path that starts from your current directory.
+What command shows the absolute path of the current directory?	pwd
+What command lists directory contents?	ls
+What command changes the current directory?	cd
+What command creates a new directory?	mkdir
+What command copies a file or directory?	cp
+What command moves or renames a file or directory?	mv
+What command removes (deletes) a file?	rm
+What command recursively removes a directory?	rm -r
+Why be careful with rm -rf?	Deletions are permanent; no trash bin on the command line.
+What command compresses files into a zip archive?	zip
+What command extracts files from a zip archive?	unzip
+What are the three standard I/O streams?	stdin, stdout, and stderr.
+What is stdin (Standard Input)?	File descriptor 0, default input source (keyboard).
+What is stdout (Standard Output)?	File descriptor 1, default output destination (screen).
+What is stderr (Standard Error)?	File descriptor 2, default error message destination (screen).
+What is the purpose of the > redirection operator?	Sends stdout to a file, overwriting it.
+What is the purpose of the >> redirection operator?	Appends stdout to the end of a file.
+What is the purpose of the < redirection operator?	Makes a command read stdin from a file.
+What is the purpose of the 2> redirection operator?	Redirects stderr to a file.
+What is the purpose of the pipe | operator?	Sends stdout of one command to stdin of another.
+What is the Unix philosophy embodied by pipes?	Small, single-purpose tools combining for complex tasks.
+How do you assign a value to a shell variable?	VAR="value" (no spaces around =).
+How do you reference a shell variable?	$VAR
+What is "weak quoting" in the shell?	Double quotes ("), allows variable substitution.
+What is "strong quoting" in the shell?	Single quotes ('), treats everything as a literal string.
+What is the purpose of a backslash (\) in the shell?	Escapes the single next character, removing its special meaning.
+Why should shell variables always be double-quoted when referenced?	To prevent issues if the variable contains spaces or special characters.
+What are the three main modes in Vim?	Normal, Insert, and Visual.
+What is Vim's Normal Mode used for?	Navigation and issuing commands (e.g., deleting, copying).
+How do you enter Vim's Insert Mode?	Press i, a, or o.
+How do you return to Vim's Normal Mode from other modes?	Press Esc.
+In Vim (Normal mode), how do you save the file?	:w
+In Vim (Normal mode), how do you quit without saving changes?	:q!
+In Vim (Normal mode), how do you save the file and quit?	:wq
+In Vim (Normal mode), what command deletes the current line?	dd
+In Vim (Normal mode), what command copies (yanks) the current line?	yy
+In Vim (Normal mode), what command pastes content?	p
+What are the three main steps in the C toolchain workflow?	Edit, Compile, Run.
+What is the standard command to compile a C file with GCC?	gcc filename.c -o outputname
+What does the -o flag do in GCC?	Specifies the name of the output executable file.
+How do you execute a compiled C program named `hello`?	./hello
+What is a best practice for Vim efficiency?	Live in Normal Mode, only entering Insert Mode to type.
+Why is fgets() safer than gets() for reading strings?	It limits the number of characters read, preventing buffer overflows.
+What are common fopen() modes?	"r" (read), "w" (write), "a" (append).
+In C, what does the & operator do?	Gets the memory address of a variable (address-of).
+In C, what does the * operator do when used with a pointer?	Accesses the value at the pointer's address (dereference).
+What is a common vulnerability related to pointer misuse?	Buffer overflows, null pointer dereferences, dangling pointers.
+What is a classic security bug related to conditional operators in C?	Using assignment = instead of equality ==.
+What is the purpose of bitwise operators in a security context?	Used in cryptography, network packet manipulation, permission flags.
+What is the purpose of a Makefile?	To automate the build (compilation) process of a project.
+What are the three parts of a Makefile rule?	Target, dependencies, command.
+In a Makefile, what character must a command line be indented with?	A Tab character.
+How does make decide if a target needs to be rebuilt?	It checks if any dependency is newer than its target.
+What is a best practice for C string handling to prevent buffer overflows?	Use fgets() and snprintf() instead of gets() and strcpy().
+What should you always do before dereferencing a pointer?	Check if it is NULL.
+What is snprintf() used for in C?	Safe string formatting with a size limit.
+What is a null pointer dereference?	Attempting to access memory at a NULL address, causing a crash.
+What is a dangling pointer?	A pointer to deallocated memory.
+What is the target in a Makefile rule?	The file to be created (e.g., an executable).
+What are dependencies in a Makefile rule?	Files the target depends on (e.g., source files).

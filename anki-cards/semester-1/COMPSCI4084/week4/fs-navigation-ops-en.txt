@@ -1,0 +1,19 @@
+What is SSH used for?	To connect to a remote Linux server.
+What is WSL?	Windows Subsystem for Linux, provides a Linux environment on Windows.
+What is the root directory in Unix?	The single, top-level directory of the entire file system.
+What character represents the user's home directory?	~
+What character represents the current directory?	.
+What character represents the parent directory?	..
+What is an absolute path?	A path that starts from the root directory (/).
+What is a relative path?	A path that starts from your current directory.
+What command shows the absolute path of the current directory?	pwd
+What command lists directory contents?	ls
+What command changes the current directory?	cd
+What command creates a new directory?	mkdir
+What command copies a file or directory?	cp
+What command moves or renames a file or directory?	mv
+What command removes (deletes) a file?	rm
+What command recursively removes a directory?	rm -r
+Why be careful with rm -rf?	Deletions are permanent; no trash bin on the command line.
+What command compresses files into a zip archive?	zip
+What command extracts files from a zip archive?	unzip

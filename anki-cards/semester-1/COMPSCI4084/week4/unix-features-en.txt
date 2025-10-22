@@ -1,0 +1,10 @@
+What are the core features of Unix?	Multi-user, multi-tasking, hierarchical directory, portability.
+What are the three main components of the Unix structure?	Kernel, Shell, and Utilities.
+What is the role of the Kernel in Unix?	Schedules programs, manages data access, and performs all hardware access.
+What is the role of the Shell in Unix?	Acts as the user's interface to the kernel, interpreting commands.
+What is a process in Unix?	Every running program on the system.
+What command lists currently running processes?	ps
+What command is used to terminate a process?	kill
+What is 'swapping' in Unix memory management?	Writing a user's program to disk to free up main memory.
+What is 'disk thrashing'?	When the OS spends most time shuttling programs between memory and disk due to overload.
+What is the Unix philosophy regarding tools?	Small, single-purpose programs that do one thing well.
