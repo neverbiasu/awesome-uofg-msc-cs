@@ -11,6 +11,13 @@ const inter = Inter({
   subsets: ['latin'],
 });
 
+// Next.js App Router metadata to set site icons (favicon)
+export const metadata = {
+  icons: {
+    icon: '/favicon.svg',
+  },
+};
+
 export default function Layout({ children }: LayoutProps) {
   return (
     <html lang="en" className={inter.className} suppressHydrationWarning>

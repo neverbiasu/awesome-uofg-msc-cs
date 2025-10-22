@@ -12,14 +12,8 @@ export function baseOptions(locale: string = 'en'): BaseLayoutProps {
     nav: {
       title: (
         <>
-          <svg
-            width="24"
-            height="24"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-label="Logo"
-          >
-            <circle cx={12} cy={12} r={12} fill="currentColor" />
-          </svg>
+          {/* Use an external logo in /public so it's easy to replace */}
+          <img src="/logo.svg" width={24} height={24} alt="UofG MSc CS logo" />
           UofG MSc CS
         </>
       ),
