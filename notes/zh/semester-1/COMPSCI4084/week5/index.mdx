@@ -1,0 +1,94 @@
+---
+title: "Week 5"
+description: "第 5 周精简学习笔记（Unix 命令行、文件管理、进程控制、Shell 脚本、Git、LaTeX）"
+---
+
+## 概要
+- **节奏**：本周重点通过实验练习进行实践学习，强调 Unix 命令和 Shell 脚本的实际应用。
+- **主题**：Unix 命令行基础、文本文件处理、用户与权限管理、进程与作业、Git 版本控制、LaTeX 文档处理、Shell 脚本编程。
+
+## 本周安排
+| Session | 主题 | 说明 |
+|---|---|---|
+| 实验材料 - Class 8 Unix | Unix 命令行与文件管理 | Unix 基本命令、文件系统导航和文件操作简介。 |
+| 预读材料 - Class 8 Unix | 文本文件处理与系统管理 | 使用 `grep`、`sort`、`uniq`、`wc`、`tr`、`sed` 进行高级文本处理，以及用户/权限/进程管理。 |
+| 实验材料 - Class 9 Unix | Git 与 LaTeX | Git 版本控制和 LaTeX 文档准备简介。 |
+| 预读材料 - Class 9 Unix | Shell 脚本与高级 Unix | Shell 脚本基础，包括变量、用户输入和命令行参数。 |
+
+## 学习目标
+1. 掌握用于文本处理、文件管理和系统监控的基本 Unix 命令行工具。
+2. 理解并应用用户和文件权限原则以确保系统安全。
+3. 能够有效地控制和管理进程与作业。
+4. 熟练使用 Git 进行本地版本控制和远程协作。
+5. 学习 LaTeX 的基本知识，用于专业的文档准备。
+6. 掌握 Shell 脚本编程的基础技能，用于任务自动化。
+
+## 关键知识点
+- **文本处理与分析**：
+  - `grep`：模式搜索，日志过滤。
+  - `sort` & `uniq`：数据聚合，识别重复项。
+  - `wc`：统计行、词、字符。
+  - `tr`：字符转换与删除。
+  - `sed`：流编辑器，文本替换与编辑。
+  - `curl`：网络数据传输，侦察与测试。
+- **系统管理与安全**：
+  - 用户与权限：`whoami`, `id`, `sudo`, `passwd`, `chmod`, `chown`, `usermod`。
+  - 进程与作业：`ps`, `top`, `kill`, `jobs`, `fg`, `bg`。
+  - 系统监控：`df`, `uptime`。
+  - 编译器警告：`-Wall`, `-Wextra`, `-Werror` 在安全编码中的作用。
+- **版本控制**：
+  - Git 基础：`init`, `status`, `add`, `commit`, `log`, `diff`。
+  - Git 远程协作：SSH 密钥设置, `clone`, `push`, `pull`, 合并冲突。
+- **文档处理**：
+  - LaTeX 基础：安装, 文档结构, 文本/数学排版, Makefile 自动化编译。
+- **Shell 脚本编程**：
+  - 脚本创建与执行。
+  - 用户输入与命令行参数。
+
+## 实践清单
+- [ ] 练习使用 `grep` 过滤日志中的特定模式。
+- [ ] 使用 `sort` 和 `uniq -c` 识别日志文件中的频繁条目。
+- [ ] 使用 `chmod` 和 `chown` 更改文件权限。
+- [ ] 使用 `ps` 和 `top` 监控系统进程，并使用 `kill` 终止进程。
+- [ ] 初始化 Git 仓库，进行提交，并查看历史记录。
+- [ ] 为 GitHub 设置 SSH 密钥，并练习 `git clone`、`push`、`pull`。
+- [ ] 创建一个简单的 LaTeX 文档并将其编译为 PDF。
+- [ ] 编写一个接受用户输入或命令行参数的基本 Shell 脚本。
+
+## 评估提醒
+- **实验练习第 5 周 - Unix (15%) - 2025 年 10 月 24 日**：Unix 课程学生的评估。
+
+## 内容索引（第 5 周子页）
+| 模块 | 页面 |
+|---|---|
+| Unix 命令行 | [文本文件处理](/zh/notes/semester-1/COMPSCI4084/week5/text-file-processing) |
+| Unix 安全 | [字符串、错误与编译器警告](/zh/notes/semester-1/COMPSCI4084/week5/strings-bugs-compiler-warnings) |
+| Unix 系统管理 | [用户与权限管理 - 进程与作业](/zh/notes/semester-1/COMPSCI4084/week5/user-permissions-processes-jobs) |
+| 文档处理 | [LaTeX 文档处理](/zh/notes/semester-1/COMPSCI4084/week5/latex) |
+| 版本控制 | [Git 基础：单用户版本控制](/zh/notes/semester-1/COMPSCI4084/week5/git-basics) |
+| 版本控制 | [Git 远程协作：使用共享仓库](/zh/notes/semester-1/COMPSCI4084/week5/git-remote-collaboration) |
+| 文本编辑 | [Vi 速查表：Vi 编辑器基本命令](/zh/notes/semester-1/COMPSCI4084/week5/vi-cheat-sheet) |
+| Shell 脚本 | [Linux 实验：命令行基础与 Shell 脚本编程](/zh/notes/semester-1/COMPSCI4084/week5/linux-lab-final) |
+
+## 材料索引
+> 注意：以下链接仅指向仓库中存在的 Markdown (.md) 版本，作为笔记内容的唯一来源。
+
+### 预读材料 - Class 8 - Unix
+- [文本文件处理 (MD)](../../materials/semester-1/COMPSCI4084-programming-systems/resources/Text_File_Processing.md)
+- [字符串、错误与编译器警告 (MD)](../../materials/semester-1/COMPSCI4084-programming-systems/resources/Strings_Bugs_and_Compiler_Warnings.md)
+- [用户与权限管理 – 进程与作业 (MD)](../../materials/semester-1/COMPSCI4084-programming-systems/resources/User_and_Permissions_Management_-_Processes_and_Jobs.md)
+
+### 实验材料 - Class 8 Unix
+- [Latex (MD)](../../materials/semester-1/COMPSCI4084-programming-systems/resources/5_latex.md)
+- [git (MD)](../../materials/semester-1/COMPSCI4084-programming-systems/resources/6_git.md)
+- [Git2 (MD)](../../materials/semester-1/COMPSCI4084-programming-systems/resources/7_git2.md)
+
+### 预读材料 - Class 9 - Unix
+- [vi 速查表 (MD)](../../materials/semester-1/COMPSCI4084-programming-systems/resources/15-vi-cheat-sheet.md)
+
+### 实验材料 - Class 9 Unix
+- [Unix 实验材料 - 20/10/25 (MD)](../../materials/semester-1/COMPSCI4084-programming-systems/resources/Linux_Lab_10_10_2023_final.md)
+
+---
+## 更新记录
+- 2025-10-22：初次创建。

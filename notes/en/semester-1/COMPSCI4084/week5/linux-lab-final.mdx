@@ -1,0 +1,176 @@
+---
+title: "Linux Lab: Command Line Fundamentals and Shell Scripting"
+description: "An introduction to the Linux command line, covering basic navigation, file operations, essential utilities, and shell scripting fundamentals."
+---
+
+## Overview
+- **Objective**: This note serves as a comprehensive guide to mastering the Linux command line, enabling efficient interaction with the operating system, effective file management, process control, and basic automation through shell scripting. It aims to build foundational skills for both desktop and remote server environments.
+- **Scope**: Covers essential command-line concepts from basic navigation (`pwd`, `cd`, `ls`) and file manipulation (`echo`, `mkdir`, `mv`, `cp`, `rm`) to powerful utilities (`cat`, `head`, `tail`, `ps`, `kill`, `man`). It also introduces the fundamentals of shell scripting, including creating, running, and making scripts interactive with user input and command-line arguments.
+
+## Learning Objectives
+1. Be able to navigate the Linux file system efficiently using various commands and addressing methods.
+2. Master basic file and directory operations, including creation, moving, copying, and deletion.
+3. Understand and utilize essential Linux utilities for viewing file content, monitoring processes, and accessing command manuals.
+4. Gain foundational knowledge in shell scripting, enabling the creation and execution of simple automation scripts.
+5. Develop an understanding of command-line arguments and user input in shell scripts for increased flexibility.
+
+## Key Knowledge Points
+
+### 1. Command Line Basics and Navigation
+- **Motivation**: The Linux command line offers a powerful and efficient way to interact with the system, often surpassing graphical interfaces, especially for automation and remote server management. Understanding its basics is fundamental for any Linux user.
+- **Core Concepts**:
+  - **Terminal**: A text-based interface for interacting with the operating system.
+  - `ssh`: Secure Shell, used to connect to remote Linux machines (e.g., `ssh user@host`).
+  - `pwd`: Print Working Directory, shows your current location in the file system.
+  - `cd [directory]`: Change Directory, moves you to a specified directory.
+  - `ls`: List contents of a directory. `ls -l` for long listing, `ls -a` for all files (including hidden).
+  - **Case Sensitivity**: Linux commands and filenames are case-sensitive.
+  - **File Structure**: Hierarchical, with `/` (root) at the top.
+  - **Tab Completion**: Pressing `Tab` auto-completes commands and filenames, saving time and preventing typos.
+  - `~`: Represents the current user's home directory.
+  - `*`: Wildcard character, matches any sequence of characters.
+- **Usage Scenarios/Patterns**:
+  - Connecting to a university cloud VM or remote server.
+  - Finding your current location and moving between directories.
+  - Listing files to see directory contents.
+  - Using wildcards to filter `ls` output (e.g., `ls p*`).
+- **Example**:
+```bash
+# Example: Navigating the file system
+# Description: Connects to a remote machine, checks current directory, moves to root, lists contents, then returns home.
+ssh your_GUID_username@10.224.160.71
+pwd
+cd /
+ls
+cd ~
+pwd
+```
+- **Notes/Best Practices**:
+  - Always remember Linux is case-sensitive.
+  - Use `Tab` completion extensively to speed up your workflow.
+  - Understand the hierarchical file system structure.
+- **Summary**: Mastering basic command-line navigation is the first step to efficiently managing a Linux system, enabling users to move around and inspect the file system effectively.
+
+---
+
+### 2. File and Directory Management
+- **Motivation**: Efficiently creating, moving, copying, and deleting files and directories are daily tasks for any Linux user. These commands provide precise control over your data organization.
+- **Core Concepts**:
+  - `echo [text]`: Writes text to the screen. Can redirect output to a file using `>`.
+  - `> [filename]`: Redirects standard output to a file. Creates the file if it doesn't exist, overwrites if it does.
+  - `mkdir [directory_name]`: Creates a new directory.
+  - `mv [source] [destination]`: Moves or renames files/directories.
+  - `cp [source] [destination]`: Copies files/directories.
+  - `rm [file]`: Removes (deletes) files.
+  - `rmdir [directory]`: Removes empty directories.
+- **Usage Scenarios/Patterns**:
+  - Creating text files with specific content.
+  - Organizing files into new directories.
+  - Backing up important files.
+  - Cleaning up unwanted files or empty folders.
+- **Example**:
+```bash
+# Example: Creating, moving, and copying files
+# Description: Creates a text file, a directory, moves the file, and copies another.
+echo "Hello World" > file1.txt
+mkdir test_dir
+mv file1.txt test_dir/
+cp test_dir/file1.txt test_dir/file2.txt
+ls test_dir
+```
+- **Notes/Best Practices**:
+  - Be careful with `rm`, as deleted files are not easily recoverable.
+  - `mv` moves a file, `cp` creates a duplicate.
+  - Use `rmdir` only for empty directories; `rm -r` for non-empty ones (with caution).
+- **Summary**: Linux provides a robust set of commands for managing files and directories, offering granular control over data organization and manipulation.
+
+---
+
+### 3. Essential Utilities: `cat`, `head`, `tail`, `ps`, `kill`, `man`
+- **Motivation**: Beyond basic file management, a set of powerful utilities helps users view file contents, inspect processes, and access documentation, crucial for troubleshooting and system understanding.
+- **Core Concepts**:
+  - `cat [file]`: Concatenate files and print to standard output. Often used to display file contents.
+  - `head [file]`: Displays the first few lines of a file (default 10). `head -n [num] [file]` for specific number of lines.
+  - `tail [file]`: Displays the last few lines of a file (default 10). `tail -n [num] [file]` for specific number of lines.
+  - `ps`: Process Status, shows currently running processes. `ps -f` for full format listing.
+  - `kill [PID]`: Sends a signal to a process, typically to terminate it. `kill -9 [PID]` for forceful termination.
+  - `man [command]`: Manual, displays the manual page for a given command, providing detailed information on its usage and options.
+- **Usage Scenarios/Patterns**:
+  - Quickly viewing the entire content of a small file (`cat`).
+  - Checking log files for recent entries (`tail`).
+  - Identifying and terminating misbehaving processes (`ps`, `kill`).
+  - Learning about new commands or options (`man`).
+- **Example**:
+```bash
+# Example: Viewing file content and managing processes
+# Description: Displays the first 3 lines of a file, starts a background process, and then kills it.
+echo -e "1\n2\n3\n4\n5" > numbers.txt
+head -n 3 numbers.txt
+sleep 100 &
+ps -f
+kill [PID_of_sleep_process]
+man ls
+```
+- **Notes/Best Practices**:
+  - `cat` is useful for small files; for large files, `less` or `more` are better.
+  - `tail -f` can be used to follow a file as it grows (e.g., log files).
+  - Be cautious with `kill -9`, as it can lead to data loss if the process doesn't shut down gracefully.
+  - `man` is your best friend for learning about any command.
+- **Summary**: Essential utilities provide powerful capabilities for inspecting file contents, monitoring and controlling processes, and accessing comprehensive documentation, enhancing a user's ability to manage and troubleshoot a Linux system.
+
+---
+
+### 4. Shell Scripting Fundamentals
+- **Motivation**: Shell scripting allows you to automate repetitive tasks by grouping a series of commands into a single executable text file. This significantly boosts efficiency and consistency in system administration and development workflows.
+- **Core Concepts**:
+  - **Script**: A text file containing a series of commands.
+  - **Shebang**: `#!/bin/bash` (or similar) at the beginning of a script, specifies the interpreter.
+  - **Execution**: `./script_name` (requires execute permissions, `chmod +x script_name`).
+  - **User Input**: `read -p "Prompt: " variable` reads user input into a variable.
+  - **Command Line Arguments**: `$1`, `$2`, `$3`, etc., refer to the first, second, third command-line arguments passed to the script.
+- **Usage Scenarios/Patterns**:
+  - Automating daily backups.
+  - Setting up development environments.
+  - Performing complex file operations.
+  - Creating interactive tools for users.
+- **Example**:
+```bash
+# Example: Simple shell script with user input and arguments
+# Description: A script that greets the user and lists files in a specified directory.
+
+#!/bin/bash
+
+# Script: greet_and_list.sh
+# Usage: ./greet_and_list.sh [directory]
+
+read -p "Enter your name: " NAME
+echo "Hello, $NAME!"
+
+if [ -z "$1" ]; then
+  echo "No directory specified. Listing current directory:"
+  ls
+else
+  echo "Listing files in $1:"
+  ls "$1"
+fi
+```
+- **Notes/Best Practices**:
+  - Always add a shebang line to your scripts.
+  - Make scripts executable using `chmod +x`.
+  - Use double quotes around variables (`"$1"`, `"$NAME"`) to prevent issues with spaces.
+  - Test scripts incrementally to debug errors.
+- **Summary**: Shell scripting is a fundamental skill for Linux users, enabling automation of tasks, creation of custom tools, and efficient management of complex workflows through combining existing commands.
+
+---
+
+## Best Practices
+- **Practice Regularly**: Consistent practice with the command line is the best way to build proficiency and speed.
+- **Use `man` for Help**: When in doubt about a command or its options, consult its manual page using `man [command]`.
+- **Understand Case Sensitivity**: Always remember that Linux is case-sensitive for commands, filenames, and arguments.
+- **Leverage Tab Completion**: Use `Tab` to auto-complete commands and paths, reducing typing and errors.
+- **Combine Commands with Pipes**: Learn to chain commands using `|` to create powerful data processing pipelines.
+- **Start Simple with Scripting**: Begin with small, simple scripts and gradually build complexity.
+
+---
+## Update History
+- 2025-10-22: Initial creation.

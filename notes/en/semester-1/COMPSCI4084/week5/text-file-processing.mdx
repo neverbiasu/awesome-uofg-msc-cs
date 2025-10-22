@@ -1,0 +1,171 @@
+---
+title: "Text File Processing"
+description: "Master essential Unix commands like grep, sort, uniq, wc, tr, sed, and curl for efficient text file manipulation and cybersecurity log analysis."
+---
+
+## Overview
+- **Objective**: This note aims to teach essential Unix commands for effective text file processing, focusing on their application in system administration and cybersecurity log analysis.
+- **Scope**: Covers fundamental commands such as `grep`, `sort`, `uniq`, `wc`, `tr`, `sed`, and `curl`, demonstrating their syntax, common options, and practical use cases for data extraction, transformation, and analysis.
+
+## Learning Objectives
+1. Master the `grep` command for searching patterns within text files and logs.
+2. Understand how to use `sort` and `uniq` in combination for data aggregation and identifying unique entries.
+3. Be able to utilize `wc` for counting lines, words, and characters in files.
+4. Learn to transform and delete characters using the `tr` command.
+5. Gain proficiency in `sed` for stream editing, including finding and replacing text.
+6. Familiarize with `curl` for transferring data to or from servers, useful for reconnaissance and testing.
+
+## Key Knowledge Points
+
+### 1. Finding Lines: `grep`
+- **Motivation**: `grep` is indispensable for quickly locating specific information within large text files, such as system logs, configuration files, or codebases, making it a cornerstone for troubleshooting and security analysis.
+- **Core Concepts**:
+  - Searches for lines matching a pattern.
+  - Linux `grep` combines functionalities of `egrep` (extended regex with `-E`) and `fgrep` (fixed strings with `-F`).
+  - Common options: `-i` (ignore case), `-v` (invert match), `-c` (count matches), `-n` (show line numbers), `-r` (recursive).
+- **Usage Scenarios/Patterns**:
+  - Searching logs for error messages or suspicious activity.
+  - Filtering configuration files for specific settings.
+  - Counting occurrences of a pattern.
+- **Example**:
+```bash
+# Example: Searching for "ALERT" in a security log
+# Description: Finds all lines containing the word "ALERT" in security.log.
+grep "ALERT" security.log
+```
+- **Notes/Best Practices**:
+  - Use regular expressions for flexible pattern matching.
+  - Combine with other commands using pipes (`|`) for complex workflows.
+  - Be mindful of case sensitivity; use `-i` if needed.
+- **Summary**: `grep` is a powerful tool for pattern-based text searching, crucial for log analysis and data filtering.
+
+---
+
+### 2. Sorting and Counting Unique Lines: `sort` and `uniq`
+- **Motivation**: In log analysis, data often contains repeated entries. `sort` and `uniq` are used together to group similar entries, count their occurrences, and identify patterns, which is vital for detecting anomalies like brute-force attacks.
+- **Core Concepts**:
+  - `sort`: Sorts lines of text files. Common options: `-r` (reverse order), `-n` (numeric sort), `-k` (sort by key/column).
+  - `uniq`: Reports or omits repeated lines. **Crucially, `uniq` only detects adjacent duplicate lines.**
+  - `uniq -c`: Counts occurrences of each unique line.
+- **Usage Scenarios/Patterns**:
+  - Identifying top attackers from security logs by counting IP addresses.
+  - Grouping similar events in system logs.
+  - Analyzing web server access logs for most frequent requests.
+- **Example**:
+```bash
+# Example: Finding the top 3 attacking IPs from a security log
+# Description: Extracts ALERT lines, then IPs, sorts them, counts unique occurrences, and shows the top 3.
+grep "ALERT" security.log | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | sort | uniq -c | sort -nr | head -n 3
+```
+- **Notes/Best Practices**:
+  - **Always `sort` before `uniq`** to ensure all duplicates are adjacent and counted correctly.
+  - Use `sort -nr` to order counts from highest to lowest.
+- **Summary**: `sort` and `uniq` are a powerful combination for aggregating and analyzing repetitive data, especially in log files.
+
+---
+
+### 3. Counting Words, Lines, and Characters: `wc`
+- **Motivation**: `wc` provides quick statistics about text files, such as their length (lines), complexity (words), or size (characters/bytes), useful for quick assessments or scripting.
+- **Core Concepts**:
+  - `wc`: Stands for "word count". Prints counts of lines, words, and characters/bytes.
+  - Common options: `-l` (line count), `-w` (word count), `-c` (byte count), `-m` (character count).
+- **Usage Scenarios/Patterns**:
+  - Checking the number of lines in a log file.
+  - Counting words in a document.
+  - Determining file size in bytes.
+- **Example**:
+```bash
+# Example: Count lines in security.log
+# Description: Displays the total number of lines in security.log.
+wc -l security.log
+```
+- **Notes/Best Practices**:
+  - Use specific options (`-l`, `-w`, `-c`) for targeted counts.
+  - Can be used in pipelines to count output from other commands.
+- **Summary**: `wc` is a simple yet effective utility for obtaining basic statistical counts from text data.
+
+---
+
+### 4. Translating and Deleting Characters: `tr`
+- **Motivation**: `tr` is used for character-by-character translation or deletion, useful for cleaning data, standardizing formats, or simple encryption/decryption tasks.
+- **Core Concepts**:
+  - `tr`: Substitutes or deletes characters from standard input.
+  - `-d`: Deletes specified characters.
+  - Without options, maps one set of characters to another.
+- **Usage Scenarios/Patterns**:
+  - Converting lowercase to uppercase.
+  - Removing unwanted characters (e.g., punctuation, special symbols).
+  - Replacing specific characters with others.
+- **Example**:
+```bash
+# Example: Convert lowercase vowels to uppercase
+# Description: Replaces all lowercase vowels in input with their uppercase equivalents.
+echo "hello world" | tr 'aeiou' 'AEIOU'
+# Output: hEllO wOrld
+```
+- **Notes/Best Practices**:
+  - Operates on standard input; typically used with pipes.
+  - Character sets can be defined using ranges (e.g., `a-z`).
+- **Summary**: `tr` is a versatile command for character-level data transformation and cleaning.
+
+---
+
+### 5. Stream Editor: `sed`
+- **Motivation**: `sed` is a powerful stream editor that processes text line by line, allowing for automated non-interactive editing, such as finding and replacing text, inserting, or deleting lines. It's more powerful than `grep` for modifications.
+- **Core Concepts**:
+  - `sed`: Processes text line by line.
+  - `s/pattern/replacement/g`: Substitute `pattern` with `replacement` globally on each line.
+  - `-i`: Edit files in place.
+- **Usage Scenarios/Patterns**:
+  - Replacing specific strings in multiple files.
+  - Deleting lines matching a pattern.
+  - Inserting content at specific line numbers.
+- **Example**:
+```bash
+# Example: Replace "Holmes" with "Detective" in a file
+# Description: Substitutes all occurrences of "Holmes" with "Detective" in the test file.
+echo "Sherlock Holmes lived at 221B Baker Street." > test.txt
+sed 's/Holmes/Detective/g' test.txt
+# Output: Sherlock Detective lived at 221B Baker Street.
+```
+- **Notes/Best Practices**:
+  - Always test `sed` commands on a copy of the file or without `-i` first to avoid unintended changes.
+  - Regular expressions can be used in patterns.
+- **Summary**: `sed` is an essential tool for automated text manipulation and transformation, especially useful for scripting and batch processing.
+
+---
+
+### 6. Client URL: `curl`
+- **Motivation**: `curl` is a command-line tool for transferring data with URL syntax, supporting various protocols. It's invaluable in cybersecurity for reconnaissance, testing APIs, automating downloads, and incident response.
+- **Core Concepts**:
+  - `curl`: Stands for "Client URL". Transfers data to or from a server.
+  - Supports HTTP, HTTPS, FTP, etc.
+  - Common options: `-o` (output to file), `-s` (silent mode), `-I` (show headers only).
+- **Usage Scenarios/Patterns**:
+  - Downloading web pages or files.
+  - Inspecting HTTP headers for security vulnerabilities.
+  - Sending requests to APIs for testing.
+  - Automating data retrieval from web sources.
+- **Example**:
+```bash
+# Example: Download a webpage silently to a file
+# Description: Downloads the BBC news article to example.html without showing progress.
+curl -s -o example.html https://www.bbc.co.uk/news/articles/czxwll89e79o
+```
+- **Notes/Best Practices**:
+  - Use `-s` for scripting to suppress progress meters.
+  - Be aware of legal and ethical implications when scraping or testing websites.
+- **Summary**: `curl` is a versatile command-line client for interacting with web services, crucial for network-related tasks in development and cybersecurity.
+
+---
+
+## Best Practices
+- **Pipe Commands**: Chain commands together using `|` to create powerful data processing pipelines.
+- **Test Incrementally**: Build complex commands step-by-step, testing each part to ensure correctness.
+- **Backup Files**: Before making in-place edits with `sed -i`, always back up your original files.
+- **Understand Regex**: Invest time in learning regular expressions for advanced pattern matching with `grep` and `sed`.
+- **Contextual Use**: Always consider the context (e.g., log analysis, data cleaning) to choose the most appropriate tool.
+
+---
+## Update History
+- 2025-10-22: Initial creation.
