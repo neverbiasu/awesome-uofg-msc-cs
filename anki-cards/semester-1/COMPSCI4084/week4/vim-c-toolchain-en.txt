@@ -1,0 +1,15 @@
+What are the three main modes in Vim?	Normal, Insert, and Visual.
+What is Vim's Normal Mode used for?	Navigation and issuing commands (e.g., deleting, copying).
+How do you enter Vim's Insert Mode?	Press i, a, or o.
+How do you return to Vim's Normal Mode from other modes?	Press Esc.
+In Vim (Normal mode), how do you save the file?	:w
+In Vim (Normal mode), how do you quit without saving changes?	:q!
+In Vim (Normal mode), how do you save the file and quit?	:wq
+In Vim (Normal mode), what command deletes the current line?	dd
+In Vim (Normal mode), what command copies (yanks) the current line?	yy
+In Vim (Normal mode), what command pastes content?	p
+What are the three main steps in the C toolchain workflow?	Edit, Compile, Run.
+What is the standard command to compile a C file with GCC?	gcc filename.c -o outputname
+What does the -o flag do in GCC?	Specifies the name of the output executable file.
+How do you execute a compiled C program named `hello`?	./hello
+What is a best practice for Vim efficiency?	Live in Normal Mode, only entering Insert Mode to type.

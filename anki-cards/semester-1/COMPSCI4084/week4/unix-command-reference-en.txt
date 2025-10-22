@@ -1,0 +1,26 @@
+What command lists directory contents?	ls
+What command lists directory contents, including hidden files, in long format?	ls -al
+What command changes the current directory?	cd
+What command shows the current working directory?	pwd
+What command creates a new directory?	mkdir
+What command deletes a file?	rm
+What command recursively deletes a directory?	rm -r
+What command copies files?	cp
+What command moves or renames files?	mv
+What command creates a symbolic link?	ln -s
+What command creates or updates a file's timestamp?	touch
+What command displays file content page by page?	more or less
+What command displays the last 10 lines of a file?	tail
+What command displays currently active processes?	ps
+What command kills a process by its ID?	kill pid
+What command changes file permissions?	chmod
+What octal value represents read permission?	4
+What octal value represents write permission?	2
+What octal value represents execute permission?	1
+What does chmod 755 file mean?	Owner rwx, group r-x, world r-x.
+What command connects to a remote host via SSH?	ssh user@host
+What command searches for a pattern in files?	grep
+What command shows the manual page for a command?	man
+What command shows disk usage?	df
+What command creates a tar archive?	tar cf
+What command extracts a zip archive?	unzip
