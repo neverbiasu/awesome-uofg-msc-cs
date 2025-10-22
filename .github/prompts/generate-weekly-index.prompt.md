@@ -40,7 +40,7 @@ The generated `index.mdx` must follow this exact structure:
 ### 1. Frontmatter
 ```yaml
 ---
-title: "Week [X] 总览"
+title: "Week [X]"
 description: "Week [X] 精简学习笔记（[theme1], [theme2], [theme3]）"
 ---
 ```
