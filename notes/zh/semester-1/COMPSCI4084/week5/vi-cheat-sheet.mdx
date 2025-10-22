@@ -1,0 +1,169 @@
+---
+title: "Vi 速查表：Vi 编辑器基本命令"
+description: "Vi 编辑器常用命令的快速参考指南，包括导航、文本操作、搜索和文件操作。"
+---
+
+## 概要
+- **目标**：本笔记为 `vi` 编辑器（Unix 类系统中强大且无处不在的文本编辑器）的基本命令提供了一个简洁方便的参考。旨在帮助用户快速回忆和应用 `vi` 命令，以提高文本编辑效率。
+- **范围**：涵盖 `vi` 的基本操作，例如光标移动、文本插入、删除、替换、复制、粘贴、模式搜索、重复命令以及保存/退出文件。它还包括基本的帮助和查找/替换功能。
+
+## 学习目标
+1. 掌握 `vi` 编辑器的基本导航命令，以实现高效的光标移动。
+2. 能够在 `vi` 中有效地插入、删除和替换文本。
+3. 学习使用 `vi` 命令进行文本搜索和复制粘贴操作。
+4. 熟悉 `vi` 的保存和退出操作。
+5. 了解如何使用 `vi` 的帮助和查找/替换功能。
+
+## 关键知识点
+
+### 1. 移动命令
+- **动机**：高效导航是 `vi` 中高效文本编辑的关键。这些命令允许您精确移动光标，而无需使用鼠标。
+- **核心概念**：
+  - `h`：光标左移。
+  - `j`：光标下移。
+  - `k`：光标上移。
+  - `l`：光标右移。
+  - `^`：移动到行首。
+  - `$`：移动到行尾。
+  - `gg`：移动到文档第一行。
+  - `G`：移动到文档最后一行。
+  - `:n`：移动到第 `n` 行。
+- **示例**：
+```bash
+# Example: Moving to the 10th line in vi
+# Description: Opens a file in vi and moves the cursor to the 10th line.
+vi myfile.txt
+:10
+```
+- **小结**：`vi` 移动命令能够实现文档中精确快速的光标定位。
+
+---
+
+### 2. 插入和删除文本
+- **动机**：快速添加和删除文本是任何编辑器的基本功能。`vi` 提供了各种命令，用于在不同位置插入文本以及删除字符、单词或行。
+- **核心概念**：
+  - **插入文本**：
+    - `i`：在当前光标位置插入文本。
+    - `I`：在当前行首插入文本。
+    - `a`：在当前光标位置后追加文本。
+    - `A`：在当前行尾追加文本。
+    - `o`：在当前行下方打开新行并插入文本。
+    - `O`：在当前行上方打开新行并插入文本。
+  - **删除文本**：
+    - `x`：删除光标下的字符。
+    - `dd`：删除当前行。
+    - `dw`：删除当前单词。
+    - `d{motion}`：删除从光标到 `{motion}` 的内容（例如，`d$` 删除到行尾）。
+- **示例**：
+```bash
+# Example: Inserting and deleting text in vi
+# Description: Opens a file, inserts text at the end of a line, and then deletes a word.
+vi myfile.txt
+A This is new text. # Append text at end of line
+# (Press Esc to exit insert mode)
+dw # Delete a word
+```
+- **小结**：`vi` 提供了灵活的插入和删除文本命令，可实现高效的内容修改。
+
+---
+
+### 3. 替换、复制和粘贴文本
+- **动机**：修改现有文本、复制内容和移动内容是常见的编辑任务。`vi` 为这些操作提供了强大的命令。
+- **核心概念**：
+  - **替换文本**：
+    - `r`：替换光标下的单个字符。
+    - `cw`：更改（替换）当前单词。
+    - `cc`：更改（替换）当前行。
+    - `c{motion}`：更改从光标到 `{motion}` 的内容。
+  - **复制/粘贴**：
+    - `y{motion}`：提取（复制）从光标到 `{motion}` 的文本。
+    - `yy`：提取（复制）当前行。
+    - `p`：在光标后粘贴文本。
+    - `P`：在光标前粘贴文本。
+- **示例**：
+```bash
+# Example: Copying and pasting a line in vi
+# Description: Opens a file, copies the current line, and pastes it below.
+vi myfile.txt
+yy # Yank (copy) the current line
+p # Paste the copied line below the current line
+```
+- **小结**：`vi` 的替换、复制和粘贴文本命令可实现快速内容操作和重组。
+
+---
+
+### 4. 搜索和重复命令
+- **动机**：快速查找特定文本和重复以前的操作可以显著加快编辑速度。`vi` 具有强大的搜索功能和简单的重复命令机制。
+- **核心概念**：
+  - **搜索**：
+    - `/{pattern}`：向前搜索 `{pattern}`。
+    - `?{pattern}`：向后搜索 `{pattern}`。
+    - `n`：在同一方向重复上次搜索。
+    - `N`：在相反方向重复上次搜索。
+  - **重复命令**：
+    - `{num}{command}`：重复 `command` `{num}` 次（例如，`5dd` 删除 5 行）。
+    - `.`：重复上次更改（例如，上次插入或删除操作）。
+- **示例**：
+```bash
+# Example: Searching for a word and repeating a command in vi
+# Description: Opens a file, searches for "error", and then deletes the next 3 lines.
+vi myfile.txt
+/error # Search for "error"
+# (Cursor moves to the first occurrence)
+3dd # Delete the next 3 lines
+```
+- **小结**：`vi` 的搜索和重复功能允许快速导航到相关文本并高效执行重复编辑任务。
+
+---
+
+### 5. 保存、退出和帮助
+- **动机**：了解如何正确保存工作、退出编辑器和访问帮助对于任何 `vi` 用户都至关重要。
+- **核心概念**：
+  - **保存和退出**：
+    - `:w`：写入（保存）更改到文件。
+    - `:wq`：写入并退出。
+    - `:q`：退出（仅当未进行任何更改时）。
+    - `:q!`：强制退出，放弃未保存的更改。
+    - `:wq!`：强制写入并退出（覆盖只读状态）。
+  - **帮助**：
+    - `:help [topic/command]`：获取有关特定主题或命令的帮助。
+    - `vimtutor`：`vi`/`Vim` 的交互式教程。
+- **示例**：
+```bash
+# Example: Saving and quitting in vi
+# Description: Saves changes to myfile.txt and then quits the editor.
+vi myfile.txt
+# (Make some edits)
+:wq
+```
+- **小结**：管理文件状态和访问内置帮助的基本命令确保了流畅的 `vi` 编辑体验。
+
+---
+
+### 6. 查找和替换（替换）
+- **动机**：对于更复杂的文本转换，`vi`（和 `Vim`）提供了强大的替换命令，允许您查找模式并将其替换为新文本，无论是在单行还是在整个文档中。
+- **核心概念**：
+  - `:s/{old}/{new}/{options}`：在当前行上用 `{new}` 替换 `{old}`。
+  - `:%s/{old}/{new}/{options}`：在整个文档中用 `{new}` 替换 `{old}`。
+  - `g` 选项：替换行上的所有匹配项；否则，每行只更改第一个匹配项。
+- **示例**：
+```bash
+# Example: Replacing a word globally in vi
+# Description: Replaces all occurrences of "error" with "warning" throughout the entire document.
+vi myfile.txt
+:%s/error/warning/g
+```
+- **小结**：`vi` 的替换命令提供了高级的查找和替换功能，对于重构和大规模文本修改至关重要。
+
+---
+
+## 最佳实践
+- **定期练习**：掌握 `vi` 的最佳方法是持续练习。使用 `vimtutor` 开始。
+- **理解模式**：请记住 `vi` 在不同模式下操作（普通模式、插入模式、可视模式、命令行模式）。始终知道您处于哪种模式。
+- **使用命令链**：组合移动和操作命令（例如，`d$` 删除到行尾）以提高效率。
+- **利用搜索**：使用 `/` 和 `?` 快速导航到特定文本。
+- **频繁保存**：使用 `:w` 定期保存您的工作。
+
+---
+## 更新记录
+- 2025-10-22：初次创建。

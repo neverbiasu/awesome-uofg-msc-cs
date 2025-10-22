@@ -1,0 +1,123 @@
+---
+title: "Git Basics: Version Control for Single Users"
+description: "An introduction to Git, covering local repository setup, basic commands (init, status, add, commit, log, diff), and methods for undoing changes."
+---
+
+## Overview
+- **Objective**: This note aims to introduce the fundamental concepts and commands of Git, a powerful distributed version control system. It focuses on how a single user can effectively track changes, manage project history, and collaborate on codebases.
+- **Scope**: Covers the importance of version control, the distributed nature of Git, setting up a local repository, the core workflow (staging, committing), essential commands like `git init`, `git status`, `git add`, `git commit`, `git log`, `git diff`, and various methods for undoing changes at different stages.
+
+## Learning Objectives
+1. Understand the importance and benefits of using a version control system like Git.
+2. Be able to initialize a local Git repository and understand its basic structure.
+3. Master the core Git workflow: staging changes, committing them, and viewing the project history.
+4. Learn to use essential Git commands for checking status, adding files, committing changes, and viewing differences.
+5. Understand and apply different methods for undoing changes in Git, including unstaged, staged, and committed modifications.
+
+## Key Knowledge Points
+
+### 1. Introduction to Git and Version Control
+- **Motivation**: Tracking changes in files is crucial for any project, especially in software development with multiple source code files and contributors. Version Control Systems (VCS) provide a systematic way to manage these changes, allowing for collaboration, history tracking, and easy rollback.
+- **Core Concepts**:
+  - **Version Control System (VCS)**: A system that records changes to a file or set of files over time so that you can recall specific versions later.
+  - **Distributed VCS**: Each user has their own complete local repository, including the full change history. Copies can be synchronized between multiple users.
+  - **Repository**: The full set of change history for a project.
+  - **Git**: The most common distributed VCS tool, originally invented by Linus Torvalds.
+  - **Centralized Repo Servers**: Platforms like GitHub, Bitbucket, and GitLab facilitate easy synchronization and often provide continuous integration services.
+- **Usage Scenarios/Patterns**:
+  - Managing source code for software projects.
+  - Tracking changes in documents, configurations, or any text-based files.
+  - Collaborating with teams on shared projects.
+- **Example**:
+```bash
+# Example: Setting up Git user information
+# Description: Configures the user name and email for Git commits. This is a one-time setup.
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
+```
+- **Notes/Best Practices**:
+  - Choose a sensible username for your GitHub/GitLab account, as it can be part of your professional identity.
+  - Always configure your Git user name and email for proper attribution of commits.
+- **Summary**: Git is a powerful distributed version control system essential for tracking project changes, enabling collaboration, and maintaining a complete history of a codebase.
+
+---
+
+### 2. Initializing a Local Repository and Basic Workflow
+- **Motivation**: To start tracking changes for a project with Git, you first need to initialize a repository. Once initialized, you follow a basic workflow to record changes: modify files, stage them, and then commit them.
+- **Core Concepts**:
+  - `git init`: Initializes a new Git repository in the current directory. Creates a hidden `.git` directory that stores all repository metadata.
+  - `git status`: Shows the current state of the working directory and the staging area. It tells you which changes have been staged, which haven't, and which files aren't being tracked by Git.
+  - `git add [file]`: Stages changes for the next commit. It tells Git to start tracking a new file or to include changes from an existing file in the next commit.
+  - `git commit -m "message"`: Records the staged changes into the repository as a new changeset (a snapshot of your project). The `-m` flag allows for a short summary message.
+  - `git log`: Displays the commit history, showing commit hashes, authors, dates, and commit messages.
+  - `git diff`: Shows changes between the working directory and the staging area, or between the staging area and the last commit.
+- **Usage Scenarios/Patterns**:
+  - Starting a new project under version control.
+  - Regularly saving snapshots of your work.
+  - Reviewing changes before committing.
+  - Understanding the history of a file or project.
+- **Example**:
+```bash
+# Example: Basic Git workflow
+# Description: Initializes a repo, creates a file, adds it, and commits it.
+mkdir my_project
+cd my_project
+git init
+echo "Hello Git" > README.md
+git add README.md
+git commit -m "Initial commit: Add README.md"
+git log --oneline
+```
+- **Notes/Best Practices**:
+  - Commit frequently with small, logical changes.
+  - Write clear and concise commit messages that explain *why* the change was made, not just *what* was changed.
+  - Use `git status` often to keep track of your working directory.
+- **Summary**: The core Git workflow involves initializing a repository, staging changes with `git add`, and recording them with `git commit`, allowing for a clear and traceable project history.
+
+---
+
+### 3. Undoing Changes in Git
+- **Motivation**: Mistakes happen. Git provides powerful tools to undo changes at various stages, from unstaged modifications to committed snapshots, allowing developers to correct errors without losing work.
+- **Core Concepts**:
+  - **Unstaged Changes**: Modifications made to files that have not yet been added to the staging area (`git add`).
+  - **Staged Changes**: Modifications that have been added to the staging area, ready for the next commit.
+  - **Committed Changes**: Changes that have been permanently recorded in the repository's history.
+  - `git checkout -- [file]`: Undoes unstaged changes in a file, reverting it to its state in the last commit (or staged state if applicable). This can also restore a deleted file.
+  - `git reset [file]`: Undoes staged changes in a file, moving them back to the unstaged state. It does not discard changes.
+  - `git revert [commit_ID]`: Creates a *new commit* that undoes the changes introduced by a specified commit. This is the safest undo option as it preserves the project history, leaving a clear trail of the undo operation.
+- **Usage Scenarios/Patterns**:
+  - Discarding accidental edits to a file.
+  - Removing a file from the staging area before committing.
+  - Reversing a previous commit while maintaining a clean history.
+- **Example**:
+```bash
+# Example: Undoing unstaged and staged changes
+# Description: Demonstrates how to discard unstaged edits and unstage changes.
+echo "New line" >> README.md
+git status # Shows README.md as modified (unstaged)
+git checkout -- README.md # Discard unstaged changes
+
+echo "Another new line" >> README.md
+git add README.md
+git status # Shows README.md as staged
+git reset README.md # Unstage changes
+git status # Shows README.md as modified (unstaged) again
+```
+- **Notes/Best Practices**:
+  - `git revert` is generally preferred for undoing committed changes in shared repositories because it maintains a linear history.
+  - Be cautious with `git reset` (especially without a file path), as it can rewrite history and potentially lose work if not used correctly.
+  - Always understand the implications of each undo command before executing it.
+- **Summary**: Git offers flexible options for undoing changes, from simple file modifications to reversing entire commits, providing safety nets for managing project history effectively.
+
+---
+
+## Best Practices
+- **Commit Early, Commit Often**: Make small, frequent commits that represent logical units of work.
+- **Meaningful Commit Messages**: Write clear, concise, and descriptive commit messages that explain *why* changes were made.
+- **Use `git status` Regularly**: Stay informed about the state of your working directory and staging area.
+- **Understand Undo Options**: Familiarize yourself with `git checkout`, `git reset`, and `git revert` to safely manage changes.
+- **Backup Your Work**: While Git tracks history, always have external backups of critical projects.
+
+---
+## Update History
+- 2025-10-22: Initial creation.

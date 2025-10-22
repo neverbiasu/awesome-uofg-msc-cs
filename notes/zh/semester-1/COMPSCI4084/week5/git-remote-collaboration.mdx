@@ -1,0 +1,169 @@
+---
+title: "Git 远程协作：使用共享仓库"
+description: "Git 团队协作简介，涵盖 SSH 密钥设置、克隆远程仓库、推送/拉取更改以及解决合并冲突。"
+---
+
+## 概要
+- **目标**：本笔记旨在介绍 Git 在团队协作开发中的应用，重点关注如何使用远程仓库进行共享工作流程。它旨在帮助学习者掌握在分布式环境中有效协作所需的技能。
+- **范围**：涵盖 SSH 密钥的生成和注册、克隆远程仓库、推送本地更改、拉取远程更改以及处理合并冲突。它还包括 `git tag` 和 `git blame` 等高级功能，以增强项目管理和代码审查能力。
+
+## 学习目标
+1. 理解 Git 在团队协作和分布式版本控制中的作用。
+2. 能够设置 SSH 密钥以安全地访问和认证远程仓库。
+3. 掌握克隆远程仓库、推送本地更改和拉取远程更改的基本操作。
+4. 学习识别和解决 Git 合并冲突，这是团队协作中的常见挑战。
+5. 了解 `git tag` 和 `git blame` 命令的用途，以进行版本标记和代码归属追踪。
+
+## 关键知识点
+
+### 1. Git 协作和远程仓库
+- **动机**：在团队项目中，多个贡献者需要同时处理代码。Git 作为分布式版本控制系统，允许每个用户拥有完整的本地仓库，并通过远程仓库服务器（如 GitHub）轻松同步更改，从而实现高效协作。
+- **核心概念**：
+  - **分布式版本控制**：每个用户都有完整的本地仓库，包含所有更改历史。
+  - **远程仓库**：托管在服务器上的项目副本，用于团队成员之间的共享和同步。
+  - **GitHub/Bitbucket/GitLab**：提供远程仓库托管和持续集成服务的平台。
+  - `git push`：将本地更改发布到远程仓库。
+  - `git pull`：从远程仓库获取其他人的更改并合并到本地。
+- **使用场景/模式**：
+  - 团队成员共享代码库并进行并行开发。
+  - 将本地完成的功能发布到共享分支。
+  - 获取团队其他成员的最新代码更新。
+- **示例**：
+```bash
+# Example: Pushing local changes to a remote repository
+# Description: After committing local changes, use git push to send them to the remote 'origin' repository.
+git push origin main
+```
+- **注意事项/最佳实践**：
+  - 始终在推送之前拉取最新更改，以避免冲突。
+  - 远程仓库是团队协作的中心枢纽，保持其最新状态至关重要。
+- **小结**：Git 通过分布式仓库和远程同步机制，为团队协作提供了强大的支持，确保代码库的一致性和可追溯性。
+
+---
+
+### 2. SSH 密钥设置和安全认证
+- **动机**：为了安全地与远程 Git 仓库进行交互，尤其是在处理私有仓库时，SSH 密钥对提供了一种比用户名/密码更安全的认证方式，避免了每次操作都输入凭据的麻烦。
+- **核心概念**：
+  - **SSH 密钥对**：由一个公钥和一个私钥组成。公钥注册到远程仓库服务（如 GitHub），私钥保存在本地。
+  - `ssh-keygen -t rsa`：生成 RSA 类型的 SSH 密钥对。通常会提示输入密码，可以留空以实现无密码访问。
+  - **公钥注册**：将生成的公钥（通常是 `~/.ssh/id_rsa.pub` 文件内容）复制并粘贴到 GitHub 等平台的 SSH 密钥设置中。
+- **使用场景/模式**：
+  - 安全地克隆、推送和拉取私有 Git 仓库。
+  - 贡献到开源项目而无需每次都输入密码。
+- **示例**：
+```bash
+# Example: Generating an SSH key pair
+# Description: Runs the ssh-keygen command to create a new RSA SSH key pair.
+ssh-keygen -t rsa
+# Follow prompts, press Enter three times for default options.
+
+# Example: Displaying public key content for registration
+# Description: Uses cat to display the content of the public key file.
+cat ~/.ssh/id_rsa.pub
+```
+- **注意事项/最佳实践**：
+  - 保护好您的私钥，切勿分享。
+  - 定期检查和更新您的 SSH 密钥。
+  - 优先通过 SSH 而非 HTTPS 克隆仓库，以获得更安全的体验。
+- **小结**：SSH 密钥是与远程 Git 仓库进行安全、便捷交互的关键，通过公钥/私钥机制实现身份验证。
+
+---
+
+### 3. 克隆、推送和拉取远程仓库
+- **动机**：团队协作的核心在于共享和同步代码。`git clone` 用于获取远程仓库的本地副本，`git push` 用于上传本地更改，`git pull` 用于下载并合并远程更改，确保所有成员的代码保持最新。
+- **核心概念**：
+  - `git clone [repository_URL]`：将整个远程仓库复制到本地机器。它会创建一个新的目录，其中包含仓库的所有文件和完整的 Git 历史。
+  - `git remote show origin`：显示远程仓库的 URL，通常 `origin` 是默认的远程仓库名称。
+  - `git push`：将本地已提交的更改发送到远程仓库。通常需要指定远程仓库名称和分支名（例如 `git push origin main`）。
+  - `git pull`：从远程仓库获取最新更改并将其合并到当前本地分支。它相当于 `git fetch` 后跟 `git merge`。
+- **使用场景/模式**：
+  - 首次加入项目时获取代码库。
+  - 将本地完成的功能或修复上传到共享分支。
+  - 在开始新工作之前，确保本地代码与远程仓库同步。
+- **示例**：
+```bash
+# Example: Cloning a repository over SSH
+# Description: Clones the 'test-repo' from GitHub using SSH.
+git clone git@github.com:YOURNAME/test-repo
+
+# Example: Pushing local changes to remote
+# Description: Sends committed local changes to the remote repository.
+git push
+
+# Example: Pulling remote changes to local
+# Description: Fetches and merges changes from the remote repository.
+git pull
+```
+- **注意事项/最佳实践**：
+  - **始终在 `git push` 之前执行 `git pull`**，以避免冲突并确保您的本地仓库是最新的。
+  - `git clone` 会创建一个新的工作目录，其名称通常与仓库名称相同。
+- **小结**：克隆、推送和拉取是 Git 远程协作的核心操作，它们共同构成了团队成员之间代码共享和同步的循环。
+
+---
+
+### 4. 解决合并冲突
+- **动机**：当多个团队成员同时修改同一文件的同一部分时，Git 无法自动合并这些更改，就会发生合并冲突。解决冲突是团队协作中不可避免的一部分，需要手动干预以整合不同版本的代码。
+- **核心概念**：
+  - **合并冲突**：当 Git 无法自动将两个分支的更改合并在一起时发生。
+  - **冲突标记**：Git 会在冲突文件中插入特殊标记（`<<<<<<<`、`=======`、`>>>>>>>`），以显示不同版本之间的差异。
+  - **手动解决**：开发者需要手动编辑文件，选择保留哪些更改，删除冲突标记，然后提交解决后的文件。
+- **使用场景/模式**：
+  - 在 `git pull` 或 `git merge` 操作后，如果 Git 报告冲突，则需要解决。
+  - 团队成员在同一代码行上工作时。
+- **示例**：
+```html
+<!-- Example: Merge conflict in an HTML file -->
+<!-- Description: Shows how Git marks conflicting sections in a file. -->
+<<<<<<< COMMIT-ID:index.html
+<div id="footer">contact : jeremy.singer@glasgow.ac.uk</div>
+=======
+<div id="footer">
+please contact Jeremy on MS Teams
+</div>
+>>>>>>> OTHER-COMMIT-ID:index.html
+```
+- **注意事项/最佳实践**：
+  - 及时解决冲突，不要将冲突文件提交到仓库。
+  - 使用代码编辑器或专门的合并工具来帮助解决复杂冲突。
+  - 解决冲突后，需要 `git add` 冲突文件，然后 `git commit` 以完成合并。
+- **小结**：合并冲突是 Git 协作的常见挑战，通过理解冲突标记并手动编辑文件，可以有效地解决冲突并整合代码。
+
+---
+
+### 5. 高级功能：`git tag` 和 `git blame`
+- **动机**：除了日常的版本控制操作，Git 还提供了一些高级功能，如 `git tag` 用于标记重要版本，`git blame` 用于追溯代码行归属，这些功能对于项目管理、发布管理和代码审查非常有用。
+- **核心概念**：
+  - `git tag -a [tag_name] -m "message"`：为特定的提交创建带注释的标签。通常用于标记发布版本（例如 `v1.0`）。
+  - `git tag`：列出所有标签。
+  - `git blame [file]`：显示文件中每一行的最后一次修改的提交信息（作者、提交 ID、时间戳）。
+- **使用场景/模式**：
+  - 标记软件的发布版本、里程碑或重要的开发阶段。
+  - 追溯代码行是谁在何时修改的，有助于代码审查和调试。
+  - 分析团队成员的代码贡献。
+- **示例**：
+```bash
+# Example: Tagging a release version
+# Description: Creates an annotated tag 'v1.0' for the current commit.
+git tag -a v1.0 -m "Release version 1.0"
+
+# Example: Using git blame to see line-by-line authorship
+# Description: Shows who last modified each line of 'file.txt'.
+git blame file.txt
+```
+- **注意事项/最佳实践**：
+  - 标签通常用于标记稳定的发布版本，不应轻易移动或删除。
+  - `git blame` 可以与 `cut`、`sort -u` 和 `grep -c` 等命令结合使用，以分析代码贡献。
+- **小结**：`git tag` 和 `git blame` 是 Git 的强大高级功能，分别用于版本标记和代码归属追踪，有助于项目管理和代码质量控制。
+
+---
+
+## 最佳实践
+- **先拉取后推送**：在将本地更改推送到远程仓库之前，始终先拉取远程仓库的最新更改。
+- **及时解决冲突**：一旦发生合并冲突，应立即解决，避免将冲突文件提交到仓库。
+- **使用 SSH 密钥**：配置 SSH 密钥以实现与远程仓库的安全、无密码交互。
+- **有意义的标签**：使用 `git tag` 标记重要的发布版本或里程碑，并附带清晰的描述。
+- **利用 `git blame`**：在代码审查或调试时，使用 `git blame` 了解代码行的修改历史和归属。
+
+---
+## 更新记录
+- 2025-10-22：初次创建。
