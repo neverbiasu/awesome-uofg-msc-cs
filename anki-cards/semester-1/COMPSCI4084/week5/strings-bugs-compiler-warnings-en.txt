@@ -1,0 +1,9 @@
+What is the main risk of the `strcpy` function?	It doesn't check buffer size, can lead to buffer overflow
+What is the advantage of `fgets` over `gets`?	It can limit the number of characters read, preventing overflow
+What is the main difference between `strncpy` and `strcpy`?	`strncpy` requires specifying the maximum number of characters to copy
+What should you be careful about after using `strncpy`?	You might need to manually add the null terminator `\0`
+What does the `-Wall` compiler flag do?	Enables a set of common, important warnings
+What does the `-Wextra` compiler flag do?	Enables extra warnings not included in `-Wall`
+What does the `-Werror` compiler flag do?	Treats all compiler warnings as errors, forcing them to be fixed
+Why should you always enable compiler warnings?	They help catch potential bugs and security vulnerabilities early
+What is the problem with `if (x = 0)` in C?	It's an assignment, not a comparison, and is usually a logic bug

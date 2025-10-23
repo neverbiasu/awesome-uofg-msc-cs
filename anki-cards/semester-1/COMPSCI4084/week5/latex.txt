@@ -1,0 +1,12 @@
+LaTeX是什么？	一种高质量的排版系统，用于专业文档准备
+Overleaf是什么？	一个基于云的在线LaTeX编辑器和编译器
+LaTeX文档的最小结构是什么？	`\documentclass{}`, `\begin{document}`, `\end{document}`
+如何在LaTeX中创建新章节？	使用 `\section{章节名}`
+如何在LaTeX中交叉引用章节？	使用 `\label{}` 和 `\ref{}`
+如何在LaTeX中排版数学公式？	使用 `\begin{equation}` 环境或 `$...$`
+如何将LaTeX编译为PDF？	使用 `pdflatex` 命令
+Makefile在LaTeX中的作用是？	自动化编译过程，处理多次编译和清理
+`\documentclass{article}`的作用是？	定义文档类型为文章
+如何在LaTeX中写粗体字？	`\textbf{文本}`
+如何在LaTeX中写斜体字？	`\textit{文本}`
+De Morgan定律的一个例子是什么？	`\lnot (A \land B) \equiv \lnot A \lor \lnot B`

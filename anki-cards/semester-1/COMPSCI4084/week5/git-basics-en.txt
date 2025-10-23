@@ -1,0 +1,15 @@
+What is Git?	A distributed version control system (VCS)
+What does VCS stand for?	Version Control System
+Who invented Git?	Linus Torvalds
+What does `git config --global user.name` do?	Sets the global Git commit user name
+What does `git init` do?	Initializes a new Git repository in the current directory
+What does the `.git` directory contain?	All repository metadata and history
+What does `git status` do?	Shows the state of the working directory and staging area
+What does `git add [file]` do?	Stages file changes for the next commit
+What does `git commit -m "message"` do?	Records staged changes to the repository
+What does `git log` do?	Displays the commit history
+What does `git diff` do?	Shows changes between the working directory and staging area
+How do you undo unstaged changes?	`git checkout -- [file]`
+How do you unstage a file?	`git reset [file]`
+What does `git revert [commit_ID]` do?	Creates a new commit that undoes the changes of a specified commit
+Why is `git revert` recommended?	It preserves project history, making it a safer way to undo

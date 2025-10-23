@@ -1,0 +1,12 @@
+How do you move the cursor up in vi?	`k`
+How do you move to the end of the line in vi?	`$`
+How do you enter insert mode in vi?	`i` (before cursor) or `a` (after cursor)
+How do you delete the current line in vi?	`dd`
+How do you delete a word in vi?	`dw`
+How do you copy the current line in vi?	`yy`
+How do you paste the copied content in vi?	`p`
+How do you search forward for "text" in vi?	`/text`
+How do you repeat the last command in vi?	`.` (period)
+How do you save and quit in vi?	`:wq`
+How do you quit without saving, forcibly?	`:q!`
+How do you replace "old" with "new" throughout the entire file?	`:%s/old/new/g`

@@ -1,0 +1,11 @@
+What does the `grep` command do?	Searches for lines matching a specified pattern in a file
+What does `grep -i` do?	Performs a case-insensitive search
+What does the `sort` command do?	Sorts the lines of a file
+What does the `uniq` command do?	Reports or omits repeated lines
+What does `uniq -c` do?	Prefixes lines by the number of occurrences
+What is usually needed before using `uniq`?	To sort the file (`sort`)
+What does `wc -l` do?	Counts the number of lines in a file
+What does `tr 'a-z' 'A-Z'` do?	Translates text from lowercase to uppercase
+What does `sed 's/old/new/g'` do?	Globally replaces all occurrences of 'old' with 'new' on each line
+What is the function of the pipe `|` in the command line?	Uses the output of one command as the input for another
+What does `curl [URL]` do?	Fetches and displays the content from a URL

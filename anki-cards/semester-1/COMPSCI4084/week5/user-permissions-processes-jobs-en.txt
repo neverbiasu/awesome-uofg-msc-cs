@@ -1,0 +1,13 @@
+What does the `whoami` command do?	Displays the current effective username
+What does the `sudo` command do?	Executes a command with superuser (root) privileges
+What does `chmod 700 file` mean?	Sets file permissions so only the owner can read, write, and execute
+What does `chown user:group file` do?	Changes the owner and group of a file
+What does `ps aux` do?	Shows all running processes on the system
+What does the `top` command do?	Provides a dynamic real-time view of system processes and resource usage
+What does `kill -9 [PID]` mean?	Forcibly terminates the process with the specified PID
+What does the `jobs` command do?	Lists the background jobs in the current shell session
+How do you bring a background job to the foreground?	`fg %[job_id]`
+What does `df -h` do?	Displays disk space usage in a human-readable format
+What does `tar -czvf archive.tar.gz dir/` do?	Creates a compressed archive of the `dir/` directory
+What does the `strings` command do on a binary file?	Extracts and displays printable character sequences from the file
+What does `hexdump -C` do?	Displays file content in hexadecimal and ASCII format
