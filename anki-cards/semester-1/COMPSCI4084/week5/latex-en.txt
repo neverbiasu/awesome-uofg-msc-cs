@@ -1,0 +1,12 @@
+What is LaTeX?	A high-quality typesetting system for professional document preparation
+What is Overleaf?	A cloud-based online LaTeX editor and compiler
+What is the minimal structure of a LaTeX document?	`\documentclass{}`, `\begin{document}`, `\end{document}`
+How do you create a new section in LaTeX?	Using `\section{Section Name}`
+How do you cross-reference sections in LaTeX?	Using `\label{}` and `\ref{}`
+How do you typeset mathematical equations in LaTeX?	Using the `equation` environment or `$...$`
+How do you compile LaTeX to PDF?	Using the `pdflatex` command
+What is the role of a Makefile in LaTeX?	To automate the compilation process, handling multiple runs and cleanup
+What does `\documentclass{article}` do?	Defines the document type as an article
+How do you write bold text in LaTeX?	`\textbf{text}`
+How do you write italic text in LaTeX?	`\textit{text}`
+What is an example of a De Morgan's law?	`\lnot (A \land B) \equiv \lnot A \lor \lnot B`

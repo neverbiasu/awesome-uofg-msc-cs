@@ -1,0 +1,14 @@
+What is a remote repository?	A version of your project hosted online for team sharing and synchronization
+What does `git push` do?	Publishes local committed changes to the remote repository
+What does `git pull` do?	Fetches changes from the remote repository and merges them into the local branch
+What is the purpose of setting up SSH keys?	To provide more secure authentication to remote repositories than username/password
+How do you generate an SSH key pair?	`ssh-keygen -t rsa`
+Where is the public key typically stored?	In the `~/.ssh/id_rsa.pub` file
+What does `git clone [URL]` do?	Copies an entire remote repository to your local machine
+What does 'origin' usually refer to in Git?	The default name for the remote repository you cloned from
+What should you do before `git push`?	Always `git pull` first to avoid conflicts
+When do merge conflicts occur?	When Git cannot automatically merge changes from two branches
+How does Git mark merge conflicts?	Using `<<<<<<<`, `=======`, `>>>>>>>` markers
+What should you do after resolving a merge conflict?	Manually edit the file, then `git add` and `git commit`
+What does `git tag -a v1.0` do?	Creates an annotated tag, typically for a release version
+What does `git blame [file]` do?	Shows the last modification information (author, commit) for each line of a file

@@ -1,0 +1,114 @@
+What is Git?	A distributed version control system (VCS)
+What does VCS stand for?	Version Control System
+Who invented Git?	Linus Torvalds
+What does `git config --global user.name` do?	Sets the global Git commit user name
+What does `git init` do?	Initializes a new Git repository in the current directory
+What does the `.git` directory contain?	All repository metadata and history
+What does `git status` do?	Shows the state of the working directory and staging area
+What does `git add [file]` do?	Stages file changes for the next commit
+What does `git commit -m "message"` do?	Records staged changes to the repository
+What does `git log` do?	Displays the commit history
+What does `git diff` do?	Shows changes between the working directory and staging area
+How do you undo unstaged changes?	`git checkout -- [file]`
+How do you unstage a file?	`git reset [file]`
+What does `git revert [commit_ID]` do?	Creates a new commit that undoes the changes of a specified commit
+Why is `git revert` recommended?	It preserves project history, making it a safer way to undo
+
+What is a remote repository?	A version of your project hosted online for team sharing and synchronization
+What does `git push` do?	Publishes local committed changes to the remote repository
+What does `git pull` do?	Fetches changes from the remote repository and merges them into the local branch
+What is the purpose of setting up SSH keys?	To provide more secure authentication to remote repositories than username/password
+How do you generate an SSH key pair?	`ssh-keygen -t rsa`
+Where is the public key typically stored?	In the `~/.ssh/id_rsa.pub` file
+What does `git clone [URL]` do?	Copies an entire remote repository to your local machine
+What does 'origin' usually refer to in Git?	The default name for the remote repository you cloned from
+What should you do before `git push`?	Always `git pull` first to avoid conflicts
+When do merge conflicts occur?	When Git cannot automatically merge changes from two branches
+How does Git mark merge conflicts?	Using `<<<<<<<`, `=======`, `>>>>>>>` markers
+What should you do after resolving a merge conflict?	Manually edit the file, then `git add` and `git commit`
+What does `git tag -a v1.0` do?	Creates an annotated tag, typically for a release version
+What does `git blame [file]` do?	Shows the last modification information (author, commit) for each line of a file
+
+What is LaTeX?	A high-quality typesetting system for professional document preparation
+What is Overleaf?	A cloud-based online LaTeX editor and compiler
+What is the minimal structure of a LaTeX document?	`\documentclass{}`, `\begin{document}`, `\end{document}`
+How do you create a new section in LaTeX?	Using `\section{Section Name}`
+How do you cross-reference sections in LaTeX?	Using `\label{}` and `\ref{}`
+How do you typeset mathematical equations in LaTeX?	Using the `equation` environment or `$...$`
+How do you compile LaTeX to PDF?	Using the `pdflatex` command
+What is the role of a Makefile in LaTeX?	To automate the compilation process, handling multiple runs and cleanup
+What does `\documentclass{article}` do?	Defines the document type as an article
+How do you write bold text in LaTeX?	`\textbf{text}`
+How do you write italic text in LaTeX?	`\textit{text}`
+What is an example of a De Morgan's law?	`\lnot (A \land B) \equiv \lnot A \lor \lnot B`
+
+What does the `pwd` command do?	Prints the current working directory
+What does the `cd` command do?	Changes the current directory
+What does `ls -l` do?	Lists directory contents in long format
+What does the `ssh` command do?	Securely connects to a remote Linux machine
+Is the Linux command line case-sensitive?	Yes
+What does `~` represent in Linux?	The current user's home directory
+What is `*` in Linux?	A wildcard character that matches any sequence of characters
+How do you redirect `echo` output to a file, overwriting it?	`echo "text" > file.txt`
+What does the `mkdir` command do?	Creates a new directory
+What does the `mv` command do?	Moves or renames files/directories
+What does the `rm` command do?	Removes (deletes) files
+What does the `cat` command do?	Displays the content of a file
+What does `head -n 5` do?	Displays the first 5 lines of a file
+What does `tail -f` do?	Follows a file in real-time, showing new content as it's added
+What does the `ps` command do?	Shows currently running processes
+What does `kill [PID]` do?	Terminates the process with the specified PID
+What does `man [command]` do?	Displays the manual page for a command
+What is typically the first line of a shell script?	A shebang, e.g., `#!/bin/bash`
+How do you make a shell script executable?	`chmod +x script_name`
+How do you read user input in a shell script?	`read -p "Prompt: " variable`
+How do you access the first command-line argument in a shell script?	Using `$1`
+
+What is the main risk of the `strcpy` function?	It doesn't check buffer size, can lead to buffer overflow
+What is the advantage of `fgets` over `gets`?	It can limit the number of characters read, preventing overflow
+What is the main difference between `strncpy` and `strcpy`?	`strncpy` requires specifying the maximum number of characters to copy
+What should you be careful about after using `strncpy`?	You might need to manually add the null terminator `\0`
+What does the `-Wall` compiler flag do?	Enables a set of common, important warnings
+What does the `-Wextra` compiler flag do?	Enables extra warnings not included in `-Wall`
+What does the `-Werror` compiler flag do?	Treats all compiler warnings as errors, forcing them to be fixed
+Why should you always enable compiler warnings?	They help catch potential bugs and security vulnerabilities early
+What is the problem with `if (x = 0)` in C?	It's an assignment, not a comparison, and is usually a logic bug
+
+What does the `grep` command do?	Searches for lines matching a specified pattern in a file
+What does `grep -i` do?	Performs a case-insensitive search
+What does the `sort` command do?	Sorts the lines of a file
+What does the `uniq` command do?	Reports or omits repeated lines
+What does `uniq -c` do?	Prefixes lines by the number of occurrences
+What is usually needed before using `uniq`?	To sort the file (`sort`)
+What does `wc -l` do?	Counts the number of lines in a file
+What does `tr 'a-z' 'A-Z'` do?	Translates text from lowercase to uppercase
+What does `sed 's/old/new/g'` do?	Globally replaces all occurrences of 'old' with 'new' on each line
+What is the function of the pipe `|` in the command line?	Uses the output of one command as the input for another
+What does `curl [URL]` do?	Fetches and displays the content from a URL
+
+What does the `whoami` command do?	Displays the current effective username
+What does the `sudo` command do?	Executes a command with superuser (root) privileges
+What does `chmod 700 file` mean?	Sets file permissions so only the owner can read, write, and execute
+What does `chown user:group file` do?	Changes the owner and group of a file
+What does `ps aux` do?	Shows all running processes on the system
+What does the `top` command do?	Provides a dynamic real-time view of system processes and resource usage
+What does `kill -9 [PID]` mean?	Forcibly terminates the process with the specified PID
+What does the `jobs` command do?	Lists the background jobs in the current shell session
+How do you bring a background job to the foreground?	`fg %[job_id]`
+What does `df -h` do?	Displays disk space usage in a human-readable format
+What does `tar -czvf archive.tar.gz dir/` do?	Creates a compressed archive of the `dir/` directory
+What does the `strings` command do on a binary file?	Extracts and displays printable character sequences from the file
+What does `hexdump -C` do?	Displays file content in hexadecimal and ASCII format
+
+How do you move the cursor up in vi?	`k`
+How do you move to the end of the line in vi?	`$`
+How do you enter insert mode in vi?	`i` (before cursor) or `a` (after cursor)
+How do you delete the current line in vi?	`dd`
+How do you delete a word in vi?	`dw`
+How do you copy the current line in vi?	`yy`
+How do you paste the copied content in vi?	`p`
+How do you search forward for "text" in vi?	`/text`
+How do you repeat the last command in vi?	`.` (period)
+How do you save and quit in vi?	`:wq`
+How do you quit without saving, forcibly?	`:q!`
+How do you replace "old" with "new" throughout the entire file?	`:%s/old/new/g`

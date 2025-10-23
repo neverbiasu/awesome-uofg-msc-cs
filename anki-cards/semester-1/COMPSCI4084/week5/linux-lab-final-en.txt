@@ -1,0 +1,21 @@
+What does the `pwd` command do?	Prints the current working directory
+What does the `cd` command do?	Changes the current directory
+What does `ls -l` do?	Lists directory contents in long format
+What does the `ssh` command do?	Securely connects to a remote Linux machine
+Is the Linux command line case-sensitive?	Yes
+What does `~` represent in Linux?	The current user's home directory
+What is `*` in Linux?	A wildcard character that matches any sequence of characters
+How do you redirect `echo` output to a file, overwriting it?	`echo "text" > file.txt`
+What does the `mkdir` command do?	Creates a new directory
+What does the `mv` command do?	Moves or renames files/directories
+What does the `rm` command do?	Removes (deletes) files
+What does the `cat` command do?	Displays the content of a file
+What does `head -n 5` do?	Displays the first 5 lines of a file
+What does `tail -f` do?	Follows a file in real-time, showing new content as it's added
+What does the `ps` command do?	Shows currently running processes
+What does `kill [PID]` do?	Terminates the process with the specified PID
+What does `man [command]` do?	Displays the manual page for a command
+What is typically the first line of a shell script?	A shebang, e.g., `#!/bin/bash`
+How do you make a shell script executable?	`chmod +x script_name`
+How do you read user input in a shell script?	`read -p "Prompt: " variable`
+How do you access the first command-line argument in a shell script?	Using `$1`

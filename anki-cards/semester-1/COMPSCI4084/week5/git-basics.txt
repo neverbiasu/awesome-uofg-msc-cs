@@ -1,0 +1,15 @@
+Git是什么？	一种分布式版本控制系统（VCS）
+VCS代表什么？	版本控制系统
+Git是谁发明的？	Linus Torvalds
+`git config --global user.name`的作用是？	设置全局Git提交用户名
+`git init`的作用是？	在当前目录初始化一个新的Git仓库
+`.git`目录包含什么？	仓库的所有元数据和历史记录
+`git status`的作用是？	显示工作目录和暂存区的状态
+`git add [file]`的作用是？	将文件更改暂存以备下次提交
+`git commit -m "message"`的作用是？	将暂存的更改记录到仓库
+`git log`的作用是？	显示提交历史
+`git diff`的作用是？	显示工作目录和暂存区之间的更改
+如何撤销未暂存的更改？	`git checkout -- [file]`
+如何取消暂存的文件？	`git reset [file]`
+`git revert [commit_ID]`的作用是？	创建一个新提交来撤销指定提交的更改
+为什么推荐使用`git revert`？	它保留项目历史，是更安全的回滚方式
