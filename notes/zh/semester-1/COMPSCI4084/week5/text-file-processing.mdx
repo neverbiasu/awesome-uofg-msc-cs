@@ -128,7 +128,7 @@ echo "Sherlock Holmes lived at 221B Baker Street." > test.txt
 sed 's/Holmes/Detective/g' test.txt
 # Output: Sherlock Detective lived at 221B Baker Street.
 ```
-- **注意事项/最佳实践**：
+- **Notes/Best Practices**:
   - 始终在文件的副本上或不带 `-i` 选项的情况下测试 `sed` 命令，以避免意外更改。
   - 正则表达式可用于模式。
 - **小结**：`sed` 是一个用于自动化文本操作和转换的重要工具，特别适用于脚本编写和批处理。
@@ -138,34 +138,34 @@ sed 's/Holmes/Detective/g' test.txt
 ### 6. 客户端 URL：`curl`
 - **动机**：`curl` 是一个用于使用 URL 语法传输数据的命令行工具，支持各种协议。它在网络安全中对于侦察、测试 API、自动化下载和事件响应非常宝贵。
 - **核心概念**：
-  - `curl`：代表“Client URL”（客户端 URL）。在服务器之间传输数据。
-  - 支持 HTTP、HTTPS、FTP 等。
-  - 常用选项：`-o`（输出到文件）、`-s`（静默模式）、`-I`（仅显示头部）。
-- **使用场景/模式**：
-  - 下载网页或文件。
-  - 检查 HTTP 头部以查找安全漏洞。
-  - 向 API 发送请求进行测试。
-  - 从网络源自动化数据检索。
-- **示例**：
+  - `curl`: Stands for "Client URL". Transfers data to or from a server.
+  - Supports HTTP, HTTPS, FTP, etc.
+  - Common options: `-o` (output to file), `-s` (silent mode), `-I` (show headers only).
+- **Usage Scenarios/Patterns**:
+  - Downloading web pages or files.
+  - Inspecting HTTP headers for security vulnerabilities.
+  - Sending requests to APIs for testing.
+  - Automating data retrieval from web sources.
+- **Example**:
 ```bash
 # Example: Download a webpage silently to a file
 # Description: Downloads the BBC news article to example.html without showing progress.
 curl -s -o example.html https://www.bbc.co.uk/news/articles/czxwll89e79o
 ```
-- **注意事项/最佳实践**：
-  - 在脚本中使用 `-s` 抑制进度条。
-  - 了解抓取或测试网站时的法律和道德影响。
-- **小结**：`curl` 是一个多功能的命令行客户端，用于与 Web 服务交互，对开发和网络安全中的网络相关任务至关重要。
+- **Notes/Best Practices**:
+  - Use `-s` for scripting to suppress progress meters.
+  - Be aware of legal and ethical implications when scraping or testing websites.
+- **Summary**: `curl` is a versatile command-line client for interacting with web services, crucial for network-related tasks in development and cybersecurity.
 
 ---
 
-## 最佳实践
-- **管道命令**：使用 `|` 将命令链接起来，创建强大的数据处理管道。
-- **增量测试**：逐步构建复杂的命令，测试每个部分以确保正确性。
-- **备份文件**：在使用 `sed -i` 进行原地编辑之前，务必备份原始文件。
-- **理解正则表达式**：投入时间学习正则表达式，以便使用 `grep` 和 `sed` 进行高级模式匹配。
-- **情境化使用**：始终考虑上下文（例如，日志分析、数据清理）以选择最合适的工具。
+## Best Practices
+- **Pipe Commands**: Chain commands together using `|` to create powerful data processing pipelines.
+- **Test Incrementally**: Build complex commands step-by-step, testing each part to ensure correctness.
+- **Backup Files**: Before making in-place edits with `sed -i`, always back up your original files.
+- **Understand Regex**: Invest time in learning regular expressions for advanced pattern matching with `grep` and `sed`.
+- **Contextual Use**: Always consider the context (e.g., log analysis, data cleaning) to choose the most appropriate tool.
 
 ---
 ## Update History
-- 2025-10-22：初次创建。
+- 2025-10-22: Initial creation.
