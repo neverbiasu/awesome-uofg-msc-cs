@@ -44,7 +44,7 @@ ls -l sensitive_data.txt
 # Output will show permissions like -rwx------
 ```
 - **注意事项/最佳实践**：
-  - 遵循最小权限原则：仅授予执行任务所需的最低权限。
+  - 遵循最小权限原则：仅授予执行其任务所需的最低权限。
   - 定期审查和审计文件权限和用户账户。
   - 使用强大、独特的密码并定期更改。
   - 谨慎使用 `sudo`；理解以 root 身份运行命令的含义。
@@ -97,20 +97,7 @@ fg %1 # Assuming %1 is the job ID for sleep 100
   - 快速评估系统负载和稳定性。
   - 归档项目目录以进行备份或分发。
   - 分析可疑二进制文件以查找嵌入的文本或文件类型。
-  - 通过检查隐藏字符串或原始二进制数据来检测恶意软件。
-- **示例**：
-```bash
-# Example: Archive and compress a directory, then analyze a binary
-# Description: Creates a compressed archive of a project directory and then uses 'strings' and 'file' on a binary.
-mkdir project_dir && touch project_dir/file1.txt
-tar -czvf project.tar.gz project_dir/
-df -h .
-
-# Assuming 'malware_sample' is a binary file
-strings malware_sample
-file malware_sample
-hexdump -C malware_sample
-```
+  - 检测恶意软件，通过检查隐藏字符串或原始二进制数据。
 - **注意事项/最佳实践**：
   - 定期检查磁盘空间以防止系统不稳定。
   - 使用 `tar` 和 `gzip` 进行高效的多个文件备份和传输。
@@ -129,5 +116,5 @@ hexdump -C malware_sample
 - **备份和归档**：使用 `tar` 和 `gzip` 等工具定期备份关键数据。
 
 ---
-## 更新记录
+## Update History
 - 2025-10-22：初次创建。

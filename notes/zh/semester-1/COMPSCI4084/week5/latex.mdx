@@ -1,27 +1,175 @@
 ---
 title: "LaTeX 文档处理"
 description: "LaTeX 高质量文档准备的入门，涵盖安装、基本结构、文本和数学格式化以及编译。"
-updated: "2025-10-22"
 ---
 
 ## 概要
-- 目标：介绍 LaTeX 的基础与工作流程，适用于学术论文、技术报告和学位论文。
-- 范围：安装（本地/Overleaf）、最小文档结构、文本与数学格式化、Makefile 自动化与练习。
+- **目标**：本笔记介绍了 LaTeX 这一强大而专业的文档准备系统，特别适用于学术论文、技术报告和学位论文。旨在为学习者提供创建结构化且美观文档的基础知识。
+- **范围**：涵盖 LaTeX 的基础知识，包括其安装（本地和通过 Overleaf 的云端）、最小文档结构、基本文本格式化命令（字体、大小）、文档分节以及强大的数学排版功能。它还涉及使用 Makefile 自动化编译和实际练习。
 
 ## 学习目标
-1. 理解 LaTeX 的编写、编译与查看流程。  
-2. 能设置本地环境或使用 Overleaf。  
-3. 熟悉最小 LaTeX 文档结构。  
-4. 掌握文本样式与分节、交叉引用。  
-5. 熟练排版数学公式与符号。  
-6. 使用 Makefile 自动化编译流程。
+1. 理解 LaTeX 的基本工作流程：编写源代码、编译和查看 PDF 输出。
+2. 能够设置 LaTeX 环境，无论是本地还是使用 Overleaf 云服务。
+3. 掌握基本 LaTeX 文档所需的最小结构。
+4. 应用各种文本格式化命令（例如，粗体、斜体、字体大小）并通过分节和交叉引用来构建文档。
+5. 利用 LaTeX 强大的功能排版数学方程式和符号。
+6. 使用 Makefile 自动化 LaTeX 编译过程。
 
 ## 关键知识点
 
 ### 1. LaTeX 简介与设置
-- 动机：高质量排版系统，适合学术与技术写作，内容与样式分离。  
-- 核心概念：
-    - LaTeX 是标记语言，编写源文件并编译为 PDF。
-    - 本地安装（例：Ubuntu 的 texlive-full、macOS 的 MacTeX）占用大量空间；Overleaf 提供云端编辑与编译。
-- 使用场景：论文、报告、书籍、演示与团队协作。
-- 示例（Ubuntu 安装）：
+- **动机**：LaTeX 是一种高质量的排版系统，广泛用于学术和科学领域，以制作专业的文档。它将内容与呈现分离，允许作者专注于写作，而 LaTeX 处理布局和格式。强烈推荐用于报告和学位论文。
+- **核心概念**：
+  - LaTeX 是一种标记语言，类似于 Markdown 或 HTML，您可以通过编写脚本来指定文档的结构和内容。
+  - 此脚本随后被编译为 PDF 以查看渲染的文档。
+  - **安装**：本地安装（例如，Ubuntu 上的 `texlive-full`，macOS 上的 MacTeX）需要数 GB 空间且耗时。
+  - **Overleaf**：一个基于云的 LaTeX 服务，提供便捷的在线编辑器和编译器。大学订阅通常提供免费的专业功能。
+- **使用场景/模式**：
+  - 撰写学术论文、硕士论文和博士论文。
+  - 创建技术报告、演示文稿和书籍。
+  - 使用 Overleaf 协作处理文档。
+- **示例**：
+```bash
+# Example: Installing texlive-full on Ubuntu
+# Description: Command to install the full TeX Live distribution on Ubuntu.
+sudo apt update
+sudo apt install texlive-full
+```
+- **注意事项/最佳实践**：
+  - 对于初学者或协作项目，Overleaf 通常是更简单、更高效的选择。
+  - 本地安装提供更多控制，但需要大量的磁盘空间和维护。
+- **小结**：LaTeX 是专业文档创建的强大工具，具有本地和云端设置选项，非常适合学术和技术写作。
+
+---
+
+### 2. 基本文档结构与文本格式化
+- **动机**：结构良好的文档易于阅读和导航。LaTeX 提供了简单的命令来定义文档类、分节和应用各种文本样式，确保一致性和专业性。
+- **核心概念**：
+  - **最小框架**：
+    - `\documentclass{article}`：定义文档类型（例如，`article`、`report`、`book`）。
+    - `\begin{document}` 和 `\end{document}`：包含文档的主要内容。
+  - **文本格式化**：
+    - `\textit{italic}`：斜体文本。
+    - `\textbf{bold}`：粗体文本。
+    - `\texttt{typewriter}`：打字机字体。
+    - `\textsf{sans-serif}`：无衬线字体。
+    - 字体大小：`{\tiny very small}` 到 `{\Huge very large}`。
+  - **文档结构**：
+    - `\section{Introduction}`：创建新节。
+    - `\label{sec:intro}`：为节分配标签以进行交叉引用。
+    - `\ref{sec:intro}`：引用带标签的节。
+- **使用场景/模式**：
+  - 创建包含引言和其他节的简单报告。
+  - 使用粗体或斜体强调文本。
+  - 在文档中引用特定节。
+- **示例**：
+```latex
+% Example: Basic LaTeX document with text formatting and sectioning
+% Description: A simple LaTeX document demonstrating document class, text styles, and sectioning with cross-references.
+\documentclass{article}
+\begin{document}
+
+In \LaTeX, you may use \textit{italic} and \textbf{bold} face fonts.
+It is also possible to have \texttt{typewriter} and \textsf{sans-serif} fonts.
+You may change the font size from {\tiny very small} to {\Huge very large}.
+
+\section{Introduction}
+\label{sec:intro}
+Some intro text.
+
+\section{Another Section}
+\label{sec:nother}
+Please refer back to Section \ref{sec:intro}.
+
+\end{document}
+```
+- **注意事项/最佳实践**：
+  - 使用逻辑分节有效地组织文档。
+  - 交叉引用（`\label`、`\ref`）自动更新页码/节号，防止手动错误。
+  - 明智地选择字体样式以提高可读性和强调。
+- **小结**：LaTeX 提供了强大的命令来构建和格式化文本，从而创建清晰、有组织且专业的文档。
+
+---
+
+### 3. 数学排版
+- **动机**：LaTeX 最强大的优势之一是其无与伦比地排版复杂数学方程式和符号的能力，使其成为科学和工程文档的标准。
+- **核心概念**：
+  - **Equation 环境**：`\begin{equation}` 和 `\end{equation}` 用于带编号的显示方程式。
+  - **数学符号**：`\lnot`（否定）、`\land`（逻辑与）、`\equiv`（等价）、`\lor`（逻辑或）、`\cup`（并集）、`\cap`（交集）等命令。
+  - **行内数学**：使用 `$` 进行行内数学表达式（例如，`$E=mc^2$`）。
+  - **数学符号参考**：在线资源，如 `https://en.wikibooks.org/wiki/LaTeX/Mathematics#List_of_Mathematical_Symbols`，提供了大量的数学符号列表。
+- **使用场景/模式**：
+  - 排版物理、数学、计算机科学中的复杂公式。
+  - 在文本中包含行内变量或简单方程式。
+  - 创建教程或习题集，带有清晰的数学符号。
+- **示例**：
+```latex
+% Example: Mathematical typesetting in LaTeX
+% Description: Demonstrates a De Morgan rewrite rule and a distributivity rule using LaTeX's equation environment.
+\documentclass{article}
+\begin{document}
+
+Below is an instance of a De Morgan rewrite rule:
+\begin{equation}
+\lnot (A \land B) \equiv \lnot A \lor \lnot B
+\end{equation}
+
+Remember all the set equivalences you learnt in Algorithmic Foundations? Typeset them in a \LaTeX document. Here's a distributivity rule:
+\begin{equation}
+A \cup (B \cap C) \equiv (A \cup B) \cap (A \cup C)
+\end{equation}
+
+\end{document}
+```
+- **注意事项/最佳实践**：
+  - 使用 `equation` 环境处理带编号的独立方程式。
+  - 利用在线资源查找特定的数学符号。
+  - 定期练习以熟练掌握数学语法。
+- **小结**：LaTeX 擅长数学排版，对方程式和符号的外观提供精确控制，这对于技术文档至关重要。
+
+---
+
+### 4. 使用 Makefile 自动化 LaTeX 编译
+- **动机**：编译 LaTeX 文档通常涉及多个步骤（例如，`pdflatex`、`bibtex`、两次 `pdflatex`）。Makefile 自动化了这一过程，确保文档始终正确高效地编译，尤其适用于复杂的项目。
+- **核心概念**：
+  - **Makefile**：包含规则的文件，用于告诉 `make` 工具如何构建目标（例如，从 `.tex` 文件生成 PDF）。
+  - **目标**：`all`（默认构建）、`clean`（删除中间文件）。
+  - **命令**：`pdflatex`、`rm`（用于清理）。
+  - **中间文件**：编译过程中生成的 `.aux`、`.log`、`.out` 文件。
+- **使用场景/模式**：
+  - 自动化大型 LaTeX 项目的构建过程。
+  - 确保不同环境之间的一致编译。
+  - 清理生成的中间文件。
+- **示例**：
+```makefile
+# Example: Makefile for LaTeX document compilation
+# Description: A simple Makefile to automate the compilation of a LaTeX document (firstdoc.tex) to PDF.
+
+PDF = firstdoc.pdf
+TEX = firstdoc.tex
+
+all: $(PDF)
+
+$(PDF): $(TEX)
+	pdflatex $(TEX)
+
+clean:
+	rm -f *.aux *.log *.out $(PDF)
+```
+- **注意事项/最佳实践**：
+  - 包含 `clean` 目标以删除临时文件，保持项目目录整洁。
+  - 对于包含参考文献或索引的复杂文档，Makefile 可能需要额外的 `bibtex` 或 `makeindex` 命令。
+- **小结**：Makefile 对于自动化 LaTeX 编译非常宝贵，可以简化工作流程并确保任何项目规模的可靠文档生成。
+
+---
+
+## 最佳实践
+- **使用 Overleaf 进行协作**：利用 Overleaf 等基于云的平台，方便协作并随时随地访问 LaTeX。
+- **逻辑结构化**：始终使用节、子节和适当的环境来清晰地组织文档内容。
+- **掌握数学模式**：投入时间学习 LaTeX 的数学排版功能，以清晰专业地呈现方程式。
+- **自动化编译**：使用 Makefile 或集成开发环境（IDE）自动化编译过程，节省时间并减少错误。
+- **参考资源**：利用在线文档和维基（例如，Overleaf 教程、Wikibooks）查找特定命令和故障排除。
+
+---
+## Update History
+- 2025-10-22：初次创建。

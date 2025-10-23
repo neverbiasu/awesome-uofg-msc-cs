@@ -3,60 +3,60 @@ title: "Git 基础：单用户版本控制"
 description: "Git 简介，涵盖本地仓库设置、基本命令（init, status, add, commit, log, diff）以及撤销更改的方法。"
 ---
 
-## 概要
-- **目标**：本笔记旨在介绍 Git（一个强大的分布式版本控制系统）的基本概念和命令。它侧重于单个用户如何有效地跟踪更改、管理项目历史并协作处理代码库。
-- **范围**：涵盖版本控制的重要性、Git 的分布式特性、本地仓库设置、核心工作流程（暂存、提交）、`git init`、`git status`、`git add`、`git commit`、`git log`、`git diff` 等基本命令，以及在不同阶段撤销更改的各种方法。
+## Overview
+- **Objective**: This note aims to introduce the fundamental concepts and commands of Git, a powerful distributed version control system. It focuses on how a single user can effectively track changes, manage project history, and collaborate on codebases.
+- **Scope**: Covers the importance of version control, the distributed nature of Git, setting up a local repository, the core workflow (staging, committing), essential commands like `git init`, `git status`, `git add`, `git commit`, `git log`, `git diff`, and various methods for undoing changes at different stages.
 
-## 学习目标
-1. 理解使用 Git 等版本控制系统的重要性和好处。
-2. 能够初始化本地 Git 仓库并理解其基本结构。
-3. 掌握 Git 的核心工作流程：暂存更改、提交更改和查看项目历史。
-4. 学习使用基本的 Git 命令来检查状态、添加文件、提交更改和查看差异。
-5. 理解并应用在 Git 中撤销更改的不同方法，包括未暂存、已暂存和已提交的修改。
+## Learning Objectives
+1. Understand the importance and benefits of using a version control system like Git.
+2. Be able to initialize a local Git repository and understand its basic structure.
+3. Master the core Git workflow: staging changes, committing them, and viewing the project history.
+4. Learn to use essential Git commands for checking status, adding files, committing changes, and viewing differences.
+5. Understand and apply different methods for undoing changes in Git, including unstaged, staged, and committed modifications.
 
-## 关键知识点
+## Key Knowledge Points
 
-### 1. Git 和版本控制简介
-- **动机**：跟踪文件中的更改对于任何项目都至关重要，尤其是在有多个源代码文件和贡献者的软件开发中。版本控制系统（VCS）提供了一种系统化的方法来管理这些更改，从而实现协作、历史跟踪和轻松回滚。
-- **核心概念**：
-  - **版本控制系统（VCS）**：一种记录文件或文件集随时间变化的系统，以便您以后可以调出特定版本。
-  - **分布式 VCS**：每个用户都有自己的完整本地仓库，包括完整的更改历史。副本可以在多个用户之间同步。
-  - **仓库**：项目的完整更改历史记录。
-  - **Git**：最常见的分布式 VCS 工具，最初由 Linus Torvalds 发明。
-  - **集中式仓库服务器**：GitHub、Bitbucket 和 GitLab 等平台促进了轻松同步，并通常提供持续集成服务。
-- **使用场景/模式**：
-  - 管理软件项目的源代码。
-  - 跟踪文档、配置或任何基于文本的文件中的更改。
-  - 与团队协作处理共享项目。
-- **示例**：
+### 1. Introduction to Git and Version Control
+- **Motivation**: Tracking changes in files is crucial for any project, especially in software development with multiple source code files and contributors. Version Control Systems (VCS) provide a systematic way to manage these changes, allowing for collaboration, history tracking, and easy rollback.
+- **Core Concepts**:
+  - **Version Control System (VCS)**: A system that records changes to a file or set of files over time so that you can recall specific versions later.
+  - **Distributed VCS**: Each user has their own complete local repository, including the full change history. Copies can be synchronized between multiple users.
+  - **Repository**: The full set of change history for a project.
+  - **Git**: The most common distributed VCS tool, originally invented by Linus Torvalds.
+  - **Centralized Repo Servers**: Platforms like GitHub, Bitbucket, and GitLab facilitate easy synchronization and often provide continuous integration services.
+- **Usage Scenarios/Patterns**:
+  - Managing source code for software projects.
+  - Tracking changes in documents, configurations, or any text-based files.
+  - Collaborating with teams on shared projects.
+- **Example**:
 ```bash
 # Example: Setting up Git user information
 # Description: Configures the user name and email for Git commits. This is a one-time setup.
 git config --global user.name "Your Name"
 git config --global user.email "your.email@example.com"
 ```
-- **注意事项/最佳实践**：
-  - 为您的 GitHub/GitLab 账户选择一个合理的用户名，因为它可以成为您职业身份的一部分。
-  - 始终配置您的 Git 用户名和电子邮件，以便正确归属提交。
-- **小结**：Git 是一个强大的分布式版本控制系统，对于跟踪项目更改、实现协作和维护代码库的完整历史至关重要。
+- **Notes/Best Practices**:
+  - Choose a sensible username for your GitHub/GitLab account, as it can be part of your professional identity.
+  - Always configure your Git user name and email for proper attribution of commits.
+- **Summary**: Git is a powerful distributed version control system essential for tracking project changes, enabling collaboration, and maintaining a complete history of a codebase.
 
 ---
 
-### 2. 初始化本地仓库和基本工作流程
-- **动机**：要开始使用 Git 跟踪项目的更改，您首先需要初始化一个仓库。初始化后，您需要遵循基本工作流程来记录更改：修改文件、暂存文件，然后提交文件。
-- **核心概念**：
-  - `git init`：在当前目录中初始化一个新的 Git 仓库。创建一个隐藏的 `.git` 目录，用于存储所有仓库元数据。
-  - `git status`：显示工作目录和暂存区的当前状态。它会告诉您哪些更改已暂存，哪些未暂存，以及哪些文件未被 Git 跟踪。
-  - `git add [file]`：暂存更改以进行下一次提交。它告诉 Git 开始跟踪新文件或将现有文件中的更改包含在下一次提交中。
-  - `git commit -m "message"`：将暂存的更改记录到仓库中，作为新的变更集（项目快照）。`-m` 标志允许提供简短的摘要消息。
-  - `git log`：显示提交历史，显示提交哈希、作者、日期和提交消息。
-  - `git diff`：显示工作目录和暂存区之间，或暂存区和上次提交之间的差异。
-- **使用场景/模式**：
-  - 在版本控制下启动新项目。
-  - 定期保存工作快照。
-  - 在提交前审查更改。
-  - 理解文件或项目的历史。
-- **示例**：
+### 2. Initializing a Local Repository and Basic Workflow
+- **Motivation**: To start tracking changes for a project with Git, you first need to initialize a repository. Once initialized, you follow a basic workflow to record changes: modify files, stage them, and then commit them.
+- **Core Concepts**:
+  - `git init`: Initializes a new Git repository in the current directory. Creates a hidden `.git` directory that stores all repository metadata.
+  - `git status`: Shows the current state of the working directory and the staging area. It tells you which changes have been staged, which haven't, and which files aren't being tracked by Git.
+  - `git add [file]`: Stages changes for the next commit. It tells Git to start tracking a new file or to include changes from an existing file in the next commit.
+  - `git commit -m "message"`: Records the staged changes into the repository as a new changeset (a snapshot of your project). The `-m` flag allows for a short summary message.
+  - `git log`: Displays the commit history, showing commit hashes, authors, dates, and commit messages.
+  - `git diff`: Shows changes between the working directory and the staging area, or between the staging area and the last commit.
+- **Usage Scenarios/Patterns**:
+  - Starting a new project under version control.
+  - Regularly saving snapshots of your work.
+  - Reviewing changes before committing.
+  - Understanding the history of a file or project.
+- **Example**:
 ```bash
 # Example: Basic Git workflow
 # Description: Initializes a repo, creates a file, adds it, and commits it.
@@ -68,28 +68,28 @@ git add README.md
 git commit -m "Initial commit: Add README.md"
 git log --oneline
 ```
-- **注意事项/最佳实践**：
-  - 频繁提交，每次提交都包含小而逻辑的更改。
-  - 编写清晰简洁的提交消息，解释更改的 *原因*，而不仅仅是 *内容*。
-  - 经常使用 `git status` 来跟踪您的工作目录。
-- **小结**：Git 的核心工作流程包括初始化仓库，使用 `git add` 暂存更改，并使用 `git commit` 记录更改，从而实现清晰可追溯的项目历史。
+- **Notes/Best Practices**:
+  - Commit frequently with small, logical changes.
+  - Write clear and concise commit messages that explain *why* the change was made, not just *what* was changed.
+  - Use `git status` often to keep track of your working directory.
+- **Summary**: The core Git workflow involves initializing a repository, staging changes with `git add`, and recording them with `git commit`, allowing for a clear and traceable project history.
 
 ---
 
-### 3. 在 Git 中撤销更改
-- **动机**：错误难免发生。Git 提供了强大的工具来在不同阶段撤销更改，从未暂存的修改到已提交的快照，允许开发人员在不丢失工作的情况下纠正错误。
-- **核心概念**：
-  - **未暂存的更改**：对文件进行的修改，但尚未添加到暂存区（`git add`）。
-  - **已暂存的更改**：已添加到暂存区，准备进行下一次提交的修改。
-  - **已提交的更改**：已永久记录在仓库历史中的更改。
-  - `git checkout -- [file]`：撤销文件中的未暂存更改，将其恢复到上次提交（或适用的暂存状态）时的状态。这也可以恢复已删除的文件。
-  - `git reset [file]`：撤销文件中的已暂存更改，将其移回未暂存状态。它不会丢弃更改。
-  - `git revert [commit_ID]`：创建一个 *新提交*，以撤销指定提交引入的更改。这是最安全的撤销选项，因为它保留了项目历史，留下了清晰的撤销操作痕迹。
-- **使用场景/模式**：
-  - 丢弃对文件的意外编辑。
-  - 在提交前从暂存区中移除文件。
-  - 在保持清晰历史记录的同时，撤销之前的提交。
-- **示例**：
+### 3. Undoing Changes in Git
+- **Motivation**: Mistakes happen. Git provides powerful tools to undo changes at various stages, from unstaged modifications to committed snapshots, allowing developers to correct errors without losing work.
+- **Core Concepts**:
+  - **Unstaged Changes**: Modifications made to files that have not yet been added to the staging area (`git add`).
+  - **Staged Changes**: Modifications that have been added to the staging area, ready for the next commit.
+  - **Committed Changes**: Changes that have been permanently recorded in the repository's history.
+  - `git checkout -- [file]`: Undoes unstaged changes in a file, reverting it to its state in the last commit (or staged state if applicable). This can also restore a deleted file.
+  - `git reset [file]`: Undoes staged changes in a file, moving them back to the unstaged state. It does not discard changes.
+  - `git revert [commit_ID]`: Creates a *new commit* that undoes the changes introduced by a specified commit. This is the safest undo option as it preserves the project history, leaving a clear trail of the undo operation.
+- **Usage Scenarios/Patterns**:
+  - Discarding accidental edits to a file.
+  - Removing a file from the staging area before committing.
+  - Reversing a previous commit while maintaining a clean history.
+- **Example**:
 ```bash
 # Example: Undoing unstaged and staged changes
 # Description: Demonstrates how to discard unstaged edits and unstage changes.
@@ -103,21 +103,21 @@ git status # Shows README.md as staged
 git reset README.md # Unstage changes
 git status # Shows README.md as modified (unstaged) again
 ```
-- **注意事项/最佳实践**：
-  - `git revert` 通常更适合在共享仓库中撤销已提交的更改，因为它保持了线性历史。
-  - 谨慎使用 `git reset`（尤其是在没有文件路径的情况下），因为它会重写历史记录，如果使用不当可能会丢失工作。
-  - 在执行每个撤销命令之前，务必理解其含义。
-- **小结**：Git 提供了灵活的撤销更改选项，从简单的文件修改到撤销整个提交，为有效管理项目历史提供了安全保障。
+- **Notes/Best Practices**:
+  - `git revert` is generally preferred for undoing committed changes in shared repositories because it maintains a linear history.
+  - Be cautious with `git reset` (especially without a file path), as it can rewrite history and potentially lose work if not used correctly.
+  - Always understand the implications of each undo command before executing it.
+- **Summary**: Git offers flexible options for undoing changes, from simple file modifications to reversing entire commits, providing safety nets for managing project history effectively.
 
 ---
 
-## 最佳实践
-- **尽早提交，频繁提交**：进行小而频繁的提交，每次提交都代表一个逻辑工作单元。
-- **有意义的提交消息**：编写清晰、简洁且描述性的提交消息，解释更改的 *原因*。
-- **定期使用 `git status`**：随时了解工作目录和暂存区的状态。
-- **理解撤销选项**：熟悉 `git checkout`、`git reset` 和 `git revert`，以安全地管理更改。
-- **备份您的工作**：虽然 Git 跟踪历史记录，但始终对关键项目进行外部备份。
+## Best Practices
+- **Commit Early, Commit Often**: Make small, frequent commits that represent logical units of work.
+- **Meaningful Commit Messages**: Write clear, concise, and descriptive commit messages that explain *why* changes were made.
+- **Use `git status` Regularly**: Stay informed about the state of your working directory and staging area.
+- **Understand Undo Options**: Familiarize yourself with `git checkout`, `git reset`, and `git revert` to safely manage changes.
+- **Backup Your Work**: While Git tracks history, always have external backups of critical projects.
 
 ---
-## 更新记录
-- 2025-10-22：初次创建。
+## Update History
+- 2025-10-22: Initial creation.
