@@ -1,0 +1,91 @@
+---
+title: "Polynomial Regression and Cross-Validation"
+description: "Using polynomial models to capture non-linear trends, and using cross-validation to combat overfitting and select the best model."
+---
+
+## Overview
+- **Goal**: To model non-linear relationships and to select a model that generalizes well to new, unseen data.
+- **Scope**: This note covers polynomial regression, the concept of overfitting, and the use of validation sets and K-fold cross-validation for model selection.
+
+## Learning Objectives
+1.  Construct polynomial features to fit non-linear data.
+2.  Identify and explain the problem of overfitting.
+3.  Use a validation set to choose the optimal model complexity (e.g., polynomial degree).
+4.  Implement K-fold cross-validation for robust model evaluation.
+
+## Key Concepts
+
+### 1. Polynomial Regression
+- **Motivation**: Simple linear regression cannot capture curves in data. If the underlying relationship is not a straight line, we need a more flexible model.
+- **Core Concept**: We can extend linear regression by adding new features that are powers of the original feature `x`. The model becomes:
+  `t = w_0 + w_1*x + w_2*x² + ... + w_K*x^K`
+  This is still considered a **linear model** because it is linear in the parameters `w`. We are just fitting a linear model to a non-linear transformation of the data.
+- **Example**: Creating a design matrix for a 2nd-order polynomial.
+  ```python
+  # Example: Manually creating polynomial features
+  import numpy as np
+  
+  def make_polynomial(x, maxorder):
+      """Creates a design matrix with polynomial features."""
+      X = np.ones_like(x) # Bias term (for w_0)
+      for i in range(1, maxorder + 1):
+          X = np.hstack((X, x**i))
+      return X
+  
+  # x_train is a column vector of single feature values
+  # X_poly will have columns for 1, x, x^2
+  X_poly = make_polynomial(x_train, 2)
+  
+  # This matrix can then be used with sklearn.linear_model.LinearRegression
+  ```
+
+### 2. Overfitting
+- **Motivation**: As we increase model complexity (e.g., the polynomial order `K`), the training error will always decrease. However, a model that is too complex may learn the noise in the training data, not the underlying trend.
+- **Core Concept**: **Overfitting** occurs when a model performs exceptionally well on the training data but poorly on new, unseen data. The model has high variance. An overfitted model does not generalize well.
+- **Visual Cue**: An overfitted polynomial often exhibits wild oscillations, especially at the edges of the data range.
+
+### 3. Model Selection using a Validation Set
+- **Motivation**: Since training error is a poor guide for model selection, we need another way to estimate how the model will perform in the real world.
+- **Core Concept**: We can split our data into two parts:
+  1.  **Training Set**: Used to fit the model parameters (`w`).
+  2.  **Validation Set**: Used to evaluate the trained model and choose its complexity (hyperparameters like polynomial degree `K`).
+- **Usage Pattern**:
+  1.  Train several models (e.g., polynomials of order 1, 2, 3, ... 8) on the **training set**.
+  2.  Evaluate each model on the **validation set**.
+  3.  Select the model with the **lowest validation error**. This model is expected to generalize best.
+
+### 4. K-Fold Cross-Validation
+- **Motivation**: A simple train/validation split can be sensitive to how the data is divided. A different split might lead to a different "best" model.
+- **Core Concept**: **K-Fold Cross-Validation (CV)** provides a more robust estimate of a model's performance. The process is as follows:
+  1.  Shuffle the dataset randomly.
+  2.  Split the dataset into `K` groups (or "folds").
+  3.  For each fold:
+      a.  Take the fold as a **test set**.
+      b.  Take the remaining `K-1` folds as a **training set**.
+      c.  Fit the model on the training set and evaluate it on the test set.
+  4.  The final performance is the average of the scores from each of the `K` folds.
+- **Example**: Using `scikit-learn` to perform 10-fold CV.
+  ```python
+  # Example: 10-fold CV for a 3rd-order polynomial model
+  from sklearn.linear_model import LinearRegression
+  from sklearn.preprocessing import PolynomialFeatures
+  from sklearn.pipeline import make_pipeline
+  from sklearn.model_selection import cross_val_score
+  
+  # Create a pipeline that first creates polynomial features, then fits a linear model
+  model = make_pipeline(PolynomialFeatures(3), LinearRegression())
+  
+  # Perform 10-fold cross-validation
+  # 'neg_mean_squared_error' is used because cross_val_score expects a utility score (higher is better)
+  scores = cross_val_score(model, x_reshaped, t_reshaped, cv=10, scoring='neg_mean_squared_error')
+  
+  # The scores are negative MSE, so we take the mean and flip the sign
+  average_mse = -scores.mean()
+  ```
+
+## Best Practices
+- **Avoid using the test set for model selection**: The final test set should only be used once, at the very end, to report the performance of the final, chosen model.
+- **Choose K carefully**: A common choice for K is 5 or 10. A larger K is more computationally expensive but gives a more robust estimate.
+
+---
+*Last updated: 2025-10-27*
