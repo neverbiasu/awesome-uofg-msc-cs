@@ -1,6 +1,6 @@
-# Enriched Content: ExplainabilityMachineLearning_(2).pdf
+# Enriched Content: ExplainabilityMachineLearning.pdf
 
-This document is a complete and detailed AI-friendly version of the presentation `ExplainabilityMachineLearning_(2).pdf`. All visual content including text, graphs, and diagrams has been meticulously transcribed and described.
+This document is a complete and detailed AI-friendly version of the presentation `ExplainabilityMachineLearning.pdf`. All visual content including text, graphs, and diagrams has been meticulously transcribed and described.
 
 ---
 

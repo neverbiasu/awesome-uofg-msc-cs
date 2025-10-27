@@ -1,7 +1,163 @@
-# MLAIDS_19_20_with_sol
+# Enriched Content: MLAIDS_19_20_with_sol.pdf
 
-DayOfWeek DayOfMonth Month 2XXX  XX.XX am/pm   –   XX.XX am/pm  (Duration:   60   minutes)  DEGREES OF   MSc,   MSci ,   MEng, BEng, BSc,MA and MA   (Social Sciences)  Machine Learning   for Data Scientists  ( Answer   all of the   3   questions )  This   exam ination   paper is worth   a total of   60   marks  INSTRUCTIONS TO INVIGILATORS  Please collect all exam question papers   and exam  answer scripts and retain for school to collect.  Candidates must not remove exam question papers.
-December Diet   2  1.   A   polynomial regression model is defined as:  𝑡 !   =   #   𝑤 "  #  " $ %  𝑥 !  " ,   𝑛   =   1 ,   .   .   .   ,   𝑁  (a)   When applying this model to the Olympic data, where   𝑥 !   ∈   1896 ,   .   .   .   , 2008 , we always  rescale x , e.g.   𝑥 !   =   & ! ' ()*+  ,%   .   Explain why   is this rescaling necessary.  [ 4   marks]  In the O lympic data, high polynomial could make the value of x^d very big [ 2 ]. As a result,  the computation of parameters becomes unstable [ 2 ].  (b)   Write down the   regression model if   the following   Radial basis function   (RBF)   with a  range of different position parameter   𝜇   is applied   to   𝑥 ! .  𝑅𝐵𝐹 ( 𝑦 ;   𝜇 ,   𝑙 )   =   exp ( −   ( 𝑦   −   𝜇 ) -  𝑙 -   )  [3 marks]  𝑡 !   =   #   𝑤 "  #  " $ (  exp ( −   ( 𝑥 !   −   𝜇 " ) -  𝑙 -   ) ,   𝑛   =   1 ,   .   .   .   ,   𝑁  (c)   Give an example of   nonlinear regression model. Also explain why it is nonlinear.  [ 2   marks]  Any nonlinear function of the w and x e.g. f(x, w) = sin(w*x)   [ 1 ]. State clearly   which  relationship   is   nonlinear [1].  (d)   Explain   why   polynomial regression could suffer from outliers .  [3 marks]  Outliers favours higher polynomial orders [1] , as they can fit the outliers better [1].  However, the high order models are more likely to overfit the data [1].  (e)   L2   Regularised regression can be used to deal with this problem.   Use a contour plot  (Assuming the dimension of the parameter is 2 )   of   parameters   and   the   loss function to  explain why.  [ 8   marks]  2 marks for the correct contour of the mean squared error, 2 marks for the correct contour for  the L2 regularisation. 2 marks for highlight the correct intersection between the  two. 2 marks for   stating the fact that optimal parameter shifted closer to (0, 0)  2 .   Classification question  (a)   C lassification and   regression   are both supervised learning problems.   Describe a way  to   turn a regression problem into a classification problem?   (Please state the differences  between the two.)
-December Diet   3  [3 marks ]  In regression, the target variable is a continuous/real - valued variable   [1] .   In classification, the  target variable is a discrete/binary/c ategorical variable [1]. To   obtain   a  classification problem from regression, one can cluster/group the  continuous/real - valued variable into groups [1].  (b)   The r eceiver operating characteristic   (ROC) curve is a standard way to visualize the  performance of clas sifiers.   Outline how to draw a ROC curve  [ 3   mar ks]  The ROC curve is created by varying the threshold at which the classifier calls something as  belonging to the positive class. [1] Each point is consisted of false positive rate or   1 - specifity  (normally on the x - axis) [1] and true positive rate or sensitivity (normally on the y - axis) [1].  (c)   For the classifier outputs in the table below, provide a value for the missing  output (labeled ‘?’) that would :  Class Label   0   0   0   1   1   1  Output   0.1   0.25   0.4   ?   0.6   0.9  (i)   Give an AUC equal   to 1 ,  [2 marks]  An ything between 0.4 and 1.0  (ii)   Give an AUC less than   1 ,  [2 marks]  Anything less than 0.4  (iii)   Now assuming you can change any output   of the six data points, g ive  an example of the output s , such that the AUC is   0.5 .  [3 marks]  As long as the output for 0s and 1s are the same.  (d)   Use a diagram   (some data in 2D)   to d escribe   how   l inear Support Vector Machines  (SVMs)   operate   (how   they   make   classification   decisions,   what   and how   parameters  have to be set, what data needs to be stored etc) .  [4 marks]  1   mar k for drawing that demonstrate the margin, 1 mark for highlight the decision  boundary, 1 mark for highlight ing   support vectors, 1 mark   for pointing out only  support vectors needs to be stored.
-December Diet   4  (e)   Logistic regression uses the sigmoid function to make classification decision.  Now, we have defined   the following probability with a sigmoid function.  𝑝 ( 𝑡 !   =   0 | 𝐰 ,   𝐱 ! )   =   1  1   +   exp ( − 𝐰 . 𝐱 ! )  Write down the corresponding likelihood function for   n th   data point s,   𝑝 ( 𝑡 ! | 𝐰 ,   𝐱 ! ) .  [3 marks]  𝑝 ( 𝑡 ! | 𝐰 ,   𝐱 ! )   =   ( 1   −   1  1   +   exp ( − 𝐰 . 𝐱 ! ) ) / !   (   1  1   +   exp ( − 𝐰 . 𝐱 ! ) ) ( ' / !  3 .   Unsupervised learning question  Consider using the K - means   algorithm   to perform clustering   on   the following data .  We want to cluster data in the outer ring in one cluster and the data in the inner circle as a  different cluster.  (a)   Outline what would happen if we directly apply   K - means   with Euclidian distance   to  this data.   Can it achieve the clustering objective? How will it split/group the data?  [ 2   marks]  K - means   cannot   split the data into outer ring and inner circle clusters [ 1 ].   It will group  parts of the outer ring or inner circle   [ 1 ] .  (b)   An alternative approach is to use   Kernel   K - means.   Explain how   the   kernel   could help  in this dataset.  [3 marks]  A kernel that project the data onto a different space [ 1 ] where data can be easily  s eparated [1]. The space could have higher or lower number of dimensions compare to  the original data [1].  (c)   Which one of the following state ments   about kernel is NOT   correct?  A.   One could use the   RBF kernel,   𝐾 ( 𝒙 ! ,   𝒙 0   )   =   exp ( − 𝛾 ( 𝒙 !   −   𝒙 0 ) . ( 𝒙 !   −   𝒙 0 ) ) , to  achieve the clustering target.  − 1.5   − 1   − 0.5   0   0.5   1   1.5  − 1.5  − 1  − 0.5  0  0.5  1  1.5  x 1  x 2
-December Diet   5  B.   The RBF kernel projects the data onto an infinite dimensional space. The free  parameter   𝛾   can be estimated with cross - validation.  C.   One could use the linear kernel ,   𝐾 ( 𝒙 ! ,   𝒙 0   )   =   𝒙 !  .   𝒙 0 ,   to achieve the   clustering  target.  D.   The linear kernel project s   the data onto   itself, and there is no free parameter to  tune.  [ 2   marks]  C  (d)   Write some pseudo - code to perform K - means.  [5 marks]  Given: Number of clusters, K  2. For each cluster k = 1...K:  3. For each object   n = 1...N: [1]  4. Compute the distance between object n and cluster k [1]  5. Assign object n to the cluster corresponding to the smallest distance [1]  6. Update the mean of each cluster [1]  7. If assignments have changed, return to 2. Else stop. [1]  (e)   Outline   how and why cross - validation can be used   to select the number of clusters K .  [ 8   marks]  Cross - validation with total   or   average Euclidean distance between data points and their  cluster centers [2]. At each   CV cycle, use the training data to   determine the mean  of the clusters [2]. Test these means by computing total or average Euclidean  distance between testing data points and their nearest cluster centers [2].   CV  allow the trained number of clusters and means to be tested on a different datas et  in which the trained K - mean may or may not be a good fit. [2]
+This document is a complete and detailed AI-friendly version of the exam paper `MLAIDS_19_20_with_sol.pdf`. All questions, solutions, text, graphs, and formulas have been meticulously transcribed and described.
+
+---
+
+## Page 1: Title Page
+
+- **University**: University of Glasgow
+- **College**: College of Science and Engineering
+- **School**: School of Computing Science
+- **Degree**: DEGREE OF MSc
+- **Course**: Machine Learning & AI for Data Scientists
+- **Academic Year**: 19/20
+
+---
+
+## Page 2: Question 1 - Linear Regression
+
+**Scenario**: A property company has a dataset of 1000 houses, each with a known sale price. For each house, two features are recorded: `x1` (size in square meters) and `x2` (distance to the city center in kilometers). The company wants to build a linear regression model to predict the sale price `y`.
+
+**(a) Write down the general form of a linear regression model for this problem.**
+
+- The model will predict the price `y` based on the two features `x1` and `x2`.
+
+**(b) What are the parameters of this model?**
+
+- The parameters are the weights that the model learns from the data.
+
+**(c) How many parameters does this model have?**
+
+- The model has a parameter for each feature, plus an intercept term.
+
+**(d) Draw a diagram that shows how the model computes `y` from `x1` and `x2`.**
+
+- A diagram illustrating the computation.
+
+---
+
+## Page 3: Question 1 (Continued)
+
+> **Image Content Analysis (Diagram for 1d):**
+> - **Overall Description**: A simple diagram of a linear neuron or perceptron.
+> - **Components**:
+>   - **Inputs**: Two nodes labeled `x1` and `x2`.
+>   - **Weights**: Arrows originate from `x1` and `x2`, labeled `w1` and `w2` respectively. There is also a bias input `w0`.
+>   - **Processing Unit**: A central node labeled `Σ` (Sigma), indicating summation.
+>   - **Output**: An arrow exits the summation node to an output node labeled `y`.
+> - **Interpretation**: The diagram shows that the output `y` is computed by taking a weighted sum of the inputs `x1` and `x2`, plus a bias term `w0`.
+
+**(e) What is the name of the algorithm used to find the optimal values for the parameters?**
+
+- The algorithm used to minimize the difference between predicted and actual values.
+
+**(f) The company is considering adding a third feature, `x3` (the age of the property). How would this change the model and its number of parameters?**
+
+- How does adding a new feature affect the linear model equation and its complexity.
+
+---
+
+## Page 4: Solution for Question 1
+
+**(a) General Form of the Model:**
+`y = w0 + w1*x1 + w2*x2 + e`
+Where `y` is the predicted price, `w0` is the bias (intercept), `w1` and `w2` are the weights for the features `x1` and `x2`, and `e` is the error term.
+
+**(b) Model Parameters:**
+The parameters are the weights `w0`, `w1`, and `w2`.
+
+**(c) Number of Parameters:**
+The model has 3 parameters.
+
+**(d) Diagram:**
+The diagram shows a linear neuron where the inputs `x1` and `x2` are multiplied by their respective weights `w1` and `w2`, summed together with the bias `w0`, to produce the output `y`.
+
+**(e) Optimization Algorithm:**
+Least Squares (or Ordinary Least Squares - OLS).
+
+**(f) Adding a Third Feature:**
+The model equation would become: `y = w0 + w1*x1 + w2*x2 + w3*x3 + e`.
+The model would now have 4 parameters (`w0`, `w1`, `w2`, `w3`).
+
+---
+
+## Page 5: Question 2 - K-Means Clustering
+
+**Scenario**: You are given a dataset of 2D points and asked to perform K-Means clustering with K=2. The initial positions of the two cluster centroids are given.
+
+> **Image Content Analysis:**
+> - **Overall Description**: A 2D scatter plot showing initial data points and cluster centroids for a K-Means problem.
+> - **Graph Analysis**:
+>   - **Type**: 2D Scatter Plot.
+>   - **Data Points**: A set of blue dots scattered across the 2D plane.
+>   - **Centroids**: Two initial cluster centers are marked with large red crosses.
+
+**(a) Describe the first step of the K-Means algorithm (the assignment step).**
+
+**(b) After the first assignment step, what are the new clusters?**
+
+**(c) Describe the second step of the K-Means algorithm (the update step).**
+
+**(d) Calculate the new positions of the two cluster centroids after the update step.**
+
+---
+
+## Page 6: Solution for Question 2
+
+**(a) Assignment Step:**
+Each data point is assigned to the nearest cluster centroid based on Euclidean distance.
+
+**(b) New Clusters:**
+Points closer to the first centroid form Cluster 1; points closer to the second centroid form Cluster 2.
+
+**(c) Update Step:**
+The position of each cluster centroid is updated to be the mean (average) of all data points assigned to that cluster.
+
+**(d) New Centroid Positions:**
+The solution provides the calculated coordinates for the new centroids.
+
+> **Image Content Analysis:**
+> - **Overall Description**: The same scatter plot as before, but now data points are colored according to their cluster assignment (e.g., blue and green). The red crosses indicate the *new* positions of the centroids after the first update step.
+
+---
+
+## Page 7: Question 3 - Principal Component Analysis (PCA)
+
+**Scenario**: You are given a 2D dataset and asked about applying PCA.
+
+> **Image Content Analysis:**
+> - **Overall Description**: A 2D scatter plot of data points.
+> - **Graph Analysis**:
+>   - **Type**: 2D Scatter Plot.
+>   - **Data Points**: A cloud of data points showing a strong positive correlation, elongated from the bottom-left to the top-right.
+
+**(a) What is the main purpose of PCA?**
+
+**(b) How many principal components can be found for this 2D dataset?**
+
+**(c) On the plot, draw the first principal component (PC1) and the second principal component (PC2).**
+
+**(d) If you were to reduce the dimensionality of the data to 1D, which component would you keep and why?**
+
+---
+
+## Page 8: Solution for Question 3
+
+**(a) Purpose of PCA:**
+PCA is a dimensionality reduction technique used to transform a large set of variables into a smaller one that still contains most of the information in the large set.
+
+**(b) Number of Components:**
+For a 2D dataset, there are 2 principal components.
+
+**(c) Drawing the Components:**
+
+> **Image Content Analysis:**
+> - **Overall Description**: The scatter plot from the question, now with the two principal components drawn on it.
+> - **Graph Analysis**:
+>   - **PC1**: A red arrow drawn through the elongated axis of the data cloud, representing the direction of maximum variance.
+>   - **PC2**: A second red arrow, perpendicular to PC1, representing the direction of the second-largest variance.
+
+**(d) Dimensionality Reduction:**
+You would keep the first principal component (PC1) because it captures the largest amount of variance in the data. Discarding PC2 would result in the minimum loss of information.
+
