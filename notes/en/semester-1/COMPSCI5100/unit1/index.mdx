@@ -1,0 +1,64 @@
+---
+title: "Unit 1: Regression"
+description: "A concise study guide for Unit 1: Regression, covering linear models, polynomial regression, cross-validation, and regularization."
+---
+
+## Overview
+This unit introduces the fundamentals of regression, a core supervised learning technique. We will start with simple linear regression, understand how to measure model performance using loss functions, and then explore more complex models like polynomial regression. Key challenges such as overfitting will be addressed using validation and regularization techniques.
+
+- **Form**: Lecture + Lab
+- **Themes**: Linear Regression, Model Complexity, Cross-Validation, Regularization
+
+## Learning Objectives
+1.  Understand and implement simple linear regression.
+2.  Explain the concept of a loss function and its role in model fitting.
+3.  Use polynomial regression to model non-linear relationships.
+4.  Understand the problem of overfitting and use cross-validation to select an appropriate model.
+5.  Explain and apply Ridge (L2) and Lasso (L1) regularization to control model complexity.
+
+## Key Knowledge Points
+- **Linear Regression**:
+  - The model `t = w_0 + w_1*x` and the meaning of parameters `w_0`, `w_1`.
+  - Squared Loss (Mean Squared Error) as a measure of model fit.
+  - The analytical solution for linear regression: `ŵ = (XᵀX)⁻¹Xᵀt`.
+- **Model Complexity & Overfitting**:
+  - Using polynomial basis functions to create more complex models.
+  - The trade-off between model complexity and generalization.
+  - How high-order polynomials can overfit by fitting to noise in the training data.
+- **Validation**:
+  - The difference between training data and validation data.
+  - Using a validation set to estimate a model's performance on unseen data.
+  - The process of K-fold cross-validation for robust model selection.
+- **Regularization**:
+  - Penalizing large weight values to prevent overfitting.
+  - **Ridge Regression (L2)**: Adds a `λ * ||w||²` penalty, shrinking weights.
+  - **Lasso Regression (L1)**: Adds a `λ * ||w||₁` penalty, which can shrink weights to zero and perform feature selection.
+  - Using cross-validation to find the optimal regularization parameter `λ`.
+
+## Practice Checklist (Self-Assessment)
+- [ ] Implement a linear regression model using `sklearn.linear_model.LinearRegression`.
+- [ ] Calculate the Mean Squared Error for a model's predictions.
+- [ ] Fit polynomial models of different orders and compare their training vs. validation loss.
+- [ ] Use `sklearn.model_selection.cross_val_score` to evaluate a model.
+- [ ] Implement and compare the effects of `Ridge` and `Lasso` on an overfitted polynomial model.
+- [ ] Use cross-validation to select the best `alpha` (λ) for a regularized model.
+
+## Content Index (Sub-pages)
+| Module | Page |
+|---|---|
+| Concepts | [Introduction to Linear Regression](./introduction-to-linear-regression) |
+| Methods | [Polynomial Regression & Cross-Validation](./polynomial-and-cv) |
+| Techniques | [Regularization (Ridge & Lasso)](./regularization) |
+
+## Materials Index
+
+> Note: The following links point only to the Markdown (.md) versions available in the repository, which serve as the single source of truth for note content.
+
+### Regression
+- [Regression Part 1 (lecture, MD)](../../../../../materials/semester-1/COMPSCI5100-ml-ai/resources/Regression_Part_1.md)
+- [Regression Part 2 (lecture, MD)](../../../../../materials/semester-1/COMPSCI5100-ml-ai/resources/Regression_Part_2.md)
+- [Regression Part 3 (lecture, MD)](../../../../../materials/semester-1/COMPSCI5100-ml-ai/resources/Regression_Part_3.md)
+
+---
+
+*Last updated: 2025-10-27*

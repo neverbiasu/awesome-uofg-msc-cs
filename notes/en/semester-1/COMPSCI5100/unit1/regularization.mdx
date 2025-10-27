@@ -1,0 +1,76 @@
+---
+title: "Regularization for Regression"
+description: "Controlling model complexity and preventing overfitting using Ridge (L2) and Lasso (L1) regularization."
+---
+
+## Overview
+- **Goal**: To learn techniques that prevent overfitting by constraining the complexity of a model.
+- **Scope**: This note covers the theory and application of Ridge (L2) and Lasso (L1) regularization, including how to choose the regularization strength using cross-validation.
+
+## Learning Objectives
+1.  Explain the motivation for regularization as a solution to overfitting.
+2.  Describe how Ridge Regression (L2 penalty) works to shrink model weights.
+3.  Describe how Lasso Regression (L1 penalty) works and how it can be used for feature selection.
+4.  Implement Ridge and Lasso regression using `scikit-learn`.
+5.  Use cross-validation to select the optimal regularization hyperparameter (λ or alpha).
+
+## Key Concepts
+
+### 1. The Problem of Overfitting and Large Weights
+- **Motivation**: As seen with high-order polynomials, complex models that overfit the training data often have extremely large positive and negative weights. These large weights cause the model function to fluctuate wildly to catch every data point, including noise.
+- **Idea**: If we can prevent the model's weights from becoming too large, we can control its complexity and reduce overfitting.
+
+### 2. Regularization: Penalizing the Loss Function
+- **Core Concept**: Regularization works by adding a **penalty term** to the original loss function. This penalty term is a function of the model's weights. The new regularized loss function is:
+  `L_reg = L_data + L_penalty`
+  - `L_data` is the original Mean Squared Error (MSE).
+  - `L_penalty` discourages large weights.
+  - The model now has to find a balance between fitting the data well (minimizing `L_data`) and keeping its weights small (minimizing `L_penalty`).
+
+### 3. Ridge Regression (L2 Regularization)
+- **Core Concept**: Ridge Regression uses the **L2 norm** of the weights as its penalty term. The penalty is the sum of the squared weights, scaled by a hyperparameter `λ` (lambda).
+  `L_penalty = λ * Σ_{k=1 to K} w_k² = λ * ||w||²`
+- **Effect**: The L2 penalty forces the weights to be small, but it rarely forces them to be exactly zero. It shrinks all weights towards zero, resulting in a smoother, less complex model function.
+- **The `λ` Hyperparameter**: `λ` (called `alpha` in `scikit-learn`) controls the strength of the regularization. 
+  - If `λ = 0`, it's the same as ordinary least squares.
+  - As `λ` increases, the weights are shrunk more and more, leading to a simpler model (higher bias, lower variance).
+- **Example**:
+  ```python
+  # Example: Applying Ridge regression to an 8th-order polynomial
+  from sklearn.linear_model import Ridge
+  from sklearn.pipeline import make_pipeline
+  from sklearn.preprocessing import PolynomialFeatures
+
+  # Create a pipeline
+  model = make_pipeline(PolynomialFeatures(8), Ridge(alpha=0.001))
+  
+  # Fit the model
+  model.fit(x_reshaped, t_reshaped)
+  ```
+
+### 4. Lasso Regression (L1 Regularization)
+- **Core Concept**: Lasso Regression uses the **L1 norm** of the weights as its penalty term. The penalty is the sum of the absolute values of the weights, scaled by `λ`.
+  `L_penalty = λ * Σ_{k=1 to K} |w_k| = λ * ||w||₁`
+- **Key Property: Sparsity**: The L1 penalty has a unique effect: it can force some of the model weights to be **exactly zero**. This means the model effectively ignores the corresponding features.
+- **Use Case: Feature Selection**: Because Lasso can zero out weights, it is very useful for automatic feature selection, especially when you have many features and suspect that not all of them are useful.
+- **Example**:
+  ```python
+  # Example: Applying Lasso regression
+  from sklearn.linear_model import Lasso
+
+  model = make_pipeline(PolynomialFeatures(8), Lasso(alpha=0.0001))
+  model.fit(x_reshaped, t_reshaped)
+  
+  # We could inspect the model's coefficients to see which are zero
+  # print(model.named_steps['lasso'].coef_)
+  ```
+
+### 5. Choosing the Regularization Parameter `λ`
+- **Motivation**: The choice of `λ` is critical. If `λ` is too small, the model will still overfit. If `λ` is too large, the model will be too simple and will underfit (not capture the underlying trend).
+- **Best Practice**: Treat `λ` as a hyperparameter and use **cross-validation** to find the value that produces the lowest average validation error. You can test a range of `λ` values (e.g., 0.0001, 0.001, 0.01, 0.1, 1, 10) to find the optimal one.
+
+## Best Practices
+- **Feature Scaling**: Regularization is sensitive to the scale of the input features. It is standard practice to scale your features (e.g., to have zero mean and unit variance) before applying Ridge or Lasso regression. `scikit-learn`'s `Ridge` and `Lasso` have a `normalize=True` parameter that can handle this, or you can use `StandardScaler` in a pipeline.
+
+---
+*Last updated: 2025-10-27*

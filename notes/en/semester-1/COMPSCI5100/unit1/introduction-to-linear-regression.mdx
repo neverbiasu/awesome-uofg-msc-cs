@@ -1,0 +1,69 @@
+---
+title: "Introduction to Linear Regression"
+description: "Understanding the fundamentals of linear regression, from model definition to loss functions and implementation with scikit-learn."
+---
+
+## Overview
+- **Goal**: To understand how to model a linear relationship between a single input feature and a continuous target variable.
+- **Scope**: This note covers the definition of a simple linear model, the concept of a loss function (MSE), and the practical implementation of model fitting.
+
+## Learning Objectives
+1.  Define a linear regression model mathematically.
+2.  Explain the role of a loss function in finding the best model parameters.
+3.  Fit a linear regression model to data using `scikit-learn`.
+4.  Interpret the parameters (slope and intercept) of a fitted model.
+
+## Key Concepts
+
+### 1. The Linear Model
+- **Motivation**: We often assume a simple, straight-line relationship exists between an input and an output. For example, predicting a future Olympic 100m winning time based on the year.
+- **Core Concept**: The relationship is modeled by the equation of a straight line:
+  `t = f(x; w_0, w_1) = w_0 + w_1*x`
+  - `t` is the target variable (e.g., winning time).
+  - `x` is the input feature (e.g., year).
+  - `w_0` is the y-intercept (the value of `t` when `x=0`). It shifts the line up or down.
+  - `w_1` is the slope or weight associated with `x`. It controls the line's steepness.
+- **Goal of Learning**: To find the optimal parameter values (`w_0`, `w_1`) that make the line best fit the training data.
+
+### 2. The Loss Function
+- **Motivation**: To find the "best" line, we need a way to numerically measure how well a given line fits the data. A line is "good" if its predictions are close to the actual data points.
+- **Core Concept**: The **Squared Loss** (or Squared Error) measures the error for a single data point `n`:
+  `L_n = (t_n - f(x_n; w_0, w_1))^2`
+  This is the squared vertical distance between the true target `t_n` and the model's prediction `f(x_n)`.
+- **Overall Loss**: To get a single measure of error for the entire dataset, we average the squared loss over all `N` data points. This is called the **Mean Squared Error (MSE)**:
+  `L = (1/N) * Σ_{n=1 to N} (t_n - f(x_n; w_0, w_1))^2`
+- **Best Practice**: The goal of training is to find the parameters `w_0` and `w_1` that minimize this MSE value.
+
+### 3. Model Fitting with Scikit-Learn
+- **Motivation**: Manually calculating the parameters that minimize the loss is tedious and complex. Libraries like `scikit-learn` automate this process.
+- **Usage Pattern**: The `sklearn.linear_model.LinearRegression` object can fit a model to data automatically.
+- **Example**:
+  ```python
+  # Example: Fitting a model to Olympic 100m data
+  # Assumes 'x' is a NumPy array of years and 't' is an array of times.
+  from sklearn.linear_model import LinearRegression
+  import numpy as np
+
+  # Reshape data for scikit-learn: needs to be a 2D array
+  x_reshaped = x[:, np.newaxis]
+  t_reshaped = t[:, np.newaxis]
+
+  # Create and fit the model
+  reg = LinearRegression().fit(x_reshaped, t_reshaped)
+
+  # The optimal parameters are stored in the model object
+  w_0 = reg.intercept_[0]  # Intercept
+  w_1 = reg.coef_[0][0]    # Slope
+
+  # Make a prediction for the year 2012
+  prediction_2012 = reg.predict(np.array([[2012]]))
+  ```
+- **Summary**: The `.fit()` method performs the optimization to find the best `w_0` and `w_1`. The resulting `reg` object is a trained model ready for predictions.
+
+## Model Assumptions
+- **Linearity**: The relationship between `x` and `t` is assumed to be linear.
+- **Continuation**: The trend observed in the training data is assumed to continue into the future.
+- **Trade-offs**: While these assumptions might be technically incorrect (e.g., winning times can't decrease forever), the model can still be very useful for making predictions within a reasonable range.
+
+---
+*Last updated: 2025-10-27*
