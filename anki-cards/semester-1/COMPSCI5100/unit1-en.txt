@@ -1,0 +1,44 @@
+What is the core goal of linear regression?	Model linear relationship between input and continuous target.
+What is the mathematical form of a simple linear model?	t = w_0 + w_1x
+In linear regression, what does w_0 represent?	The y-intercept, vertical shift of the line.
+In linear regression, what does w_1 represent?	The slope, steepness of the regression line.
+What is the primary function of a loss function?	Quantify model error to measure data fit.
+What is the formula for Squared Loss for one data point?	L_n = (t_n - f(x_n))^2
+What is the formula for Mean Squared Error (MSE)?	L = (1/N) * Σ(t_n - f(x_n))^2
+What is the purpose of scikit-learn's .fit() method?	Find optimal parameters minimizing the loss function.
+How are 1D arrays prepared for scikit-learn's .fit() method?	Reshaped into 2D arrays (e.g., x[:, np.newaxis]).
+What is the core assumption about input-target relationship in linear regression?	It is linear.
+How do you access the intercept (w_0) from a fitted `LinearRegression` model `reg`?	`reg.intercept_[0]`
+How do you access the slope (w_1) from a fitted `LinearRegression` model `reg`?	`reg.coef_[0][0]`
+What is the purpose of `x[:, np.newaxis]` in NumPy?	Reshape 1D array `x` into a 2D column vector.
+What problem might arise if the linearity assumption is violated in linear regression?	Model may not accurately capture the true relationship.
+What problem does polynomial regression address?	Modeling non-linear relationships beyond a straight line.
+What is the general formula for a polynomial regression model?	t = w_0 + w_1x + w_2x^2 + ... + w_Kx^K
+Is polynomial regression considered a linear or non-linear model?	Linear, because it's linear in its weights (w).
+Define overfitting in machine learning.	Model learns training data noise, fails to generalize to new data.
+What is a visual indicator of an overfitted polynomial model?	Wild oscillations, especially at data range edges.
+What is the primary purpose of a validation set?	Estimate performance on unseen data, select hyperparameters.
+How is the best model selected using a validation set?	Choose the model with the lowest validation error.
+Why is K-fold Cross-Validation generally preferred over a single validation set?	Provides a more robust and reliable performance estimate.
+What is the final step in K-fold CV to obtain a single performance score?	Average scores from all K individual folds.
+What is a key best practice for the test set during model selection?	Use only once at the very end for final performance reporting.
+What is the purpose of `PolynomialFeatures(degree)` in scikit-learn?	Generate polynomial and interaction features up to `degree`.
+What does `make_pipeline(PolynomialFeatures(3), LinearRegression())` achieve?	Creates a pipeline for 3rd-order polynomial regression.
+Why is `scoring='neg_mean_squared_error'` used in `cross_val_score`?	`cross_val_score` expects utility (higher is better), so MSE is negated.
+What are the advantages of a larger K in K-fold cross-validation?	More robust estimate, less bias.
+What are the disadvantages of a larger K in K-fold cross-validation?	Computationally more expensive.
+What is the primary motivation for using regularization?	Prevent overfitting by controlling model complexity.
+How does regularization prevent overfitting?	Adds a penalty term to the loss function, discouraging large weights.
+What is the general form of a regularized loss function?	L_reg = L_data + L_penalty
+What is Ridge Regression also known as?	L2 Regularization.
+What is the penalty term in Ridge Regression?	Sum of squared weights (L2 norm), scaled by λ.
+What is the effect of L2 regularization on model weights?	Shrinks all weights towards zero, but rarely to exactly zero.
+What does the hyperparameter λ (alpha) control in Ridge Regression?	The strength of regularization.
+What happens if λ = 0 in Ridge Regression?	It becomes equivalent to ordinary least squares.
+What is Lasso Regression also known as?	L1 Regularization.
+What is the penalty term in Lasso Regression?	Sum of absolute values of weights (L1 norm), scaled by λ.
+What unique property does L1 regularization have on model weights?	Can force some weights to be exactly zero (sparsity).
+What is a key use case for Lasso Regression due to its sparsity property?	Automatic feature selection.
+How is the optimal regularization parameter λ chosen?	Using cross-validation to find the lowest validation error.
+Why is feature scaling important before applying Ridge or Lasso regression?	Regularization is sensitive to feature scale.
+What is the effect of very large weights in an overfitted model?	Causes the model function to fluctuate wildly.

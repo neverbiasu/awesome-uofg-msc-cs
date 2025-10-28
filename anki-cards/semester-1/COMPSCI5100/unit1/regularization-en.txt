@@ -1,0 +1,15 @@
+What is the primary motivation for using regularization?	Prevent overfitting by controlling model complexity.
+How does regularization prevent overfitting?	Adds a penalty term to the loss function, discouraging large weights.
+What is the general form of a regularized loss function?	L_reg = L_data + L_penalty
+What is Ridge Regression also known as?	L2 Regularization.
+What is the penalty term in Ridge Regression?	Sum of squared weights (L2 norm), scaled by λ.
+What is the effect of L2 regularization on model weights?	Shrinks all weights towards zero, but rarely to exactly zero.
+What does the hyperparameter λ (alpha) control in Ridge Regression?	The strength of regularization.
+What happens if λ = 0 in Ridge Regression?	It becomes equivalent to ordinary least squares.
+What is Lasso Regression also known as?	L1 Regularization.
+What is the penalty term in Lasso Regression?	Sum of absolute values of weights (L1 norm), scaled by λ.
+What unique property does L1 regularization have on model weights?	Can force some weights to be exactly zero (sparsity).
+What is a key use case for Lasso Regression due to its sparsity property?	Automatic feature selection.
+How is the optimal regularization parameter λ chosen?	Using cross-validation to find the lowest validation error.
+Why is feature scaling important before applying Ridge or Lasso regression?	Regularization is sensitive to feature scale.
+What is the effect of very large weights in an overfitted model?	Causes the model function to fluctuate wildly.

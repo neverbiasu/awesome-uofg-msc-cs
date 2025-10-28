@@ -1,0 +1,15 @@
+What problem does polynomial regression address?	Modeling non-linear relationships beyond a straight line.
+What is the general formula for a polynomial regression model?	t = w_0 + w_1x + w_2x^2 + ... + w_Kx^K
+Is polynomial regression considered a linear or non-linear model?	Linear, because it's linear in its weights (w).
+Define overfitting in machine learning.	Model learns training data noise, fails to generalize to new data.
+What is a visual indicator of an overfitted polynomial model?	Wild oscillations, especially at data range edges.
+What is the primary purpose of a validation set?	Estimate performance on unseen data, select hyperparameters.
+How is the best model selected using a validation set?	Choose the model with the lowest validation error.
+Why is K-fold Cross-Validation generally preferred over a single validation set?	Provides a more robust and reliable performance estimate.
+What is the final step in K-fold CV to obtain a single performance score?	Average scores from all K individual folds.
+What is a key best practice for the test set during model selection?	Use only once at the very end for final performance reporting.
+What is the purpose of `PolynomialFeatures(degree)` in scikit-learn?	Generate polynomial and interaction features up to `degree`.
+What does `make_pipeline(PolynomialFeatures(3), LinearRegression())` achieve?	Creates a pipeline for 3rd-order polynomial regression.
+Why is `scoring='neg_mean_squared_error'` used in `cross_val_score`?	`cross_val_score` expects utility (higher is better), so MSE is negated.
+What are the advantages of a larger K in K-fold cross-validation?	More robust estimate, less bias.
+What are the disadvantages of a larger K in K-fold cross-validation?	Computationally more expensive.
