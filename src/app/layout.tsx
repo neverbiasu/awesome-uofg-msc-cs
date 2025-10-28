@@ -2,6 +2,7 @@ import '@/app/global.css';
 import { AISearchTrigger } from '@/components/search';
 import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
+import 'katex/dist/katex.css';
 
 type LayoutProps = {
   children: ReactNode;
