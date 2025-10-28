@@ -1,0 +1,16 @@
+What is classification in machine learning?	A supervised learning task to predict a discrete/categorical label.
+How does classification differ from regression?	Classification predicts discrete labels; regression predicts continuous values.
+What are the four main components of a classification system?	Labeled training data, features, model, evaluation metrics.
+What is the role of "features" in a classification system?	Numerical representation of raw data for the model.
+What is "labeled training data" in classification?	Dataset with examples `x` and corresponding correct labels `y`.
+What is the "model" component in classification?	Algorithm learning relationship between features and labels.
+What are "evaluation metrics" used for in classification?	Measure the model's performance (e.g., accuracy).
+What is a "feature vector"?	A numerical representation of data's measurable properties.
+What is the Bag-of-Words (BoW) model used for?	Representing text data as a vector of word counts/frequencies.
+What is the "curse of dimensionality"?	Problems arising from using too many features (high dimensionality).
+What is the goal of dimensionality reduction?	Reduce features while retaining important information.
+What is PCA (Principal Component Analysis)?	A popular technique for dimensionality reduction.
+How does PCA work?	Identifies directions (principal components) capturing maximum variance.
+What does the first principal component represent in PCA?	Direction of maximum data spread.
+What is the principle of Occam's Razor in model building?	Seek simpler models that explain data well.
+Why is feature engineering considered key in traditional machine learning?	Greatest impact on model performance.

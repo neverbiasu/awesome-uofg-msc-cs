@@ -1,0 +1,16 @@
+What is the primary purpose of Logistic Regression?	To model probabilities for classification tasks.
+How does Logistic Regression model probabilities?	Passes linear model output through a sigmoid function.
+What is the formula for the sigmoid function?	σ(z) = 1 / (1 + e⁻ᶻ)
+What loss function is minimized in Logistic Regression?	Negative log-likelihood (cross-entropy loss).
+What is the decision boundary in Logistic Regression?	A linear boundary where probability is 0.5 (wᵀx = 0).
+What is the core principle of Support Vector Machines (SVMs)?	Maximize the margin between classes.
+What is the "margin" in SVMs?	Distance between decision boundary and closest data points.
+What are "support vectors" in SVMs?	Data points lying exactly on the margin, defining the boundary.
+What is the "kernel trick" in SVMs used for?	To handle non-linearly separable data by mapping to higher dimensions.
+Name two common kernel functions used in SVMs.	Polynomial kernel, Radial Basis Function (RBF) kernel.
+How does Logistic Regression handle non-linearity?	Requires manual feature engineering.
+How do SVMs handle non-linearity?	Easily with the kernel trick.
+What type of output does Logistic Regression provide?	Probabilities.
+What type of output does SVM typically provide?	Class labels.
+What is the underlying principle of Logistic Regression?	Probabilistic (maximizes likelihood).
+What is the underlying principle of SVMs?	Geometric (maximizes margin).
