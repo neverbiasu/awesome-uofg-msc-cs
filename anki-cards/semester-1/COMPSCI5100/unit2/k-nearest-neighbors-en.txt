@@ -1,0 +1,13 @@
+What type of learning algorithm is k-NN?	Non-parametric, instance-based supervised learning.
+What does "instance-based" mean for k-NN?	No explicit training phase; memorizes entire training dataset.
+How does k-NN classify a new data point?	Assigns majority label of its `k` closest neighbors.
+What is the role of the hyperparameter `k` in k-NN?	Controls model complexity and decision boundary.
+What is the effect of a small `k` (e.g., k=1) in k-NN?	Low bias, high variance (overfitting), sensitive to noise.
+What is the effect of a large `k` in k-NN?	High bias, low variance (underfitting), smoother decision boundary.
+How is the optimal `k` typically chosen for k-NN?	Using cross-validation to find the best score.
+What is the most common distance metric used in k-NN?	Euclidean distance (L2 norm).
+Why is feature scaling crucial for k-NN?	Sensitive to feature scale; large ranges dominate distance.
+What is a common method for feature scaling before k-NN?	Standardization (zero mean, unit variance).
+What is a disadvantage of k-NN regarding computational cost?	Computationally expensive at test time.
+What is a disadvantage of k-NN regarding memory?	Requires large memory to store entire dataset.
+Can k-NN learn complex decision boundaries?	Yes, it can learn complex, non-linear decision boundaries.

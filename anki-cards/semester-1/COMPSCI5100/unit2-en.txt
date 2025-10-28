@@ -1,0 +1,45 @@
+What is classification in machine learning?	A supervised learning task to predict a discrete/categorical label.
+How does classification differ from regression?	Classification predicts discrete labels; regression predicts continuous values.
+What are the four main components of a classification system?	Labeled training data, features, model, evaluation metrics.
+What is the role of "features" in a classification system?	Numerical representation of raw data for the model.
+What is "labeled training data" in classification?	Dataset with examples `x` and corresponding correct labels `y`.
+What is the "model" component in classification?	Algorithm learning relationship between features and labels.
+What are "evaluation metrics" used for in classification?	Measure the model's performance (e.g., accuracy).
+What is a "feature vector"?	A numerical representation of data's measurable properties.
+What is the Bag-of-Words (BoW) model used for?	Representing text data as a vector of word counts/frequencies.
+What is the "curse of dimensionality"?	Problems arising from using too many features (high dimensionality).
+What is the goal of dimensionality reduction?	Reduce features while retaining important information.
+What is PCA (Principal Component Analysis)?	A popular technique for dimensionality reduction.
+How does PCA work?	Identifies directions (principal components) capturing maximum variance.
+What does the first principal component represent in PCA?	Direction of maximum data spread.
+What is the principle of Occam's Razor in model building?	Seek simpler models that explain data well.
+Why is feature engineering considered key in traditional machine learning?	Greatest impact on model performance.
+What type of learning algorithm is k-NN?	Non-parametric, instance-based supervised learning.
+What does "instance-based" mean for k-NN?	No explicit training phase; memorizes entire training dataset.
+How does k-NN classify a new data point?	Assigns majority label of its `k` closest neighbors.
+What is the role of the hyperparameter `k` in k-NN?	Controls model complexity and decision boundary.
+What is the effect of a small `k` (e.g., k=1) in k-NN?	Low bias, high variance (overfitting), sensitive to noise.
+What is the effect of a large `k` in k-NN?	High bias, low variance (underfitting), smoother decision boundary.
+How is the optimal `k` typically chosen for k-NN?	Using cross-validation to find the best score.
+What is the most common distance metric used in k-NN?	Euclidean distance (L2 norm).
+Why is feature scaling crucial for k-NN?	Sensitive to feature scale; large ranges dominate distance.
+What is a common method for feature scaling before k-NN?	Standardization (zero mean, unit variance).
+What is a disadvantage of k-NN regarding computational cost?	Computationally expensive at test time.
+What is a disadvantage of k-NN regarding memory?	Requires large memory to store entire dataset.
+Can k-NN learn complex decision boundaries?	Yes, it can learn complex, non-linear decision boundaries.
+What is the primary purpose of Logistic Regression?	To model probabilities for classification tasks.
+How does Logistic Regression model probabilities?	Passes linear model output through a sigmoid function.
+What is the formula for the sigmoid function?	σ(z) = 1 / (1 + e⁻ᶻ)
+What loss function is minimized in Logistic Regression?	Negative log-likelihood (cross-entropy loss).
+What is the decision boundary in Logistic Regression?	A linear boundary where probability is 0.5 (wᵀx = 0).
+What is the core principle of Support Vector Machines (SVMs)?	Maximize the margin between classes.
+What is the "margin" in SVMs?	Distance between decision boundary and closest data points.
+What are "support vectors" in SVMs?	Data points lying exactly on the margin, defining the boundary.
+What is the "kernel trick" in SVMs used for?	To handle non-linearly separable data by mapping to higher dimensions.
+Name two common kernel functions used in SVMs.	Polynomial kernel, Radial Basis Function (RBF) kernel.
+How does Logistic Regression handle non-linearity?	Requires manual feature engineering.
+How do SVMs handle non-linearity?	Easily with the kernel trick.
+What type of output does Logistic Regression provide?	Probabilities.
+What type of output does SVM typically provide?	Class labels.
+What is the underlying principle of Logistic Regression?	Probabilistic (maximizes likelihood).
+What is the underlying principle of SVMs?	Geometric (maximizes margin).
