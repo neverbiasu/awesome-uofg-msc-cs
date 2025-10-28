@@ -1,0 +1,14 @@
+What is the core goal of linear regression?	Model linear relationship between input and continuous target.
+What is the mathematical form of a simple linear model?	t = w_0 + w_1x
+In linear regression, what does w_0 represent?	The y-intercept, vertical shift of the line.
+In linear regression, what does w_1 represent?	The slope, steepness of the regression line.
+What is the primary function of a loss function?	Quantify model error to measure data fit.
+What is the formula for Squared Loss for one data point?	L_n = (t_n - f(x_n))^2
+What is the formula for Mean Squared Error (MSE)?	L = (1/N) * Σ(t_n - f(x_n))^2
+What is the purpose of scikit-learn's .fit() method?	Find optimal parameters minimizing the loss function.
+How are 1D arrays prepared for scikit-learn's .fit() method?	Reshaped into 2D arrays (e.g., x[:, np.newaxis]).
+What is the core assumption about input-target relationship in linear regression?	It is linear.
+How do you access the intercept (w_0) from a fitted `LinearRegression` model `reg`?	`reg.intercept_[0]`
+How do you access the slope (w_1) from a fitted `LinearRegression` model `reg`?	`reg.coef_[0][0]`
+What is the purpose of `x[:, np.newaxis]` in NumPy?	Reshape 1D array `x` into a 2D column vector.
+What problem might arise if the linearity assumption is violated in linear regression?	Model may not accurately capture the true relationship.
