@@ -38,7 +38,9 @@ description: "Understanding the fundamentals of linear regression, from model de
   ```math
   L = \frac{1}{N} \sum_{n=1}^{N} (t_n - f(x_n; w_0, w_1))^2
   ```
-- **Best Practice**: The goal of training is to find the parameters `w_0` and `w_1` that minimize this MSE value.
+<Callout type="info" title="Best Practice">
+  The goal of training is to find the parameters `w_0` and `w_1` that minimize this MSE value.
+</Callout>
 
 ### 3. Model Fitting with Scikit-Learn
 - **Motivation**: Manually calculating the parameters that minimize the loss is tedious and complex. Libraries like `scikit-learn` automate this process.
@@ -69,7 +71,9 @@ description: "Understanding the fundamentals of linear regression, from model de
 ## Model Assumptions
 - **Linearity**: The relationship between `x` and `t` is assumed to be linear.
 - **Continuation**: The trend observed in the training data is assumed to continue into the future.
-- **Trade-offs**: While these assumptions might be technically incorrect (e.g., winning times can't decrease forever), the model can still be very useful for making predictions within a reasonable range.
+<Callout type="warn" title="Trade-offs">
+  While linear regression assumptions might be technically incorrect, the model can still be very useful for predictions within a reasonable range.
+</Callout>
 
 ## Key Takeaway
 - Linear Regression models linear relationships using parameters `w_0` (intercept) and `w_1` (slope).
