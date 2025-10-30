@@ -1,0 +1,76 @@
+---
+title: "k-Nearest Neighbors (k-NN)"
+description: "Understanding the k-Nearest Neighbors algorithm, an intuitive, instance-based classifier, and learning how to select the optimal 'k' using cross-validation."
+---
+
+## Overview
+- **Goal**: To understand and implement the k-Nearest Neighbors (k-NN) algorithm for classification.
+- **Scope**: This note covers the mechanics of k-NN, the importance of the hyperparameter `k`, the role of distance metrics and feature scaling, and how to choose `k` using cross-validation.
+
+## Learning Objectives
+1.  Explain the decision-making process of the k-NN algorithm.
+2.  Describe how the choice of `k` affects the model's decision boundary and the bias-variance trade-off.
+3.  Implement a k-NN classifier using `scikit-learn`.
+4.  Use cross-validation to find an optimal value for `k`.
+5.  Explain why feature scaling is crucial for k-NN.
+
+## Key Concepts
+
+### 1. The k-NN Algorithm
+- **Motivation**: Sometimes the simplest approach is the most effective. Instead of building a complex model, what if we just let the data "speak for itself"?
+<Callout type="info" title="Core Concept: k-NN Algorithm">
+  k-NN is a non-parametric, instance-based learning algorithm that classifies new points by majority vote of their `k` nearest neighbors.
+</Callout>
+
+### 2. The Hyperparameter `k` and the Bias-Variance Trade-off
+- **The Role of `k`**: The number of neighbors, `k`, is a critical hyperparameter that you must choose. It controls the complexity of the model.
+<Callout type="warn" title="Small k: Overfitting Risk">
+  A small `k` leads to a flexible model with low bias but high variance, making it sensitive to noise and prone to overfitting.
+</Callout>
+<Callout type="warn" title="Large k: Underfitting Risk">
+  A large `k` leads to a less flexible model with high bias but low variance, making it prone to underfitting.
+</Callout>
+
+### 3. Choosing the Optimal `k`
+- **Motivation**: Since `k` controls the bias-variance trade-off, we need a principled way to find the best value for our specific dataset.
+- **Best Practice**: Use **cross-validation**. 
+  1.  Test a range of different values for `k` (e.g., from 1 to 30).
+  2.  For each `k`, calculate the average cross-validation score.
+  3.  Choose the value of `k` that results in the best score (e.g., lowest error or highest accuracy).
+- **Example**:
+  ```python
+  # Example: Finding the best k using cross-validation
+  from sklearn.neighbors import KNeighborsClassifier
+  from sklearn.model_selection import cross_val_score
+  import numpy as np
+
+  # Assume X_scaled and y are our pre-processed data
+  k_range = range(1, 31)
+  k_scores = []
+
+  for k in k_range:
+      knn = KNeighborsClassifier(n_neighbors=k)
+      # Use 5-fold CV to get scores
+      scores = cross_val_score(knn, X_scaled, y, cv=5, scoring='accuracy')
+      k_scores.append(scores.mean())
+
+  # Find the k with the best score
+  best_k = k_range[np.argmax(k_scores)]
+  ```
+
+### 4. Distance Metrics and Feature Scaling
+- **Distance Metric**: The most common choice for calculating distance is the **Euclidean distance** (L2 norm). 
+<Callout type="warn" title="Important: Feature Scaling for k-NN">
+  k-NN is extremely sensitive to feature scales. Always scale your features (e.g., Standardization) before applying k-NN to prevent features with larger ranges from dominating distance calculations.
+</Callout>
+
+## Pros and Cons of k-NN
+| Pros | Cons |
+|---|---|
+| Simple to understand and implement. | Computationally expensive at test time (must compare to all training points). |
+| No training phase is required. | Requires a large amount of memory to store the entire dataset. |
+| Can learn complex, non-linear decision boundaries. | Performance is very sensitive to the choice of `k`. |
+| | Highly sensitive to irrelevant features and the scale of the data. |
+
+---
+*Last updated: 2025-10-27*
