@@ -18,7 +18,9 @@ description: "Understanding the fundamentals of linear regression, from model de
 ### 1. The Linear Model
 - **Motivation**: We often assume a simple, straight-line relationship exists between an input and an output. For example, predicting a future Olympic 100m winning time based on the year.
 - **Core Concept**: The relationship is modeled by the equation of a straight line:
-  `t = f(x; w_0, w_1) = w_0 + w_1*x`
+  ```math
+  t = f(x; w_0, w_1) = w_0 + w_1x
+  ```
   - `t` is the target variable (e.g., winning time).
   - `x` is the input feature (e.g., year).
   - `w_0` is the y-intercept (the value of `t` when `x=0`). It shifts the line up or down.
@@ -28,10 +30,14 @@ description: "Understanding the fundamentals of linear regression, from model de
 ### 2. The Loss Function
 - **Motivation**: To find the "best" line, we need a way to numerically measure how well a given line fits the data. A line is "good" if its predictions are close to the actual data points.
 - **Core Concept**: The **Squared Loss** (or Squared Error) measures the error for a single data point `n`:
-  `L_n = (t_n - f(x_n; w_0, w_1))^2`
+  ```math
+  L_n = (t_n - f(x_n; w_0, w_1))^2
+  ```
   This is the squared vertical distance between the true target `t_n` and the model's prediction `f(x_n)`.
 - **Overall Loss**: To get a single measure of error for the entire dataset, we average the squared loss over all `N` data points. This is called the **Mean Squared Error (MSE)**:
-  `L = (1/N) * Σ_{n=1 to N} (t_n - f(x_n; w_0, w_1))^2`
+  ```math
+  L = \frac{1}{N} \sum_{n=1}^{N} (t_n - f(x_n; w_0, w_1))^2
+  ```
 - **Best Practice**: The goal of training is to find the parameters `w_0` and `w_1` that minimize this MSE value.
 
 ### 3. Model Fitting with Scikit-Learn
@@ -64,6 +70,12 @@ description: "Understanding the fundamentals of linear regression, from model de
 - **Linearity**: The relationship between `x` and `t` is assumed to be linear.
 - **Continuation**: The trend observed in the training data is assumed to continue into the future.
 - **Trade-offs**: While these assumptions might be technically incorrect (e.g., winning times can't decrease forever), the model can still be very useful for making predictions within a reasonable range.
+
+## Key Takeaway
+- Linear Regression models linear relationships using parameters `w_0` (intercept) and `w_1` (slope).
+- Mean Squared Error (MSE) is used to quantify model error, and the goal is to minimize it.
+- `scikit-learn` automates the process of finding optimal parameters.
+- The model assumes linearity and continuation of trends.
 
 ---
 *Last updated: 2025-10-27*

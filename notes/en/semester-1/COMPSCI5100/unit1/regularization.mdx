@@ -50,7 +50,9 @@ description: "Controlling model complexity and preventing overfitting using Ridg
 
 ### 4. Lasso Regression (L1 Regularization)
 - **Core Concept**: Lasso Regression uses the **L1 norm** of the weights as its penalty term. The penalty is the sum of the absolute values of the weights, scaled by `λ`.
-  `L_penalty = λ * Σ_{k=1 to K} |w_k| = λ * ||w||₁`
+  ```math
+  L_\text{penalty} = \lambda \sum_{k=1}^{K} |w_k| = \lambda \|w\|_1
+  ```
 - **Key Property: Sparsity**: The L1 penalty has a unique effect: it can force some of the model weights to be **exactly zero**. This means the model effectively ignores the corresponding features.
 - **Use Case: Feature Selection**: Because Lasso can zero out weights, it is very useful for automatic feature selection, especially when you have many features and suspect that not all of them are useful.
 - **Example**:
