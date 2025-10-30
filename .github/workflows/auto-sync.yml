@@ -42,6 +42,9 @@ jobs:
   auto-sync:
     runs-on: ubuntu-latest
     if: github.event_name == 'schedule'
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -80,4 +83,20 @@ jobs:
           git config --local user.name "GitHub Action"
           git add .
           git commit -m "🤖 Auto-sync: Update extracted materials [$(date +'%Y-%m-%d %H:%M')]"
-          git push
+          
+          # 使用 GITHUB_TOKEN 推送（已通过 permissions 授权）
+          git push origin HEAD:${{ github.ref }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Handle push failure
+        if: failure() && steps.verify-changed-files.outputs.changed == 'true'
+        run: |
+          echo "❌ Push failed. Common causes:"
+          echo "1. GITHUB_TOKEN permissions insufficient (needs 'contents: write')"
+          echo "2. Branch protection rules preventing automated pushes"
+          echo "3. Network connectivity issue"
+          echo ""
+          echo "📋 Recent commits:"
+          git log --oneline -5
+          exit 1
