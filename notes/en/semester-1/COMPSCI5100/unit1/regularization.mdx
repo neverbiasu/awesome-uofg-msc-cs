@@ -18,7 +18,9 @@ description: "Controlling model complexity and preventing overfitting using Ridg
 
 ### 1. The Problem of Overfitting and Large Weights
 - **Motivation**: As seen with high-order polynomials, complex models that overfit the training data often have extremely large positive and negative weights. These large weights cause the model function to fluctuate wildly to catch every data point, including noise.
-- **Idea**: If we can prevent the model's weights from becoming too large, we can control its complexity and reduce overfitting.
+<Callout type="info" title="Core Idea of Regularization">
+  Preventing model weights from becoming too large helps control complexity and reduce overfitting.
+</Callout>
 
 ### 2. Regularization: Penalizing the Loss Function
 - **Core Concept**: Regularization works by adding a **penalty term** to the original loss function. This penalty term is a function of the model's weights. The new regularized loss function is:
@@ -54,7 +56,9 @@ description: "Controlling model complexity and preventing overfitting using Ridg
   L_\text{penalty} = \lambda \sum_{k=1}^{K} |w_k| = \lambda \|w\|_1
   ```
 - **Key Property: Sparsity**: The L1 penalty has a unique effect: it can force some of the model weights to be **exactly zero**. This means the model effectively ignores the corresponding features.
-- **Use Case: Feature Selection**: Because Lasso can zero out weights, it is very useful for automatic feature selection, especially when you have many features and suspect that not all of them are useful.
+<Callout type="info" title="Lasso's Sparsity Property">
+  Lasso (L1 regularization) can force some model weights to be exactly zero, effectively performing automatic feature selection.
+</Callout>
 - **Example**:
   ```python
   # Example: Applying Lasso regression
@@ -69,10 +73,20 @@ description: "Controlling model complexity and preventing overfitting using Ridg
 
 ### 5. Choosing the Regularization Parameter `λ`
 - **Motivation**: The choice of `λ` is critical. If `λ` is too small, the model will still overfit. If `λ` is too large, the model will be too simple and will underfit (not capture the underlying trend).
-- **Best Practice**: Treat `λ` as a hyperparameter and use **cross-validation** to find the value that produces the lowest average validation error. You can test a range of `λ` values (e.g., 0.0001, 0.001, 0.01, 0.1, 1, 10) to find the optimal one.
+<Callout type="info" title="Choosing Optimal λ">
+  Treat `λ` as a hyperparameter and use cross-validation to find the value that minimizes validation error.
+</Callout>
 
 ## Best Practices
-- **Feature Scaling**: Regularization is sensitive to the scale of the input features. It is standard practice to scale your features (e.g., to have zero mean and unit variance) before applying Ridge or Lasso regression. `scikit-learn`'s `Ridge` and `Lasso` have a `normalize=True` parameter that can handle this, or you can use `StandardScaler` in a pipeline.
+<Callout type="warn" title="Important: Feature Scaling">
+  Always scale your features before applying Ridge or Lasso regression, as regularization is sensitive to feature scale.
+</Callout>
 
 ---
+
+## Key Takeaway
+- Regularization (Ridge/Lasso) prevents overfitting by penalizing large model weights.
+- Ridge (L2) shrinks weights towards zero; Lasso (L1) can force some weights to exactly zero, enabling feature selection.
+- Cross-validation is essential for selecting the optimal regularization strength (λ).
+
 *Last updated: 2025-10-27*

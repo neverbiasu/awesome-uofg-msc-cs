@@ -46,6 +46,10 @@ description: "Using polynomial models to capture non-linear trends, and using cr
 - **Core Concept**: **Overfitting** occurs when a model performs exceptionally well on the training data but poorly on new, unseen data. The model has high variance. An overfitted model does not generalize well.
 - **Visual Cue**: An overfitted polynomial often exhibits wild oscillations, especially at the edges of the data range.
 
+<Callout type="error" title="Overfitting">
+  Overfitting occurs when a model performs exceptionally well on training data but poorly on new, unseen data. An overfitted model does not generalize well.
+</Callout>
+
 ### 3. Model Selection using a Validation Set
 - **Motivation**: Since training error is a poor guide for model selection, we need another way to estimate how the model will perform in the real world.
 - **Core Concept**: We can split our data into two parts:
@@ -54,7 +58,9 @@ description: "Using polynomial models to capture non-linear trends, and using cr
 - **Usage Pattern**:
   1.  Train several models (e.g., polynomials of order 1, 2, 3, ... 8) on the **training set**.
   2.  Evaluate each model on the **validation set**.
-  3.  Select the model with the **lowest validation error**. This model is expected to generalize best.
+      <Callout type="info" title="Best Practice: Model Selection">
+      Always select the model with the lowest validation error, as this model is expected to generalize best to new, unseen data.
+      </Callout>
 
 ### 4. K-Fold Cross-Validation
 - **Motivation**: A simple train/validation split can be sensitive to how the data is divided. A different split might lead to a different "best" model.
@@ -87,7 +93,16 @@ description: "Using polynomial models to capture non-linear trends, and using cr
 
 ## Best Practices
 - **Avoid using the test set for model selection**: The final test set should only be used once, at the very end, to report the performance of the final, chosen model.
+    <Callout type="warn" title="Important: Test Set Usage">
+    The final test set should only be used once, at the very end, to report the performance of the final, chosen model. Avoid using it for model selection.
+    </Callout>
 - **Choose K carefully**: A common choice for K is 5 or 10. A larger K is more computationally expensive but gives a more robust estimate.
 
 ---
+
+## Key Takeaway
+- Polynomial regression extends linear models to capture non-linear trends.
+- Overfitting occurs when complex models learn noise; cross-validation helps prevent this.
+- Validation sets and K-fold cross-validation are crucial for robust model selection and hyperparameter tuning.
+
 *Last updated: 2025-10-27*
