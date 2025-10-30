@@ -18,7 +18,9 @@ description: "Using polynomial models to capture non-linear trends, and using cr
 ### 1. Polynomial Regression
 - **Motivation**: Simple linear regression cannot capture curves in data. If the underlying relationship is not a straight line, we need a more flexible model.
 - **Core Concept**: We can extend linear regression by adding new features that are powers of the original feature `x`. The model becomes:
-  `t = w_0 + w_1*x + w_2*x² + ... + w_K*x^K`
+  ```math
+  t = w_0 + w_1x + w_2x^2 + \dots + w_Kx^K
+  ```
   This is still considered a **linear model** because it is linear in the parameters `w`. We are just fitting a linear model to a non-linear transformation of the data.
 - **Example**: Creating a design matrix for a 2nd-order polynomial.
   ```python
