@@ -1,0 +1,74 @@
+---
+title: "Linear Models for Classification: Logistic Regression & SVMs"
+description: "An exploration of two fundamental linear classifiers: Logistic Regression for probabilistic modeling and Support Vector Machines (SVMs) for maximum-margin classification."
+---
+
+## Overview
+- **Goal**: To understand and compare two powerful linear models for classification: Logistic Regression and Support Vector Machines (SVMs).
+- **Scope**: This note covers the core mechanics of Logistic Regression, including its probabilistic interpretation, and the maximum-margin principle of SVMs, along with the kernel trick.
+
+## Learning Objectives
+1.  Explain how the sigmoid function enables Logistic Regression to model probabilities.
+2.  Describe the maximum-margin principle that underlies Support Vector Machines.
+3.  Define support vectors and their role in shaping the decision boundary.
+4.  Explain the purpose of the kernel trick for non-linear classification.
+5.  Implement both `LogisticRegression` and `SVC` using `scikit-learn`.
+
+## Key Concepts
+
+### 1. Logistic Regression
+- **Motivation**: While linear regression can be adapted for classification, it performs poorly in the presence of outliers. We need a model designed specifically for classification that outputs probabilities.
+<Callout type="info" title="Core Concept: Logistic Regression">
+  Logistic Regression uses the sigmoid function to transform linear model outputs into probabilities for binary classification.
+</Callout>
+- **Cost Function**: The model parameters `w` are learned by minimizing the **negative log-likelihood**, also known as the **cross-entropy loss**. This loss function penalizes the model for being confident and wrong.
+- **Decision Boundary**: The boundary between classes is where the probability is 0.5, which occurs when `wᵀx = 0`. This is a linear decision boundary.
+- **Example**:
+  ```python
+  # Example: Fitting a Logistic Regression model
+  from sklearn.linear_model import LogisticRegression
+  from sklearn.model_selection import train_test_split
+  from sklearn.preprocessing import StandardScaler
+
+  # It's good practice to scale data for logistic regression
+  scaler = StandardScaler()
+  X_scaled = scaler.fit_transform(X)
+
+  # Create and fit the model
+  clf = LogisticRegression().fit(X_scaled, y)
+
+  # Predict probabilities for new data
+  probabilities = clf.predict_proba(X_new_scaled)
+  ```
+
+### 2. Support Vector Machines (SVM)
+- **Motivation**: For a linearly separable dataset, there can be infinitely many lines that separate the two classes. Which one is the best? The one that is farthest from the data on both sides.
+<Callout type="info" title="Core Concept: Support Vector Machines (SVM)">
+  SVMs aim to find the hyperplane that maximizes the margin between classes, making the model robust and generalizable.
+</Callout>
+- **Support Vectors**: The data points that lie exactly on the margin are called **support vectors**. These are the most critical points in the dataset, as they alone define the position and orientation of the decision boundary. Removing any other data point would not change the result.
+<Callout type="info" title="The Kernel Trick">
+  The kernel trick allows SVMs to handle non-linearly separable data by implicitly mapping it to a higher-dimensional space where it becomes linearly separable.
+</Callout>
+- **Example**:
+  ```python
+  # Example: Fitting a Support Vector Classifier (SVC)
+  from sklearn.svm import SVC
+
+  # Using a linear kernel is similar to logistic regression
+  # clf_linear = SVC(kernel='linear').fit(X_scaled, y)
+
+  # The RBF kernel is a popular choice for non-linear problems
+  clf_rbf = SVC(kernel='rbf', gamma='auto').fit(X_scaled, y)
+  ```
+
+## Comparison
+| Feature | Logistic Regression | Support Vector Machine (SVM) |
+|---|---|---|
+| **Output** | Probabilities | Class labels (based on which side of the margin) |
+| **Principle** | Probabilistic (maximizes likelihood) | Geometric (maximizes margin) |
+| **Core Idea** | Fits a line and squashes output to be a probability | Finds the widest possible "street" between classes |
+| **Non-linearity**| Requires manual feature engineering | Handles non-linearity easily with the kernel trick |
+
+---
+*Last updated: 2025-10-27*

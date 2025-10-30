@@ -1,0 +1,63 @@
+---
+title: "Introduction to Classification"
+description: "An overview of classification, its core components, feature representation, and the concept of dimensionality reduction with PCA."
+---
+
+## Overview
+- **Goal**: To understand the fundamental concepts of classification as a supervised learning task.
+- **Scope**: This note defines classification, outlines the essential components of a classification system, discusses data representation through features, and introduces dimensionality reduction.
+
+## Learning Objectives
+1.  Distinguish between classification and regression problems.
+2.  Identify the four main components of a classification system.
+3.  Explain how data is represented using feature vectors.
+4.  Describe the motivation for dimensionality reduction and the basic idea of PCA.
+
+## Key Concepts
+
+### 1. What is Classification?
+- **Motivation**: Many real-world problems require assigning items to predefined categories. For example, is an email spam or not? Does a medical image show a tumor or not? 
+<Callout type="info" title="Core Concept: Classification">
+  Classification is a supervised learning task to predict a discrete or categorical label, contrasting with regression's continuous value prediction.
+</Callout>
+- **Example**: 
+  - **Classification**: Predicting if a fruit is an `apple`, `orange`, or `banana`.
+  - **Regression**: Predicting the `weight` in grams of a fruit.
+
+### 2. Components of a Classification System
+- **A complete system requires four components**:
+  1.  **Labeled Training Data**: A dataset where each example `x` has a corresponding correct label `y`.
+  2.  **Features**: A numerical representation of the raw data. The quality of features is critical to the model's success.
+  3.  **Model**: An algorithm (e.g., Logistic Regression, SVM) that learns the relationship between the features and the labels.
+  4.  **Evaluation Metrics**: A way to measure the model's performance (e.g., accuracy, precision, recall).
+
+### 3. Feature Representation
+- **Motivation**: Machine learning models cannot work with raw data (like images or text) directly. They require numerical input.
+- **Core Concept**: **Features** are measurable properties or characteristics of the data, extracted and converted into a numerical **feature vector**. 
+- **Examples**:
+  - **Tabular Data**: For classifying animals, features could be binary values for `is_mammal`, `has_scales`, `is_poisonous`.
+  - **Text Data**: A common representation is the **Bag-of-Words (BoW)** model, where a document is represented by a vector of word counts or frequencies.
+  - **Image Data**: Traditionally, this involved hand-crafting features like color histograms or textures. In deep learning, features are learned automatically by the model.
+
+### 4. Dimensionality Reduction and PCA
+- **Core Concept**: **Dimensionality reduction** aims to reduce the number of features while retaining as much important information as possible. **Principal Component Analysis (PCA)** is a popular technique for this.
+
+<Callout type="warn" title="Curse of Dimensionality">
+  Using too many features (high dimensionality) can lead to models that are harder to train, more prone to overfitting, and computationally expensive.
+</Callout>
+- **How PCA Works**:
+  1.  It identifies the directions (principal components) in the data that capture the **maximum variance**.
+  2.  The first principal component is the direction along which the data is most spread out.
+  3.  Each subsequent component is orthogonal to the previous ones and captures the next highest variance.
+  4.  By keeping only the first few principal components, we can create a lower-dimensional representation of the data that preserves most of its structure.
+- **Goal**: To find a more parsimonious (simpler) model that explains the data well, in line with Occam's Razor.
+
+## Best Practices
+- **Understand Your Data**: Before choosing features or a model, it's crucial to explore and understand the properties of your dataset.
+
+<Callout type="info" title="Feature Engineering is Key">
+  In traditional machine learning, the quality of hand-designed features often has the biggest impact on model performance.
+</Callout>
+
+---
+*Last updated: 2025-10-27*

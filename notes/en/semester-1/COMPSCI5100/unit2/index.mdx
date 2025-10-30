@@ -1,0 +1,70 @@
+---
+title: "Unit 2: Classification"
+description: "A guide to classification, covering logistic regression, SVMs, k-NN, and essential evaluation metrics to measure model performance."
+---
+
+## Overview
+This unit transitions from regression to classification, the task of assigning discrete labels to data. We will explore several fundamental classification algorithms, including logistic regression, support vector machines (SVM), and k-nearest neighbors (k-NN). A major focus will be on how to properly evaluate a classifier's performance beyond simple accuracy.
+
+- **Form**: Lecture + Lab
+- **Themes**: Logistic Regression, SVM, k-NN, Model Evaluation
+
+## Learning Objectives
+1.  Formulate a problem as a classification task and understand its components.
+2.  Implement and explain logistic regression for binary classification.
+3.  Describe the maximum margin principle of Support Vector Machines (SVMs).
+4.  Apply the k-Nearest Neighbors (k-NN) algorithm.
+5.  Evaluate classifier performance using a confusion matrix, precision, recall, F1-score, and ROC/AUC.
+
+## Key Knowledge Points
+- **Logistic Regression**:
+  - Uses the sigmoid (logistic) function to map a linear model's output to a probability (0 to 1).
+  - The cost function is based on maximizing the log-likelihood of the data.
+  - More robust to outliers than using simple least-squares for classification.
+- **Support Vector Machines (SVM)**:
+  - A maximum-margin classifier that finds the hyperplane best separating two classes.
+  - The decision boundary is determined by a few critical data points called **support vectors**.
+  - The **kernel trick** allows SVMs to model non-linear decision boundaries by projecting data into a higher-dimensional space.
+- **k-Nearest Neighbors (k-NN)**:
+  - A simple, non-parametric algorithm that classifies a new point by a majority vote of its `k` nearest neighbors.
+  - Requires no explicit training phase, but can be computationally expensive at test time.
+  - The choice of `k` is a critical hyperparameter, typically chosen via cross-validation.
+- **Evaluation Metrics**:
+  - **Confusion Matrix**: A table summarizing performance (True Positives, False Positives, False Negatives, True Negatives).
+  - **Precision**: `TP / (TP + FP)`. Measures the accuracy of positive predictions.
+  - **Recall (Sensitivity)**: `TP / (TP + FN)`. Measures how many actual positives were correctly identified.
+  - **F1-Score**: The harmonic mean of precision and recall, providing a single balanced score.
+  - **ROC Curve & AUC**: Plots the True Positive Rate vs. the False Positive Rate at various thresholds. The Area Under the Curve (AUC) provides an aggregate measure of performance.
+
+## Practice Checklist (Self-Assessment)
+- [ ] Implement `LogisticRegression` on a binary classification dataset.
+- [ ] Train an `SVC` (Support Vector Classifier) and visualize its decision boundary.
+- [ ] Use `KNeighborsClassifier` and run cross-validation to find the optimal value for `k`.
+- [ ] For a given model's predictions, generate a `confusion_matrix`.
+- [ ] Calculate the `precision_score`, `recall_score`, and `f1_score`.
+- [ ] Plot an ROC curve and calculate the `roc_auc_score`.
+
+## Content Index (Sub-pages)
+| Module | Page |
+|---|---|
+| Introduction | [Introduction to Classification](./introduction-to-classification) |
+| Linear Models | [Logistic Regression & SVMs](./logistic-regression-and-svms) |
+| Non-parametric | [k-Nearest Neighbors](./k-nearest-neighbors) |
+| Evaluation | [Classifier Performance Evaluation](./model-evaluation) |
+
+## Materials Index
+
+> Note: The following links point only to the Markdown (.md) versions available in the repository.
+
+### Classification
+- [Classification Part 1 (lecture, MD)](../../../../../materials/semester-1/COMPSCI5100-ml-ai/resources/Classification_1.md)
+- [Classification Part 2 (lecture, MD)](../../../../../materials/semester-1/COMPSCI5100-ml-ai/resources/Classification_2.md)
+- [Logistic Regression (lecture, MD)](../../../../../materials/semester-1/COMPSCI5100-ml-ai/resources/3_LogReg.md)
+- [Evaluation (lecture, MD)](../../../../../materials/semester-1/COMPSCI5100-ml-ai/resources/4_Eval.md)
+- [Support Vector Machines (lecture, MD)](../../../../../materials/semester-1/COMPSCI5100-ml-ai/resources/5_SVM.md)
+- [k-Nearest Neighbors (lecture, MD)](../../../../../materials/semester-1/COMPSCI5100-ml-ai/resources/kNN.md)
+- [Exam Questions & Solutions (practice, MD)](../../../../../materials/semester-1/COMPSCI5100-ml-ai/resources/Classification_question_2024_-SOLUTIONS.md)
+
+---
+
+*Last updated: 2025-10-27*
