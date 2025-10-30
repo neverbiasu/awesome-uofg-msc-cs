@@ -1,0 +1,158 @@
+---
+title: "2024 COMPSCI4084 Final Lab Exam (ProgSD)"
+---
+
+# 2024 COMPSCI4084 Final Lab Exam (ProgSD)
+
+## 考试概述
+本考试包含两个部分：第一部分要求编写 Python 程序，第二部分要求编写 Java 程序。总分 80 分，每个部分 40 分。
+
+## 考试要求
+- 考试为开卷考试，可以参考练习材料和笔记。
+- 考试期间严禁考生之间交流。
+- 遇到硬件或软件问题应立即召唤监考人员。
+- Python 任务需在同一个 Python 源文件中完成，并命名为 `your_name_python_task.py`，通过 Moodle 提交。
+
+## 第一部分：Python 题目
+
+### 任务 1: Python 基础和数据操作 (13 Marks)
+**题目描述:**
+给定一个 CSV 文件 `sales_data.csv`，包含销售数据。编写一个 Python 程序执行以下操作：
+
+#### 任务 1a: 数据加载和预处理
+1.  加载数据：将 CSV 文件加载到 Pandas DataFrame (2 Marks)。
+2.  数据清洗：
+    - 确保没有缺失值。如果发现，用适当的值填充 (3 Marks)。
+    - 将 `Date` 列转换为 datetime 对象 (2 Marks)。
+    - 确保 `Total` 列正确表示 `Quantity` 和 `Price` 的乘积。如果发现差异，进行修正 (2 Marks)。
+
+#### 任务 1b: 数据可视化
+1.  产品销售分布：创建一个条形图，显示每个产品的总销售数量 (2 Marks)。
+2.  销售趋势：创建一个折线图，显示 2023 年每月总销售额的趋势 (2 Marks)。
+
+**关键概念/知识点:**
+- Pandas DataFrame 操作 (加载、清洗、转换)
+- 数据可视化 (条形图、折线图)
+
+### 任务 2: Python 数据库管理 (15 Marks)
+**题目描述:**
+使用 SQLite 管理销售数据。创建一个数据库来存储和管理在第一部分中处理的销售数据。
+
+#### 任务 2a: 数据库创建和数据插入
+1.  创建一个名为 `SalesDB` 的 SQLite 数据库 (2 Marks)。
+2.  创建一个名为 `Sales` 的表，包含适当的列来存储数据 (Date, Product, Quantity, Price, Total) (3 Marks)。
+3.  将第一部分中清洗和处理过的数据插入到 `Sales` 表中。确保不添加重复条目 (4 Marks)。
+
+#### 2b: 查询数据库
+1.  总销售额计算：编写查询以计算 2023 年的总销售额并显示结果 (3 Marks)。
+2.  产品销售摘要：编写查询以列出每个产品及其在 2023 年的总销售数量。按数量降序显示结果 (3 Marks)。
+
+**关键概念/知识点:**
+- SQLite 数据库操作 (创建、表定义、数据插入)
+- SQL 查询 (聚合、过滤、排序)
+
+### 任务 3: 基本神经网络实现 (12 Marks)
+**题目描述:**
+使用 PyTorch 定义一个简单的全连接神经网络。在合成数据上训练网络，通过跟踪训练期间的损失来评估其性能，并可视化结果。
+
+#### 任务 3a: 模型初始化
+- 实例化 `SimpleNN` 模型。
+- 使用 `torch.nn.MSELoss()` 作为损失函数。
+- 使用 `torch.optim.SGD` 作为优化器，学习率为 0.01。
+
+#### 3b: 数据生成
+- 生成 100 个样本的合成数据，每个样本有 10 个特征。目标应为 100 个值的张量。
+- 使用 `torch.randn` 生成合成输入数据和目标值。
+
+#### 3c: 训练网络
+- 训练网络 20 个 epoch。
+- 在每个 epoch 期间，计算损失，执行反向传播，并更新模型的权重。
+- 记录每个 epoch 的训练损失。
+
+#### 3d: 损失可视化
+- 使用 matplotlib 绘制随 epoch 变化的训练损失。
+
+**关键概念/知识点:**
+- PyTorch 神经网络定义 (nn.Module)
+- 损失函数和优化器
+- 合成数据生成
+- 神经网络训练流程 (前向传播、损失计算、反向传播、权重更新)
+- Matplotlib 数据可视化
+
+## 第二部分：Java 题目
+
+### 任务 1: 表示动物 (10 Marks)
+**题目描述:**
+管理宠物护理服务系统。每个动物都住在自己的围栏中。
+提供 `AnimalSize` 枚举类型和 `Animal` 类的骨架，都位于 `petcare` 包中。
+动物属性：`Name` (至少 3 个字符), `Size` (small, medium, large), `Comfortable temperature` (0-50 之间的上下限整数)。
+
+#### 任务 1a
+编写代码表示动物，包括一个设置所有属性的构造函数。
+
+#### 任务 1b
+添加所有值的 getter 和 setter 方法，并重写 `toString()` 和 `equals()/hashCode()` 方法。`equals` 方法在两个动物大小相同且名称相同时返回 true。
+
+#### 1c
+确保所有存储的值都有效。如果尝试使用无效值创建或更新动物，则应抛出 `IllegalArgumentException`。
+
+**关键概念/知识点:**
+- Java 类设计 (属性、构造函数、getter、setter)
+- `toString()`, `equals()`, `hashCode()` 方法重写
+- 数据验证和异常处理
+
+### 任务 2: 围栏和检查 (15 Marks)
+**题目描述:**
+围栏属性：`Size` (small, medium, large), `Temperature`, `Running costs`, `Current occupant`。
+
+#### 任务 2a
+创建一个名为 `Enclosure` 的类，存储这些信息。构造函数接受大小、温度和运行成本，并将 `occupant` 设置为 null。类应有所有变量的 getter 方法，但没有 setter。
+
+#### 2b
+编写方法 `public boolean checkCompatibility(Animal animal)`。检查围栏是否可以容纳该动物。动物必须与围栏大小相同或更小，且围栏温度应在动物的舒适范围内。
+
+#### 2c
+编写方法 `public void addAnimal(Animal animal)` 和 `public void removeAnimal()`。
+`addAnimal`：如果兼容且没有占用者，则将动物添加到围栏。如果无法添加，则抛出 `IllegalArgumentException`。
+`removeAnimal`：从围栏中移除当前动物。如果对空围栏调用，则不执行任何操作。
+
+**关键概念/知识点:**
+- Java 类设计 (属性、构造函数、getter)
+- 兼容性检查逻辑
+- 动物添加/移除逻辑和异常处理
+
+### 任务 3: 宠物护理服务 (15 Marks)
+**题目描述:**
+宠物护理服务管理围栏集合，并根据需要分配动物。
+
+#### 任务 3a
+编写一个名为 `PetService` 的类，表示宠物护理服务，存储其管理的围栏集合（初始为空）。
+
+#### 3b
+向 `PetService` 类添加方法以维护和打印其管理的围栏。
+- `public void addEnclosure(Enclosure enclosure)`：将给定围栏添加到宠物服务。
+- `public void printAllEnclosures()`：打印服务维护的所有围栏的详细信息。
+
+#### 3c
+处理将动物添加到宠物服务。
+- `public boolean allocateAnimal(Animal animal)`：找到最佳围栏来分配动物。
+    - 围栏必须满足动物的所有要求（大小、温度）。
+    - 围栏不能有其他动物。
+    - 如果有多个围栏符合要求，动物应分配给最便宜的围栏（运行成本最低），方法返回 `true`。
+    - 如果没有合适的围栏，则不进行任何更改，方法返回 `false`。
+
+#### 3d
+添加方法 `public void removeAnimal(Animal animal)`。
+当调用时，此方法应在宠物服务的围栏中搜索匹配的动物。如果存在匹配的动物，则应将其从围栏中移除。如果系统中不存在该动物，则该方法应抛出 `IllegalArgumentException`。
+
+**关键概念/知识点:**
+- Java 类设计 (属性、构造函数、方法)
+- 集合管理
+- 动物分配逻辑 (最佳匹配、成本优化)
+- 动物移除逻辑和异常处理
+
+## 关键要点 (Key Takeaways)
+- 综合运用 Python 和 Java 解决实际问题。
+- 熟悉数据处理、数据库管理、机器学习基础和面向对象设计。
+- 强调代码的健壮性、可维护性和用户体验。
+- 理解如何将复杂系统分解为可管理的组件。

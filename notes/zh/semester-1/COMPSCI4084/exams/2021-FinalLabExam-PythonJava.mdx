@@ -1,0 +1,115 @@
+---
+title: "2021 COMPSCI4084 Final Lab Exam (Python + Java)"
+---
+
+# 2021 COMPSCI4084 Final Lab Exam (Python + Java)
+
+## 考试概述
+本考试包含两个部分：第一部分要求编写 Python 程序，第二部分要求编写 Java 程序。总分 24 分，另有 1 分用于代码风格。
+
+## 考试要求
+- 考试期间不允许访问任何预先编写的文档或代码文件。
+- 考试期间严禁考生之间交流。
+- 遇到硬件或软件问题应立即召唤监考人员。
+- Python 任务需在同一个源文件中完成，并命名为 `your_name_python_task.py`，通过 Moodle 提交。
+- Java 任务需将所有类放在 `trading` 包中，并命名为 `Goods.java`, `Trade.java`, `Citizen.java`, `Trader.java`，通过 Moodle 提交。
+
+## 第一部分：Python 题目
+
+### 任务 1a: tkinter GUI 和数据库 (4 Marks)
+**题目描述:**
+创建一个程序，显示一个登录界面。
+- 程序应在点击“Save”按钮时，将有效的用户名和密码保存到名为 `Users` 的数据库中 (4 Marks)。
+- 点击“Clear”按钮时，应清除所有窗口 (2 Marks)。
+- 点击“Display”按钮时，系统应显示数据库中保存的所有用户名和密码 (3 Marks)。
+
+**关键概念/知识点:**
+- tkinter GUI 界面设计
+- 数据库操作 (保存、显示、清除)
+
+### 任务 1b: 用户名和密码验证 (5 Marks)
+**题目描述:**
+- 系统不应保存重复的用户名。如果用户名已存在，系统应显示适当消息 (5 Marks)。
+- 密码应满足以下条件：
+    a) 密码至少包含 8 个字符。
+    b) 密码应包含数字。
+- 如果密码不满足以上两个条件，系统应拒绝并显示不符合要求的消息 (6 Marks)。
+
+**关键概念/知识点:**
+- 用户名唯一性验证
+- 密码复杂度验证 (长度、包含数字)
+- 错误消息提示
+
+## 第二部分：Java 题目
+
+### 任务 1: Goods (3 Marks)
+**题目描述:**
+创建一个枚举类型 `Goods`，包含以下值：`BREAD, COAL, FISH, HELMET, IRON, PAPER, SHIELD, SWORD, WOOD, WOOL`。所有类应放在 `trading` 包中。
+
+**关键概念/知识点:**
+- Java 枚举类型
+
+### 任务 2: Trade (7 Marks)
+**题目描述:**
+创建一个 `Trade` 类，表示单次交易，包含以下属性：
+- `gems`: 交易涉及的宝石数量 (整数)
+- `amount`: 交易涉及的商品数量 (整数)
+- `goods`: 交易涉及的商品类型 (`Goods` 对象)
+`Trade` 类应有一个公共构造函数初始化所有字段，并包含以下方法：
+- 完整的 `get` 方法集，但没有 `set` 方法。
+- 适当的 `equals()` 和 `hashCode()` 实现（基于所有三个字段的值）。
+- `toString()` 实现，生成类似“1 gem for 3 BREAD”的字符串表示。
+
+**关键概念/知识点:**
+- Java 类设计 (属性、构造函数、getter)
+- `equals()` 和 `hashCode()` 方法重写
+- `toString()` 方法重写
+
+### 任务 3: Citizen (6 Marks)
+**题目描述:**
+创建一个 `Citizen` 类，表示游戏中的公民。
+- 构造函数接受一个整数参数，表示宝石数量，并创建一个具有该数量宝石和空库存的新公民。
+- 包含以下公共方法：
+    - `public int getGems()`：返回当前宝石数量。
+    - `public int getAmount(Goods goods)`：返回当前某种商品的数量。
+    - `public boolean canAfford(Trade trade)`：检查公民是否能负担某笔交易。
+    - `public void executeTrade(Trade trade)`：执行交易，更新宝石和商品数量。
+
+**关键概念/知识点:**
+- Java 类设计 (属性、构造函数、方法)
+- 游戏逻辑实现 (交易、库存管理)
+
+### 任务 4: Trader (4 Marks)
+**题目描述:**
+创建一个 `Trader` 类，表示游戏中的商人。
+- 构造函数不接受参数，并创建一个带有一个随机选择的 `Trade` 的商人。
+- 包含以下公共方法：
+    - `public List<Trade> getTrades()`：返回该商人支持的当前交易列表。
+    - `public void addRandomTrade()`：向列表中添加一个新的随机选择的 `Trade`。
+        - `gems` 值应在 1 到 5 之间（包含）。
+        - `amount` 值应在 1 到 5 之间（包含）。
+        - `Goods` 值应从 `Goods` 枚举中随机选择。
+
+**关键概念/知识点:**
+- Java 类设计 (属性、构造函数、方法)
+- 随机数生成
+- 列表操作
+
+### 任务 5: Trade.execute() (4 Marks)
+**题目描述:**
+在 `Trade` 类中实现一个额外的公共方法：
+- `public void execute(Trader trader, Citizen citizen)`
+该方法应按以下方式运行：
+- 如果当前 `Trade` 不包含在 `trader` 支持的交易列表中，则抛出 `IllegalArgumentException`。
+- 否则，调用 `citizen.executeTrade()` 并传入当前交易。
+    - 如果 `executeTrade()` 返回 true，则该方法还应调用 `trader.addRandomTrade()`。
+
+**关键概念/知识点:**
+- 异常处理
+- 类之间的方法调用和交互
+
+## 关键要点 (Key Takeaways)
+- 掌握 Python 和 Java 两种语言的编程能力。
+- 熟悉 GUI、数据库、数据验证等 Python 常用技术。
+- 掌握 Java 面向对象编程，包括枚举、类设计、方法重写、异常处理和类间交互。
+- 理解如何将复杂问题分解为模块化任务并逐步实现。
