@@ -1,0 +1,70 @@
+---
+title: "单元 2：分类"
+description: "分类任务指南，涵盖逻辑回归、支持向量机、k-NN以及用于衡量模型性能的基本评估指标。"
+---
+
+## 概要
+本单元从回归过渡到分类，即为数据分配离散标签的任务。我们将探讨几种基本的分类算法，包括逻辑回归、支持向量机（SVM）和k-最近邻（k-NN）。一个主要重点将是如何正确评估分类器的性能，而不仅仅是看准确率。
+
+- **形式**：讲座 + 实验
+- **主题**：逻辑回归、支持向量机、k-NN、模型评估
+
+## 学习目标
+1.  将一个问题表述为分类任务，并理解其组成部分。
+2.  实现并解释用于二元分类的逻辑回归。
+3.  描述支持向量机（SVM）的最大间隔原则。
+4.  应用k-最近邻（k-NN）算法。
+5.  使用混淆矩阵、精确率、召回率、F1分数和ROC/AUC来评估分类器性能。
+
+## 关键知识点
+- **逻辑回归**：
+  - 使用 sigmoid（逻辑）函数将线性模型的输出映射到概率（0到1）。
+  - 其成本函数基于最大化数据的对数似然。
+  - 与使用普通最小二乘法进行分类相比，对异常值更具鲁棒性。
+- **支持向量机 (SVM)**：
+  - 一种最大间隔分类器，旨在找到能最好地区分两个类别的超平面。
+  - 决策边界由少数几个关键数据点（称为**支持向量**）确定。
+  - **核技巧**（kernel trick）允许SVM通过将数据投影到更高维空间来模拟非线性决策边界。
+- **k-最近邻 (k-NN)**：
+  - 一种简单的非参数算法，通过其 `k` 个最近邻的多数投票来对新数据点进行分类。
+  - 无需显式的训练阶段，但在测试时计算成本可能很高。
+  - `k` 的选择是一个关键的超参数，通常通过交叉验证来选择。
+- **评估指标**：
+  - **混淆矩阵**：一个总结性能的表格（真正例、假正例、假负例、真负例）。
+  - **精确率 (Precision)**：`TP / (TP + FP)`。衡量正例预测的准确性。
+  - **召回率 (Recall/Sensitivity)**：`TP / (TP + FN)`。衡量正确识别了多少实际的正例。
+  - **F1分数**：精确率和召回率的调和平均数，提供一个平衡的单一分数。
+  - **ROC曲线 & AUC**：绘制在不同阈值下真正例率与假正例率的关系图。曲线下面积（AUC）提供了一个总体的性能度量。
+
+## 实践清单（自检）
+- [ ] 在一个二元分类数据集上实现 `LogisticRegression`。
+- [ ] 训练一个 `SVC`（支持向量分类器）并可视化其决策边界。
+- [ ] 使用 `KNeighborsClassifier` 并运行交叉验证以找到最优的 `k` 值。
+- [ ] 对于给定模型的预测，生成一个 `confusion_matrix`。
+- [ ] 计算 `precision_score`、`recall_score` 和 `f1_score`。
+- [ ] 绘制ROC曲线并计算 `roc_auc_score`。
+
+## 内容索引（子页）
+| 模块 | 页面 |
+|---|---|
+| 简介 | [分类任务简介](./introduction-to-classification) |
+| 线性模型 | [逻辑回归与支持向量机](./logistic-regression-and-svms) |
+| 非参数方法 | [k-最近邻](./k-nearest-neighbors) |
+| 评估 | [分类器性能评估](./model-evaluation) |
+
+## 材料索引
+
+> 注意：下列链接仅指向仓库内已存在的 Markdown（.md）版本。
+
+### 分类
+- [分类（一） (讲座, MD)](../../../../../materials/semester-1/COMPSCI5100-ml-ai/resources/Classification_1.md)
+- [分类（二） (讲座, MD)](../../../../../materials/semester-1/COMPSCI5100-ml-ai/resources/Classification_2.md)
+- [逻辑回归 (讲座, MD)](../../../../../materials/semester-1/COMPSCI5100-ml-ai/resources/3_LogReg.md)
+- [评估 (讲座, MD)](../../../../../materials/semester-1/COMPSCI5100-ml-ai/resources/4_Eval.md)
+- [支持向量机 (讲座, MD)](../../../../../materials/semester-1/COMPSCI5100-ml-ai/resources/5_SVM.md)
+- [k-最近邻 (讲座, MD)](../../../../../materials/semester-1/COMPSCI5100-ml-ai/resources/kNN.md)
+- [考试问答与解答 (练习, MD)](../../../../../materials/semester-1/COMPSCI5100-ml-ai/resources/Classification_question_2024_-SOLUTIONS.md)
+
+---
+
+*最后更新：2025-10-27*
