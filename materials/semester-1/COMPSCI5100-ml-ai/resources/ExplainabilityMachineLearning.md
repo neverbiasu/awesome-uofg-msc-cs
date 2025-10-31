@@ -1,125 +1,39 @@
-# Enriched Content: ExplainabilityMachineLearning.pdf
+# ExplainabilityMachineLearning
 
-This document is a complete and detailed AI-friendly version of the presentation `ExplainabilityMachineLearning.pdf`. All visual content including text, graphs, and diagrams has been meticulously transcribed and described.
-
----
-
-## Page 1: Title Slide
-
-- **Title**: Explainability in Machine Learning
-- **Author**: Dr. Ke Yuan
-- **Contact**: ke.yuan@glasgow.ac.uk
-
----
-
-## Page 2: Can we trust AI's decision?
-
-> **Image Content Analysis:**
-> - **Description**: A diagram showing an AI system for loan applications.
-> - **Workflow**: A loan application is fed into a "Deep Learning Black-Box", which outputs a decision: "Loan Denied". A question mark points to the black box, indicating the lack of transparency.
-> - **Question**: Why was the loan denied? We need explainability.
-
----
-
-## Page 3: Why is explainability important?
-
-- **Trust**: To trust a model, we need to understand its behavior.
-- **Legal/Ethical**: Regulations like GDPR require explanations for automated decisions (the "right to explanation").
-- **Debugging**: Explanations help identify flaws and biases in the model.
-- **Scientific Discovery**: Understanding what a model has learned can lead to new insights.
-
----
-
-## Page 4: Interpretable vs. Explainable
-
-- **Interpretable Models**: These are "white-box" or "glass-box" models that are inherently understandable due to their simple structure.
-  - Examples: Linear Regression, Logistic Regression, Decision Trees.
-
-- **Explainable AI (XAI)**: This field focuses on developing methods to explain the decisions of complex, "black-box" models.
-  - Examples: Deep Neural Networks, Ensemble models (Random Forests, Gradient Boosting).
-
----
-
-## Page 5: Scope of explanations
-
-- **Global Explanations**: Understanding the model as a whole. What are the most important features across all predictions?
-- **Local Explanations**: Understanding a single prediction. Why did the model make this specific decision for this specific data point?
-
----
-
-## Page 6: LIME (Local Interpretable Model-agnostic Explanations)
-
-- **Core Idea**: To explain a single prediction from a complex model by approximating it with a simple, interpretable model (e.g., a linear model) in the local vicinity of that prediction.
-
-> **Image Content Analysis:**
-> - **Description**: A diagram illustrating how LIME works.
-> - **Components**:
->   1. A complex, non-linear decision boundary (the black-box model) is shown separating a blue and a pink region.
->   2. A single prediction to be explained (a bold red cross) is highlighted.
->   3. New data points are sampled in the neighborhood of the red cross.
->   4. A simple linear model (a dashed line) is fitted to these local samples. This line provides a local, interpretable approximation of the complex model's behavior around that specific prediction.
-
----
-
-## Page 7: LIME for Images
-
-> **Image Content Analysis:**
-> - **Description**: An example of LIME explaining an image classification.
-> - **Process**:
->   1. **Original Image**: A photo of a frog.
->   2. **Segmentation**: The image is broken down into interpretable components or "superpixels".
->   3. **Explanation**: LIME highlights the superpixels that were most influential in the model's decision to classify the image as "tree frog". In this case, the frog's face and parts of its body are highlighted in green (positive contribution).
-
----
-
-## Page 8: SHAP (SHapley Additive exPlanations)
-
-- **Core Idea**: Based on Shapley values, a concept from cooperative game theory. It calculates the contribution of each feature to a prediction.
-- **Shapley Value**: The average marginal contribution of a feature value across all possible coalitions (subsets) of features.
-
-> **Image Content Analysis:**
-> - **Description**: A diagram explaining the intuition behind SHAP values.
-> - **Formula**: `g(z') = φ₀ + Σ_{i=1 to M} φ_i * z'_i`
->   - `g`: The explanation model.
->   - `z'`: A simplified binary representation of features (1 if present, 0 if absent).
->   - `φ_i`: The Shapley value for feature `i`, representing its contribution to the prediction.
-
----
-
-## Page 9: SHAP Force Plot
-
-> **Image Content Analysis:**
-> - **Description**: A SHAP "force plot" explaining a single prediction.
-> - **Components**:
->   - **Base Value**: The average model output over the entire dataset.
->   - **Features**: Features that increase the prediction are shown as red arrows pushing the value to the right. Features that decrease the prediction are shown as blue arrows pushing to the left.
->   - **Final Prediction**: The point where these competing forces balance out.
-> - **Interpretation**: This plot provides a clear, quantitative view of which features drove a specific prediction and in which direction.
-
----
-
-## Page 10: SHAP Summary Plot
-
-> **Image Content Analysis:**
-> - **Description**: A SHAP "summary plot" or "beeswarm plot" that provides a global explanation of the model.
-> - **Structure**:
->   - Each row represents a feature, ordered by its overall importance.
->   - Each dot on a row is a single prediction (a Shapley value for that feature).
->   - **Color**: The color of the dot represents the feature's value (e.g., red for high, blue for low).
-> - **Interpretation**: This plot shows not only which features are most important but also how their value affects the prediction outcome across the entire dataset.
-
----
-
-## Page 11: Other XAI Methods
-
-- **Integrated Gradients**: A method for attributing a model's prediction to its input features.
-- **Counterfactual Explanations**: Describes the smallest change to the feature values that changes the prediction to a different outcome.
-- **Concept Activation Vectors (CAVs)**: Helps understand what high-level concepts a neural network has learned.
-
----
-
-## Page 12: Conclusion
-
-- Explainability is crucial for building trust, ensuring fairness, and debugging complex ML models.
-- Methods like LIME and SHAP provide powerful tools for understanding both individual predictions (local) and overall model behavior (global).
-- The field of XAI is rapidly evolving, with new techniques constantly being developed.
+Why do we need Explainable  Machine Learning Models?  Dr.   Fani Deligianni,  fani.deligianni@glasgow.ac.uk  Lecturer (Assistant Professor)  Lead of the Computing Technologies for Healthcare Theme  https://www.gla.ac.uk/schools/computing/staff/fanideligianni
+Explainable Model  •   Do we understand why the  model came to this output?  •   Do we know the  conditions/cases that the model  is successful and when it is not?  •   Do we know the factors behind  this output?  BMI  Age  Smoking  Alcohol  …  Blood Pressure  …  Output
+Explainable Model   -   Factors  •   Age is the most important factor  in predicting heart failure.  •   Large BMI also increases the  probability of a heart attach  episode  •   History of smoking also increase  the probability  •   High blood pressure is also  associated with heart failure  BMI  Age  Smoking  Alcohol  …  Blood Pressure  …  Output
+Explainable Model   –   Representation Learning  •   Knowledge of the what each  node represents  •   Latent factors that affect the  decision process  •   How important each node is to  the model’s performance  Gender  Stress  Exercise   Substance  Abuse  Old age  Family  History  BMI  Age  Smoking  Alcohol  Output
+Interpretable Models   –   Decision Trees  •   It is clearly what each node  represents  •   Easy to visualize and overview  the whole decision operation  •   Easy to explain to non -  specialists  •   Results can be tracked and  associated with the output of  each node  Age  Social  Interaction  BMI  Smoking  >=x  No  Yes No  Yes No  >=60  >=x   >=x  >=x   >=25  >=x   >=x
+Interpretable vs Explainable Models  More  Interpretable  Less  Interpretable  Interpretable  Models  Explainable  Models Grey Area  Decision  Trees  Linear  Regression   Logistic  Regression  Random  Forests  Neural  Networks  Convolutional  Neural  Networks
+Interpretable vs Explainable Models  Explainable Models  •   The knowledge of which input  factors are affecting the output  •   The knowledge of how much  they affect the decision  Interpretable/Transparent Models  •   Model is readily understandable  •   Direct Explanation  •   The ability to determine cause  and effect
+Interpretable vs Explainable Models  Explainable Models  •   The knowledge of which input  factors are affecting the output  •   The knowledge of how much  they affect the decision  Interpretable Models  •   Model is readily understandable  •   Direct Explanation  •   The ability to determine cause  and effect  •   The ability to know what each node represents  •   The ability to determine cause and effect
+Interpretability vs Accuracy  Linear Regression  Decision Tree  K - Nearest Neighbours  Random Forests  Support Vector Machines  Deep Learning  Interpretability  Accuracy
+Summary  •   Linear models and decision trees are inherently interpretable,  •   Complex models can offer better accuracy but they are inherently less  interpretable  •   Black boxes can be ‘explained’ in a number of different levels:  •   Based on post - hoc models that approximate their function  •   Based on local and global interpretability processes that identify which  input factors are most significant and to what degree  •   Based on representation learning that identifies interpretable latent  factors  •   The ability to determine cause and effect
+References  •   Arrieta et al. ‘Explainable Artificial Intelligence (XAI): Concepts, taxonomies,  opportunities and challenges toward responsible AI’, Information Fusion,  2020.  •   Molnar ‘Interpretable Machine Learning   -   A Guide for Making Black Box  Models Explainable’  https://christophm.github.io/interpretable - ml - book/
+Feature Ranking as Model Agnostic  Explanations :   Permutation Feature Importance  Dr.   Fani Deligianni,  fani.deligianni@glasgow.ac.uk  Lecturer (Assistant Professor)  Lead of the Computing Technologies for Healthcare Theme  https://www.gla.ac.uk/schools/computing/staff/fanideligianni
+Taxonomy  •   Local vs   Global Explanations  •   Model Agnostic vs Model Specific Explanations  •   Data Modality Specific vs Data Modality Agnostic  •   Ad - Hoc vs Post - Hoc Explanations
+Global Explanations  •   Overall view of the model, along with data predictions and explanations.  •   The   data exploration , which displays an overview of the data set along with the  prediction values.  •   The   global importance , these aggregates, features, importance values of individual  data points, to show the model's overall top key.  •   The explanation   demonstrates how a feature affects the change in the model prediction  values
+Model Agnostic Approaches   -   Advantages  •   Model Flexibility  •   Explanation Flexibility  •   Representation Flexibility
+Model Agnostic Approaches  •   Permutation Feature Importance  •   Local Interpretable Model - agnostic Explanations  •   Shapley Additive Explanations
+Permutation Feature Importance (PFI)  •   Permutation feature importance (PFI)   is a model inspection technique that can  be used for any fitted estimator.  •   This is especially useful for   non - linear or black - box estimators .  •   The permutation feature importance is defined to be the decrease in a model  score when a single feature value is randomly shuffled.  •   This procedure breaks the   relationship between the feature and the target ,  thus the drop in the model score is indicative of how much the model depends on  the feature.
+Permutation Feature Importance (PFI)  •   The PFI algorithm is outlined as followed:  •   Inputs: Fitted predictive model   m   and dataset   D .  •   Compute the reference score   s   of the model   m   on data   D   ( for instance the accuracy for a  classifier or the   R 2   for a regressor).  •   For each feature   j   and for each repetition   k   in   1,..., K   :  •   Randomly shuffle column   j   of dataset   D   to generate a corrupted version of the data named   D k,j .  •   Compute the score   s k,j   of model m on corrupted data   D k,j .  •   Compute importance   i j   for feature   f j   defined as:
+Permutation Feature Importance (PFI)  Mi et al. ‘ Permutation - based identification of important biomarkers for complex diseases via machine learning models ’, Nature Communications 2021
+PFI   -   Disadvantages  •   An in - depth understanding of the model decision is not  possible  •   The interaction between features via the original model is  not taken into consideration  •   Exact/local explanations may be required due to legal or  ethical reasons
+Summary  •   Conceptually simple, yet powerful global ‘ explainability ’ method.  •   PFI explains the complete dataset and not individual samples.  •   It can provide a score of how important an input variable is to the prediction  •   It depends on reshuffling features, adding randomness to the data  measurements.
+References  •   Ribeiro et al. ‘Model - Agnostic Interpretability of Machine Learning’, ICML  Workshop on Human Interpretability in Machine Learning, 2016.  •   Mi et al. ‘Permutation - based identification of important biomarkers for  complex diseases via machine learning models’, Nature Communications,  2021.
+Preprocessing of ECG Signal  Dr.   Fani Deligianni,  fani.deligianni@glasgow.ac.uk  Lecturer (Assistant Professor)  Lead of the Computing Technologies for Healthcare Theme  https://www.gla.ac.uk/schools/computing/staff/fanideligianni
+Electrocardiogram (ECG)  •   An ECG test consist of collecting data through the electrical activity of the  human cardiovascular system  •   ECG consist of three key features which represent distinct stages of the  heartbeat.  •   P - wave:   Depolarization of the atria.  •   QRS complex:   Depolarization of the  ventricles.  •   T - wave:   Re - polarization of the  ventricles.
+ECG Classification  •   Manual ECG analysis is time -  consuming and error prone  •   ECG abnormalities may require  continuous monitoring  •   Machine learning has been  extensively applied in ECG  classification
+Noise Interference  •   The ECG signals are extremely susceptible to high and low frequency  noise. These noise usually occur from:  •   Baseline wander  •   Misplaced electrode contact  •   Motion artifacts  •   Power line interference
+MIT - BIH ECG Dataset  •   The MIT - BIH dataset used for this investigation is a public database consisting of a  large number of annotated beats.  •   It is frequently used for time - series classification research.  •   The MIT - BIH Arrhythmia Database contains sections of ambulatory ECG recordings:  •   From 47 subjects, digitized at 360 samples per second per channel.  •   11 - bit resolution at 10 - mV range on two channels.  •   Here 23 recordings were picked at random from a set of 4000 24 - hour ECG recordings.  •   Collected from a population 60% of inpatients and 40% outpatients.
+MIT - BIH ECG Dataset  •   This data has been pre - annotated and labelled by cardiologists.  •   These different annotations refer to various normal and abnormal ECG signals which  represent different types of arrhythmia.  •   The dataset consists of ECG signals of various classes, but the eight classes used for this  investigation are ’N’, ’L’, ’R’, ’V’, ’A’, ’F’, ’f’, ’/’.  •   The table shows the description and numerical identification values assigned to these  classes.
+Data Pre - processing  Data Pre - processing  Input  Data  Raw  Data  Individual Beat, Centre R - peak,  Standardize, Beat Annotation
+Class Imbalance  •   The normal class is over - represented in the data  •   Resampling is based on a   bootstrap method   which resamples a dataset with  replacement, iteratively  •   For   up - sampling and down - sampling , the sample value was calculated by taking  the mean values of the total number of beats of the abnormal classes.
+Summary  •   Preprocessing of the ECG signal include:  •   Filtering to remove noise  •   Annotation of the R - peaks  •   Segmentation of the recordings into ECG beats  •   Resampling the data to address the imbalance problem
+References  •   Mark RG et al. ‘An annotated ECG database for evaluating arrhythmia detectors’,  IEEE Transactions on Biomedical Engineering 29(8):600, 1982  •   Moody et al. ‘The impact of the MIT - BIH arrhythmia database’, IEEE Engineering  in Medicine and Biology Magazine 20(3), 45 - 50, 2001  •   Yola et al. ‘Improving ECG Classification Interpretability using Saliency Maps’,  IEEE BIBE, 2020.
+Explainability   Use - Case  Dr.   Fani Deligianni,  fani.deligianni@glasgow.ac.uk  Lecturer (Assistant Professor)  Lead of the Computing Technologies for Healthcare Theme  https://www.gla.ac.uk/schools/computing/staff/fanideligianni
+Application of PFI in ECG Classification  •   The ECG beats were divided into slices of 11 segments.  •   This helped interpret which segment is being given more importance by the  classifier.  •   The slices were made by replacing the data points with the average point for  each slice.
+ECG Segmentation  •   Segments 1 - 4 cover the PR interval.  •   Segments 5 - 7 cover the QRS complex  •   Segments 8 - 11 cover the ST segment.  •   We expected to see the model focusing on important morphological features of the  ECG beat, such as the PR interval, the QRS complex, and the ST segment.
+PFI for ECG Classification
+Assessment Tasks  •   Inspect your data and plot different types of arrythmia.   Run the python notebooks  provided and plot   also the distribution of samples across   classes  4 - 6 members   per   group:   (At least   two   different classifiers)  •   Classification of ECG beats based on the holdout splitting method  •   Classification of ECG beats based on the leave - out, patients - hold out validation  protocol  •   For each of the models developed above use permutation feature importance to  explain the model’s function  •   Apply the same   explainability   technique with different type of classifiers and  discuss the   differences  6   members per g roup :   (In   addition   to   the   above   task):  •   Use at least one clustering technique to visualize the data and understand  better their structure and   how   well   classes   are   separated
