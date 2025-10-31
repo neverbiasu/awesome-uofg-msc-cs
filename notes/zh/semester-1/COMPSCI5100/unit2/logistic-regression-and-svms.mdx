@@ -1,0 +1,72 @@
+---
+title: "分类的线性模型：逻辑回归与支持向量机"
+description: "探索两种基本的线性分类器：用于概率建模的逻辑回归和用于最大间隔分类的支持向量机（SVM）。"
+---
+
+## Overview
+- **Goal**: To understand and compare two powerful linear models for classification: Logistic Regression and Support Vector Machines (SVMs).
+- **Scope**: This note covers the core mechanics of Logistic Regression, including its probabilistic interpretation, and the maximum-margin principle of SVMs, along with the kernel trick.
+
+## Learning Objectives
+1.  Explain how the sigmoid function enables Logistic Regression to model probabilities.
+2.  Describe the maximum-margin principle that underlies Support Vector Machines.
+3.  Define support vectors and their role in shaping the decision boundary.
+4.  Explain the purpose of the kernel trick for non-linear classification.
+5.  Implement both `LogisticRegression` and `SVC` using `scikit-learn`.
+
+## Key Concepts
+
+### 1. Logistic Regression
+- **Motivation**: While linear regression can be adapted for classification, it performs poorly in the presence of outliers. We need a model designed specifically for classification that outputs probabilities.
+- **Core Concept**: Logistic Regression passes the output of a linear model `z = wᵀx` through a **sigmoid (or logistic) function**: `σ(z) = 1 / (1 + e⁻ᶻ)`. 
+  - The sigmoid function squashes any real-valued number into a range between 0 and 1, making it suitable for interpreting as a class probability: `P(y=1|x) = σ(wᵀx)`.
+- **Cost Function**: The model parameters `w` are learned by minimizing the **negative log-likelihood**, also known as the **cross-entropy loss**. This loss function penalizes the model for being confident and wrong.
+- **Decision Boundary**: The boundary between classes is where the probability is 0.5, which occurs when `wᵀx = 0`. This is a linear decision boundary.
+- **Example**:
+  ```python
+  # 示例：拟合一个逻辑回归模型
+  from sklearn.linear_model import LogisticRegression
+  from sklearn.model_selection import train_test_split
+  from sklearn.preprocessing import StandardScaler
+
+  # 对逻辑回归，缩放数据是一个好习惯
+  scaler = StandardScaler()
+  X_scaled = scaler.fit_transform(X)
+
+  # 创建并拟合模型
+  clf = LogisticRegression().fit(X_scaled, y)
+
+  # 预测新数据的概率
+  probabilities = clf.predict_proba(X_new_scaled)
+  ```
+
+### 2. 支持向量机 (SVM)
+- **动机**：对于一个线性可分的数据集，可能有无数条线可以将两个类别分开。哪一条是最好的？离两边数据都最远的那一条。
+- **核心概念（最大间隔）**：SVM的目标是找到能够**最大化间隔**的超平面。间隔是决策边界与任一类别最近的数据点之间的距离。
+  - 这使得模型对噪声更具鲁棒性，并且更有可能很好地泛化到新数据。
+- **支持向量**：那些恰好位于间隔边界上的数据点被称为**支持向量**。它们是数据集中最关键的点，因为它们独自决定了决策边界的位置和方向。移除任何其他数据点都不会改变结果。
+- **核技巧 (The Kernel Trick)**:
+  - **问题**：如果数据不是线性可分的怎么办？
+  - **解决方案**：核技巧是一种强大的技术，它允许SVM创建复杂的非线性决策边界。它的工作原理是隐式地将数据映射到一个更高维的空间，在这个空间里数据是线性可分的，而无需显式计算该空间中的坐标。常见的核函数包括多项式核和径向基函数（RBF）核。
+- **示例**:
+  ```python
+  # 示例：拟合一个支持向量分类器 (SVC)
+  from sklearn.svm import SVC
+
+  # 使用线性核类似于逻辑回归
+  # clf_linear = SVC(kernel='linear').fit(X_scaled, y)
+
+  # RBF核是处理非线性问题的热门选择
+  clf_rbf = SVC(kernel='rbf', gamma='auto').fit(X_scaled, y)
+  ```
+
+## 对比
+| 特性 | 逻辑回归 | 支持向量机 (SVM) |
+|---|---|---|
+| **输出** | 概率 | 类别标签（基于在间隔的哪一侧） |
+| **原则** | 概率性的（最大化似然） | 几何学的（最大化间隔） |
+| **核心思想** | 拟合一条线并将输出压缩为概率 | 在类别之间找到尽可能宽的“街道” |
+| **非线性** | 需要手动进行特征工程 | 通过核技巧轻松处理非线性问题 |
+
+---
+*Last updated: 2025-10-27*

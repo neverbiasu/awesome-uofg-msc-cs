@@ -1,0 +1,76 @@
+---
+title: "k-最近邻 (k-NN)"
+description: "理解k-最近邻算法，一个直观的、基于实例的分类器，并学习如何使用交叉验证选择最优的'k'值。"
+---
+
+## 概要
+- **目标**：理解并实现用于分类的k-最近邻（k-NN）算法。
+- **范围**：本笔记涵盖k-NN的机制、超参数`k`的重要性、距离度量和特征缩放的作用，以及如何使用交叉验证来选择`k`。
+
+## 学习目标
+1.  解释k-NN算法的决策过程。
+2.  描述`k`的选择如何影响模型的决策边界和偏见-方差权衡。
+3.  使用`scikit-learn`实现k-NN分类器。
+4.  使用交叉验证找到`k`的最优值。
+5.  解释为什么特征缩放对k-NN至关重要。
+
+## 关键概念
+
+### 1. k-NN 算法
+- **动机**：有时最简单的方法就是最有效的方法。与其构建一个复杂的模型，不如让数据“自己说话”？
+<Callout type="info" title="核心概念：k-NN 算法">
+  k-NN 是一种非参数、基于实例的学习算法，通过其 `k` 个最近邻的多数投票对新点进行分类。
+</Callout>
+
+### 2. 超参数 `k` 与偏见-方差权衡
+- **`k`的角色**：邻居的数量`k`是一个你必须选择的关键超参数。它控制着模型的复杂度。
+<Callout type="warn" title="小 k：过拟合风险">
+  小的 `k` 导致模型灵活，偏见低但方差高，对噪声敏感且易过拟合。
+</Callout>
+<Callout type="warn" title="大 k：欠拟合风险">
+  大的 `k` 导致模型不那么灵活，偏见高但方差低，易欠拟合。
+</Callout>
+
+### 3. 选择最优的 `k`
+- **动机**：由于`k`控制着偏见-方差的权衡，我们需要一种有原则的方法来为我们的特定数据集找到最佳值。
+- **最佳实践**：使用**交叉验证**。 
+  1.  测试一系列不同的`k`值（例如，从1到30）。
+  2.  对于每个`k`，计算平均交叉验证分数。
+  3.  选择能带来最佳分数（例如，最低错误率或最高准确率）的`k`值。
+- **示例**:
+  ```python
+  # 示例：使用交叉验证找到最佳k值
+  from sklearn.neighbors import KNeighborsClassifier
+  from sklearn.model_selection import cross_val_score
+  import numpy as np
+
+  # 假设 X_scaled 和 y 是我们预处理过的数据
+  k_range = range(1, 31)
+  k_scores = []
+
+  for k in k_range:
+      knn = KNeighborsClassifier(n_neighbors=k)
+      # 使用5折交叉验证获取分数
+      scores = cross_val_score(knn, X_scaled, y, cv=5, scoring='accuracy')
+      k_scores.append(scores.mean())
+
+  # 找到分数最高的k
+  best_k = k_range[np.argmax(k_scores)]
+  ```
+
+### 4. 距离度量与特征缩放
+- **距离度量**：计算距离最常用的选择是**欧几里得距离**（L2范数）。
+<Callout type="warn" title="重要：k-NN 的特征缩放">
+  k-NN 对特征尺度极其敏感。在应用 k-NN 之前，务必对特征进行缩放（例如，标准化），以防止范围较大的特征主导距离计算。
+</Callout>
+
+## Pros and Cons of k-NN
+| 优点 | 缺点 |
+|---|---|
+| 易于理解和实现。 | 测试时计算成本高（必须与所有训练点进行比较）。 |
+| 无需训练阶段。 | 需要大量内存来存储整个数据集。 |
+| 可以学习复杂的非线性决策边界。 | 性能对`k`的选择非常敏感。 |
+| | 对不相关的特征和数据尺度高度敏感。 |
+
+---
+*Last updated: 2025-10-27*
