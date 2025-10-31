@@ -1,0 +1,60 @@
+---
+title: "Computational Linear Algebra"
+description: "Notes on Computational Linear Algebra, covering graphs, matrix operations, eigenvalues, and decompositions."
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+## Graphs as Matrices
+
+We can represent graphs using an **adjacency matrix**. For a graph with *V* vertices, the adjacency matrix *A* is a *V x V* matrix where *Aᵢⱼ* is 1 if there is an edge from vertex *i* to vertex *j*, and 0 otherwise. For weighted graphs, *Aᵢⱼ* can represent the weight of the edge.
+
+### Key Properties
+- **Out-degree**: The sum of each row gives the out-degree of each vertex.
+- **In-degree**: The sum of each column gives the in-degree of each vertex.
+- **Symmetry**: A symmetric adjacency matrix represents an undirected graph.
+
+## Flow Analysis
+
+We can model the flow of items in a network (e.g., packages between distribution centers) using matrices. If we assume the flow is linear, the state of the system at time *t+1* can be calculated from the state at time *t* by multiplying with the adjacency matrix.
+
+`x_{t+1} = x_t * A`
+
+## Matrix Powers and Eigen-analysis
+
+### Matrix Powers
+- **Matrix exponentiation** (Aⁿ) corresponds to applying the transformation *A* multiple times. This is useful for simulating system changes over several time steps.
+
+### Eigenvalues and Eigenvectors
+- **Eigenvectors** of a matrix *A* are special vectors that are only scaled (not rotated) when transformed by *A*.
+- **Eigenvalues (λ)** are the corresponding scaling factors for the eigenvectors.
+- The equation is given by: `Ax = λx`
+- The **power iteration method** is an algorithm to find the leading eigenvector of a matrix.
+
+<Callout title="Eigen-analysis in a Nutshell">
+  Eigen-analysis helps us understand the fundamental modes of a linear system. Eigenvectors represent the stable directions of the transformation, while eigenvalues indicate the magnitude of scaling along these directions.
+</Callout>
+
+## Matrix Decompositions
+
+### Principal Component Analysis (PCA)
+PCA is a statistical technique that uses eigendecomposition to transform a set of correlated variables into a set of linearly uncorrelated variables called principal components. The eigenvectors of the covariance matrix are the principal components.
+
+### Singular Value Decomposition (SVD)
+SVD is a powerful and general method to decompose **any** matrix *A* into three other matrices:
+
+`A = UΣVᵀ`
+
+- **U**: Left singular vectors (orthogonal).
+- **Σ**: Singular values (diagonal matrix).
+- **V**: Right singular vectors (orthogonal).
+
+<Callout title="Why SVD is so Important">
+  SVD is the powerhouse of computational linear algebra. It provides a way to break down any matrix into a set of rotations (U and V) and a scaling (Σ). This is incredibly useful for a wide range of applications, including dimensionality reduction, matrix inversion, and solving linear systems.
+</Callout>
+
+## Matrix Inversion
+
+- The **inverse** of a matrix A, denoted A⁻¹, "undoes" the transformation of A.
+- Inversion is only defined for **square, non-singular** matrices (determinant is not zero).
+- For non-square or singular matrices, we can use the **pseudo-inverse**, which finds the "best fit" solution.
