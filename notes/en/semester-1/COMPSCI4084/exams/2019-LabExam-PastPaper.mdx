@@ -4,110 +4,186 @@ title: "2019 COMPSCI4084 Lab Exam Past Paper (Python + Java)"
 
 # 2019 COMPSCI4084 Lab Exam Past Paper (Python + Java)
 
-## 考试概述
-本考试包含两个部分：第一部分要求编写 Python 程序，第二部分要求编写 Java 程序。总分 24 分，另有 1 分用于代码风格。
+## General Information
 
-## 考试要求
-- 考试期间将使用默认配置的实验室机器。
-- 不允许携带任何物品，不允许访问任何预先编写的文档或代码文件。
-- 考试期间严禁考生之间交流。
-- 遇到硬件或软件问题应立即召唤监考人员。
-- Python 任务需在单独的源文件中完成，并命名为 `python_task1.py`, `python_task2.py`, `python_task3.py`, `python_task4.py`，通过 Moodle 提交。
-- Java 任务需将所有类放在 `superhero` 包中，并命名为 `Power.java`, `GameCharacter.java`, `Player.java`，通过 Moodle 提交。
+You will sit the actual lab exam during your scheduled lab session on **Thursday 31 October**, or during a different time by consultation with the Teaching Office.
 
-## 第一部分：Python 题目
+### Exam Conditions
+*   You will use one of the lab machines in its default configuration.
+*   You are not allowed to bring anything with you into the exam.
+*   Accessing any previously written documents or code files from your home drive or the web is **not allowed** and will be considered plagiarism.
+*   Communication between candidates during the laboratory exam is **strictly forbidden**.
+*   A candidate who wishes to print a document during the exam should summon an invigilator, who will collect it from the printer and deliver it.
+*   A candidate may leave early, but only after summoning an invigilator, who will ensure that submission has taken place.
+*   Any candidate who experiences a hardware or software problem during the examination should summon an invigilator at once.
+*   Leave the laboratory quietly when you are done; the exam may still be in progress for other groups.
 
-### 任务 1: 数据库 (5 Marks)
-**题目描述:**
-创建一个新的 SQL 数据库，包含两个表：`Authors` 和 `Books`。
-`Authors` 表包含 `ID`, `Name`, `Place of Birth`。
-`Books` 表包含 `ID`, `Title`, `Author`, `Data Published`。
-并插入给定的数据。
-将解决方案保存到 `python_task1.py`。
+## Overview
 
-**关键概念/知识点:**
-- SQL 数据库创建和数据插入
-- 数据库表设计
+This exam consists of two parts:
+*   **Part 1:** Requires you to write a Python program.
+*   **Part 2:** Requires you to write a Java program.
 
-### 任务 2: 显示数据库 (7 Marks)
-**题目描述:**
-使用 `BookInfo` 数据库，显示作者及其出生地列表。程序应要求用户输入出生地，然后显示在该地点出生的作者的所有图书的标题、出版日期和作者姓名。
-将解决方案保存到 `python_task2.py`。
+The instructions, allocated marks, and submission instructions are given below for each part. Note that each part has a total of **24 marks** allocated for correctness; in addition, **1 mark** for each part will be allocated for appropriate coding style (commenting, formatting, variable names, etc).
 
-**关键概念/知识点:**
-- 数据库查询和数据显示
-- 用户输入处理
+---
 
-### 任务 3: 查询数据库 (5 Marks)
-**题目描述:**
-程序应要求用户输入一个年份，并显示在该年份之后出版的所有图书，按出版年份排序。
-将解决方案保存到 `python_task3.py`。
+## Part 1: Python
 
-**关键概念/知识点:**
-- 数据库查询 (按年份过滤、排序)
-- 用户输入处理
+You should write the code for each task below in a separate Python source file, as indicated. You should then submit all source files through Moodle as described at the end.
 
-### 任务 4: 写入文件 (7 Marks)
-**题目描述:**
-程序应要求用户输入作者姓名，然后将该作者的所有图书保存到名为 `Booklist.txt` 的文本文件中，每个字段用破折号分隔。最后，应显示文本文件的内容。
-将解决方案保存到 `python_task4.py`。
+### Task 1: Database [5 marks]
 
-**关键概念/知识点:**
-- 文件 I/O 操作
-- 字符串格式化
+Create a new SQL database called `BookInfo` with two tables.
 
-## 第二部分：Java 题目
+The first table should be called `Authors` and contain the following data:
 
-### 任务 1: Power (2 Marks)
-**题目描述:**
-创建一个枚举类型 `Power`，包含以下值：`CLONING, COMPUTER, ENERGY_BLAST, FLIGHT, INVINCIBILITY, MAGIC, MAGNETISM, SCIENCE, SMALL, SPEED, STRENGTH, TELEPATHY, TRANSFORMATION, WEAPONS, WATER`。所有类应放在 `superhero` 包中。
+| Name            | Place of Birth |
+| --------------- | -------------- |
+| Agatha Christie | Torquay        |
+| J.K. Rowling    | Bristol        |
+| Oscar Wilde     | Dublin         |
 
-**关键概念/知识点:**
-- Java 枚举类型
+The second table should be called `Books` and contain the following data:
 
-### 任务 2: GameCharacter (6 Marks)
-**题目描述:**
-创建一个 `GameCharacter` 类，表示游戏角色，包含以下属性：
-- `name` (String)
-- `powers` (Set of Power objects)
-构造函数签名：`public GameCharacter(String name, int cost, Power... powers)`。
-要求：
-- 类必须是不可变的。
-- 必须有完整的 `get` 方法集，但没有 `set` 方法。
-- 提供适当的 `equals()`, `hashCode()` 和 `toString()` 实现。`toString()` 必须手动编写。
-- 为类和所有成员编写描述性 Javadoc 注释。
+| ID  | Title                               | Author          | Date Published |
+| --- | ----------------------------------- | --------------- | -------------- |
+| 1   | De Profundis                        | Oscar Wilde     | 1905           |
+| 2   | Harry Potter and the chamber of secrets | J.K. Rowling    | 1998           |
+| 3   | The seven dials mystery             | Agatha Christie | 1929           |
+| 4   | The picture of Dorian Gray          | Oscar Wilde     | 1890           |
+| 5   | Murder on the Orient Express        | Agatha Christie | 1934           |
+| 6   | Harry Potter and the prisoner of Azkaban | J.K. Rowling    | 1999           |
 
-**关键概念/知识点:**
-- Java 类设计 (属性、构造函数、getter)
-- 不可变类
-- `equals()`, `hashCode()`, `toString()` 方法重写
-- Javadoc 注释
+Save your solution to this problem in a file `python_task1.py`.
 
-### 任务 3: Player (6 Marks)
-**题目描述:**
-实现一个 `Player` 类，表示游戏玩家，包含一个字段：
-- 玩家当前拥有的游戏角色集合 (GameCharacter 对象)。
-包含以下方法：
-- 构造函数初始化角色集合。
-- 添加角色的方法。
-- 获取字段值的 `get` 方法。
+### Task 2: Displaying Database [7 marks]
 
-**关键概念/知识点:**
-- Java 类设计 (属性、构造函数、方法)
-- 集合操作
+Using the `BookInfo` database, display the list of authors and their place of birth. The program should ask the user to enter a place of birth and then show the title of the book, date published and author’s name for all books by authors who were born in the location they selected.
 
-### 任务 4: chooseCharacters (10 Marks)
-**题目描述:**
-在 `GameCharacter` 类中实现一个额外的公共方法：
-- `public Set<GameCharacter> chooseCharacters(Power... neededPowers)`
-该方法应根据所需能力返回提供所有所需能力的角色集合，如果不可能提供，则返回 `null`。如果存在多个有效集合，则返回其中任何一个。
+Save your solution to this problem in a file `python_task2.py`.
 
-**关键概念/知识点:**
-- 集合操作
-- 算法设计 (寻找满足条件的角色组合)
+### Task 3: Querying Database [5 marks]
 
-## 关键要点 (Key Takeaways)
-- 掌握 Python 和 Java 两种语言的编程能力。
-- 熟悉 Python 数据库操作和文件 I/O。
-- 掌握 Java 面向对象编程，包括枚举、类设计、不可变类、方法重写、集合操作和算法设计。
-- 理解如何将复杂问题分解为模块化任务并逐步实现。
+The program should ask the user to enter a year and display all the books published after that year, sorted by the year they were published.
+
+Save your solution to this problem in a file `python_task3.py`.
+
+### Task 4: Writing to File [7 marks]
+
+The program should ask the user for an author’s name and then save all the books by that author to a text file called `Booklist.txt`, each field separated by dashes so it looks as follows (for example):
+
+```
+This file contents the following record(s):
+2 - Harry Potter and the chamber of secrets - J.K. Rowling - 1998
+3 - The seven dials mystery - Agatha Christie - 1929
+4 - The picture of Dorian Gray - Oscar Wilde - 1890
+```
+
+Finally, the content of the text file should be displayed as above.
+
+Save your solution to this problem in a file `python_task4.py`.
+
+### Python Submission
+
+Ensure your submission files are named exactly as they are supposed to (i.e. `python_task1.py`, `python_task2.py`, `python_task3.py`, `python_task4.py`).
+
+Go to your Moodle account, and submit your files at the appropriate submission link:
+**Moodle > Programming and System Design > Lab Exam > Python Submission**
+
+---
+
+## Part 2: Java
+
+In this lab, you will create a set of classes representing playable characters in a video game, as well as a class representing a player of that video game.
+
+Every `GameCharacter` has two properties: a `name` (e.g., "Superman") and a set of `powers` (e.g., for Superman, this might include Flying, Invincibility, Speed, and Energy Blast).
+
+A `Player` of a video game has a set of game characters which they have already purchased.
+
+During the game, a player will encounter a series of levels – and each level requires a set of characters with particular powers. For example, one level might need characters with powers including Flight, Strength, and Science. To begin such a level, a player must choose a set of characters that supply all of the necessary powers. For example, if a level needs character with Flight, Strength, and Science, the player might choose Superman (to provide Flight and Strength) along with Doctor Octopus (to provide Science). If a player does not have characters that are able to supply the necessary powers, they are not able to start the level.
+
+#### Example
+
+Assume that the player has the following characters in their set:
+*   Robin (providing Weapons)
+*   Starfire (providing Flight and Energy Blast)
+*   Cyborg (providing Strength and Weapons)
+*   Beast Boy (providing Transformation)
+*   Raven (providing Magic)
+
+The following are the game characters the player should choose in various circumstances:
+*   If the required powers are **Weapons** and **Strength**, they should choose **Cyborg**.
+*   If the required powers are **Flight**, **Strength**, and **Transformation**, they should choose **Starfire**, **Cyborg**, and **Beast Boy**.
+*   If the required powers are **Transformation**, **Magic**, and **Science**, then this is not possible. _[Content Truncated]_
+
+### Task 1: Power (2 marks)
+
+**Note about implementation:** all classes created in this exam should be put in the `superhero` package.
+
+You should create an enumerated type `Power` with the following values:
+`CLONING`, `COMPUTER`, `ENERGY_BLAST`, `FLIGHT`, `INVINCIBILITY`, `MAGIC`, `MAGNETISM`, `SCIENCE`, `SMALL`, `SPEED`, `STRENGTH`, `TELEPATHY`, `TRANSFORMATION`, `WEAPONS`, `WATER`.
+
+### Task 2: GameCharacter (6 marks)
+
+You should then create a class `GameCharacter` representing a game character including the following properties:
+*   `name` (a `String`)
+*   `powers` (a set of `Power` objects)
+
+You should create a constructor to set the value of the above fields with the following signature (note that this constructor uses varargs for its final parameter):
+```java
+public GameCharacter(String name, int cost, Power... powers)
+```
+
+In addition, your `GameCharacter` class must satisfy the following requirements:
+*   Your class must be **immutable** – that is, it should not be possible to change any of the fields of the class in any way after it is created.
+*   The class must have a complete set of `get` methods for all parameters, but no `set` methods.
+    *   Be sure that none of your `get` methods violate the immutability of your class.
+*   You should provide appropriate implementations of `equals()`, `hashCode()`, and `toString()`.
+    *   It is fine to use the auto-generated versions of `equals()` and `hashCode()` if you want, but you must write your own (non-auto-generated) `toString()` method.
+*   You must write **descriptive Javadoc comments** for the class and for all class members (fields and methods).
+
+### Task 3: Player (6 marks)
+
+Once your `GameCharacter` class is finished, you should implement a `Player` class to represent a player of the game, making use of the `GameCharacter` class defined above. `Player` should have a single field:
+*   The set of game characters that they currently own (represented as `GameCharacter` objects) – you can choose whatever data type you want for this field.
+
+`Player` should also have the following methods:
+*   A constructor that initialises the set of characters correctly.
+*   An appropriately named method to add a character to the set.
+*   A `get` method to retrieve the field value.
+
+### Task 4: chooseCharacters (10 marks)
+
+In your `GameCharacter` class, implement one additional public method, as follows:
+```java
+public Set<GameCharacter> chooseCharacters(Power... neededPowers)
+```
+Note that you are free to add any number of `private` helper methods that you want, but the above should be the only `public` method in the class other than the constructor and the `get` method.
+
+This method should implement the behaviour shown in the example: given a set of powers, this should return the set of characters required to provide all of the requested powers, or `null` if it is not possible to provide the powers. If no set of characters can be found to cover all of the required powers, this method should return `null`. If more than one set of characters can provide the required powers, any valid set of characters can be returned (e.g., in the example, a level requiring Weapons and Magic could return Raven and Robin, or Raven and Cyborg).
+
+### Java Submission
+
+Ensure your submission files are named exactly as they are supposed to – i.e., `Power.java`, `GameCharacter.java`, `Player.java`. Also be sure that all classes are in the `superhero` package.
+
+Go to your Moodle account... _[Content Truncated]_
+
+---
+
+## Key Takeaways
+
+### Python
+*   **Database Management (SQLite):** Creating tables, inserting data, and querying data based on user input.
+*   **Data Filtering and Sorting:** Selecting and ordering records based on specific criteria (location, year).
+*   **File I/O:** Writing formatted data to a text file.
+*   **Modular Design:** Structuring code into separate files for different tasks.
+
+### Java
+*   **Object-Oriented Programming:** Designing and implementing classes (`GameCharacter`, `Player`) to model a problem domain.
+*   **Enums:** Using enumerated types (`Power`) for a fixed set of constants.
+*   **Immutability:** Creating immutable classes to ensure data integrity.
+*   **Collections Framework:** Using `Set` to manage collections of objects and powers.
+*   **Algorithm Design:** Implementing logic (`chooseCharacters`) to find a valid combination of objects that satisfy a given set of requirements.
+*   **API Documentation:** Writing Javadoc comments for classes and methods.
+

@@ -4,112 +4,167 @@ title: "2021 COMPSCI4084 Final Lab Exam (Python + Java)"
 
 # 2021 COMPSCI4084 Final Lab Exam (Python + Java)
 
-## 考试概述
-本考试包含两个部分：第一部分要求编写 Python 程序，第二部分要求编写 Java 程序。总分 24 分，另有 1 分用于代码风格。
+## General Information
 
-## 考试要求
-- 考试期间不允许访问任何预先编写的文档或代码文件。
-- 考试期间严禁考生之间交流。
-- 遇到硬件或软件问题应立即召唤监考人员。
-- Python 任务需在同一个源文件中完成，并命名为 `your_name_python_task.py`，通过 Moodle 提交。
-- Java 任务需将所有类放在 `trading` 包中，并命名为 `Goods.java`, `Trade.java`, `Citizen.java`, `Trader.java`，通过 Moodle 提交。
+### Exam Conditions
+*   You are **not allowed** to access any previously written documents or code files from your home drive or the web. If you do, it will be considered plagiarism.
+*   Communication between candidates during the laboratory exam is **strictly forbidden**.
+*   Any candidate who experiences a hardware or software problem during the examination should summon an invigilator at once.
 
-## 第一部分：Python 题目
+## Overview
 
-### 任务 1a: tkinter GUI 和数据库 (4 Marks)
-**题目描述:**
-创建一个程序，显示一个登录界面。
-- 程序应在点击“Save”按钮时，将有效的用户名和密码保存到名为 `Users` 的数据库中 (4 Marks)。
-- 点击“Clear”按钮时，应清除所有窗口 (2 Marks)。
-- 点击“Display”按钮时，系统应显示数据库中保存的所有用户名和密码 (3 Marks)。
+This exam consists of two parts:
+*   **Part 1:** Requires you to write a Python program.
+*   **Part 2:** Requires you to write a Java program.
 
-**关键概念/知识点:**
-- tkinter GUI 界面设计
-- 数据库操作 (保存、显示、清除)
+The instructions, allocated marks, and submission instructions are given below for each part. Note that each part has a total of **24 marks** allocated for correctness; in addition, **1 mark** for each part will be allocated for appropriate coding style (commenting, formatting, variable names, etc).
 
-### 任务 1b: 用户名和密码验证 (5 Marks)
-**题目描述:**
-- 系统不应保存重复的用户名。如果用户名已存在，系统应显示适当消息 (5 Marks)。
-- 密码应满足以下条件：
-    a) 密码至少包含 8 个字符。
-    b) 密码应包含数字。
-- 如果密码不满足以上两个条件，系统应拒绝并显示不符合要求的消息 (6 Marks)。
+---
 
-**关键概念/知识点:**
-- 用户名唯一性验证
-- 密码复杂度验证 (长度、包含数字)
-- 错误消息提示
+## Part 1: Python
 
-## 第二部分：Java 题目
+You should write the code for all tasks below in the **same Python source file**. You should then submit your source file through Moodle as described at the end.
 
-### 任务 1: Goods (3 Marks)
-**题目描述:**
-创建一个枚举类型 `Goods`，包含以下值：`BREAD, COAL, FISH, HELMET, IRON, PAPER, SHIELD, SWORD, WOOD, WOOL`。所有类应放在 `trading` 包中。
+### Task 1a: tkinter GUI and Database [13 marks total]
 
-**关键概念/知识点:**
-- Java 枚举类型
+Create a program that should display the following screen:
 
-### 任务 2: Trade (7 Marks)
-**题目描述:**
-创建一个 `Trade` 类，表示单次交易，包含以下属性：
-- `gems`: 交易涉及的宝石数量 (整数)
-- `amount`: 交易涉及的商品数量 (整数)
-- `goods`: 交易涉及的商品类型 (`Goods` 对象)
-`Trade` 类应有一个公共构造函数初始化所有字段，并包含以下方法：
-- 完整的 `get` 方法集，但没有 `set` 方法。
-- 适当的 `equals()` 和 `hashCode()` 实现（基于所有三个字段的值）。
-- `toString()` 实现，生成类似“1 gem for 3 BREAD”的字符串表示。
+*   **GUI Setup [4 marks]**
+*   The program should save valid usernames and passwords in a database called `Users` when the "Save" button is clicked. **[4 marks]**
+*   It should clear all the windows when the "Clear" button is clicked. **[2 marks]**
+*   If a user clicks the button “Display”, the system should display all usernames and passwords saved in the database. **[3 marks]**
 
-**关键概念/知识点:**
-- Java 类设计 (属性、构造函数、getter)
-- `equals()` 和 `hashCode()` 方法重写
-- `toString()` 方法重写
+### Task 1b: Username and Password Validation [11 marks total]
 
-### 任务 3: Citizen (6 Marks)
-**题目描述:**
-创建一个 `Citizen` 类，表示游戏中的公民。
-- 构造函数接受一个整数参数，表示宝石数量，并创建一个具有该数量宝石和空库存的新公民。
-- 包含以下公共方法：
-    - `public int getGems()`：返回当前宝石数量。
-    - `public int getAmount(Goods goods)`：返回当前某种商品的数量。
-    - `public boolean canAfford(Trade trade)`：检查公民是否能负担某笔交易。
-    - `public void executeTrade(Trade trade)`：执行交易，更新宝石和商品数量。
+*   The system should **not** save duplicated usernames. If a user enters a username, the system should check if the username already exists in the database. If it does, the system should display a suitable message. **[5 marks]**
+*   The password should meet the following criteria:
+    a) The password should have a minimum of 8 characters.
+    b) The password should include numbers.
+*   If the password does not meet **BOTH** criteria, the system should reject it with a message saying that it does not meet the requirements. **[6 marks]**
 
-**关键概念/知识点:**
-- Java 类设计 (属性、构造函数、方法)
-- 游戏逻辑实现 (交易、库存管理)
+### Python Submission
 
-### 任务 4: Trader (4 Marks)
-**题目描述:**
-创建一个 `Trader` 类，表示游戏中的商人。
-- 构造函数不接受参数，并创建一个带有一个随机选择的 `Trade` 的商人。
-- 包含以下公共方法：
-    - `public List<Trade> getTrades()`：返回该商人支持的当前交易列表。
-    - `public void addRandomTrade()`：向列表中添加一个新的随机选择的 `Trade`。
-        - `gems` 值应在 1 到 5 之间（包含）。
-        - `amount` 值应在 1 到 5 之间（包含）。
-        - `Goods` 值应从 `Goods` 枚举中随机选择。
+Ensure your submission file is named exactly as it is supposed to (i.e. `your_name_python_task.py`).
 
-**关键概念/知识点:**
-- Java 类设计 (属性、构造函数、方法)
-- 随机数生成
-- 列表操作
+Go to your Moodle account, and submit your file at the appropriate submission link:
+**Moodle > Programming and System Design > Lab Exam > Python Submission**
 
-### 任务 5: Trade.execute() (4 Marks)
-**题目描述:**
-在 `Trade` 类中实现一个额外的公共方法：
-- `public void execute(Trader trader, Citizen citizen)`
-该方法应按以下方式运行：
-- 如果当前 `Trade` 不包含在 `trader` 支持的交易列表中，则抛出 `IllegalArgumentException`。
-- 否则，调用 `citizen.executeTrade()` 并传入当前交易。
-    - 如果 `executeTrade()` 返回 true，则该方法还应调用 `trader.addRandomTrade()`。
+---
 
-**关键概念/知识点:**
-- 异常处理
-- 类之间的方法调用和交互
+## Part 2: Java
 
-## 关键要点 (Key Takeaways)
-- 掌握 Python 和 Java 两种语言的编程能力。
-- 熟悉 GUI、数据库、数据验证等 Python 常用技术。
-- 掌握 Java 面向对象编程，包括枚举、类设计、方法重写、异常处理和类间交互。
-- 理解如何将复杂问题分解为模块化任务并逐步实现。
+Your task is to develop classes to model a world involving `Citizens` and `Traders`, where `Citizens` are able to exchange gems for `Goods` including bread, wool, armour, weapons, and building materials.
+
+All of those goods are provided by `Traders` in exchange for gems. Every `Trader` supports one or more `Trades`, where a `Trade` includes the following information:
+- The price in gems
+- The specific goods that are for sale
+- How much of that goods is available for the price
+
+**Example of a `Trade`:**
+- Trade **1 gem** for **3 Bread**
+
+Every `Citizen` has an amount of gems along with an amount of `Goods` of each type (which may be zero). When a `Citizen` successfully executes a `Trade`, the following happens:
+- The relevant amount of gems is removed.
+- The relevant amount of `Goods` is added.
+
+For example, if a `Citizen` initially has 5 gems and an empty inventory, after executing the above trade, they would have 4 gems and 3 Bread in their inventory. If a `Citizen` does not have enough gems to complete a trade, they cannot execute it.
+
+`Trades` are provided by `Traders`. When a new `Trader` is created, they only have one `Trade` available. Each time a `Trader` makes a trade with a `Citizen`, a new (randomly-chosen) `Trade` is added to their set. So if a `Trader` starts with the sample `Trade` above, after three successful trades with `Citizens`, the `Trader` might have the following `Trades` in their list:
+- Trade **1 gem** for **3 Bread**
+- Trade **2 gems** for **1 Helmet**
+- Trade **1 gem** for **1 Bread**
+- Trade **2 gems** for **4 Wool**
+
+(Note that this trader has two `Trades` for the same item of `Goods` – Bread. This is not a problem in the system – you do not need to check for duplicates.)
+
+### Task 1: Goods (3 marks)
+
+**Note about implementation:** all classes created in this exam should be put in the `trading` package.
+
+You must create an enumerated type `Goods` with the following values:
+`BREAD`, `COAL`, `FISH`, `HELMET`, `IRON`, `PAPER`, `SHIELD`, `SWORD`, `WOOD`, `WOOL`
+
+### Task 2: Trade (7 marks)
+
+You must create a class `Trade` representing a single trade, including the following properties:
+*   `gems`: the number of gems involved in the trade (an integer)
+*   `amount`: the amount of goods involved in the trade (an integer)
+*   `goods`: the type of goods involved in the trade (an object of type `Goods`)
+
+For example, the trade “1 gem for 3 BREAD” would be represented as:
+- `gems`: 1
+- `amount`: 3
+- `goods`: `Goods.BREAD`
+
+The `Trade` class should have a public constructor that initialises all of the fields, and should also include the following methods:
+*   A complete set of `get` methods, but no `set` methods.
+*   Appropriate implementations of `equals()` and `hashCode()` – note that equality should be based on the values of all three fields.
+*   An implementation of `toString()` that produces a string representation of the `Trade` similar to the example above (“1 gem for 3 BREAD”).
+
+Note that you can use automatically-generated code for the `get` methods and `equals()`/`hashCode()`, but you will need to write the `toString()` method by hand to meet the specification.
+
+### Task 3: Citizen (6 marks)
+
+Next, create a class `Citizen` representing a citizen in the game. The internal details of this class are up to you; here is the required behaviour.
+
+The constructor for `Citizen` should take a single parameter, an integer representing the number of gems, and should create a new `Citizen` with that many gems and an empty inventory.
+
+`Citizen` should have the following `public` methods:
+- `public int getGems()` – returns the current amount of gems
+- `public int getAmount(Goods goods)` – ... _[Content Truncated]_
+
+### Task 4: Trader (4 marks)
+
+Create a class `Trader` representing a trader in the world. As with `Citizen`, the internal details of this class are up to you; here is the required behaviour.
+
+The constructor for `Trader` should take no parameters, and should create a `Trader` with a single, randomly-chosen `Trade`.
+
+`Trader` should have the following `public` methods:
+- `public List<Trade> getTrades()` – returns the current list of `Trades` supported by this `Trader`.
+- `public void addRandomTrade()` – adds a new, randomly-chosen `Trade` to the list. The `Trade` should be generated with the following constraints:
+    - The value for `gems` should be between 1 and 5 (inclusive)
+    - The value for `amount` should be between 1 and 5 (inclusive)
+    - The value for `Goods` should be randomly chosen from the values of the `Goods` enum.
+
+To generate a random number, you can use the `java.util.Random` class, as follows:
+- Creating an object: `Random rand = new Random();`
+- Later on in the code, when you need a number: `int value = rand.nextInt(n);` will return a number between 0 and (n-1), inclusive.
+
+### Task 5: Trade.execute() (4 marks)
+
+In your `Trade` class, implement one additional public method, as follows:
+```java
+public void execute(Trader trader, Citizen citizen)
+```
+
+This method should behave as follows:
+*   If the current `Trade` is not included in the list of trades supported by `trader`, this method should throw an `IllegalArgumentException`.
+*   Otherwise, it should call `citizen.executeTrade()` with the current trade.
+    *   If `executeTrade()` returns true, the method should also call `trader.addRandomTrade()`.
+
+### Java Submission
+
+Ensure your submission files are named appropriately:
+- `Goods.java`
+- `Trade.java`
+- `Citizen.java`
+- `Trader.java`
+
+Go to your Moodle account, and submit your files at the appropriate submission link:
+**Moodle > Programming and System Design > Lab Exam > ...** _[Content Truncated]_
+
+---
+
+## Key Takeaways
+
+### Python
+*   **GUI Development (tkinter):** Building a user interface with input fields and buttons.
+*   **Database Management (SQLite):** Storing, retrieving, and validating user data (usernames, passwords).
+*   **Data Validation:** Implementing rules for data integrity, such as checking for duplicate usernames and enforcing password complexity requirements.
+
+### Java
+*   **Object-Oriented Modeling:** Designing a system of interacting classes (`Citizen`, `Trader`, `Trade`) to represent a real-world scenario.
+*   **Enums:** Using enumerated types (`Goods`) to represent a fixed set of items.
+*   **Random Number Generation:** Using `java.util.Random` to introduce variability.
+*   **Exception Handling:** Throwing exceptions (`IllegalArgumentException`) to handle invalid states.
+*   **Class Interaction:** Implementing methods that involve multiple objects collaborating to achieve a result.

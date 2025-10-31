@@ -4,53 +4,53 @@ title: "2023 COMPSCI4084 Python Lab Exam"
 
 # 2023 COMPSCI4084 Python Lab Exam
 
-## 考试概述
-本考试包含 Python 部分，主要考察 tkinter GUI、数据库管理、数据验证以及模拟虚拟图书馆员功能。
+## Exam Overview
+This exam includes a Python section, primarily assessing tkinter GUI, database management, data validation, and simulating virtual librarian functionalities.
 
-## 考试要求
-- 题目要求在同一个 Python 源文件中完成所有任务。
-- 提交文件命名为 `your_name_python_task.py`。
-- 通过 Moodle 提交。
+## Exam Requirements
+- All tasks are required to be completed in a single Python source file.
+- The submitted file should be named `your_name_python_task.py`.
+- Submission is via Moodle.
 
-## 第一部分：Python 题目
+## Part One: Python Questions
 
-### 任务 1a: tkinter GUI 和数据库图书馆系统 (14 Marks)
-**题目描述:**
-创建一个图书馆管理系统，并集成一个模拟的虚拟图书馆员。
-1.  创建一个程序，显示以下屏幕 (5 Marks)。
-2.  用户应能输入图书的 ISBN、标题、作者和出版年份，并在点击“Save”按钮时将有效图书详情保存到名为 `LibraryDB` 的数据库中。保存成功时应显示适当消息 (4 Marks)。
-3.  点击“Clear”按钮时，系统应清除所有窗口 (2 Marks)。
-4.  点击“Display Books”按钮时，系统应显示数据库中保存的所有图书详情 (3 Marks)。
+### Task 1a: tkinter GUI and Database Library System (14 Marks)
+**Task Description:**
+Create a library management system and integrate a simulated virtual librarian.
+1.  Create a program that displays the following screen (5 Marks).
+2.  The user should be able to enter the book's ISBN, title, author, and publication year, and save valid book details to a database named `LibraryDB` when the "Save" button is clicked. An appropriate message should be displayed upon successful saving (4 Marks).
+3.  When the "Clear" button is clicked, the system should clear all fields in the window (2 Marks).
+4.  When the "Display Books" button is clicked, the system should display all book details saved in the database (3 Marks).
 
-**关键概念/知识点:**
-- tkinter GUI 界面设计
-- 数据库操作 (保存、显示、清除)
-- 图书馆管理系统基本功能
+**Key Concepts/Knowledge Points:**
+- tkinter GUI interface design
+- Database operations (save, display, clear)
+- Basic functionalities of a library management system
 
-### 任务 1b: 图书数据验证 (3 Marks)
-**题目描述:**
-1.  系统应确保不存储重复的 ISBN。如果输入的 ISBN 已存在，系统应显示适当消息 (1 Mark)。
-2.  确保输入的年份不晚于当前年份，且不早于 1450 年 (1 Mark)。
-3.  系统应确保标题和作者字段均不为空。如果任何字段为空，系统应显示适当消息 (1 Mark)。
+### Task 1b: Book Data Validation (3 Marks)
+**Task Description:**
+1.  The system should ensure that duplicate ISBNs are not stored. If an entered ISBN already exists, the system should display an appropriate message (1 Mark).
+2.  Ensure the entered year is not later than the current year and not earlier than 1450 (1 Mark).
+3.  The system should ensure that both the title and author fields are not empty. If any field is empty, the system should display an appropriate message (1 Mark).
 
-**关键概念/知识点:**
-- 数据验证 (ISBN 重复、年份范围、非空检查)
-- 错误消息提示
+**Key Concepts/Knowledge Points:**
+- Data validation (duplicate ISBN, year range, non-empty check)
+- Error message prompts
 
-### 任务 1c: 集成模拟 ChatGPT 作为虚拟图书馆员 (7 Marks)
-**题目描述:**
-创建一个聊天窗口，模拟与 ChatGPT 的交互。系统应连接到 `LibraryDB` 以检索实时数据来回答用户查询。虚拟图书馆员应能回答以下类型的查询：
+### Task 1c: Integrate a Simulated ChatGPT as a Virtual Librarian (7 Marks)
+**Task Description:**
+Create a chat window to simulate interaction with ChatGPT. The system should connect to `LibraryDB` to retrieve real-time data to answer user queries. The virtual librarian should be able to answer the following types of queries:
 - “Recommend me a book by [author name].” (3.5 Marks)
 - “When was [book title] published.” (3.5 Marks)
-只需处理这两种结构的句子，无需支持其他句子。
+Only these two sentence structures need to be handled; support for other sentences is not required.
 
-**关键概念/知识点:**
-- 模拟自然语言处理 (NLP)
-- 数据库查询以响应用户请求
-- 字符串匹配和解析
+**Key Concepts/Knowledge Points:**
+- Simulated Natural Language Processing (NLP)
+- Database queries to respond to user requests
+- String matching and parsing
 
-## 关键要点 (Key Takeaways)
-- 综合运用 tkinter、数据库和数据验证构建功能性应用程序。
-- 学习如何模拟简单的 AI 交互，通过数据库检索信息。
-- 强调用户界面设计、数据完整性和用户体验。
-- 注意代码的模块化和错误处理。
+## Key Takeaways
+- Comprehensively use tkinter, databases, and data validation to build a functional application.
+- Learn how to simulate simple AI interactions by retrieving information from a database.
+- Emphasize user interface design, data integrity, and user experience.
+- Pay attention to code modularity and error handling.
