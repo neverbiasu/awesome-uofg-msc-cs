@@ -11,9 +11,14 @@ export default async function Page(props: {
   if (!page) notFound();
 
   const MDX = page.data.body;
+  const { lastModified } = page.data;
 
   return (
-    <DocsPage toc={page.data.toc} full={page.data.full}>
+    <DocsPage 
+      toc={page.data.toc} 
+      full={page.data.full}
+      lastUpdate={lastModified ? new Date(lastModified) : undefined}
+    >
       <DocsBody>
         <h1>{page.data.title}</h1>
         <MDX />
