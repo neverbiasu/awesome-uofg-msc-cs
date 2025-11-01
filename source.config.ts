@@ -33,6 +33,7 @@ export const quizzes = defineDocs({
 });
 
 export default defineConfig({
+  lastModifiedTime: 'git',
   mdxOptions: {
     remarkPlugins: [remarkMath],
     // Place it at first, it should be executed before the syntax highlighter

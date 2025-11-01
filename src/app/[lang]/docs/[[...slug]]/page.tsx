@@ -16,9 +16,14 @@ export default async function Page(props: PageProps<'/[lang]/docs/[[...slug]]'>)
   if (!page) notFound();
 
   const MDXContent = page.data.body;
+  const { lastModified } = page.data;
 
   return (
-    <DocsPage toc={page.data.toc} full={page.data.full}>
+    <DocsPage 
+      toc={page.data.toc} 
+      full={page.data.full}
+      lastUpdate={lastModified ? new Date(lastModified) : undefined}
+    >
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
       <DocsBody>

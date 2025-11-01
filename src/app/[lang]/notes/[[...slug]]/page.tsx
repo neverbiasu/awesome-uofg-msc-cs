@@ -27,15 +27,21 @@ export default async function Page({
   if (!page) notFound();
 
   const MDX = page.data.body;
+  const { lastModified } = page.data;
 
   return (
-    <DocsPage toc={page.data.toc}>
-      <DocsTitle>{page.data.title}</DocsTitle>
-      <DocsDescription>{page.data.description}</DocsDescription>
-      <DocsBody>
-        <MDX components={getMDXComponents()} />
-      </DocsBody>
-    </DocsPage>
+    <div suppressHydrationWarning>
+      <DocsPage 
+        toc={page.data.toc}
+        lastUpdate={lastModified ? new Date(lastModified) : undefined}
+      >
+        <DocsTitle>{page.data.title}</DocsTitle>
+        <DocsDescription>{page.data.description}</DocsDescription>
+        <DocsBody>
+          <MDX components={getMDXComponents()} />
+        </DocsBody>
+      </DocsPage>
+    </div>
   );
 }
 
