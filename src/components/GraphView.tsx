@@ -10,25 +10,23 @@ import {
 } from 'react';
 import type {
   ForceGraphMethods,
-  LinkObject,
   NodeObject,
 } from 'react-force-graph-2d';
 import { forceCollide, forceLink, forceManyBody } from 'd3-force';
 import { useRouter } from 'fumadocs-core/framework';
 
 // Type definitions for the graph data
-export interface Graph {
-  links: Link[];
-  nodes: Node[];
-}
-
 export type Node = NodeObject & {
   url: string;
   text: string;
   description?: string;
   neighbors?: string[];
 };
-export type Link = LinkObject;
+
+export interface Graph {
+  links: Record<string, unknown>[];
+  nodes: Node[];
+}
 
 export interface GraphViewProps {
   graph: Graph;
@@ -60,7 +58,7 @@ function ClientOnly({
   containerRef,
   graph,
 }: GraphViewProps & { containerRef: RefObject<HTMLDivElement | null> }) {
-  const fgRef = useRef<ForceGraphMethods<Node, Link> | undefined>(undefined);
+  const fgRef = useRef<ForceGraphMethods<Node, Record<string, unknown>> | undefined>(undefined);
   const hoveredRef = useRef<Node | null>(null);
   const readyRef = useRef(false);
   const router = useRouter();
@@ -76,7 +74,7 @@ function ClientOnly({
     readyRef.current = true;
   }, []);
 
-  const handleNodeHover = (node: NodeObject | null, _prevNode?: NodeObject | null) => {
+  const handleNodeHover = (node: NodeObject | null) => {
     const graph = fgRef.current;
     const typedNode = node as Node | null;
     if (!graph) return;
@@ -121,7 +119,7 @@ function ClientOnly({
     ctx.fillText(typedNode.text, typedNode.x ?? 0, (typedNode.y ?? 0) + radius + 4);
   };
 
-  const linkColor = (link: LinkObject) => {
+  const linkColor = (link: Record<string, unknown>) => {
     const container = containerRef.current;
     if (!container) return '#999';
 
@@ -143,17 +141,27 @@ function ClientOnly({
   };
 
   const enrichedGraph = useMemo<Graph>(() => {
-    const nodeIds = new Set(graph.nodes.map(n => n.id));
-    const validLinks = graph.links.filter(
-      link => nodeIds.has(link.source as string) && nodeIds.has(link.target as string)
-    );
+    const nodeMap = new Map(graph.nodes.map(n => [n.id, n]));
+    const validLinks = graph.links
+      .filter(
+        link => nodeMap.has(link.source as string) && nodeMap.has(link.target as string)
+      )
+      .map(link => ({
+        ...link,
+        source: nodeMap.get(link.source as string) || link.source,
+        target: nodeMap.get(link.target as string) || link.target,
+      }));
 
     const nodesWithNeighbors = graph.nodes.map((node) => ({
       ...node,
       neighbors: validLinks
         .flatMap((link) => {
-          if (link.source === node.id) return [link.target as string];
-          if (link.target === node.id) return [link.source as string];
+          if (link.source === node || (typeof link.source === 'object' && link.source !== null && 'id' in link.source && link.source.id === node.id)) {
+            return [typeof link.target === 'object' && link.target !== null && 'id' in link.target ? (link.target.id as string) : (link.target as string)];
+          }
+          if (link.target === node || (typeof link.target === 'object' && link.target !== null && 'id' in link.target && link.target.id === node.id)) {
+            return [typeof link.source === 'object' && link.source !== null && 'id' in link.source ? (link.source.id as string) : (link.source as string)];
+          }
           return [];
         })
     }));
@@ -162,7 +170,7 @@ function ClientOnly({
 
   return (
     <>
-      <ForceGraph2D<Node, Link>
+      <ForceGraph2D<Node, Record<string, unknown>>
         ref={fgRef}
         graphData={enrichedGraph}
         nodeCanvasObject={nodeCanvasObject}
