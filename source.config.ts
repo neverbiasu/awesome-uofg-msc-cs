@@ -1,5 +1,6 @@
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
+import rehypeMermaid from 'rehype-mermaid';
 import {
   defineConfig,
   defineDocs,
@@ -37,6 +38,6 @@ export default defineConfig({
   mdxOptions: {
     remarkPlugins: [remarkMath],
     // Place it at first, it should be executed before the syntax highlighter
-    rehypePlugins: (v) => [rehypeKatex, ...v],
+    rehypePlugins: (v) => [rehypeKatex, rehypeMermaid, ...v],
   },
 });

@@ -1,0 +1,189 @@
+'use client';
+
+import {
+  lazy,
+  type RefObject,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import type {
+  ForceGraphMethods,
+  LinkObject,
+  NodeObject,
+} from 'react-force-graph-2d';
+import { forceCollide, forceLink, forceManyBody } from 'd3-force';
+import { useRouter } from 'fumadocs-core/framework';
+
+// Type definitions for the graph data
+export interface Graph {
+  links: Link[];
+  nodes: Node[];
+}
+
+export type Node = NodeObject & {
+  url: string;
+  text: string;
+  description?: string;
+  neighbors?: string[];
+};
+export type Link = LinkObject;
+
+export interface GraphViewProps {
+  graph: Graph;
+}
+
+// Lazy load the graph component to avoid SSR issues
+const ForceGraph2D = lazy(
+  () => import('react-force-graph-2d'),
+) as typeof import('react-force-graph-2d').default;
+
+// Main component wrapper
+export function GraphView(props: GraphViewProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [mount, setMount] = useState(false);
+
+  useEffect(() => {
+    setMount(true);
+  }, []);
+
+  return (
+    <div ref={ref} className="w-full h-[600px] relative border rounded-lg">
+      {mount && <ClientOnly {...props} containerRef={ref} />}
+    </div>
+  );
+}
+
+// The actual client-side graph implementation
+function ClientOnly({
+  containerRef,
+  graph,
+}: GraphViewProps & { containerRef: RefObject<HTMLDivElement | null> }) {
+  const fgRef = useRef<ForceGraphMethods<Node, Link> | undefined>(undefined);
+  const hoveredRef = useRef<Node | null>(null);
+  const readyRef = useRef(false);
+  const router = useRouter();
+  const [tooltip, setTooltip] = useState<{ x: number; y: number; content: string } | null>(null);
+
+  useEffect(() => {
+    const fg = fgRef.current;
+    if (!fg || readyRef.current) return;
+
+    fg.d3Force('link', forceLink().distance(120));
+    fg.d3Force('charge', forceManyBody().strength(-100));
+    fg.d3Force('collision', forceCollide(60));
+    readyRef.current = true;
+  }, []);
+
+  const handleNodeHover = (node: NodeObject | null, _prevNode?: NodeObject | null) => {
+    const graph = fgRef.current;
+    const typedNode = node as Node | null;
+    if (!graph) return;
+
+    hoveredRef.current = typedNode;
+    if (typedNode) {
+      const coords = graph.graph2ScreenCoords(typedNode.x ?? 0, typedNode.y ?? 0);
+      setTooltip({
+        x: coords.x + 8,
+        y: coords.y + 8,
+        content: typedNode.description ?? typedNode.text,
+      });
+    } else {
+      setTooltip(null);
+    }
+  };
+
+  const nodeCanvasObject = (node: NodeObject, ctx: CanvasRenderingContext2D) => {
+    const typedNode = node as Node;
+    const container = containerRef.current;
+    if (!container) return;
+
+    const color = getComputedStyle(container).getPropertyValue('color');
+    const fontSize = 14;
+    const radius = 6;
+
+    ctx.beginPath();
+    ctx.arc(typedNode.x ?? 0, typedNode.y ?? 0, radius, 0, 2 * Math.PI, false);
+
+    const hoverNode = hoveredRef.current;
+    const isActive = hoverNode?.id === typedNode.id || hoverNode?.neighbors?.includes(typedNode.id as string);
+
+    ctx.fillStyle = isActive
+      ? 'var(--color-fd-primary)'
+      : '#7287fd';
+    ctx.fill();
+
+    ctx.font = `${fontSize}px sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    ctx.fillStyle = color;
+    ctx.fillText(typedNode.text, typedNode.x ?? 0, (typedNode.y ?? 0) + radius + 4);
+  };
+
+  const linkColor = (link: LinkObject) => {
+    const container = containerRef.current;
+    if (!container) return '#999';
+
+    const hoverNode = hoveredRef.current;
+
+    if (
+      hoverNode &&
+      typeof link.source === 'object' &&
+      link.source !== null &&
+      'id' in link.source &&
+      typeof link.target === 'object' &&
+      link.target !== null &&
+      'id' in link.target &&
+      (hoverNode.id === link.source.id || hoverNode.id === link.target.id)
+    ) {
+      return 'var(--color-fd-primary)';
+    }
+    return '#99999980'; // Use a safe, semi-transparent gray
+  };
+
+  const enrichedGraph = useMemo<Graph>(() => {
+    const nodeIds = new Set(graph.nodes.map(n => n.id));
+    const validLinks = graph.links.filter(
+      link => nodeIds.has(link.source as string) && nodeIds.has(link.target as string)
+    );
+
+    const nodesWithNeighbors = graph.nodes.map((node) => ({
+      ...node,
+      neighbors: validLinks
+        .flatMap((link) => {
+          if (link.source === node.id) return [link.target as string];
+          if (link.target === node.id) return [link.source as string];
+          return [];
+        })
+    }));
+    return { nodes: nodesWithNeighbors, links: validLinks };
+  }, [graph]);
+
+  return (
+    <>
+      <ForceGraph2D<Node, Link>
+        ref={fgRef}
+        graphData={enrichedGraph}
+        nodeCanvasObject={nodeCanvasObject}
+        linkColor={linkColor}
+        onNodeHover={handleNodeHover}
+        onNodeClick={(node) => {
+          const typedNode = node as Node;
+          if (typedNode.url) router.push(typedNode.url);
+        }}
+        linkWidth={1}
+        enableNodeDrag={true}
+        enableZoomInteraction={true}
+      />
+      {tooltip && (
+        <div
+          className="absolute p-2 rounded-md bg-black/80 text-white text-sm pointer-events-none"
+          style={{ transform: `translate(${tooltip.x}px, ${tooltip.y}px)` }}
+        >
+          {tooltip.content}
+        </div>
+      )}
+    </>
+  );
+}

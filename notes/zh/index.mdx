@@ -4,6 +4,8 @@ description: MSc Computing Science 课程学习笔记
 ---
 
 import { Card, Cards } from 'fumadocs-ui/components/card';
+import { GraphView } from '@/components/GraphView';
+import { buildGraph } from '@/lib/build-graph';
 
 # 学习笔记
 
@@ -76,3 +78,9 @@ import { Card, Cards } from 'fumadocs-ui/components/card';
 </Cards>
 
 待更新...
+
+---
+
+## 知识网络图
+
+<GraphView graph={buildGraph()} />
