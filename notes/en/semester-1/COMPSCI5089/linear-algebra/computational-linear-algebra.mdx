@@ -1,0 +1,48 @@
+---
+title: "Computational Linear Algebra"
+description: "Solving systems of linear equations (Ax = b) using computational methods and libraries like NumPy."
+---
+
+## Overview
+- **Goal**: To learn how to represent and solve systems of linear equations computationally, a common task in various scientific domains.
+- **Scope**: This note covers the matrix representation of linear systems and the use of NumPy's `linalg.solve` function.
+
+## Learning Objectives
+1. Represent a system of linear equations in the matrix form `Ax = b`.
+2. Understand the high-level concept of solution methods like Gaussian elimination.
+3. Use the `numpy.linalg.solve` function to efficiently find the solution vector `x`.
+
+## Key Knowledge Points
+
+### 1. Solving Systems of Linear Equations
+- **Motivation**: Many real-world problems, from circuit analysis to economic modeling, can be described as a system of linear equations. Solving for the unknown variables is a frequent computational task.
+- **Core Concepts**:
+  - **Matrix Form `Ax = b`**: A compact way to represent a system of linear equations, where **A** is a matrix of coefficients, **x** is a vector of unknown variables, and **b** is a vector of constants.
+  - **Gaussian Elimination**: A classical algorithm for solving linear systems by transforming the matrix **A** into an upper triangular form, allowing for a straightforward solution through back-substitution. While fundamental, it's often not directly used in practice in favor of more robust library functions.
+  - **`numpy.linalg.solve`**: A highly optimized and numerically stable function in NumPy that directly solves the equation `Ax = b` for `x`.
+- **Example**:
+  ```python
+  # System of equations:
+  # 2x + 3y = 8
+  # 4x + 1y = 6
+  import numpy as np
+
+  # Matrix A (coefficients)
+  A = np.array([[2, 3], [4, 1]])
+
+  # Vector b (constants)
+  b = np.array([8, 6])
+
+  # Solve for x (the vector [x, y])
+  x = np.linalg.solve(A, b)
+  # x will be [1., 2.]
+  ```
+- **Notes/Best Practices**:
+  - A unique solution exists only if the matrix **A** is square and non-singular (i.e., its determinant is non-zero).
+  - For performance and numerical stability, using `np.linalg.solve(A, b)` is strongly preferred over calculating the inverse of A and multiplying by b (`np.linalg.inv(A) @ b`).
+- **Summary**: Representing linear systems in matrix form allows us to leverage powerful and efficient computational tools like NumPy to find solutions.
+
+---
+
+## Best Practices
+- Always use dedicated linear algebra library functions like `numpy.linalg.solve` for solving systems of equations in production code.

@@ -1,0 +1,46 @@
+---
+title: "Optimisation I: Problem Formulation"
+description: "An introduction to the fundamental concepts of optimisation, including objective functions, parameters, and problem classification."
+---
+
+## Overview
+- **Goal**: To learn how to frame a problem in the language of optimisation, a critical first step in solving it computationally.
+- **Scope**: This note covers the core components of an optimisation problem: the objective function and parameters, and how to classify problems.
+
+## Learning Objectives
+1. Define an objective function and identify its parameters.
+2. Differentiate between constrained and unconstrained optimisation.
+3. Understand the difference between convex and non-convex optimisation problems.
+
+## Key Knowledge Points
+
+### 1. Formulating an Optimisation Problem
+- **Motivation**: To solve a problem using a computer, we must first translate it into a formal mathematical structure. Optimisation provides this structure for problems where we want to find the "best" solution from a set of possibilities.
+- **Core Concepts**:
+  - **Objective Function**: A function that we want to minimize or maximize. In machine learning, this is often a "cost" or "loss" function that measures the error of a model's predictions.
+  - **Parameters**: The variables of the objective function that we can control or adjust to find the optimal value.
+  - **Constraints**: Conditions or rules that the parameters must satisfy.
+- **Example**:
+  ```
+  # Problem: Find the lowest point of a parabola f(x) = x^2.
+  # Objective Function: f(x) = x^2
+  # Goal: minimize(f(x))
+  # Parameters: x
+  # Constraints: None (unconstrained)
+  ```
+- **Summary**: Framing a problem involves defining what you want to optimize (the objective) and what you can change (the parameters).
+
+### 2. Classifying Optimisation Problems
+- **Motivation**: The type of optimisation problem determines which algorithms can be used to solve it and whether a found solution is guaranteed to be the best one globally.
+- **Core Concepts**:
+  - **Constrained vs. Unconstrained**: A problem is constrained if there are limitations on the parameter values; otherwise, it is unconstrained.
+  - **Convex vs. Non-convex**: In a convex problem, any local minimum is also a global minimum, making it much easier to solve. A non-convex problem may have many local minima, and finding the true global minimum can be very difficult.
+- **Notes/Best Practices**:
+  - Identifying a problem as convex is a significant advantage, as it guarantees the reliability of the solution found by many algorithms.
+- **Summary**: Classifying a problem is a crucial step that guides the choice of solution strategy.
+
+---
+
+## Best Practices
+- Clearly define the objective function and parameters before attempting to solve a problem.
+- Whenever possible, try to formulate a problem in a convex form.
