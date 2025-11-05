@@ -100,7 +100,7 @@ Table linking to child pages:
 ```markdown
 | 模块 | 页面 |
 |---|---|
-| [Module Name] | [Link to ./page.mdx] |
+| [Module Name] | [Link to /${lang}/notes/semester-${semester}/${courseCode}/week${weekNumber}/${topicSlug}] |
 ```
 
 #### 材料索引 (Materials Index)
