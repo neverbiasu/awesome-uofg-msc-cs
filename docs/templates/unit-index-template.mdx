@@ -2,6 +2,7 @@
 title: "Unit <X>: <Title>"
 description: "<单元主题一览，列出主要模块与目标>"
 ---
+import { Cards } from 'fumadocs-ui/components/card';
 
 ## 概要
 {/* 每个单元总览与子页都必须包含"概要"小节，说明本页目标与适用范围 */}
@@ -35,12 +36,8 @@ description: "<单元主题一览，列出主要模块与目标>"
 ## 评估提醒（如有）
 - <说明>
 
-## 内容索引（子页）
-| 模块 | 页面 |
-|---|---|
-| <模块 A> | [<标题>](/${lang}/notes/semester-${semester}/${courseCode}/unit<X>/<slug-a>) |
-| <模块 B> | [<标题>](/${lang}/notes/semester-${semester}/${courseCode}/unit<X>/<slug-b>) |
-| <模块 C> | [<标题>](/${lang}/notes/semester-${semester}/${courseCode}/unit<X>/<slug-c>) |
+## 内容索引
+<Cards />
 
 ## 材料索引
 
@@ -51,8 +48,3 @@ description: "<单元主题一览，列出主要模块与目标>"
 
 ### 实验材料
 - [<实验标题> (类型, MD)](../../../../materials/semester-[X]/[COURSE-DIRECTORY]/resources/<filename>.md)
-
----
-
-更新记录
-- YYYY-MM-DD：创建初版。
