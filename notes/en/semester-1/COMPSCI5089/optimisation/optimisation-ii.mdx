@@ -1,0 +1,45 @@
+---
+title: "Optimisation II: Gradient Descent"
+description: "An introduction to gradient-based optimisation algorithms, focusing on the Gradient Descent method for finding a function's minimum."
+---
+
+## Overview
+- **Goal**: To understand the intuition and mechanics of the Gradient Descent algorithm, a fundamental method for training machine learning models.
+- **Scope**: This note covers the concept of a gradient, the gradient descent update rule, and the role of the learning rate.
+
+## Learning Objectives
+1. Understand the role of the gradient in identifying the direction of steepest ascent.
+2. Describe the iterative process of the gradient descent algorithm.
+3. Explain the function of the learning rate and its impact on convergence.
+
+## Key Knowledge Points
+
+### 1. The Gradient Descent Algorithm
+- **Motivation**: Once an optimisation problem is formulated with an objective function, we need an algorithm to systematically find the parameter values that minimize it. Gradient Descent is a simple yet powerful iterative approach to do this.
+- **Core Concepts**:
+  - **Gradient**: A vector that points in the direction of the steepest ascent of a function at a given point. To find a minimum, we move in the opposite direction of the gradient.
+  - **Gradient Descent Update Rule**: The core of the algorithm. In each iteration, the parameters are updated according to the rule: `new_parameters = old_parameters - learning_rate * gradient`.
+  - **Learning Rate (α)**: A small scalar value that determines the size of the step taken in the direction opposite to the gradient. It controls how quickly the algorithm converges.
+  - **Local vs. Global Minima**: For non-convex functions, Gradient Descent may converge to a local minimum (a low point in a small region) rather than the global minimum (the lowest point overall).
+- **Example**:
+  ```python
+  # Conceptual Gradient Descent Update
+  # Let's say our parameter is x, and the gradient of the loss function at x_old is grad_f_x.
+  x_old = 5
+  learning_rate = 0.1
+  grad_f_x = 10 # Calculated gradient at x=5
+
+  # Update x to take a step towards the minimum
+  x_new = x_old - learning_rate * grad_f_x
+  # x_new = 5 - 0.1 * 10 = 4.0
+  ```
+- **Notes/Best Practices**:
+  - **Choosing the learning rate is critical**. A small rate leads to slow convergence, while a large rate can cause the algorithm to overshoot the minimum and fail to converge.
+  - For non-convex functions, the algorithm's final result can depend heavily on the starting point.
+- **Summary**: Gradient Descent is an iterative algorithm that takes steps in the direction of the negative gradient to find a local minimum of an objective function.
+
+---
+
+## Best Practices
+- When implementing gradient descent, start with a small learning rate (e.g., 0.01) and observe the behavior of the loss function. If it decreases steadily, you can try a slightly larger rate to speed up convergence.
+- Consider using more advanced optimizers (like Adam or RMSprop) in practice, as they adapt the learning rate automatically and often converge faster.
