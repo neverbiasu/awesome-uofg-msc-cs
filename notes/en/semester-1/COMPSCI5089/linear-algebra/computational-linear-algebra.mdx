@@ -1,48 +1,140 @@
 ---
 title: "Computational Linear Algebra"
-description: "Solving systems of linear equations (Ax = b) using computational methods and libraries like NumPy."
+description: "An in-depth exploration of computational linear algebra, covering graphs, matrix decompositions (Eigen, SVD), Principal Component Analysis (PCA), and solving linear systems."
 ---
+
+import { Callout } from "fumadocs-ui/components/callout";
 
 ## Overview
-- **Goal**: To learn how to represent and solve systems of linear equations computationally, a common task in various scientific domains.
-- **Scope**: This note covers the matrix representation of linear systems and the use of NumPy's `linalg.solve` function.
+This note explores the application of continuous mathematics, specifically matrix operations, to model and solve discrete problems. We will cover how graphs can be represented as matrices, how to analyze network flows, and delve into powerful matrix decomposition techniques like Eigendecomposition and Singular Value Decomposition (SVD) to understand the structure of data.
 
-## Learning Objectives
-1. Represent a system of linear equations in the matrix form `Ax = b`.
-2. Understand the high-level concept of solution methods like Gaussian elimination.
-3. Use the `numpy.linalg.solve` function to efficiently find the solution vector `x`.
+## Intended Learning Outcomes
+- Model discrete problems using continuous mathematics (matrices).
+- Represent graphs as adjacency matrices and analyze their properties.
+- Understand and compute eigenvalues and eigenvectors using methods like power iteration.
+- Decompose matrices and understand the geometric intuition behind trace and determinant.
+- Grasp the concept of positive semi-definiteness and its importance.
+- Apply Singular Value Decomposition (SVD) to compute functions of matrices.
+- Represent and solve linear systems of equations, including the use of the pseudo-inverse.
+- Normalize data using matrix operations for "whitening".
 
-## Key Knowledge Points
+## Graphs as Matrices
+Many real-world systems can be modeled as a network of connected nodes (vertices) and connections (edges). This can be represented mathematically as a graph $$G = (V, E)$$
 
-### 1. Solving Systems of Linear Equations
-- **Motivation**: Many real-world problems, from circuit analysis to economic modeling, can be described as a system of linear equations. Solving for the unknown variables is a frequent computational task.
-- **Core Concepts**:
-  - **Matrix Form `Ax = b`**: A compact way to represent a system of linear equations, where **A** is a matrix of coefficients, **x** is a vector of unknown variables, and **b** is a vector of constants.
-  - **Gaussian Elimination**: A classical algorithm for solving linear systems by transforming the matrix **A** into an upper triangular form, allowing for a straightforward solution through back-substitution. While fundamental, it's often not directly used in practice in favor of more robust library functions.
-  - **`numpy.linalg.solve`**: A highly optimized and numerically stable function in NumPy that directly solves the equation `Ax = b` for `x`.
-- **Example**:
-  ```python
-  # System of equations:
-  # 2x + 3y = 8
-  # 4x + 1y = 6
-  import numpy as np
+An **adjacency matrix** $$A$$ is a square matrix used to represent a finite graph. The elements of the matrix indicate whether pairs of vertices are adjacent or not in the graph.
+- For an unweighted graph, $$A_{ij} = 1$$ if there is an edge from vertex $$i$$ to $$j$$, and $$0$$ otherwise.
+- For a **weighted graph**, $$A_{ij}$$ represents the weight of the connection.
 
-  # Matrix A (coefficients)
-  A = np.array([[2, 3], [4, 1]])
+### Graph Properties from the Matrix
+- **Out-degree** (edges leaving a vertex): Sum of each row.
+- **In-degree** (edges entering a vertex): Sum of each column.
+- **Undirected Graph**: The matrix is symmetric ($$A = A^T$$).
 
-  # Vector b (constants)
-  b = np.array([8, 6])
+## Flow Analysis: Modeling Discrete Problems
+We can use matrices to model dynamic systems, such as packages flowing between distribution depots.
 
-  # Solve for x (the vector [x, y])
-  x = np.linalg.solve(A, b)
-  # x will be [1., 2.]
-  ```
-- **Notes/Best Practices**:
-  - A unique solution exists only if the matrix **A** is square and non-singular (i.e., its determinant is non-zero).
-  - For performance and numerical stability, using `np.linalg.solve(A, b)` is strongly preferred over calculating the inverse of A and multiplying by b (`np.linalg.inv(A) @ b`).
-- **Summary**: Representing linear systems in matrix form allows us to leverage powerful and efficient computational tools like NumPy to find solutions.
+- **State Vector $$x_t$$**: A vector representing the state of the system at time $$t$$ (e.g., the proportion of packages at each depot).
+- **Adjacency Matrix $$A$$**: Represents the linear map of how the system evolves from one step to the next.
 
----
+The state at the next time step $$t+1$$ can be calculated as:
+$$x_{t+1} = A^T x_t$$
 
-## Best Practices
-- Always use dedicated linear algebra library functions like `numpy.linalg.solve` for solving systems of equations in production code.
+This allows us to analyze a discrete problem using tools from continuous mathematics. If we want to know the state after 7 days, we can compute:
+$$x_7 = (A^T)^7 x_0$$
+
+<Callout title="The Power of Vectorization">
+  By representing problems in terms of vectors and matrices, we can leverage optimized hardware like GPUs to perform these computations much faster than iterating through discrete steps.
+</Callout>
+
+## Eigenvalues and Eigenvectors
+An eigenvector of a linear transformation is a nonzero vector that changes at most by a scalar factor when that linear transformation is applied to it. The corresponding scalar is the eigenvalue.
+
+$$Av = \lambda v$$
+
+- $$v$$: Eigenvector of matrix A.
+- $$\lambda$$: Eigenvalue corresponding to v.
+
+Eigenvectors represent the "fundamental" or "characteristic" directions of the matrix transformation. Along these directions, the matrix only scales the vector, it does not rotate it.
+
+### Steady State and The Leading Eigenvector
+In a flow network, if we repeatedly apply the transformation matrix, the system often settles into a **steady state** where the distribution no longer changes. This steady state corresponds to the **leading eigenvector** of the matrix (the eigenvector associated with the largest eigenvalue).
+
+### Power Iteration Method
+The power iteration method is an algorithm to find the leading eigenvector of a matrix. It works by repeatedly multiplying a random vector by the matrix and normalizing the result.
+
+```python
+# Example of Power Iteration
+import numpy as np
+
+def power_iteration(A, num_simulations: int):
+    # Ideally choose a random vector
+    # To make this reproducible, we will start with a vector of all ones
+    b_k = np.ones(A.shape[1])
+
+    for _ in range(num_simulations):
+        # calculate the matrix-by-vector product Ab
+        b_k1 = np.dot(A, b_k)
+
+        # calculate the norm
+        b_k1_norm = np.linalg.norm(b_k1)
+
+        # re-normalize the vector
+        b_k = b_k1 / b_k1_norm
+
+    return b_k
+
+# The resulting b_k is the leading eigenvector
+```
+
+## Matrix Decompositions
+
+### Eigendecomposition
+Eigendecomposition is the factorization of a matrix into a canonical form, representing the matrix in terms of its eigenvalues and eigenvectors. For a square matrix $$A$$, it is:
+
+$$A = Q\Lambda Q^{-1}$$
+
+- $$Q$$: Matrix whose columns are the eigenvectors of $$A$$.
+- $$\Lambda$$: Diagonal matrix whose diagonal entries are the corresponding eigenvalues.
+
+<Callout title="Not Always Possible">
+Eigendecomposition is only possible for square matrices that are *diagonalizable*.
+</Callout>
+
+### Principal Component Analysis (PCA)
+PCA is a statistical procedure that uses eigendecomposition to convert a set of observations of possibly correlated variables into a set of linearly uncorrelated variables called **principal components**.
+
+The eigenvectors of the **covariance matrix** of the data are the principal components. They point in the directions of maximum variance in the data. The eigenvalues indicate how much variance is captured by each principal component. This is extremely useful for dimensionality reduction.
+
+## Matrix Inversion
+The inverse of a square, non-singular matrix $$A$$ is $$A^{-1}$$, defined such that:
+
+$$A^{-1}A = I$$
+
+(where $$I$$ is the identity matrix)
+
+Inversion allows us to "undo" a matrix transformation. It is crucial for solving linear systems of equations:
+
+If $$Ax = y$$, then $$x = A^{-1}y$$.
+
+<Callout title="Singularity" type="warn">
+A matrix has an inverse only if it is **non-singular**, which means its **determinant is non-zero**. A singular matrix collapses at least one dimension of the space, losing information and making the transformation irreversible.
+</Callout>
+
+## Singular Value Decomposition (SVD)
+SVD is the "powerhouse" of computational linear algebra. It is a generalization of eigendecomposition that works for **any** $$m \times n$$ matrix.
+
+$$A = U\Sigma V^T$$
+
+- $$U$$: An $$m \times m$$ orthogonal matrix (left singular vectors). Represents a rotation.
+- $$\Sigma$$: An $$m \times n$$ diagonal matrix (singular values). Represents a scaling.
+- $$V^T$$: An $$n \times n$$ orthogonal matrix (right singular vectors). Represents a rotation.
+
+SVD states that any matrix transformation can be broken down into a sequence of three fundamental operations: **rotate, scale, and rotate back**.
+
+### Applications of SVD
+- **Pseudo-inverse**: SVD can be used to calculate the pseudo-inverse $$A^+$$ for any matrix, which provides an approximate solution to linear systems even for non-square or singular matrices.
+- **Matrix Approximation**: By keeping only the largest singular values, we can construct a low-rank approximation of the original matrix, which is key for compression and noise reduction.
+- **Rank and Condition Number**: The number of non-zero singular values gives the **rank** of the matrix. The ratio of the largest to the smallest singular value gives the **condition number**, which measures the sensitivity of matrix inversion to numerical errors.
+
+## Data Whitening
+Whitening is a preprocessing step that transforms a dataset so that its features are uncorrelated and have unit variance. The covariance matrix of whitened data is the identity matrix. This is often done using SVD or eigendecomposition to "sphericalize" the data, which is a requirement for many algorithms.
