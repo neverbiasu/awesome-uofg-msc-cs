@@ -70,6 +70,9 @@ Matrix   multiplication   as   c omposed maps  •   We saw vectors as   points 
 •   nonuniform scaling   •   rotation  Composed maps
 Composed maps  •   Nonuniform scaling matrix:   scale_x  •   Rotation matrix: rot30
 Composed maps  •   Nonuniform scaling matrix:   scale_x  •   Rotation matrix: rot30
+Composed maps  •   Nonuniform scaling matrix:   scale_x  •   Rotation matrix: rot30
+Composed maps  •   Nonuniform scaling matrix:   scale_x  •   Rotation matrix: rot30
+Composed maps  •   Nonuniform scaling matrix:   scale_x  •   Rotation matrix: rot30
 Concatenation of transforms  •   Many software operations take advantage of the definition of matrix multiplication as the  composition of linear maps.  •   In a graphics processing pipeline, for example, all of the operations to position, scale and  orient visible objects are represented as matrix transforms.  •   Multiple operations can be combined into   one single matrix operation .
 An example matrix for measuring spread: covariance  matrices  •   variance :   measures the spread of a dataset  •   C ovariance between two datasets / populations:   measures how they co - vary  •   Cov   > 0: Variable variances coincides   –   as one increases so does the other  •   Cov   < 0: Opposite  •   Cov   = 0: No linear relationship between X and Y  •   Cov   is not standardised   –   its magnitude is not bounded, it depends on   Xs   and Ys.
 An example matrix for measuring spread:  Covariance Matrices  •   If you have multiple variables  •   The covariance matrix is  •   The main diagonal has the variances of individual populations or variables  •   Symmetric  •   Eigenvalues are non - negative (important for some applications, see later)
