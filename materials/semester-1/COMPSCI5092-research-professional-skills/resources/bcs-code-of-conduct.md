@@ -1,0 +1,43 @@
+# BCS Code of Conduct
+
+## 1. The Public Interest
+You shall:
+a. have due regard for the public interest.
+b. have due regard for the legitimate rights of third parties.
+c. ensure that within your professional field you have knowledge and understanding of relevant legislation, regulations and standards and that you comply with such requirements.
+d. conduct your professional activities without discrimination on the grounds of sex, sexual orientation, marital status, nationality, colour, race, ethnic origin, religion, age or disability, or of any other condition or requirement.
+e. reject and will not make any offer of bribery or unethical inducement.
+
+## 2. Professional Competence and Integrity
+You shall:
+a. only undertake to do work or provide a service that is within your professional competence.
+b. NOT claim any level of competence that you do not possess.
+c. develop your professional knowledge, skills and competence on a continuing basis, maintaining awareness of technological developments, procedures, and standards that are relevant to your field.
+d. ensure that you have the knowledge and understanding of legislation and that you comply with it in your professional activities.
+e. ensure that you are acquainted with the relevant BCS Code of Conduct and that you adhere to it.
+f. act with integrity in your professional relationships, and will have due regard for the interests of all stakeholders.
+g. not engage in any discriminatory or harassing behaviour in your professional activities.
+h. not misrepresent or withhold information on the performance of products, systems or services, or take advantage of the lack of knowledge or inexperience of others.
+i. not make any statement on behalf of BCS or any of its constituent bodies unless you are authorised to do so.
+j. not make any statement that is false or misleading.
+k. not bring the profession into disrepute.
+
+## 3. Duty to Relevant Authority
+You shall:
+a. carry out your professional responsibilities with due care and diligence in accordance with the relevant authority’s requirements whilst exercising your professional judgement at all times.
+b. seek to avoid any situation that may give rise to a conflict of interest between you and your relevant authority.
+c. accept professional responsibility for your work and for the work of colleagues who are defined in a given context as working under your supervision.
+d. not disclose or authorise to be disclosed, or use for personal gain or to benefit a third party, confidential information except with the permission of your relevant authority, or as required by law.
+e. not misrepresent or withhold information on the capabilities of systems, services or products.
+
+## 4. Duty to the Profession
+You shall:
+a. uphold the reputation and good standing of BCS, the chartered institute for IT.
+b. seek to improve professional standards through participation in their development, use and enforcement.
+c. not do anything that would bring the profession into disrepute.
+d. encourage and support fellow members in their professional development.
+e. act with integrity and respect towards fellow members.
+f. not make any public statement in your professional capacity unless you are authorised to do so.
+g. not make any statement that is false or misleading.
+h. not do anything that would contravene the Institute’s Charter and Bye-laws.
+i. notify the Institute if you are convicted of a criminal offence or upon becoming bankrupt or disqualified as a company director.
