@@ -1,0 +1,19 @@
+# Assessed Exercise: 5-minute video
+
+## The Task
+Your task is to create a 5-minute video on a topic of your choice. The topic should be related to the course, but it can be anything that you are interested in. The video should be aimed at a general audience, and should be engaging and informative.
+
+## What to Submit
+You should submit a single file containing your video. The video should be in a standard format (e.g. MP4, MOV, AVI). The video should be no more than 5 minutes long.
+
+## Marking Criteria
+The video will be marked on the following criteria:
+- **Content (10 marks):** The video should be informative and engaging. It should be well-structured and easy to follow. It should be accurate and up-to-date.
+- **Presentation (10 marks):** The video should be well-presented. You should speak clearly and audibly. You should make good use of visuals (e.g. slides, images, animations). You should be enthusiastic and engaging.
+- **Technical Quality (5 marks):** The video should be of a high technical quality. The video should be well-lit and in focus. The audio should be clear and free of background noise. The video should be well-edited.
+
+## Submission
+The video should be submitted via Moodle. The submission deadline is **Friday 28th October at 12:00 (noon)**.
+
+## Note
+This is an individual exercise. You should not work with other students on this exercise.
