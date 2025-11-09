@@ -156,9 +156,15 @@ class MaterialExtractor {
 
     async extractMaterials() {
         const materialsDir = path.join(__dirname, '..', 'materials');
-        const supportedExtensions = ['.pdf', '.docx', '.doc', '.pptx', '.ppt'];
+        const includePdf = process.env.INCLUDE_PDFS === '1' || process.env.EXTRACT_PDFS === '1' || process.argv.includes('--include-pdfs') || process.argv.includes('--pdfs');
+        const supportedExtensions = includePdf ? ['.pdf', '.docx', '.doc', '.pptx', '.ppt'] : ['.docx', '.doc', '.pptx', '.ppt'];
         
         console.log('🚀 开始提取 materials 中的文档内容...');
+        if (!includePdf) {
+            console.log('ℹ️ 默认配置：跳过 PDF 文件。如果想包含 PDF，请设置 INCLUDE_PDFS=1 或 加上 --include-pdfs 参数。');
+        } else {
+            console.log('ℹ️ 配置：包含 PDF 文件进行提取（这可能会增加处理时间）。');
+        }
         
         const files = this.findSupportedFiles(materialsDir, supportedExtensions);
         console.log(`📁 找到 ${files.length} 个支持的文档文件`);
@@ -174,13 +180,16 @@ class MaterialExtractor {
             processedCount++;
             
             // 只显示进度，不显示每个文件的详细信息
-            if (processedCount % 10 === 0 || processedCount === files.length) {
-                try {
-                    process.stdout.write(`\r📄 进度: ${processedCount}/${files.length} (${Math.round(processedCount/files.length*100)}%)`);
-                } catch (e) {
-                    // 忽略 EPIPE 错误
+                if (processedCount % 10 === 0 || processedCount === files.length) {
+                    try {
+                        process.stdout.write(`\r📄 进度: ${processedCount}/${files.length} (${Math.round(processedCount/files.length*100)}%)`);
+                    } catch (err) {
+                        // 忽略 EPIPE 错误（仅在管道断开时出现）
+                        if (err && err.code !== 'EPIPE') {
+                            console.warn(err);
+                        }
+                    }
                 }
-            }
             
             try {
                 await this.extractFile(file, outputPath);
@@ -191,8 +200,11 @@ class MaterialExtractor {
                 if (failCount === 1) {
                     try {
                         console.log(`\n❌ 提取失败: ${relativePath} ${error.message}`);
-                    } catch (e) {
-                        // 忽略 EPIPE 错误
+                    } catch (err) {
+                        // 忽略 EPIPE 错误（仅在管道断开时出现）
+                        if (err && err.code !== 'EPIPE') {
+                            console.warn(err);
+                        }
                     }
                 }
             }
@@ -201,8 +213,11 @@ class MaterialExtractor {
         try {
             console.log('\n✅ 提取完成！');
             console.log(`📊 统计: 成功 ${successCount} 个，失败 ${failCount} 个`);
-        } catch (e) {
-            // 忽略 EPIPE 错误
+        } catch (err) {
+            // 忽略 EPIPE 错误（仅在管道断开时出现）
+            if (err && err.code !== 'EPIPE') {
+                console.warn(err);
+            }
         }
     }
 

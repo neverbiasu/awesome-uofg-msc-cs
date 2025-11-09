@@ -282,7 +282,9 @@ class CompleteMoodleScraper {
           console.log('✅ Navigated to courses page');
           return;
         }
-      } catch (e) {}
+      } catch (err) {
+          // 忽略选择器检查中的错误
+      }
     }
     
     console.log('Direct navigation to courses page...');
@@ -403,6 +405,28 @@ class CompleteMoodleScraper {
       return links;
     });
 
+    // Also look for links that point to Moodle "page" or folder pages which may contain attachments.
+    // ONLY include page and folder links (exclude resource/url which are typically direct files or already in downloadLinks)
+    const pageLinks = await this.page.evaluate(() => {
+      const anchors = Array.from(document.querySelectorAll('a[href]'));
+      const pages = anchors
+        .map(a => ({ href: a.href, text: a.textContent.trim() }))
+        .filter(x => (/\/mod\/page\//i.test(x.href) || /mod\/page\/view.php/i.test(x.href) || /\/mod\/folder\//i.test(x.href)));
+      // dedupe
+      const uniq = [];
+      const seen = new Set();
+      for (const p of pages) {
+        if (!seen.has(p.href)) {
+          seen.add(p.href);
+          uniq.push(p);
+        }
+      }
+      return uniq;
+    });
+
+    if (pageLinks.length > 0) {
+      console.log(`Found ${pageLinks.length} linked Moodle pages that may contain attachments`);
+    }
     console.log(`Found ${downloadLinks.length} downloadable files`);
 
     if (downloadLinks.length === 0) {
@@ -435,7 +459,7 @@ class CompleteMoodleScraper {
           const response = await downloadPage.goto(link.url, { waitUntil: 'networkidle2' });
           try {
             console.log('Response status:', response && response.status());
-          } catch (e) {}
+          } catch {}
           await new Promise(resolve => setTimeout(resolve, 2000));
           await downloadPage.close();
           downloadedFiles.push(link);
@@ -445,11 +469,135 @@ class CompleteMoodleScraper {
       }
     }
 
+    // Process linked pages (like mod/page/view.php) to extract embedded file URLs and download them
+    if (pageLinks && pageLinks.length > 0) {
+      console.log(`⚠️ IMPORTANT: Will process ${pageLinks.length} linked page(s). Each page opens in a new tab and waits for page load.`);
+      console.log(`This may take several minutes. Press Ctrl+C to cancel if needed.`);
+      
+      for (let j = 0; j < pageLinks.length; j++) {
+        const pageLink = pageLinks[j];
+        console.log(`➡️  [${j + 1}/${pageLinks.length}] Processing linked page: "${pageLink.text}"`);
+        try {
+          const downloadCandidates = await this.extractDownloadLinksFromPage(pageLink.href, 0);
+          if (downloadCandidates && downloadCandidates.length > 0) {
+            console.log(`   Found ${downloadCandidates.length} downloadable link(s) in this page`);
+            for (const candidate of downloadCandidates) {
+              try {
+                const saved = await downloadViaFetch(this.page, candidate.url, candidate.filename || candidate.text || 'unknown');
+                console.log(`   ✅ Saved: ${saved}`);
+                downloadedFiles.push({ ...candidate, savedPath: saved });
+              } catch (err) {
+                console.log(`   ⚠️ Fetch failed for ${candidate.url}: ${err.message}`);
+                // fallback: open in browser tab to trigger download
+                try {
+                  const downloadPage = await this.browser.newPage();
+                  const client = await downloadPage.target().createCDPSession();
+                  await client.send('Page.setDownloadBehavior', {
+                    behavior: 'allow',
+                    downloadPath: DOWNLOAD_PATH
+                  });
+
+              await downloadPage.goto(candidate.url, { waitUntil: 'networkidle2' });
+              await new Promise(resolve => setTimeout(resolve, 2000));
+                  await downloadPage.close();
+                  downloadedFiles.push(candidate);
+                  console.log(`   ✅ Downloaded via browser fallback`);
+                } catch (err2) {
+                  console.log(`   ❌ Fallback browser download failed: ${err2.message}`);
+                }
+              }
+            }
+          } else {
+            console.log(`   ℹ️ No downloadable links found in this page`);
+          }
+        } catch (err) {
+          console.log(`   ❌ Failed to process this page: ${err.message}`);
+        }
+      }
+    }
+
     console.log(`✅ Downloaded ${downloadedFiles.length} files to ${DOWNLOAD_PATH}`);
     return downloadedFiles;
   }
 
-  async organizeMaterials(courseCode, downloadedFiles) {
+  // Open a Moodle page URL and extract candidate file links (pluginfile urls, resource links, direct file extensions)
+  // depth: 防止递归调用；仅在 depth=0 时搜索，避免链式调用导致的死循环
+  async extractDownloadLinksFromPage(pageUrl, depth = 0) {
+    const MAX_DEPTH = 0;  // 仅在当前页面搜索，不递归进入子页面
+    if (depth > MAX_DEPTH) {
+      console.log(`ℹ️ Max depth reached, skipping further page traversal`);
+      return [];
+    }
+
+    const tempPage = await this.browser.newPage();
+    // 设置超时保护（30 秒），防止页面长时间加载
+    const pageTimeout = new Promise((_, reject) => 
+      setTimeout(() => reject(new Error('Page load timeout (30s)')), 30000)
+    );
+
+    try {
+      // 竞速：要么加载完成，要么超时
+      await Promise.race([
+        tempPage.goto(pageUrl, { waitUntil: 'networkidle2' }),
+        pageTimeout
+      ]);
+
+      // 仅提取文件类型链接，排除其他 Moodle activity 页面链接以防止链式调用
+      const links = await tempPage.evaluate(() => {
+        const anchors = Array.from(document.querySelectorAll('a[href]'));
+        const out = [];
+        anchors.forEach(a => {
+          const href = a.href;
+          const text = (a.textContent || a.getAttribute('title') || '').trim();
+          if (!href) return;
+          // 仅提取文件类型链接（pluginfile 或常见文件后缀），排除其他 Moodle activity 页面（如 /mod/page/, /mod/resource/ 等）
+          if (href.includes('/pluginfile.php/') || href.match(/\.(pdf|doc|docx|ppt|pptx|xls|xlsx|zip|txt|csv)$/i)) {
+            out.push({ url: href, text: text, filename: text || 'unknown' });
+          }
+        });
+
+        // Also try to find embedded <a> tags inside the page content area that may be rendered as attachments
+        const contentArea = document.querySelector('.page, .content, .region-content, #page');
+        if (contentArea) {
+          const innerAnchors = Array.from(contentArea.querySelectorAll('a[href]'));
+          innerAnchors.forEach(a => {
+            const href = a.href;
+            const text = (a.textContent || a.getAttribute('title') || '').trim();
+            if (!href) return;
+            // 仅提取文件类型链接，排除其他 Moodle activity 页面
+            if (href.includes('/pluginfile.php/') || href.match(/\.(pdf|doc|docx|ppt|pptx|zip|txt|csv)$/i)) {
+              out.push({ url: href, text: text, filename: text || 'unknown' });
+            }
+          });
+        }
+
+        // dedupe
+        const uniq = [];
+        const seen = new Set();
+        out.forEach(o => {
+          if (!seen.has(o.url)) {
+            seen.add(o.url);
+            uniq.push(o);
+          }
+        });
+
+        return uniq;
+      });
+
+      await tempPage.close();
+      return links;
+    } catch (err) {
+      if (err.message.includes('timeout')) {
+        console.log(`⚠️ Page load timeout (30s) for: ${pageUrl}`);
+      } else {
+        console.log(`⚠️ Error extracting links from page: ${err.message}`);
+      }
+      try { await tempPage.close(); } catch {}
+      return [];  // 返回空数组而不是抛出异常，避免中断整个流程
+    }
+  }
+
+  async organizeMaterials(courseCode) {
     console.log('📁 Organizing downloaded materials...');
     
     const coursePath = COURSES[courseCode].localPath;
@@ -591,8 +739,8 @@ async function main() {
       const foundResources = await scraper.findAndClickResources();
 
       if (foundResources) {
-        const downloadedFiles = await scraper.downloadAllFilesFromTable();
-        await scraper.organizeMaterials(courseCode, downloadedFiles);
+  await scraper.downloadAllFilesFromTable();
+  await scraper.organizeMaterials(courseCode);
         console.log(`\n🎉 Material collection for ${courseCode} complete!`);
         console.log(`Check the ${COURSES[courseCode].localPath} folder for your materials.`);
       } else {
