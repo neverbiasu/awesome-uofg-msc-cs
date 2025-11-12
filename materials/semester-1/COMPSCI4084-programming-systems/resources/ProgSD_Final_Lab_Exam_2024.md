@@ -1,4 +1,4 @@
-# ProgSD Final Lab Exam 2024
+# ProgSD_Final_Lab_Exam_2024
 
 Programming and Systems Development  
 Final Lab Exam – December 2024
