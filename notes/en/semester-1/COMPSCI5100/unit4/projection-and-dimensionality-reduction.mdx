@@ -1,0 +1,41 @@
+---
+title: "Projection & Dimensionality Reduction"
+description: "An introduction to dimensionality reduction and Principal Component Analysis (PCA)."
+---
+
+## Overview
+- **Objective**: To understand why dimensionality reduction is important and learn the principles of Principal Component Analysis (PCA).
+- **Scope**: This note covers the curse of dimensionality, the concept of projection, and the workflow of PCA.
+
+## Learning Objectives
+1. Explain the "curse of dimensionality".
+2. Describe the goal of dimensionality reduction.
+3. Explain how PCA works to find the principal components of a dataset.
+4. Apply PCA to a dataset.
+
+## Key Concepts
+
+### The Curse of Dimensionality
+- **Motivation**: As the number of features (dimensions) in a dataset increases, the volume of the space increases so fast that the available data become sparse.
+- **Consequences**: This sparsity makes it much harder to find meaningful patterns. Many machine learning algorithms struggle with high-dimensional data.
+
+### Dimensionality Reduction
+- **Goal**: To reduce the number of random variables under consideration by obtaining a set of principal variables. It can be divided into feature selection and feature extraction.
+- **Projection**: A type of feature extraction where we create new features by projecting the original data onto a lower-dimensional subspace.
+
+### Principal Component Analysis (PCA)
+- **Core Idea**: A technique that transforms the data into a new coordinate system such that the greatest variance by some projection of the data comes to lie on the first coordinate (called the first principal component), the second greatest variance on the second coordinate, and so on.
+- **Workflow**:
+  1. **Standardize**: Standardize the range of the continuous initial variables.
+  2. **Covariance Matrix**: Compute the covariance matrix to identify correlations.
+  3. **Eigendecomposition**: Compute the eigenvectors and eigenvalues of the covariance matrix to identify the principal components.
+  4. **Feature Vector**: Create a feature vector to decide which principal components to keep.
+  5. **Recast Data**: Recast the data along the principal components' axes.
+- **Use Cases**: Speeding up model training, data visualization (by reducing to 2 or 3 dimensions).
+
+---
+
+## Best Practices
+- Always standardize your data before applying PCA.
+- Choose the number of components by looking at the cumulative explained variance ratio. A common threshold is to keep enough components to explain 95% of the variance.
+- Remember that the new components created by PCA are less interpretable than the original features.

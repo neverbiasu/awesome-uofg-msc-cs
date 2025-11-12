@@ -1,0 +1,49 @@
+---
+title: "Introduction to Machine Learning"
+description: "An overview of learning from data, including regression, classification, clustering, and the full ML workflow."
+---
+
+## Overview
+- **Objective**: To understand the fundamental concepts of machine learning, its main problem types, and the standard process of a data-driven project.
+- **Scope**: This note covers the definition of learning from data, introduces regression, classification, and clustering, and outlines the stages from training to deployment.
+
+## Learning Objectives
+1. Explain what "learning from data" means.
+2. Differentiate between regression, classification, and clustering problems.
+3. Understand the importance of training, validation, and testing.
+4. Be aware of common pitfalls in machine learning projects.
+
+## Key Concepts
+
+### What is Learning from Data?
+- **Motivation**: To build systems that can automatically improve their performance on a task by using data, rather than being explicitly programmed.
+- **Core Idea**: Instead of writing rules by hand, we provide a model with a large number of examples (data) and let it learn the underlying patterns itself.
+- **Use Cases**: Spam detection, image recognition, stock price prediction, medical diagnosis.
+
+### Main Problem Types
+- **Regression**: Predicting a continuous numerical value.
+  - *Example*: Predicting the price of a house based on its features (size, location, etc.).
+- **Classification**: Assigning an input to one of a set of predefined categories or classes.
+  - *Example*: Determining if an email is "spam" or "not spam".
+- **Clustering**: Grouping a set of objects in such a way that objects in the same group (cluster) are more similar to each other than to those in other groups. This is an unsupervised learning task.
+  - *Example*: Segmenting customers into different groups based on their purchasing behavior.
+
+### The Machine Learning Workflow
+- **Training**: The process of feeding data to a model to let it learn the patterns. The model adjusts its internal parameters during this phase.
+- **Validation**: The process of evaluating the model on a separate dataset (the validation set) to tune its hyperparameters and prevent overfitting.
+- **Testing**: The final evaluation of the trained model on a completely unseen dataset (the test set) to estimate its real-world performance.
+- **Performance Metrics**: Quantitative measures to assess the model's performance, such as accuracy for classification or mean squared error for regression.
+- **Baselines**: Simple models or rules used as a reference point to evaluate the performance of a more complex model. A model is only useful if it performs significantly better than a simple baseline.
+
+### Common Pitfalls
+- **Overfitting**: The model learns the training data too well, including its noise, and fails to generalize to new, unseen data.
+- **Underfitting**: The model is too simple to capture the underlying patterns in the data, resulting in poor performance on both training and test data.
+- **Data Leakage**: Information from outside the training dataset is used to create the model, leading to overly optimistic performance estimates.
+
+---
+
+## Best Practices
+- Always split your data into training, validation, and test sets.
+- Start with a simple baseline model to understand the problem's difficulty.
+- Choose performance metrics that are appropriate for your specific problem.
+
