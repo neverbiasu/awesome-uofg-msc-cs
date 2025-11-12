@@ -1,0 +1,47 @@
+---
+title: "Clustering Algorithms"
+description: "An introduction to clustering, K-Means, and other common clustering methods."
+---
+
+## Overview
+- **Objective**: To understand the principles of clustering and learn how to apply common algorithms like K-Means.
+- **Scope**: This note covers the basics of unsupervised learning, the K-Means algorithm, and methods for evaluating clustering results.
+
+## Learning Objectives
+1. Define clustering and its applications.
+2. Explain the workflow of the K-Means algorithm.
+3. Understand the concept of cluster inertia and how to choose the optimal number of clusters (K).
+4. Be aware of other clustering methods.
+
+## Key Concepts
+
+### Introduction to Clustering
+- **Motivation**: To automatically discover subgroups or clusters in data without any pre-existing labels.
+- **Core Idea**: Partition data points into groups where points within a cluster are more similar to each other than to points in other clusters.
+- **Use Cases**: Customer segmentation, anomaly detection, image segmentation.
+
+### K-Means Algorithm
+- **Goal**: To partition n observations into k clusters in which each observation belongs to the cluster with the nearest mean (cluster centroid).
+- **Workflow**:
+  1. **Initialization**: Randomly select K data points as the initial centroids.
+  2. **Assignment**: Assign each data point to the closest centroid.
+  3. **Update**: Recalculate the centroids as the mean of all data points assigned to that cluster.
+  4. **Iteration**: Repeat the assignment and update steps until the centroids no longer change significantly.
+- **Choosing K**: The "Elbow Method" is a common technique used to find the optimal number of clusters by plotting the within-cluster sum of squares (inertia) for different values of K.
+
+### Evaluating Clustering
+- **Challenge**: Since there are no ground truth labels, evaluation is less straightforward than in supervised learning.
+- **Metrics**:
+  - **Inertia**: Measures how internally coherent clusters are. Lower is better.
+  - **Silhouette Score**: Measures how similar an object is to its own cluster compared to other clusters. A score near +1 indicates that the object is far away from the neighboring clusters.
+
+### Other Clustering Methods
+- **Hierarchical Clustering**: Builds a hierarchy of clusters either from the bottom up (agglomerative) or top down (divisive).
+- **DBSCAN (Density-Based Spatial Clustering of Applications with Noise)**: Groups together points that are closely packed together, marking as outliers points that lie alone in low-density regions.
+
+---
+
+## Best Practices
+- Scale your features before applying K-Means, as it is sensitive to the scale of data.
+- Run the K-Means algorithm multiple times with different random initializations to ensure a stable result.
+- Use methods like the Elbow Method or Silhouette Score to guide your choice of K, but also consider the domain context.
