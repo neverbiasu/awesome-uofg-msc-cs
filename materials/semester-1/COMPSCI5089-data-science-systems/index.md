@@ -30,6 +30,7 @@ This course provides a practical introduction to data science, covering the theo
 - [Lecture 4: Optimisation I (v2025-26a)](./lectures/idss_lecture_04_optimisation_i_v20252026a.md)
 - [Lecture 5: Optimisation II](./lectures/Lecture_5_Optimisation_II.md)
 - [Lecture 5: Optimisation II (v2025-26a)](./lectures/idss_lecture_05_optimisation_ii_v20252026a.md)
+- [Lecture 7: Probability Part 2](./lectures/Lecture_07_-_probability_part_2.md)
 
 ## Course Handbooks and Resources
 
