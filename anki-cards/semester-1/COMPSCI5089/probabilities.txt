@@ -1,0 +1,17 @@
+What is an experiment or trial in probability?	An occurrence with an uncertain outcome
+What is the sample space in probability?	The set of all possible outcomes for an experiment
+What is the definition of probability for an event?	The ratio of outcomes in the event to the total outcomes in the sample space
+What is the Bayesian (Laplacian) view of probability?	It treats probability as a calculus of belief or degree of confidence
+What is the Frequentist view of probability?	It considers probability to be the long-term frequency of repeated events
+What is the Boundedness axiom of probability?	For any event A, 0 <= P(A) <= 1
+What is the Unitarity axiom of probability?	The sum of probabilities for all possible outcomes in a sample space is 1
+What is the Sum Rule of probability for two events A and B?	P(A or B) = P(A) + P(B) - P(A and B)
+What is conditional probability P(A|B)?	The probability of A happening given that B has already happened
+What is a random variable?	A variable that can take on different values, but its specific value is unknown
+What function describes the probabilities of a discrete random variable?	Probability Mass Function (PMF)
+What function describes the probabilities of a continuous random variable?	Probability Density Function (PDF)
+What must any PMF or PDF sum or integrate to over all possible outcomes?	1
+What is the expectation or expected value E[X] of a random variable?	The "average" value, weighted by the probability of each outcome
+What is the mean of a random variable?	Its expectation, E[X]
+What is the variance of a random variable?	A measure of spread, E[(X-E[X])^2]
+Why do we often use log-probabilities?	To avoid numerical underflow by summing logs instead of multiplying small probabilities
