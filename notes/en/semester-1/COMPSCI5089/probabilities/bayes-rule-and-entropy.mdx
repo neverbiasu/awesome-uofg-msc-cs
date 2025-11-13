@@ -1,0 +1,95 @@
+---
+title: "Bayes' Rule and Entropy"
+description: "Understanding conditional probability with Bayes' Rule, and measuring uncertainty with Entropy."
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+## Overview
+- **Objective**: To understand and apply Bayes' Rule to solve problems involving conditional probabilities, and to calculate and interpret the entropy of a probability distribution.
+- **Scope**: This note covers the concepts of joint, marginal, and conditional probabilities, Bayes' rule with its applications, and the concept of entropy. It uses text analysis and a plague diagnosis problem as examples.
+
+## Learning Objectives
+1. Understand the definitions of joint, marginal, and conditional probability.
+2. Be able to apply Bayes' Rule to invert conditional probabilities.
+3. Understand the concept of entropy and its relationship to information and uncertainty.
+4. Be able to calculate the entropy of a discrete probability distribution.
+
+## Key Knowledge Points
+
+### 1. Joint, Marginal, and Conditional Probabilities
+- **Motivation**: To model the relationships between multiple random variables, we need more than just the probability of a single event. We need to describe the probabilities of combinations of events.
+- **Core Concepts**:
+    - **Joint Probability `P(X,Y)`**: The probability of two events X and Y happening simultaneously.
+    - **Marginal Probability `P(X)`**: The probability of a single event X, irrespective of the outcome of other variables. It can be calculated from the joint probability by summing over all outcomes of the other variables: `P(X) = Σy P(X, y)`. This process is called **marginalisation**.
+    - **Conditional Probability `P(X|Y)`**: The probability of event X happening *given* that event Y has already happened. It's calculated as `P(X|Y) = P(X,Y) / P(Y)`.
+- **Usage Scenarios/Patterns**:
+    - Joint probabilities are used when we are interested in the co-occurrence of events, like the probability of seeing the character 'h' following a 't'.
+    - Marginal probabilities are used when we want to know the overall probability of an event, regardless of context.
+    - Conditional probabilities are fundamental for prediction and inference, such as predicting the next word in a sentence given the previous words.
+- **Example**:
+  In the "Scorpion" grid example, we have a 6x8 grid (48 outcomes).
+  - Let X be the event "row >= 4" (south) and Y be "column >= 6" (east).
+  - `P(X) = 24/48 = 0.5` (Marginal)
+  - `P(Y) = 18/48 = 0.375` (Marginal)
+  - `P(X,Y) = 9/48 = 0.1875` (Joint)
+  - `P(X|Y) = P(X,Y) / P(Y) = (9/48) / (18/48) = 0.5` (Conditional)
+- **Best Practices**:
+    - Remember that `P(X|Y)` is not the same as `P(Y|X)`.
+    - For independent events, `P(X,Y) = P(X)P(Y)` and `P(X|Y) = P(X)`. This is a special case and not generally true.
+- **Summary**: Joint, marginal, and conditional probabilities are the building blocks for reasoning about multiple variables and their dependencies.
+
+---
+
+### 2. Bayes' Rule
+- **Motivation**: Often, we can easily measure `P(B|A)` (the probability of observing evidence B given an event A), but what we really want to know is `P(A|B)` (the probability of the event A given that we've seen the evidence B). Bayes' rule provides a way to "invert" the conditional probability.
+- **Core Concepts**:
+    - **Bayes' Rule**: `P(A|B) = (P(B|A) * P(A)) / P(B)`
+    - **Nomenclature**:
+        - `P(A|B)`: **Posterior** - what we want to know.
+        - `P(B|A)`: **Likelihood** - how likely the event is to produce the evidence.
+        - `P(A)`: **Prior** - our belief about the event before seeing evidence.
+        - `P(B)`: **Evidence** (or Marginal Likelihood) - the total probability of observing the evidence.
+- **Usage Scenarios/Patterns**:
+    - Medical diagnosis: Given a positive test result (evidence), what is the probability of having a disease (event)?
+    - Spam filtering: Given the words in an email (evidence), what is the probability it is spam (event)?
+    - Statistical inference: Updating our belief about a hypothesis after observing data.
+- **Example**: The Plague X problem.
+  - `P(Plague)` (Prior) = 1/100,000
+  - `P(Positive|Plague)` (Likelihood) = 0.95 (95% accuracy, 5% false negative)
+  - `P(Positive|No Plague)` = 0.05 (5% false positive)
+  - We want to find `P(Plague|Positive)` (Posterior).
+  - Using Bayes' rule, the result is surprisingly low, around 1 in 5263.
+- **Best Practices**:
+    - Don't forget the denominator `P(B)`. It's crucial and is calculated by marginalising over all possibilities: `P(B) = P(B|A)P(A) + P(B|not A)P(not A)`.
+    - Be aware of the "base rate fallacy": a low prior probability `P(A)` can mean the posterior `P(A|B)` is still low even with strong evidence `P(B|A)`.
+- **Summary**: Bayes' rule is a fundamental tool for updating beliefs in the light of new evidence, allowing us to move from a prior to a posterior probability.
+
+---
+
+### 3. Entropy
+- **Motivation**: How can we quantify the amount of "surprise" or "uncertainty" in a probability distribution? A flat, uniform distribution is very unpredictable, while a sharply peaked one is very predictable.
+- **Core Concepts**:
+    - **Entropy `H(X)`**: A measure of the average uncertainty or "information content" of a random variable. For a discrete variable, it's the expected value of the log-probability.
+    - **Formula**: `H(X) = -Σ P(x) * log₂(P(x))`
+    - The unit is typically **bits**. One bit of entropy corresponds to the uncertainty of a fair coin flip.
+- **Usage Scenarios/Patterns**:
+    - In information theory, it gives the minimum number of bits needed to encode a message from a given distribution.
+    - In machine learning, it's used in decision trees (information gain) and to measure the "surprise" of a model's predictions.
+- **Example**: A coin toss.
+  - For a fair coin (`q=0.5`), `H(X) = -0.5*log₂(0.5) - 0.5*log₂(0.5) = 1` bit. This is the maximum possible entropy for a two-outcome event, representing maximum uncertainty.
+  - For a biased coin (`q=0.1`), the entropy is lower, `H(X) ≈ 0.47` bits, because the outcome is more predictable.
+- **Best Practices**:
+    - The base of the logarithm determines the units (base 2 for bits, base e for nats).
+    - Entropy is always non-negative. `H(X) >= 0`.
+- **Summary**: Entropy quantifies the uncertainty of a probability distribution, with higher values indicating more surprise and unpredictability.
+
+## Best Practices
+- **Distinguish `P(A|B)` from `P(B|A)`**: They are different and related by Bayes' rule. Confusing them is a common error.
+- **Mind the Base Rate**: In Bayesian reasoning, a low prior probability can have a huge impact on the final posterior, even with seemingly strong evidence.
+- **Use Log-Likelihood**: When calculating the likelihood of a long sequence of events, use the sum of log-probabilities (log-likelihood) to avoid numerical underflow from multiplying many small probabilities.
+- **Entropy as a Measure of Surprise**: Use entropy to reason about the predictability of systems. A drop in entropy after a Bayesian update signifies a gain in knowledge.
+
+---
+## Update History
+- 2025-11-12: Created initial version based on Lecture 7 slides.
