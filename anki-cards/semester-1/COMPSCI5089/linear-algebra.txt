@@ -1,0 +1,43 @@
+What is an adjacency matrix A used for?	To represent a finite graph G = (V, E)
+In an unweighted adjacency matrix, what does A_ij = 1 mean?	There is an edge from vertex i to j
+How is the out-degree of a vertex found from an adjacency matrix?	Sum of each row
+How is the in-degree of a vertex found from an adjacency matrix?	Sum of each column
+What property does the adjacency matrix of an undirected graph have?	It is symmetric (A = A^T)
+How can the state of a system at time t+1 be calculated using a state vector x_t and adjacency matrix A?	x_{t+1} = A^T * x_t
+What is an eigenvector of a linear transformation?	A non-zero vector that only changes by a scalar factor (eigenvalue)
+What is the formula for an eigenvector v and eigenvalue lambda of a matrix A?	Av = lambda * v
+What does the leading eigenvector of a transformation matrix represent in a flow network?	The steady state of the system
+What is the Power Iteration method used for?	To find the leading eigenvector of a matrix
+What is Eigendecomposition?	Factorization of a matrix into its eigenvalues and eigenvectors
+What is the formula for Eigendecomposition of a square matrix A?	A = Q * Lambda * Q^-1
+What are the principal components in PCA?	The eigenvectors of the data's covariance matrix
+When does a matrix have an inverse?	Only if it is non-singular (determinant is non-zero)
+What is Singular Value Decomposition (SVD)?	A generalization of eigendecomposition for any m x n matrix
+What is the formula for SVD of a matrix A?	A = U * Sigma * V^T
+What three operations does SVD break a matrix transformation into?	Rotate, scale, and rotate back
+What does the pseudo-inverse A+ provide?	An approximate solution to linear systems for any matrix
+What is data whitening?	A preprocessing step to make features uncorrelated with unit variance
+How are vectors represented in NumPy?	As 1D arrays
+How are matrices represented in NumPy?	As 2D arrays
+What NumPy function creates a matrix of all zeros?	np.zeros()
+What NumPy function creates a matrix of all ones?	np.ones()
+What NumPy function creates an identity matrix?	np.eye()
+How are two vectors added?	By adding their corresponding components
+How is a vector multiplied by a scalar?	By multiplying each component by the scalar
+What is the L1 Norm (Manhattan Distance)?	Sum of the absolute values of components
+What is the L2 Norm (Euclidean Distance)?	Square root of the sum of squared components
+What is the L-infinity Norm?	The largest absolute value among the components
+What is the dot product of two vectors?	A scalar value measuring their geometric relationship
+What does it mean if the dot product of two non-zero vectors is zero?	They are orthogonal (perpendicular)
+How are two matrices added?	By adding their corresponding elements
+How is a matrix multiplied by a scalar?	By multiplying every element by the scalar
+How is the transpose of a matrix A (A^T) formed?	By turning its rows into columns and columns into rows
+What is the condition for matrix-matrix multiplication to be defined?	Columns of first matrix must equal rows of second
+Is matrix multiplication commutative?	No, AB != BA in general
+What NumPy operator is used for matrix multiplication?	@ operator
+What NumPy operator is used for element-wise multiplication?	* operator
+What is a square matrix?	A matrix with the same number of rows and columns
+What is a symmetric matrix?	A square matrix equal to its transpose (A = A^T)
+What is a diagonal matrix?	A matrix where all off-diagonal elements are zero
+What is an identity matrix?	A diagonal matrix with all diagonal elements equal to 1
+What is an orthogonal matrix?	A square matrix whose inverse is equal to its transpose (A^-1 = A^T)

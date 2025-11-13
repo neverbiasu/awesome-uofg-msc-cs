@@ -1,0 +1,11 @@
+What is the goal of optimisation in machine learning?	To find the best set of parameters that minimizes a cost function
+What is an objective function, J(theta)?	A function that measures how well a model is performing (e.g., a loss function)
+What is the difference between convex and non-convex optimisation?	Convex has one global minimum; non-convex has multiple local minima
+What is the intuition behind Gradient Descent?	Repeatedly taking a step in the direction of the steepest downhill slope
+What is the update rule for Gradient Descent?	theta_new = theta_old - alpha * grad(J(theta))
+What is the learning rate (alpha) in Gradient Descent?	A small scalar that controls the size of each step
+What happens if the learning rate is too large?	The algorithm may overshoot the minimum and fail to converge
+What is the main drawback of Batch Gradient Descent?	It is very slow and computationally expensive for large datasets
+How much data is used to compute the gradient in Stochastic Gradient Descent (SGD)?	A single, randomly selected training example
+What is the main advantage of SGD?	It is much faster and can escape shallow local minima
+What is Mini-Batch Gradient Descent?	A compromise that computes the gradient on a small, random subset of data

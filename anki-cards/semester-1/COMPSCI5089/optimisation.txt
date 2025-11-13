@@ -1,0 +1,20 @@
+What is the goal of optimisation in machine learning?	To find the best set of parameters that minimizes a cost function
+What is an objective function, J(theta)?	A function that measures how well a model is performing (e.g., a loss function)
+What is the difference between convex and non-convex optimisation?	Convex has one global minimum; non-convex has multiple local minima
+What is the intuition behind Gradient Descent?	Repeatedly taking a step in the direction of the steepest downhill slope
+What is the update rule for Gradient Descent?	theta_new = theta_old - alpha * grad(J(theta))
+What is the learning rate (alpha) in Gradient Descent?	A small scalar that controls the size of each step
+What happens if the learning rate is too large?	The algorithm may overshoot the minimum and fail to converge
+What is the main drawback of Batch Gradient Descent?	It is very slow and computationally expensive for large datasets
+How much data is used to compute the gradient in Stochastic Gradient Descent (SGD)?	A single, randomly selected training example
+What is the main advantage of SGD?	It is much faster and can escape shallow local minima
+What is Mini-Batch Gradient Descent?	A compromise that computes the gradient on a small, random subset of data
+What is the intuition behind Momentum optimiser?	It adds a "velocity" component to smooth out updates and overcome bumps
+What is the key idea of Nesterov Accelerated Gradient (NAG)?	It anticipates where it's going and corrects its course
+What is the main feature of the AdaGrad optimiser?	It adapts the learning rate for each parameter individually
+What is a major drawback of AdaGrad?	The learning rate can shrink to zero, stopping learning entirely
+How does RMSprop improve upon AdaGrad?	It uses an exponentially decaying average of squared gradients, preventing vanishing learning rates
+What two ideas does the Adam optimiser combine?	Momentum and RMSprop
+Why is Adam often the default choice in deep learning?	It is robust and effective with little hyperparameter tuning
+What kind of information does Newton's Method use?	Second-order information (the curvature of the function) via the Hessian matrix
+What is the main disadvantage of Newton's Method for large models?	Computing the inverse of the Hessian matrix is extremely computationally expensive
