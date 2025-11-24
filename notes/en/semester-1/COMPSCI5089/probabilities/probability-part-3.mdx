@@ -1,0 +1,82 @@
+---
+title: "Probability & Statistics III: Continuous Random Variables and Inference"
+description: "Exploring continuous random variables, the normal distribution, multivariate distributions, Monte Carlo methods, and various approaches to statistical inference."
+---
+
+import { Steps } from 'fumadocs-ui/components/layout/steps';
+
+## Summary
+- **Objective**: To understand the properties of continuous random variables, learn how to model data using normal distributions, and grasp the fundamentals of statistical inference including estimation and Bayesian approaches.
+- **Scope**: This note covers Probability Density Functions (PDFs), Cumulative Distribution Functions (CDFs), the Normal distribution, the Central Limit Theorem, multivariate distributions, Monte Carlo simulation, and three key methods of inference: Direct Estimation, Maximum Likelihood Estimation (MLE), and Bayesian Inference.
+
+## Learning Outcomes
+1. Understand the challenges and properties of continuous random variables (PDFs, CDFs).
+2. Learn to model data using the Normal distribution and appreciate the significance of the Central Limit Theorem.
+3. Gain insight into multivariate distributions and their parameters.
+4. Understand what Monte Carlo methods are and how they can be used to approximate expectations.
+5. Differentiate between population, parameters, statistics, and samples.
+6. Learn how estimators work, particularly through Maximum Likelihood Estimation (MLE).
+7. Get introduced to Bayesian inference and MCMC approaches for sampling posteriors.
+
+## Key Concepts
+
+### Continuous Random Variables
+- **Motivation**: Unlike discrete variables which take on specific values, many real-world phenomena (e.g., height, temperature) are continuous. We need a different framework to handle probabilities for these variables.
+- **Core Concepts**:
+    - **Probability Density Function (PDF)**: A function `f(x)` that describes the relative likelihood for a random variable to take on a given value. The probability of the variable falling within a particular range is the integral of this function over that range.
+    - **Key Property**: For any continuous variable `X`, the probability of it taking a specific value is zero, i.e., `P(X=x) = 0`. Probabilities are only defined over intervals.
+    - **Cumulative Distribution Function (CDF)**: A function `F(x)` that gives the probability that the random variable `X` is less than or equal to `x`, i.e., `F(x) = P(X ≤ x)`.
+    - **Support**: The set of values where the PDF is non-zero. It can be compact (a fixed interval) or infinite.
+
+### The Normal (Gaussian) Distribution
+- **Motivation**: The normal distribution is the most common continuous distribution due to its mathematical properties and its connection to the Central Limit Theorem.
+- **Core Concepts**:
+    - **Notation**: `X ~ N(μ, σ²)` where `μ` is the mean (location) and `σ²` is the variance (scale).
+    - **PDF Formula**: The density is given by `f(x) = (1 / (σ√(2π))) * exp(-(x - μ)² / (2σ²))`. It's a symmetric bell-shaped curve centered at `μ`.
+- **Central Limit Theorem (CLT)**:
+    - **Concept**: The sum of a large number of independent and identically distributed random variables, regardless of their original distribution, will be approximately normally distributed.
+    - **Significance**: This is why many natural processes and composite measurements tend to follow a normal distribution, making it a powerful modeling tool.
+
+### Multivariate Distributions
+- **Motivation**: Often, we need to model the relationship between multiple continuous variables simultaneously (e.g., height and weight).
+- **Core Concepts**:
+    - **Definition**: A distribution over a vector space `R^n`. The joint PDF must integrate to 1 over the entire space.
+    - **Multivariate Normal**: Defined by a mean vector `μ` and a covariance matrix `Σ`. `μ` specifies the center of the distribution, and `Σ` describes the shape, orientation, and scale of the probability mass.
+    - **Joint vs. Marginal PDF**:
+        - **Joint PDF**: Density over all dimensions combined.
+        - **Marginal PDF**: Density over a subset of dimensions, found by integrating out the other variables.
+
+### Monte Carlo Methods
+- **Motivation**: How can we compute expectations or other properties of distributions when the integrals are analytically intractable?
+- **Core Concept**: Use random sampling to approximate the answer. To compute the expectation `E[g(X)]`, we can draw many samples `x_i` from the distribution `P(X)` and average the results of `g(x_i)`.
+- **Example**: To find the expected score on a dartboard, instead of solving a complex integral of `(score_function * probability_density)`, we can simulate many dart throws according to the probability density and average the resulting scores.
+
+### Statistical Inference
+- **Motivation**: We want to infer the properties (parameters) of an entire population based on a limited set of observed samples.
+- **Core Concepts**:
+    - **Population**: The complete (and often infinite) set of all possible outcomes.
+    - **Parameter**: A value that describes the population (e.g., the true mean `μ`).
+    - **Sample**: A subset of the population that we have observed.
+    - **Statistic**: A function of the sample data (e.g., the sample mean `μ̂`). It is often used as an estimator for a population parameter.
+
+<Steps>
+
+#### 1. Direct Estimation
+- **Concept**: Use specially derived functions of the data (statistics) to directly estimate population parameters.
+- **Example**: The sample mean `μ̂ = (1/n) * Σx_i` is an unbiased estimator for the population mean `μ`. The sample variance `s²` is an estimator for the population variance `σ²`.
+
+#### 2. Maximum Likelihood Estimation (MLE)
+- **Concept**: Find the parameter values `θ` that maximize the likelihood `P(D|θ)` of observing the collected data `D`.
+- **Method**: This is an optimization problem. We define the likelihood function (often the log-likelihood for convenience) and use optimization algorithms (like gradient descent) to find the parameters `θ` that maximize it.
+- **Advantage**: It's a general technique that can be applied to complex models (e.g., Gaussian Mixture Models) where direct estimators are not available.
+
+#### 3. Bayesian Inference
+- **Concept**: Update our beliefs about model parameters `θ` in light of new evidence `D`. It treats parameters themselves as random variables.
+- **Bayes' Rule**: `P(θ|D) = [P(D|θ) * P(θ)] / P(D)`
+    - `P(θ|D)`: **Posterior** - our updated belief about the parameters.
+    - `P(D|θ)`: **Likelihood** - same as in MLE.
+    - `P(θ)`: **Prior** - our initial belief about the parameters before seeing data.
+    - `P(D)`: **Evidence** - a normalization constant.
+- **Markov Chain Monte Carlo (MCMC)**: A class of algorithms (like Metropolis-Hastings) used to draw samples from the posterior distribution `P(θ|D)` when it's too complex to compute directly. This allows us to approximate the posterior distribution and understand the uncertainty in our parameter estimates.
+
+</Steps>
