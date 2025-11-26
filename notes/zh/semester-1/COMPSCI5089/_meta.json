@@ -1,0 +1,12 @@
+{
+  "order": [
+    "index",
+    "python-numpy-basics",
+    "linear-algebra",
+    "probabilities",
+    "databases",
+    "optimisation",
+    "labs",
+    "exams"
+  ]
+}
