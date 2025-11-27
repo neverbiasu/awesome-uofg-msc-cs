@@ -3,18 +3,41 @@ title: '2019-2020 Exam Analysis'
 description: 'An analysis of the COMPSCI5089 Data Science and Systems exam for the academic year 2019-2020.'
 ---
 
-## Key Takeaways
-
-*Coming soon: A detailed analysis of the 2019-2020 exam paper.*
-
 ## Exam Structure
 
-*Content to be added.*
+- **Duration:** 1 hour 30 minutes
+- **Format:** Closed book, written exam.
+- **Total Marks:** 60
+- **Number of Questions:** 3 (Answer all)
 
 ## Question Breakdown
 
-*Content to be added.*
+### Question 1: Linear Algebra, Probability, Visualisation & Optimisation
+- **Topics:** Solving linear systems, gradient descent, data visualisation, and Gaussian modeling.
+- **Key Concepts:**
+    - Converting a system of coupled linear equations into the matrix form `Ab = c`.
+    - Defining an optimisation problem (e.g., minimising `||Ab - c||^2`) to solve for `b` without matrix inversion.
+    - Providing the update equations for standard gradient descent and explaining its convergence conditions.
+    - Critiquing a poor data visualisation and suggesting improvements.
+    - Parameterising separate Normal distributions to model clustered 2D data.
+    - Using eigendecomposition of covariance matrices to identify the principal axes of variation for the clusters.
 
-## Recommended Revision Topics
+### Question 2: Text Processing in Data Science
+- **Topics:** Cosine similarity, TF-IDF, k-means clustering.
+- **Key Concepts:**
+    - Calculating cosine similarity between two term frequency vectors.
+    - Explaining the geometric properties of cosine similarity and justifying its use in applications like document similarity.
+    - Using `scikit-learn` to compute a TF-IDF cosine similarity matrix.
+    - Defining and contrasting lemmatization and stemming.
+    - Explaining the k-means clustering algorithm pseudo-code.
+    - Describing a real-world application of k-means for textual data, including feature representation and similarity functions.
+    - Suggesting modifications to k-means to handle large datasets (e.g., mini-batch k-means).
+    - Describing a method (e.g., the elbow method) to determine the optimal number of clusters, `k`.
 
-*Content to be added.*
+### Question 3: Database Systems
+- **Topics:** Storage costs, query cost estimation, and join algorithms.
+- **Key Concepts:**
+    - Computing the blocking factor and the number of blocks required to store a relation.
+    - Estimating query processing cost (in block accesses) for a selection query on different file organisations (Heap, Sequential, Hash).
+    - Estimating the I/O cost for a nested-loop join and a block-based nested-loop join.
+    - Comparing the cost of different join orders (i.e., which relation is the outer loop).

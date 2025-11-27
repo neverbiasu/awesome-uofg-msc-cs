@@ -3,18 +3,37 @@ title: '2020-2021 Exam Analysis'
 description: 'An analysis of the COMPSCI5089 Data Science and Systems exam for the academic year 2020-2021.'
 ---
 
-## Key Takeaways
-
-*Coming soon: A detailed analysis of the 2020-2021 exam paper.*
-
 ## Exam Structure
 
-*Content to be added.*
+- **Duration:** 2 hours (flexible start time within a 24-hour window)
+- **Format:** Open book, online assessment.
+- **Total Marks:** 60
+- **Number of Questions:** 3 (Answer all)
 
 ## Question Breakdown
 
-*Content to be added.*
+### Question 1: Computational Linear Algebra and Optimisation
+- **Topics:** Data normalisation, kNN search, PCA, and non-linear optimisation.
+- **Key Concepts:**
+    - Justifying the need for data normalisation based on feature statistics (mean, variance) and suggesting a suitable method.
+    - Designing a simple kNN-based search routine to find the closest match for a given vector.
+    - Formulating a system as a linear least-squares problem (`Xw^T - y = 0`) and solving for `w` using the pseudo-inverse.
+    - Outlining the step-by-step procedure for PCA, from covariance matrix to final projection.
+    - Interpreting an eigenspectrum to determine the effective dimensionality of data and justify a projection (e.g., to 2D).
+    - Formulating a non-linear problem as an optimisation task and choosing a suitable numerical optimisation method (e.g., gradient descent).
 
-## Recommended Revision Topics
+### Question 2: Probabilities & Bayes' Rule
+- **Topics:** Application of Bayes' theorem and probability in a public health context.
+- **Key Concepts:**
+    - Using a confusion matrix (trial data) and Bayes' formula to estimate conditional probabilities like `p(Diseased | Positive Test)` and `p(Diseased | Negative Test)`.
+    - Evaluating the suitability of a medical test for different purposes based on its false positive/negative rates.
+    - Estimating the prevalence of a disease in a population from a new sample of test results, accounting for test inaccuracies.
+    - Calculating vaccine efficacy by comparing infection rates in vaccinated vs. placebo groups, while accounting for test reliability.
 
-*Content to be added.*
+### Question 3: Database Systems
+- **Topics:** Storage costs and query processing optimisation.
+- **Key Concepts:**
+    - Computing blocking factors and the number of blocks required to store relations, given schema and block size information.
+    - Performing a detailed I/O cost analysis for a nested loop join with a selection predicate.
+    - Comparing the cost of different join orders (e.g., which relation to use as the outer loop).
+    - Factoring in file organisation (Heap vs. Sequential) and available memory buffers into the cost estimation.
