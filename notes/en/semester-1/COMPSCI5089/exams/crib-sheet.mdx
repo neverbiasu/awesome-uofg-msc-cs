@@ -1,0 +1,99 @@
+---
+title: "Crib Sheet"
+description: "A formula and key concept crib sheet for COMPSCI5089 Data Science and Systems."
+---
+
+# IDSS_Crib_Sheet_2025_26
+
+## Introduction to Data Science and Systems Crib Sheet 2025-26
+Nicolas Pugeault & Iraklis Klampanos
+
+## I. LINEAR ALGEBRA
+
+*   For vectors x , y ∈ R n , a ∈ R :
+    *   Inner Product: x · y = ⟨ x , y ⟩ = x T y = P n i =1 x i y i
+    *   Orthogonality: x ⊥ y ⇐⇒ x · y = 0
+    *   Cosine Similarity: cos θ = x · y ∥ x ∥∥ y ∥
+*   The general case p -Norm of a vector norm is defined as: ∥ x ∥ p = ( P n i =1 | x i | p ) ^ (1 /p)
+*   Data Statistics ( X ∈ R m × n , m observations, n features)
+    *   Mean Vector: μ = (1 / m) P m i =1 x i
+    *   Centered Data: X centered = X − μ
+    *   Covariance Matrix ( Σ ): Σ ≈ (1 / (N − 1)) X T centered X centered (Symmetric)
+*   Singularity: A square matrix A is singular (non- invertible, A − 1 does not exist) if:
+    *   det( A ) = 0 .
+    *   The columns (or rows) are linearly dependent.
+*   Eigendecomposition (for A being a square matrix)
+    *   Definition: Av = λ v ( v : eigenvector, λ : eigenvalue)
+    *   Decomposition (Symmetric A ): A = VΛV T
+    *   V : Orthonormal matrix of eigenvectors.
+    *   Λ : Diagonal matrix of eigenvalues.
+*   Singular Value Decomposition (SVD)
+    *   A = UΣV T where:
+        *   U ∈ R m × m : Left singular vectors (orthogonal).
+        *   Σ ∈ R m × n : Diagonal matrix of singular values σ i ≥ 0 .
+        *   V ∈ R n × n : Right singular vectors (orthogonal).
+    *   The pseudo-inverse of a matrix is: A † = VΣ † U T
+*   Whitening a Dataset (Zero mean, Identity Covariance I )
+    *   Centered Data SVD: X centered = UΣV T
+    *   Whitening Transform: X whitened = UΣ − (1 / 2) U T X centered
+    *   Σ − (1 / 2) is the diagonal matrix with elements σ − (1 / 2) i .
+
+## II. OPTIMISATION
+
+*   If f ( x ) is a scalar function of a scalar x
+    *   f ′ ( x ) is the first derivative of f w.r.t. x, d / dx f ( x ) .
+    *   The second derivative is written f ′′ ( x ) = d ^ 2 / dx ^ 2 f ( x ) .
+*   Differentiation of f ( x ) with finite differences : d / dx f ( x ) = lim h → 0 (f ( x + h ) − f ( x − h )) / (2 h)
+*   For a vector function y = f ( x ) the Jacobian matrix is
+    J =
+    [ ∂y_0/∂x_0   ∂y_0/∂x_1   ... ∂y_0/∂x_n ]
+    [ ∂y_1/∂x_0   ∂y_1/∂x_1   ... ∂y_1/∂x_n ]
+    [ ...         ...         ... ...         ]
+    [ ∂y_m/∂x_0   ∂y_m/∂x_1   ... ∂y_m/∂x_n ]
+*   The gradient vector is the transpose of the Jacobian for a scalar function f : R n → R .
+
+## III. PROBABILITIES
+
+*   Axioms of probability:
+    *   Boundedness: 0 ≤ P ( A ) ≤ 1
+    *   Unitarity: P x P ( x ) = 1
+    *   Sum rule: P ( A ∨ B ) = P ( A ) + P ( B ) − P ( A ∧ B )
+    *   Conditional Probability: P ( A | B ) = P ( A ∧ B ) / P ( B )
+*   Integration to Unity
+    *   continuous: P i f X ( x i ) = 1
+    *   discrete: R x f X ( x ) dx = 1
+*   Expectation:
+    *   continuous E [ X ] = R x x f X ( x ) dx
+    *   discrete E [ X ] = P x f X ( x ) x
+*   The expectation of any function g ( X ) of a continuous random variable X is defined as:
+    *   continuous: E [ g ( X )] = R x f X ( x ) g ( x ) dx
+    *   discrete E [ g ( X )] = P x f X ( x ) g ( x )
+*   Odds and logit
+    *   odds = p / (1 − p)
+    *   logit ( p ) = log ( p / (1 − p) )
+*   Conditional Probability: P ( X | Y ) = P ( X, Y ) / P ( Y )
+*   Marginal probability:
+    *   continuous: P ( X ) = R y P ( X, Y ) dy
+    *   discrete: P ( X ) = P y P ( X, Y )
+*   Bayes Rule: P ( A | B ) = ( P ( B | A ) P ( A ) ) / P ( B )
+*   Cumulative Distribution: F X ( x ) = Z x −∞ f X ( x ) = P ( X ≤ x )
+*   Normal Distribution: f X ( x ) = (1 / Z) e − ( x − μ ) ^ 2 / (2 σ ^ 2)
+*   Mean and Variance
+    *   ˆ μ = (1 / N) P N i =1 x i
+    *   ˆ σ ^ 2 = (1 / N) P N i =1 ( x i − ˆ μ ) ^ 2 .
+
+## IV. DATABASES
+
+*   Data Storage & I/O Cost
+    *   I/O Cost: Measured by the number of block accesses (reads/writes) to disk.
+    *   Blocking Factor (bfr): Number of records per disk block. – bf r = ⌊ Block Size / Record Size ⌋
+    *   Total Blocks ( b ): Total number of blocks for a relation. – b = ceil(Number of Records ( r ) / Blocking Factor ( bf r ))
+    *   Search Costs (Block Accesses / Complexity):
+        *   Linear Search (Heap/Unsorted): O ( b )
+        *   Binary Search (Sequential/Sorted): O (log 2 ( b ))
+        *   Index-based Search (B+ Tree): O (log bfr i ( b )) or O ( t ) , where t is the number of levels.
+*   Indexing Concepts
+    *   Primary Index: Index on the ordering key field. Always Sparse (one entry per data block).
+    *   Clustering Index: Index on an ordering non-key field. Always Sparse (one entry per distinct value/cluster).
+    *   Secondary Index: Index on a non-ordering field. Always Dense (one entry per data record).
+    *   Multi-Level Index (Sparse): Used when the primary index is too large.
