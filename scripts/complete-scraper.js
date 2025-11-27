@@ -78,6 +78,7 @@ async function findRealFileLinkFromHtml(page, html, baseUrl) {
     try {
       return new URL(found, baseUrl).toString();
     } catch (e) {
+      void e;
       return found;
     }
   }
@@ -136,6 +137,7 @@ async function downloadViaFetch(page, url, filename) {
       const parsed = new URL(res.url || url);
       outName = decodeURIComponent(path.basename(parsed.pathname)) || 'download.bin';
     } catch (e) {
+      void e;
       outName = 'download.bin';
     }
   }
@@ -159,6 +161,7 @@ class CompleteMoodleScraper {
     this.browser = null;
     this.page = null;
     this.isLoggedIn = false;
+    this.currentCourseCode = null;
   }
 
   async initialize() {
@@ -214,6 +217,7 @@ class CompleteMoodleScraper {
       try {
         await this.waitForMoodleLogin();
       } catch (error) {
+        void error;
         console.log('\n❌ Automatic login detection failed.');
         const manualConfirm = await askQuestion('Are you now on the Moodle dashboard? (y/n): ');
         
@@ -282,8 +286,9 @@ class CompleteMoodleScraper {
           console.log('✅ Navigated to courses page');
           return;
         }
-      } catch (err) {
+      } catch (e) {
           // 忽略选择器检查中的错误
+          void e;
       }
     }
     
@@ -375,8 +380,39 @@ class CompleteMoodleScraper {
     }
   }
 
+  async filterNewFiles(downloadLinks, courseCode) {
+    console.log('🔍 Checking for new files...');
+    const coursePath = COURSES[courseCode].localPath;
+    const fullCoursePath = path.join(__dirname, '..', coursePath);
+    
+    const subdirs = ['lectures', 'resources', 'datasets'];
+    const existingFiles = new Set();
+    
+    subdirs.forEach(subdir => {
+      const dirPath = path.join(fullCoursePath, subdir);
+      if (fs.existsSync(dirPath)) {
+        const files = fs.readdirSync(dirPath);
+        files.forEach(file => {
+          existingFiles.add(file.toLowerCase());
+        });
+      }
+    });
+    
+    const newFiles = downloadLinks.filter(link => {
+      const sanitized = sanitizeFilename(link.filename || link.text);
+      const isNew = !existingFiles.has(sanitized.toLowerCase());
+      if (!isNew) {
+        console.log(`⏭️  Already exists (skip): ${sanitized}`);
+      }
+      return isNew;
+    });
+    
+    console.log(`✅ Found ${newFiles.length} new files out of ${downloadLinks.length} total`);
+    return newFiles;
+  }
+
   async downloadAllFilesFromTable() {
-    console.log('📥 Downloading all files from table...');
+    console.log('📥 Downloading files from table...');
 
     const downloadLinks = await this.page.evaluate(() => {
       const tables = document.querySelectorAll('table');
@@ -406,13 +442,11 @@ class CompleteMoodleScraper {
     });
 
     // Also look for links that point to Moodle "page" or folder pages which may contain attachments.
-    // ONLY include page and folder links (exclude resource/url which are typically direct files or already in downloadLinks)
     const pageLinks = await this.page.evaluate(() => {
       const anchors = Array.from(document.querySelectorAll('a[href]'));
       const pages = anchors
         .map(a => ({ href: a.href, text: a.textContent.trim() }))
         .filter(x => (/\/mod\/page\//i.test(x.href) || /mod\/page\/view.php/i.test(x.href) || /\/mod\/folder\//i.test(x.href)));
-      // dedupe
       const uniq = [];
       const seen = new Set();
       for (const p of pages) {
@@ -427,25 +461,51 @@ class CompleteMoodleScraper {
     if (pageLinks.length > 0) {
       console.log(`Found ${pageLinks.length} linked Moodle pages that may contain attachments`);
     }
-    console.log(`Found ${downloadLinks.length} downloadable files`);
+    console.log(`Found ${downloadLinks.length} downloadable files in table`);
 
-    if (downloadLinks.length === 0) {
-      console.log('❌ No downloadable files found in tables');
+    if (downloadLinks.length === 0 && pageLinks.length === 0) {
+      console.log('❌ No downloadable files found');
       return [];
     }
 
     const downloadedFiles = [];
+    
+    // Build set of existing files once at the start
+    const coursePath = COURSES[this.currentCourseCode].localPath;
+    const fullCoursePath = path.join(__dirname, '..', coursePath);
+    const subdirs = ['lectures', 'resources', 'datasets'];
+    const existingFiles = new Set();
+    
+    subdirs.forEach(subdir => {
+      const dirPath = path.join(fullCoursePath, subdir);
+      if (fs.existsSync(dirPath)) {
+        const files = fs.readdirSync(dirPath);
+        files.forEach(file => {
+          existingFiles.add(file.toLowerCase());
+        });
+      }
+    });
 
+    // Download table links immediately as we iterate
+    console.log(`📥 Downloading ${downloadLinks.length} table files...`);
     for (let i = 0; i < downloadLinks.length; i++) {
       const link = downloadLinks[i];
-      console.log(`Downloading ${i + 1}/${downloadLinks.length}: ${link.text} -> ${link.url}`);
+      const sanitized = sanitizeFilename(link.filename || link.text);
+      
+      if (existingFiles.has(sanitized.toLowerCase())) {
+        console.log(`⏭️  Already exists (skip): ${sanitized}`);
+        continue;
+      }
+
+      console.log(`Downloading ${i + 1}/${downloadLinks.length}: ${link.text}`);
 
       try {
         const saved = await downloadViaFetch(this.page, link.url, link.filename);
-        console.log(`✅ Saved via fetch: ${saved}`);
+        console.log(`✅ Saved: ${saved}`);
         downloadedFiles.push({ ...link, savedPath: saved });
+        existingFiles.add(sanitized.toLowerCase());  // Track newly downloaded files
       } catch (fetchErr) {
-        console.log(`⚠️ Fetch download failed for ${link.url}: ${fetchErr.message}`);
+        console.log(`⚠️ Fetch failed for ${link.url}: ${fetchErr.message}`);
         console.log('Fallback: attempt in-browser download...');
 
         try {
@@ -456,39 +516,43 @@ class CompleteMoodleScraper {
             downloadPath: DOWNLOAD_PATH
           });
 
-          const response = await downloadPage.goto(link.url, { waitUntil: 'networkidle2' });
-          try {
-            console.log('Response status:', response && response.status());
-          } catch {}
+          await downloadPage.goto(link.url, { waitUntil: 'networkidle2' });
           await new Promise(resolve => setTimeout(resolve, 2000));
           await downloadPage.close();
           downloadedFiles.push(link);
+          console.log(`✅ Downloaded via browser`);
         } catch (err) {
-          console.log(`❌ Failed fallback download for ${link.text}: ${err.message}`);
+          console.log(`❌ Failed: ${err.message}`);
         }
       }
     }
 
-    // Process linked pages (like mod/page/view.php) to extract embedded file URLs and download them
+    // Process linked pages
     if (pageLinks && pageLinks.length > 0) {
-      console.log(`⚠️ IMPORTANT: Will process ${pageLinks.length} linked page(s). Each page opens in a new tab and waits for page load.`);
-      console.log(`This may take several minutes. Press Ctrl+C to cancel if needed.`);
+      console.log(`\n🔗 Processing ${pageLinks.length} linked page(s)...`);
       
       for (let j = 0; j < pageLinks.length; j++) {
         const pageLink = pageLinks[j];
-        console.log(`➡️  [${j + 1}/${pageLinks.length}] Processing linked page: "${pageLink.text}"`);
+        console.log(`➡️  [${j + 1}/${pageLinks.length}] ${pageLink.text}`);
         try {
           const downloadCandidates = await this.extractDownloadLinksFromPage(pageLink.href, 0);
           if (downloadCandidates && downloadCandidates.length > 0) {
-            console.log(`   Found ${downloadCandidates.length} downloadable link(s) in this page`);
+            console.log(`   Found ${downloadCandidates.length} file(s)`);
             for (const candidate of downloadCandidates) {
+              const sanitized = sanitizeFilename(candidate.filename || candidate.text);
+              
+              if (existingFiles.has(sanitized.toLowerCase())) {
+                console.log(`   ⏭️  Already exists: ${sanitized}`);
+                continue;
+              }
+
               try {
                 const saved = await downloadViaFetch(this.page, candidate.url, candidate.filename || candidate.text || 'unknown');
                 console.log(`   ✅ Saved: ${saved}`);
                 downloadedFiles.push({ ...candidate, savedPath: saved });
+                existingFiles.add(sanitized.toLowerCase());
               } catch (err) {
-                console.log(`   ⚠️ Fetch failed for ${candidate.url}: ${err.message}`);
-                // fallback: open in browser tab to trigger download
+                console.log(`   ⚠️ Fetch failed: ${err.message}`);
                 try {
                   const downloadPage = await this.browser.newPage();
                   const client = await downloadPage.target().createCDPSession();
@@ -497,26 +561,26 @@ class CompleteMoodleScraper {
                     downloadPath: DOWNLOAD_PATH
                   });
 
-              await downloadPage.goto(candidate.url, { waitUntil: 'networkidle2' });
-              await new Promise(resolve => setTimeout(resolve, 2000));
+                  await downloadPage.goto(candidate.url, { waitUntil: 'networkidle2' });
+                  await new Promise(resolve => setTimeout(resolve, 2000));
                   await downloadPage.close();
                   downloadedFiles.push(candidate);
-                  console.log(`   ✅ Downloaded via browser fallback`);
+                  console.log(`   ✅ Downloaded via browser`);
                 } catch (err2) {
-                  console.log(`   ❌ Fallback browser download failed: ${err2.message}`);
+                  console.log(`   ❌ Failed: ${err2.message}`);
                 }
               }
             }
           } else {
-            console.log(`   ℹ️ No downloadable links found in this page`);
+            console.log(`   ℹ️ No files found`);
           }
         } catch (err) {
-          console.log(`   ❌ Failed to process this page: ${err.message}`);
+          console.log(`   ❌ Failed to process: ${err.message}`);
         }
       }
     }
 
-    console.log(`✅ Downloaded ${downloadedFiles.length} files to ${DOWNLOAD_PATH}`);
+    console.log(`\n✅ Downloaded ${downloadedFiles.length} new files`);
     return downloadedFiles;
   }
 
@@ -734,6 +798,7 @@ async function main() {
       await scraper.navigateToMyCourses();
 
       const courseCode = await scraper.selectCourse();
+      scraper.currentCourseCode = courseCode;  // Set for filterNewFiles
       await scraper.navigateToCourse(courseCode);
 
       const foundResources = await scraper.findAndClickResources();
