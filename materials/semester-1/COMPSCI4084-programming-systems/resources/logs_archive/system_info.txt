@@ -1,0 +1,4 @@
+Hostname: sys-node-23
+OS: Ubuntu 22.04
+Kernel: 5.15.0-110-generic
+Admin: root@sys-node-23.local
