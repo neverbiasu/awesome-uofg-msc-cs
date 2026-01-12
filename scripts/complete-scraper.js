@@ -31,6 +31,7 @@ function askQuestion(question) {
 
 // Course configuration
 const COURSES = {
+  // Semester 1
   'COMPSCI4084': {
     name: 'Programming and Systems Development',
     localPath: 'materials/semester-1/COMPSCI4084-programming-systems'
@@ -47,6 +48,32 @@ const COURSES = {
     name: 'Machine Learning & AI',
     localPath: 'materials/semester-1/COMPSCI5100-ml-ai'
   },
+  // Semester 2
+  'COMPSCI4064/5088': {
+    name: 'Big Data: Systems, Programming, and Management H/M',
+    localPath: 'materials/semester-2/COMPSCI4064-5088-big-data'
+  },
+  'COMPSCI5012': {
+    name: 'Internet Technology',
+    localPath: 'materials/semester-2/COMPSCI5012-internet-technology'
+  },
+  'COMPSCI5057': {
+    name: 'Human Computer Interaction Design and Evaluation (M)',
+    localPath: 'materials/semester-2/COMPSCI5057-hci'
+  },
+  'COMPSCI5079': {
+    name: 'Cryptography and Secure Development M',
+    localPath: 'materials/semester-2/COMPSCI5079-cryptography'
+  },
+  'COMPSCI5093/5104': {
+    name: 'Secured Software Engineering M/MSc',
+    localPath: 'materials/semester-2/COMPSCI5093-5104-secured-software'
+  },
+  'COMPSCI5103': {
+    name: 'Deep Learning for MSc (M)',
+    localPath: 'materials/semester-2/COMPSCI5103-deep-learning'
+  },
+  // Handbook
   'HANDBOOK': {
     name: 'MSc (IT+) & MSc (CS+) Handbook - 2025/26',
     localPath: 'materials/handbook'
