@@ -23,6 +23,16 @@ yarn-debug.log*
 yarn-error.log*
 
 # others
+.env
 .env*.local
 .vercel
 next-env.d.ts
+
+# dev notes
+docs/
+GEMINI.md
+fumadocs/
+
+# logs
+*.log
+build-output.log
