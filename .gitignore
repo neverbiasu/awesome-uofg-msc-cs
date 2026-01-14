@@ -36,3 +36,10 @@ fumadocs/
 # logs
 *.log
 build-output.log
+
+# large media files
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm

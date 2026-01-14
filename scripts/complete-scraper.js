@@ -82,6 +82,9 @@ const COURSES = {
 
 const DOWNLOAD_PATH = path.join(__dirname, '..', 'downloads');
 
+// Video file extensions to skip
+const SKIP_VIDEO_EXTENSIONS = /\.(mp4|mov|avi|mkv|webm|wmv|flv|m4v)$/i;
+
 function sanitizeFilename(name) {
   if (!name) return 'download.bin';
   let s = String(name).trim();
@@ -456,6 +459,11 @@ class CompleteMoodleScraper {
               href.match(/\.(pdf|doc|docx|ppt|pptx|xls|xlsx|zip|txt|csv)$/i) ||
               link.querySelector('img[src*="icon"]')) {
 
+            // Skip video files
+            if (href.match(/\.(mp4|mov|avi|mkv|webm|wmv|flv|m4v)$/i)) {
+              return;
+            }
+
             links.push({
               url: href,
               text: text,
@@ -641,6 +649,8 @@ class CompleteMoodleScraper {
           const href = a.href;
           const text = (a.textContent || a.getAttribute('title') || '').trim();
           if (!href) return;
+          // Skip video files
+          if (href.match(/\.(mp4|mov|avi|mkv|webm|wmv|flv|m4v)$/i)) return;
           // 仅提取文件类型链接（pluginfile 或常见文件后缀），排除其他 Moodle activity 页面（如 /mod/page/, /mod/resource/ 等）
           if (href.includes('/pluginfile.php/') || href.match(/\.(pdf|doc|docx|ppt|pptx|xls|xlsx|zip|txt|csv)$/i)) {
             out.push({ url: href, text: text, filename: text || 'unknown' });
@@ -655,6 +665,8 @@ class CompleteMoodleScraper {
             const href = a.href;
             const text = (a.textContent || a.getAttribute('title') || '').trim();
             if (!href) return;
+            // Skip video files
+            if (href.match(/\.(mp4|mov|avi|mkv|webm|wmv|flv|m4v)$/i)) return;
             // 仅提取文件类型链接，排除其他 Moodle activity 页面
             if (href.includes('/pluginfile.php/') || href.match(/\.(pdf|doc|docx|ppt|pptx|zip|txt|csv)$/i)) {
               out.push({ url: href, text: text, filename: text || 'unknown' });
