@@ -1,0 +1,92 @@
+---
+title: "Week 1: System Architecture & Information Architecture"
+description: "Web application introduction, system architecture design, database modeling, information architecture basics."
+---
+
+## Overview
+
+This week introduces the fundamentals of web application development, including system architecture design, database modeling, and information architecture. These concepts are the building blocks for modern web applications.
+
+- **Format**: Lecture + Lab
+- **Topics**: Web applications, system architecture, ER model, information architecture
+
+## Learning Objectives
+
+1. Understand the basic structure of web applications (frontend and backend)
+2. Master multi-tier architecture design (2-tier, 3-tier, N-tier)
+3. Use ER models for database modeling
+4. Understand core concepts of information architecture
+
+## Key Concepts
+
+### Introduction to Web Applications
+
+- **Web Application Definition**: Applications consisting of frontend and backend that communicate over the web
+- **Internet vs Web**:
+  - Internet: The underlying network infrastructure
+  - Web: Application layer protocols used by browsers on the network
+
+### System Architecture
+
+- **Monolithic Architecture**: 1-tier architecture, not suitable for modern web applications
+- **Tiered Architecture**:
+  - **2-tier**: Client + Data source
+  - **3-tier**: Client + Middleware/Application server + Data source
+  - **N-tier**: Finer-grained layering for better scalability
+
+- **Benefits of Layering**:
+  - Separation of Concerns
+  - Can be distributed across different machines
+  - Easy to scale and maintain
+
+- **Design Approaches**:
+  - **Top-down**: Start from user requirements
+  - **Bottom-up**: Start from data structures
+
+### Database Modeling - ER Model
+
+- **ER Model (Entity-Relationship Model)**: Abstract representation of data and relationships
+- **Three Core Components**:
+  1. **Entity**: Data objects, e.g., users, orders
+  2. **Relationship**: Connections between entities
+  3. **Attribute**: Characteristics of entities
+
+- **Relationship Types**:
+  - **One-to-One (1:1)**: e.g., one user to one profile
+  - **One-to-Many (1:N)**: e.g., one author to many articles
+  - **Many-to-Many (M:N)**: e.g., students and courses
+
+### Information Architecture (IA)
+
+- **Definition**: Structural design of shared information environments
+- **Core Focus**:
+  - Organization systems
+  - Labeling systems
+  - Search systems
+  - Navigation systems
+
+- **Three Key Elements**:
+  - **Context**: Business goals, technical constraints
+  - **Content**: Information structure, data types
+  - **Users**: Target users, usage scenarios
+
+- **Key Deliverables**:
+  - **User Requirements**: User Stories, Personas
+  - **Site Map**: Page hierarchy structure
+  - **User Flow**: User navigation paths
+  - **Wireframe**: Page layout sketches
+
+## Practice Checklist
+
+- [ ] Draw a 3-tier architecture diagram for a simple web application
+- [ ] Design an ER model with users, articles, and comments
+- [ ] Identify 1:1, 1:N, M:N relationships in the ER model
+- [ ] Create a site map for a simple website
+- [ ] Write 3-5 user stories
+
+## Materials Index
+
+### Lectures
+- [L1-IntroSysArchDBInfoArch (Lecture, PDF)](../../../../../materials/semester-2/COMPSCI5012-internet-technology/resources/L1-IntroSysArchDBInfoArch.pdf)
+
+---

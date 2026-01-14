@@ -1,0 +1,126 @@
+---
+title: "Week 1: Big Data Fundamentals"
+description: "Big data definition, hardware fundamentals, user needs, vertical vs horizontal scaling, compute parallelization."
+---
+
+## Overview
+
+This week introduces fundamental big data concepts, from defining big data to understanding hardware fundamentals, scaling strategies, and parallel computing principles. These are foundational for understanding frameworks like Hadoop and Spark later in the course.
+
+- **Format**: Video lectures + Reading materials
+- **Topics**: Big data definition, hardware, scaling, parallel computing
+
+## Learning Objectives
+
+1. Understand the definition and characteristics of big data
+2. Master how hardware impacts big data processing
+3. Distinguish between batch and stream processing
+4. Understand the difference between vertical and horizontal scaling
+5. Master basic concepts of parallel computing
+
+## Key Concepts
+
+### What is Big Data?
+
+- **Definition**: Data that cannot be captured, stored, managed, and processed by traditional tools within an acceptable timeframe
+- **Key Factors**:
+  - **Storage and Access**: How to store and retrieve data
+  - **Processing**: How to extract value from data
+  - **Tools**: Available software tools
+  - **Time**: Hardware processing capability
+
+- **Why Big Data Exploded**:
+  - Massive increase in data production and storage capacity
+  - Organizations started storing "potentially useful" data
+  - Explosive growth of internet-connected devices
+
+### Hardware Fundamentals
+
+- **Four Main Hardware Aspects**:
+  1. **General Purpose Compute**: CPU processing power
+  2. **Specialist Compute**: GPU, TPU accelerators
+  3. **Storage Stack**: Storage hierarchy
+  4. **Network**: Data transfer speed
+
+- **CPU Evolution**:
+  - Performance improved through more transistors
+  - Architecture optimization (pipelining, multi-core)
+  - Use benchmarks to evaluate compute capacity
+
+- **Storage Hierarchy** (by speed):
+  1. Registers
+  2. Cache
+  3. Main Memory (RAM)
+  4. SSD
+  5. HDD
+
+- **Network Considerations**: Network transfers are generally slower than local storage
+
+### Big Data Use Cases
+
+- **Three Operation Types**:
+  1. **Extraction/Filtering**: Extract subsets matching specific criteria from large datasets
+  2. **Transformation**: Apply functions to each data item and save results
+  3. **Aggregation**: Merge and transform sets of data items
+
+- **Batch vs Stream Processing**:
+  | Feature | Batch | Stream |
+  |---------|-------|--------|
+  | Data | Static data | Continuously arriving new data |
+  | Focus | Completion time | Per-item processing latency |
+  | Examples | SQL queries, search indexing | Real-time filtering, stream aggregation |
+
+### Vertical vs Horizontal Scaling
+
+- **Vertical Scaling**:
+  - Buy larger, more powerful single computers
+  - Traditional approach (90s/early 2000s)
+  - Limited by physical constraints (chip size, transistor density)
+  - Diminishing cost-effectiveness
+
+- **Horizontal Scaling**:
+  - Distribute work across clusters of low-cost machines
+  - Theoretically infinitely scalable
+  - Requires specialized tools and programming approaches
+  - **Course focus**
+
+### Compute Parallelization
+
+- **Definition**: Breaking down big data problems into multiple tasks that can be executed simultaneously
+
+- **Parallelization Levels**:
+  1. **Within CPU core**: Pipelining, superscalar architecture (transparent to programmers)
+  2. **Across CPU cores**: Multi-threading
+  3. **Across machines**: Distributed computing (horizontal scaling)
+
+- **Flynn's Taxonomy**:
+  | Type | Instruction Stream | Data Stream | Example |
+  |------|-------------------|-------------|---------|
+  | SISD | Single | Single | Traditional single-core CPU |
+  | MIMD | Multiple | Multiple | Modern multi-core CPU |
+  | SIMD | Single | Multiple | GPU |
+  | MISD | Multiple | Single | Rare |
+
+- **Measuring Parallelism Effectiveness**:
+  - **Speed-up** = Serial Time / Parallel Time
+  - Ideal case: Speed-up ≤ Number of processors (p)
+  - **Linear speed-up**: Speed-up = p
+
+## Practice Checklist
+
+- [ ] Explain why the definition of "big data" changes over time
+- [ ] Describe characteristics of each storage tier (speed, cost, persistence)
+- [ ] Give examples of batch and stream processing use cases
+- [ ] Explain why horizontal scaling became mainstream for big data processing
+- [ ] Calculate theoretical speed-up for a simple parallel task
+
+## Materials Index
+
+### Week 1 Lectures
+- [01-01-WhatIsBigData (PDF)](../../../../../materials/semester-2/COMPSCI4064-5088-big-data/resources/01-01-WhatIsBigData.pdf)
+- [01-02-Hardware (PDF)](../../../../../materials/semester-2/COMPSCI4064-5088-big-data/resources/01-02-Hardware.pdf)
+- [01-03-UserNeeds (PDF)](../../../../../materials/semester-2/COMPSCI4064-5088-big-data/resources/01-03-UserNeeds.pdf)
+- [01-04-VerticalVsHorizontalScaling (PDF)](../../../../../materials/semester-2/COMPSCI4064-5088-big-data/resources/01-04-VerticalVsHorizontalScaling.pdf)
+- [01-05-ComputeParallelism (PDF)](../../../../../materials/semester-2/COMPSCI4064-5088-big-data/resources/01-05-ComputeParallelism.pdf)
+
+---

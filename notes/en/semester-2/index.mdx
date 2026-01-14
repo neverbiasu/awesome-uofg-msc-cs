@@ -7,29 +7,46 @@ import { Card, Cards } from 'fumadocs-ui/components/card';
 
 # Semester 2 Course Notes
 
-Semester 2 courses will be updated after the semester begins.
-
-## Prospective Courses
+## Core Courses
 
 <Cards>
-  <Card 
-    title="Advanced Topics" 
-    description="Advanced courses to be confirmed"
-    href="#"
+  <Card
+    title="COMPSCI5012"
+    description="Internet Technology - Web application design, system architecture, Django framework"
+    href="/en/notes/semester-2/COMPSCI5012"
   />
-  <Card 
-    title="Dissertation" 
-    description="Preparation for the final dissertation"
-    href="#"
+  <Card
+    title="COMPSCI4064/5088"
+    description="Big Data - Hadoop, Spark, distributed computing frameworks"
+    href="/en/notes/semester-2/COMPSCI4064-5088"
+  />
+  <Card
+    title="COMPSCI5103"
+    description="Deep Learning - Neural networks, CNN, RNN, PyTorch"
+    href="/en/notes/semester-2/COMPSCI5103"
   />
 </Cards>
 
-## Semester Plan
+## Semester Overview
 
-The second semester will focus on:
-- In-depth study of advanced technologies
-- The dissertation project
-- Internships or industry projects
-- Career preparation
+The second semester focuses on advanced topics and practical applications.
 
-More details will be provided once the course information is confirmed...
+### Key Learning Areas
+
+1. **Web Development** - Django framework and web application design
+2. **Big Data** - Distributed computing with Hadoop and Spark
+3. **Deep Learning** - Neural networks and modern AI techniques
+4. **Research** - Dissertation project preparation
+
+### Course Relationships
+
+```mermaid
+graph TD
+    A[Programming Basics] --> B[Web Development]
+    A --> C[Big Data Processing]
+    D[Machine Learning] --> E[Deep Learning]
+    C --> E
+    B --> F[Full Stack Applications]
+```
+
+The courses build on first semester foundations, with machine learning knowledge supporting deep learning studies.
