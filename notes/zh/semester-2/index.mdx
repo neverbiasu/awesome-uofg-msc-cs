@@ -7,29 +7,46 @@ import { Card, Cards } from 'fumadocs-ui/components/card';
 
 # 第二学期课程笔记
 
-第二学期的课程将在开学后更新。
-
-## 预期课程
+## 核心课程
 
 <Cards>
-  <Card 
-    title="Advanced Topics" 
-    description="高级课程待确定"
-    href="#"
+  <Card
+    title="COMPSCI5012"
+    description="Internet Technology - Web应用设计，系统架构，Django框架"
+    href="/zh/notes/semester-2/COMPSCI5012"
   />
-  <Card 
-    title="Dissertation" 
-    description="毕业论文准备"
-    href="#"
+  <Card
+    title="COMPSCI4064/5088"
+    description="Big Data - Hadoop, Spark, 分布式计算框架"
+    href="/zh/notes/semester-2/COMPSCI4064-5088"
+  />
+  <Card
+    title="COMPSCI5103"
+    description="Deep Learning - 神经网络, CNN, RNN, PyTorch"
+    href="/zh/notes/semester-2/COMPSCI5103"
   />
 </Cards>
 
-## 学期规划
+## 学期总览
 
-第二学期将专注于：
-- 高级技术深入学习
-- 毕业论文项目
-- 实习或行业项目
-- 就业准备
+第二学期主要专注于高级主题和实践应用。
 
-待课程信息确定后会详细更新...
+### 重点学习领域
+
+1. **Web开发** - Django框架与Web应用设计
+2. **大数据** - Hadoop和Spark分布式计算
+3. **深度学习** - 神经网络与现代AI技术
+4. **研究** - 毕业论文项目准备
+
+### 课程关系
+
+```mermaid
+graph TD
+    A[Programming Basics] --> B[Web Development]
+    A --> C[Big Data Processing]
+    D[Machine Learning] --> E[Deep Learning]
+    C --> E
+    B --> F[Full Stack Applications]
+```
+
+课程建立在第一学期基础之上，机器学习知识为深度学习学习提供支撑。
