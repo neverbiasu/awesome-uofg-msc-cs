@@ -3,6 +3,8 @@ title: "第一周：系统架构与信息架构"
 description: "Web应用介绍、系统架构设计、数据库建模、信息架构基础。"
 ---
 
+import { Card, Cards } from 'fumadocs-ui/components/card';
+
 ## 概要
 
 本周介绍Web应用开发的基础知识，包括系统架构设计、数据库建模和信息架构。这些概念是构建现代Web应用的基石。
@@ -17,76 +19,21 @@ description: "Web应用介绍、系统架构设计、数据库建模、信息架
 3. 使用ER模型进行数据库建模
 4. 理解信息架构的核心概念
 
-## 关键知识点
+## 笔记
 
-### Web应用介绍
+<Cards>
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5012/week1/system-architecture"
+      title="Web应用与系统架构"
+      description="Web应用介绍和多层系统架构设计。"
+    />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5012/week1/database-and-ia"
+      title="数据库建模与信息架构"
+      description="ER模型数据库设计和信息架构核心概念。"
+    />
+</Cards>
 
-- **Web应用定义**：由前端（Frontend）和后端（Backend）组成，通过Web进行通信的应用程序
-- **Internet vs Web**：
-  - Internet：底层网络基础设施
-  - Web：浏览器在网络上使用的应用层协议
+## 材料
 
-### 系统架构
-
-- **单体架构（Monolithic）**：1层架构，不适合现代Web应用
-- **多层架构（Tiered Architecture）**：
-  - **2层架构**：客户端 + 数据源
-  - **3层架构**：客户端 + 中间件/应用服务器 + 数据源
-  - **N层架构**：更细粒度的分层，提供更好的可扩展性
-
-- **分层优势**：
-  - 关注点分离（Separation of Concerns）
-  - 可以分布在不同机器上
-  - 便于扩展和维护
-
-- **设计方法**：
-  - **自顶向下（Top-down）**：从用户需求开始设计
-  - **自底向上（Bottom-up）**：从数据结构开始设计
-
-### 数据库建模 - ER模型
-
-- **ER模型（Entity-Relationship Model）**：抽象表示数据及其关系
-- **三个核心组件**：
-  1. **实体（Entity）**：数据对象，如用户、订单
-  2. **关系（Relationship）**：实体之间的联系
-  3. **属性（Attribute）**：实体的特征
-
-- **关系类型**：
-  - **一对一（1:1）**：如一个用户对应一个个人资料
-  - **一对多（1:N）**：如一个作者对应多篇文章
-  - **多对多（M:N）**：如学生和课程的关系
-
-### 信息架构（Information Architecture）
-
-- **定义**：共享信息环境的结构设计
-- **核心关注点**：
-  - 组织系统（Organization）
-  - 标签系统（Labeling）
-  - 搜索系统（Search）
-  - 导航系统（Navigation）
-
-- **三大要素**：
-  - **Context（上下文）**：业务目标、技术限制
-  - **Content（内容）**：信息结构、数据类型
-  - **Users（用户）**：目标用户、使用场景
-
-- **关键产出物**：
-  - **用户需求**：User Stories、Personas
-  - **站点地图（Site Map）**：页面层级结构
-  - **用户流程（User Flow）**：用户操作路径
-  - **线框图（Wireframe）**：页面布局草图
-
-## 实践清单（自检）
-
-- [ ] 绘制一个简单Web应用的3层架构图
-- [ ] 设计一个包含用户、文章、评论的ER模型
-- [ ] 识别ER模型中的1:1、1:N、M:N关系
-- [ ] 为一个简单网站创建站点地图
-- [ ] 编写3-5个用户故事（User Stories）
-
-## 材料索引
-
-### 讲座
-- [L1-IntroSysArchDBInfoArch (讲座, PDF)](../../../../../materials/semester-2/COMPSCI5012-internet-technology/resources/L1-IntroSysArchDBInfoArch.pdf)
-
----
+- [L1-IntroSysArchDBInfoArch (PDF)](../../../../../materials/semester-2/COMPSCI5012-internet-technology/resources/L1-IntroSysArchDBInfoArch.pdf)

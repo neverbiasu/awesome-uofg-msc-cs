@@ -1,0 +1,74 @@
+---
+title: "Hardware, Scaling and Parallelism"
+description: "Hardware fundamentals, vertical vs horizontal scaling, and compute parallelization concepts."
+---
+
+## Hardware Fundamentals
+
+- **Four Main Hardware Aspects**:
+  1. **General Purpose Compute**: CPU processing power
+  2. **Specialist Compute**: GPU, TPU accelerators
+  3. **Storage Stack**: Storage hierarchy
+  4. **Network**: Data transfer speed
+
+- **CPU Evolution**:
+  - Performance improved through more transistors
+  - Architecture optimization (pipelining, multi-core)
+  - Use benchmarks to evaluate compute capacity
+
+- **Storage Hierarchy** (by speed):
+  1. Registers
+  2. Cache
+  3. Main Memory (RAM)
+  4. SSD
+  5. HDD
+
+- **Network Considerations**: Network transfers are generally slower than local storage
+
+## Vertical vs Horizontal Scaling
+
+- **Vertical Scaling**:
+  - Buy larger, more powerful single computers
+  - Traditional approach (90s/early 2000s)
+  - Limited by physical constraints (chip size, transistor density)
+  - Diminishing cost-effectiveness
+
+- **Horizontal Scaling**:
+  - Distribute work across clusters of low-cost machines
+  - Theoretically infinitely scalable
+  - Requires specialized tools and programming approaches
+  - **Course focus**
+
+## Compute Parallelization
+
+- **Definition**: Breaking down big data problems into multiple tasks that can be executed simultaneously
+
+- **Parallelization Levels**:
+  1. **Within CPU core**: Pipelining, superscalar architecture (transparent to programmers)
+  2. **Across CPU cores**: Multi-threading
+  3. **Across machines**: Distributed computing (horizontal scaling)
+
+- **Flynn's Taxonomy**:
+  | Type | Instruction Stream | Data Stream | Example |
+  |------|-------------------|-------------|---------|
+  | SISD | Single | Single | Traditional single-core CPU |
+  | MIMD | Multiple | Multiple | Modern multi-core CPU |
+  | SIMD | Single | Multiple | GPU |
+  | MISD | Multiple | Single | Rare |
+
+- **Measuring Parallelism Effectiveness**:
+  - **Speed-up** = Serial Time / Parallel Time
+  - Ideal case: Speed-up ≤ Number of processors (p)
+  - **Linear speed-up**: Speed-up = p
+
+## Practice Checklist
+
+- [ ] Describe characteristics of each storage tier (speed, cost, persistence)
+- [ ] Explain why horizontal scaling became mainstream for big data processing
+- [ ] Calculate theoretical speed-up for a simple parallel task
+
+## Materials
+
+- [01-02-Hardware (PDF)](../../../../../../materials/semester-2/COMPSCI4064-5088-big-data/resources/01-02-Hardware.pdf)
+- [01-04-VerticalVsHorizontalScaling (PDF)](../../../../../../materials/semester-2/COMPSCI4064-5088-big-data/resources/01-04-VerticalVsHorizontalScaling.pdf)
+- [01-05-ComputeParallelism (PDF)](../../../../../../materials/semester-2/COMPSCI4064-5088-big-data/resources/01-05-ComputeParallelism.pdf)

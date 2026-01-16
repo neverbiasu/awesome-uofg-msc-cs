@@ -1,0 +1,74 @@
+---
+title: "硬件、扩展与并行化"
+description: "硬件基础、垂直vs水平扩展以及计算并行化概念。"
+---
+
+## 硬件基础
+
+- **四大硬件方面**：
+  1. **通用计算（General Purpose Compute）**：CPU处理能力
+  2. **专用计算（Specialist Compute）**：GPU、TPU等加速器
+  3. **存储栈（Storage Stack）**：存储层级
+  4. **网络（Network）**：数据传输速度
+
+- **CPU发展**：
+  - 通过集成更多晶体管提升性能
+  - 架构优化（流水线、多核）
+  - 使用基准测试评估计算能力
+
+- **存储层级**（按速度排序）：
+  1. 寄存器（Registers）
+  2. 缓存（Cache）
+  3. 主内存（Main Memory/RAM）
+  4. SSD
+  5. 硬盘（HDD）
+
+- **网络考虑**：网络传输通常比本地存储慢
+
+## 垂直扩展 vs 水平扩展
+
+- **垂直扩展（Vertical Scaling）**：
+  - 购买更大、更强的单台计算机
+  - 传统方法（90年代/2000年代初）
+  - 受物理限制（芯片大小、晶体管密度）
+  - 成本效益递减
+
+- **水平扩展（Horizontal Scaling）**：
+  - 将工作分布到多台低成本机器组成的集群
+  - 理论上可无限扩展
+  - 需要专门的工具和编程方法
+  - **本课程重点**
+
+## 计算并行化
+
+- **定义**：将大数据问题分解为多个可同时执行的任务
+
+- **并行化层级**：
+  1. **CPU核心内**：流水线、超标量架构（对程序员透明）
+  2. **跨CPU核心**：多线程
+  3. **跨机器**：分布式计算（水平扩展）
+
+- **Flynn分类法**：
+  | 类型 | 指令流 | 数据流 | 示例 |
+  |------|--------|--------|------|
+  | SISD | 单 | 单 | 传统单核CPU |
+  | MIMD | 多 | 多 | 现代多核CPU |
+  | SIMD | 单 | 多 | GPU |
+  | MISD | 多 | 单 | 少见 |
+
+- **衡量并行效果**：
+  - **加速比（Speed-up）** = 串行时间 / 并行时间
+  - 理想情况：加速比 ≤ 处理器数量（p）
+  - **线性加速**：加速比 = p
+
+## 实践清单
+
+- [ ] 描述存储层级中各层的特点（速度、成本、持久性）
+- [ ] 解释为什么水平扩展成为大数据处理的主流方法
+- [ ] 计算一个简单并行任务的理论加速比
+
+## 材料
+
+- [01-02-Hardware (PDF)](../../../../../../materials/semester-2/COMPSCI4064-5088-big-data/resources/01-02-Hardware.pdf)
+- [01-04-VerticalVsHorizontalScaling (PDF)](../../../../../../materials/semester-2/COMPSCI4064-5088-big-data/resources/01-04-VerticalVsHorizontalScaling.pdf)
+- [01-05-ComputeParallelism (PDF)](../../../../../../materials/semester-2/COMPSCI4064-5088-big-data/resources/01-05-ComputeParallelism.pdf)
