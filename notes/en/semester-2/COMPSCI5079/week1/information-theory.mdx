@@ -1,0 +1,181 @@
+---
+title: "Information Theory"
+description: "Information theory in cryptography, including entropy, information content, and perfect secrecy."
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+# Information Theory
+
+Information theory is one of the theoretical foundations of cryptography, established by Claude Shannon in 1948. It provides a mathematical framework for measuring information and analyzing the security of cryptographic systems.
+
+## Information and Entropy
+
+### Information Content
+
+The information content of an event is inversely related to its probability. The less likely an event, the more information it provides when it occurs.
+
+**Self-Information Definition**:
+
+For an event $x$ with probability $P(x)$, its self-information is:
+
+$$I(x) = -\log_2 P(x) = \log_2 \frac{1}{P(x)}$$
+
+The unit is bits.
+
+<Callout type="info">
+Intuitive understanding: A fair coin landing heads (probability 0.5) provides 1 bit of information; rolling a 6 on a die (probability 1/6) provides about 2.58 bits.
+</Callout>
+
+### Entropy
+
+Entropy is the expected value of information content, measuring the uncertainty of a random variable.
+
+**Shannon Entropy Definition**:
+
+$$H(X) = -\sum_{x \in X} P(x) \log_2 P(x) = \sum_{x \in X} P(x) \log_2 \frac{1}{P(x)}$$
+
+**Properties**:
+1. $H(X) \geq 0$ (entropy is non-negative)
+2. Entropy is maximized when all events are equally probable
+3. Deterministic events have zero entropy
+
+### Entropy Calculation Examples
+
+**Uniform Distribution**: For $n$ equally probable events:
+
+$$H(X) = \log_2 n$$
+
+- Fair coin: $H = \log_2 2 = 1$ bit
+- Fair die: $H = \log_2 6 \approx 2.58$ bits
+- 256 equally probable symbols: $H = \log_2 256 = 8$ bits
+
+## Joint Entropy and Conditional Entropy
+
+### Joint Entropy
+
+The joint entropy of two random variables $X$ and $Y$:
+
+$$H(X, Y) = -\sum_{x,y} P(x, y) \log_2 P(x, y)$$
+
+### Conditional Entropy
+
+The uncertainty of $X$ given knowledge of $Y$:
+
+$$H(X|Y) = -\sum_{x,y} P(x, y) \log_2 P(x|y)$$
+
+**Chain Rule**:
+
+$$H(X, Y) = H(Y) + H(X|Y) = H(X) + H(Y|X)$$
+
+### Mutual Information
+
+Mutual information measures the shared information between two random variables:
+
+$$I(X; Y) = H(X) - H(X|Y) = H(Y) - H(Y|X)$$
+
+$$I(X; Y) = H(X) + H(Y) - H(X, Y)$$
+
+## Cryptographic Applications
+
+### Key Entropy
+
+The security strength of a key is directly related to its entropy:
+
+| Key Type | Entropy |
+|----------|---------|
+| 128-bit random key | 128 bits |
+| 8-char lowercase password | ≈37.6 bits |
+| 8-char mixed password | ≈52.4 bits |
+
+<Callout type="warn">
+Weak passwords have entropy far below what their length suggests. Dictionary attacks exploit the fact that real password entropy is lower than the theoretical maximum.
+</Callout>
+
+### Unicity Distance
+
+Unicity distance is the minimum ciphertext length needed to uniquely determine the plaintext:
+
+$$U = \frac{H(K)}{D}$$
+
+Where:
+- $H(K)$ is the entropy of the key space
+- $D$ is the redundancy of the plaintext language (per character)
+
+**English redundancy** is about 1.0-1.5 bits/character, meaning English text contains significant predictable structure.
+
+### Perfect Secrecy
+
+**Definition**: A cryptosystem has perfect secrecy if and only if the ciphertext reveals no information about the plaintext:
+
+$$P(M|C) = P(M)$$
+
+Or equivalently:
+
+$$H(M|C) = H(M)$$
+
+**Shannon's Theorem**: Perfect secrecy requires:
+
+$$H(K) \geq H(M)$$
+
+The key entropy must be at least equal to the message entropy.
+
+### One-Time Pad
+
+The one-time pad is the only known perfectly secure system:
+
+**Requirements**:
+1. Key is as long as the plaintext
+2. Key is completely random
+3. Key is used only once
+
+**Encryption**: $C = M \oplus K$
+
+**Decryption**: $M = C \oplus K$
+
+<Callout type="warn">
+Although theoretically perfect, the one-time pad is impractical due to key distribution and management difficulties.
+</Callout>
+
+## Cryptanalysis and Information Theory
+
+### Redundancy and Attacks
+
+Natural language redundancy makes cryptanalysis possible:
+
+- **Frequency analysis**: Exploits letter frequency distribution
+- **Pattern recognition**: Exploits common words and grammatical structures
+- **Known plaintext attacks**: Exploits known plaintext-ciphertext pairs
+
+### Confusion and Diffusion
+
+Shannon proposed two principles for designing secure ciphers:
+
+**Confusion**:
+- Complicates the relationship between key and ciphertext
+- Implementation: Substitution operations (S-box)
+
+**Diffusion**:
+- Spreads plaintext statistical properties across the ciphertext
+- Implementation: Permutation operations (P-box)
+
+Modern block ciphers (like AES) achieve security through multiple rounds combining confusion and diffusion.
+
+## Information-Theoretic Security vs Computational Security
+
+| Property | Information-Theoretic Security | Computational Security |
+|----------|-------------------------------|------------------------|
+| Security Basis | Information theory | Computational complexity |
+| Attacker Capability | Unlimited computing power | Limited computing power |
+| Example | One-time pad | AES, RSA |
+| Practicality | Limited | Widely used |
+
+## Summary
+
+| Concept | Cryptographic Significance |
+|---------|---------------------------|
+| Entropy | Measures key strength and randomness |
+| Conditional Entropy | Analyzes information leakage |
+| Perfect Secrecy | Theoretical security upper bound |
+| Redundancy | Basis for cryptanalysis |
+| Confusion & Diffusion | Modern cipher design principles |

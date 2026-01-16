@@ -1,0 +1,146 @@
+---
+title: "Mathematical Foundations"
+description: "Mathematical foundations for cryptography, including modular arithmetic, number theory, and polynomial arithmetic."
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+# Mathematical Foundations
+
+Cryptography is built on solid mathematical foundations. This section introduces the mathematical concepts commonly used in cryptography.
+
+## Modular Arithmetic
+
+Modular arithmetic is the core mathematical tool in cryptography.
+
+### Basic Definition
+
+For integers $a$, $b$ and positive integer $n$, if $n$ divides $(a - b)$, then $a$ and $b$ are congruent modulo $n$:
+
+$$a \equiv b \pmod{n}$$
+
+### Properties of Modular Arithmetic
+
+1. **Addition**: $(a + b) \mod n = ((a \mod n) + (b \mod n)) \mod n$
+2. **Multiplication**: $(a \times b) \mod n = ((a \mod n) \times (b \mod n)) \mod n$
+3. **Exponentiation**: $a^k \mod n = (a \mod n)^k \mod n$
+
+<Callout type="info">
+Modular arithmetic preserves the structure of addition and multiplication, making it well-suited for cryptographic applications.
+</Callout>
+
+### Modular Inverse
+
+If there exists an integer $b$ such that $a \times b \equiv 1 \pmod{n}$, then $b$ is the inverse of $a$ modulo $n$.
+
+**Condition**: $a$ has an inverse modulo $n$ if and only if $\gcd(a, n) = 1$.
+
+### Extended Euclidean Algorithm
+
+Used to compute the greatest common divisor and modular inverse:
+
+```python
+def extended_gcd(a, b):
+    if a == 0:
+        return b, 0, 1
+    gcd, x1, y1 = extended_gcd(b % a, a)
+    x = y1 - (b // a) * x1
+    y = x1
+    return gcd, x, y
+```
+
+## Primes and Coprimality
+
+### Prime Numbers
+
+A prime is a positive integer greater than 1 that is only divisible by 1 and itself.
+
+**Cryptographic Importance**:
+- RSA algorithm relies on large primes
+- Primes are used to generate finite fields
+
+### Euler's Totient Function φ(n)
+
+Euler's totient function $\phi(n)$ counts the positive integers less than $n$ that are coprime to $n$.
+
+**Formulas**:
+- If $p$ is prime: $\phi(p) = p - 1$
+- If $p$, $q$ are distinct primes: $\phi(pq) = (p-1)(q-1)$
+
+### Euler's Theorem
+
+If $\gcd(a, n) = 1$, then:
+
+$$a^{\phi(n)} \equiv 1 \pmod{n}$$
+
+**Fermat's Little Theorem** (special case of Euler's theorem):
+
+If $p$ is prime and $\gcd(a, p) = 1$, then:
+
+$$a^{p-1} \equiv 1 \pmod{p}$$
+
+## Polynomial Arithmetic
+
+### Polynomials over GF(2)
+
+In cryptography, polynomial arithmetic is often performed over $GF(2)$ (binary finite field).
+
+**Characteristics**:
+- Coefficients can only be 0 or 1
+- Addition is equivalent to XOR operation
+- No carry
+
+### Polynomial Modular Arithmetic
+
+Similar to integer modular arithmetic, polynomials can also undergo modular operations:
+
+$$f(x) \mod g(x)$$
+
+### Irreducible Polynomials
+
+Polynomials that cannot be factored over $GF(2)$ are called irreducible polynomials, analogous to primes in integers.
+
+**Irreducible polynomial used in AES**:
+
+$$m(x) = x^8 + x^4 + x^3 + x + 1$$
+
+## Groups, Rings, and Fields
+
+### Group
+
+A set $G$ with operation $\cdot$ forms a group if it satisfies:
+1. **Closure**: $a, b \in G \Rightarrow a \cdot b \in G$
+2. **Associativity**: $(a \cdot b) \cdot c = a \cdot (b \cdot c)$
+3. **Identity**: There exists $e$ such that $a \cdot e = e \cdot a = a$
+4. **Inverse**: Every element has an inverse
+
+### Ring
+
+A ring is an algebraic structure with two operations (addition and multiplication), where addition forms an abelian group, and multiplication satisfies associativity and distributivity.
+
+### Field
+
+A field is a ring where multiplication also forms an abelian group (excluding zero).
+
+<Callout type="info">
+Finite fields (Galois fields) are particularly important in cryptography. AES operates over $GF(2^8)$.
+</Callout>
+
+## Discrete Logarithm Problem
+
+Given prime $p$, generator $g$, and $y = g^x \mod p$, finding $x$ is called the Discrete Logarithm Problem (DLP).
+
+**Importance**:
+- Diffie-Hellman key exchange security is based on DLP
+- ElGamal encryption is based on DLP
+- DSA signatures are based on DLP
+
+## Summary
+
+| Concept | Application |
+|---------|-------------|
+| Modular Arithmetic | All cryptographic algorithms |
+| Euler's Function | RSA |
+| Polynomial Arithmetic | AES |
+| Discrete Logarithm | DH, ElGamal, DSA |
+| Finite Fields | AES, ECC |
