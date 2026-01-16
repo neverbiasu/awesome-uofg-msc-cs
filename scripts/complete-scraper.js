@@ -349,18 +349,40 @@ class CompleteMoodleScraper {
 
   async navigateToCourse(courseCode) {
     console.log(`🎯 Looking for course: ${COURSES[courseCode].name}`);
-    
+
     const courseName = COURSES[courseCode].name;
-    
-    const courseLink = await this.page.evaluate((courseName, courseCode) => {
+
+    // Extract individual course codes for matching (e.g., "COMPSCI5093/5104" -> ["COMPSCI5093", "COMPSCI5104"])
+    const courseCodes = courseCode.split('/').map(c => c.trim());
+    // Also extract base code without numbers for partial matching
+    const baseCode = courseCodes[0].replace(/\d+$/, '');
+
+    const courseLink = await this.page.evaluate((courseName, courseCode, courseCodes, baseCode) => {
       const links = Array.from(document.querySelectorAll('a'));
-      const foundLink = links.find(link => 
-        link.textContent.includes(courseName) || 
-        link.textContent.includes(courseCode) ||
-        link.href.includes(courseCode)
-      );
+      const foundLink = links.find(link => {
+        const text = link.textContent || '';
+        const href = link.href || '';
+
+        // Check full course name
+        if (text.includes(courseName)) return true;
+
+        // Check full course code
+        if (text.includes(courseCode) || href.includes(courseCode)) return true;
+
+        // Check individual course codes (for combined courses like COMPSCI5093/5104)
+        for (const code of courseCodes) {
+          if (text.includes(code) || href.includes(code)) return true;
+        }
+
+        // Check for partial name match (e.g., "Secured Software Engineering")
+        const nameWords = courseName.split(/[\s\/]+/).filter(w => w.length > 3);
+        const matchCount = nameWords.filter(word => text.toLowerCase().includes(word.toLowerCase())).length;
+        if (matchCount >= 2) return true;
+
+        return false;
+      });
       return foundLink ? foundLink.href : null;
-    }, courseName, courseCode);
+    }, courseName, courseCode, courseCodes, baseCode);
     
     if (courseLink) {
       console.log(`Found course link: ${courseLink}`);
