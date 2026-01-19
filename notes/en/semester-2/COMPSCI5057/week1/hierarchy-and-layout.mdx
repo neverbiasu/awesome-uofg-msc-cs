@@ -3,35 +3,208 @@ title: "Hierarchy & Layout Design"
 description: "Visual hierarchy techniques and layout design principles for effective interfaces."
 ---
 
-## Hierarchy
+import { Callout } from 'fumadocs-ui/components/callout';
 
-- **Definition**: Organizing elements to show their relative importance
-- **Visual Hierarchy Techniques**:
-  - Size and scale
-  - Color and contrast
-  - Typography weight
-  - Spacing and positioning
+# Hierarchy & Layout Design
 
-- **Purpose**: Guide users' attention to the most important elements first
+Visual hierarchy and layout are fundamental to creating interfaces that users can understand and navigate efficiently. Hierarchy guides attention, while layout organizes content for optimal comprehension.
+
+## Visual Hierarchy
+
+### What is Visual Hierarchy?
+
+Visual hierarchy is the arrangement of elements to show their order of importance. It guides users' eyes through the interface in a deliberate sequence, ensuring they see the most important information first.
+
+<Callout type="info">
+Users typically spend only seconds scanning a page. Good visual hierarchy ensures they find what they need quickly.
+</Callout>
+
+### Hierarchy Techniques
+
+#### 1. Size and Scale
+
+Larger elements attract more attention:
+
+| Element | Typical Size | Purpose |
+|---------|--------------|---------|
+| Headlines | 24-48px | Primary attention |
+| Subheadings | 18-24px | Secondary structure |
+| Body text | 14-16px | Content reading |
+| Captions | 12-14px | Supporting information |
+
+#### 2. Color and Contrast
+
+- **High contrast**: Draws attention (dark on light, bright accents)
+- **Low contrast**: Recedes visually (gray text, muted colors)
+- **Color coding**: Establishes meaning (red for errors, green for success)
+
+#### 3. Typography Weight
+
+- **Bold text**: Emphasizes important content
+- **Regular weight**: Standard reading
+- **Light weight**: De-emphasizes secondary information
+
+#### 4. Spacing and Position
+
+- **Top of page**: Higher importance (seen first)
+- **Left side**: Primary content (in LTR languages)
+- **Whitespace**: Isolates and emphasizes elements
+- **Proximity**: Groups related items together
+
+#### 5. Visual Treatments
+
+- **Borders and backgrounds**: Separate sections
+- **Shadows and depth**: Elevate important elements
+- **Icons and imagery**: Draw attention and convey meaning
+
+### Creating Effective Hierarchy
+
+**The Squint Test**: Blur your eyes or squint at a design. The elements that stand out should be the most important ones.
+
+**Three Levels Rule**: Establish at least three distinct levels of hierarchy:
+1. **Primary**: What users must see (headlines, CTAs)
+2. **Secondary**: What supports the primary (subheads, key info)
+3. **Tertiary**: Additional details (fine print, metadata)
 
 ## Layout Design
 
-- **Principles**:
-  - Grid systems for alignment
-  - White space for readability
-  - Grouping related elements
-  - F-pattern and Z-pattern scanning
+### Principles of Good Layout
 
-- **Considerations**:
-  - Responsive design for different screen sizes
-  - Accessibility requirements
-  - Cultural reading patterns
+#### Grid Systems
 
-## Practice Checklist
+Grids provide structure and consistency:
 
-- [ ] Analyze visual hierarchy in popular applications
-- [ ] Create a basic layout using grid principles
-- [ ] Evaluate a design for usability problems
+- **Column grids**: Divide width into columns (12-column is common)
+- **Modular grids**: Add horizontal divisions
+- **Baseline grids**: Align text to consistent vertical rhythm
+
+```
+|  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  | 10  | 11  | 12  |
+|     Content Area (8 cols)          |    Sidebar (4 cols)       |
+```
+
+#### Whitespace (Negative Space)
+
+Whitespace is not wasted space—it:
+- Improves readability
+- Creates visual breathing room
+- Groups related elements
+- Emphasizes important content
+
+<Callout type="warn">
+Cramming too much content reduces comprehension. Strategic whitespace improves usability.
+</Callout>
+
+#### Alignment
+
+Strong alignment creates order:
+- **Left alignment**: Most readable for body text
+- **Center alignment**: Headlines, short text blocks
+- **Right alignment**: Numbers, specific design needs
+- **Edge alignment**: Elements should share edges when possible
+
+#### Proximity and Grouping
+
+**Gestalt Principle**: Elements close together are perceived as related.
+
+- Group related controls together
+- Separate unrelated sections
+- Use consistent spacing between groups
+
+### Reading Patterns
+
+#### F-Pattern
+
+For text-heavy pages:
+```
+████████████████████
+████████████
+████████████████
+████████
+```
+Users scan horizontally, then down, with decreasing attention.
+
+#### Z-Pattern
+
+For minimal, visual pages:
+```
+1 ─────────────► 2
+        ╲
+         ╲
+          ╲
+3 ◄───────────── 4
+```
+Eyes move from top-left to top-right, diagonally down, then left to right.
+
+### Responsive Layout
+
+Designs must adapt to different screen sizes:
+
+| Breakpoint | Width | Columns | Use Case |
+|------------|-------|---------|----------|
+| Mobile | < 768px | 4 | Phones |
+| Tablet | 768-1024px | 8 | Tablets, small laptops |
+| Desktop | > 1024px | 12 | Laptops, desktops |
+
+**Key Strategies**:
+- Stack columns on smaller screens
+- Prioritize content (hide less important items)
+- Adjust typography and spacing
+- Consider touch targets for mobile
+
+### Accessibility Considerations
+
+- **Sufficient contrast**: WCAG requires 4.5:1 for normal text
+- **Scalable text**: Support user font size preferences
+- **Logical reading order**: Screen readers follow DOM order
+- **Focus indicators**: Visible keyboard navigation
+- **Touch targets**: Minimum 44x44px for mobile
+
+## Combining Hierarchy and Layout
+
+Effective design integrates both:
+
+1. **Layout** establishes the structural framework
+2. **Hierarchy** guides attention within that structure
+3. **Consistency** ties everything together
+
+### Example Analysis
+
+```
+┌─────────────────────────────────────┐
+│  LOGO        Navigation    [CTA]   │  ← Header (consistent)
+├─────────────────────────────────────┤
+│                                     │
+│     LARGE HEADLINE                  │  ← Primary hierarchy
+│     Subheading with description     │  ← Secondary
+│                                     │
+│     [Primary Button]  [Secondary]   │  ← Action hierarchy
+│                                     │
+├─────────────────────────────────────┤
+│  Feature 1  │  Feature 2  │  Feat 3 │  ← Grid layout
+└─────────────────────────────────────┘
+```
+
+## Common Layout Mistakes
+
+| Mistake | Problem | Solution |
+|---------|---------|----------|
+| No clear hierarchy | Users don't know where to look | Define 3+ hierarchy levels |
+| Crowded layout | Overwhelming, hard to read | Add whitespace |
+| Inconsistent spacing | Looks unprofessional | Use spacing system (8px base) |
+| Poor alignment | Chaotic appearance | Align to grid |
+| Ignoring patterns | Against user expectations | Follow F/Z patterns |
+
+## Summary
+
+| Concept | Key Points |
+|---------|------------|
+| Visual Hierarchy | Size, color, weight, position to show importance |
+| Grid Systems | Structure for consistent layouts |
+| Whitespace | Essential for readability and emphasis |
+| Reading Patterns | F-pattern (text), Z-pattern (visual) |
+| Responsive Design | Adapt layout to screen sizes |
+| Accessibility | Ensure usability for all users |
 
 ## Materials
 

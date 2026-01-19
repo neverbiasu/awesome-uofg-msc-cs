@@ -1,0 +1,178 @@
+---
+title: "Introduction to Deep Learning"
+description: "What is deep learning, its history, relationship to AI/ML, and neural network fundamentals."
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+# Introduction to Deep Learning
+
+Deep learning is a subset of machine learning that uses artificial neural networks with multiple layers to learn representations of data with multiple levels of abstraction.
+
+## What is Deep Learning?
+
+### Definition
+
+Deep learning is a class of machine learning algorithms that:
+- Uses multiple layers of neural networks
+- Learns hierarchical representations of data
+- Automatically discovers features from raw data
+
+### Relationship to AI and ML
+
+```
+Artificial Intelligence (AI)
+    └── Machine Learning (ML)
+            └── Deep Learning (DL)
+```
+
+| Level | Description |
+|-------|-------------|
+| AI | Systems that can perform tasks requiring human intelligence |
+| ML | Systems that learn from data without explicit programming |
+| DL | ML using deep neural networks with many layers |
+
+<Callout type="info">
+Deep learning has revolutionized AI by achieving human-level or better performance in tasks like image recognition, speech recognition, and natural language processing.
+</Callout>
+
+## History of Deep Learning
+
+### Key Milestones
+
+| Year | Event |
+|------|-------|
+| 1943 | McCulloch & Pitts: First mathematical model of neurons |
+| 1958 | Rosenblatt: Perceptron |
+| 1986 | Rumelhart et al.: Backpropagation |
+| 2006 | Hinton: Deep Belief Networks |
+| 2012 | AlexNet wins ImageNet (deep learning breakthrough) |
+| 2014 | GANs introduced by Goodfellow |
+| 2017 | Transformer architecture (Attention is All You Need) |
+| 2022+ | Large Language Models (GPT, Claude, etc.) |
+
+### AI Winters and Resurgence
+
+Deep learning experienced periods of reduced interest ("AI winters") due to:
+- Limited computational power
+- Insufficient training data
+- Vanishing gradient problems
+
+The resurgence was enabled by:
+- **GPU computing**: Massive parallel processing
+- **Big data**: Large datasets for training
+- **Algorithmic advances**: Better architectures and training techniques
+
+## Neural Network Basics
+
+### Biological Inspiration
+
+Artificial neural networks are inspired by biological neurons:
+
+| Biological | Artificial |
+|------------|------------|
+| Dendrites | Inputs |
+| Cell body | Summation + Activation |
+| Axon | Output |
+| Synapse | Weights |
+
+### The Artificial Neuron (Perceptron)
+
+A single neuron computes:
+
+$$y = f\left(\sum_{i=1}^{n} w_i x_i + b\right) = f(\mathbf{w}^T \mathbf{x} + b)$$
+
+Where:
+- $x_i$: Input features
+- $w_i$: Weights
+- $b$: Bias
+- $f$: Activation function
+- $y$: Output
+
+### Activation Functions
+
+| Function | Formula | Use Case |
+|----------|---------|----------|
+| Sigmoid | $\sigma(x) = \frac{1}{1+e^{-x}}$ | Binary classification (output) |
+| Tanh | $\tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}$ | Hidden layers (legacy) |
+| ReLU | $\max(0, x)$ | Hidden layers (most common) |
+| Softmax | $\frac{e^{x_i}}{\sum_j e^{x_j}}$ | Multi-class classification |
+
+### Multi-Layer Networks
+
+A deep neural network consists of:
+- **Input layer**: Receives raw features
+- **Hidden layers**: Learn representations (the "deep" part)
+- **Output layer**: Produces predictions
+
+```
+Input → [Hidden 1] → [Hidden 2] → ... → [Hidden n] → Output
+```
+
+<Callout type="info">
+The term "deep" refers to having multiple hidden layers. Networks with 2+ hidden layers are typically considered "deep".
+</Callout>
+
+## Why Deep Learning Works
+
+### Universal Approximation Theorem
+
+A neural network with a single hidden layer can approximate any continuous function, given enough neurons.
+
+### Hierarchical Feature Learning
+
+Deep networks learn features at multiple levels:
+
+**Example: Image Recognition**
+- Layer 1: Edges, corners
+- Layer 2: Textures, patterns
+- Layer 3: Parts (eyes, wheels)
+- Layer 4: Objects (faces, cars)
+
+### End-to-End Learning
+
+Traditional ML:
+```
+Raw Data → [Feature Engineering] → [ML Model] → Prediction
+```
+
+Deep Learning:
+```
+Raw Data → [Deep Neural Network] → Prediction
+```
+
+Deep learning automatically learns features, eliminating manual feature engineering.
+
+## Applications of Deep Learning
+
+| Domain | Applications |
+|--------|--------------|
+| Computer Vision | Image classification, object detection, segmentation |
+| NLP | Translation, sentiment analysis, chatbots, LLMs |
+| Speech | Recognition, synthesis, voice assistants |
+| Healthcare | Medical imaging, drug discovery |
+| Autonomous Systems | Self-driving cars, robotics |
+| Games | AlphaGo, game playing agents |
+
+## Deep Learning Frameworks
+
+| Framework | Developer | Key Features |
+|-----------|-----------|--------------|
+| PyTorch | Meta | Dynamic graphs, research-friendly |
+| TensorFlow | Google | Production-ready, TensorFlow Serving |
+| JAX | Google | Functional, high-performance |
+| Keras | Google | High-level API, beginner-friendly |
+
+<Callout type="info">
+This course uses PyTorch for practical implementations.
+</Callout>
+
+## Summary
+
+| Concept | Key Points |
+|---------|------------|
+| Deep Learning | ML using multi-layer neural networks |
+| Neural Networks | Inspired by biological neurons |
+| Activation Functions | Add non-linearity (ReLU most common) |
+| Deep Networks | Multiple hidden layers learn hierarchical features |
+| Frameworks | PyTorch (this course), TensorFlow, JAX |
