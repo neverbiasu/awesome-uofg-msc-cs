@@ -1,0 +1,190 @@
+---
+title: "Compute Challenges"
+description: "Challenges in distributed computing including fault tolerance, data locality, and synchronization."
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+# Compute Challenges in Distributed Systems
+
+When scaling computation across multiple machines, we face numerous challenges that don't exist in single-machine environments. Understanding these challenges is essential for designing effective big data solutions.
+
+## Why Distributed Computing is Hard
+
+### Single Machine vs. Distributed
+
+| Aspect | Single Machine | Distributed System |
+|--------|----------------|-------------------|
+| Failure | Rare, total | Common, partial |
+| Communication | Nanoseconds (memory) | Milliseconds (network) |
+| Consistency | Guaranteed | Must be managed |
+| Debugging | Straightforward | Complex |
+
+<Callout type="info">
+In a distributed system, anything that can go wrong will go wrong—and at the worst possible time.
+</Callout>
+
+## Key Challenges
+
+### 1. Fault Tolerance
+
+In large clusters, hardware failures are the norm, not the exception.
+
+**Failure Statistics**:
+- Google reports ~1-5% of disk failures per year
+- At scale (10,000+ machines), expect multiple failures daily
+- Network partitions happen regularly
+
+**Types of Failures**:
+- **Hardware**: Disk, memory, CPU, power supply
+- **Software**: Bugs, crashes, memory leaks
+- **Network**: Partitions, packet loss, latency spikes
+- **Human**: Misconfigurations, accidental deletions
+
+**Solutions**:
+- Replication of data and computation
+- Checkpointing intermediate results
+- Automatic task re-execution
+- Graceful degradation
+
+### 2. Data Locality
+
+Moving data is expensive; moving computation is cheaper.
+
+**The Problem**:
+```
+Network bandwidth << Disk bandwidth << Memory bandwidth
+```
+
+| Medium | Typical Bandwidth |
+|--------|-------------------|
+| Network (1Gbps) | ~100 MB/s |
+| Disk (HDD) | ~100-200 MB/s |
+| SSD | ~500-3000 MB/s |
+| Memory | ~50,000 MB/s |
+
+**Principle**: Move computation to where the data resides, not vice versa.
+
+**Data Locality Levels**:
+1. **Process-local**: Data in same process memory
+2. **Node-local**: Data on same machine's disk
+3. **Rack-local**: Data on same network rack
+4. **Off-rack**: Data on different rack
+
+### 3. Synchronization
+
+Coordinating work across machines is complex.
+
+**Challenges**:
+- No global clock
+- Message delays are unpredictable
+- Partial failures complicate coordination
+- Deadlocks and race conditions
+
+**Synchronization Patterns**:
+
+| Pattern | Description | Use Case |
+|---------|-------------|----------|
+| Barrier | All tasks wait until everyone reaches a point | Iterative algorithms |
+| Lock | Mutual exclusion for shared resources | Concurrent updates |
+| Consensus | Agreement on a value | Leader election |
+
+### 4. Load Balancing
+
+Distributing work evenly across machines.
+
+**Stragglers Problem**:
+- Some tasks take much longer than others
+- One slow task delays entire job completion
+- Causes: Data skew, hardware issues, resource contention
+
+**Solutions**:
+- Speculative execution (run duplicate tasks)
+- Fine-grained task division
+- Dynamic work stealing
+- Data pre-processing to reduce skew
+
+### 5. Network Bottlenecks
+
+Network is often the limiting factor.
+
+**Shuffle Problem**:
+- When data needs to move between phases
+- N machines sending to N machines = N² connections
+- Network congestion, packet drops
+
+**Mitigation Strategies**:
+- Combiners (local aggregation before shuffle)
+- Compression
+- Intelligent partitioning
+- Minimize data movement
+
+## Programming Complexity
+
+### Traditional Parallel Programming
+
+```java
+// Manual thread management
+Thread[] threads = new Thread[numWorkers];
+for (int i = 0; i < numWorkers; i++) {
+    threads[i] = new Thread(() -> {
+        // Handle failures?
+        // Coordinate with others?
+        // What if this node dies?
+    });
+    threads[i].start();
+}
+// Wait for all... but what if one crashes?
+```
+
+**Problems**:
+- Explicit thread/process management
+- Manual synchronization (locks, barriers)
+- Complex failure handling
+- Hard to debug and test
+
+### What We Need
+
+A programming model that:
+- Hides distribution complexity
+- Handles failures automatically
+- Scales transparently
+- Is easy to program
+
+<Callout type="info">
+This is exactly what MapReduce provides—a simple programming model that abstracts away the complexity of distributed computing.
+</Callout>
+
+## CAP Theorem
+
+In distributed systems, you can only guarantee two of three properties:
+
+| Property | Description |
+|----------|-------------|
+| **Consistency** | All nodes see the same data |
+| **Availability** | System responds to all requests |
+| **Partition Tolerance** | System works despite network failures |
+
+**In Practice**:
+- Network partitions are inevitable
+- Must choose between Consistency and Availability
+- Different systems make different trade-offs
+
+| System Type | Choice | Example |
+|-------------|--------|---------|
+| CP | Consistency over Availability | HBase, MongoDB |
+| AP | Availability over Consistency | Cassandra, DynamoDB |
+
+## Summary
+
+| Challenge | Description | Solution Approach |
+|-----------|-------------|-------------------|
+| Fault Tolerance | Machines fail frequently | Replication, checkpointing |
+| Data Locality | Network is slow | Move compute to data |
+| Synchronization | No global clock | Barrier, distributed consensus |
+| Load Balancing | Uneven work distribution | Speculation, fine tasks |
+| Network | Limited bandwidth | Reduce data movement |
+
+## Materials
+
+- [02-01 Compute Challenges (PDF)](../../../../../../materials/semester-2/COMPSCI4064-5088-big-data/resources/02-01-ComputeChallenges.pdf)

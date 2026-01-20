@@ -1,0 +1,268 @@
+---
+title: "MapReduce"
+description: "MapReduce编程模型及其用于分布式数据处理的关键概念。"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+# MapReduce
+
+MapReduce是一种用于在分布式集群上并行处理大型数据集的编程模型。由Google在2004年提出，它通过提供一个简单的抽象来隐藏分布式计算的复杂性，从而彻底改变了大数据处理。
+
+## 核心概念
+
+MapReduce将计算分为两个阶段：
+
+```
+输入 → [MAP] → 中间结果 → [SHUFFLE] → [REDUCE] → 输出
+```
+
+### Map阶段
+
+**目的**：将输入数据转换为中间键值对。
+
+```
+map(key, value) → list[(key', value')]
+```
+
+- 一次处理一条记录
+- 在所有输入分片上并行运行
+- 输出零个或多个键值对
+
+### Reduce阶段
+
+**目的**：按键聚合值。
+
+```
+reduce(key, list[values]) → list[values']
+```
+
+- 接收给定键的所有值
+- 产生最终输出
+- 在不同键上并行运行
+
+## 经典示例：词频统计
+
+**问题**：统计文档集合中每个词的出现次数。
+
+### Map函数
+
+```python
+def map(document_id, document_text):
+    for word in document_text.split():
+        emit(word, 1)
+```
+
+**输入**: `("doc1", "hello world hello")`
+
+**输出**:
+```
+("hello", 1)
+("world", 1)
+("hello", 1)
+```
+
+### Reduce函数
+
+```python
+def reduce(word, counts):
+    emit(word, sum(counts))
+```
+
+**输入**: `("hello", [1, 1])`
+
+**输出**: `("hello", 2)`
+
+## 数据流
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                         输入数据                             │
+│  分片1   │  分片2   │  分片3   │  分片4   │  分片5          │
+└─────────────────────────────────────────────────────────────┘
+      ↓           ↓           ↓           ↓           ↓
+┌─────────────────────────────────────────────────────────────┐
+│                        MAP阶段                              │
+│  Map 1   │  Map 2   │  Map 3   │  Map 4   │  Map 5         │
+└─────────────────────────────────────────────────────────────┘
+      ↓           ↓           ↓           ↓           ↓
+┌─────────────────────────────────────────────────────────────┐
+│                    SHUFFLE & SORT                           │
+│           按键分组所有mapper的值                              │
+└─────────────────────────────────────────────────────────────┘
+      ↓                       ↓                       ↓
+┌─────────────────────────────────────────────────────────────┐
+│                      REDUCE阶段                             │
+│      Reduce 1      │      Reduce 2      │    Reduce 3      │
+└─────────────────────────────────────────────────────────────┘
+      ↓                       ↓                       ↓
+┌─────────────────────────────────────────────────────────────┐
+│                        输出数据                              │
+└─────────────────────────────────────────────────────────────┘
+```
+
+## 关键组件
+
+### Partitioner（分区器）
+
+决定每个键发送到哪个reducer。
+
+```python
+def partition(key, num_reducers):
+    return hash(key) % num_reducers
+```
+
+- 默认：哈希分区
+- 可自定义分区器满足特殊需求
+- 确保相同的键总是发送到相同的reducer
+
+### Combiner（组合器）
+
+shuffle前的本地聚合（可选优化）。
+
+```
+Map输出 → [COMBINER] → 缩减的数据 → Shuffle
+```
+
+<Callout type="info">
+Combiner就像一个在本地运行的"迷你reducer"。它必须是结合律和交换律的（如sum、max、min）。
+</Callout>
+
+**示例**：带combiner的词频统计
+
+不使用combiner：
+```
+Mapper 1: ("the", 1), ("the", 1), ("the", 1) → 发送3条记录
+```
+
+使用combiner：
+```
+Mapper 1: ("the", 3) → 发送1条记录
+```
+
+### Shuffle和Sort
+
+框架自动完成：
+1. 按键对mapper输出进行分区
+2. 按键排序数据
+3. 将数据传输到适当的reducer
+4. 为reducer按键分组值
+
+## MapReduce模式
+
+### 过滤
+
+选择符合条件的记录。
+
+```python
+def map(key, record):
+    if meets_criteria(record):
+        emit(key, record)
+
+def reduce(key, records):
+    for record in records:
+        emit(key, record)
+```
+
+### 聚合
+
+计算统计量（sum、avg、count）。
+
+```python
+def map(key, record):
+    emit(record.category, record.value)
+
+def reduce(category, values):
+    emit(category, sum(values))
+```
+
+### 连接
+
+合并多个数据源的数据。
+
+**Reduce端连接**：
+```python
+def map(key, record):
+    # 用源标记记录
+    emit(record.join_key, ("source_A", record))
+    # 或
+    emit(record.join_key, ("source_B", record))
+
+def reduce(join_key, tagged_records):
+    # 按源分离并合并
+    a_records = [r for tag, r in tagged_records if tag == "source_A"]
+    b_records = [r for tag, r in tagged_records if tag == "source_B"]
+    for a in a_records:
+        for b in b_records:
+            emit(join_key, merge(a, b))
+```
+
+### 倒排索引
+
+从文档构建搜索索引。
+
+```python
+def map(doc_id, content):
+    for word in content.split():
+        emit(word, doc_id)
+
+def reduce(word, doc_ids):
+    emit(word, list(set(doc_ids)))
+```
+
+## 容错
+
+MapReduce提供自动容错：
+
+| 故障类型 | 恢复策略 |
+|----------|----------|
+| Map任务失败 | 在另一个节点重新执行 |
+| Reduce任务失败 | 重新执行；重新获取map输出 |
+| 节点故障 | 重新调度其所有任务 |
+| Master故障 | 重启作业（罕见） |
+
+**关键原则**：任务是确定性和幂等的——可以安全地重新执行。
+
+## MapReduce的局限性
+
+| 局限性 | 描述 |
+|--------|------|
+| 仅批处理 | 不适合实时处理 |
+| 磁盘I/O | 中间数据写入磁盘 |
+| 两阶段 | 复杂算法需要多个作业 |
+| 无迭代 | 对迭代算法（ML）支持差 |
+| 高延迟 | 分钟到小时，而非秒 |
+
+<Callout type="warn">
+MapReduce在map和reduce阶段之间将中间结果写入磁盘，对于迭代算法会造成显著的I/O开销。
+</Callout>
+
+## 何时使用MapReduce
+
+**适合**：
+- 大型数据集的批处理
+- ETL（提取、转换、加载）
+- 日志分析
+- 构建搜索索引
+- 一次性聚合
+
+**不理想**：
+- 交互式查询
+- 实时处理
+- 迭代算法（改用Spark）
+- 小数据集
+
+## 总结
+
+| 概念 | 描述 |
+|------|------|
+| Map | 将输入转换为键值对 |
+| Reduce | 按键聚合值 |
+| Shuffle | 按键传输和分组数据 |
+| Combiner | 本地预聚合优化 |
+| Partitioner | 确定键到reducer的映射 |
+| 容错 | 自动任务重新执行 |
+
+## 材料
+
+- [02-02 MapReduce (PDF)](../../../../../../materials/semester-2/COMPSCI4064-5088-big-data/resources/02-02-MapReduce.pdf)
