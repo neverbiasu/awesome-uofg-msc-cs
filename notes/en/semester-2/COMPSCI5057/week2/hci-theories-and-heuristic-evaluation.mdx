@@ -1,0 +1,81 @@
+---
+title: 'Week 2: Theories of HCI and Heuristic Evaluation'
+description: 'Exploring foundational theories of Human-Computer Interaction (HCI) including affordances, mental models, and error prevention, alongside the practical application of Heuristic Evaluation for usability assessment.'
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+## Key Takeaway
+
+This week delves into core theories that explain how users interact with systems, emphasizing that effective design minimizes cognitive load and prevents errors. Concepts like **affordances**, **signifiers**, and the distinction between **knowledge in the head** and **knowledge in the world** provide a framework for creating intuitive interfaces. Crucially, the practical method of **Heuristic Evaluation** is introduced, outlining ten key usability principles that designers can use to systematically identify and address usability problems in any user interface, ensuring a more user-friendly and efficient experience.
+
+## Theoretical Background of HCI
+
+Understanding human cognition and behavior is fundamental to designing effective interfaces.
+
+### Ease to Understand
+
+How do users know how to use an unfamiliar object? This involves:
+-   **Affordance**: The perceived and actual properties of an object that determine how it could be used. It's a relationship between an object and a person, jointly determined by the object's properties and the person's capabilities/experiences. (e.g., a chair affords sitting).
+-   **Anti-Affordance**: Properties that prevent actions.
+-   **Signifier**: When affordances cannot be easily perceived, a signifier (image, text, sound) is needed to communicate where the action should take take place (e.g., labels, worn paths).
+
+### Ease to Use: Reducing Cognitive Load
+
+Designing to reduce the cognitive load, especially memorization, required for correct use.
+-   **Knowledge in the Head vs. Knowledge in the World**:
+    -   **Knowledge in the World**: Information available from the environment (e.g., perceived affordances, controls, cultural norms). Easier to recognize than recall.
+    -   **Knowledge in the Head**: Memories and experiences (short-term and long-term memory). Short-term memory is fragile and limited. Long-term memory is easier for meaningful things. Designers face a trade-off between relying on user's memory or external cues.
+-   **Principle of Mapping**: Forming natural mappings between controls and their effects.
+-   **Principle of Feedback**: Showing the effect of an action to inform users.
+
+### Error-Free Design
+
+How to avoid mistakes in interaction design.
+-   **Slips vs. Mistakes**:
+    -   **Slips**: Unintended actions, often due to inattention.
+    -   **Mistakes**: Intended actions that are incorrect due to faulty goals or understanding.
+-   **Design for Error Prevention**: Assume mishaps will happen and design to protect against them.
+-   **Constraints**: Limit user choices to prevent errors.
+    -   **Physical Constraints**: Rely on physical properties (e.g., only one way to insert a USB-A plug).
+    -   **Cultural Constraints**: Rely on socially learned behaviors.
+    -   **Semantic Constraints**: Rely on intrinsic meaning.
+    -   **Logical Constraints**: Rely on trial and reasoning.
+-   **Forcing Functions**: Design elements that actively prevent errors or ensure certain actions.
+    -   **Interlocks**: Require actions to occur in sequence (e.g., cannot remove an item before confirming).
+    -   **Lock-Ins**: Keep an action active, preventing it from stopping prematurely.
+    -   **Lock-Outs**: Prevent an action from occurring (often in safety-critical contexts).
+-   **Design for Error Recovery**: Make errors easy to discover and correct, and allow actions to be reversed.
+
+## Heuristic Evaluation
+
+A usability inspection method for identifying usability problems in user interface design.
+
+### Analytic vs. Empirical Methods
+
+-   **Analytic Methods**: Based on examining inherent attributes of the design (e.g., Heuristic Evaluation, Cognitive Walkthrough). Do not involve real users in evaluation phase.
+-   **Empirical Methods**: Based on data observed from real user participants (e.g., Lab-based evaluation, Field study).
+
+### What is Heuristic Evaluation?
+
+It involves a small set of evaluators examining the interface and judging its compliance with recognized usability principles (the "heuristics"). It's important because it provides foundational usability principles, is applicable in many contexts, uses concrete language, and offers tools to evaluate and improve interfaces.
+
+### Jakob Nielsen's 10 Usability Heuristics
+
+1.  **Visibility of System Status**: Keep users informed about what is going on through appropriate feedback.
+2.  **Match Between System and the Real World**: Speak the user's language, follow real-world conventions.
+3.  **User Control and Freedom**: Provide clearly marked "emergency exits" for users to leave unwanted states.
+4.  **Consistency and Standards**: Users should not have to wonder whether different words, situations, or actions mean the same thing.
+5.  **Error Prevention**: Design carefully to prevent problems from occurring in the first place (eliminate error-prone conditions, provide confirmation).
+6.  **Recognition Rather Than Recall**: Minimize user's memory load by making objects, actions, and options visible.
+7.  **Flexibility and Efficiency of Use**: Allow experienced users to tailor frequent actions or use accelerators. Cater to both novice and expert users.
+8.  **Aesthetic and Minimalist Design**: Dialogues should not contain irrelevant or rarely needed information.
+9.  **Help Users Recognize, Diagnose, and Recover from Errors**: Error messages should be plain, precise, and constructively suggest solutions.
+10. **Help and Documentation**: Provide easily searchable, task-focused help and documentation with concrete steps.
+
+### How to Conduct Heuristic Evaluation
+
+-   **Evaluators**: Each evaluator finds problems alone. A single evaluator finds only about 35% of issues identified by a group. Nielsen recommends up to five evaluators for optimal cost/benefit.
+-   **Identifying Problems**: Problems are presented in a written report, labeled, and organized by heuristics.
+-   **Aggregating Problems**: Combine problems from all reports into a complete list, often using a matrix to plot problems against evaluators.
+-   **Analyzing Problems**: Consider the prevalence (how many found it), ease of correction, and importance of each problem. Propose solutions and a ranked priority list.
