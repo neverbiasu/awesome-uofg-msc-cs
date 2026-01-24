@@ -1,0 +1,164 @@
+---
+title: "Lecture 1: Introduction to Secured Software Engineering"
+description: "An overview of the course logistics and a foundational introduction to Secured Software Engineering (SSE), covering its importance, core concepts like design and development models, and the principles of secure software design."
+---
+
+import { Accordions, Accordion } from 'fumadocs-ui/components/accordion';
+import { Callout } from 'fumadocs-ui/components/callout';
+
+## Course Logistics
+
+### Schedule
+- **Lectures**: Every Friday, 16:00 – 18:00 at JOSEPH BLACK: B419 MAIN Lecture Theatre.
+- **QA session (Online & Optional)**: Wednesday, 17:00 – 18:00 via [Zoom](https://uofglasgow.zoom.us/j/89729933348?pwd=EKSCxrnNTlELap1kbhOsViAtwWYE Vn.1).
+- **Labs**: There are no labs for SSE. Tutorials are integrated into the lectures.
+- **Recording**: Lectures are recorded and available via an [auto-enroll link on Echo360](https://echo360.org.uk/collection/09ea5454-3751-4b38-9e22-85190dceced2/public).
+
+### Assessments
+- **A1 (10%)**: Available 30/01/2026 (Week 3), due 13/02/2026 (Week 5).
+- **A2 (10%)**: Available 27/02/2026 (Week 7), due 13/03/2026 (Week 9).
+- **Final Exam (80%)**: Takes place in April/May (closed book with a provided cheat sheet).
+
+<Callout title="Cheat Sheet Policy">
+A standardized cheat sheet (max 4 sides of A4, ideally 2) will be provided by the instructor at least 2 weeks before the exam. It is not expected to be comprehensive.
+</Callout>
+
+### Intended Learning Outcomes (ILOs)
+By the end of this course, students will be able to:
+1. Describe the life cycle for developing secure software systems.
+2. Apply lightweight refactoring methods to balance trade-offs between competing security, privacy, and functionality.
+3. Verify the effectiveness of a secure software design solution.
+4. Explore general approaches to privacy engineering and the Privacy-by-Design paradigm.
+5. Build a simple privacy justificatory framework for a given software's alignment with data protection regulations (e.g., GDPR).
+6. Apply secure software design principles to various application domains.
+
+### Prerequisites
+- A firm background in Object-Oriented Software Engineering (e.g., `COMPSCI2008` or equivalent).
+- Ability to understand and write Java code is required for assignments and the final exam.
+
+---
+
+## Introduction to Security
+
+### What is a Vulnerability?
+In the context of Secure Software Engineering, a vulnerability is a **design flaw or implementation bug** that can be exploited by an attacker. It's a weakness in the system, not the attack itself.
+
+### The Importance of Software in Critical Sectors
+Software is integral to modern society, underpinning critical sectors where security is paramount:
+- **Finance**: Manages transactions, investments, and protects against fraud.
+- **Healthcare**: Essential for patient records (EHRs), diagnostics, and treatment planning.
+- **Communication**: Enables secure messaging, video conferencing, and data transfer.
+- **Transportation**: Vital for GPS, aviation systems, and autonomous vehicles.
+
+<Callout title="Case Study: Mariner 1 (1962)">
+The Mariner 1 spacecraft failed shortly after liftoff due to a combination of hardware and software failures. A programmer incorrectly transcribed a formula into code, missing a single subscript bar. This tiny error led to the mission's failure, highlighting how even the smallest bug can have catastrophic consequences.
+</Callout>
+
+### Consequences of Insecure Software
+- **Data Breaches**: Unauthorized access to sensitive information.
+- **Financial Losses**: Costs from fraud, theft, and operational downtime.
+- **Reputational Damage**: Loss of customer trust and brand integrity.
+- **Operational Disruptions**: Interruption of essential business services.
+- **Legal and Compliance Issues**: Penalties for not adhering to regulations like GDPR.
+
+---
+
+## Software Design Principles
+
+### What is Software Design?
+Software design is the process of defining a system's architecture, components, and interfaces to satisfy specific requirements. It's the bridge between understanding a problem and creating a solution.
+
+> "Design is not just what it looks like and feels like. Design is how it works." — Steve Jobs
+
+### Design Strategies
+
+<Accordions>
+  <Accordion title="Top-down Design">
+    A hierarchical approach that starts with the overall system architecture and breaks it down into smaller, specific components.
+    - **Advantages**: Facilitates clear understanding, simplifies complexity, and encourages modularity.
+  </Accordion>
+  <Accordion title="Bottom-up Design">
+    Starts with developing and testing individual, reusable modules, which are then integrated to form a complete system.
+    - **Advantages**: Allows parallel development, facilitates code reuse, and offers flexibility.
+  </Accordion>
+  <Accordion title="Hybrid Approach">
+    Combines both strategies. It starts with a high-level (top-down) outline and then develops detailed components (bottom-up) that are integrated into the architecture. This is the most common and practical approach.
+  </Accordion>
+</Accordions>
+
+---
+
+## Software Development Models and Security
+
+No single software development model can inherently guarantee secure software. Security must be an intentional and integrated part of any lifecycle.
+
+- **Waterfall Model**: A linear, sequential approach. Rigid and documentation-heavy.
+- **V-Model**: An extension of Waterfall where each development phase has a corresponding testing phase. Emphasizes verification and validation.
+- **Incremental/Iterative Model**: Software is developed in small, repeated cycles (iterations), allowing for flexibility and evolution.
+- **Spiral Model**: Focuses on risk assessment through iterative prototyping and evaluation.
+- **Agile Development**: Emphasizes rapid iterations (sprints) and customer feedback to reduce project risk. While popular, it does not inherently ensure security.
+
+<Callout title="The Common Criteria (ISO/IEC 15408)">
+The Common Criteria (CC) is an international standard for assessing security features in computer systems. It provides evidence that security features perform as specified but **cannot guarantee overall security**. A system can have CC-evaluated features and still contain vulnerabilities.
+</Callout>
+
+**Key Takeaway**: Current software development methods **may not** produce secure software by default. Security requires dedicated principles and practices.
+
+---
+
+## Principles of Secure Software Design
+
+These are fundamental concepts for building robust and secure systems.
+
+<Accordions>
+  <Accordion title="1. Defence in Depth">
+    **Definition**: Employing multiple layers of security controls. If one layer fails, others provide backup protection.
+    **Example**: A network with both a firewall and an Intrusion Detection System (IDS).
+  </Accordion>
+  <Accordion title="2. Fail Safe">
+    **Definition**: In case of an error or malfunction, the system should revert to a safe state, protecting information.
+    **Example**: An application automatically logging a user out after a period of inactivity.
+  </Accordion>
+  <Accordion title="3. Least Privilege">
+    **Definition**: Granting users or processes only the minimum access rights necessary to perform their tasks.
+    **Example**: A database admin can manage the database but cannot modify user accounts on the OS level.
+  </Accordion>
+  <Accordion title="4. Separation of Duties">
+    **Definition**: A system of checks and balances where no single individual has control over all aspects of a transaction.
+    **Example**: One employee records a financial transaction, while another must approve it.
+  </Accordion>
+  <Accordion title="5. Economy of Mechanism">
+    **Definition**: Keeping the system design simple and small to reduce the potential attack surface.
+    **Example**: Minimizing the amount of code in a program.
+  </Accordion>
+  <Accordion title="6. Complete Mediation">
+    **Definition**: Every single access request to any object must be checked against the access control mechanism.
+    **Example**: Validating file permissions on every access, rather than relying on a cached or temporary permission.
+  </Accordion>
+  <Accordion title="7. Open Design">
+    **Definition**: The security of a system should not depend on the secrecy of its design or implementation.
+    **Example**: Using well-known, publicly scrutinized encryption algorithms (like AES) instead of a secret, proprietary one.
+  </Accordion>
+  <Accordion title="8. Least Common Mechanism">
+    **Definition**: Minimize the mechanisms (e.g., resources, files) shared among users or processes.
+    **Example**: Isolating data for each tenant in a multi-tenant cloud application.
+  </Accordion>
+  <Accordion title="9. Psychological Acceptability">
+    **Definition**: Security measures should be user-friendly and transparent enough that users will not try to circumvent them.
+    **Example**: Using fingerprint or face ID for authentication is both secure and easy for users.
+  </Accordion>
+  <Accordion title="10. Weakest Link">
+    **Definition**: The overall security of a system is only as strong as its weakest component.
+    **Example**: A secure web application can be compromised by a single vulnerable third-party plugin.
+  </Accordion>
+  <Accordion title="11. Leveraging Existing Components">
+    **Definition**: Reuse well-tested, existing software components and libraries to avoid introducing new vulnerabilities.
+    **Example**: Using a trusted library like OpenSSL for encryption instead of writing your own.
+  </Accordion>
+</Accordions>
+
+<Callout type="warning" title="Case Study Violation">
+**Scenario**: A system validates all user inputs, but an attacker bypasses this by sending data through an undocumented internal interface.
+**Principle Violated**: **Complete Mediation**. The system fails to check *every* access point, leaving an internal interface unguarded.
+</Callout>
+
