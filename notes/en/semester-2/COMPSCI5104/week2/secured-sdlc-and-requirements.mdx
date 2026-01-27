@@ -5,7 +5,7 @@ description: "This lecture covers common software vulnerabilities, threats, and 
 
 import { Accordions, Accordion } from 'fumadocs-ui/components/accordion';
 import { Callout } from 'fumadocs-ui/components/callout';
-import { Steps } from 'fumadocs-ui/components/steps';
+import { Steps, Step } from 'fumadocs-ui/components/steps';
 
 ## Vulnerabilities, Threats, and Countermeasures
 
@@ -15,6 +15,9 @@ A **software vulnerability** is a security flaw, glitch, or weakness in the code
 A key resource for understanding common vulnerabilities is the **OWASP Top 10**.
 
 ### OWASP Top 10 Vulnerabilities (2021 Highlights)
+
+![OWASP Top 10 2017 vs 2021](/images/COMPSCI5104/week2/owasp-top-10-2017-vs-2021.png)
+_A comparison diagram showing the evolution of the OWASP Top 10 from 2017 to 2021._
 
 <Accordions>
   <Accordion title="A01: Broken Access Control">
@@ -36,6 +39,9 @@ A key resource for understanding common vulnerabilities is the **OWASP Top 10**.
   <Accordion title="A06: Vulnerable and Outdated Components">
     **Definition**: Using libraries, frameworks, or other software components with known security vulnerabilities.
     **Example**: Running a web server with an old version of OpenSSL that is known to be vulnerable to the Heartbleed bug.
+
+    ![Screenshot of the "Add Plugins" page in the WordPress admin dashboard](/images/COMPSCI5104/week2/wordpress-plugins-example.png)
+    _An example of managing third-party components (plugins) in WordPress. Outdated or untested plugins can introduce vulnerabilities._
   </Accordion>
 </Accordions>
 
@@ -43,7 +49,14 @@ A key resource for understanding common vulnerabilities is the **OWASP Top 10**.
 Threats are potential actions that can exploit vulnerabilities. Common non-target-specific threats include:
 - **Backdoor**: A hidden method of bypassing normal authentication to gain access to a system.
 - **Phishing**: A social engineering attack using deceptive emails or websites to trick users into revealing sensitive information.
+
+  ![Screenshot of an email message, likely taken from a web-based email client, with the subject 'Fake emails' and sender Simon Gay](/images/COMPSCI5104/week2/phishing-email-example.png)
+  _A real-world example of a phishing alert sent to university staff, warning about deceptive emails impersonating a legitimate sender._
 - **Man-in-the-Middle (MITM)**: An attacker intercepts communication between two parties to eavesdrop or manipulate data.
+
+  ![Diagram illustrating a Man-in-the-Middle (MITM) cyberattack](/images/COMPSCI5104/week2/mitm-attack-diagram.png)
+  _A diagram illustrating how a Man-in-the-Middle (MITM) attack works._
+
 - **Denial-of-Service (DoS)**: An attack that overwhelms a system with traffic, making it unavailable to legitimate users. The root cause is often a failure to consider capacity limits in the design.
 
 ### Countermeasures
