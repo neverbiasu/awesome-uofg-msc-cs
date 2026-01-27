@@ -1,0 +1,134 @@
+---
+title: "Hadoop and Spark Fundamentals"
+description: "A deep dive into the execution flow of Hadoop MapReduce, its limitations, and the introduction to Apache Spark, its core concepts like RDDs, and its execution model featuring DAGs."
+---
+
+import { Accordions, Accordion } from 'fumadocs-ui/components/accordion';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps, Step } from 'fumadocs-ui/components/steps';
+
+## Key Takeaways
+- **Hadoop's Execution Flow**: A MapReduce job involves a detailed, multi-step process managed by a JobTracker and multiple TaskTrackers, with heavy reliance on HDFS for reading data and writing intermediate results.
+- **Hadoop's Limitations**: Hadoop faces challenges with small files, high latency due to constant disk I/O, complex job chaining, and a verbose programming model (Java), which has led to its declining popularity.
+- **Rise of Apache Spark**: Spark was created to address Hadoop's shortcomings by leveraging in-memory processing, which dramatically reduces read/write overhead and simplifies job chaining.
+- **Spark's Core Concepts**: Spark is built around Resilient Distributed Datasets (RDDs), which are partitioned, in-memory data collections. Operations are categorized into **Transformations** (creating a new RDD) and **Actions** (returning a value or writing to disk).
+- **Spark's Execution Model**: Spark uses a **Directed Acyclic Graph (DAG)** to represent the sequence of tasks. It employs **Lazy Execution**, meaning it only computes the necessary transformations when an action is called, optimizing the workflow.
+
+---
+
+## The Anatomy of a Hadoop MapReduce Job
+
+The execution of a Hadoop MapReduce job is a complex ballet orchestrated by the **JobTracker** and performed by multiple **TaskTrackers** across a cluster. It relies heavily on the Hadoop Distributed File System (HDFS) for storing job resources and data.
+
+### Step-by-Step Execution Flow
+
+<Steps>
+  <Step title="1-4: Job Submission">
+    The client submits a job. The JobTracker provides a Job ID, and the client copies job resources (like the JAR file) to HDFS. The job is then formally submitted to the JobTracker.
+  </Step>
+  <Step title="5-6: Job Initialization">
+    The JobTracker initializes the job and retrieves **Input Splits** from the NameNode. An Input Split is a chunk of the input data that will be processed by a single Map task. By default, splits are data-agnostic and at most one HDFS block in size.
+  </Step>
+  <Step title="7-11: Map Task Execution">
+    TaskTrackers, which are constantly sending heartbeats to the JobTracker, are assigned Map tasks based on data locality (data-local > rack-local > remote). A TaskTracker launches a new JVM, runs the Map task, and reads its assigned data split from a DataNode.
+  </Step>
+  <Step title="12-14: Intermediate Output & Shuffle">
+    The Map task's output is sorted by key in memory. This intermediate data is partitioned and written to local disk (not HDFS). Once complete, the TaskTracker notifies the JobTracker.
+  </Step>
+  <Step title="15-20: Reduce Task Execution">
+    Once Map tasks are complete, the JobTracker assigns Reduce tasks. The Reduce task retrieves its assigned partitions from the various nodes where Map tasks ran (this is the "shuffle" phase), performs a recursive merge-sort on the data, and executes the Reduce function.
+  </Step>
+  <Step title="21-23: Final Output & Completion">
+    The Reduce task writes its final output to HDFS using an `OutputFormat`. Upon completion, it notifies the JobTracker, which then marks the entire job as complete.
+  </Step>
+</Steps>
+
+<Accordions>
+  <Accordion title="Understanding InputFormat and OutputFormat">
+    - **`InputFormat`**: This class is responsible for converting HDFS blocks into usable data for a Map or Reduce function. Hadoop provides various built-in formats for text files, key-value pairs, sequence files (binary key-value), and database tables (via JDBC).
+    - **`OutputFormat`**: This class writes the final partitions of data to persistent storage, usually HDFS. Like `InputFormat`, several pre-provided writers are available for different data formats.
+  </Accordion>
+</Accordions>
+
+---
+
+## Additional Hadoop Concepts & Limitations
+
+While powerful, the classic Hadoop MapReduce has several nuances and well-known issues that have influenced the development of newer big data tools.
+
+### Key Additional Concepts
+
+<Accordions>
+  <Accordion title="Distributed Cache">
+    To handle small, read-only files efficiently without the overhead of HDFS, Hadoop provides a **Distributed Cache**. It copies files (like JARs, configuration files, or small datasets) to each TaskTracker only once per job. This is a common way to share state across tasks.
+  </Accordion>
+  <Accordion title="Counters">
+    Hadoop allows tasks to create and update numerical **Counters** at runtime. These are periodically sent to the JobTracker, providing real-time progress monitoring for jobs, tasks, and HDFS operations. Users can also define custom counters.
+  </Accordion>
+  <Accordion title="Compression">
+    Data compression is highly recommended to reduce storage/network overhead and improve I/O throughput. However, the chosen compression format (e.g., Bzip2, LZO, Snappy) must be **splittable** to work effectively with MapReduce's parallel processing model.
+  </Accordion>
+  <Accordion title="Task Failures">
+    Hadoop is designed for fault tolerance.
+    - **Task Failure**: If a task fails (due to a bug, dead JVM, etc.), the TaskTracker notifies the JobTracker, which reschedules the task on a different node.
+    - **TaskTracker Failure**: If a TaskTracker fails (detected via missed heartbeats), the JobTracker removes it from the pool and reschedules all its assigned tasks elsewhere.
+  </Accordion>
+</Accordions>
+
+### Major Issues with Hadoop
+
+<Callout title="Why is Hadoop's Popularity Declining?">
+Hadoop's design, which was revolutionary for its time, has several drawbacks in the context of modern hardware and data processing needs.
+</Callout>
+
+- **The Small Files Problem**: HDFS is optimized for large files. Storing a massive number of small files overloads the NameNode's memory, as it must hold metadata for every single file block.
+- **High Latency from Disk I/O**: Hadoop was designed when RAM was expensive. It writes intermediate data from every Map and Reduce task to disk. This constant disk I/O creates significant latency, especially for complex jobs.
+- **Complex Job Chaining**: Many real-world algorithms require chaining multiple MapReduce jobs together. In Hadoop, this is slow and cumbersome because data must be written to HDFS and then re-read between each stage.
+- **Limited Use Cases**: The rigid MapReduce paradigm doesn't naturally fit all problem types, especially streaming data processing or iterative algorithms that require shared state.
+- **Verbose and Difficult to Use**: Writing MapReduce jobs, typically in Java, is wordy and less intuitive compared to modern data science APIs (like Python's Pandas).
+
+---
+
+## Introduction to Apache Spark
+
+Apache Spark was created at UC Berkeley in 2009 specifically to address the shortcomings of Hadoop MapReduce. It redesigns data processing from the ground up to leverage a key resource that has become cheap and abundant: **main memory**.
+
+### Core Principles
+
+The fundamental motivation for Spark was to **eliminate intermediate read/write operations to disk**. By performing computations in-memory, Spark drastically reduces the overhead that slows down Hadoop, making complex, multi-stage jobs fast and easy.
+
+### Resilient Distributed Datasets (RDDs)
+
+The core abstraction in Spark is the **Resilient Distributed Dataset (RDD)**.
+- An RDD is an immutable, partitioned collection of records that can be processed in parallel.
+- When data is loaded into Spark, it is converted into an RDD and automatically partitioned across the cluster's nodes.
+- Think of it as an in-memory, distributed table that can be manipulated efficiently.
+
+### Spark Operations: Transformations and Actions
+
+Spark operations are divided into two categories:
+
+- **Transformations**: Create a *new* RDD from an existing one. Examples include `map()`, `filter()`, and `flatMap()`. Transformations are *lazy*, meaning Spark doesn't execute them immediately.
+- **Actions**: Trigger a computation and return a result to the driver program or write data to storage. Examples include `reduce()`, `collect()` (returns the entire RDD to the driver), and `count()`.
+
+This model allows developers to chain many transformations together without any computation happening until an action is called.
+
+---
+
+## The Spark Execution Model
+
+### Directed Acyclic Graph (DAG)
+
+Unlike Hadoop's static Map -> Reduce structure, Spark allows for flexible chaining of transformations. When an action is called on an RDD, Spark's scheduler examines the lineage of transformations and builds a **Directed Acyclic Graph (DAG)**.
+
+- The DAG represents the sequence of computations to be performed.
+- The scheduler uses the DAG to create an efficient execution plan, bundling tasks into **Stages**.
+- A stage is a group of tasks that can be executed together in parallel without a "shuffle" (redistribution of data across the network). The next stage can only begin once the previous one is complete.
+
+### Lazy Execution
+
+Spark uses a **Lazy Execution** model. This means that:
+1. Transformations are only recorded in the DAG; no computation occurs when they are declared.
+2. When an **action** is called, the scheduler analyzes the DAG and executes the minimal set of tasks required to produce the final result.
+
+This approach allows for significant optimizations, as Spark can pipeline operations and avoid unnecessary computations.

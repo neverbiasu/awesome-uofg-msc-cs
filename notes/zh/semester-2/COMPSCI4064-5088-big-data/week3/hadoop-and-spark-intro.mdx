@@ -1,0 +1,134 @@
+---
+title: "Hadoop 与 Spark 基础"
+description: "深入探讨 Hadoop MapReduce 的执行流程、其局限性，并介绍 Apache Spark 及其核心概念（如 RDD）和以 DAG 为特色的执行模型。"
+---
+
+import { Accordions, Accordion } from 'fumadocs-ui/components/accordion';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps, Step } from 'fumadocs-ui/components/steps';
+
+## 关键要点
+- **Hadoop 的执行流程**：一个 MapReduce 作业涉及由一个 JobTracker 和多个 TaskTracker 管理的详细、多步骤过程，严重依赖 HDFS 来读取数据和写入中间结果。
+- **Hadoop 的局限性**：Hadoop 在处理小文件、因持续磁盘 I/O 导致的高延迟、复杂的作业链，以及繁琐的编程模型（Java）方面面临挑战，这导致其受欢迎程度下降。
+- **Apache Spark 的兴起**：Spark 的创建是为了通过利用内存计算来解决 Hadoop 的缺点，这极大地减少了读/写开销并简化了作业链。
+- **Spark 的核心概念**：Spark 围绕弹性分布式数据集（RDD）构建，RDD 是分区的、内存中的数据集合。操作分为**转换（Transformations）**（创建新的 RDD）和**行动（Actions）**（返回值或写入磁盘）。
+- **Spark 的执行模型**：Spark 使用**有向无环图（DAG）**来表示任务序列。它采用**惰性执行（Lazy Execution）**，这意味着只有在调用行动时，它才会计算必要的转换，从而优化工作流程。
+
+---
+
+## Hadoop MapReduce 作业剖析
+
+Hadoop MapReduce 作业的执行是由 **JobTracker** 精心策划、由集群中多个 **TaskTracker** 执行的一场复杂的芭蕾舞。它严重依赖 Hadoop 分布式文件系统（HDFS）来存储作业资源和数据。
+
+### 分步执行流程
+
+<Steps>
+  <Step title="1-4：作业提交">
+    客户端提交一个作业。JobTracker 提供一个作业 ID，客户端将作业资源（如 JAR 文件）复制到 HDFS。然后，作业被正式提交给 JobTracker。
+  </Step>
+  <Step title="5-6：作业初始化">
+    JobTracker 初始化作业，并从 NameNode 检索**输入分片（Input Splits）**。输入分片是单个 Map 任务将处理的输入数据块。默认情况下，分片与数据内容无关，大小最多为一个 HDFS 块。
+  </Step>
+  <Step title="7-11：Map 任务执行">
+    不断向 JobTracker 发送心跳的 TaskTracker 会根据数据本地性（数据本地 > 机架本地 > 远程）被分配 Map 任务。TaskTracker 启动一个新的 JVM，运行 Map 任务，并从 DataNode 读取其分配的数据分片。
+  </Step>
+  <Step title="12-14：中间输出与 Shuffle">
+    Map 任务的输出在内存中按键排序。这个中间数据被分区并写入本地磁盘（而非 HDFS）。完成后，TaskTracker 通知 JobTracker。
+  </Step>
+  <Step title="15-20：Reduce 任务执行">
+    Map 任务完成后，JobTracker 分配 Reduce 任务。Reduce 任务从运行 Map 任务的各个节点检索其分配的分区（这是“shuffle”阶段），对数据执行递归的合并排序，并执行 Reduce 函数。
+  </Step>
+  <Step title="21-23：最终输出与完成">
+    Reduce 任务使用 `OutputFormat` 将其最终输出写入 HDFS。完成后，它通知 JobTracker，后者随后将整个作业标记为完成。
+  </Step>
+</Steps>
+
+<Accordions>
+  <Accordion title="理解 InputFormat 和 OutputFormat">
+    - **`InputFormat`**：此类负责将 HDFS 块转换为可供 Map 或 Reduce 函数使用的可用数据。Hadoop 为文本文件、键值对、序列文件（二进制键值）和数据库表（通过 JDBC）提供了各种内置格式。
+    - **`OutputFormat`**：此类将数据的最终分区写入持久存储，通常是 HDFS。与 `InputFormat` 类似，有多种预先提供的写入器可用于不同的数据格式。
+  </Accordion>
+</Accordions>
+
+---
+
+## 其他 Hadoop 概念与局限性
+
+尽管功能强大，经典的 Hadoop MapReduce 仍有几个细微之处和众所周知的问题，这些问题影响了新型大数据工具的发展。
+
+### 关键附加概念
+
+<Accordions>
+  <Accordion title="分布式缓存 (Distributed Cache)">
+    为了在没有 HDFS 开销的情况下高效处理小型只读文件，Hadoop 提供了**分布式缓存**。它将文件（如 JARs、配置文件或小数据集）在每个作业中仅复制一次到每个 TaskTracker。这是跨任务共享状态的常用方法。
+  </Accordion>
+  <Accordion title="计数器 (Counters)">
+    Hadoop 允许任务在运行时创建和更新数值**计数器**。这些计数器会定期发送给 JobTracker，为作业、任务和 HDFS 操作提供实时进度监控。用户也可以定义自定义计数器。
+  </Accordion>
+  <Accordion title="压缩 (Compression)">
+    强烈建议进行数据压缩，以减少存储/网络开销并提高 I/O 吞吐量。然而，所选的压缩格式（例如 Bzip2、LZO、Snappy）必须是**可分割的（splittable）**，才能与 MapReduce 的并行处理模型有效协作。
+  </Accordion>
+  <Accordion title="任务失败处理 (Task Failures)">
+    Hadoop 为容错而设计。
+    - **任务失败**：如果一个任务失败（由于 bug、JVM 崩溃等），TaskTracker 会通知 JobTracker，后者会在不同的节点上重新调度该任务。
+    - **TaskTracker 失败**：如果一个 TaskTracker 失败（通过丢失心跳检测到），JobTracker 会将其从活动池中移除，并将其分配的所有任务重新调度到别处。
+  </Accordion>
+</Accordions>
+
+### Hadoop 的主要问题
+
+<Callout title="为什么 Hadoop 的受欢迎程度在下降？">
+Hadoop 的设计在当时是革命性的，但在现代硬件和数据处理需求的背景下，它有几个缺点。
+</Callout>
+
+- **小文件问题**：HDFS 为大文件优化。存储大量小文件会使 NameNode 的内存过载，因为它必须为每个文件块保存元数据。
+- **磁盘 I/O 导致的高延迟**：Hadoop 设计时 RAM 还很昂贵。它将每个 Map 和 Reduce 任务的中间数据写入磁盘。这种持续的磁盘 I/O 造成了显著的延迟，特别是对于复杂的作业。
+- **复杂的作业链**：许多现实世界的算法需要将多个 MapReduce 作业链接在一起。在 Hadoop 中，这既慢又麻烦，因为数据必须在链中的每个阶段之间写入 HDFS 然后再重新读取。
+- **有限的用例**：刚性的 MapReduce 范式不能自然地适用于所有问题类型，特别是流数据处理或需要共享状态的迭代算法。
+- **繁琐且难于使用**：编写 MapReduce 作业（通常用 Java）与现代数据科学 API（如 Python 的 Pandas）相比，代码冗长且不够直观。
+
+---
+
+## Apache Spark 简介
+
+Apache Spark 于 2009 年在加州大学伯克利分校创立，专门为了解决 Hadoop MapReduce 的缺点。它从根本上重新设计了数据处理，以利用一个已经变得廉价和丰富的关键资源：**主内存**。
+
+### 核心原则
+
+Spark 的基本动机是**消除对磁盘的中间读/写操作**。通过在内存中执行计算，Spark 极大地减少了拖慢 Hadoop 的开销，使得复杂的多阶段作业变得快速和简单。
+
+### 弹性分布式数据集 (RDDs)
+
+Spark 中的核心抽象是**弹性分布式数据集（Resilient Distributed Dataset, RDD）**。
+- RDD 是一个不可变的、分区的、可以并行处理的记录集合。
+- 当数据加载到 Spark 中时，它被转换为 RDD，并自动在集群的节点上分区。
+- 可以把它看作是一个可以高效操作的、分布式的内存中表格。
+
+### Spark 操作：转换与行动
+
+Spark 操作分为两类：
+
+- **转换（Transformations）**：从现有 RDD 创建一个*新*的 RDD。例如 `map()`、`filter()` 和 `flatMap()`。转换是*惰性的*，意味着 Spark 不会立即执行它们。
+- **行动（Actions）**：触发计算并将结果返回给驱动程序，或将数据写入存储。例如 `reduce()`、`collect()`（将整个 RDD 返回给驱动程序）和 `count()`。
+
+这种模型允许开发人员将许多转换链接在一起，直到调用一个行动之前，不会发生任何计算。
+
+---
+
+## Spark 执行模型
+
+### 有向无环图 (DAG)
+
+与 Hadoop 静态的 Map -> Reduce 结构不同，Spark 允许灵活地链接转换。当在一个 RDD 上调用一个行动时，Spark 的调度器会检查转换的血统，并构建一个**有向无环图（Directed Acyclic Graph, DAG）**。
+
+- DAG 代表了要执行的计算序列。
+- 调度器使用 DAG 创建一个高效的执行计划，将任务捆绑成**阶段（Stages）**。
+- 一个阶段是一组可以并行执行而无需“shuffle”（跨网络重新分配数据）的任务。下一个阶段只有在前一个阶段完成后才能开始。
+
+### 惰性执行 (Lazy Execution)
+
+Spark 使用**惰性执行**模型。这意味着：
+1. 转换仅被记录在 DAG 中；在声明它们时不会发生计算。
+2. 当调用**行动**时，调度器会分析 DAG，并执行产生最终结果所需的最小任务集。
+
+这种方法允许进行显著的优化，因为 Spark 可以将操作流水线化并避免不必要的计算。
