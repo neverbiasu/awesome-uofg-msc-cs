@@ -18,7 +18,7 @@ dotenv.config();
  */
 const API_KEY = process.env.MODELSCOPE_API_KEY;
 const BASE_URL = process.env.MODELSCOPE_API_ENDPOINT || "https://api-inference.modelscope.cn/v1"; // Allow BASE_URL to be overridden by .env
-const MODEL_ID = "Qwen/Qwen3-VL-235B-A22B-Instruct"; // New model specified by user
+const MODEL_ID = "Qwen/Qwen2.5-VL-3B-Instruct"; // The smaller model that seemed more lenient
 const PROMPT_TEXT = "Describe this image in detail. What is its content and purpose? Is it a diagram, a screenshot, an icon, or something else? If it's a diagram, explain what it shows.";
 
 // --- DEBUG ---
@@ -85,13 +85,19 @@ async function analyzeImage(dataURL) {
   }
 }
 
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
 /**
  * Main function to process the image directory.
  * @param {string} dirPath - The path to the directory containing images.
+ * @param {string} courseCode - The course code for organizing the report.
+ * @param {string} reportHint - A hint for the report filename, e.g., 'L0-L3'.
+ * @param {number} limit - The maximum number of images to process.
+ * @param {number} offset - The starting offset for the images to process.
  */
-async function main(dirPath) {
+async function main(dirPath, courseCode = 'COMPSCI5012', reportHint = 'analysis', limit = null, offset = 0) {
   if (!API_KEY) {
-    console.error('Error: MODELSCOPE_ACCESS_TOKEN is not set in your environment or .env file.');
+    console.error('Error: MODELSCOPE_API_KEY is not set in your environment or .env file.');
     process.exit(1);
   }
 
@@ -99,29 +105,38 @@ async function main(dirPath) {
     console.error(`Error: Directory not found at '${dirPath}'`);
     process.exit(1);
   }
+
+  // Define and create the output directory
+  const reportDir = path.join(process.cwd(), 'reports', 'image-analysis', courseCode);
+  fs.mkdirSync(reportDir, { recursive: true });
   
-  const reportPath = path.join(process.cwd(), 'image_analysis_report.md');
+  const finalReportHint = limit ? `${reportHint}-batch-${offset/limit + 1}` : reportHint;
+  const reportPath = path.join(reportDir, `${finalReportHint}-analysis.json`);
   const reportStream = fs.createWriteStream(reportPath);
-  reportStream.write(`# Image Analysis Report for ${path.basename(dirPath)}\n\n`);
-  
+  reportStream.write('[\n');
+
   const allFiles = fs.readdirSync(dirPath);
-  const imageFiles = allFiles.filter(file => /\.(png|jpg|jpeg|webp)$/i.test(file));
+  let imageFiles = allFiles.filter(file => file.startsWith('L2-WAFsDjango-') && /\.(png|jpg|jpeg|webp)$/i.test(file));
+
+  // Apply slicing for batch processing
+  if (limit) {
+    imageFiles = imageFiles.slice(offset, offset + limit);
+  }
 
   const MIN_FILE_SIZE_BYTES = 51200; // 50 KB
 
-  console.log(`Found ${imageFiles.length} images. Filtering for files > ${MIN_FILE_SIZE_BYTES / 1024} KB...`);
+  console.log(`Found ${imageFiles.length} images to process in this batch. Filtering for files > ${MIN_FILE_SIZE_BYTES / 1024} KB...`);
+  let isFirst = true;
 
   for (const file of imageFiles) {
     const fullPath = path.join(dirPath, file);
     
-    // Get file stats to check the size
     const stats = fs.statSync(fullPath);
     if (stats.size <= MIN_FILE_SIZE_BYTES) {
       continue; // Skip small files
     }
 
     const dataURL = imageToDataURL(fullPath);
-
     if (!dataURL) {
       console.warn(`Skipping unsupported file type: ${file}`);
       continue;
@@ -130,25 +145,77 @@ async function main(dirPath) {
     console.log(`Analyzing ${file} (${Math.round(stats.size / 1024)} KB)...`);
     const description = await analyzeImage(dataURL);
     
-    // Write the result to the report
-    const relativeImagePath = path.relative(process.cwd(), fullPath);
-    reportStream.write(`## ${file}\n\n`);
-    reportStream.write(`![${file}](${relativeImagePath})\n\n`);
-    reportStream.write('**AI Description:**\n');
-    reportStream.write(`${description}\n\n`);
-    reportStream.write('---\n\n');
+    // Use a root-relative path for consistency, stripping the leading 'public' directory
+    const relativePath = path.relative(process.cwd(), fullPath);
+    const publicIndex = relativePath.indexOf('public');
+    const rootRelativePath = publicIndex !== -1 ? relativePath.substring(publicIndex + 'public'.length) : '/' + relativePath;
+    
+    const result = {
+      imageFile: file,
+      imagePath: rootRelativePath,
+      aiDescription: description,
+    };
+
+    if (!isFirst) {
+      reportStream.write(',\n');
+    }
+    reportStream.write(JSON.stringify(result, null, 2));
+    isFirst = false;
+
+    // Be nice to the API
+    await sleep(5000);
   }
 
+  reportStream.write('\n]\n');
   reportStream.end();
-  console.log(`\nAnalysis complete. Report generated at: ${reportPath}`);
+
+  console.log(`\nAnalysis complete. JSON report for this batch generated at: ${reportPath}`);
+}
+// --- Script Execution ---
+function parseArgs(args) {
+  const parsedArgs = {};
+  for (let i = 0; i < args.length; i++) {
+    const arg = args[i];
+    if (arg.startsWith('--')) {
+      const [key, value] = arg.substring(2).split('=');
+      parsedArgs[key] = value || (args[i+1] && !args[i+1].startsWith('--') ? args[i+1] : true);
+    }
+  }
+  return parsedArgs;
 }
 
-// --- Script Execution ---
-const targetDirectory = process.argv[2];
-if (!targetDirectory) {
-  console.error('Usage: node scripts/analyze-images.js <path/to/image/directory>');
-  console.error('Example: node scripts/analyze-images.js public/images/COMPSCI5104/week2');
+const logDir = path.join(process.cwd(), 'logs');
+fs.mkdirSync(logDir, { recursive: true });
+const logFile = path.join(logDir, 'analyze-images.log');
+
+process.on('unhandledRejection', (reason, promise) => {
+  const errorMessage = `[${new Date().toISOString()}] --- UNHANDLED REJECTION ---\nReason: ${reason}\n\n`;
+  fs.appendFileSync(logFile, errorMessage);
+  console.error('An unhandled promise rejection occurred. See logs/analyze-images.log for details.');
+  process.exit(1);
+});
+
+const positionalArgs = process.argv.slice(2).filter(arg => !arg.startsWith('--'));
+const options = parseArgs(process.argv.slice(2));
+
+const targetDirectory = positionalArgs[0];
+const courseCode = positionalArgs[1];
+const reportHint = positionalArgs[2];
+const limit = options.limit ? parseInt(options.limit, 10) : null;
+const offset = options.offset ? parseInt(options.offset, 10) : 0;
+
+
+if (!targetDirectory || !courseCode || !reportHint) {
+  console.error('Usage: node scripts/analyze-images.js <path/to/image/directory> <courseCode> <reportHint> [--limit=<num>] [--offset=<num>]');
+  console.error('Example: node scripts/analyze-images.js public/images/COMPSCI5012-internet-technology COMPSCI5012-internet-technology L1 --limit=5 --offset=0');
   process.exit(1);
 }
 
-main(path.resolve(targetDirectory));
+try {
+  main(path.resolve(targetDirectory), courseCode, reportHint, limit, offset);
+} catch (error) {
+  const errorMessage = `[${new Date().toISOString()}] --- SYNC ERROR ---\n${error.stack}\n\n`;
+  fs.appendFileSync(logFile, errorMessage);
+  console.error('A critical synchronous error occurred. See logs/analyze-images.log for details.');
+  process.exit(1);
+}
