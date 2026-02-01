@@ -1,0 +1,32 @@
+---
+title: "第2周笔记"
+description: "第2周的课程笔记。"
+---
+
+
+![This image is a diagram that illustrates the architecture of a Django web application. The diagram is divided into three main sections: Client, Django/Middleware, and Backend.
+
+1. **Client Section**:
+   - This section represents the client side of the application.
+   - It includes the following components:
+     - URLs: These are the routes defined in the URL configuration of Django, which map to views.
+     - Template: This is where the HTML templates for rendering the web pages are stored.
+     - Views: These are the Python functions that handle the business logic of the application and generate the output based on the incoming requests.
+
+2. **Django/Middleware Section**:
+   - This section represents the middleware layer of Django.
+   - It includes the following components:
+     - Wrapper: This is the middleware component that intercepts requests and responses before they reach the views or models.
+     - Models: These are the database models used to store and retrieve data from the backend.
+
+3. **Backend Section**:
+   - This section represents the backend of the application.
+   - It includes the following components:
+     - Services: These are the services or APIs that interact with external systems or databases.
+     - Database: This is the storage system where the data is persisted.
+
+The arrows in the diagram indicate the flow of data and control between these components. For example, requests start at the client side (URLs), pass through the middleware (Wrapper), and then reach the views. From there, the views can access the models to fetch or manipulate data. Finally, the data is returned to the views, which can be rendered by the template and sent back to the client.
+
+This diagram helps to visualize how different parts of a Django application work together to process requests, manage data, and render web pages.](/images/COMPSCI5012-internet-technology/L2-WAFsDjango-070.jpg)
+
+---
