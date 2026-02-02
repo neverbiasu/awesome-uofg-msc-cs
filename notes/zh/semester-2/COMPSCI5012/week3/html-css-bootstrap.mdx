@@ -1,0 +1,71 @@
+---
+title: "HTML, CSS 与 Bootstrap"
+description: "Web 前端基础：HTML 结构、CSS 样式与布局、Bootstrap 响应式框架及 Web 可持续性。"
+---
+
+## 概要
+
+- **目标**：掌握构建结构化 HTML 文档的方法；运用 CSS 进行样式设计与布局；了解 Bootstrap 等前端框架的作用；认识 Web 设计中的可访问性（Accessibility）与可持续性（Sustainability）。
+- **范围**：HTML5 基础、CSS 选择器与盒模型、布局技术（Float, Flexbox, Grid）、Bootstrap 框架、Web 碳足迹。
+
+## 学习目标
+
+1. **构建** 结构良好的 HTML 文档。
+2. **应用** CSS 实现页面样式与布局（分离关注点）。
+3. **理解** Bootstrap 等前端框架如何加速开发。
+4. **了解** Web 可持续性与可访问性的最佳实践。
+
+## 关键知识点
+
+### 1. HTML (HyperText Markup Language)
+
+- **核心概念**：
+  - **标签 (Tags)**：如 `<h1>`, `<p>`, `<div>`，定义文档结构。
+  - **元素 (Elements)**：包含开始标签、内容和结束标签。
+  - **文档结构**：`<html>` -> `<head>` (元数据) + `<body>` (可见内容)。
+- **Web 可持续性 (Web Sustainability)**：
+  - 互联网产生约 4% 的全球温室气体排放。
+  - **策略**：压缩 HTML/CSS/JS，移除废弃代码（Deprecated Elements），减少数据传输。
+  - **Mobile First**：优先为移动设备设计，设定页面大小预算（Page Weight Budget），移除不必要的元素。
+
+---
+
+### 2. CSS (Cascading Style Sheets)
+
+- **动机**：分离文档结构（HTML）与表现（CSS）。提高维护性、加载速度和复用性。
+- **核心概念**：
+  - **选择器 (Selectors)**：
+    - 元素选择器 (`p`)
+    - 类选择器 (`.classname`) - 可复用
+    - ID 选择器 (`#idname`) - 唯一
+  - **层叠 (Cascading)**：根据优先级（Specificity）和顺序决定应用哪个样式。优先级：ID > Class > Element。
+  - **盒模型 (Box Model)**：每个元素都是一个矩形盒子，包含 Content, Padding, Border, Margin。
+
+- **布局 (Layout)**：
+  - **传统**：`float`, `position` (static, relative, absolute, fixed)。
+  - **现代**：Flexbox (一维布局), Grid (二维布局) —— 解决传统布局的复杂性，支持响应式设计。
+
+---
+
+### 3. Bootstrap Framework
+
+- **动机**：快速开发响应式、跨浏览器兼容的 Web 应用。
+- **核心概念**：
+  - **栅格系统 (Grid System)**：基于 12 列布局，适应不同屏幕尺寸（Mobile, Tablet, Desktop）。
+  - **预制组件**：导航栏、按钮、表单、卡片等。
+  - **实用类 (Utility Classes)**：快速设置 margin, padding, color 等。
+- **优势**：
+  - 移动优先（Mobile-first）。
+  - 统一的视觉风格。
+  - 极其丰富的社区资源与文档。
+
+## 最佳实践
+
+- **语义化 HTML**：使用正确的标签（如 `<header>`, `<nav>`, `<article>` 而非全是 `<div>`）以提升 SEO 和可访问性。
+- **外部 CSS**：尽量使用外部样式表（External CSS），避免内联样式（Inline Style），以保持关注点分离。
+- **响应式设计**：使用 Media Queries 或 Bootstrap 栅格系统，确保页面在各种设备上都能良好展示。
+- **优化资源**：压缩图片和代码，减少 HTTP 请求，降低 Web 碳足迹。
+
+## 更新记录
+
+- 2026-02-02：基于 Lecture 3 材料创建初版笔记。

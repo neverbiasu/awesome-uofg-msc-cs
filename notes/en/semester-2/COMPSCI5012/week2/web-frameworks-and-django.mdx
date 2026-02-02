@@ -1,0 +1,96 @@
+---
+title: "Web Frameworks and Django"
+description: "Understanding Web Frameworks, MVC Architecture, and Django Core Concepts (MVT)."
+---
+
+## Overview
+
+- **Goal**: To understand the complexity of modern web development and how Frameworks solve these issues; To master the MVC architecture and its Django variant (MVT); To get familiar with Django's core components.
+- **Scope**: Evolution of Web Tools, Frameworks vs Libraries, MVC Pattern, Django Design Philosophy, Core Modules (Models, Views, URLs, Templates).
+
+## Learning Objectives
+
+1. **Understand** the complexity of web development and the need for frameworks.
+2. **Distinguish** between Libraries and Frameworks (Inversion of Control).
+3. **Master** the MVC (Model-View-Controller) architectural pattern.
+4. **Understand** Django's MVT (Model-View-Template) architecture and request processing flow.
+
+## Key Knowledge Points
+
+### 1. Web Development Complexity & Frameworks
+
+- **Motivation**: Web dev involves multiple languages (HTML/CSS/JS/SQL/Python), shifting standards, browser compatibility, and stateless HTTP. Manual handling is inefficient and error-prone.
+- **Core Concepts**:
+  - **Framework**: Provides a skeleton/design and partial implementation for a specific domain.
+  - **Inversion of Control (IoC)**:
+    - **Library**: Your code calls the library.
+    - **Framework**: The framework calls your code (you fill in the blanks).
+  - **Characteristics**: Default Behavior, Extensibility, Non-modifiable core.
+- **Use Cases**: Building medium-to-large web apps to avoid "reinventing the wheel" (Auth, ORM, Session).
+- **Summary**: Frameworks boost efficiency and code quality by providing pre-fabricated components and patterns.
+
+---
+
+### 2. MVC Architecture (Model-View-Controller)
+
+- **Motivation**: To decouple systems by separating Data, Display, and Logic.
+- **Core Concepts**:
+  - **Model**: Manages application data (CRUD) and rules.
+  - **View**: Presentation layer; renders data to the user.
+  - **Controller**: Coordinator; handles user input, updates Model, selects View.
+- **Pros**: Separation of Concerns, Reusability, Maintainability.
+- **Cons**: Increased initial complexity.
+
+---
+
+### 3. Django & MVT Architecture
+
+- **Core Concept**: Django is a high-level Python Web framework encouraging rapid development and clean design.
+- **MVT (Model-View-Template)**: Django's implementation of MVC.
+  - **Model**: Database structure description (same as MVC).
+  - **View**: Logic that determines **what** data to display. (Equivalent to MVC Controller logic + View logic).
+  - **Template**: HTML with presentation logic; determines **how** to display data. (Equivalent to MVC View).
+  - **Controller**: Handled by the Django Framework itself (URL Parser/Router).
+
+![Django Architecture Detail](/images/COMPSCI5012/L2-WAFsDjango-068.jpg)
+
+- **Core Components**:
+  - **models.py**: Database entities and relationships (ORM).
+  - **views.py**: Request handling, data retrieval, template rendering.
+  - **urls.py**: URL routing/mapping.
+  - **templates/**: HTML files.
+
+- **Request Flow**:
+  1. User requests URL.
+  2. `urls.py` resolves URL to View.
+  3. View processes request (fetches data from Model).
+  4. View renders Template with data.
+  5. HTTP Response returned.
+
+- **Summary**: Django uses MVT to separate business logic from presentation, with "batteries included" features like Admin and Auth.
+
+---
+
+### 4. Framework Comparison
+
+- **Django**: "Batteries included", robust, good for large apps.
+- **Flask**: Microframework, minimal core, flexible.
+
+  ![Flask Logo](/images/COMPSCI5012/L2-WAFsDjango-083.png)
+
+- **Ruby on Rails**: Convention over Configuration, rapid dev.
+
+  ![Rails Architecture](/images/COMPSCI5012/L2-WAFsDjango-077.png)
+
+- **Selection**: Depends on project size, team skills, and requirements.
+
+## Best Practices
+
+- **Use an IDE**: PyCharm/VS Code for syntax highlighting and debugging.
+- **DRY Principle**: Don't Repeat Yourself; use Django template inheritance.
+- **Virtual Environments**: Always isolate project dependencies.
+- **Keep Views Simple**: Move complex logic to Models or Services.
+
+## Update History
+
+- 2026-02-02: Created based on Lecture 2 materials.
