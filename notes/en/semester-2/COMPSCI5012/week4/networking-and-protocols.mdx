@@ -1,0 +1,84 @@
+---
+title: "Networking and Protocols"
+description: "Deep dive into Web Networking Basics, HTTP Protocol, RESTful APIs, and Inter-Process Communication."
+---
+
+## Overview
+
+- **Goal**: To understand Web Applications as Network Applications, master the mechanics of HTTP, distinguish between GET and POST, and explore Inter-Process Communication (IPC) protocols, specifically REST.
+- **Scope**: Network Models (OSI/TCP-IP), HTTP Request/Response Lifecycle, HTTP Methods, Statelessness & Solutions (Cookies), REST vs gRPC.
+
+## Learning Objectives
+
+1. **Explain** the fundamentals of network communication (Layered Architecture).
+2. **Master** the HTTP protocol and its key characteristics (Stateless, Request/Response).
+3. **Distinguish** between HTTP GET and POST methods in terms of usage and security.
+4. **Understand** Inter-Process Communication (IPC), especially the design principles of RESTful APIs.
+
+## Key Knowledge Points
+
+### 1. Web Apps as Network Apps
+
+- **Core Concepts**:
+  - **Client**: Intermittently connected, requests resources, does not communicate directly with other clients.
+  - **Server**: Always-on, typically in data centers, responds to requests.
+- **Network Models**:
+  - **OSI Model (7 Layers)**: Application, Presentation, Session, Transport, Network, Data Link, Physical.
+  - **TCP/IP Model (4 Layers)**:
+    - **Application**: HTTP/HTTPS (Web), DNS (Name Resolution), SMTP (Email).
+    - **Transport**: TCP (Reliable), UDP (Unreliable).
+    - **Internet**: IP (Addressing & Routing).
+    - **Link**: Physical transmission.
+
+![TCP/IP Model](/images/COMPSCI5012/L4-ProtocolsMessagingCoursework-008.png)
+
+### 2. HTTP (Hypertext Transfer Protocol)
+
+- **Definition**: An application-layer protocol for transmitting hypermedia documents (like HTML).
+- **Pattern**: Request-Response.
+- **Stateless**: The server retains no information about client status. Every request is independent.
+  - **Problem**: Cannot maintain login state, shopping carts, etc.
+  - **Solutions**:
+    - **Client-side**: Cookies, URL Rewriting (Session ID).
+    - **Server-side**: Sessions, Hidden Form Fields.
+
+![HTTP Request Response](/images/COMPSCI5012/L4-ProtocolsMessagingCoursework-023.png)
+
+### 3. HTTP Methods: GET vs POST
+
+| Feature | GET | POST |
+| :--- | :--- | :--- |
+| **Purpose** | Retrieve data | Submit/Update data |
+| **Data Location** | URL Query String | Message Body |
+| **Visibility** | Visible in URL (Insecure) | Not visible in URL (Relatively Secure) |
+| **Length Limit** | Limited (~2048 chars) | No limit |
+| **Cache/Bookmark** | Cacheable, Bookmarkable | Not Cacheable/Bookmarkable |
+| **Idempotent** | Yes | No |
+| **Side Effects** | None (Safe) | Yes |
+
+### 4. Inter-Process Communication (IPC)
+
+When applications are distributed (Microservices, Cloud), IPC protocols are needed:
+
+- **Legacy**: SOAP (Complex, XML), XML-RPC.
+- **Modern**:
+  - **gRPC**: Based on HTTP/2, high performance, uses Protocol Buffers, strongly typed. Ideal for internal microservices.
+  - **REST (Representational State Transfer)**:
+    - **Style**: Uses standard HTTP methods (GET, POST, PUT, DELETE) to act on resources.
+    - **Format**: Typically JSON or XML.
+    - **Features**: Lightweight, Stateless, Scalable. The standard for Web APIs.
+
+![REST Architecture](/images/COMPSCI5012/L4-ProtocolsMessagingCoursework-048.png)
+
+## Best Practices
+
+- **Use Correct HTTP Methods**: Never use GET for sensitive data (passwords) or side-effect operations (delete).
+- **Performance & Sustainability**:
+  - **Persistent Connections**: Reuse TCP connections to reduce handshake overhead (HTTP/1.1+).
+  - **Browser Caching**: Use HTTP cache headers (`Cache-Control`, `ETag`) to avoid unnecessary data transfer.
+  - **Compression**: Compress transferred files (Gzip, Brotli).
+- **RESTful Design**: When designing APIs, URLs should represent resources (Nouns), and HTTP methods should represent actions (Verbs).
+
+## Update History
+
+- 2026-02-02: Created based on Lecture 4 materials.
