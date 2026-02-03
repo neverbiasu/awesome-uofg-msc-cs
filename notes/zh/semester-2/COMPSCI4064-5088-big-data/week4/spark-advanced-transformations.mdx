@@ -1,0 +1,77 @@
+---
+title: "Spark 高级转换"
+description: "掌握 Spark 的高级转换操作，包括集合操作、键值对操作、连接与重分区。"
+---
+
+## 概要
+
+- **目标**：深入理解处理复杂数据结构（如键值对）和数据集之间关系（如集合操作、连接）的高级转换。
+- **范围**：集合转换 (`union`, `intersection`)，键值对转换 (`groupByKey`, `reduceByKey`, `aggregateByKey`, `sortByKey`)，连接 (`join`, `cogroup`) 以及重分区 (`repartition`, `coalesce`)。
+
+## 学习目标
+
+1. **掌握** 处理重复记录的集合操作。
+2. **比较** `groupByKey` 与 `reduceByKey` 的性能差异。
+3. **理解** 聚合操作 `aggregateByKey` 的灵活性。
+4. **运用** 连接操作合并不同数据集。
+5. **学会** 使用重分区操作优化并行度。
+
+## 关键知识点
+
+### 1. 集合转换 (Set Transformations)
+
+处理两个 RDD 之间的集合关系：
+
+- **`union(otherDataset)`**：
+  - 返回包含源数据集和参数数据集中所有元素的并集。
+  - **注意**：如果存在重复记录，`union` **不会**自动去重（不同于 SQL 的 UNION，更像 UNION ALL）。
+- **`intersection(otherDataset)`**：
+  - 返回两个数据集的交集（即同时存在于两边的元素）。
+  - 会触发 Shuffle。
+
+### 2. 键值对转换 (Key-Value Transformations)
+
+专门针对 PairRDD `(Key, Value)` 的操作：
+
+- **`groupByKey([numPartitions])`**：
+  - 将具有相同 Key 的 Value 分组。
+  - **返回**：`RDD<Key, Iterable<Value>>`。
+  - **警告**：性能开销极大，因为所有 Values 都要通过网络传输（Shuffle）传输到同一个节点。如果 Value 列表很大，容易导致 OOM。
+- **`reduceByKey(func, [numPartitions])`**：
+  - 使用关联函数 `func` 合并每个 Key 的 Value。
+  - **优势**：支持 **Map-side Combine**（在 Shuffle 前先在本地聚合），显著减少网络传输量。**优先推荐使用**。
+- **`aggregateByKey(zeroValue)(seqOp, combOp)`**：
+  - 更通用的聚合操作，允许聚合结果类型与输入类型不同。
+  - 需要提供零值（Zero Value）、分区内聚合函数 (`seqOp`) 和分区间聚合函数 (`combOp`)。
+- **`sortByKey([ascending])`**：
+  - 按 Key 对 RDD 进行全局排序。
+
+### 3. 连接操作 (Joins)
+
+- **`join(otherDataset)`**：
+  - 内连接（Inner Join）。返回 `(K, (V, W))`。
+  - 仅保留两个 RDD 中都存在的 Key。
+- **`cogroup(otherDataset)`**：
+  - 协同分组（Group With）。返回 `(K, (Iterable<V>, Iterable<W>))`。
+  - 无论 Key 是否在另一边存在，都会保留。
+
+### 4. 重分区 (Re-Partitioning)
+
+调整 RDD 的分区数量：
+
+- **`repartition(numPartitions)`**：
+  - 随机重洗（Shuffle）所有数据，创建更多或更少的分区并平衡数据分布。
+  - **代价**：全量 Shuffle，昂贵。
+- **`coalesce(numPartitions)`**：
+  - 仅用于**减少**分区数。
+  - **优势**：尝试合并现有分区，避免全量 Shuffle，比 `repartition` 高效。常用于过滤大量数据后减少分区。
+
+## 最佳实践
+
+- **`reduceByKey` vs `groupByKey`**：只要能用 `reduceByKey`（即聚合逻辑满足结合律），就坚决不用 `groupByKey`。
+- **处理数据倾斜**：在进行 Join 或 GroupBy 操作前，注意 Key 的分布是否均匀。
+- **合理重分区**：在执行过滤操作（`filter`）大大减少数据量后，使用 `coalesce` 减少分区数以避免产生大量小任务。
+
+## 更新记录
+
+- 2026-02-02：基于 Lecture 04-03 资料创建。

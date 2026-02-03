@@ -1,0 +1,39 @@
+---
+title: "第四周"
+description: "Spark 架构与基础转换"
+---
+import { Card, Cards } from 'fumadocs-ui/components/card';
+
+## 概要
+- 主题: Apache Spark 架构, 转换 (Transformations), 动作 (Actions)
+
+## 学习目标
+1. 理解 Spark 的核心架构组件（Driver, Master, Worker, Executor）。
+2. 掌握 Spark 作业的执行流程（DAG, Stage, Task）。
+3. 区分 Spark 中的 Transformations 和 Actions。
+4. 熟悉常用的基础与高级转换操作（map, reduceByKey 等）及 Actions。
+
+## 笔记
+
+<Cards>
+  <Card
+    href="/zh/notes/semester-2/COMPSCI4064-5088-big-data/week4/spark-architecture"
+    title="Spark 架构"
+    description="深入了解 Spark 的运行时架构、执行阶段及作业剖析。"
+  />
+  <Card
+    href="/zh/notes/semester-2/COMPSCI4064-5088-big-data/week4/spark-basic-transformations"
+    title="Spark 基础转换"
+    description="学习 Spark 的基础转换操作（如 map, filter）及自定义函数的使用。"
+  />
+  <Card
+    href="/zh/notes/semester-2/COMPSCI4064-5088-big-data/week4/spark-advanced-transformations"
+    title="Spark 高级转换"
+    description="掌握集合操作、键值对聚合（reduceByKey）及 Join 操作。"
+  />
+  <Card
+    href="/zh/notes/semester-2/COMPSCI4064-5088-big-data/week4/spark-actions"
+    title="Spark 动作 (Actions)"
+    description="详解触发计算的操作：collect, count, saveAsTextFile 等。"
+  />
+</Cards>

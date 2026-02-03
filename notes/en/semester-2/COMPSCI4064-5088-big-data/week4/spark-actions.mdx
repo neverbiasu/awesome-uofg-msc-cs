@@ -1,0 +1,65 @@
+---
+title: "Spark Actions"
+description: "Detailed guide to Spark Actions: Triggering computation, collecting results, and persistence."
+---
+
+## Overview
+
+- **Goal**: To understand the role of Actions in Spark - triggering lazy evaluation and producing results.
+- **Scope**: Common Actions (`collect`, `count`, `reduce`, `take`, etc.) and Save Actions (`saveAs...`).
+
+## Learning Objectives
+
+1. **Understand** the triggering role of Actions in Spark's lazy evaluation mechanism.
+2. **Master** operations that fetch results to the Driver (`collect`, `take`) and their memory risks.
+3. **Learn** aggregation Actions (`reduce`, `count`).
+4. **Familiarize** with methods for persisting results to storage systems.
+
+## Key Knowledge Points
+
+### 1. Common Actions
+
+These operations trigger Job execution and return results to the Driver:
+
+- **`collect()`**:
+  - Returns **all** elements of the RDD as an array.
+  - **Risk**: Throws OOM if data size exceeds Driver memory. Use only for small datasets.
+- **`count()`**:
+  - Returns the total number of elements in the RDD.
+- **`reduce(func)`**:
+  - Aggregates all elements in the RDD using function `func`.
+  - Function must be commutative and associative for parallel computation.
+- **`first()`**:
+  - Returns the first element of the RDD. Equivalent to `take(1)`.
+- **`take(n)`**:
+  - Returns the first `n` elements.
+  - This is "cheap" as it only computes enough partitions to get `n` items.
+- **`takeSample(withReplacement, num, [seed])`**:
+  - Returns a fixed-size random sample array.
+  - Note: Result is returned to Driver, so `num` should be manageable.
+- **`takeOrdered(n, [ordering])`**:
+  - Returns the first `n` elements ordered naturally or by a custom comparator.
+
+### 2. Save Actions
+
+Write RDD content to external storage (HDFS, S3, Local FS):
+
+- **`saveAsTextFile(path)`**:
+  - Writes elements as text files. Spark calls `toString` on each element.
+  - Result is a **directory** containing multiple part-files (part-00000, part-00001...), corresponding to RDD partitions.
+- **`saveAsSequenceFile(path)`**:
+  - Saves as Hadoop SequenceFile format (binary Key-Value pairs).
+  - Only available for PairRDDs.
+- **`saveAsObjectFile(path)`**:
+  - Saves RDD elements using Java serialization.
+  - Can be loaded via `SparkContext.objectFile()`.
+
+## Best Practices
+
+- **Avoid `collect()` on large datasets in production**.
+- **Use `take()` for debugging**: Quickly inspect data samples.
+- **Understand `saveAsTextFile` output**: It produces a partitioned directory, not a single file.
+
+## Update History
+
+- 2026-02-02: Created based on Lecture 04-04 materials.

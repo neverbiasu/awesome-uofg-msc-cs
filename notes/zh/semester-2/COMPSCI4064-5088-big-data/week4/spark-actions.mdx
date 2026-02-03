@@ -1,0 +1,65 @@
+---
+title: "Spark 动作 (Actions)"
+description: "详解 Spark 的 Action 操作：触发计算、收集结果与数据持久化。"
+---
+
+## 概要
+
+- **目标**：掌握 Spark Action 的作用——触发惰性计算并产生结果。
+- **范围**：常用 Actions (`collect`, `count`, `reduce`, `take` 等) 和保存 Actions (`saveAs...`)。
+
+## 学习目标
+
+1. **理解** Action 在 Spark 惰性求值机制中的触发角色。
+2. **掌握** 获取结果到 Driver 的操作 (`collect`, `take`) 及其内存风险。
+3. **学会** 使用聚合 Action (`reduce`, `count`)。
+4. **熟悉** 将结果持久化到存储系统的方法。
+
+## 关键知识点
+
+### 1. 常用 Actions (Common Actions)
+
+这些操作会触发 Job 执行并返回结果给 Driver：
+
+- **`collect()`**：
+  - 返回 RDD 中**所有**元素作为数组。
+  - **风险**：如果数据量超过 Driver 内存，会抛出 OOM。仅用于小数据集。
+- **`count()`**：
+  - 返回 RDD 中的元素总数。
+- **`reduce(func)`**：
+  - 使用函数 `func` 聚合 RDD 中的所有元素。
+  - 函数必须是可交换和可结合的，以便并行计算。
+- **`first()`**：
+  - 返回 RDD 的第一个元素。等同于 `take(1)`。
+- **`take(n)`**：
+  - 返回 RDD 的前 `n` 个元素。
+  - 这是一个“廉价”操作，因为它只需要计算部分分区直到获取足够数据。
+- **`takeSample(withReplacement, num, [seed])`**：
+  - 返回一个固定大小的随机样本数组。
+  - 注意：结果也是返回给 Driver，`num` 不宜过大。
+- **`takeOrdered(n, [ordering])`**：
+  - 返回 RDD 中前 `n` 个元素（按自然顺序或自定义比较器排序）。
+
+### 2. 保存 Actions (Save Actions)
+
+将 RDD 内容写入外部存储（如 HDFS, S3, 本地文件系统）：
+
+- **`saveAsTextFile(path)`**：
+  - 将元素写入文本文件。Spark 会对每个元素调用 `toString`。
+  - 结果是一个**目录**，包含多个部分文件（part-00000, part-00001...），对应 RDD 的分区。
+- **`saveAsSequenceFile(path)`**：
+  - 保存为 Hadoop SequenceFile 格式（二进制键值对）。
+  - 仅适用于 PairRDD。
+- **`saveAsObjectFile(path)`**：
+  - 使用 Java 序列化保存 RDD 元素。
+  - 可通过 `SparkContext.objectFile()` 读取。
+
+## 最佳实践
+
+- **避免在生产环境对大数据集使用 `collect()`**。
+- **使用 `take()` 进行调试**：快速查看数据样本。
+- **理解 `saveAsTextFile` 的输出**：它不是单个文件，而是分区的文件夹。
+
+## 更新记录
+
+- 2026-02-02：基于 Lecture 04-04 资料创建。

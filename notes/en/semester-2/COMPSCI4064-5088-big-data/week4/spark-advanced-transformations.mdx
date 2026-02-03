@@ -1,0 +1,77 @@
+---
+title: "Spark Advanced Transformations"
+description: "Master advanced Spark transformations, including Set operations, Key-Value operations, Joins, and Re-partitioning."
+---
+
+## Overview
+
+- **Goal**: To understand advanced transformations for processing complex data structures (like Key-Value pairs) and relationships between datasets (Sets, Joins).
+- **Scope**: Set transformations (`union`, `intersection`), Key-Value transformations (`groupByKey`, `reduceByKey`, `aggregateByKey`, `sortByKey`), Joins (`join`, `cogroup`), and Re-partitioning (`repartition`, `coalesce`).
+
+## Learning Objectives
+
+1. **Master** set operations for handling duplicate records.
+2. **Compare** the performance differences between `groupByKey` and `reduceByKey`.
+3. **Understand** the flexibility of `aggregateByKey`.
+4. **Apply** join operations to combine different datasets.
+5. **Learn** to use re-partitioning to optimize parallelism.
+
+## Key Knowledge Points
+
+### 1. Set Transformations
+
+Handling relationships between two RDDs:
+
+- **`union(otherDataset)`**:
+  - Returns the union of elements from source and argument datasets.
+  - **Note**: Does **not** deduplicate (like SQL `UNION ALL`, unlike `UNION`).
+- **`intersection(otherDataset)`**:
+  - Returns the intersection (elements present in both).
+  - Triggers a Shuffle.
+
+### 2. Key-Value Transformations
+
+Operations specifically for PairRDDs `(Key, Value)`:
+
+- **`groupByKey([numPartitions])`**:
+  - Groups values for the same key.
+  - **Returns**: `RDD<Key, Iterable<Value>>`.
+  - **Warning**: Very expensive as all values must be Shuffled to a single node. Can lead to OOM if value lists are large.
+- **`reduceByKey(func, [numPartitions])`**:
+  - Aggregates values for each key using an associative function `func`.
+  - **Advantage**: Supports **Map-side Combine** (local aggregation before shuffle), significantly reducing network traffic. **Preferred over groupByKey**.
+- **`aggregateByKey(zeroValue)(seqOp, combOp)`**:
+  - More general aggregation allowing the result type to differ from the input type.
+  - Requires a Zero Value, a Seq Op (intra-partition), and a Comb Op (inter-partition).
+- **`sortByKey([ascending])`**:
+  - Sorts the RDD globally by Key.
+
+### 3. Joins
+
+- **`join(otherDataset)`**:
+  - Inner Join. Returns `(K, (V, W))`.
+  - Keeps keys present in both RDDs.
+- **`cogroup(otherDataset)`**:
+  - Returns `(K, (Iterable<V>, Iterable<W>))`.
+  - Keeps keys regardless of presence in the other RDD.
+
+### 4. Re-Partitioning
+
+Adjusting the number of partitions:
+
+- **`repartition(numPartitions)`**:
+  - Reshuffles all data randomly to create more or fewer partitions and balance them.
+  - **Cost**: Full Shuffle, expensive.
+- **`coalesce(numPartitions)`**:
+  - Only for **decreasing** the number of partitions.
+  - **Advantage**: Merges existing partitions, avoiding a full shuffle. More efficient than `repartition` after heavy filtering.
+
+## Best Practices
+
+- **reduceByKey over groupByKey**: Always prefer `reduceByKey` if the aggregation logic allows, due to map-side combining.
+- **Handle Skew**: Be aware of key distribution before Joins or GroupBy operations.
+- **Coalesce after Filter**: Use `coalesce` to reduce partition count after a `filter` operation drastically reduces data size.
+
+## Update History
+
+- 2026-02-02: Created based on Lecture 04-03 materials.
