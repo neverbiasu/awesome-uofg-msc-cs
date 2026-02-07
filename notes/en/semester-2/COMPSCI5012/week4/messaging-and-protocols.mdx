@@ -1,0 +1,96 @@
+---
+title: "Messaging and Protocols"
+description: "Fundamentals of network communication, HTTP, and Inter-Process Communication (REST, gRPC, SOAP)."
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## Overview
+
+- **Goal**: Understand network communication, HTTP characteristics (GET vs POST), and Inter-Process Communication (RESTful APIs).
+- **Key Concepts**: OSI Model, TCP/IP, HTTP, Statelessness, REST, gRPC, SOAP.
+
+## 1. Network Communication Models
+
+### OSI Model (7 Layers)
+1.  **Physical**: Binary transmission (Cables, Signals).
+2.  **Data Link**: MAC addressing (Frames).
+3.  **Network**: IP addressing and routing (Packets).
+4.  **Transport**: End-to-end reliability (TCP/UDP Segments).
+5.  **Session**: Communication maintenance.
+6.  **Presentation**: Encryption, compression (e.g., SSL/TLS).
+7.  **Application**: Network process to application (HTTP, FTP, DNS).
+
+### TCP/IP Model (4 Layers)
+1.  **Link/Physical**: Transmission over physical network.
+2.  **Internet**: IP addressing and routing.
+3.  **Transport**: TCP (Reliable) / UDP (Unreliable).
+4.  **Application**: HTTP, DNS, SMTP.
+
+---
+
+## 2. HTTP Fundamentals
+
+**HTTP (HyperText Transfer Protocol)** is a request-response protocol used to transmit resources (HTML, Images, JSON) over the web.
+
+### Request-Response Pattern
+1.  **Client** sends a Request (Method, URL, Headers, Body).
+2.  **Server** sends a Response (Status Code, Headers, Body).
+
+### HTTP Methods
+
+| Method | Description | Characteristics |
+| :--- | :--- | :--- |
+| **GET** | Retrieve data | Safe, Idempotent, Cacheable, Data in URL |
+| **POST** | Submit data | Not Safe, Not Idempotent, Data in Body |
+| **PUT** | Update/Create resource | Idempotent |
+| **DELETE** | Delete resource | Idempotent |
+
+<Callout title="GET vs POST">
+- **GET**: Parameters visible in URL, limited length, bookmarked/cached. Use for fetching data.
+- **POST**: Parameters in body, no length limit, not cached. Use for sensitive data or state changes.
+</Callout>
+
+### Statelessness
+HTTP is stateless: the server does not retain information about the client between requests.
+**Solutions**:
+- **Cookies**: Client-side storage of session ID.
+- **Sessions**: Server-side storage of user state.
+
+### Persistence
+- **HTTP 1.0**: New connection for every request (Slow).
+- **HTTP 1.1**: Persistent connections (Keep-Alive) reuse TCP connection.
+- **HTTP/2**: Multiplexing (parallel requests over one connection).
+- **HTTP/3**: Uses QUIC (UDP-based) for lower latency.
+
+---
+
+## 3. Web Sustainability
+
+To reduce energy consumption and network load:
+1.  **Optimize Caching**: Reduce server requests.
+2.  **Compress Files**: Reduce payload size.
+3.  **Avoid Redirects**: Reduce round-trips.
+
+---
+
+## 4. Inter-Process Communication (IPC)
+
+Protocols for distributed systems to communicate.
+
+### Legacy Protocols
+- **XML-RPC**: Remote procedure calls using XML over HTTP.
+- **SOAP (Simple Object Access Protocol)**: Strict, verbose, XML-based protocol. Complex but robust security/transaction support.
+
+### Modern Protocols
+- **gRPC**:
+    - Modern, open-source RPC framework by Google.
+    - Uses **HTTP/2** and **Protocol Buffers** (binary format).
+    - High performance, supports streaming.
+- **REST (Representational State Transfer)**:
+    - Architectural style, not a strict protocol.
+    - Uses standard HTTP methods (GET, POST, PUT, DELETE).
+    - Stateless and Cacheable.
+    - Typically uses **JSON** for data exchange.
+

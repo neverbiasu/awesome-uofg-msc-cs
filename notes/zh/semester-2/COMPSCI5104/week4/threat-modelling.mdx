@@ -1,0 +1,119 @@
+---
+title: "威胁建模"
+description: "威胁建模介绍，四步框架，STRIDE 模型以及攻击树。"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## Overview
+
+- **Goal**: Understand the basis of threat modelling and apply frameworks like STRIDE and Attack Trees.
+- **Key Concepts**: Threat vs. Vulnerability, Trust Boundaries, STRIDE, Attack Trees.
+
+## 1. Introduction to Threat Modelling
+
+### Threats vs. Vulnerabilities
+- **Vulnerabilities**: Inherent flaws or weaknesses in a system.
+- **Threats**: Potential or actual actions that can exploit vulnerabilities.
+- **Dependency**: Most cyber threats exploit existing vulnerabilities.
+
+### Definition
+**Threat Modelling** is a process by which potential threats, such as structural vulnerabilities or the absence of appropriate safeguards, can be identified, enumerated, and prioritized – all from a hypothetical attacker’s point of view.
+
+![Threat Modeling Design](/images/COMPSCI5104/week4/SSE-Lecture4-005.png)
+
+---
+
+## 2. Four-Step Framework
+
+The core process of threat modelling involves four steps:
+
+<Steps>
+### Model the System
+What are you building? Use diagrams to represent the system.
+
+### Find Threats
+What can go wrong? Use models like STRIDE.
+
+### Address Threats
+What should you do about them? Mitigate, Eliminate, Transfer, or Accept.
+
+### Validate
+Did you do a good job? Check for completeness and effectiveness.
+</Steps>
+
+![Four-Step Framework](/images/COMPSCI5104/week4/SSE-Lecture4-013.png)
+
+---
+
+## 3. Step 1: Model the System
+
+### Data Flow Diagrams
+Start with a diagram showing how data flows through the system (e.g., Web Browser -> Web Server -> Database).
+
+### Trust Boundaries
+Boundaries that define which parts of the system are trusted and which are untrusted. Threats often occur where data crosses these boundaries.
+
+![Trust Boundaries](/images/COMPSCI5104/week4/SSE-Lecture4-015.png)
+
+It is helpful to number each process and data flow:
+
+![Numbered Trust Boundaries](/images/COMPSCI5104/week4/SSE-Lecture4-019.png)
+
+---
+
+## 4. Step 2: Find Threats (STRIDE)
+
+**STRIDE** is a threat model developed by Microsoft. It helps categorize threats into 6 types:
+
+| Threat | Security Property Violated | Definition |
+| :--- | :--- | :--- |
+| **S**poofing | Authenticity | Impersonating something or someone else. |
+| **T**ampering | Integrity | Modifying data or code. |
+| **R**epudiation | Non-repudiation | Claiming to have not performed an action. |
+| **I**nformation Disclosure | Confidentiality | Exposing information to unauthorized people. |
+| **D**enial of Service | Availability | Denying or degrading service to users. |
+| **E**levation of Privilege | Authorization | Gaining capabilities without proper authorization. |
+
+![STRIDE Framework](/images/COMPSCI5104/week4/SSE-Lecture4-023.png)
+
+![STRIDE Security Controls](/images/COMPSCI5104/week4/SSE-Lecture4-034.png)
+
+---
+
+## 5. Step 3: Address Threats
+
+There are 4 ways to address a threat:
+
+1.  **Mitigate**: Make it harder to exploit (e.g., strong passwords).
+2.  **Eliminate**: Remove the feature that introduces the threat.
+3.  **Transfer**: Let someone else handle the risk (e.g., using OS authentication).
+4.  **Accept**: Accept the risk if the cost of mitigation is too high.
+
+---
+
+## 6. Attack Trees
+
+An **Attack Tree** is a conceptual diagram showing how an asset, or target, might be attacked.
+
+- **Root Node**: The goal of the attack (e.g., "Compromise Server").
+- **Leaf Nodes**: Ways to achieve the goal.
+
+![Attack Tree Diagram](/images/COMPSCI5104/week4/SSE-Lecture4-047.png)
+
+### Example: Compromise Server
+
+![Attack Tree Example](/images/COMPSCI5104/week4/SSE-Lecture4-048.png)
+
+### Example: Stealing Money
+
+![Attack Tree Bank Example](/images/COMPSCI5104/week4/SSE-Lecture4-055.png)
+
+---
+
+## 7. Threat Libraries
+
+- **CAPEC** (Common Attack Pattern Enumeration and Classification): Dictionary of attack patterns.
+- **CWE** (Common Weakness Enumeration): List of software/hardware weakness types.
+
