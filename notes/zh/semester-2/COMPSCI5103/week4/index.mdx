@@ -1,10 +1,31 @@
 ---
-title: "第四周：机器学习工作流"
-description: "深度学习项目的规划与执行"
+title: "第4周：机器学习工作流"
+description: 数据划分、模型选择、评估指标以及偏差-方差权衡
 ---
 
-## 概要
-本周重点关注深度学习项目的规划与执行。
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 
-## 内容
+## 总结
+
+本周探讨了开发深度学习模型的实际工作流程。涵盖了数据分区、模型选择和严格评估的基本策略，以确保模型能够泛化到未见数据。
+
+<Accordions>
+  <Accordion title="数据分区">
+    将数据划分为**训练集**、**验证集**和**测试集**的重要性。理解为什么在开发过程中绝不能“偷看”测试集。
+  </Accordion>
+  <Accordion title="模型选择">
+    使用验证集调整超参数并选择最佳模型架构。交叉验证 (Cross-Validation) 技术介绍。
+  </Accordion>
+  <Accordion title="评估指标">
+    超越准确率：精确率 (Precision)、召回率 (Recall)、F1 分数和混淆矩阵。理解如何衡量不平衡数据集上的性能。
+  </Accordion>
+  <Accordion title="偏差-方差权衡">
+    识别过拟合（高方差）和欠拟合（高偏差）。基于错误分析改进模型性能的策略。
+  </Accordion>
+</Accordions>
+
+## 快速链接
+
 - [机器学习工作流](./machine-learning-workflow)
+- [数据划分策略](./machine-learning-workflow#data-partitioning)
+- [性能指标](./machine-learning-workflow#evaluation-metrics)

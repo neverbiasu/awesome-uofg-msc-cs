@@ -1,0 +1,31 @@
+---
+title: "Week 4: Message Digests & Secret Sharing"
+description: MACs, Hash Functions, Birthday Attacks, and Secret Sharing Schemes
+---
+
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+
+## Summary
+
+This week explores data integrity and authenticity through Message Authentication Codes (MACs) and cryptographic hash functions. It also covers the generation of random numbers and threshold-based secret sharing schemes like Shamir's Secret Sharing.
+
+<Accordions>
+  <Accordion title="Message Digests & MACs">
+    Understanding the role of one-way hash functions in ensuring data integrity. Difference between a simple hash and a MAC (Message Authentication Code) which uses a secret key for authentication.
+  </Accordion>
+  <Accordion title="Birthday Attacks">
+    Exploring collision resistance and the statistical probability of finding two messages with the same digest. Understanding the Birthday Paradox and its implications for digest size.
+  </Accordion>
+  <Accordion title="Random Numbers">
+    Classification of random number generators: Pseudo-random (PRNG), Cryptographically Secure PRNG (CSPRNG), and True Random Numbers. Case study on historical flaws in Netscape's PRNG.
+  </Accordion>
+  <Accordion title="Secret Sharing">
+    Techniques for splitting a secret among multiple parties. Introduction to Threshold Schemes (m, n) where any $m$ out of $n$ participants can reconstruct the secret, using Lagrange Interpolation.
+  </Accordion>
+</Accordions>
+
+## Quick Links
+
+- [Message Digests and Secret Sharing](./message-digests-and-secret-sharing)
+- [Collision Resistance](./message-digests-and-secret-sharing#requirements-of-message-digest)
+- [Shamir's Secret Sharing](./message-digests-and-secret-sharing#secret-sharing-threshold-schemes)

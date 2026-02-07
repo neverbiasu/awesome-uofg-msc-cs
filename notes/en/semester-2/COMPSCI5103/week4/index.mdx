@@ -1,10 +1,31 @@
 ---
 title: "Week 4: Machine Learning Workflow"
-description: "Planning and executing Deep Learning projects"
+description: Data splits, model selection, evaluation metrics, and bias-variance trade-off
 ---
 
-## Overview
-This week focuses on planning and executing deep learning projects.
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 
-## Content
+## Summary
+
+This week explores the practical workflow of developing deep learning models. It covers essential strategies for data partitioning, model selection, and rigorous evaluation to ensure generalization to unseen data.
+
+<Accordions>
+  <Accordion title="Data Partitioning">
+    The importance of splitting data into **Training**, **Validation**, and **Test** sets. Understanding why we never peek at the test set during development.
+  </Accordion>
+  <Accordion title="Model Selection">
+    Using the validation set to tune hyperparameters and choose the best model architecture. Introduction to Cross-Validation techniques.
+  </Accordion>
+  <Accordion title="Evaluation Metrics">
+    Going beyond accuracy: Precision, Recall, F1-score, and Confusion Matrices. Understanding how to measure performance on imbalanced datasets.
+  </Accordion>
+  <Accordion title="Bias-Variance Trade-off">
+    Identifying Overfitting (High Variance) and Underfitting (High Bias). Strategies to improve model performance based on error analysis.
+  </Accordion>
+</Accordions>
+
+## Quick Links
+
 - [Machine Learning Workflow](./machine-learning-workflow)
+- [Data Splitting Strategy](./machine-learning-workflow#data-partitioning)
+- [Performance Metrics](./machine-learning-workflow#evaluation-metrics)

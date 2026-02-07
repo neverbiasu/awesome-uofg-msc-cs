@@ -1,39 +1,28 @@
 ---
-title: "Week 4"
-description: "Spark Architecture and Basic Transformations"
+title: "Week 4: Apache Spark & Streaming"
+description: Spark Architecture, Transformations, Actions, and Batch vs Streaming
 ---
-import { Card, Cards } from 'fumadocs-ui/components/card';
 
-## Overview
-- Topics: Apache Spark Architecture, Transformations, Actions
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 
-## Learning Objectives
-1. Understand the core architectural components of Spark (Driver, Master, Worker, Executor).
-2. Master the execution flow of a Spark job (DAG, Stage, Task).
-3. Distinguish between Transformations and Actions in Spark.
-4. Familiarize with common basic and advanced transformations (map, reduceByKey, etc.) and Actions.
+## Summary
 
-## Notes
+This week covers the architecture and operational model of Apache Spark, including its fundamental data structure (RDD), lazy evaluation, and the distinction between transformations and actions. It also explores the trade-offs between batch and streaming processing models.
 
-<Cards>
-  <Card
-    href="/en/notes/semester-2/COMPSCI4064-5088-big-data/week4/spark-architecture"
-    title="Spark Architecture"
-    description="Deep dive into Spark's runtime architecture, execution phases, and job anatomy."
-  />
-  <Card
-    href="/en/notes/semester-2/COMPSCI4064-5088-big-data/week4/spark-basic-transformations"
-    title="Spark Basic Transformations"
-    description="Learn about Spark's basic transformations (e.g., map, filter) and using custom functions."
-  />
-  <Card
-    href="/en/notes/semester-2/COMPSCI4064-5088-big-data/week4/spark-advanced-transformations"
-    title="Spark Advanced Transformations"
-    description="Master Set operations, Key-Value aggregations (reduceByKey), and Joins."
-  />
-  <Card
-    href="/en/notes/semester-2/COMPSCI4064-5088-big-data/week4/spark-actions"
-    title="Spark Actions"
-    description="Detailed guide to operations that trigger computation: collect, count, saveAsTextFile, etc."
-  />
-</Cards>
+<Accordions>
+  <Accordion title="Spark Architecture">
+    Introduction to the Spark ecosystem: Client, Driver, Master, Workers, and Executors. Comparison with the Hadoop MapReduce model.
+  </Accordion>
+  <Accordion title="Transformations & Actions">
+    Deep dive into Spark's API: Basic transformations (map, filter), set operations (union, intersection), and key-based operations (reduceByKey, groupByKey). Understanding the concept of Lazy Evaluation.
+  </Accordion>
+  <Accordion title="Batch vs. Streaming">
+    Exploration of static data (Batch) versus real-time data (Streaming). Analysis of challenges in streaming such as state management, buffering, and back-pressure.
+  </Accordion>
+</Accordions>
+
+## Quick Links
+
+- [Spark Architecture and Streaming](./spark-architecture-and-streaming)
+- [Key Spark Operations](./spark-architecture-and-streaming#transformations--actions)
+- [Streaming Challenges](./spark-architecture-and-streaming#streaming-challenges)

@@ -1,0 +1,56 @@
+---
+title: "Quantitative Evaluation"
+description: Scientific methods for evaluating user interfaces and experience
+---
+
+Quantitative methods in HCI focus on gathering numerical data to measure usability and prove design hypotheses with statistical significance.
+
+## Analytic vs. Empirical Methods
+
+Evaluation methods are broadly categorized into two types based on what is being studied.
+
+![Analytic vs Empirical Methods](/images/COMPSCI5057/week4/HCIDE2026_week_4_quantitative_evaluation-001.png)
+
+- **Analytic Evaluation**: Based on looking at inherent attributes of the design (e.g., heuristic evaluation, cognitive walkthrough).
+- **Empirical Evaluation**: Based on data observed from real user participants (e.g., lab studies, field studies).
+
+## Lab-Based Evaluations
+
+Lab studies involve observing user behavior in highly controlled settings to minimize confounding variables.
+
+### Key Measurements
+- **Objective Measures**: Success rate, errors, time to completion.
+- **Behavioral Analysis**: Gaze behavior (eye-tracking), physical movement.
+- **Subjective Measures**: Standardized questionnaires.
+
+### Usability Constructs
+According to ISO 9241-11, usability is measured via:
+- **Effectiveness**: Can users achieve their goals?
+- **Efficiency**: At what cost (time/effort)?
+- **Satisfaction**: How comfortable/happy is the user?
+
+![Usability Constructs](/images/COMPSCI5057/week4/HCIDE2026_week_4_quantitative_evaluation-003.png)
+
+## Analysing Data from User Studies
+
+### Measurement Scales
+The type of statistical test you can run depends on the scale of your data:
+1. **Nominal**: Categories (e.g., Gender, Browser choice).
+2. **Ordinal**: Rankings (e.g., 1st, 2nd, 3rd - intervals are not equal).
+3. **Interval**: Equal intervals, no absolute zero (e.g., Celsius).
+4. **Ratio**: Equal intervals with an absolute zero (e.g., Time, Distance).
+
+### Hypothesis Testing
+To prove an effect exists (e.g., "Keyboard A is faster than Keyboard B"), we must attempt to reject the **Null Hypothesis ($H_0$)**.
+
+![Hypothesis Testing selection chart](/images/COMPSCI5057/week4/HCIDE2026_week_4_quantitative_evaluation-039.png)
+
+- **$p$-value**: The probability that the observed difference happened by chance. Typically $p < 0.05$ is required for "significance".
+- **Type I Error**: False Positive (rejecting $H_0$ when it is true).
+- **Type II Error**: False Negative (failing to reject $H_0$ when it is false).
+
+## Key Takeaway
+
+- **Don't Reinvent the Wheel**: Use established, validated questionnaires (like SUS - System Usability Scale) for reliable results.
+- **Visualise Data**: simple means can be misleading; always plot distributions to understand the shape of your data.
+- **Central Limit Theorem**: Allows the use of tests like t-tests even on non-normal data if the sample size is large enough.
