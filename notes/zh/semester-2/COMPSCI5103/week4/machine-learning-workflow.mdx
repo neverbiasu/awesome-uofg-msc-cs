@@ -11,6 +11,8 @@ import { Steps } from 'fumadocs-ui/components/steps';
 - **Goal**: Understand the key steps in a machine learning workflow for deep learning.
 - **Key Concepts**: Data Preparation, Evaluation Protocols, Overfitting/Underfitting, Hyperparameter Tuning.
 
+![Machine Learning Workflow](/images/COMPSCI5103/week4/2025_26_DL_Lecture4_Machine_Learning_Workflow-000.png)
+
 ## The 8-Step Workflow
 
 <Steps>
@@ -26,6 +28,8 @@ import { Steps } from 'fumadocs-ui/components/steps';
     - **Regression**: Mean Squared Error (MSE).
 - **Goal Alignment**: Metrics should align with higher-level business goals (e.g., customer retention).
 
+![ROC Curve](/images/COMPSCI5103/week4/2025_26_DL_Lecture4_Machine_Learning_Workflow-009.png)
+
 ### 3. Prepare the Data
 Deep learning requires specific data preprocessing:
 - **Vectorization**: Turn data into tensors (e.g., One-hot encoding for categories).
@@ -38,6 +42,8 @@ Deep learning requires specific data preprocessing:
 - **Hold-out Validation**: Split data into Training, Validation, and Test sets (e.g., 60/20/20).
 - **K-Fold Cross-Validation**: Use when data is limited.
 - **Test Set**: Use ONLY ONCE at the very end to estimate generalization error.
+
+![K-Fold Validation](/images/COMPSCI5103/week4/2025_26_DL_Lecture4_Machine_Learning_Workflow-033.png)
 
 ### 5. Monitor and Diagnose Issues
 - **Underfitting**: Model is too simple (high bias). Fix: Increase capacity (layers/neurons).
@@ -61,6 +67,8 @@ Optimize the model to generalize better:
     - **Grid Search**: Exhaustive but slow.
     - **Random Search**: Often more effective.
     - **Bayesian Optimization**: Smart search using a surrogate model.
+
+![Optimization Strategies](/images/COMPSCI5103/week4/2025_26_DL_Lecture4_Machine_Learning_Workflow-045.png)
 </Steps>
 
 ## Key Concepts

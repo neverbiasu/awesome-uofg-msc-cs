@@ -28,6 +28,8 @@ import { Steps } from 'fumadocs-ui/components/steps';
 3.  **Transport**: TCP (Reliable) / UDP (Unreliable).
 4.  **Application**: HTTP, DNS, SMTP.
 
+![TCP/IP Model](/images/COMPSCI5012/week4/L4-ProtocolsMessagingCoursework-006.png)
+
 ---
 
 ## 2. HTTP Fundamentals
@@ -37,6 +39,8 @@ import { Steps } from 'fumadocs-ui/components/steps';
 ### Request-Response Pattern
 1.  **Client** sends a Request (Method, URL, Headers, Body).
 2.  **Server** sends a Response (Status Code, Headers, Body).
+
+![Request Flow](/images/COMPSCI5012/week4/L4-ProtocolsMessagingCoursework-013.png)
 
 ### HTTP Methods
 
@@ -60,9 +64,10 @@ HTTP is stateless: the server does not retain information about the client betwe
 
 ### Persistence
 - **HTTP 1.0**: New connection for every request (Slow).
-- **HTTP 1.1**: Persistent connections (Keep-Alive) reuse TCP connection.
 - **HTTP/2**: Multiplexing (parallel requests over one connection).
 - **HTTP/3**: Uses QUIC (UDP-based) for lower latency.
+
+![HTTP Persistence](/images/COMPSCI5012/week4/L4-ProtocolsMessagingCoursework-031.png)
 
 ---
 
