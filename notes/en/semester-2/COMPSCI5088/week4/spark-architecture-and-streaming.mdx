@@ -11,7 +11,7 @@ The Spark ecosystem consists of several key components that coordinate to execut
 
 ### Core Components
 
-![Spark Architecture](/images/COMPSCI4064-5088/week4/04-01-SparkArchitectuire-003.png)
+![Spark Architecture](/images/COMPSCI5088/week4/04-01-SparkArchitectuire-003.png)
 
 - **Client**: Submits work to the cluster and communicates with the Spark Master.
 - **Driver**: The central coordinator that executes the main program and builds the DAG.
@@ -23,7 +23,7 @@ The Spark ecosystem consists of several key components that coordinate to execut
 
 Spark uses **Lazy Evaluation**, meaning transformations are not executed until an **Action** is called. This allows the DAG Scheduler to optimize the execution plan.
 
-![Spark Execution Phases](/images/COMPSCI4064-5088/week4/04-01-SparkArchitectuire-006.png)
+![Spark Execution Phases](/images/COMPSCI5088/week4/04-01-SparkArchitectuire-006.png)
 
 1. **DAG Creation**: Transformations create a Directed Acyclic Graph.
 2. **Stage Building**: The DAG Scheduler groups tasks into stages based on data dependencies.
@@ -52,12 +52,12 @@ While batch processing handles static datasets, streaming handles continuous dat
 
 ### Streaming Challenges
 
-![Batch vs Streaming Example](/images/COMPSCI4064-5088/week4/04-06-BatchVsStreaming-006.png)
+![Batch vs Streaming Example](/images/COMPSCI5088/week4/04-06-BatchVsStreaming-006.png)
 
 - **State Management**: Keeping track of information across different batches (e.g., total spending per user).
 - **Buffering & Back-pressure**: If input velocity exceeds processing capacity, buffers fill up, leading to system failure unless back-pressure is managed.
 
-![Back Pressure Diagram](/images/COMPSCI4064-5088/week4/04-06-BatchVsStreaming-028.png)
+![Back Pressure Diagram](/images/COMPSCI5088/week4/04-06-BatchVsStreaming-028.png)
 
 ## Key Takeaway
 

@@ -51,7 +51,7 @@ const COURSES = {
   // Semester 2
   'COMPSCI4064/5088': {
     name: 'Big Data: Systems, Programming, and Management H/M',
-    localPath: 'materials/semester-2/COMPSCI4064-5088-big-data'
+    localPath: 'materials/semester-2/COMPSCI5088'
   },
   'COMPSCI5012': {
     name: 'Internet Technology',
