@@ -1,0 +1,28 @@
+---
+title: "第3周：分组密码 (DES & AES)"
+description: 对称加密、Feistel 网络、DES 和 AES 算法。
+---
+
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+
+## 总结
+
+本周深入探讨**对称密钥密码学**，重点关注分组密码。详细介绍了基于 Feistel 网络的历史性数据加密标准 (DES) 及其现代替代品——高级加密标准 (AES)。
+
+<Accordions>
+  <Accordion title="Feistel 网络">
+    一种用于许多分组密码（如 DES）的对称结构。它将数据块分为两半 ($L_i, R_i$) 并迭代应用轮函数。解密使用相同的结构，但密钥顺序相反。
+  </Accordion>
+  <Accordion title="DES (数据加密标准)">
+    一种 64 位分组密码，密钥长度为 56 位。由于密钥长度过短（容易受到暴力破解），现在被认为是不安全的。三重 DES (3DES) 通过三次应用 DES 来提高安全性。
+  </Accordion>
+  <Accordion title="AES (高级加密标准)">
+    当前的标准 (Rijndael)。一种代换-置换网络（非 Feistel），具有 128 位块大小和可变密钥长度（128, 192, 256 位）。它依赖于四个主要变换：**字节代换 (SubBytes)**、**行移位 (ShiftRows)**、**列混淆 (MixColumns)** 和 **轮密钥加 (AddRoundKey)**。
+  </Accordion>
+</Accordions>
+
+## 快速链接
+
+- [对称分组密码](./symmetric-block-ciphers)
+- [Feistel 结构](./symmetric-block-ciphers#feistel-cipher-structure)
+- [AES 变换](./symmetric-block-ciphers#aes-advanced-encryption-standard)

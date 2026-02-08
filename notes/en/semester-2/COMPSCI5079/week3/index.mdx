@@ -1,0 +1,28 @@
+---
+title: "Week 3: Block Ciphers (DES & AES)"
+description: Symmetric encryption, Feistel networks, DES, and AES algorithms.
+---
+
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+
+## Summary
+
+This week dives into **Symmetric Key Cryptography**, focusing on Block Ciphers. It details the historical Data Encryption Standard (DES) based on the Feistel network and its modern replacement, the Advanced Encryption Standard (AES).
+
+<Accordions>
+  <Accordion title="Feistel Networks">
+    A symmetric structure used in many block ciphers (like DES). It splits the data block into two halves ($L_i, R_i$) and applies a round function iteratively. Decryption uses the same structure with reversed keys.
+  </Accordion>
+  <Accordion title="DES (Data Encryption Standard)">
+    A 64-bit block cipher with a 56-bit key. Now considered insecure due to its short key length (susceptible to brute-force). Triple-DES (3DES) improves security by applying DES three times.
+  </Accordion>
+  <Accordion title="AES (Advanced Encryption Standard)">
+    The current standard (Rijndael). A substitution-permutation network (not Feistel) with a 128-bit block size and variable key lengths (128, 192, 256 bits). It relies on four main transformations: **SubBytes**, **ShiftRows**, **MixColumns**, and **AddRoundKey**.
+  </Accordion>
+</Accordions>
+
+## Quick Links
+
+- [Symmetric Block Ciphers](./symmetric-block-ciphers)
+- [Feistel Structure](./symmetric-block-ciphers#feistel-cipher-structure)
+- [AES Transformations](./symmetric-block-ciphers#aes-advanced-encryption-standard)

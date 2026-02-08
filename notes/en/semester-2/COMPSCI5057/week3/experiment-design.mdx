@@ -1,0 +1,45 @@
+---
+title: "Experiment Design"
+description: Scientific methods for designing reliable user studies
+---
+
+Designing a robust experiment is crucial for gathering valid empirical data in Human-Computer Interaction.
+
+## Variables
+
+In any experiment, we manipulate and measure specific factors:
+
+- **Independent Variable (IV)**: The factor that the researcher manipulates (e.g., Input Method: Mouse vs. Trackpad).
+- **Dependent Variable (DV)**: The outcome that is measured (e.g., Task Completion Time, Error Rate).
+- **Control Variable**: Factors that are kept constant to prevent interference (e.g., Screen size, Lighting conditions).
+
+## Experimental Designs
+
+We must decide how to assign participants to different conditions.
+
+### Within-Subjects Design (Repeated Measures)
+Each participant performs **all** experimental conditions.
+- **Pros**: Requires fewer participants; eliminates individual differences (each person acts as their own control).
+- **Cons**: Susceptible to **Learning Effects** (getting better over time) and **Fatigue Effects**.
+- **Mitigation**: Use **Counterbalancing** (e.g., half do A then B, half do B then A) to cancel out order effects.
+
+### Between-Subjects Design (Independent Measures)
+Each participant performs **only one** experimental condition.
+- **Pros**: No learning or fatigue effects across conditions.
+- **Cons**: Requires more participants; individual differences (e.g., age, skill) can skew results.
+- **Mitigation**: Random assignment of participants to groups.
+
+## Hypothesis Testing
+
+Experiments are designed to test hypotheses.
+
+- **Null Hypothesis ($H_0$)**: Assumes there is **no difference** between conditions (e.g., "There is no difference in speed between Layout A and Layout B").
+- **Alternative Hypothesis ($H_1$)**: Assumes there **is a difference** (e.g., "Layout A is faster than Layout B").
+
+Our goal is to gather enough evidence to **reject the null hypothesis** with a certain level of confidence (typically $p < 0.05$).
+
+## Key Takeaway
+
+- **Control is Key**: Always identify and control confounding variables.
+- **Counterbalancing**: Essential for Within-Subjects designs to neutralize order effects.
+- **Validity**: Internal validity (did the IV cause the change in DV?) vs. External validity (do results generalize to the real world?).
