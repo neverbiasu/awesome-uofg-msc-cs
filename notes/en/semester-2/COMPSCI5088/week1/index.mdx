@@ -1,44 +1,27 @@
 ---
 title: "Week 1: Big Data Fundamentals"
-description: "Big data definition, hardware fundamentals, user needs, vertical vs horizontal scaling, compute parallelization."
+description: Big data definition, hardware fundamentals, and parallel computing concepts.
 ---
 
-import { Card, Cards } from 'fumadocs-ui/components/card';
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 
-## Overview
+## Summary
 
-This week introduces fundamental big data concepts, from defining big data to understanding hardware fundamentals, scaling strategies, and parallel computing principles. These are foundational for understanding frameworks like Hadoop and Spark later in the course.
+This week introduces the "Three Vs" of Big Data (Volume, Velocity, Variety) and explores the hardware and software paradigms required to process it. It contrasts vertical scaling (adding more power to one machine) with horizontal scaling (adding more machines), which is the foundation of modern distributed computing.
 
-- **Format**: Video lectures + Reading materials
-- **Topics**: Big data definition, hardware, scaling, parallel computing
+<Accordions>
+  <Accordion title="The Big Data Problem">
+    Why traditional databases fail at scale. Understanding the explosion of data from social media, IoT, and scientific research.
+  </Accordion>
+  <Accordion title="Scaling Strategies">
+    **Vertical Scaling (Scale-up)** vs. **Horizontal Scaling (Scale-out)**. Why horizontal scaling is preferred for fault tolerance and cost-effectiveness in big data.
+  </Accordion>
+  <Accordion title="Compute Parallelism">
+    The concept of splitting a task into smaller sub-tasks to run concurrently. Introduction to Amdahl's Law and the limits of parallelization.
+  </Accordion>
+</Accordions>
 
-## Learning Objectives
+## Quick Links
 
-1. Understand the definition and characteristics of big data
-2. Master how hardware impacts big data processing
-3. Distinguish between batch and stream processing
-4. Understand the difference between vertical and horizontal scaling
-5. Master basic concepts of parallel computing
-
-## Notes
-
-<Cards>
-    <Card
-      href="/en/notes/semester-2/COMPSCI5088/week1/big-data-overview"
-      title="Big Data Overview"
-      description="What is big data, why it exploded, and common use cases."
-    />
-    <Card
-      href="/en/notes/semester-2/COMPSCI5088/week1/scaling-and-parallelism"
-      title="Hardware, Scaling and Parallelism"
-      description="Hardware fundamentals, vertical vs horizontal scaling, and compute parallelization."
-    />
-</Cards>
-
-## Materials
-
-- [01-01-WhatIsBigData (PDF)](../../../../../materials/semester-2/COMPSCI5088/resources/01-01-WhatIsBigData.pdf)
-- [01-02-Hardware (PDF)](../../../../../materials/semester-2/COMPSCI5088/resources/01-02-Hardware.pdf)
-- [01-03-UserNeeds (PDF)](../../../../../materials/semester-2/COMPSCI5088/resources/01-03-UserNeeds.pdf)
-- [01-04-VerticalVsHorizontalScaling (PDF)](../../../../../materials/semester-2/COMPSCI5088/resources/01-04-VerticalVsHorizontalScaling.pdf)
-- [01-05-ComputeParallelism (PDF)](../../../../../materials/semester-2/COMPSCI5088/resources/01-05-ComputeParallelism.pdf)
+- [Big Data Overview](./big-data-overview)
+- [Scaling and Parallelism](./scaling-and-parallelism)

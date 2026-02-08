@@ -1,46 +1,28 @@
 ---
-title: "第2周：MapReduce与Hadoop"
-description: "分布式系统中的计算挑战、MapReduce编程模型和Hadoop框架介绍。"
+title: "第2周：MapReduce 与 Hadoop"
+description: 分布式计算挑战、MapReduce 模型以及 Hadoop 生态系统。
 ---
 
-import { Card, Cards } from 'fumadocs-ui/components/card';
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 
-## 概述
+## 总结
 
-本周介绍分布式计算的基本挑战，并引入MapReduce作为解决方案。我们还将探索Hadoop，这是MapReduce范式最广泛使用的实现。
+本周深入探讨处理大数据的解决方案：MapReduce 编程模型及其开源实现——Apache Hadoop。解决了分布式计算的核心挑战，如容错和数据局部性。
 
-- **形式**：视频讲座
-- **主题**：计算挑战、MapReduce模型、Hadoop框架
+<Accordions>
+  <Accordion title="分布式挑战">
+    当与数千台机器一起工作时，如何处理部分故障、网络延迟和同步问题。
+  </Accordion>
+  <Accordion title="MapReduce 模型">
+    一种函数式编程方法，其中数据处理分为 **Map** 阶段（过滤/排序）和 **Reduce** 阶段（汇总操作）。
+  </Accordion>
+  <Accordion title="Apache Hadoop">
+    包含 **HDFS**（存储）和 **YARN**（资源管理）的生态系统。Hadoop 如何实现 MapReduce 以在数据驻留的地方处理数据（数据局部性）。
+  </Accordion>
+</Accordions>
 
-## 学习目标
+## 快速链接
 
-1. 理解分布式计算的挑战
-2. 掌握MapReduce编程模型
-3. 学习Hadoop的架构和组件
-4. 理解MapReduce如何解决并行化问题
-
-## 笔记
-
-<Cards>
-    <Card
-      href="/zh/notes/semester-2/COMPSCI5088/week2/compute-challenges"
-      title="计算挑战"
-      description="分布式计算中的挑战：容错、数据局部性和同步。"
-    />
-    <Card
-      href="/zh/notes/semester-2/COMPSCI5088/week2/mapreduce"
-      title="MapReduce"
-      description="MapReduce编程模型及其关键概念。"
-    />
-    <Card
-      href="/zh/notes/semester-2/COMPSCI5088/week2/hadoop"
-      title="Hadoop"
-      description="Apache Hadoop生态系统和架构。"
-    />
-</Cards>
-
-## 材料
-
-- [02-01 计算挑战 (PDF)](../../../../../materials/semester-2/COMPSCI5088/resources/02-01-ComputeChallenges.pdf)
-- [02-02 MapReduce (PDF)](../../../../../materials/semester-2/COMPSCI5088/resources/02-02-MapReduce.pdf)
-- [02-03 Hadoop (PDF)](../../../../../materials/semester-2/COMPSCI5088/resources/02-03-Hadoop.pdf)
+- [计算挑战](./compute-challenges)
+- [MapReduce 模型](./mapreduce)
+- [Hadoop 框架](./hadoop)

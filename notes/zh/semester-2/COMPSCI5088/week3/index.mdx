@@ -1,28 +1,27 @@
 ---
-title: "第三周"
-description: "本周主题概览，涵盖 Hadoop 的执行、附加功能、问题，以及 Apache Spark 和有向无环图（DAG）的介绍。"
+title: "第3周：Hadoop执行与Spark入门"
+description: MapReduce内部机制、Hadoop的局限性以及Apache Spark的兴起。
 ---
 
-## 概要
-- **节奏**: tAPP + Lab
-- **主题**: Hadoop, Apache Spark, DAGs
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 
-## 本周安排（按顺序）
-| 讲座 | 主题 | 说明 |
-|---|---|---|
-| 讲座 1 | Hadoop 生态系统 | 涵盖 Hadoop 的执行、附加功能及常见问题。 |
-| 讲座 2 | Spark 入门 | 介绍 Apache Spark 及其核心概念，包括有向无环图（DAG）。 |
+## 总结
 
-## 学习目标
-1. 理解 Hadoop MapReduce 作业的执行流程。
-2. 认识 Hadoop 的局限性和常见问题。
-3. 初步了解作为替代方案的 Apache Spark 及其优势。
-4. 理解分布式计算背景下的有向无环图（DAG）是什么。
+本周连接了 Hadoop 和 Spark。它详细介绍了 Hadoop MapReduce 复杂的执行流程，指出了其局限性（磁盘 I/O、延迟），并介绍了作为内存中心替代方案的 Apache Spark，其特点包括弹性分布式数据集 (RDD) 和有向无环图 (DAG)。
 
-## 内容索引（子页）
-| 模块 | 页面 |
-|---|---|
-| Hadoop 与 Spark | [Hadoop 与 Spark 基础](./hadoop-and-spark-intro) |
+<Accordions>
+  <Accordion title="Hadoop 执行流程">
+    深入了解 MapReduce 作业的运行方式：JobTracker、TaskTrackers、HDFS 读/写、排序和洗牌 (Shuffling)。理解其对磁盘 I/O 的严重依赖。
+  </Accordion>
+  <Accordion title="Hadoop 的局限性">
+    为什么 Hadoop 在迭代算法（如机器学习）和交互式查询方面速度较慢。小文件问题和高延迟问题。
+  </Accordion>
+  <Accordion title="Spark 入门">
+    Spark 的核心价值主张：**内存计算**。介绍 **RDD**（不可变、分区的集合）和 **DAG**（在运行前优化执行计划）。
+  </Accordion>
+</Accordions>
 
-## 评估提醒（如有）
-- 本周无评估任务。
+## 快速链接
+
+- [Hadoop 与 Spark 基础](./hadoop-and-spark-intro)
+- [关键要点](./hadoop-and-spark-intro#key-takeaways)

@@ -1,44 +1,27 @@
 ---
-title: "第一周：大数据基础"
-description: "大数据定义、硬件基础、用户需求、垂直vs水平扩展、计算并行化。"
+title: "第1周：大数据基础"
+description: 大数据定义、硬件基础以及并行计算概念。
 ---
 
-import { Card, Cards } from 'fumadocs-ui/components/card';
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 
-## 概要
+## 总结
 
-本周介绍大数据的基础概念，从定义大数据开始，深入了解硬件基础、扩展策略和并行计算原理。这些是理解后续Hadoop和Spark等框架的基础。
+本周介绍了大数据的“3V”特征（规模 Volume、速度 Velocity、多样性 Variety），并探讨了处理大数据所需的硬件和软件范式。对比了垂直扩展（增加单机性能）与水平扩展（增加机器数量），后者是现代分布式计算的基础。
 
-- **形式**：视频讲座 + 阅读材料
-- **主题**：大数据定义、硬件、扩展、并行计算
+<Accordions>
+  <Accordion title="大数据问题">
+    为什么传统数据库在规模化时会失效。理解来自社交媒体、物联网和科学研究的数据爆炸。
+  </Accordion>
+  <Accordion title="扩展策略">
+    **垂直扩展 (Scale-up)** vs. **水平扩展 (Scale-out)**。为什么在大数据中水平扩展在容错和成本效益方面更受青睐。
+  </Accordion>
+  <Accordion title="计算并行化">
+    将任务分解为较小的子任务以便并发运行的概念。介绍阿姆达尔定律 (Amdahl's Law) 以及并行化的局限性。
+  </Accordion>
+</Accordions>
 
-## 学习目标
+## 快速链接
 
-1. 理解大数据的定义和特征
-2. 掌握硬件对大数据处理的影响
-3. 区分批处理和流处理
-4. 理解垂直扩展和水平扩展的区别
-5. 掌握并行计算的基本概念
-
-## 笔记
-
-<Cards>
-    <Card
-      href="/zh/notes/semester-2/COMPSCI5088/week1/big-data-overview"
-      title="大数据概述"
-      description="什么是大数据、大数据爆发的原因以及常见用例。"
-    />
-    <Card
-      href="/zh/notes/semester-2/COMPSCI5088/week1/scaling-and-parallelism"
-      title="硬件、扩展与并行化"
-      description="硬件基础、垂直vs水平扩展以及计算并行化概念。"
-    />
-</Cards>
-
-## 材料
-
-- [01-01-WhatIsBigData (PDF)](../../../../../materials/semester-2/COMPSCI5088/resources/01-01-WhatIsBigData.pdf)
-- [01-02-Hardware (PDF)](../../../../../materials/semester-2/COMPSCI5088/resources/01-02-Hardware.pdf)
-- [01-03-UserNeeds (PDF)](../../../../../materials/semester-2/COMPSCI5088/resources/01-03-UserNeeds.pdf)
-- [01-04-VerticalVsHorizontalScaling (PDF)](../../../../../materials/semester-2/COMPSCI5088/resources/01-04-VerticalVsHorizontalScaling.pdf)
-- [01-05-ComputeParallelism (PDF)](../../../../../materials/semester-2/COMPSCI5088/resources/01-05-ComputeParallelism.pdf)
+- [大数据概述](./big-data-overview)
+- [扩展与并行化](./scaling-and-parallelism)

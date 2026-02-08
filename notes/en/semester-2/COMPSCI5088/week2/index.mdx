@@ -1,46 +1,28 @@
 ---
-title: "Week 2: MapReduce and Hadoop"
-description: "Compute challenges in distributed systems, MapReduce programming model, and Hadoop framework introduction."
+title: "Week 2: MapReduce & Hadoop"
+description: Distributed computing challenges, MapReduce model, and the Hadoop ecosystem.
 ---
 
-import { Card, Cards } from 'fumadocs-ui/components/card';
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 
-## Overview
+## Summary
 
-This week covers the fundamental challenges of distributed computing and introduces MapReduce as a solution. We also explore Hadoop, the most widely-used implementation of the MapReduce paradigm.
+This week dives into the solution for processing big data: the MapReduce programming model and its open-source implementation, Apache Hadoop. It addresses core distributed computing challenges like fault tolerance and data locality.
 
-- **Format**: Video Lectures
-- **Topics**: Compute challenges, MapReduce model, Hadoop framework
+<Accordions>
+  <Accordion title="Distributed Challenges">
+    How to handle partial failures, network latency, and synchronization issues when working with thousands of machines.
+  </Accordion>
+  <Accordion title="The MapReduce Model">
+    A functional programming approach where data processing is split into a **Map** phase (filtering/sorting) and a **Reduce** phase (summary operation).
+  </Accordion>
+  <Accordion title="Apache Hadoop">
+    The ecosystem comprising **HDFS** (storage) and **YARN** (resource management). How Hadoop implements MapReduce to process data where it resides (Data Locality).
+  </Accordion>
+</Accordions>
 
-## Learning Objectives
+## Quick Links
 
-1. Understand the challenges of distributed computing
-2. Master the MapReduce programming model
-3. Learn the architecture and components of Hadoop
-4. Understand how MapReduce solves parallelization problems
-
-## Notes
-
-<Cards>
-    <Card
-      href="/en/notes/semester-2/COMPSCI5088/week2/compute-challenges"
-      title="Compute Challenges"
-      description="Challenges in distributed computing: fault tolerance, data locality, and synchronization."
-    />
-    <Card
-      href="/en/notes/semester-2/COMPSCI5088/week2/mapreduce"
-      title="MapReduce"
-      description="The MapReduce programming model and its key concepts."
-    />
-    <Card
-      href="/en/notes/semester-2/COMPSCI5088/week2/hadoop"
-      title="Hadoop"
-      description="Apache Hadoop ecosystem and architecture."
-    />
-</Cards>
-
-## Materials
-
-- [02-01 Compute Challenges (PDF)](../../../../../materials/semester-2/COMPSCI5088/resources/02-01-ComputeChallenges.pdf)
-- [02-02 MapReduce (PDF)](../../../../../materials/semester-2/COMPSCI5088/resources/02-02-MapReduce.pdf)
-- [02-03 Hadoop (PDF)](../../../../../materials/semester-2/COMPSCI5088/resources/02-03-Hadoop.pdf)
+- [Compute Challenges](./compute-challenges)
+- [MapReduce Model](./mapreduce)
+- [Hadoop Framework](./hadoop)
