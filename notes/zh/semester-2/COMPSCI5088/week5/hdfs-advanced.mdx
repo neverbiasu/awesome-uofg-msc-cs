@@ -1,0 +1,31 @@
+---
+title: "HDFS 高级概念"
+description: 高可用性、联邦与纠删码
+---
+
+随着 HDFS 集群的增长，原始设计的局限性催生了一些高级特性。
+
+## 高可用性 (High Availability, HA)
+
+为了解决 NameNode 的 **单点故障 (SPOF)**：
+- **Active/Standby NameNodes**：两个 NameNode 同时运行。
+- **JournalNodes**：用于存储编辑日志的共享存储，以保持 Standby 同步。
+- **ZooKeeper**：处理自动故障转移。
+
+## HDFS 联邦 (Federation)
+
+为了解决单个 NameNode 内存的 **可扩展性限制**：
+- **多个 NameNodes/命名空间**：每个管理文件系统的一个切片（例如 `/user`, `/data`）。
+- **共享 DataNodes**：所有 NameNode 共享同一个存储池。
+
+## 小文件问题
+
+HDFS 在处理数百万个小文件时效率低下，因为每个文件（无论大小）都需要在 NameNode 内存中占用一个对象（约 150 字节）。
+- **解决方案**：**Hadoop Archives (HAR)** 或 SequenceFiles，将小文件打包成大文件。
+
+## 纠删码 (Erasure Coding) (HDFS 3.x)
+
+为了减少 3 倍复制带来的存储开销（200% 开销）：
+- **机制**：类似于分布式的 RAID 5/6。计算奇偶校验块。
+- **好处**：将存储开销降低到约 50%，同时保持容错性。
+- **权衡**：计算和恢复需要更高的 CPU 使用率。

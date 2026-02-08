@@ -1,0 +1,31 @@
+---
+title: "第5周：分布式存储与HDFS"
+description: 持久化存储的演变、NFS 以及 Hadoop 分布式文件系统。
+---
+
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+
+## 总结
+
+本周的重点从计算（Spark/MapReduce）转向存储。探讨了从本地持久化存储到网络文件系统 (NFS)，最后到 Hadoop 分布式文件系统 (HDFS) 的演变，HDFS 专为商用硬件上的大规模和容错而设计。
+
+<Accordions>
+  <Accordion title="持久化存储基础">
+    了解存储介质（HDD vs SSD）、用于冗余和性能的 RAID 配置，以及本地存储在大数据方面的局限性。
+  </Accordion>
+  <Accordion title="网络文件系统 (NFS)">
+    迈向分布式存储的第一步。允许通过网络远程访问文件。局限性：单点故障（中央服务器）和网络瓶颈。
+  </Accordion>
+  <Accordion title="HDFS 架构">
+    **NameNode**（元数据主节点）与 **DataNode**（块存储）。HDFS 如何将大文件分割成块（默认 128MB）并进行复制（默认 3x）以实现容错。
+  </Accordion>
+  <Accordion title="HDFS 操作">
+    **读取**（客户端联系 NameNode 获取位置，然后从 DataNode 读取）和**写入**（管道复制策略）的详细工作流程。
+  </Accordion>
+</Accordions>
+
+## 快速链接
+
+- [持久化存储与 NFS](./persistent-storage)
+- [HDFS 架构](./hdfs-architecture)
+- [HDFS 高级概念](./hdfs-advanced)
