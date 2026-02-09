@@ -1,23 +1,32 @@
 ---
-title: "Week 2"
-description: "Web Frameworks and Django Fundamentals"
+title: "Week 2: Web Frameworks & Django"
+description: MVC vs MVT patterns, Django core components, and URL routing.
 ---
-import { Card, Cards } from 'fumadocs-ui/components/card';
 
-## Overview
-- Topics: Web Frameworks, MVC/MVT, Django Basics
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 
-## Learning Objectives
-1. Understand the difference between Frameworks and Libraries.
-2. Master MVC and Django MVT architectures.
-3. Familiarize with Django core components (Models, Views, URLs).
+## Summary
 
-## Notes
+This week introduces the tools used to build scalable web applications. It defines what a web framework is (vs. a library) and dives into Django, a high-level Python web framework, explaining its specific architectural pattern (MVT).
 
-<Cards>
-  <Card
-    href="/en/notes/semester-2/COMPSCI5012/week2/web-frameworks-and-django"
-    title="Web Frameworks and Django"
-    description="Week 2 Lecture Notes: Framework principles, MVC pattern, and Django MVT architecture."
-  />
-</Cards>
+<Accordions>
+  <Accordion title="Frameworks vs. Libraries">
+    **Inversion of Control**: The key difference. A library is a tool you call; a framework calls your code. Why frameworks are essential for complex web apps (security, scalability, speed).
+  </Accordion>
+  <Accordion title="Architectural Patterns">
+    **MVC (Model-View-Controller)**: The industry standard pattern.
+    **MVT (Model-View-Template)**: Django's variation.
+    - **Model**: Data Access Layer.
+    - **View**: Business Logic (Controller).
+    - **Template**: Presentation Layer (View).
+  </Accordion>
+  <Accordion title="Django Fundamentals">
+    The request lifecycle in Django: `URLconf` -> `View` -> `Model` -> `Template` -> `Response`. Setting up a project, creating apps, and mapping URLs.
+  </Accordion>
+</Accordions>
+
+## Quick Links
+
+- [Web Frameworks and Django](./web-frameworks-and-django)
+- [MVC vs MVT](./web-frameworks-and-django#mvc-and-django-mvt-architecture)
+- [Django Request Lifecycle](./web-frameworks-and-django#django-fundamentals)

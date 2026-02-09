@@ -1,23 +1,32 @@
 ---
-title: "第二周"
-description: "Web 框架与 Django 开发基础"
+title: "第2周：Web 框架与 Django"
+description: MVC vs MVT 模式、Django 核心组件与 URL 路由。
 ---
-import { Card, Cards } from 'fumadocs-ui/components/card';
 
-## 概要
-- 主题: Web 框架, MVC/MVT, Django 基础
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 
-## 学习目标
-1. 理解框架与库的区别。
-2. 掌握 MVC 与 Django MVT 架构。
-3. 熟悉 Django 的核心组件（Models, Views, URLs）。
+## 总结
 
-## 笔记
+本周介绍了用于构建可扩展 Web 应用的工具。定义了什么是 Web 框架（相对于库），并深入探讨了 Django——一个高级 Python Web 框架，解释了其特定的架构模式 (MVT)。
 
-<Cards>
-  <Card
-    href="/zh/notes/semester-2/COMPSCI5012/week2/web-frameworks-and-django"
-    title="Web 框架与 Django"
-    description="Week 2 课堂笔记：框架原理、MVC 模式、Django MVT 架构详解。"
-  />
-</Cards>
+<Accordions>
+  <Accordion title="框架 vs. 库">
+    **控制反转 (Inversion of Control)**：关键区别。库是你调用的工具；框架调用你的代码。为什么框架对复杂的 Web 应用至关重要（安全性、可扩展性、速度）。
+  </Accordion>
+  <Accordion title="架构模式">
+    **MVC (模型-视图-控制器)**：行业标准模式。
+    **MVT (模型-视图-模板)**：Django 的变体。
+    - **Model**：数据访问层。
+    - **View**：业务逻辑（控制器）。
+    - **Template**：表现层（视图）。
+  </Accordion>
+  <Accordion title="Django 基础">
+    Django 中的请求生命周期：`URLconf` -> `View` -> `Model` -> `Template` -> `Response`。设置项目、创建应用以及映射 URL。
+  </Accordion>
+</Accordions>
+
+## 快速链接
+
+- [Web 框架与 Django](./web-frameworks-and-django)
+- [MVC vs MVT](./web-frameworks-and-django#mvc-and-django-mvt-architecture)
+- [Django 请求生命周期](./web-frameworks-and-django#django-fundamentals)

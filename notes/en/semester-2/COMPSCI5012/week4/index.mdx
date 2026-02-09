@@ -1,10 +1,28 @@
 ---
-title: "Week 4: Messaging and Protocols"
-description: "HTTP fundamentals and Inter-Process Communication"
+title: "Week 4: Messaging & Protocols"
+description: Network models, HTTP fundamentals, and Inter-Process Communication.
 ---
 
-## Overview
-This week focuses on http fundamentals and inter-process communication.
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 
-## Content
+## Summary
+
+This week explores how computers communicate over the internet. It covers the theoretical models (OSI, TCP/IP), the practical details of the HTTP protocol (Requests, Responses, Methods), and how distributed systems exchange data via Inter-Process Communication (IPC) using technologies like REST and gRPC.
+
+<Accordions>
+  <Accordion title="Network Models">
+    The 7-layer **OSI Model** vs. the 4-layer **TCP/IP Model**. Understanding how data moves from the Physical layer up to the Application layer.
+  </Accordion>
+  <Accordion title="HTTP Fundamentals">
+    The request-response cycle. Key methods (**GET** vs **POST**), status codes, headers, and the stateless nature of HTTP (and how Cookies/Sessions fix this).
+  </Accordion>
+  <Accordion title="Inter-Process Communication (IPC)">
+    Protocols for systems to talk to each other: **REST** (Representational State Transfer) APIs using JSON, compared to legacy **SOAP** (XML) and modern **gRPC** (Protocol Buffers).
+  </Accordion>
+</Accordions>
+
+## Quick Links
+
 - [Messaging and Protocols](./messaging-and-protocols)
+- [HTTP Methods (GET vs POST)](./messaging-and-protocols#http-methods)
+- [IPC Protocols](./messaging-and-protocols#inter-process-communication-ipc)

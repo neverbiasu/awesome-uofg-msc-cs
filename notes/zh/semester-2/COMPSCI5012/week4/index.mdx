@@ -1,10 +1,28 @@
 ---
-title: "第四周：消息传递与协议"
-description: "HTTP 基础与进程间通信"
+title: "第4周：消息传递与协议"
+description: 网络模型、HTTP 基础以及进程间通信。
 ---
 
-## 概要
-本周重点关注HTTP 基础与进程间通信。
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 
-## 内容
+## 总结
+
+本周探讨计算机如何在互联网上进行通信。涵盖了理论模型（OSI、TCP/IP）、HTTP 协议的实际细节（请求、响应、方法），以及分布式系统如何使用 REST 和 gRPC 等技术通过进程间通信 (IPC) 交换数据。
+
+<Accordions>
+  <Accordion title="网络模型">
+    7 层 **OSI 模型** vs. 4 层 **TCP/IP 模型**。理解数据如何从物理层向上传输到应用层。
+  </Accordion>
+  <Accordion title="HTTP 基础">
+    请求-响应周期。关键方法（**GET** vs **POST**）、状态码、标头，以及 HTTP 的无状态性质（以及 Cookies/Sessions 如何解决此问题）。
+  </Accordion>
+  <Accordion title="进程间通信 (IPC)">
+    系统间通信的协议：使用 JSON 的 **REST** (表现层状态转换) API，与传统的 **SOAP** (XML) 和现代的 **gRPC** (Protocol Buffers) 进行对比。
+  </Accordion>
+</Accordions>
+
+## 快速链接
+
 - [消息传递与协议](./messaging-and-protocols)
+- [HTTP 方法 (GET vs POST)](./messaging-and-protocols#http-methods)
+- [IPC 协议](./messaging-and-protocols#inter-process-communication-ipc)
