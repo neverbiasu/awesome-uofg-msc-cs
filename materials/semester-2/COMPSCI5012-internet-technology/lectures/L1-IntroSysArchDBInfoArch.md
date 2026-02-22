@@ -394,6 +394,19 @@ Providing flexibility
 Tiers can be replicated across a number of machines
 Providing scalability
 
+Group Registration: UPDATE
+Groups for this course will now be 
+assigned automatically
+Self-formed groups won’t be used
+If you’ve already formed a group, 
+you may not stay in the same one
+Your assigned group will be posted on 
+Moodle
+This change follows a 
+School-level decision
+ to make group work fair and consistent across courses.
+Sorry for any inconvenience this causes, and thanks for your understanding 🙂
+
 System Architecture Design
 
 Top Down Design
@@ -441,7 +454,8 @@ Low level design decisions can have major impact on solutions
 Risks integration problems – how do components link together
 Often used to add on to existing modules
 
-Notation for Diagrams
+Notation for 
+System Architecture Diagrams
 Modified Dataflow Language 
 where we have the following entities:
 User
@@ -454,6 +468,7 @@ External Service/Application
 Communications/
 DataFlows
 
+System Architecture Diagram: 
 User
 The user or client instigates and interacts with the services or applications provided
 There are various clients including:
@@ -464,7 +479,7 @@ Agents,
 Other systems, 
 etc
 
-Client
+System Architecture Diagram: Client
 The client and the interface presented takes on many forms and can vary greatly:
 Web Browser on a PC, Tablet, Mobile, 
 etc
@@ -473,7 +488,7 @@ etc
 Devices and Robots
 Sensors 
 
-Middleware (1)
+System Architecture Diagram: Middleware (1)
 The middleware houses an array of possible components from:
 Domain Name Servers
 Load Balancing Servers
@@ -483,11 +498,11 @@ Caching Servers
 Typically the first three are predefined or configured using standard software
 The Application Server is what is mainly of interest i.e. what needs to be developed.
 
-Middleware (2)
+System Architecture Diagram: Middleware (2)
 Often represented as a single component that processes requests between the client and database.
 Though encapsulates a number of other components
 
-Databases
+System Architecture Diagram: Databases
 A database server is usually employed to handle the data management side of applications.
 i.e. Postgres, 
 SQLServer
@@ -497,13 +512,16 @@ i.e. the database tables have to be defined and populated.
 To specify this part more precisely, ER Diagrams can be used.		
 		
 
+System Architecture Diagram: 
 Logs and External Services
 Logs represent data sinks
 The application outputs data but does not read it back, directly.
 External Services represent applications and services that are used by the application
 They provide an API or interface of some kind that which can be used to interact with the service.
 
- Messaging
+ 
+System Architecture Diagram: 
+Messaging
 The 
 request message
  is sent to the server from a user agent to:
@@ -517,6 +535,7 @@ response message
 return the requested information
 affect some change in the environment
 
+System Architecture Diagram: 
 Data flows
 Arrows are used to denote the flow of information
 The direction of the arrow denotes the direction of the communication.
@@ -524,7 +543,7 @@ Most communications are both ways, where a request is made, followed by a respon
 The client makes the requests.
 This show how the entities are related.
 
-Technology and Devices
+System Architecture Diagram: Technology and Devices
 For each box, we can state/specify the technology/device used, e.g.
 Client: Web browser on a mobile device, using HTML/CSS/JS
 Middleware: Apache Web Server, with an Application Server built using 
@@ -739,6 +758,14 @@ Many ways to specify user requirements
 As a < type of user >, I want < some goal > so that <some reason >.
 2. Prioritized "User Needs" matrix
 3. Personas
+
+User Stories
+Example Website:
+ University Café Menu website
+As a <student>, I want < to see today’s menu> so that <I can decide what to eat before going to the café>.
+As a <student>, I want < to see the café’s opening hours> so that <I know when it’s open>.
+As a <café manager>, I want <to change opening hours> so that <students know when it is open>
+As a <café manager>, I want <to add or remove items quickly> so that <daily options can be displayed>
 
 User Needs Matrix
 A document to 
