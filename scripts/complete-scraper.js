@@ -81,6 +81,7 @@ const COURSES = {
 };
 
 const DOWNLOAD_PATH = path.join(__dirname, '..', 'downloads');
+const CACHE_FILE = path.join(__dirname, 'scraped_cache.json');
 
 // Video file extensions to skip
 const SKIP_VIDEO_EXTENSIONS = /\.(mp4|mov|avi|mkv|webm|wmv|flv|m4v)$/i;
@@ -192,6 +193,28 @@ class CompleteMoodleScraper {
     this.page = null;
     this.isLoggedIn = false;
     this.currentCourseCode = null;
+    this.cache = {};
+    this.loadCache();
+  }
+
+  loadCache() {
+    if (fs.existsSync(CACHE_FILE)) {
+      try {
+        this.cache = JSON.parse(fs.readFileSync(CACHE_FILE, 'utf8'));
+        console.log(`📦 Loaded cache with ${Object.keys(this.cache).length} entries`);
+      } catch (e) {
+        console.error('⚠️ Failed to load cache:', e.message);
+        this.cache = {};
+      }
+    }
+  }
+
+  saveCache() {
+    try {
+      fs.writeFileSync(CACHE_FILE, JSON.stringify(this.cache, null, 2));
+    } catch (e) {
+      console.error('⚠️ Failed to save cache:', e.message);
+    }
   }
 
   async initialize() {
@@ -644,6 +667,11 @@ class CompleteMoodleScraper {
   // Open a Moodle page URL and extract candidate file links (pluginfile urls, resource links, direct file extensions)
   // depth: 防止递归调用；仅在 depth=0 时搜索，避免链式调用导致的死循环
   async extractDownloadLinksFromPage(pageUrl, depth = 0) {
+    if (this.cache[pageUrl]) {
+      console.log(`⚡ Using cached links for: ${pageUrl} (Found ${this.cache[pageUrl].length} files)`);
+      return this.cache[pageUrl];
+    }
+
     const MAX_DEPTH = 0;  // 仅在当前页面搜索，不递归进入子页面
     if (depth > MAX_DEPTH) {
       console.log(`ℹ️ Max depth reached, skipping further page traversal`);
@@ -709,6 +737,11 @@ class CompleteMoodleScraper {
         return uniq;
       });
 
+      // Cache the result even if empty, so we don't scrape this page again
+      this.cache[pageUrl] = links;
+      this.saveCache();
+      console.log(`💾 Cached ${links.length} links for: ${pageUrl}`);
+      
       await tempPage.close();
       return links;
     } catch (err) {
