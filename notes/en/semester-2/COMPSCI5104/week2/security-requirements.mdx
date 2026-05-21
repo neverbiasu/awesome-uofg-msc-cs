@@ -1,0 +1,116 @@
+---
+title: "Week 2: Security Requirements & SSDLC"
+description: "This lecture covers common software vulnerabilities, threats, and countermeasures, with a deep dive into the OWASP Top 10. It also explores the Secured Software Development Lifecycle (SSDLC) and the process of security requirement planning."
+---
+
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+## Vulnerabilities, Threats, and Countermeasures
+
+### Understanding Vulnerabilities
+A **software vulnerability** is a security flaw, glitch, or weakness in the code that an attacker could exploit. It is the underlying weakness, not the attack itself.
+A key resource for understanding common vulnerabilities is the **OWASP Top 10**.
+
+### OWASP Top 10 Vulnerabilities (2021 Highlights)
+![OWASP Top 10 2017 vs 2021](/images/COMPSCI5104/week2/owasp-top-10-2017-vs-2021.png)
+_A comparison diagram showing the evolution of the OWASP Top 10 from 2017 to 2021._
+<Accordions>
+  <Accordion title="A01: Broken Access Control">
+    **Definition**: Failures in enforcing restrictions on what authenticated users are allowed to do. Attackers can exploit these flaws to access other users' accounts, view sensitive files, or modify other users' data.
+    **Example**: An application uses a user's ID in the URL to access their data (`/account?id=123`). An attacker changes the `id` to `124` and gains access to another user's account because the application doesn't verify that the logged-in user is authorized to see the requested data.
+  </Accordion>
+  <Accordion title="A03: Injection">
+    **Definition**: A flaw where an application interprets user-supplied data as a command or query. This can allow an attacker to execute arbitrary code.
+    **Example**: A SQL injection attack where an attacker enters `' OR '1'='1' --` into a username field. The resulting query becomes `SELECT * FROM users WHERE username = '' OR '1'='1' --';`, which bypasses authentication.
+  </Accordion>
+  <Accordion title="A04: Insecure Design">
+    **Definition**: Vulnerabilities stemming from a lack of security considerations during the design and architecture phase. This is a broad category representing missing or ineffective security controls.
+    **Example**: Storing passwords in plaintext in a database instead of using a strong hashing algorithm.
+  </Accordion>
+  <Accordion title="A05: Security Misconfiguration">
+    **Definition**: Errors in configuring the security of the application, framework, or server.
+    **Example**: Leaving default usernames and passwords active on a server, or displaying overly detailed error messages (like stack traces) that reveal internal system information.
+  </Accordion>
+  <Accordion title="A06: Vulnerable and Outdated Components">
+    **Definition**: Using libraries, frameworks, or other software components with known security vulnerabilities.
+    **Example**: Running a web server with an old version of OpenSSL that is known to be vulnerable to the Heartbleed bug.
+    ![Screenshot of the "Add Plugins" page in the WordPress admin dashboard](/images/COMPSCI5104/week2/wordpress-plugins-example.png)
+    _An example of managing third-party components (plugins) in WordPress. Outdated or untested plugins can introduce vulnerabilities._
+  </Accordion>
+</Accordions>
+
+### Threats
+Threats are potential actions that can exploit vulnerabilities. Common non-target-specific threats include:
+- **Backdoor**: A hidden method of bypassing normal authentication to gain access to a system.
+- **Phishing**: A social engineering attack using deceptive emails or websites to trick users into revealing sensitive information.
+  ![Screenshot of an email message, likely taken from a web-based email client, with the subject 'Fake emails' and sender Simon Gay](/images/COMPSCI5104/week2/phishing-email-example.png)
+  _A real-world example of a phishing alert sent to university staff, warning about deceptive emails impersonating a legitimate sender._
+- **Man-in-the-Middle (MITM)**: An attacker intercepts communication between two parties to eavesdrop or manipulate data.
+  ![Diagram illustrating a Man-in-the-Middle (MITM) cyberattack](/images/COMPSCI5104/week1/SSE-Lecture_1-013.png)
+  _A diagram illustrating how a Man-in-the-Middle (MITM) attack works._
+- **Denial-of-Service (DoS)**: An attack that overwhelms a system with traffic, making it unavailable to legitimate users. The root cause is often a failure to consider capacity limits in the design.
+
+### Countermeasures
+Countermeasures are actions taken to manage risk and protect assets. It's impossible to make software completely secure; the goal is to find a **tradeoff** between security, cost, and practicality.
+- **Types**: Preventive, Detective, and Responsive.
+- **Best Practice**: Integrate security into the entire Software Development Lifecycle (SDLC).
+
+## Secured Software Development Lifecycle (SSDLC)
+The SSDLC integrates security activities into every phase of the traditional SDLC.
+<Steps>
+  <Step>
+    ### 1. Requirements
+    Identify security requirements from the very beginning. This includes misuse cases (how an attacker might abuse the system) and abuse cases.
+  </Step>
+  <Step>
+    ### 2. Design
+    Apply the "Security by Design" concept. Use threat modeling to identify potential threats and design countermeasures. Follow secure design principles (from Lecture 1).
+  </Step>
+  <Step>
+    ### 3. Implementation
+    Follow secure coding practices and patterns. Use tools for **Static Analysis (SAST)** to examine source code for vulnerabilities without executing it (e.g., SonarQube).
+  </Step>
+  <Step>
+    ### 4. Verification (Testing)
+    Use **Dynamic Analysis (DAST)** to test the running application from the outside (e.g., OWASP ZAP). Conduct **Penetration Testing** to simulate real-world attacks and perform security regression testing to ensure new changes don't introduce vulnerabilities.
+  </Step>
+  <Step>
+    ### 5. Maintenance
+    Continuously monitor for new vulnerabilities, apply patches, and conduct regular security reviews.
+  </Step>
+</Steps>
+
+## Security Requirement Planning
+
+### Types of Requirements
+- **Functional Requirements**: Define what the system should *do*.
+- **Non-Functional Requirements**: Define system qualities or constraints (e.g., performance, usability, security).
+A **security requirement** can be either functional (e.g., "The system shall encrypt all data in transit") or non-functional (e.g., "The system must be resistant to DoS attacks"). The key is to consider security for *every* requirement.
+
+### Requirements Gathering and Analysis
+A structured process is needed to ensure security is not overlooked.
+<Steps>
+  <Step>
+    ### 1. Gather Requirements
+    Use interviews and feedback sessions with stakeholders. For new systems, a prototype can help gather user feedback.
+  </Step>
+  <Step>
+    ### 2. Document & Organize
+    Record requirements and organize them in a spreadsheet with details like Stakeholder, Type (Functional/Non-Functional), and Priority.
+  </Step>
+  <Step>
+    ### 3. Analyze & Prioritize
+    Evaluate requirements for feasibility (cost, time) and relevance to project goals.
+  </Step>
+  <Step>
+    ### 4. Integrate Security Analysis
+    For each requirement, perform a risk assessment by asking security-focused questions:
+    - What happens if this requirement is intentionally violated?
+    - What are the consequences if its conditions are violated?
+    - What sensitive information is involved?
+    - What are the exceptions, and what is the fail case?
+  </Step>
+</Steps>
+This systematic approach ensures that security is a core consideration throughout the planning phase, rather than an afterthought.

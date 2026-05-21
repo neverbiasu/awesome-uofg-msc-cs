@@ -1,0 +1,46 @@
+---
+title: "Week 4: Software Analysis"
+description: "Techniques for finding vulnerabilities in source code and binaries using static and dynamic analysis."
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## Key Takeaway
+Software analysis moves security from a manual "guessing game" to a systematic verification process, using automated tools to detect patterns of known vulnerabilities like buffer overflows and data leaks.
+
+## 1. Static Application Security Testing (SAST)
+Analyzing code **without executing it**.
+-   **Control Flow Analysis**: Understanding the paths code can take.
+-   **Data Flow Analysis**: Tracking untrusted input (Sinks and Sources).
+-   **Taint Analysis**: Identifying if "tainted" (user-controlled) data reaches a sensitive "sink" (e.g., `SQL.execute()`).
+![Taint Analysis Logic](/images/COMPSCI5104/week4/SSE-Lecture4-007.png)
+
+## 2. Dynamic Application Security Testing (DAST)
+Analyzing a **running application**.
+-   **Fuzzing**: Providing random, invalid, or unexpected data as input to find crashes or memory leaks.
+-   **Penetration Testing**: Simulating real-world attacks against the live system.
+
+## 3. Comparing SAST and DAST
+| Feature | SAST | DAST |
+| : | :--- |
+| **Stage** | Early (Development) | Late (Testing/Prod) |
+| **Visibility** | White-box (Source code) | Black-box (Behavior) |
+| **False Positives** | High | Low |
+| **Root Cause** | Identifies exact line of code | Identifies observable behavior |
+
+## 4. Examiner's Perspective: Technical Nuances
+
+### Soundness vs. Completeness
+-   **Soundness**: If the tool says the code is safe, it really is (No false negatives).
+-   **Completeness**: If there is a bug, the tool will find it (No false positives).
+-   **Nuance**: In practice, tools trade off these two properties. Most security tools are **neither** perfectly sound nor complete.
+
+### Hard Red Lines: False Negatives
+-   A "False Negative" (missing a real bug) is much more dangerous than a "False Positive" (wrongly flagging safe code). Security analysis should prioritize high recall.
+
+## Review & Self-Check
+- [ ] What is a "Sink" in taint analysis?
+- [ ] Explain the benefit of "White-box" fuzzing over "Black-box" fuzzing.
+- [ ] Why can't static analysis find configuration-related vulnerabilities?

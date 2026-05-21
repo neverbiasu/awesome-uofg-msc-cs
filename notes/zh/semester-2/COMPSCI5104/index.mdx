@@ -1,22 +1,61 @@
 ---
-title: "COMPSCI5104: 安全软件工程"
-description: "安全软件工程课程笔记索引，按周组织。"
+title: "COMPSCI 5104: 安全软件工程"
+description: "掌握构建安全软件的原理和实践，从需求工程和安全设计到静态/动态分析及安全部署。"
 ---
+
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 import { Card, Cards } from 'fumadocs-ui/components/card';
 
-## 课程笔记（按周）
+# 课程概览
+本课程提供了一套系统的软件安全方法。学生将学习如何识别威胁、设计安全架构，并使用自动化工具在整个开发生命周期中发现并修复漏洞。
+<Accordions>
+  <Accordion title="评估信息">
+    - 威胁建模作业
+    - 安全分析实验
+    - 期末考试
+  </Accordion>
+</Accordions>
 
-本部分包含本课程的所有笔记，按周组织。
-
+## 每周笔记
 <Cards>
-  <Card
-    href="/zh/notes/semester-2/COMPSCI5104/week1"
-    title="第一周：课程安排与SSE导论"
-    description="介绍课程、时间表、评估以及安全软件工程的基本原则。"
-  />
-  <Card
-    href="/zh/notes/semester-2/COMPSCI5104/week2"
-    title="第二周：安全软件开发生命周期与需求规划"
-    description="探讨常见的漏洞（OWASP Top 10）、安全软件开发生命周期（SSDLC）以及安全需求规划。"
-  />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5104/week1"
+      title="第1周：安全软件工程导论"
+      description="可靠性 vs. 安全性以及基本安全原则。"
+    />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5104/week2"
+      title="第2周：安全需求"
+      description="误用用例和 STRIDE 威胁建模框架。"
+    />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5104/week3"
+      title="第3周：安全设计"
+      description="减少攻击面和纵深防御。"
+    />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5104/week4"
+      title="第4周：软件分析"
+      description="静态 (SAST) 和动态 (DAST) 分析技术。"
+    />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5104/week5"
+      title="第5周：Web 安全"
+      description="OWASP Top 10、CSRF 和损坏的访问控制。"
+    />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5104/week6"
+      title="第6周：移动安全"
+      description="Android/iOS 沙箱和移动端漏洞。"
+    />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5104/week7"
+      title="第7周：云安全"
+      description="共享责任模型和虚拟化安全。"
+    />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5104/week8"
+      title="第8周：SSDLC 与成熟度"
+      description="安全 SDLC 阶段和成熟度模型 (BSIMM/OpenSAMM)。"
+    />
 </Cards>

@@ -1,0 +1,41 @@
+---
+title: "Week 3: Secure Design"
+description: "Applying security principles to software architecture, patterns for security, and design-level threat mitigation."
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## Key Takeaway
+Secure design is about reducing the attack surface and building multiple layers of defense so that the failure of a single security mechanism does not compromise the entire system.
+
+## 1. Attack Surface Reduction
+The **Attack Surface** is the sum of all points where an attacker can enter or extract data from a system.
+-   **Minimize entry points**: Disable unused services/ports.
+-   **Least Privilege**: Ensure components only have the access they need.
+-   **Input Validation at the Boundary**: Don't let untrusted data deep into the system logic.
+
+## 2. Design Patterns for Security
+-   **Distrustful Decomposition**: Split a system into multiple processes so that if one is compromised, the others remain secure.
+-   **Privilege Separation**: Separating parts of the system that require high privileges (e.g., root) from those that process untrusted data.
+-   **Secure Defaults**: The system should be secure out-of-the-box (e.g., password complexity required by default).
+![Distrustful Decomposition Example](/images/COMPSCI5104/week3/SSE-Lecture3-019.png)
+
+## 3. Defense in Depth
+Applying multiple independent security layers.
+-   *Example*: Firewalls $\rightarrow$ Network IDS $\rightarrow$ OS Hardening $\rightarrow$ Application Authentication $\rightarrow$ Database Encryption.
+
+## 4. Examiner's Perspective: Technical Nuances
+
+### Complete Mediation
+-   **Hard Red Line**: Every access to every object must be checked for authority. Systems that cache permissions (for performance) risk being bypassed if permissions are revoked but the cache isn't cleared.
+
+### TCB (Trusted Computing Base)
+-   **Concept**: The set of all hardware, software, and firmware components that are critical to its security.
+-   **Nuance**: A smaller TCB is easier to verify and more likely to be secure. The goal of secure design is to keep the TCB as small as possible.
+
+## Review & Self-Check
+- [ ] Explain the "Principle of Least Privilege" with a real-world software example.
+- [ ] What is the difference between "Security by Design" and "Security as an Afterthought"?
+- [ ] How does "Sandboxing" contribute to secure design?

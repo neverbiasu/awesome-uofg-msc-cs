@@ -1,0 +1,48 @@
+---
+title: "Week 5: Web Security"
+description: "Web-specific vulnerabilities, the OWASP Top 10, and defense mechanisms for modern web applications."
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## Key Takeaway
+Web security is a constant battle against injection attacks and broken access control. Developers must move beyond simple input filtering to robust, framework-level protections like CSRF tokens and Content Security Policies.
+
+## 1. The OWASP Top 10
+The Open Web Application Security Project (OWASP) maintains a list of the most critical web security risks.
+1.  **Broken Access Control**: Users accessing resources they shouldn't (e.g., changing a URL ID to see someone else's profile).
+2.  **Cryptographic Failures**: Using weak algorithms or exposing cleartext sensitive data.
+3.  **Injection**: SQLi, XSS, and OS Command injection.
+
+## 2. Broken Access Control
+-   **Insecure Direct Object Reference (IDOR)**: An attacker bypasses authorization by changing a parameter value (e.g., `user_id=123` $\rightarrow$ `user_id=124`).
+-   **Mitigation**: Always perform server-side checks to ensure the logged-in user owns the requested resource.
+![Access Control Logic](/images/COMPSCI5104/week5/SSE-Lecture_5-027.png)
+
+## 3. Request Forgery Attacks
+
+### Cross-Site Request Forgery (CSRF)
+An attacker tricks a victim's browser into sending a forged request to a vulnerable web application where the victim is authenticated.
+-   **Defense**: **CSRF Tokens**. A unique, secret, and unpredictable token required for state-changing requests (POST/PUT).
+
+### Cross-Site Scripting (XSS) - Revisited
+-   **Content Security Policy (CSP)**: A browser-side security layer that tells the browser which sources of scripts are trusted, effectively disabling most XSS attacks.
+
+## 4. Examiner's Perspective: Technical Nuances
+
+### Authentication vs. Authorization
+-   **Authentication**: Proving who you are (e.g., Login).
+-   **Authorization**: Proving what you are allowed to do (e.g., Permissions).
+- *Exam Tip*: A system can have perfect authentication but fail if it doesn't check authorization for every sensitive action.
+
+### Secure Cookies
+-   **HttpOnly**: Prevents JavaScript (XSS) from reading the cookie.
+-   **Secure**: Ensures the cookie is only sent over HTTPS.
+-   **SameSite**: Mitigates CSRF by restricting when cookies are sent with cross-site requests.
+
+## Review & Self-Check
+- [ ] Explain how a CSRF token prevents an attack.
+- [ ] What is the difference between Vertical and Horizontal privilege escalation?
+- [ ] Why is "Client-side Validation" not a security feature?

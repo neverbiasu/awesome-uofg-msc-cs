@@ -1,0 +1,42 @@
+---
+title: "Week 7: Cloud & Service Security"
+description: "Security in cloud computing models (SaaS, PaaS, IaaS), virtualization security, and securing RESTful services."
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## Key Takeaway
+Cloud security shifts the responsibility model between provider and consumer. Securing services requires protecting both the transport layer (HTTPS) and the resource access layer (OAuth/OIDC).
+
+## 1. Cloud Service Models & Responsibility
+The **Shared Responsibility Model** is the foundation of cloud security.
+-   **IaaS (Infrastructure)**: Provider secures hardware/HV; Consumer secures OS, Apps, and Data.
+-   **PaaS (Platform)**: Provider secures OS/Middleware; Consumer secures Apps and Data.
+-   **SaaS (Software)**: Provider secures almost everything; Consumer secures Data access and usage.
+
+## 2. Virtualization Security
+-   **Hypervisor Security**: The "Gold Standard" of cloud security. If the hypervisor is compromised, all guest VMs are at risk (**VM Escape**).
+-   **Side-Channel Attacks**: One VM stealing data from another via shared hardware resources (e.g., CPU cache).
+![Cloud Isolation Architecture](/images/COMPSCI5104/week7/SSE-Lecture_7-013.png)
+
+## 3. Securing Web Services (REST)
+-   **Transport Security**: Mandatory use of TLS (HTTPS).
+-   **Authentication**: Moving from session cookies to **Tokens** (JWT).
+-   **OAuth 2.0**: A framework for authorization, allowing a third-party app to access resources without sharing the user's password.
+-   **OpenID Connect (OIDC)**: An identity layer on top of OAuth 2.0.
+
+## 4. Examiner's Perspective: Technical Nuances
+
+### Token Security (JWT)
+-   **Nuance**: JWTs are often only **signed** (Integrity), not encrypted (Confidentiality). Never store sensitive PII inside a JWT unless it is specifically encrypted (JWE).
+- *Exam Tip*: If asked how to invalidate a JWT before it expires, the answer is usually **Token Blacklisting** on the server.
+
+### Multi-Tenancy
+-   **Hard Red Line**: The biggest risk in the cloud is **Data Leakage** between tenants. Mechanisms like logical isolation (DB row level) or physical isolation (separate instances) must be validated.
+
+## Review & Self-Check
+- [ ] Who is responsible for patching the OS in a PaaS model?
+- [ ] What is "VM Escape" and why is it dangerous?
+- [ ] Explain the difference between OAuth 2.0 and OpenID Connect.
