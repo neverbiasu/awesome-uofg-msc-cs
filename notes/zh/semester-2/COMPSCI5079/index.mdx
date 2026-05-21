@@ -1,121 +1,61 @@
 ---
-title: "COMPSCI 5079: 密码学与安全开发"
-description: "学习密码学原理、安全编码实践和实际安全实现。"
+title: "COMPSCI 5079: 密码学"
+description: "掌握安全通信的数学基础和实现，包括对称和非对称加密、数字签名和哈希。"
 ---
 
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+import { Card, Cards } from 'fumadocs-ui/components/card';
 
-# COMPSCI 5079: 密码学与安全开发
-
-本课程涵盖密码学和安全软件开发的基础知识，包括对称和非对称加密、哈希函数、数字签名和安全编码实践。
-
+# 课程概览
+本课程探讨现代密码学的原理和实践。学生将学习如何使用行业标准的协议和算法来确保静态和传输中数据的安全。
 <Accordions>
-  <Accordion title="课程基本信息">
-    **学习目标:**
-    1. 理解基础密码学概念和算法
-    2. 实现加密和解密系统
-    3. 应用安全编码实践
-    4. 分析安全漏洞和威胁
-    5. 设计安全的软件系统
-  </Accordion>
-  <Accordion title="课程结构与考核">
-    **课程结构:**
-    - 讲座：密码学理论和安全概念
-    - 实验：实现练习
-    - 作业：实际安全任务
-
-    **考核:**
-    - 期中作业
-    - 课程作业
+  <Accordion title="评估信息">
+    - 实验报告
+    - 实践作业
     - 期末考试
   </Accordion>
 </Accordions>
 
-## 材料概览
-
-### 第1周：基础知识
-
-| 材料 | 主题 | 类型 |
-|------|------|------|
-| [S11 - 课程介绍](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S11_COMPSCI5079_Introduction.pdf) | 课程介绍 | 讲座 |
-| [S12 - 基础背景](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S12_COMPSCI5079_Foundation_background.pdf) | 数学基础 | 讲座 |
-| [S13 - 多项式运算](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S13_COMPSCI5079_Polynomial_Arthmetic.pdf) | 多项式运算 | 讲座 |
-| [S14 - 信息论](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S14_COMPSCI5079_Information_Theory.pdf) | 信息论 | 讲座 |
-
-### 第2周：传统加密
-
-| 材料 | 主题 | 类型 |
-|------|------|------|
-| [S21 - 传统加密](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S21_COMPSCI5079_Traditional_Encryptions.pdf) | 传统加密概述 | 讲座 |
-| [S22 - 置换算法](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S22_COMPSCI5079_Transposition_Algorithms.pdf) | 置换密码 | 讲座 |
-| [S23 - 替换算法](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S23_COMPSCI5079_Substitution_Algorithms.pdf) | 替换密码 | 讲座 |
-| [S24 - 同音密码](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S24_COMPSCI5079_Homophonic_ciphers.pdf) | 同音密码 | 讲座 |
-| [S25 - 多表密码](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S25_COMPSCI5079_Polyalphabet_ciphers.pdf) | 多表密码 | 讲座 |
-| [S26 - 滚动密钥算法](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S26_COMPSCI5079_Running_Key_Algorithm.pdf) | 滚动密钥密码 | 讲座 |
-
-### 第3周：现代对称加密
-
-| 材料 | 主题 | 类型 |
-|------|------|------|
-| [S31 - Feistel密码](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S31_COMPSCI5079_FeistelCiphers.pdf) | Feistel网络结构 | 讲座 |
-| [S32 - DES](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S32_COMPSCI5079_DataEncryptionStandard_DES.pdf) | 数据加密标准 | 讲座 |
-| [S32 - AES](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S32_COMPSCI5079_Advanced_Encryption_Standard_AES.pdf) | 高级加密标准 | 讲座 |
-| [AES NIST标准](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/AES_Standard_NIST.pdf) | 官方AES规范 | 阅读 |
-| [差分密码分析](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/Reading_Article_Differential_Cryptanalysis.pdf) | 密码分析文章 | 阅读 |
-
-### 第4周：消息摘要与随机数
-
-| 材料 | 主题 | 类型 |
-|------|------|------|
-| [S41 - 消息摘要](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S41_COMPSCI5079_Message_Digests.pdf) | 哈希函数 | 讲座 |
-| [S42 - 随机数生成器](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S42_COMPSCI5079_Random_Numbers_Generators.pdf) | 密码学中的RNG | 讲座 |
-| [S43 - 秘密共享](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S43_COMPSCI5079_Secret_Sharing.pdf) | 秘密共享方案 | 讲座 |
-
-### 第5周：非对称加密
-
-| 材料 | 主题 | 类型 |
-|------|------|------|
-| [S51 - Diffie-Hellman](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S51_COMPSCI5079_DiffieHellman.pdf) | 密钥交换协议 | 讲座 |
-| [S52 - RSA](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S52_COMPSCI5079_RSA.pdf) | RSA算法 | 讲座 |
-| [S53 - ECC](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S53_COMPSCI5079_ECC.pdf) | 椭圆曲线密码学 | 讲座 |
-| [ECDSA算法](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/The_Elliptic_Curve_Digital_Signature_Algorithm.pdf) | ECDSA规范 | 阅读 |
-
-### 第6周：比特币与加密货币
-
-| 材料 | 主题 | 类型 |
-|------|------|------|
-| [S61 - 比特币加密货币](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S61_COMSCI5079_Bitcoin_Cryptocurrencies.pdf) | 加密货币概述 | 讲座 |
-| [S62 - 比特币协议](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S62_COMPSCI5079_BitcoinProtocol.pdf) | 比特币协议细节 | 讲座 |
-| [S63 - 比特币安全与隐私](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S63_COMPSCI5079_BitcoinSecurityPrivacy.pdf) | 安全考量 | 讲座 |
-| [比特币白皮书](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/1._Bitcoin-a-peer-to-peer-electronic-cash-system.pdf) | 原始比特币论文 | 阅读 |
-
-### 第7周：安全编程
-
-| 材料 | 主题 | 类型 |
-|------|------|------|
-| [S71 - SQL注入](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S71_COMPSCI5079_SQL_Injection.pdf) | SQL注入攻击 | 讲座 |
-| [S72 - XSS](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S72_COMPSCI5079_OutputHandling_XSS_updated.pdf) | 跨站脚本攻击 | 讲座 |
-| [S73 - 编程语言安全](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S73_COMPSCI5079_ProgrammingLanguagesSecurity_updated.pdf) | 语言安全特性 | 讲座 |
-| [S74 - Java安全演示](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S74_COMPSCI5079_JAVASecurityDemo_updated.pdf) | Java安全示例 | 讲座 |
-
-### 代码示例与资源
-
-| 材料 | 主题 | 类型 |
-|------|------|------|
-| [DES实现](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/Des.java) | Java DES实现 | 代码 |
-| [Java密码学主程序](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/MainJavaCrypto.java) | Java密码学示例 | 代码 |
-| [缓冲区溢出代码](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/BufferOverflow_Code.cpp) | 缓冲区溢出演示 | 代码 |
-| [转子密码](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/Rotor96Crypto.java) | 转子机模拟 | 代码 |
-| [文件加密应用](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/FilesEncryptionApp.zip) | 文件加密应用 | 代码 |
-
-### 考试准备
-
-| 材料 | 主题 | 类型 |
-|------|------|------|
-| [总结与模拟题](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/CSD_Summary_MockQuestions.pdf) | 考试准备 | 复习 |
-| [密码学提示](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/Cryptography_Hints.pdf) | 学习提示 | 复习 |
-| [全部幻灯片](../../../../materials/semester-2/COMPSCI5079-cryptography/lectures/CSD_All_slides.pdf) | 完整幻灯片 | 复习 |
-
-## 课程笔记
-
-> 课程进行中将添加笔记。
+## 每周笔记
+<Cards>
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5079/week1"
+      title="第1周：数学与信息论"
+      description="加密算法的基础数学和香农的完美保密性。"
+    />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5079/week2"
+      title="第2周：对称加密"
+      description="传统加密、DES、AES 以及分组密码模式。"
+    />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5079/week3"
+      title="第3周：消息摘要与 MAC"
+      description="哈希函数、消息完整性和 HMAC。"
+    />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5079/week4"
+      title="第4周：非对称加密"
+      description="公钥加密、Diffie-Hellman 和 RSA。"
+    />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5079/week5"
+      title="第5周：数字签名与 PKI"
+      description="身份验证、不可否认性和证书管理。"
+    />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5079/week6"
+      title="第6周：比特币与区块链"
+      description="去中心化账本的加密学基础。"
+    />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5079/week7"
+      title="第7周：编码与安全"
+      description="常见软件漏洞 (SQLi, XSS) 及其缓解措施。"
+    />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5079/week8"
+      title="第8周：安全开发"
+      description="安全 SDLC、成熟度模型和持续安全。"
+    />
+</Cards>

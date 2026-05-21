@@ -1,0 +1,61 @@
+---
+title: "第7周：编码与安全"
+description: "识别并缓解常见的编码漏洞，如 SQL 注入、XSS 和缓冲区溢出。"
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## 核心要点
+安全编码需要主动采取输入验证、输出编码和内存管理等措施，以防止攻击者向子系统注入恶意命令或数据。
+
+## 1. SQL 注入 (SQL Injection)
+当不受信任的数据被插入到数据库查询中时，就会发生 SQL 注入，允许攻击者操纵查询逻辑。
+
+### 攻击类型
+-   **注释掉 (Comment Out)**：使用 `--` 使查询的剩余部分失效（例如：绕过密码检查）。
+-   **布尔优先级**：使用 `OR '1'='1'` 确保条件始终评估为真。
+-   **UNION SELECT**：将预期表的结果与其他敏感表的数据合并。
+![SQL 注入示例](/images/COMPSCI5079/AllSlides/CSD_All_slides-585.png)
+<Callout type="warn">
+**缓解措施**：始终使用 **参数化查询 (Prepared Statements)** 或 **存储过程**。严禁使用字符串拼接用户输入来构建查询。
+</Callout>
+
+## 2. 跨站脚本攻击 (XSS)
+XSS 涉及将恶意脚本（通常是 JavaScript）注入到其他用户查看的网页中。
+
+### 分类
+1.  **存储型 (持久性)**：恶意脚本保存在服务器上（例如：在数据库中）。
+2.  **反射型 (非持久性)**：脚本从 Web 服务器“反射”出来（例如：在 URL 参数中）。
+3.  **基于 DOM**：漏洞存在于客户端代码而非服务器端。
+<Callout type="info">
+**会话劫持 (Session Hijacking)**：攻击者利用 XSS 窃取 `document.cookie`，从而允许他们冒充受害者。
+</Callout>
+
+## 3. 编程语言漏洞
+
+### 缓冲区溢出 (C/C++)
+C/C++ 不会自动检查数组边界。攻击者可以提供比分配的缓冲区更长的输入，以覆盖相邻内存。
+-   **UNIX 密码案例**：用已知哈希覆盖 `epwd` 缓冲区以作为 root 登录。
+
+### 毒化零字节 (Poisoned Null Byte)
+使用空终止符 (C) 的语言与使用显式长度 (Python/PHP) 的语言之间的不匹配。攻击者可以绕过文件扩展名检查（例如：`attack.php%00.jpg`）。
+
+## 4. 出卷人视角
+
+### 硬核红线：Java Crypto API
+在 Java 中实现加密时：
+-   **不要**实现自己的算法。
+-   使用 `javax.crypto.Cipher` 进行加解密。
+-   使用 `java.security.MessageDigest` 进行哈希处理。
+-   **细微差别**：RSA 密钥对使用 `KeyPairGenerator` 创建，而 AES 密钥使用 `KeyGenerator`。
+
+### 故障分析：输入 vs. 输出
+-   输入验证（白名单）防止 **SQL 注入**。
+-   输出编码（转义）防止 **XSS**。
+
+## 复习与自测
+- [ ] 为什么“仅接受好的输入”比“拒绝坏的输入”更好？
+- [ ] 解释 `UNION SELECT` 攻击如何泄露数据库模式。
+- [ ] 存储密码时使用“加盐 (Salt)”的目的是什么？

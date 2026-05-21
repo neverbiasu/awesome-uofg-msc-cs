@@ -1,48 +1,41 @@
 ---
-title: 'Traditional Ciphers and Cryptanalysis'
-description: 'An overview of traditional encryption schemes, including transposition, substitution, homophonic, polyalphabetic, and running key ciphers, alongside their cryptanalytic methods and the principles of confusion and diffusion.'
+title: "Week 2: Symmetric Encryption"
+description: "Classical substitution and transposition ciphers, cryptanalysis techniques, and the transition to modern block ciphers like DES and AES."
 ---
 
 import { Callout } from 'fumadocs-ui/components/callout';
 
 ## Key Takeaway
-
-Traditional ciphers, while foundational to cryptography, primarily relied on obfuscation techniques like **transposition** (rearranging plaintext units) and **substitution** (replacing plaintext units). Their security often hinged on key length and complexity. However, most traditional ciphers are vulnerable to statistical attacks, particularly **frequency analysis**, due to the inherent redundancy of natural languages. Concepts like **confusion** (obscuring the relationship between ciphertext and key) and **diffusion** (spreading the influence of plaintext statistics over ciphertext) emerged as critical principles for stronger encryption, laying the groundwork for modern cryptosystems. The evolution from simple ciphers to complex mechanical devices like the Enigma machine highlights the continuous arms race between cryptographers and cryptanalysts.
+Symmetric encryption relies on a single shared secret key, using Shannon's principles of Confusion (substitution) and Diffusion (transposition/permutation) to obscure the relationship between plaintext and ciphertext. Traditional ciphers failed primarily due to language redundancy (frequency analysis), leading to the development of modern block ciphers.
+# Symmetric Encryption
+![Substitution-Permutation Network](/images/COMPSCI5079/week2/CSD_All_slides-045.png)
 
 ## Traditional Encryption Schemes
-
 Traditional encryption schemes predate electronic computers and are primarily single-key systems. They are broadly categorized into two main types:
 -   **Transposition ciphers**: Characters are rearranged without changing their identity.
 -   **Substitution ciphers**: Characters are replaced by other characters, symbols, or numbers.
-
 Both methods can be combined, and their effectiveness is often evaluated against various types of attacks.
 
 ### Types of Attack
-
 Cryptanalysis attempts to break codes using available information:
 -   **Ciphertext Only**: Attacker only has the ciphertext.
 -   **Known Plaintext**: Attacker has a segment of plaintext corresponding to a segment of ciphertext.
 -   **Chosen Plaintext**: Attacker can choose a plaintext and obtain its corresponding ciphertext.
-
 Common attack methods include:
 -   **Brute Force (Exhaustive Search)**: Trying all possible keys.
 -   **Frequency Analysis**: Exploiting the statistical properties of language (e.g., letter, digram, trigram frequencies).
-
 <Callout type="info" title="Confusion and Diffusion">
 **Confusion** aims to obscure the relationship between the ciphertext and the key, meaning a small change in the key should produce a large, unpredictable change in the ciphertext.
 **Diffusion** aims to spread the influence of a single plaintext bit over many ciphertext bits, meaning a small change in the plaintext should result in a large, unpredictable change in the ciphertext. Both are crucial for robust cryptographic design.
 </Callout>
 
 ### Transposition Ciphers
-
 Transposition ciphers rearrange the order of plaintext characters within fixed-length blocks based on a key-dependent permutation. Decryption uses the inverse permutation.
-
 -   **Example**: Text "securityandcryptography" arranged in 4-character blocks and permuted.
 -   **Unicity Distance**: Relates to the key space entropy (e.g., `log2(d!)` for block length `d`).
 -   **Cryptanalysis**: Transposition ciphers preserve letter frequencies, making them susceptible to frequency analysis combined with anagramming techniques, especially with di-gram and tri-gram frequency tables.
 
 ### Substitution Ciphers
-
 Substitution ciphers replace plaintext letters with other letters or symbols.
 -   **Shift Substitution**: Each letter is shifted a fixed amount along the alphabet (e.g., Caesar Cipher, where `c = (p + k) % n`).
     -   **Weakness**: Poor diffusion (changing one plaintext letter changes only one ciphertext letter) and susceptible to frequency analysis (shifted frequencies).
@@ -51,26 +44,22 @@ Substitution ciphers replace plaintext letters with other letters or symbols.
 -   **Cryptanalysis**: Small unicity distance and vulnerable to single-letter frequency analysis and brute force, as the key space is relatively small.
 
 ### Homophonic Ciphers
-
 Homophonic ciphers map each plaintext letter to potentially *more than one* ciphertext symbol.
 -   **Goal**: To flatten the frequency distribution of ciphertext symbols, thereby weakening single-letter frequency analysis. More frequent plaintext letters are assigned more ciphertext options.
 -   **Weakness**: Can still be vulnerable to di-gram frequencies.
 -   **Second-Order Homophonic Ciphers**: An advanced technique to hide two different plaintext messages with different keys within a single ciphertext, often used for deniability (e.g., "rubber hose" decryption).
 
 ### Polyalphabetic Ciphers
-
 Polyalphabet ciphers use multiple different substitutions for different plaintext letters, often cycling through a set of substitution rules.
 -   **Vigenère/Beaufort Cipher**: A well-known example where the shift amount for each plaintext letter depends on a repeating key. Formula: `ci = (pi + ki) % n`.
 -   **Cryptanalysis (Kasiski's Method)**: Exploits the repeating nature of the key by looking for repeated ciphertext segments that correspond to identical plaintext phrases, whose distances are multiples of the key period.
 
 ### Rotor Machines
-
 Mechanical encryption devices that implement polyalphabetic substitutions.
 -   **Mechanism**: Multiple rotors, each performing a substitution. Rotors rotate after each character encryption, changing the substitution alphabet.
 -   **Advantages**: Offer excellent confusion and diffusion, making them robust against Kasiski's attack due to very long periods.
 
 ### The Enigma Machine
-
 A sophisticated rotor machine used by Germany in WWII.
 -   **Components**: Multiple rotors, a reflector (a fixed rotor that bounces the current back through the rotors), and a plugboard (a simple permutation device).
 -   **Key Management**: The key involved rotor choice, order, and plugboard settings, changed daily.
@@ -79,7 +68,6 @@ A sophisticated rotor machine used by Germany in WWII.
 -   **Weaknesses**: The reflector was a critical weakness, as it ensured a letter could never be encrypted to itself, which significantly reduced the key space that cryptanalysts needed to search.
 
 ### Running Key Ciphers
-
 Ciphers where the key is the same length as the plaintext, often derived from a long source.
 -   **Encryption/Decryption**: Simple shift substitution `ci = (pi + ki) mod n`, `pi = (ci - ki) mod n`.
 -   **Literature-based Keys**: Using a book or document as the key source. This appears to defeat frequency analysis and periodicity but is vulnerable to **Friedman's Attack**.
@@ -92,4 +80,17 @@ Ciphers where the key is the same length as the plaintext, often derived from a 
 
 ### Transition to Block Ciphers
 
-The limitations of traditional ciphers, especially against frequency attacks, highlighted the need for more complex designs. Encrypting blocks of characters (polygram substitution) rather than single letters was a conceptual step towards modern **block ciphers**, enabled by electronic computers.
+## Examiner's Perspective
+
+### Hard Red Line: Enigma Weakness
+-   **The Reflector**: The most critical design flaw of the Enigma was that **a letter could never be encrypted to itself**. This significantly reduced the search space for cryptanalysts (Cribs).
+
+### Technical Nuance: Confusion vs. Diffusion
+-   **Substitution** provides **Confusion** (obscuring key-ciphertext relation).
+-   **Transposition** provides **Diffusion** (spreading plaintext statistics).
+- *Exam Tip*: Modern block ciphers (AES) are called **Substitution-Permutation Networks (SPN)** because they combine both principles in rounds.
+
+### Perfect Secrecy vs. Practicality
+-   OTP is theoretically unbreakable but practically unusable for general internet traffic due to key distribution and length requirements.
+
+## Review & Self-Check

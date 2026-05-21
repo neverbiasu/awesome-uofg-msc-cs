@@ -1,121 +1,61 @@
 ---
-title: "COMPSCI 5079: Cryptography and Secure Development"
-description: "Learn cryptographic principles, secure coding practices, and practical security implementations."
+title: "COMPSCI 5079: Cryptography"
+description: "Master the mathematical foundations and implementation of secure communication, including symmetric and asymmetric encryption, digital signatures, and hashing."
 ---
 
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+import { Card, Cards } from 'fumadocs-ui/components/card';
 
-# COMPSCI 5079: Cryptography and Secure Development
-
-This course covers the fundamentals of cryptography and secure software development, including symmetric and asymmetric encryption, hash functions, digital signatures, and secure coding practices.
-
+# Course Overview
+This course explores the principles and practices of modern cryptography. Students will learn how to secure data at rest and in transit using industry-standard protocols and algorithms.
 <Accordions>
-  <Accordion title="Course Information">
-    **Learning Objectives:**
-    1. Understand fundamental cryptographic concepts and algorithms
-    2. Implement encryption and decryption systems
-    3. Apply secure coding practices
-    4. Analyze security vulnerabilities and threats
-    5. Design secure software systems
-  </Accordion>
-  <Accordion title="Course Structure & Assessment">
-    **Course Structure:**
-    - Lectures: Cryptographic theory and security concepts
-    - Labs: Implementation exercises
-    - Assignments: Practical security tasks
-
-    **Assessment:**
-    - Midterm assignment
-    - Coursework
-    - Final exam
+  <Accordion title="Assessment Information">
+    - Lab Reports
+    - Practical Assignment
+    - Final Exam
   </Accordion>
 </Accordions>
 
-## Materials Overview
-
-### Week 1: Foundations
-
-| Material | Topic | Type |
-|----------|-------|------|
-| [S11 - Introduction](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S11_COMPSCI5079_Introduction.pdf) | Course Introduction | Lecture |
-| [S12 - Foundation Background](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S12_COMPSCI5079_Foundation_background.pdf) | Mathematical Foundations | Lecture |
-| [S13 - Polynomial Arithmetic](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S13_COMPSCI5079_Polynomial_Arthmetic.pdf) | Polynomial Arithmetic | Lecture |
-| [S14 - Information Theory](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S14_COMPSCI5079_Information_Theory.pdf) | Information Theory | Lecture |
-
-### Week 2: Traditional Encryption
-
-| Material | Topic | Type |
-|----------|-------|------|
-| [S21 - Traditional Encryptions](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S21_COMPSCI5079_Traditional_Encryptions.pdf) | Traditional Encryption Overview | Lecture |
-| [S22 - Transposition Algorithms](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S22_COMPSCI5079_Transposition_Algorithms.pdf) | Transposition Ciphers | Lecture |
-| [S23 - Substitution Algorithms](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S23_COMPSCI5079_Substitution_Algorithms.pdf) | Substitution Ciphers | Lecture |
-| [S24 - Homophonic Ciphers](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S24_COMPSCI5079_Homophonic_ciphers.pdf) | Homophonic Ciphers | Lecture |
-| [S25 - Polyalphabet Ciphers](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S25_COMPSCI5079_Polyalphabet_ciphers.pdf) | Polyalphabetic Ciphers | Lecture |
-| [S26 - Running Key Algorithm](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S26_COMPSCI5079_Running_Key_Algorithm.pdf) | Running Key Cipher | Lecture |
-
-### Week 3: Modern Symmetric Encryption
-
-| Material | Topic | Type |
-|----------|-------|------|
-| [S31 - Feistel Ciphers](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S31_COMPSCI5079_FeistelCiphers.pdf) | Feistel Network Structure | Lecture |
-| [S32 - DES](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S32_COMPSCI5079_DataEncryptionStandard_DES.pdf) | Data Encryption Standard | Lecture |
-| [S32 - AES](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S32_COMPSCI5079_Advanced_Encryption_Standard_AES.pdf) | Advanced Encryption Standard | Lecture |
-| [AES NIST Standard](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/AES_Standard_NIST.pdf) | Official AES Specification | Reading |
-| [Differential Cryptanalysis](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/Reading_Article_Differential_Cryptanalysis.pdf) | Cryptanalysis Article | Reading |
-
-### Week 4: Message Digests & Random Numbers
-
-| Material | Topic | Type |
-|----------|-------|------|
-| [S41 - Message Digests](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S41_COMPSCI5079_Message_Digests.pdf) | Hash Functions | Lecture |
-| [S42 - Random Number Generators](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S42_COMPSCI5079_Random_Numbers_Generators.pdf) | RNG in Cryptography | Lecture |
-| [S43 - Secret Sharing](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S43_COMPSCI5079_Secret_Sharing.pdf) | Secret Sharing Schemes | Lecture |
-
-### Week 5: Asymmetric Encryption
-
-| Material | Topic | Type |
-|----------|-------|------|
-| [S51 - Diffie-Hellman](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S51_COMPSCI5079_DiffieHellman.pdf) | Key Exchange Protocol | Lecture |
-| [S52 - RSA](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S52_COMPSCI5079_RSA.pdf) | RSA Algorithm | Lecture |
-| [S53 - ECC](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S53_COMPSCI5079_ECC.pdf) | Elliptic Curve Cryptography | Lecture |
-| [ECDSA Algorithm](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/The_Elliptic_Curve_Digital_Signature_Algorithm.pdf) | ECDSA Specification | Reading |
-
-### Week 6: Bitcoin & Cryptocurrencies
-
-| Material | Topic | Type |
-|----------|-------|------|
-| [S61 - Bitcoin Cryptocurrencies](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S61_COMSCI5079_Bitcoin_Cryptocurrencies.pdf) | Cryptocurrency Overview | Lecture |
-| [S62 - Bitcoin Protocol](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S62_COMPSCI5079_BitcoinProtocol.pdf) | Bitcoin Protocol Details | Lecture |
-| [S63 - Bitcoin Security & Privacy](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S63_COMPSCI5079_BitcoinSecurityPrivacy.pdf) | Security Considerations | Lecture |
-| [Bitcoin Whitepaper](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/1._Bitcoin-a-peer-to-peer-electronic-cash-system.pdf) | Original Bitcoin Paper | Reading |
-
-### Week 7: Secure Programming
-
-| Material | Topic | Type |
-|----------|-------|------|
-| [S71 - SQL Injection](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S71_COMPSCI5079_SQL_Injection.pdf) | SQL Injection Attacks | Lecture |
-| [S72 - XSS](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S72_COMPSCI5079_OutputHandling_XSS_updated.pdf) | Cross-Site Scripting | Lecture |
-| [S73 - Programming Languages Security](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S73_COMPSCI5079_ProgrammingLanguagesSecurity_updated.pdf) | Language Security Features | Lecture |
-| [S74 - Java Security Demo](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/S74_COMPSCI5079_JAVASecurityDemo_updated.pdf) | Java Security Examples | Lecture |
-
-### Code Examples & Resources
-
-| Material | Topic | Type |
-|----------|-------|------|
-| [DES Implementation](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/Des.java) | DES in Java | Code |
-| [Main Java Crypto](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/MainJavaCrypto.java) | Java Crypto Examples | Code |
-| [Buffer Overflow Code](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/BufferOverflow_Code.cpp) | Buffer Overflow Demo | Code |
-| [Rotor Cipher](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/Rotor96Crypto.java) | Rotor Machine Simulation | Code |
-| [Files Encryption App](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/FilesEncryptionApp.zip) | File Encryption Application | Code |
-
-### Exam Preparation
-
-| Material | Topic | Type |
-|----------|-------|------|
-| [Summary & Mock Questions](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/CSD_Summary_MockQuestions.pdf) | Exam Preparation | Review |
-| [Cryptography Hints](../../../../materials/semester-2/COMPSCI5079-cryptography/resources/Cryptography_Hints.pdf) | Study Hints | Review |
-| [All Slides](../../../../materials/semester-2/COMPSCI5079-cryptography/lectures/CSD_All_slides.pdf) | Complete Slide Deck | Review |
-
-## Course Notes
-
-> Notes will be added as the course progresses.
+## Weekly Notes
+<Cards>
+    <Card
+      href="/en/notes/semester-2/COMPSCI5079/week1"
+      title="Week 1: Math & Information Theory"
+      description="Fundamental math for crypto and Shannon's perfect secrecy."
+    />
+    <Card
+      href="/en/notes/semester-2/COMPSCI5079/week2"
+      title="Week 2: Symmetric Encryption"
+      description="Traditional ciphers, DES, AES, and block cipher modes."
+    />
+    <Card
+      href="/en/notes/semester-2/COMPSCI5079/week3"
+      title="Week 3: Message Digests & MACs"
+      description="Hash functions, message integrity, and HMAC."
+    />
+    <Card
+      href="/en/notes/semester-2/COMPSCI5079/week4"
+      title="Week 4: Asymmetric Encryption"
+      description="Public-key cryptography, Diffie-Hellman, and RSA."
+    />
+    <Card
+      href="/en/notes/semester-2/COMPSCI5079/week5"
+      title="Week 5: Digital Signatures & PKI"
+      description="Authentication, non-repudiation, and certificate management."
+    />
+    <Card
+      href="/en/notes/semester-2/COMPSCI5079/week6"
+      title="Week 6: Bitcoin & Blockchain"
+      description="Cryptographic foundations of decentralized ledgers."
+    />
+    <Card
+      href="/en/notes/semester-2/COMPSCI5079/week7"
+      title="Week 7: Coding & Security"
+      description="Common software vulnerabilities (SQLi, XSS) and mitigations."
+    />
+    <Card
+      href="/en/notes/semester-2/COMPSCI5079/week8"
+      title="Week 8: Secure Development"
+      description="SSDLC, maturity models, and continuous security."
+    />
+</Cards>

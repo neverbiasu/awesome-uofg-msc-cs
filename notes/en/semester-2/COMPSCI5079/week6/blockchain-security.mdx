@@ -1,0 +1,101 @@
+---
+title: "Week 6: Bitcoin & Blockchain"
+description: "Technical foundations of the Bitcoin protocol, including block structures, Merkle trees, and Proof-of-Work."
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+## Overview
+- Goal: Understand the decentralized architecture of Bitcoin and how blockchain technology ensures trustless data integrity.
+- Scope: Digital Cash history (Chaum's DigiCash), Bitcoin Ledger, Merkle Trees, and the Mining process.
+
+## Learning Objectives
+1. Explain the mechanism of Blind Signatures in early digital cash.
+2. Diagram the Bitcoin block structure: Header, Previous Hash, and Transactions.
+3. Understand the efficiency gains of using Merkle Trees for transaction verification.
+4. Define Proof-of-Work and its role in reaching distributed consensus.
+
+## Key Concepts
+
+### Origins: Digital Cash
+- **David Chaum (DigiCash)**: Introduced **Blind Signatures** to provide anonymity.
+    - **Blinding**: Alice signs an envelope containing money; the bank signs the outside without seeing the contents.
+    - **Issue**: Required a trusted central party and was computationally expensive.
+
+### The Bitcoin Protocol
+- **Distributed Ledger**: A peer-to-peer transaction log where all nodes store identical copies.
+- **Identity**: Based on Public-Key cryptography (Bitcoin Address = Hash of Hash of Public-Key).
+- **Blockchain Structure**:
+    - A **Linked List** where each block contains the hash of the previous block.
+    - **Immutability**: Changing a block in the middle would invalidate all subsequent hashes.
+
+### Merkle Trees
+- Motivation: To efficiently prove a transaction is part of a block without downloading the entire block.
+- **Concept**: A binary tree where each leaf is a transaction hash, and every non-leaf node is the hash of its two children.
+- **Integrity**: The **Merkle Root** is stored in the block header. Any modification to a transaction changes the root hash.
+
+### Consensus Mechanism: Proof-of-Work (PoW)
+- Motivation: To ensure all nodes agree on the state of the ledger without a master authority.
+- **Mining**: Finding a number (**Nonce** $N$) such that:
+```math
+\text{Hash}(\text{Hash}(B_{prev}) | \text{txs} | N) < \text{Target}
+```
+- **Forks**: If two miners find a block simultaneously, the network temporarily forks.
+- **Rule**: **The Longest Chain Wins.** Eventually, nodes converge on the chain with the most work.
+
+## Best Practices
+- **Wait for Confirmations**: Transactions are only "probabilistically" final. It is standard to wait for 6 confirmations (blocks) to ensure high finality.
+- **Understand Scripting**: Bitcoin uses a stack-based, non-Turing complete scripting language for transaction verification to prevent DoS attacks.
+Update Log
+- 2026-05-17: Initial version created based on Week 6 slides.
+
+## Overview
+- Goal: Evaluate the robustness of the Bitcoin network against malicious actors and understand user privacy risks.
+- Scope: Mining Security, Double-Spending strategies, 51% Attacks, and Pseudonymity analysis.
+
+## Learning Objectives
+1. Explain how mining acts as the "guardian" of the network via resource-intensive validation.
+2. Trace the steps of a double-spend attack involving network forks.
+3. Define the threshold for a 51% attack and its practical impossibility.
+4. Analyze how "transaction graph analysis" can de-anonymize Bitcoin users.
+
+## Key Concepts
+
+### Mining Security
+- **Validation**: Miners not only generate coins but validate every transaction embedded in the blockchain.
+- **Difficulty**: The system automatically adjusts the hashing target to ensure blocks are found approximately every 10 minutes, regardless of total network hash-rate.
+- **Incentives**: Miners are rewarded with newly minted BTC and transaction fees, aligning their self-interest with network security.
+
+### Double-Spending Attacks
+- **Problem**: Successfully using the same funds twice.
+- **Strategy**:
+    1. Attacker sends Transaction X to victim $V$.
+    2. Attacker secretly mines a block with Transaction Y (sending same funds to themselves).
+    3. $V$ waits for 1 confirmation and ships goods.
+    4. Attacker broadcasts their (longer) secret fork.
+    5. The network adopts the longer fork; Transaction X is reversed.
+- **Defense**: Waiting for multiple confirmations (e.g., 6) makes the cost of out-mining the honest network exponentially higher.
+
+### The 51% Attack
+- **Concept**: If an entity controls $>50\%$ of the network's hashing power, they can reliably out-mine the rest of the network, enabling consistent double-spending and transaction reversal.
+- **Reality**: Due to the massive energy consumption and specialized hardware (ASICs) globally distributed, this is considered practically impossible for Bitcoin.
+
+### Privacy: Anonymity vs. Pseudonymity
+- **Anonymity**: No one knows your real identity.
+- **Privacy**: No one knows what you bought or for how much.
+- **Bitcoin Status**: **Pseudonymous**.
+    - Addresses are random strings (anonymity), but every transaction is public on the ledger (no privacy).
+- **De-anonymization**: "Transaction graph analysis" combines transaction flow with side-info (e.g., IP addresses, merchant data) to reveal real identities.
+
+### Fungibility & Solutions
+- **Fungibility**: Every unit of currency has equal value and is interchangeable.
+- **Solutions to Privacy Risks**:
+    - **Mixers**: Services that pool and redistribute coins to break the transaction link.
+    - **CoinJoin**: Users combine multiple transactions into one to obscure individual paths.
+    - **Zero-Knowledge Proofs (ZKP)**: Advanced math to prove a transaction is valid without revealing amounts or identities (used in newer coins).
+
+## Best Practices
+- **Use New Addresses**: Generate a new address for every transaction to minimize de-anonymization risks.
+- **Avoid Centralized Reuse**: Be aware that linking a Bitcoin address to a KYC-compliant exchange reveals your identity to that entity.
+Update Log
+- 2026-05-17: Initial version created.

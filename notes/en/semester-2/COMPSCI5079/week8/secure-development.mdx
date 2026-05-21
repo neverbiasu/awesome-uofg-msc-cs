@@ -1,0 +1,49 @@
+---
+title: "Week 8: Secure Development"
+description: "Integrating security into the Software Development Life Cycle (SDLC) and modern development practices."
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## Key Takeaway
+Security must be built in from the requirements phase, not bolted on at the end. Continuous security requires automation and integration into the CI/CD pipeline.
+
+## 1. Secure Software Development Life Cycle (SDLC)
+Security should be considered at every stage of development.
+<Steps>
+
+### Security in the SDLC
+1.  **Requirements**: Identify sensitive assets and define security requirements (CIA triad).
+2.  **Design**: Apply security principles like "Defense in Depth" and "Least Privilege".
+3.  **Implementation**: Follow secure coding standards and use static analysis tools.
+4.  **Testing**: Conduct penetration testing and fuzzing.
+5.  **Deployment/Maintenance**: Continuous monitoring and security updates.
+</Steps>
+
+## 2. Secure Design Principles
+-   **Favor Simplicity**: Complex systems are harder to secure and more prone to errors.
+-   **Trust with Reluctance**: Never trust data from the client or external subsystems.
+-   **Defend in Depth**: Multiple layers of security so that if one fails, others remain.
+![SDLC Security Integration](/images/COMPSCI5079/AllSlides/CSD_All_slides-685.png)
+
+## 3. Maturity Models and Frameworks
+-   **BSIMM (Building Security In Maturity Model)**: A descriptive model that provides a framework for measuring security initiatives.
+-   **Microsoft SDL**: A security assurance process that is focused on software development.
+-   **OpenSAMM**: A flexible software assurance maturity model.
+
+## 4. Examiner's Perspective
+
+### Hard Red Lines: SDLC Timing
+If an exam question asks when security testing should begin, the answer is **as early as possible** (shift-left security).
+- *Nuance*: Security requirements must be defined **before** design begins.
+
+### Technical Nuance: Continuous Security
+-   Security must be integrated into the **CI/CD environment** (e.g., GitHub Actions, Jenkins).
+-   Third-party components and open-source libraries must be **audited** automatically for known vulnerabilities.
+
+## Review & Self-Check
+- [ ] What are the three components of the CIA triad?
+- [ ] Explain the concept of "Defense in Depth" with an example.
+- [ ] Why is it important to audit third-party libraries in modern development?

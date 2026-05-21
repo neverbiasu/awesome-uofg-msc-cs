@@ -1,0 +1,61 @@
+---
+title: "Week 7: Coding & Security"
+description: "Identifying and mitigating common coding vulnerabilities such as SQL Injection, XSS, and Buffer Overflows."
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## Key Takeaway
+Secure coding requires a proactive approach to input validation, output encoding, and memory management to prevent attackers from injecting malicious commands or data into subsystems.
+
+## 1. SQL Injection
+SQL Injection occurs when untrusted data is inserted into a database query, allowing an attacker to manipulate the query's logic.
+
+### Types of Attacks
+-   **Comment Out**: Using `--` to invalidate the rest of a query (e.g., bypassing password checks).
+-   **Boolean Precedence**: Using `OR '1'='1'` to ensure a condition always evaluates to true.
+-   **UNION SELECT**: Combining results from the intended table with sensitive data from other tables.
+![SQL Injection Example](/images/COMPSCI5079/AllSlides/CSD_All_slides-585.png)
+<Callout type="warn">
+**Mitigation**: Always use **Parametrized Queries** (Prepared Statements) or **Stored Procedures**. Never build queries using string concatenation with user input.
+</Callout>
+
+## 2. Cross-Site Scripting (XSS)
+XSS involves injecting malicious scripts (usually JavaScript) into web pages viewed by other users.
+
+### Categories
+1.  **Stored (Persistent)**: Malicious script is saved on the server (e.g., in a database).
+2.  **Reflected (Non-Persistent)**: Script is "reflected" off the web server (e.g., in a URL parameter).
+3.  **DOM-Based**: Vulnerability exists in client-side code rather than server-side.
+<Callout type="info">
+**Session Hijacking**: Attacker uses XSS to steal `document.cookie`, allowing them to impersonate the victim.
+</Callout>
+
+## 3. Programming Language Vulnerabilities
+
+### Buffer Overflow (C/C++)
+C/C++ do not automatically check array bounds. An attacker can provide input longer than the allocated buffer to overwrite adjacent memory.
+-   **UNIX Password Case**: Overwriting the `epwd` buffer with a known hash to log in as root.
+
+### Poisoned Null Byte
+Mismatch between languages that use null-terminators (C) and those that use explicit lengths (Python/PHP). An attacker can bypass file extension checks (e.g., `attack.php%00.jpg`).
+
+## 4. Examiner's Perspective
+
+### Hard Red Lines: Java Crypto API
+When implementing cryptography in Java:
+-   **DO NOT** implement your own algorithms.
+-   Use `javax.crypto.Cipher` for encryption/decryption.
+-   Use `java.security.MessageDigest` for hashing.
+-   **Nuance**: RSA key pairs are created with `KeyPairGenerator`, while AES keys use `KeyGenerator`.
+
+### Failure Analysis: Input vs. Output
+-   Input validation (Whitelisting) prevents **SQL Injection**.
+-   Output encoding (Escaping) prevents **XSS**.
+
+## Review & Self-Check
+- [ ] Why is "Accept only good inputs" better than "Reject bad inputs"?
+- [ ] Explain how a `UNION SELECT` attack can leak a database schema.
+- [ ] What is the purpose of a "Salt" when storing passwords?
