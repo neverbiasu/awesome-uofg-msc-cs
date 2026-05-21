@@ -1,124 +1,47 @@
 ---
-title: "Convolutional Neural Networks (CNNs)"
-description: "An exploration of Convolutional Neural Networks (CNNs), their architecture, desirable properties like invariance, and key layers such as convolution and pooling. This note also covers classic CNN architectures like LeNet, AlexNet, VGG, and ResNet."
+title: "Week 3: Convolutional Neural Networks"
+description: "Architecture of CNNs, convolution operations, pooling, and their application in computer vision."
+date: "2026-05-18"
 ---
 
-import { Accordions, Accordion } from 'fumadocs-ui/components/accordion';
 import { Callout } from 'fumadocs-ui/components/callout';
-import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import { Steps } from 'fumadocs-ui/components/steps';
 
-## Key Takeaways
-- **Parameter Explosion Problem**: Using standard Multi-Layer Perceptrons (MLPs) for images is impractical due to the enormous number of parameters required, leading to overfitting and high computational costs.
-- **CNNs for Efficiency**: CNNs solve this problem by using **sparse interactions** (small kernels) and **parameter sharing** (the same kernel is applied across the entire image).
-- **Desirable Properties**: CNNs exhibit **equivariance** (a translation in the input causes a translation in the output) and, when combined with pooling, can achieve **invariance** (the output is robust to translations in the input).
-- **Core CNN Layers**:
-    1.  **Convolutional Layer**: Applies a set of learnable filters (kernels) to the input, detecting features like edges, textures, and patterns to create feature maps.
-    2.  **Pooling Layer**: Downsamples the feature maps, reducing dimensionality and computational load while retaining the most important information (e.g., `MaxPool2d`).
-    3.  **Fully Connected Layer**: A standard MLP, typically at the end of the network, that performs classification based on the high-level features detected by the preceding layers.
-- **Hierarchical Feature Learning**: Stacking multiple convolution and pooling layers allows the network to learn a hierarchy of features, from simple edges in early layers to complex object parts in deeper layers.
-- **Classic Architectures**: The history of CNNs is marked by increasingly deep and complex architectures, from LeNet-5 to AlexNet, VGG, GoogLeNet, and ResNet (which introduced skip connections to train very deep networks).
+## Key Takeaway
+CNNs exploit the spatial local correlation of images through shared weights and pooling, drastically reducing the number of parameters compared to fully connected networks while achieving translation invariance.
 
----
+## 1. Why CNN for Images?
+Fully connected networks (MLPs) fail on images because:
+1.  **Parameter Explosion**: A $1000 \times 1000$ image would require millions of weights per neuron.
+2.  **Loss of Spatial Structure**: MLPs flatten images into 1D vectors, losing the relative positions of pixels.
 
-## Why Not Use MLPs for Images?
+## 2. Core Components of CNN
 
-In previous lectures, we saw that Multi-Layer Perceptrons (MLPs) are powerful classifiers. However, they are not well-suited for image data. The primary reason is the **parameter explosion**.
+### Convolutional Layer
+-   **Kernels/Filters**: Small matrices that slide across the image to detect features (edges, textures).
+-   **Stride**: The step size of the filter.
+-   **Padding**: Adding zeros around the borders to control output size.
 
-<Callout title="The Parameter Problem">
-Let's consider a small 32x32 pixel color image.
-- **Input Size**: 3 (channels) x 32 (height) x 32 (width) = 3,072 input neurons.
-- If our first hidden layer has 4,704 neurons (a modest size), the number of parameters (weights and biases) required for this single layer would be:
-  `(3,072 * 4,704) + 4,704 = **14,455,392**`
-- Over 14 million parameters for just the first layer of a network processing a tiny image is computationally expensive, extremely difficult to train, and highly prone to overfitting.
-</Callout>
+### Pooling Layer
+-   Reduces spatial dimensions (downsampling).
+-   **Max Pooling**: Keeps the most prominent feature in a window.
+-   **Advantage**: Provides **Invariance** to small translations and distortions.
+![CNN Architecture Example](/images/COMPSCI5103/week3/2025_26_DL_Lecture3_Convolutional_Neural_Networks-044.png)
 
-CNNs are designed to solve this problem. For the same transformation, a `Conv2d` layer might only have a few hundred parameters by leveraging sparse connectivity and parameter sharing.
+## 3. Calculation Formulas
+-   **Output Width ($W_{out}$)**: $\frac{W_{in} - F + 2P}{S} + 1$
+-   *Where*: $W$ = Width, $F$ = Filter size, $P$ = Padding, $S$ = Stride.
 
----
-
-## Desirable Properties of CNNs
-
-Beyond efficiency, CNNs have two important properties that make them ideal for visual data.
-
-1.  **Invariance**: A function `f(x)` is *invariant* to a transformation `t` if `f(t(x)) = f(x)`. For image classification, this means the classifier should identify an object correctly even if it's shifted (translated) within the image.
-
-2.  **Equivariance**: A function `f(x)` is *equivariant* to a transformation `t` if `f(t(x)) = t(f(x))`. For tasks like image segmentation, this means if an object in the input image moves, the corresponding segmentation mask should move in the same way.
-
-Convolutional layers are naturally equivariant. When combined with pooling, the network can learn to be approximately invariant.
-
----
-
-## How CNNs Work: The Core Layers
-
-A typical CNN architecture consists of a sequence of three main types of layers.
-
-### 1. The Convolutional Layer (`Conv2d`)
-
-The convolutional layer is the core building block of a CNN. It operates by sliding a small filter, called a **kernel**, across the input image.
-
-- **Kernel/Filter**: A small matrix of learnable weights (e.g., 3x3 or 5x5). Each kernel is designed to detect a specific feature, like a vertical edge, a specific color, or a simple texture.
-- **Parameter Sharing**: The *same* kernel is used across all positions of the input image. This is the key to reducing the number of parameters.
-- **Activation Map**: At each position, the kernel performs a dot product with the underlying patch of the image. The result is a 2D **activation map** (or feature map) that shows where the kernel's specific feature was detected in the image.
-- **Multiple Kernels**: A `Conv2d` layer uses multiple kernels, each learning to detect a different feature. If a layer has 6 kernels, it will produce 6 activation maps (output channels).
-
-In PyTorch, a convolutional layer is defined as:
-```python
-# 3 input channels (RGB), 6 output channels (6 kernels), 5x5 kernel size
-self.conv1 = nn.Conv2d(3, 6, 5) 
-```
-
-### 2. The Pooling Layer (`MaxPool2d`)
-
-Pooling layers are used to **downsample** the activation maps. Their main purposes are:
-- To reduce the spatial dimensions (width and height) of the representation.
-- To decrease the computational load and number of parameters in subsequent layers.
-- To make the feature detection more robust to small translations.
-
-**Max Pooling** is the most common form. It operates with a window (e.g., 2x2) and, for each position, outputs only the maximum value within that window. This effectively concentrates the strongest activations from a region.
-
-In PyTorch, a max pooling layer is defined as:
-```python
-# A 2x2 window with a stride of 2
-self.pool = nn.MaxPool2d(2, 2)
-```
-
-### 3. The Fully Connected Layer (`Linear`)
-
-After several convolution and pooling layers, the high-level feature maps are flattened into a 1D vector. This vector is then fed into one or more **fully connected layers**, which are standard MLPs. These layers perform the final classification task by combining the detected features to make a prediction.
-
----
-
-## Advanced Convolution Concepts
-
-### Padding and Stride
-
-- **Padding**: Refers to adding extra pixels (usually zeros) around the border of an input image. This allows the kernel to process the edges of the image more effectively. **"Half padding"** is a common technique where enough padding is added to make the output feature map the same size as the input.
-- **Stride**: The number of pixels the kernel shifts at each step. A stride of 1 moves the kernel one pixel at a time. A stride of 2 or more can be used as an alternative to pooling for downsampling the image.
+## 4. Examiner's Perspective: Technical Nuances
 
 ### Receptive Field
+-   **Concept**: The specific area of the input image that a neuron in a deep layer "sees".
+-   **Nuance**: Deeper layers have larger receptive fields, allowing them to detect complex, global features (like faces) rather than just local edges.
 
-The **receptive field** of a neuron is the region of the original input image that affects its activation. In deep CNNs, stacking layers increases the receptive field of deeper neurons. For example, a neuron in the second convolutional layer "sees" a larger patch of the original input than a neuron in the first layer. This allows the network to learn a **hierarchy of features**, from simple edges to complex shapes and object parts.
+### Translation Invariance
+-   **Hard Red Line**: CNNs are invariant to *small* translations due to pooling, but not necessarily to rotation or scaling. Data augmentation is usually needed to handle those.
 
----
-
-## Classic CNN Architectures
-
-The field of deep learning has been shaped by several landmark CNN architectures, each pushing the boundaries of depth and performance.
-
-<Accordions>
-  <Accordion title="LeNet-5 (1998)">
-    One of the earliest successful CNNs, developed by Yann LeCun for handwritten digit recognition (MNIST). Its architecture `[CONV-POOL-CONV-POOL-FC-FC]` established the foundational pattern for many future networks.
-  </Accordion>
-  <Accordion title="AlexNet (2012)">
-    Won the ImageNet challenge by a large margin, popularizing CNNs in the broader computer vision community. It was deeper and larger than LeNet-5 and was the first to stack multiple convolutional layers directly. It also introduced the use of the **ReLU** activation function, **Dropout**, and **data augmentation** to combat overfitting.
-  </Accordion>
-  <Accordion title="VGGNet (2014)">
-    Demonstrated that a simple, deep architecture using very small 3x3 kernels could achieve excellent performance. The VGG-16 and VGG-19 models showed that depth was a critical component for high performance.
-  </Accordion>
-  <Accordion title="GoogLeNet (2014)">
-    Introduced the **Inception module**, a "network-in-a-network" block that runs multiple convolutions with different kernel sizes in parallel and concatenates their outputs. This allowed the network to be very deep (22 layers) while remaining computationally efficient.
-  </Accordion>
-  <Accordion title="ResNet (2015)">
-    Solved the **degradation problem** (where very deep networks perform worse than shallower ones) by introducing **residual units** with **skip connections**. These connections allow the gradient to flow more easily through the network during backpropagation, enabling the training of extremely deep models (e.g., 152 layers).
-  </Accordion>
-</Accordions>
+## Review & Self-Check
+- [ ] Calculate the output size for a $32 \times 32$ image, $5 \times 5$ filter, stride 1, padding 0.
+- [ ] Explain the difference between "Valid Padding" and "Same Padding".
+- [ ] Why is the final layer of a CNN usually a Fully Connected layer?

@@ -1,0 +1,42 @@
+---
+title: "Week 6: Visualization & Interpretability"
+description: "Methods for understanding what deep neural networks learn, including feature visualization and attribution methods."
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## Key Takeaway
+Deep networks are often considered "black boxes", but interpretability techniques allow us to verify that a model is focusing on correct features (e.g., the dog) rather than background noise (e.g., the grass).
+
+## 1. Feature Visualization
+Visualizing what specific filters in a CNN detect.
+-   **Early Layers**: Detect simple features like edges, blobs, and colors.
+-   **Deep Layers**: Detect complex parts of objects (e.g., eyes, wheels, textures).
+![Feature Visualization Hierarchy](/images/COMPSCI5103/week6/Lecture_6_-_Visualisation_and_Interpretability_of_DNNs-012.png)
+
+## 2. Attribution Methods
+Attribution identifies which input pixels contributed most to a specific prediction.
+-   **Saliency Maps**: Compute the gradient of the output with respect to the input image.
+-   **Grad-CAM**: Uses the gradients of any target concept flowing into the last convolutional layer to produce a localization map.
+<Callout type="warn">
+**Why it matters**: Interpretability is crucial for high-stakes applications like medical diagnosis or autonomous driving, where we need to know *why* a decision was made.
+</Callout>
+
+## 3. Adversarial Attacks
+-   **Adversarial Examples**: Small, human-imperceptible perturbations added to an image that cause a model to misclassify it with high confidence.
+-   **Interpretability Connection**: These attacks highlight that models often learn non-robust features that are different from human perception.
+
+## 4. Examiner's Perspective: Technical Nuances
+
+### Deconvolution vs. Backprop
+-   **Nuance**: Simple backpropagation to the image often results in "noisy" visualizations. Specialized methods like **Guided Backpropagation** suppress negative gradients to produce cleaner feature maps.
+
+### Robustness
+-   **Hard Red Line**: A highly accurate model is not necessarily a robust or interpretable one. Verification using visualization is a standard part of the modern DL workflow.
+
+## Review & Self-Check
+- [ ] What does a saliency map represent?
+- [ ] Explain how a "Clever Hans" model (a model that learns the wrong cues) can be detected.
+- [ ] What is the difference between global and local interpretability?

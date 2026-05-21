@@ -1,0 +1,48 @@
+---
+title: "Week 4: ML Workflow & Evaluation"
+description: "The machine learning pipeline, dataset splitting, evaluation metrics, and hyperparameter tuning."
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## Key Takeaway
+A rigorous ML workflow requires a clear separation between training, validation, and testing sets to prevent data leakage and ensure that the model's performance generalizes to unseen data.
+
+## 1. The ML Pipeline
+<Steps>
+
+### The Standard Workflow
+1.  **Data Collection**: Gathering raw data.
+2.  **Preprocessing**: Normalization, cleaning, and augmentation.
+3.  **Splitting**: Training, Validation, and Test sets.
+4.  **Training**: Optimizing weights on the training set.
+5.  **Validation**: Tuning hyperparameters (e.g., learning rate) and selecting the best model version.
+6.  **Testing**: Final evaluation on the test set (Must be done only ONCE).
+</Steps>
+
+## 2. Evaluation Metrics
+Choosing the right metric depends on the task and data distribution.
+-   **Accuracy**: Percentage of correct predictions. (Bad for imbalanced data).
+-   **Precision/Recall**: Trade-off between "finding only targets" and "finding all targets".
+-   **F1-Score**: Harmonic mean of Precision and Recall.
+-   **Confusion Matrix**: Visual representation of True Positives, False Positives, etc.
+![Evaluation Metrics Table](/images/COMPSCI5103/week4/2025_26_DL_Lecture4_Machine_Learning_Workflow-026.png)
+
+## 3. Cross-Validation
+-   **K-Fold Cross-Validation**: Splitting the data into $K$ parts and training $K$ times, using each part as a validation set once. This provides a more robust estimate of model performance.
+
+## 4. Examiner's Perspective: Technical Nuances
+
+### Data Leakage
+-   **Hard Red Line**: Data leakage occurs when information from the test set "leaks" into the training process (e.g., calculating the global mean/variance before splitting). This leads to overly optimistic but fake results.
+
+### Validation vs. Testing
+-   **Validation Set**: Used during training to make decisions (select hyperparameters).
+-   **Test Set**: Used after training is complete for final reporting. Never use the test set to adjust parameters.
+
+## Review & Self-Check
+- [ ] Why should you not use the Test Set for hyperparameter tuning?
+- [ ] In a medical diagnosis task, which is more important: Precision or Recall?
+- [ ] Explain how "Early Stopping" works.

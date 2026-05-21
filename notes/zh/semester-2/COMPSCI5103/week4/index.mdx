@@ -1,31 +1,25 @@
 ---
 title: "第4周：机器学习工作流"
-description: 数据划分、模型选择、评估指标以及偏差-方差权衡
+description: "数据划分、模型选择、评估指标以及偏差-方差权衡。"
 ---
 
-import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+## 概要
+- 主题：实际 ML 流水线
+- 核心知识点：数据划分 (Train/Val/Test)、过拟合与欠拟合、评估指标、偏差-方差权衡。
 
-## 总结
+## 本周安排
+| 会议 | 主题 | 说明 |
+|||---|
+| 工作流 | [机器学习工作流](/zh/notes/semester-2/COMPSCI5103/week4/machine-learning-workflow) |
 
-本周探讨了开发深度学习模型的实际工作流程。涵盖了数据分区、模型选择和严格评估的基本策略，以确保模型能够泛化到未见数据。
+## 复习与自测
 
-<Accordions>
-  <Accordion title="数据分区">
-    将数据划分为**训练集**、**验证集**和**测试集**的重要性。理解为什么在开发过程中绝不能“偷看”测试集。
-  </Accordion>
-  <Accordion title="模型选择">
-    使用验证集调整超参数并选择最佳模型架构。交叉验证 (Cross-Validation) 技术介绍。
-  </Accordion>
-  <Accordion title="评估指标">
-    超越准确率：精确率 (Precision)、召回率 (Recall)、F1 分数和混淆矩阵。理解如何衡量不平衡数据集上的性能。
-  </Accordion>
-  <Accordion title="偏差-方差权衡">
-    识别过拟合（高方差）和欠拟合（高偏差）。基于错误分析改进模型性能的策略。
-  </Accordion>
-</Accordions>
+### 1. 核心问题
+1. [ ] 为什么使用测试集来调整超参数是危险的？
+2. [ ] 混淆矩阵的 4 个象限分别是什么？
+3. [ ] 如果验证误差远高于训练误差，模型是高偏差还是高方差？
 
-## 快速链接
-
-- [机器学习工作流](./machine-learning-workflow)
-- [数据划分策略](./machine-learning-workflow#data-partitioning)
-- [性能指标](./machine-learning-workflow#evaluation-metrics)
+### 2. 实践任务
+使用真阳性 (TP)、假阳性 (FP) 和真阴性 (TN) 定义精确率 (Precision) 和召回率 (Recall) 的公式。
+最后更新
+- 2026-05-17：标准化标题并添加了复习机制。

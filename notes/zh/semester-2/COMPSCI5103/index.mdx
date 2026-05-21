@@ -1,51 +1,61 @@
 ---
 title: "COMPSCI 5103: 深度学习"
-description: "学习深度学习的理论基础和实践应用，包括神经网络、CNN、RNN等核心技术。"
+description: "深入学习神经网络，包括 CNN、RNN、Transformer 以及用于复杂模式识别的优化技术。"
 ---
 
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+import { Card, Cards } from 'fumadocs-ui/components/card';
 
-# COMPSCI 5103: 深度学习
-
-本课程深入介绍深度学习的理论和实践，涵盖神经网络基础、卷积神经网络、循环神经网络等核心技术，以及使用PyTorch进行模型开发。
-
+# 课程概览
+本课程深入探讨现代深度学习的架构和数学基础。主题包括反向传播、正则化以及用于视觉和自然语言处理 (NLP) 的最先进模型。
 <Accordions>
-  <Accordion title="课程基本信息">
-    **课程目标:**
-    1. 理解神经网络的基本原理
-    2. 掌握反向传播和梯度下降算法
-    3. 学习CNN、RNN等深度学习架构
-    4. 使用PyTorch框架实现深度学习模型
-    5. 理解正则化、优化等训练技巧
-  </Accordion>
-  <Accordion title="课程结构与考核">
-    **课程结构:**
-    - 讲座：理论知识讲解
-    - 实验：PyTorch编程实践
-    - 项目：深度学习应用开发
-
-    **考核:**
-    - 课程作业
-    - 期末考试/项目
+  <Accordion title="评估信息">
+    - 实现项目 (PyTorch)
+    - 研究论文综述
+    - 期末考试
   </Accordion>
 </Accordions>
 
-## 材料概览
-
-### 第1周：导论
-
-| 材料 | 主题 | 类型 |
-|------|------|------|
-| [第1讲：导论](../../../../materials/semester-2/COMPSCI5103-deep-learning/lectures/2025_26_DL_Lecture1_Introduction_final.pdf) | 深度学习导论 | 讲座 |
-
-## 课程内容
-
-import { Card, Cards } from 'fumadocs-ui/components/card';
-
+## 每周笔记
 <Cards>
     <Card
       href="/zh/notes/semester-2/COMPSCI5103/week1"
-      title="第1周：导论"
-      description="深度学习导论、神经网络基础和课程概述。"
+      title="第1周：神经网络基础"
+      description="生物神经元、激活函数以及发展历史。"
+    />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5103/week2"
+      title="第2周：反向传播与 MLP"
+      description="多层感知机和梯度下降优化。"
+    />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5103/week3"
+      title="第3周：卷积神经网络"
+      description="CNN 架构和计算机视觉基础。"
+    />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5103/week4"
+      title="第4周：ML 工作流与评估"
+      description="流水线阶段、评估指标和数据泄露。"
+    />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5103/week5"
+      title="第5周：优化与正则化"
+      description="高级优化器、Dropout 和批归一化。"
+    />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5103/week6"
+      title="第6周：可视化与可解释性"
+      description="显著图、Grad-CAM 和模型验证。"
+    />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5103/week7"
+      title="第7周：RNN 与 Transformer"
+      description="序列建模和自注意力机制。"
+    />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5103/week8"
+      title="第8周：自动编码器"
+      description="无监督表示学习和瓶颈层。"
     />
 </Cards>

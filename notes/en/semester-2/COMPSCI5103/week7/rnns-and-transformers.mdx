@@ -1,0 +1,40 @@
+---
+title: "Week 7: RNNs & Transformers"
+description: "Sequence modeling from recurrent hidden states to self-attention mechanisms."
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## Key Takeaway
+Transformers have revolutionized sequence modeling by replacing the sequential constraints of RNNs with a parallelizable self-attention mechanism, enabling models to capture long-range dependencies efficiently.
+
+## 1. Recurrent Neural Networks (RNNs)
+RNNs process data sequentially.
+-   **Hidden State**: Serves as the memory of the network.
+-   **Challenge**: Vanishing/Exploding gradients in long sequences.
+-   **Solution**: **LSTMs** and **GRUs** introduce gating mechanisms to control memory flow.
+
+## 2. The Self-Attention Mechanism
+The core innovation of the Transformer.
+-   **Parallelization**: All tokens in a sequence are processed simultaneously.
+-   **Context**: Each token "attends" to all other tokens to calculate its representation.
+-   **Formulas**: $Attention(Q, K, V) = softmax(\frac{QK^T}{\sqrt{d_k}})V$.
+![Transformer Architecture](/images/COMPSCI5103/week7/Lecture_7_Recurrent_Neural_Networks_(RNNs)_and_Transformers_(AG)-013.png)
+
+## 3. Transformer Components
+-   **Multi-Head Attention**: Captures different semantic relationships.
+-   **Positional Encoding**: Adds order information back into the parallel model.
+-   **Layer Norm & Residuals**: Ensures stable training of deep stacks.
+
+## 4. Examiner's Perspective: Technical Nuances
+
+### Why Transformers beat RNNs?
+-   **RNN**: $O(N)$ depth for dependencies. Hard to parallelize.
+-   **Transformer**: $O(1)$ depth for dependencies (direct attention). Highly parallelizable.
+
+## Review & Self-Check
+- [ ] Compare the computational complexity of RNN vs. Transformer.
+- [ ] What is the purpose of the "Query" in self-attention?
+- [ ] Why do Transformers need Positional Encodings?

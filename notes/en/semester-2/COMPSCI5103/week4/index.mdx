@@ -1,31 +1,25 @@
 ---
-title: "Week 4: Machine Learning Workflow"
-description: Data splits, model selection, evaluation metrics, and bias-variance trade-off
+title: "Week 4: ML Workflow & Evaluation"
+description: "Data splits, model selection, evaluation metrics, and bias-variance trade-off."
 ---
 
-import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+## Overview
+- Theme: Practical ML Pipelines
+- Key Topics: Data Partitioning (Train/Val/Test), Overfitting vs. Underfitting, Performance Metrics, Bias-Variance Trade-off.
 
-## Summary
+## Schedule
+| Session | Topic | Description |
+|||---|
+| Workflow | [Machine Learning Workflow](/en/notes/semester-2/COMPSCI5103/week4/machine-learning-workflow) |
 
-This week explores the practical workflow of developing deep learning models. It covers essential strategies for data partitioning, model selection, and rigorous evaluation to ensure generalization to unseen data.
+## Review & Self-Check
 
-<Accordions>
-  <Accordion title="Data Partitioning">
-    The importance of splitting data into **Training**, **Validation**, and **Test** sets. Understanding why we never peek at the test set during development.
-  </Accordion>
-  <Accordion title="Model Selection">
-    Using the validation set to tune hyperparameters and choose the best model architecture. Introduction to Cross-Validation techniques.
-  </Accordion>
-  <Accordion title="Evaluation Metrics">
-    Going beyond accuracy: Precision, Recall, F1-score, and Confusion Matrices. Understanding how to measure performance on imbalanced datasets.
-  </Accordion>
-  <Accordion title="Bias-Variance Trade-off">
-    Identifying Overfitting (High Variance) and Underfitting (High Bias). Strategies to improve model performance based on error analysis.
-  </Accordion>
-</Accordions>
+### 1. Key Questions
+1. [ ] Why is it dangerous to tune hyperparameters using the test set?
+2. [ ] What are the 4 quadrants of a Confusion Matrix?
+3. [ ] If validation error is much higher than training error, is the model biased or does it have high variance?
 
-## Quick Links
-
-- [Machine Learning Workflow](./machine-learning-workflow)
-- [Data Splitting Strategy](./machine-learning-workflow#data-partitioning)
-- [Performance Metrics](./machine-learning-workflow#evaluation-metrics)
+### 2. Practice Task
+Define the formulas for Precision and Recall using True Positives (TP), False Positives (FP), and False Negatives (FN).
+Update Log
+- 2026-05-17: Standardized titles and added review mechanism.

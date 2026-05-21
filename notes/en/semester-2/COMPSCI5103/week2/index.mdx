@@ -1,27 +1,26 @@
 ---
-title: "Week 2: Neural Networks Fundamentals"
-description: "Overview of Multi-Layer Perceptrons (MLP), Stochastic Gradient Descent (SGD), and Backpropagation."
+title: "Week 2: Backpropagation & MLP"
+description: "Foundations of Multi-Layer Perceptrons (MLP), optimization with SGD, and the mechanics of Backpropagation."
 ---
 
 ## Overview
-- **Topics**: MLP, SGD, Backpropagation using Computational Graphs.
+- Theme: Training Neural Networks
+- Key Topics: MLPs, Loss Functions, Gradient Descent, Backpropagation, Computational Graphs.
 
-## Weekly Schedule (Sequential)
+## Schedule
 | Session | Topic | Description |
-|---|---|---|
-| Lecture 2A | MLP and SGD | Introduction to Multi-Layer Perceptrons and the Stochastic Gradient Descent optimization algorithm. |
-| Lecture 2B | Backpropagation | Understanding how gradients are calculated through backpropagation on computational graphs. |
+|||---|
+| Theory | [MLP & SGD](/en/notes/semester-2/COMPSCI5103/week2/mlp-sgd) |
+| Calculus | [Backpropagation](/en/notes/semester-2/COMPSCI5103/week2/backpropagation) |
 
-## Learning Objectives
-1. Understand the architecture of a Multi-Layer Perceptron.
-2. Explain how SGD is used to train a neural network.
-3. Describe the process of backpropagation for gradient computation.
+## Review & Self-Check
 
-## Content Index
-| Module | Page |
-|---|---|
-| Lecture 2A | [MLP and SGD](./mlp-sgd) |
-| Lecture 2B | [Backpropagation](./backpropagation) |
+### 1. Key Questions
+1. [ ] Why is SGD preferred over Batch Gradient Descent for large datasets?
+2. [ ] What is the "Chain Rule" and how is it used in Backpropagation?
+3. [ ] What happens if we initialize all weights to zero in an MLP?
 
----
-*This is a placeholder. Content to be added.*
+### 2. Practice Task
+Given a computational graph $z = x \cdot y$, calculate the local gradients $\frac{\partial z}{\partial x}$ and $\frac{\partial z}{\partial y}$.
+Update Log
+- 2026-05-17: Standardized titles and added review mechanism.
