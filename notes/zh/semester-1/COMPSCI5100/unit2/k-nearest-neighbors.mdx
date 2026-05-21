@@ -3,6 +3,9 @@ title: "k-最近邻 (k-NN)"
 description: "理解k-最近邻算法，一个直观的、基于实例的分类器，并学习如何使用交叉验证选择最优的'k'值。"
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## 概要
 - **目标**：理解并实现用于分类的k-最近邻（k-NN）算法。
 - **范围**：本笔记涵盖k-NN的机制、超参数`k`的重要性、距离度量和特征缩放的作用，以及如何使用交叉验证来选择`k`。
@@ -33,7 +36,7 @@ description: "理解k-最近邻算法，一个直观的、基于实例的分类�
 
 ### 3. 选择最优的 `k`
 - **动机**：由于`k`控制着偏见-方差的权衡，我们需要一种有原则的方法来为我们的特定数据集找到最佳值。
-- **最佳实践**：使用**交叉验证**。 
+- **最佳实践**：使用**交叉验证**。
   1.  测试一系列不同的`k`值（例如，从1到30）。
   2.  对于每个`k`，计算平均交叉验证分数。
   3.  选择能带来最佳分数（例如，最低错误率或最高准确率）的`k`值。
@@ -43,17 +46,14 @@ description: "理解k-最近邻算法，一个直观的、基于实例的分类�
   from sklearn.neighbors import KNeighborsClassifier
   from sklearn.model_selection import cross_val_score
   import numpy as np
-
   # 假设 X_scaled 和 y 是我们预处理过的数据
   k_range = range(1, 31)
   k_scores = []
-
   for k in k_range:
       knn = KNeighborsClassifier(n_neighbors=k)
       # 使用5折交叉验证获取分数
       scores = cross_val_score(knn, X_scaled, y, cv=5, scoring='accuracy')
       k_scores.append(scores.mean())
-
   # 找到分数最高的k
   best_k = k_range[np.argmax(k_scores)]
   ```
@@ -66,10 +66,8 @@ description: "理解k-最近邻算法，一个直观的、基于实例的分类�
 
 ## Pros and Cons of k-NN
 | 优点 | 缺点 |
-|---|---|
+||
 | 易于理解和实现。 | 测试时计算成本高（必须与所有训练点进行比较）。 |
 | 无需训练阶段。 | 需要大量内存来存储整个数据集。 |
 | 可以学习复杂的非线性决策边界。 | 性能对`k`的选择非常敏感。 |
 | | 对不相关的特征和数据尺度高度敏感。 |
-
----

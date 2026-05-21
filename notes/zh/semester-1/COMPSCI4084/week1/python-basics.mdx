@@ -3,6 +3,25 @@ title: "Python 基础"
 description: "变量与类型、运算符、序列/映射、字符串与格式化、输入输出、代码风格与类型提示"
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+```python
+
+```python
+```python
+import re
+```
+```
+
+```python
+```python
+from typing import Iterable, List
+```
+```
+
+```
+
 ## 概要
 - 目标：熟悉核心内置类型与常用操作；打牢表达式与 I/O、字符串格式化与代码风格基础。
 - 适用：后续条件/循环、数据处理与面向对象的基础。
@@ -34,11 +53,9 @@ print(answer)
 ```python
 x, y = 10, 3
 print(x // y, x % y, x ** y)
-
 s = "ProgSD"
 print(s[:3], s[-2:])
 print(f"{s} length={len(s)}")
-
 info = {"name": "Alice", "score": 90}
 keys = set(info)
 ```
@@ -91,8 +108,6 @@ except ValueError:
 
 ### 7. 代码风格与类型提示
 ```python
-from typing import Iterable, List
-
 def head(xs: Iterable[int], n: int = 5) -> List[int]:
     return list(xs)[:n]
 ```
@@ -125,7 +140,7 @@ print(s[1:4])       # yth
 ### 9. 正则表达式入门（re 模块）
 - 常用函数：`findall`、`search`、`split`、`sub`
 ```python
-import re
+
 text = "ab1 cd2 ef3"
 print(re.findall(r"\d", text))         # ['1','2','3']
 print(re.search(r"cd\d", text).group()) # 'cd2'
@@ -133,13 +148,9 @@ print(re.split(r"\s+", text))           # ['ab1','cd2','ef3']
 print(re.sub(r"\d", "*", text))        # 'ab* cd* ef*'
 ```
 
----
-
 ## 最佳实践
 - 选择合适的数据结构表达意图；避免共享可变对象导致隐藏副作用。
 - 对输入做显式校验与异常处理；输出统一用 f-string。
 - 遵循 PEP 8；保持类型提示与文档同步。
-
----
 
 ## 更新记录

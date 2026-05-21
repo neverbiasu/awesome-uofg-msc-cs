@@ -3,6 +3,9 @@ title: "投影与降维"
 description: "降维和主成分分析 (PCA) 的介绍。"
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## 概要
 - **目标**: 理解降维为何重要，并学习主成分分析 (PCA) 的原理。
 - **范围**: 本笔记涵盖维度灾难、投影的概念以及 PCA 的工作流程。
@@ -32,8 +35,6 @@ description: "降维和主成分分析 (PCA) 的介绍。"
   4. **特征向量**: 创建一个特征向量以决定保留哪些主成分。
   5. **重铸数据**: 沿着主成分轴重铸数据。
 - **使用场景**: 加快模型训练速度、数据可视化（通过降至2维或3维）。
-
----
 
 ## 最佳实践
 - 在应用 PCA 之前务必标准化您的数据。

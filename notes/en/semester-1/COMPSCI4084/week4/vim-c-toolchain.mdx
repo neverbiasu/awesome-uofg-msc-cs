@@ -3,6 +3,9 @@ title: "Vim Editor and C Toolchain"
 description: "An introduction to the Vim text editor, covering its modal nature and basic commands, and its role in the C development cycle with GCC."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## Overview
 - **Goal**: To learn the basic operations of the Vim editor and understand how to use it to write, compile, and run C programs in a Unix environment.
 - **Scope**: Covers Vim's core modes and commands, and the basic C toolchain workflow (edit with Vim, compile with GCC).
@@ -30,8 +33,6 @@ description: "An introduction to the Vim text editor, covering its modal nature 
     5. Save and Quit: Type `:wq` and press Enter.
 - **Summary**: The key to using Vim is understanding its modal nature. Always be aware of which mode you are in.
 
----
-
 ### 2. Essential Vim Commands (in Normal Mode)
 - **Motivation**: To perform common editing tasks efficiently without a mouse.
 - **Core Concepts**:
@@ -49,8 +50,6 @@ description: "An introduction to the Vim text editor, covering its modal nature 
   - **Navigation**: While arrow keys work, traditional Vim navigation uses `h` (left), `j` (down), `k` (up), and `l` (right) in Normal Mode.
 - **Summary**: Learning these basic commands allows you to perform all fundamental text editing operations.
 
----
-
 ### 3. The C Toolchain Workflow
 - **Motivation**: To understand the standard process of turning C source code into an executable program on a Unix system.
 - **Core Concepts**: The cycle consists of three main steps:
@@ -64,7 +63,6 @@ description: "An introduction to the Vim text editor, covering its modal nature 
   1.  **Edit `hello.c`**:
       ```c
       #include <stdio.h>
-
       int main() {
           printf("Hello, World!\n");
           return 0;
@@ -81,15 +79,10 @@ description: "An introduction to the Vim text editor, covering its modal nature 
       ```
 - **Summary**: The edit-compile-run cycle is a fundamental workflow for software development in compiled languages like C.
 
----
-
 ## Best Practices
 - **Live in Normal Mode**: Try to spend most of your time in Normal Mode, only entering Insert Mode to type text. This is the path to Vim efficiency.
 - **Save Often**: Get into the habit of pressing `Esc` and typing `:w` frequently to save your work.
 - **Use Compiler Warnings**: Compile with the `-Wall` flag (e.g., `gcc -Wall hello.c -o hello`) to enable all warnings, which can help you catch potential bugs early.
 
----
 ## Update History
 - 2025-10-20: Created by merging `Vim_and_the_C_toolchain.md` and `3_vim.md` as part of a major refactoring.
-
-

@@ -1,7 +1,30 @@
 ---
-title: Pandas I/O
-description: Basic concepts of Pandas DataFrame/Series and file I/O, including reading and writing CSV, Excel, HTML, and SQL data.
+title: "Pandas I/O"
+description: "Basic concepts of Pandas DataFrame/Series and file I/O, including reading and writing CSV, Excel, HTML, and SQL data."
 ---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+```python
+
+```python
+```python
+import pandas as pd
+```
+```
+
+df.to_excel('out.xlsx', index=False)
+
+```python
+```python
+from sqlalchemy import create_engine
+```
+```
+
+df.to_sql('table_name', engine, index=False, if_exists='replace')
+df.to_csv('out.csv', index=False)
+```
 
 ## Overview
 - **Goal**: Master Pandas APIs for reading from and writing to various data sources, to better import raw data into DataFrames and export them to common formats.
@@ -14,18 +37,18 @@ description: Basic concepts of Pandas DataFrame/Series and file I/O, including r
 4. Master common options for `to_csv` like suppressing the `index`/`header` and specifying encoding/delimiters.
 
 ## Key Concepts
+
 ### 1. DataFrame and Series Briefly
 - **Motivation**: `DataFrame` provides a labeled 2D table structure, facilitating column-based analysis and visualization.
 - **Core Concepts**: A `DataFrame` is a collection of columns (each a `Series`). A `Series` is a 1D labeled array that interoperates seamlessly with NumPy functions.
 - **Summary**: Understanding the structure of `DataFrame`/`Series` helps in choosing the right I/O and manipulation functions.
 
----
 ### 2. Reading CSV/TXT
 - **Motivation**: CSV is the most common format for data exchange.
 - **Core Concepts**: `pd.read_csv('file.csv', header=None, names=[...], delimiter=',', parse_dates=[...], dayfirst=True, nrows=..., skiprows=...)`.
 - **Example**:
 ```python
-import pandas as pd
+
 # Basic read
 df = pd.read_csv('data/texting.csv')
 # Specify column names
@@ -38,7 +61,6 @@ df_re = pd.read_csv('data.txt', sep=r'\s+', engine='python')
 - **Notes**: Use regular expressions for irregular delimiters. Setting `parse_dates` and `dayfirst` can automatically parse date columns.
 - **Summary**: Using the parameters of `read_csv` effectively can significantly simplify subsequent cleaning processes.
 
----
 ### 3. Reading/Writing Excel / HTML
 - **Motivation**: Excel and HTML are often used as data sources or reporting formats.
 - **Core Concepts**: `pd.read_excel`, `DataFrame.to_excel`, `pd.read_html`, `DataFrame.to_html`.
@@ -47,22 +69,18 @@ df_re = pd.read_csv('data.txt', sep=r'\s+', engine='python')
 # Read the first sheet of an Excel file
 df_x = pd.read_excel('file.xlsx', sheet_name=0)
 # Write to Excel, without the index
-df.to_excel('out.xlsx', index=False)
 # Parse all tables from a webpage
 tables = pd.read_html('https://example.com')
 ```
 - **Notes**: Reading Excel requires installing an engine like `openpyxl` or `xlrd`. `read_html` returns a list of DataFrames.
 - **Summary**: Mastering Excel/HTML I/O facilitates handling data from multiple sources.
 
----
 ### 4. Interacting with Databases (SQLite / SQLAlchemy)
 - **Motivation**: To interface DataFrames with relational databases for persistence and querying.
 - **Core Concepts**: `sqlalchemy.create_engine`, `pd.read_sql`, `DataFrame.to_sql`.
 - **Example**:
 ```python
-from sqlalchemy import create_engine
 engine = create_engine('sqlite:///mydb.sqlite')
-df.to_sql('table_name', engine, index=False, if_exists='replace')
 # Read from the table
 q = 'SELECT * FROM table_name'
 df2 = pd.read_sql(q, engine)
@@ -70,13 +88,11 @@ df2 = pd.read_sql(q, engine)
 - **Notes**: `to_sql` can take `if_exists='append'|'replace'|'fail'`. For large tables, it's recommended to write in chunks.
 - **Summary**: The SQL API is suitable for project-level persistence and complex filtering queries.
 
----
 ### 5. Common Options for Writing CSVs
 - **Motivation**: To control the format and metadata when sharing data with others.
 - **Core Concepts**: `df.to_csv('out.csv', index=False, header=True, sep=',', encoding='utf-8')`.
 - **Example**:
 ```python
-df.to_csv('out.csv', index=False)
 ```
 - **Notes**: Pay attention to encoding (UTF-8 vs. Latin-1) and delimiters to avoid garbled text or column misalignment when opening in Excel in different regions.
 - **Summary**: Setting appropriate parameters ensures cross-platform data compatibility.
@@ -86,6 +102,5 @@ df.to_csv('out.csv', index=False)
 - Use chunking (`chunksize`) for large tables to lower peak memory usage.
 - When saving to a database, explicitly specify `dtype` or create indexes after writing to improve query performance.
 
----
 ## Update History
 - 2025-10-08: Created initial version with examples for `read_csv/read_excel/read_html/to_csv/to_excel/pandas.io.sql` based on course materials.

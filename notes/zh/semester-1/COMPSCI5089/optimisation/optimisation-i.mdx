@@ -3,14 +3,14 @@ title: "优化 I：梯度下降"
 description: "优化原理简介，重点介绍作为训练机器学习模型基础方法的梯度下降及其变体。"
 ---
 
-import { Callout } from "fumadocs-ui/components/callout";
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
 
 ## 概述
 - **目标**: 理解如何通过最小化目标函数来“学习”模型的参数。
 - **范围**: 本笔记涵盖目标函数、约束、凸性，并深入探讨梯度下降、随机梯度下降（SGD）和小批量梯度下降。
 
 ## 优化的核心概念
-
 优化是为模型找到最佳参数集（或权重）的过程，以最小化或最大化某个特定函数，即目标函数。
 
 ### 目标函数
@@ -22,7 +22,6 @@ import { Callout } from "fumadocs-ui/components/callout";
 - **无约束优化**问题则没有此类条件。
 
 ## 凸优化与非凸优化
-
 <Callout title="问题的形状">
 目标函数曲面的几何形状决定了优化问题的难度。
 </Callout>
@@ -38,21 +37,16 @@ import { Callout } from "fumadocs-ui/components/callout";
 - 大多数深度学习问题都是高度非凸的。
 
 ## 梯度下降
-
 梯度下降是一种迭代优化算法，用于寻找可微函数的局部最小值。
-
 - **直观理解**: 想象你正站在山坡上，想要到达山底。你会环顾四周，看哪个方向下山最陡，然后朝那个方向迈出一步。你重复这个过程，直到无法再往下走为止。
 - “最陡的方向”是目标函数梯度的**负方向**，即 $$- \nabla J(\theta)$$。
 
 ### 更新法则
 梯度下降的核心是迭代应用的更新法则：
-
-$$\theta_{\text{新}} = \theta_{\text{旧}} - \alpha \nabla J(\theta_{\text{旧}})$$ 
-
+$$\theta_{\text{新}} = \theta_{\text{旧}} - \alpha \nabla J(\theta_{\text{旧}})$$
 - $$\theta$$: 模型的参数。
 - $$\alpha$$: **学习率**，一个控制每一步大小的小标量。
 - $$\nabla J(\theta)$$: 目标函数关于参数的梯度。
-
 <Callout title="学习率 α" type="warn">
 选择正确的学习率至关重要：
 - **太小**: 算法收敛会非常缓慢。
@@ -60,7 +54,6 @@ $$\theta_{\text{新}} = \theta_{\text{旧}} - \alpha \nabla J(\theta_{\text{旧}
 </Callout>
 
 ## 梯度下降的变体
-
 梯度下降变体之间的主要区别在于每次迭代中使用多少数据来计算梯度。
 
 ### 批量梯度下降

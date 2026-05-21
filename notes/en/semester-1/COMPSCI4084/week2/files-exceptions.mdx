@@ -3,6 +3,40 @@ title: "Files and Exception Handling"
 description: "File I/O in Python, CSV operations, context management (with), exception handling (try/except/finally), and command-line argument examples."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+```python
+
+```python
+```python
+import csv
+```
+```
+
+```python
+```python
+import sys
+```
+```
+
+```python
+```python
+import sys
+```
+```
+
+```python
+```python
+import argparse
+```
+```
+
+f.close()
+parser.add_argument('filename')
+parser.add_argument('--lines', action='store_true', help='Only output the number of lines')
+```
+
 ## Overview
 - This document summarizes common file I/O operations and exception handling patterns in Python. It covers text/binary files, open modes, read/write methods, CSV file handling, context managers, exception catching, and command-line arguments.
 - The goal is to master safe, readable, and maintainable file operations and learn how to handle common error scenarios.
@@ -32,16 +66,13 @@ description: "File I/O in Python, CSV operations, context management (with), exc
 - **Binary**: Images, audio, compressed files, binary serializations of machine learning models (like .pth/.bin), etc.
 
 #### Example
-
 ```python
 # Text mode
 with open('notes.txt', 'w', encoding='utf-8') as f:
     f.write('This is some text.\n')
-
 # Binary mode (saving an image/model)
 with open('image.jpg', 'rb') as f:
     data = f.read()  # bytes
-
 with open('model.bin', 'wb') as f:
     f.write(b"\x00\x01\x02")
 ```
@@ -55,8 +86,6 @@ with open('model.bin', 'wb') as f:
 
 #### Summary
 Choosing the correct file type and open mode is the first step in file operations and can prevent most read/write errors.
-
----
 
 ### 2. Opening Files and Access Modes
 
@@ -75,19 +104,14 @@ Choosing the correct file type and open mode is the first step in file operation
 - `x`: Creating a new file, raises `FileExistsError` if it already exists.
 
 #### Example
-
 ```python
 # Reading
 f = open('data.txt', 'r', encoding='utf-8')
 content = f.read()
-f.close()
-
 # Recommended: use with (see next section)
-
 # Writing (overwrite)
 with open('out.txt', 'w', encoding='utf-8') as f:
     f.write('Overwrite and write\n')
-
 # Appending
 with open('out.txt', 'a', encoding='utf-8') as f:
     f.write('Append a line\n')
@@ -102,8 +126,6 @@ with open('out.txt', 'a', encoding='utf-8') as f:
 
 #### Summary
 Choosing the right `open()` mode and combining it with a context manager minimizes the risk of data loss.
-
----
 
 ### 3. Reading Methods: `read`, `readline`, `readlines`, Iteration
 
@@ -122,13 +144,11 @@ Choosing the right `open()` mode and combining it with a context manager minimiz
 - **Large files or stream processing**: Iterate line by line or read in chunks with `read(size)`.
 
 #### Example
-
 ```python
 # Line-by-line iteration (recommended)
 with open('large.log', 'r', encoding='utf-8') as f:
     for line in f:
         process(line)
-
 # readline() loop
 with open('data.txt', 'r', encoding='utf-8') as f:
     while True:
@@ -136,7 +156,6 @@ with open('data.txt', 'r', encoding='utf-8') as f:
         if not line:
             break
         print(line.rstrip())
-
 # read(size) for chunk processing (good for binary or huge files)
 with open('big.bin', 'rb') as f:
     chunk_size = 1024 * 1024  # 1 MB
@@ -155,8 +174,6 @@ with open('big.bin', 'rb') as f:
 #### Summary
 Choose the appropriate reading method for different file sizes and processing needs. Prioritize line-by-line iteration to save memory.
 
----
-
 ### 4. Writing Methods and CSV File Handling
 
 #### Motivation
@@ -173,21 +190,17 @@ Choose the appropriate reading method for different file sizes and processing ne
 - Use the `csv` module or `pandas` for reading/writing tabular data (especially when more powerful data handling is needed).
 
 #### Example
-
 ```python
-import csv
 
 rows = [
     ['name', 'age'],
     ['Alice', '30'],
     ['Bob', '25'],
 ]
-
 # Writing a CSV (recommended way)
 with open('people.csv', 'w', encoding='utf-8', newline='') as csvfile:
     writer = csv.writer(csvfile)
     writer.writerows(rows)
-
 # Reading a CSV
 with open('people.csv', 'r', encoding='utf-8', newline='') as csvfile:
     reader = csv.reader(csvfile)
@@ -206,8 +219,6 @@ with open('people.csv', 'r', encoding='utf-8', newline='') as csvfile:
 #### Summary
 Using the `csv` module with `newline=''` and `encoding` ensures cross-platform, correct CSV reading and writing.
 
----
-
 ### 5. Context Managers (`with`) and Resource Safety
 
 #### Motivation
@@ -222,7 +233,6 @@ Using the `csv` module with `newline=''` and `encoding` ensures cross-platform, 
 - Use a context manager whenever you need to ensure resource release, even in exceptional paths.
 
 #### Example
-
 ```python
 # Recommended way: automatically closes the file
 with open('data.txt', 'r', encoding='utf-8') as f:
@@ -241,8 +251,6 @@ with open('data.txt', 'r', encoding='utf-8') as f:
 #### Summary
 Using `with` is an elegant way to ensure the safe release of files and other resources and should be the default pattern.
 
----
-
 ### 6. Exception Handling: `try` / `except` / `finally` / `else`
 
 #### Motivation
@@ -257,12 +265,9 @@ Using `with` is an elegant way to ensure the safe release of files and other res
 - Handle specific exceptions precisely; avoid using a bare `except:` to catch all exceptions (it can hide bugs).
 
 #### Example
-
 ```python
-import sys
 
 filename = sys.argv[1] if len(sys.argv) > 1 else 'data.txt'
-
 try:
     with open(filename, 'r', encoding='utf-8') as f:
         print(f.read())
@@ -294,8 +299,6 @@ finally:
 #### Summary
 Using `try/except` to precisely catch and handle exceptions, combined with logging and user feedback, significantly improves program robustness.
 
----
-
 ### 7. Command-Line Arguments and Scripting (`sys.argv`)
 
 #### Motivation
@@ -309,15 +312,12 @@ Using `try/except` to precisely catch and handle exceptions, combined with loggi
 - Use `sys.argv` for simple scripts that read one or two arguments. Use `argparse` when you need options, help messages, or type conversion.
 
 #### Example
-
 ```python
 # simple_arg.py
-import sys
 
 if len(sys.argv) < 2:
     print('Usage: python simple_arg.py <filename>')
     sys.exit(1)
-
 filename = sys.argv[1]
 try:
     with open(filename, 'r', encoding='utf-8') as f:
@@ -325,18 +325,12 @@ try:
 except FileNotFoundError:
     print('File not found')
 ```
-
 A better example using `argparse`:
-
 ```python
 # better_arg.py
-import argparse
 
 parser = argparse.ArgumentParser(description='Read a file and count its lines.')
-parser.add_argument('filename')
-parser.add_argument('--lines', action='store_true', help='Only output the number of lines')
 args = parser.parse_args()
-
 with open(args.filename, 'r', encoding='utf-8') as f:
     if args.lines:
         print(sum(1 for _ in f))
@@ -354,15 +348,10 @@ with open(args.filename, 'r', encoding='utf-8') as f:
 #### Summary
 Command-line arguments make scripts more flexible. Choosing the right parsing tool improves user experience and script maintainability.
 
----
-
 ## Best Practices (Quick Reference)
-
 - Always use `with open(..., encoding='utf-8')` to open text files.
 - When handling CSVs, use the `csv` module and specify `newline=''`.
 - Use specific `try/except` blocks for I/O operations that might fail and log the exceptions.
 - Avoid loading huge files into memory with `read()`; use line-by-line or chunked reading instead.
 - Before writing, consider writing to a temporary file and then atomically replacing it to prevent accidental data loss.
 - Use `argparse` to build robust command-line interfaces.
-
----

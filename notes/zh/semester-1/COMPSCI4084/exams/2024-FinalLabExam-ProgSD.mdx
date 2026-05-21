@@ -2,6 +2,9 @@
 title: "2024 COMPSCI4084 Final Lab Exam (ProgSD)"
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 # 2024 COMPSCI4084 Final Lab Exam (ProgSD)
 
 ## 考试概述
@@ -29,7 +32,6 @@ title: "2024 COMPSCI4084 Final Lab Exam (ProgSD)"
 #### 任务 1b: 数据可视化
 1.  产品销售分布：创建一个条形图，显示每个产品的总销售数量 (2 Marks)。
 2.  销售趋势：创建一个折线图，显示 2023 年每月总销售额的趋势 (2 Marks)。
-
 **关键概念/知识点:**
 - Pandas DataFrame 操作 (加载、清洗、转换)
 - 数据可视化 (条形图、折线图)
@@ -46,7 +48,6 @@ title: "2024 COMPSCI4084 Final Lab Exam (ProgSD)"
 #### 2b: 查询数据库
 1.  总销售额计算：编写查询以计算 2023 年的总销售额并显示结果 (3 Marks)。
 2.  产品销售摘要：编写查询以列出每个产品及其在 2023 年的总销售数量。按数量降序显示结果 (3 Marks)。
-
 **关键概念/知识点:**
 - SQLite 数据库操作 (创建、表定义、数据插入)
 - SQL 查询 (聚合、过滤、排序)
@@ -71,7 +72,6 @@ title: "2024 COMPSCI4084 Final Lab Exam (ProgSD)"
 
 #### 3d: 损失可视化
 - 使用 matplotlib 绘制随 epoch 变化的训练损失。
-
 **关键概念/知识点:**
 - PyTorch 神经网络定义 (nn.Module)
 - 损失函数和优化器
@@ -95,7 +95,6 @@ title: "2024 COMPSCI4084 Final Lab Exam (ProgSD)"
 
 #### 1c
 确保所有存储的值都有效。如果尝试使用无效值创建或更新动物，则应抛出 `IllegalArgumentException`。
-
 **关键概念/知识点:**
 - Java 类设计 (属性、构造函数、getter、setter)
 - `toString()`, `equals()`, `hashCode()` 方法重写
@@ -115,7 +114,6 @@ title: "2024 COMPSCI4084 Final Lab Exam (ProgSD)"
 编写方法 `public void addAnimal(Animal animal)` 和 `public void removeAnimal()`。
 `addAnimal`：如果兼容且没有占用者，则将动物添加到围栏。如果无法添加，则抛出 `IllegalArgumentException`。
 `removeAnimal`：从围栏中移除当前动物。如果对空围栏调用，则不执行任何操作。
-
 **关键概念/知识点:**
 - Java 类设计 (属性、构造函数、getter)
 - 兼容性检查逻辑
@@ -144,7 +142,6 @@ title: "2024 COMPSCI4084 Final Lab Exam (ProgSD)"
 #### 3d
 添加方法 `public void removeAnimal(Animal animal)`。
 当调用时，此方法应在宠物服务的围栏中搜索匹配的动物。如果存在匹配的动物，则应将其从围栏中移除。如果系统中不存在该动物，则该方法应抛出 `IllegalArgumentException`。
-
 **关键概念/知识点:**
 - Java 类设计 (属性、构造函数、方法)
 - 集合管理

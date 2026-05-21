@@ -3,6 +3,9 @@ title: "Linux Lab: Command Line Fundamentals and Shell Scripting"
 description: "An introduction to the Linux command line, covering basic navigation, file operations, essential utilities, and shell scripting fundamentals."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## Overview
 - **Objective**: This note serves as a comprehensive guide to mastering the Linux command line, enabling efficient interaction with the operating system, effective file management, process control, and basic automation through shell scripting. It aims to build foundational skills for both desktop and remote server environments.
 - **Scope**: Covers essential command-line concepts from basic navigation (`pwd`, `cd`, `ls`) and file manipulation (`echo`, `mkdir`, `mv`, `cp`, `rm`) to powerful utilities (`cat`, `head`, `tail`, `ps`, `kill`, `man`). It also introduces the fundamentals of shell scripting, including creating, running, and making scripts interactive with user input and command-line arguments.
@@ -51,8 +54,6 @@ pwd
   - Understand the hierarchical file system structure.
 - **Summary**: Mastering basic command-line navigation is the first step to efficiently managing a Linux system, enabling users to move around and inspect the file system effectively.
 
----
-
 ### 2. File and Directory Management
 - **Motivation**: Efficiently creating, moving, copying, and deleting files and directories are daily tasks for any Linux user. These commands provide precise control over your data organization.
 - **Core Concepts**:
@@ -83,8 +84,6 @@ ls test_dir
   - `mv` moves a file, `cp` creates a duplicate.
   - Use `rmdir` only for empty directories; `rm -r` for non-empty ones (with caution).
 - **Summary**: Linux provides a robust set of commands for managing files and directories, offering granular control over data organization and manipulation.
-
----
 
 ### 3. Essential Utilities: `cat`, `head`, `tail`, `ps`, `kill`, `man`
 - **Motivation**: Beyond basic file management, a set of powerful utilities helps users view file contents, inspect processes, and access documentation, crucial for troubleshooting and system understanding.
@@ -118,8 +117,6 @@ man ls
   - `man` is your best friend for learning about any command.
 - **Summary**: Essential utilities provide powerful capabilities for inspecting file contents, monitoring and controlling processes, and accessing comprehensive documentation, enhancing a user's ability to manage and troubleshoot a Linux system.
 
----
-
 ### 4. Shell Scripting Fundamentals
 - **Motivation**: Shell scripting allows you to automate repetitive tasks by grouping a series of commands into a single executable text file. This significantly boosts efficiency and consistency in system administration and development workflows.
 - **Core Concepts**:
@@ -137,15 +134,11 @@ man ls
 ```bash
 # Example: Simple shell script with user input and arguments
 # Description: A script that greets the user and lists files in a specified directory.
-
 #!/bin/bash
-
 # Script: greet_and_list.sh
 # Usage: ./greet_and_list.sh [directory]
-
 read -p "Enter your name: " NAME
 echo "Hello, $NAME!"
-
 if [ -z "$1" ]; then
   echo "No directory specified. Listing current directory:"
   ls
@@ -161,8 +154,6 @@ fi
   - Test scripts incrementally to debug errors.
 - **Summary**: Shell scripting is a fundamental skill for Linux users, enabling automation of tasks, creation of custom tools, and efficient management of complex workflows through combining existing commands.
 
----
-
 ## Best Practices
 - **Practice Regularly**: Consistent practice with the command line is the best way to build proficiency and speed.
 - **Use `man` for Help**: When in doubt about a command or its options, consult its manual page using `man [command]`.
@@ -171,6 +162,5 @@ fi
 - **Combine Commands with Pipes**: Learn to chain commands using `|` to create powerful data processing pipelines.
 - **Start Simple with Scripting**: Begin with small, simple scripts and gradually build complexity.
 
----
 ## Update History
 - 2025-10-22: Initial creation.

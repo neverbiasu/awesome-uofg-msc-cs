@@ -3,6 +3,9 @@ title: "File System: Navigation and Operations"
 description: "A comprehensive guide to the Unix file system, covering directory navigation, file and directory manipulation, and methods for accessing a Unix environment."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## Overview
 - **Goal**: To master navigation of the Unix file system and the commands for creating, deleting, copying, and moving files and directories.
 - **Scope**: Covers accessing a Unix terminal, the file system hierarchy, core navigation and manipulation commands, and file compression.
@@ -24,8 +27,6 @@ description: "A comprehensive guide to the Unix file system, covering directory 
   - **macOS/Linux Terminals**: Both operating systems provide a built-in terminal application for direct access to a Unix-like shell.
 - **Summary**: Whether your machine is local or remote, tools like SSH, WSL, and built-in terminals provide the entry point to the Unix shell.
 
----
-
 ### 2. The File System Hierarchy
 - **Motivation**: To navigate effectively, you must first understand the map. The Unix file system is a hierarchical tree structure.
 - **Core Concepts**:
@@ -37,8 +38,6 @@ description: "A comprehensive guide to the Unix file system, covering directory 
   - **Relative Path**: A path that starts from your current directory (e.g., `../images` or `./notes`).
 - **Summary**: Understanding the tree structure and the difference between absolute and relative paths is fundamental to all file system operations.
 
----
-
 ### 3. Core Navigation Commands
 - **Motivation**: These three commands are the essential tools for orienting yourself and moving around within the file system.
 - **Core Concepts**:
@@ -46,13 +45,11 @@ description: "A comprehensive guide to the Unix file system, covering directory 
   - **`ls` (List)**: Lists the contents (files and subdirectories) of the current directory. Common options include:
     - `ls -l`: Long format, showing permissions, owner, size, and modification date.
     - `ls -a`: Shows all files, including hidden files (those starting with a dot `.`)
-  - **`cd` (Change Directory)**: Used to move to a different directory. 
+  - **`cd` (Change Directory)**: Used to move to a different directory.
     - `cd /home/user`: Navigates to an absolute path.
     - `cd ../project`: Navigates to a relative path.
     - `cd`: With no arguments, navigates to your home directory (`~`).
 - **Summary**: Use `pwd` to know where you are, `ls` to see what's around you, and `cd` to move.
-
----
 
 ### 4. File and Directory Manipulation
 - **Motivation**: These commands allow you to create, organize, and remove the files and directories that make up the file system.
@@ -68,22 +65,16 @@ description: "A comprehensive guide to the Unix file system, covering directory 
   ```bash
   # Create a project directory and enter it
   mkdir my_project && cd my_project
-
   # Create a notes file
   touch notes.txt
-
   # Copy it for a backup
   cp notes.txt notes.bak
-
   # Create an archive directory and move the backup into it
   mkdir archive
   mv notes.bak archive/
-
   # Remove the original file
   rm notes.txt
   ```
-
----
 
 ### 5. Archiving and Compression
 - **Motivation**: To bundle multiple files into a single archive for easier transfer or storage.
@@ -94,21 +85,16 @@ description: "A comprehensive guide to the Unix file system, covering directory 
   ```bash
   # Zip an entire directory
   zip -r project_archive.zip my_project/
-
   # Unzip the archive into a new location
   mkdir restored_project
   cd restored_project
   unzip ../project_archive.zip
   ```
 
----
-
 ## Best Practices
 - **Confirm Location**: Always use `pwd` to be sure of your current directory before running destructive commands like `rm`.
 - **Use Tab Completion**: Press the `Tab` key to autocomplete filenames and directory names. This reduces typos and saves time.
 - **Be Wary of `rm -rf`**: This command forcefully and recursively deletes files. A small typo can wipe out important data. Double-check your command before pressing Enter.
 
----
 ## Update History
 - 2025-10-20: Created by merging `Exploring_Files_and_Directories...`, `0_getting_started.md`, and `1_files.md` as part of a major refactoring.
-

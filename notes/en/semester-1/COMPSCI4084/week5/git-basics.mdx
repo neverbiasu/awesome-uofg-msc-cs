@@ -3,6 +3,9 @@ title: "Git Basics: Version Control for Single Users"
 description: "An introduction to Git, covering local repository setup, basic commands (init, status, add, commit, log, diff), and methods for undoing changes."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## Overview
 - **Objective**: This note aims to introduce the fundamental concepts and commands of Git, a powerful distributed version control system. It focuses on how a single user can effectively track changes, manage project history, and collaborate on codebases.
 - **Scope**: Covers the importance of version control, the distributed nature of Git, setting up a local repository, the core workflow (staging, committing), essential commands like `git init`, `git status`, `git add`, `git commit`, `git log`, `git diff`, and various methods for undoing changes at different stages.
@@ -40,8 +43,6 @@ git config --global user.email "your.email@example.com"
   - Always configure your Git user name and email for proper attribution of commits.
 - **Summary**: Git is a powerful distributed version control system essential for tracking project changes, enabling collaboration, and maintaining a complete history of a codebase.
 
----
-
 ### 2. Initializing a Local Repository and Basic Workflow
 - **Motivation**: To start tracking changes for a project with Git, you first need to initialize a repository. Once initialized, you follow a basic workflow to record changes: modify files, stage them, and then commit them.
 - **Core Concepts**:
@@ -74,8 +75,6 @@ git log --oneline
   - Use `git status` often to keep track of your working directory.
 - **Summary**: The core Git workflow involves initializing a repository, staging changes with `git add`, and recording them with `git commit`, allowing for a clear and traceable project history.
 
----
-
 ### 3. Undoing Changes in Git
 - **Motivation**: Mistakes happen. Git provides powerful tools to undo changes at various stages, from unstaged modifications to committed snapshots, allowing developers to correct errors without losing work.
 - **Core Concepts**:
@@ -96,7 +95,6 @@ git log --oneline
 echo "New line" >> README.md
 git status # Shows README.md as modified (unstaged)
 git checkout -- README.md # Discard unstaged changes
-
 echo "Another new line" >> README.md
 git add README.md
 git status # Shows README.md as staged
@@ -109,8 +107,6 @@ git status # Shows README.md as modified (unstaged) again
   - Always understand the implications of each undo command before executing it.
 - **Summary**: Git offers flexible options for undoing changes, from simple file modifications to reversing entire commits, providing safety nets for managing project history effectively.
 
----
-
 ## Best Practices
 - **Commit Early, Commit Often**: Make small, frequent commits that represent logical units of work.
 - **Meaningful Commit Messages**: Write clear, concise, and descriptive commit messages that explain *why* changes were made.
@@ -118,6 +114,5 @@ git status # Shows README.md as modified (unstaged) again
 - **Understand Undo Options**: Familiarize yourself with `git checkout`, `git reset`, and `git revert` to safely manage changes.
 - **Backup Your Work**: While Git tracks history, always have external backups of critical projects.
 
----
 ## Update History
 - 2025-10-22: Initial creation.

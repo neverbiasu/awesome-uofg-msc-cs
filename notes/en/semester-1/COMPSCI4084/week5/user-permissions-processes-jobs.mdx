@@ -3,6 +3,9 @@ title: "User & Permissions Management - Processes & Jobs"
 description: "Manage users, file permissions, processes, and system resources in Unix-like systems for security and operational efficiency."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## Overview
 - **Objective**: This note aims to provide a comprehensive understanding of user and permissions management, process control, and system monitoring in Unix-like operating systems. It emphasizes the critical role these concepts play in maintaining system security, stability, and operational efficiency.
 - **Scope**: Covers essential commands for identifying users (`whoami`, `id`), managing privileges (`sudo`), changing passwords (`passwd`), controlling file/directory access (`chmod`, `chown`), modifying user accounts (`usermod`), and auditing system activity (`find`, `last`, `history`). It also includes commands for monitoring and managing running processes (`ps`, `top`, `kill`, `jobs`, `fg`, `bg`), checking disk usage (`df`), system uptime (`uptime`), and useful utilities for file archiving (`tar`, `gzip`) and binary analysis (`strings`, `file`, `hexdump`).
@@ -41,7 +44,7 @@ description: "Manage users, file permissions, processes, and system resources in
 touch sensitive_data.txt
 chmod 700 sensitive_data.txt
 ls -l sensitive_data.txt
-# Output will show permissions like -rwx------
+# Output will show permissions like -rwx
 ```
 - **Notes/Best Practices**:
   - Adhere to the principle of least privilege: grant only the necessary permissions.
@@ -49,8 +52,6 @@ ls -l sensitive_data.txt
   - Use strong, unique passwords and change them periodically.
   - Be cautious with `sudo`; understand the implications of running commands as root.
 - **Summary**: Effective user and permissions management is paramount for system security, controlling access to resources and preventing unauthorized actions.
-
----
 
 ### 2. Processes and Jobs Control
 - **Motivation**: Understanding and managing processes is crucial for system performance, troubleshooting, and identifying malicious activity. Processes are running instances of programs, and jobs are processes managed by the shell.
@@ -80,8 +81,6 @@ fg %1 # Assuming %1 is the job ID for sleep 100
   - Malware often disguises itself as legitimate processes; look for unusual names, paths, or parent/child relationships.
 - **Summary**: Process and job control are essential for system administration, enabling efficient resource management, troubleshooting, and security incident response.
 
----
-
 ### 3. System Monitoring and File Utilities
 - **Motivation**: Beyond user and process management, monitoring system resources and having versatile file utilities are vital for maintaining system health, diagnosing issues, and performing forensic analysis.
 - **Core Concepts**:
@@ -105,7 +104,6 @@ fg %1 # Assuming %1 is the job ID for sleep 100
 mkdir project_dir && touch project_dir/file1.txt
 tar -czvf project.tar.gz project_dir/
 df -h .
-
 # Assuming 'malware_sample' is a binary file
 strings malware_sample
 file malware_sample
@@ -118,8 +116,6 @@ hexdump -C malware_sample
   - Combine these tools in pipelines for more complex analysis tasks.
 - **Summary**: A suite of system monitoring and file utilities complements user/process management, providing essential capabilities for system health, data management, and security forensics.
 
----
-
 ## Best Practices
 - **Principle of Least Privilege**: Grant users and processes only the minimum permissions required to perform their tasks.
 - **Regular Monitoring**: Continuously monitor system logs, processes, and resource usage for anomalies that could indicate security breaches or performance issues.
@@ -128,6 +124,5 @@ hexdump -C malware_sample
 - **Understand Command Output**: Always read and understand the output of commands, especially when dealing with permissions, processes, or system resources.
 - **Backup and Archive**: Regularly back up critical data using tools like `tar` and `gzip`.
 
----
 ## Update History
 - 2025-10-22: Initial creation.

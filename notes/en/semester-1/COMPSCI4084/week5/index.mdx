@@ -1,7 +1,10 @@
 ---
-title: "Week 5"
+title: "Week 5: Infrastructure"
 description: "Week 5 concise study notes (Unix command line, file management, process control, shell scripting, Git, LaTeX)"
 ---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
 
 ## Overview
 - **Pace**: This week focuses on hands-on learning through lab exercises, emphasizing practical application of Unix commands and shell scripting.
@@ -9,58 +12,7 @@ description: "Week 5 concise study notes (Unix command line, file management, pr
 
 ## Weekly Schedule
 | Session | Topic | Description |
-|---|---|---|
-| Lab material - Class 8 Unix | Unix Command Line & File Management | Introduction to basic Unix commands, file system navigation, and file operations. |
-| Pre-reading material - Class 8 Unix | Text File Processing & System Management | Advanced text processing with `grep`, `sort`, `uniq`, `wc`, `tr`, `sed`, and user/permissions/process management. |
-| Lab material - Class 9 Unix | Git & LaTeX | Introduction to Git for version control and LaTeX for document preparation. |
-| Pre-reading material - Class 9 Unix | Shell Scripting & Advanced Unix | Fundamentals of shell scripting, including variables, user input, and command-line arguments. |
-
-## Learning Objectives
-1. Master essential Unix command-line tools for text processing, file management, and system monitoring.
-2. Understand and apply principles of user and file permissions for system security.
-3. Be able to control and manage processes and jobs effectively.
-4. Gain proficiency in using Git for both local version control and remote collaboration.
-5. Learn the basics of LaTeX for professional document preparation.
-6. Develop foundational skills in shell scripting for task automation.
-
-## Key Knowledge Points
-- **Text Processing and Analysis**:
-  - `grep`: Pattern searching, log filtering.
-  - `sort` & `uniq`: Data aggregation, identifying duplicates.
-  - `wc`: Counting lines, words, characters.
-  - `tr`: Character translation and deletion.
-  - `sed`: Stream editor, text substitution and editing.
-  - `curl`: Network data transfer, reconnaissance and testing.
-- **System Administration and Security**:
-  - Users & Permissions: `whoami`, `id`, `sudo`, `passwd`, `chmod`, `chown`, `usermod`.
-  - Processes & Jobs: `ps`, `top`, `kill`, `jobs`, `fg`, `bg`.
-  - System Monitoring: `df`, `uptime`.
-  - Compiler Warnings: The role of `-Wall`, `-Wextra`, `-Werror` in secure coding.
-- **Version Control**:
-  - Git Basics: `init`, `status`, `add`, `commit`, `log`, `diff`.
-  - Git Remote Collaboration: SSH key setup, `clone`, `push`, `pull`, merge conflicts.
-- **Document Processing**:
-  - LaTeX Basics: Installation, document structure, text/math typesetting, Makefile automated compilation.
-- **Shell Scripting**:
-  - Script creation and execution.
-  - User input and command-line arguments.
-
-## Practice Checklist
-- [ ] Practice `grep` to filter logs for specific patterns.
-- [ ] Use `sort` and `uniq -c` to identify frequent entries in a log file.
-- [ ] Change file permissions using `chmod` and `chown`.
-- [ ] Monitor system processes with `ps` and `top`, and terminate processes with `kill`.
-- [ ] Initialize a Git repository, make commits, and view history.
-- [ ] Set up SSH keys for GitHub and practice `git clone`, `push`, `pull`.
-- [ ] Create a simple LaTeX document and compile it to PDF.
-- [ ] Write a basic shell script that takes user input or command-line arguments.
-
-## Assessment Reminders
-- **Lab Exercise Week 5 - Unix (15%) - 24 October 2025**: Assessment for Unix track students.
-
-## Content Index (Week 5 Subpages)
-| Module | Page |
-|---|---|
+|||---|
 | Unix Command Line | [Text File Processing](/en/notes/semester-1/COMPSCI4084/week5/text-file-processing) |
 | Unix Security | [Strings, Bugs, and Compiler Warnings](/en/notes/semester-1/COMPSCI4084/week5/strings-bugs-compiler-warnings) |
 | Unix System Management | [User & Permissions Management - Processes & Jobs](/en/notes/semester-1/COMPSCI4084/week5/user-permissions-processes-jobs) |
@@ -89,6 +41,5 @@ description: "Week 5 concise study notes (Unix command line, file management, pr
 ### Lab material - Class 9 Unix
 - [Lab material Unix - 20/10/25 (MD)](../../../../../materials/semester-1/COMPSCI4084-programming-systems/resources/Linux_Lab_10_10_2023_final.md)
 
----
 ## Update History
 - 2025-10-22: Initial creation.

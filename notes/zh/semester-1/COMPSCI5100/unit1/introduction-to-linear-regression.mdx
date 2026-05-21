@@ -3,6 +3,9 @@ title: "线性回归简介"
 description: "理解线性回归的基础知识，从模型定义到损失函数以及使用 scikit-learn 实现。"
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## 概要
 - **目标**：理解如何为单个输入特征和连续目标变量之间的线性关系建模。
 - **范围**：本笔记涵盖简单线性模型的定义、损失函数（MSE）的概念以及模型拟合的实际实现。
@@ -51,18 +54,14 @@ description: "理解线性回归的基础知识，从模型定义到损失函数
   # 假设 'x' 是年份的 NumPy 数组，'t' 是时间的数组。
   from sklearn.linear_model import LinearRegression
   import numpy as np
-
   # 为 scikit-learn 重塑数据：需要是二维数组
   x_reshaped = x[:, np.newaxis]
   t_reshaped = t[:, np.newaxis]
-
   # 创建并拟合模型
   reg = LinearRegression().fit(x_reshaped, t_reshaped)
-
   # 最优参数存储在模型对象中
   w_0 = reg.intercept_[0]  # 截距
   w_1 = reg.coef_[0][0]    # 斜率
-
   # 对 2012 年进行预测
   prediction_2012 = reg.predict(np.array([[2012]]))
   ```
@@ -80,5 +79,3 @@ description: "理解线性回归的基础知识，从模型定义到损失函数
 - 均方误差（MSE）用于量化模型误差，目标是最小化它。
 - `scikit-learn` 自动化了寻找最优参数的过程。
 - 模型假设线性关系和趋势的连续性。
-
----

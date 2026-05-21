@@ -3,6 +3,9 @@ title: "Unix Command Reference"
 description: "A quick reference guide (cheatsheet) for common and essential Unix/Linux commands, covering file operations, process management, permissions, and more."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## Overview
 - **Goal**: To provide a quick and easy-to-use reference for the most common Unix commands.
 - **Scope**: Covers commands for file management, process management, file permissions, SSH, searching, system info, and compression.
@@ -37,8 +40,6 @@ description: "A quick reference guide (cheatsheet) for common and essential Unix
 - `tail file`: Output the last 10 lines of `file`.
 - `tail -f file`: Output the contents of `file` as it grows.
 
----
-
 ### 2. Process Management
 - `ps`: Display your currently active processes.
 - `top`: Display all running processes in real-time.
@@ -46,8 +47,6 @@ description: "A quick reference guide (cheatsheet) for common and essential Unix
 - `killall proc`: Kill all processes named `proc` (*use with caution*).
 - `bg`: Lists stopped or background jobs; resumes a stopped job in the background.
 - `fg`: Brings the most recent job to the foreground.
-
----
 
 ### 3. File Permissions
 - `chmod octal file`: Change the permissions of `file` to `octal`.
@@ -59,21 +58,15 @@ description: "A quick reference guide (cheatsheet) for common and essential Unix
   - `chmod 777 file`: read, write, execute for all (owner, group, world).
   - `chmod 755 file`: rwx for owner, r-x for group and world.
 
----
-
 ### 4. SSH
 - `ssh user@host`: Connect to `host` as `user`.
 - `ssh -p port user@host`: Connect to `host` on port `port` as `user`.
 - `ssh-copy-id user@host`: Add your key to `host` for `user` to enable passwordless login.
 
----
-
 ### 5. Searching
 - `grep pattern files`: Search for `pattern` in `files`.
 - `grep -r pattern dir`: Search recursively for `pattern` in `dir`.
 - `find dir -name pattern`: Find files named `pattern` in `dir`.
-
----
 
 ### 6. System Info
 - `date`: Show the current date and time.
@@ -85,22 +78,16 @@ description: "A quick reference guide (cheatsheet) for common and essential Unix
 - `du`: Show directory space usage.
 - `free`: Show memory and swap usage.
 
----
-
 ### 7. Compression
 - `tar cf file.tar files`: Create a tar archive named `file.tar` containing `files`.
 - `tar xf file.tar`: Extract the files from `file.tar`.
 - `zip file.zip files`: Create a zip archive.
 - `unzip file.zip`: Extract a zip archive.
 
----
-
 ## Best Practices
 - **Use `man`**: When in doubt, `man <command>` provides the most detailed and accurate information.
 - **Be Cautious with `rm`**: Especially `rm -rf`, as it deletes files permanently without confirmation.
 - **Tab Completion**: Use the `Tab` key to autocomplete commands and filenames to save time and prevent typos.
 
----
 ## Update History
 - 2025-10-20: Created based on the `fwunixref.md` source material as part of a major refactoring.
-

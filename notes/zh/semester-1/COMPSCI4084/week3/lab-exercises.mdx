@@ -1,22 +1,59 @@
 ---
-title: Week 3 实验练习
-description: 本页收集 Week 3（NumPy / Pandas / Matplotlib）相关实验题目与参考解法要点
+title: "Week 3 实验练习"
+description: "本页收集 Week 3（NumPy / Pandas / Matplotlib）相关实验题目与参考解法要点"
 ---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+```python
+
+```python
+```python
+import numpy as np
+```
+```
+
+```python
+```python
+import pandas as pd
+```
+```
+
+```python
+```python
+import numpy as np
+```
+```
+
+```python
+```python
+import matplotlib.pyplot as plt
+```
+```
+
+plt.plot(x,y, label='y=2x')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('示例')
+plt.legend()
+plt.show()
+```
 
 ## 概要
 - 本页列出来自课程 Lab4 与 Lab5 的练习题，并给出关键解题思路与参考代码段，帮助复习与自测。
 
 ## 习题要点与参考实现
+
 ### NumPy 练习
 - 题：测试数组中是否没有元素为零（all）
 - 要点：使用 `np.all(arr != 0)` 或 `np.any(arr == 0)` 检查
 - 参考：
 ```python
-import numpy as np
+
 arr = np.array([1,2,3])
 print(np.all(arr != 0))  # True
 ```
-
 - 题：元素逐位比较两个数组 (`>`, `>=`, `<`, `<=`)
 - 要点：直接使用比较运算符得到布尔数组
 - 参考：
@@ -25,7 +62,6 @@ a = np.array([45,67,23])
 b = np.array([56,23,89])
 print(a > b)
 ```
-
 - 题：创建由 8 个 0、5 个 1、10 个 5 组成的一维数组
 - 要点：使用 `np.concatenate` 或 `np.repeat`
 - 参考：
@@ -38,8 +74,6 @@ arr = np.concatenate([np.zeros(8), np.ones(5), np.repeat(5,10)])
 - 要点：使用 `df.head(3)`, `df[df['attempts']>2]`, `df.shape`, `df[(df['score']>=14)&(df['score']<=20)]`, `df.loc['c','score']=11.5`, `df['score'].mean()`。
 - 参考：
 ```python
-import pandas as pd
-import numpy as np
 
 labels = list('abcdefghij')
 assessment_results = {
@@ -48,7 +82,6 @@ assessment_results = {
     'attempts': [1, 3, 2, 3, 2, 3, 1, 1, 2, 1],
     'qualify': ['yes','no','yes','no','no','yes','yes','no','no','yes']
 }
-
 df = pd.DataFrame(assessment_results, index=labels)
 print(df.head(3))
 print(df[df['attempts'] > 2])
@@ -63,15 +96,9 @@ print(df['score'].mean())
 - 要点：使用 `plt.plot`, `plt.legend`, `plt.bar` + `yerr`, `plt.subplots` 等 API
 - 参考：
 ```python
-import matplotlib.pyplot as plt
+
 x = list(range(1,31))
 y = [2*i for i in x]
-plt.plot(x,y, label='y=2x')
-plt.xlabel('x')
-plt.ylabel('y')
-plt.title('示例')
-plt.legend()
-plt.show()
 ```
 
 ## 提示与得分要点
@@ -79,6 +106,5 @@ plt.show()
 - Pandas 题注重索引的使用、布尔筛选与缺失值处理。
 - Matplotlib 题注重图表清晰度（标签/图例）与子图布局。
 
----
 ## 更新记录
 - 2025-10-08：根据 Lab4 与 Lab5 习题整理参考要点。

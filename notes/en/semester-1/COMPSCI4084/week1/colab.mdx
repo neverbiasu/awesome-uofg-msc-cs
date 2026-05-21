@@ -3,6 +3,37 @@ title: "Colab"
 description: "Write, run, and share code in your browser; enable GPU/TPU; manage files and collaboration; minimal R runtime."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+```python
+
+```python
+```python
+import numpy as np
+```
+```
+
+```python
+```python
+import matplotlib.pyplot as plt
+```
+```
+
+import os; os.listdir(base)
+plt.plot(arr)
+plt.title("Random * 10")
+plt.show()
+
+```python
+```python
+from google.colab import drive
+```
+```
+
+drive.mount('/content/drive')
+```
+
 ## Overview
 - **Goal**: Quickly get started with Google Colab (a cloud-based Jupyter environment) to complete a full cycle from creation to sharing and collaboration.
 - **Scope**: Covers creating and running notebooks, enabling GPU/TPU, installing dependencies, accessing Google Drive files, collaboration, revision history, and minimal R support.
@@ -21,8 +52,6 @@ print("Hello, Colab!")
 ```
 - **Notes**: Use Markdown cells to document purpose and steps. It's good practice to place dependency installation commands in the first code cell.
 
----
-
 ### 2. Hardware Acceleration (GPU/TPU) & Plotting
 - **Steps**: Runtime → Change runtime type → Select GPU (or TPU) from the Hardware accelerator dropdown.
 - **Installation & Plotting**:
@@ -30,35 +59,23 @@ print("Hello, Colab!")
 !pip -q install numpy matplotlib
 ```
 ```python
-import numpy as np
-import matplotlib.pyplot as plt
+
 arr = np.random.rand(100) * 10
-plt.plot(arr)
-plt.title("Random * 10")
-plt.show()
 ```
 - **Tips**: Pinning key library versions can reduce environment drift. Plotting requires importing `matplotlib.pyplot`.
-
----
 
 ### 3. Collaboration & Version History
 - **Sharing**: Click "Share" in the top right → Add collaborator emails and set permissions.
 - **History**: File → Revision history to view and revert to previous versions.
 
----
-
 ### 4. Mounting Drive & File I/O
 ```python
-from google.colab import drive
-drive.mount('/content/drive')
 base = '/content/drive/MyDrive'
-import os; os.listdir(base)
+
 with open(f"{base}/colab-demo.txt", "w") as f:
     f.write("Saved from Colab.")
 ```
 - **Caution**: Resetting the runtime will clear temporary storage. Important files should be saved to Drive.
-
----
 
 ### 5. R Runtime (Minimal Example)
 ```bash
@@ -69,8 +86,6 @@ with open(f"{base}/colab-demo.txt", "w") as f:
 ```r
 print("Hello, R in Colab!")
 ```
-
----
 
 ## Best Practices
 - Pin dependencies for a reproducible environment.

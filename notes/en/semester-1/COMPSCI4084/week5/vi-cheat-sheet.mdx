@@ -3,6 +3,9 @@ title: "Vi Cheat Sheet: Essential Commands for the Vi Editor"
 description: "A quick reference guide for common Vi editor commands, including navigation, text manipulation, searching, and file operations."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## Overview
 - **Objective**: This note provides a concise and handy reference for essential commands in the `vi` editor, a powerful and ubiquitous text editor in Unix-like systems. It aims to help users quickly recall and apply `vi` commands to enhance their text editing efficiency.
 - **Scope**: Covers fundamental `vi` operations such as cursor movement, text insertion, deletion, replacement, copying, pasting, searching for patterns, repeating commands, and saving/quitting files. It also includes basic help and find/replace functionalities.
@@ -37,8 +40,6 @@ vi myfile.txt
 ```
 - **Summary**: `vi` movement commands enable precise and rapid cursor positioning within a document.
 
----
-
 ### 2. Inserting and Deleting Text
 - **Motivation**: The ability to quickly add and remove text is fundamental to any editor. `vi` provides various commands for inserting text at different positions and deleting characters, words, or lines.
 - **Core Concepts**:
@@ -65,8 +66,6 @@ dw # Delete a word
 ```
 - **Summary**: `vi` offers flexible commands for inserting and deleting text, allowing for efficient content modification.
 
----
-
 ### 3. Replacing, Copying, and Pasting Text
 - **Motivation**: Modifying existing text, duplicating content, and moving it around are common editing tasks. `vi` provides powerful commands for these operations.
 - **Core Concepts**:
@@ -90,8 +89,6 @@ p # Paste the copied line below the current line
 ```
 - **Summary**: `vi`'s commands for replacing, copying, and pasting text enable rapid content manipulation and reorganization.
 
----
-
 ### 4. Searching and Repeating Commands
 - **Motivation**: Quickly finding specific text and repeating previous actions significantly speeds up editing. `vi` has robust search capabilities and a simple mechanism for repeating commands.
 - **Core Concepts**:
@@ -113,8 +110,6 @@ vi myfile.txt
 3dd # Delete the next 3 lines
 ```
 - **Summary**: `vi`'s search and repeat functionalities allow for quick navigation to relevant text and efficient execution of repetitive editing tasks.
-
----
 
 ### 5. Saving, Quitting, and Help
 - **Motivation**: Knowing how to properly save your work, exit the editor, and access help is essential for any `vi` user.
@@ -138,8 +133,6 @@ vi myfile.txt
 ```
 - **Summary**: Essential commands for managing file state and accessing built-in help ensure a smooth `vi` editing experience.
 
----
-
 ### 6. Find and Replace (Substitution)
 - **Motivation**: For more complex text transformations, `vi` (and `Vim`) offers powerful substitution commands, allowing you to find patterns and replace them with new text, either on a single line or throughout the entire document.
 - **Core Concepts**:
@@ -155,8 +148,6 @@ vi myfile.txt
 ```
 - **Summary**: `vi`'s substitution commands provide advanced find and replace capabilities, crucial for refactoring and large-scale text modifications.
 
----
-
 ## Best Practices
 - **Practice Regularly**: The best way to master `vi` is through consistent practice. Use `vimtutor` to get started.
 - **Understand Modes**: Remember that `vi` operates in different modes (normal, insert, visual, command-line). Always know which mode you are in.
@@ -164,6 +155,5 @@ vi myfile.txt
 - **Leverage Search**: Use `/` and `?` for quick navigation to specific text.
 - **Save Frequently**: Use `:w` to save your work periodically.
 
----
 ## Update History
 - 2025-10-22: Initial creation.

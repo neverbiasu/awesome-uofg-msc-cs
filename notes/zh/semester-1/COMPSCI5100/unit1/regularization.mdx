@@ -3,6 +3,9 @@ title: "回归中的正则化"
 description: "使用岭回归（L2）和Lasso回归（L1）来控制模型复杂度并防止过拟合。"
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## 概要
 - **目标**：学习通过约束模型复杂度来防止过拟合的技术。
 - **范围**：本笔记涵盖岭回归（L2）和Lasso回归（L1）正则化的理论和应用，包括如何使用交叉验证来选择正则化强度。
@@ -42,10 +45,8 @@ description: "使用岭回归（L2）和Lasso回归（L1）来控制模型复杂
   from sklearn.linear_model import Ridge
   from sklearn.pipeline import make_pipeline
   from sklearn.preprocessing import PolynomialFeatures
-
   # 创建一个流水线
   model = make_pipeline(PolynomialFeatures(8), Ridge(alpha=0.001))
-  
   # 拟合模型
   model.fit(x_reshaped, t_reshaped)
   ```
@@ -63,10 +64,8 @@ description: "使用岭回归（L2）和Lasso回归（L1）来控制模型复杂
   ```python
   # 示例：应用Lasso回归
   from sklearn.linear_model import Lasso
-
   model = make_pipeline(PolynomialFeatures(8), Lasso(alpha=0.0001))
   model.fit(x_reshaped, t_reshaped)
-  
   # 我们可以检查模型的系数，看哪些是零
   # print(model.named_steps['lasso'].coef_)
   ```
@@ -82,10 +81,7 @@ description: "使用岭回归（L2）和Lasso回归（L1）来控制模型复杂
   在应用岭回归或 Lasso 回归之前，务必对特征进行缩放，因为正则化对特征尺度敏感。
 </Callout>
 
----
-
 ## 关键要点
 - 正则化（岭回归/Lasso回归）通过惩罚过大的模型权重来防止过拟合。
 - 岭回归（L2）将权重向零收缩；Lasso回归（L1）可以迫使某些权重精确为零，从而实现特征选择。
 - 交叉验证对于选择最优的正则化强度（λ）至关重要。
-

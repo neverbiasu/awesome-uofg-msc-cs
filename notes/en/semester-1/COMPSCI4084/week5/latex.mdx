@@ -3,6 +3,9 @@ title: "LaTeX for Document Processing"
 description: "An introduction to LaTeX for high-quality document preparation, covering installation, basic structure, text and mathematical formatting, and compilation."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## Overview
 - **Objective**: This note introduces LaTeX as a powerful and professional document preparation system, particularly suited for academic papers, technical reports, and dissertations. It aims to equip learners with the foundational knowledge to create structured and aesthetically pleasing documents.
 - **Scope**: Covers the basics of LaTeX, including its installation (local and cloud-based via Overleaf), the minimal document structure, essential text formatting commands (fonts, sizes), document sectioning, and the robust capabilities for mathematical typesetting. It also touches upon automating compilation with Makefiles and practical exercises.
@@ -40,8 +43,6 @@ sudo apt install texlive-full
   - Local installations provide more control but require significant disk space and maintenance.
 - **Summary**: LaTeX is a powerful tool for professional document creation, with both local and cloud-based setup options, making it ideal for academic and technical writing.
 
----
-
 ### 2. Basic Document Structure and Text Formatting
 - **Motivation**: A well-structured document is easy to read and navigate. LaTeX provides simple commands to define document classes, sections, and apply various text styles, ensuring consistency and professionalism.
 - **Core Concepts**:
@@ -68,19 +69,15 @@ sudo apt install texlive-full
 % Description: A simple LaTeX document demonstrating document class, text styles, and sectioning with cross-references.
 \documentclass{article}
 \begin{document}
-
 In \LaTeX, you may use \textit{italic} and \textbf{bold} face fonts.
 It is also possible to have \texttt{typewriter} and \textsf{sans-serif} fonts.
 You may change the font size from {\tiny very small} to {\Huge very large}.
-
 \section{Introduction}
 \label{sec:intro}
 Some intro text.
-
 \section{Another Section}
 \label{sec:nother}
 Please refer back to Section \ref{sec:intro}.
-
 \end{document}
 ```
 - **Notes/Best Practices**:
@@ -88,8 +85,6 @@ Please refer back to Section \ref{sec:intro}.
   - Cross-referencing (`\label`, `\ref`) automatically updates page/section numbers, preventing manual errors.
   - Choose font styles judiciously for readability and emphasis.
 - **Summary**: LaTeX provides robust commands for structuring and formatting text, enabling the creation of clear, organized, and professional documents.
-
----
 
 ### 3. Mathematical Typesetting
 - **Motivation**: One of LaTeX's greatest strengths is its unparalleled ability to typeset complex mathematical equations and symbols beautifully and consistently, making it the standard for scientific and engineering documents.
@@ -108,17 +103,14 @@ Please refer back to Section \ref{sec:intro}.
 % Description: Demonstrates a De Morgan rewrite rule and a distributivity rule using LaTeX's equation environment.
 \documentclass{article}
 \begin{document}
-
 Below is an instance of a De Morgan rewrite rule:
 \begin{equation}
 \lnot (A \land B) \equiv \lnot A \lor \lnot B
 \end{equation}
-
 Remember all the set equivalences you learnt in Algorithmic Foundations? Typeset them in a \LaTeX document. Here's a distributivity rule:
 \begin{equation}
 A \cup (B \cap C) \equiv (A \cup B) \cap (A \cup C)
 \end{equation}
-
 \end{document}
 ```
 - **Notes/Best Practices**:
@@ -126,8 +118,6 @@ A \cup (B \cap C) \equiv (A \cup B) \cap (A \cup C)
   - Leverage online resources for finding specific mathematical symbols.
   - Practice regularly to become proficient with mathematical syntax.
 - **Summary**: LaTeX excels at mathematical typesetting, offering precise control over the appearance of equations and symbols, which is essential for technical documentation.
-
----
 
 ### 4. Automating LaTeX Compilation with Makefiles
 - **Motivation**: Compiling LaTeX documents often involves multiple steps (e.g., `pdflatex`, `bibtex`, `pdflatex` twice). Makefiles automate this process, ensuring that documents are always compiled correctly and efficiently, especially for complex projects.
@@ -144,15 +134,11 @@ A \cup (B \cap C) \equiv (A \cup B) \cap (A \cup C)
 ```makefile
 # Example: Makefile for LaTeX document compilation
 # Description: A simple Makefile to automate the compilation of a LaTeX document (firstdoc.tex) to PDF.
-
 PDF = firstdoc.pdf
 TEX = firstdoc.tex
-
 all: $(PDF)
-
 $(PDF): $(TEX)
 	pdflatex $(TEX)
-
 clean:
 	rm -f *.aux *.log *.out $(PDF)
 ```
@@ -161,8 +147,6 @@ clean:
   - For complex documents with bibliographies or indices, the Makefile might need additional `bibtex` or `makeindex` commands.
 - **Summary**: Makefiles are invaluable for automating LaTeX compilation, streamlining the workflow and ensuring reliable document generation for any project size.
 
----
-
 ## Best Practices
 - **Use Overleaf for Collaboration**: Leverage cloud-based platforms like Overleaf for easy collaboration and access to LaTeX from anywhere.
 - **Structure Logically**: Always use sections, subsections, and proper environments to organize your document content clearly.
@@ -170,6 +154,5 @@ clean:
 - **Automate Compilation**: Use Makefiles or integrated development environments (IDEs) to automate the compilation process, saving time and reducing errors.
 - **Reference Resources**: Utilize online documentation and wikis (e.g., Overleaf tutorials, Wikibooks) for specific commands and troubleshooting.
 
----
 ## Update History
 - 2025-10-22: Initial creation.

@@ -3,6 +3,9 @@ title: "分类的线性模型：逻辑回归与支持向量机"
 description: "探索两种基本的线性分类器：用于概率建模的逻辑回归和用于最大间隔分类的支持向量机（SVM）。"
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## Overview
 - **Goal**: To understand and compare two powerful linear models for classification: Logistic Regression and Support Vector Machines (SVMs).
 - **Scope**: This note covers the core mechanics of Logistic Regression, including its probabilistic interpretation, and the maximum-margin principle of SVMs, along with the kernel trick.
@@ -18,7 +21,7 @@ description: "探索两种基本的线性分类器：用于概率建模的逻辑
 
 ### 1. Logistic Regression
 - **Motivation**: While linear regression can be adapted for classification, it performs poorly in the presence of outliers. We need a model designed specifically for classification that outputs probabilities.
-- **Core Concept**: Logistic Regression passes the output of a linear model `z = wᵀx` through a **sigmoid (or logistic) function**: `σ(z) = 1 / (1 + e⁻ᶻ)`. 
+- **Core Concept**: Logistic Regression passes the output of a linear model `z = wᵀx` through a **sigmoid (or logistic) function**: `σ(z) = 1 / (1 + e⁻ᶻ)`.
   - The sigmoid function squashes any real-valued number into a range between 0 and 1, making it suitable for interpreting as a class probability: `P(y=1|x) = σ(wᵀx)`.
 - **Cost Function**: The model parameters `w` are learned by minimizing the **negative log-likelihood**, also known as the **cross-entropy loss**. This loss function penalizes the model for being confident and wrong.
 - **Decision Boundary**: The boundary between classes is where the probability is 0.5, which occurs when `wᵀx = 0`. This is a linear decision boundary.
@@ -28,14 +31,11 @@ description: "探索两种基本的线性分类器：用于概率建模的逻辑
   from sklearn.linear_model import LogisticRegression
   from sklearn.model_selection import train_test_split
   from sklearn.preprocessing import StandardScaler
-
   # 对逻辑回归，缩放数据是一个好习惯
   scaler = StandardScaler()
   X_scaled = scaler.fit_transform(X)
-
   # 创建并拟合模型
   clf = LogisticRegression().fit(X_scaled, y)
-
   # 预测新数据的概率
   probabilities = clf.predict_proba(X_new_scaled)
   ```
@@ -52,20 +52,16 @@ description: "探索两种基本的线性分类器：用于概率建模的逻辑
   ```python
   # 示例：拟合一个支持向量分类器 (SVC)
   from sklearn.svm import SVC
-
   # 使用线性核类似于逻辑回归
   # clf_linear = SVC(kernel='linear').fit(X_scaled, y)
-
   # RBF核是处理非线性问题的热门选择
   clf_rbf = SVC(kernel='rbf', gamma='auto').fit(X_scaled, y)
   ```
 
 ## 对比
 | 特性 | 逻辑回归 | 支持向量机 (SVM) |
-|---|---|---|
+||---|
 | **输出** | 概率 | 类别标签（基于在间隔的哪一侧） |
 | **原则** | 概率性的（最大化似然） | 几何学的（最大化间隔） |
 | **核心思想** | 拟合一条线并将输出压缩为概率 | 在类别之间找到尽可能宽的“街道” |
 | **非线性** | 需要手动进行特征工程 | 通过核技巧轻松处理非线性问题 |
-
----

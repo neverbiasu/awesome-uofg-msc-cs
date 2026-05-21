@@ -3,6 +3,25 @@ title: "Python Functions"
 description: "Function definition and invocation, parameter types (positional/keyword/default), return values, scope, and module import/reuse."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+```python
+
+```python
+```python
+import math
+```
+```
+
+```python
+```python
+from random import randint, choice
+```
+```
+
+```
+
 ## Overview
 - **Goal**: Master function definition and invocation, understand parameter passing and return mechanisms, and improve code reusability and modularity.
 - **Scope**: Covers function definitions, various parameter types, local/global scope, and module imports. Does not cover advanced topics like decorators, closures, or higher-order functions.
@@ -33,14 +52,11 @@ description: "Function definition and invocation, parameter types (positional/ke
 # A greeting function with no parameters
 def greet():
     print("Hello from function!")
-
 greet()  # Output: Hello from function!
-
 # Function with a parameter
 # Takes a `name` parameter to print a personalized greeting
 def greet_user(name):
     print(f"Hello, {name}!")
-
 greet_user("Alice")  # Output: Hello, Alice!
 ```
 - **Notes/Best Practices**:
@@ -48,8 +64,6 @@ greet_user("Alice")  # Output: Hello, Alice!
   - Functions should have a single responsibility and be kept short (ideally under 20 lines).
   - A function must be defined before it is called (or loaded automatically when a module is imported).
 - **Summary**: Functions are defined with `def` and called by their name followed by parentheses. They are the basic unit of code reuse.
-
----
 
 ### 2. Parameter Types: Positional and Keyword Arguments
 - **Motivation**: Different scenarios require different ways of passing arguments. Positional arguments are concise, while keyword arguments are highly readable.
@@ -72,21 +86,18 @@ def draw_box(width, height, outline='*', fill=' '):
             print(outline * width)
         else:
             print(outline + fill * (width - 2) + outline)
-
 # Providing only positional arguments (outline and fill use defaults)
 draw_box(5, 3)
 # Output:
 # *****
 # *   *
 # *****
-
 # Mixing positional and keyword arguments
 draw_box(4, 3, outline='#', fill='-')
 # Output:
 # ####
 # #--#
 # ####
-
 # Pure keyword argument invocation (order doesn't matter)
 draw_box(height=2, width=6, fill='.')
 ```
@@ -98,8 +109,6 @@ draw_box(height=2, width=6, fill='.')
   - Positional arguments are concise but order-dependent; keyword arguments are explicit but verbose.
   - If a function has too many parameters (>5), consider passing a configuration object or dictionary.
 - **Summary**: Positional arguments are passed in order, keyword arguments by name. Follow the order rule when mixing them.
-
----
 
 ### 3. Default Arguments
 - **Motivation**: Provide default values for optional parameters to reduce the number of arguments required at invocation and improve API flexibility.
@@ -116,15 +125,12 @@ draw_box(height=2, width=6, fill='.')
 # `name` defaults to 'Guest' and can be omitted
 def greet(name='Guest'):
     print(f"Hello, {name}!")
-
 greet()           # Output: Hello, Guest!
 greet('Charlie')  # Output: Hello, Charlie!
-
 # Multiple default arguments
 # `a` and `b` have default values and can be selectively overridden
 def add(a=0, b=0):
     return a + b
-
 print(add())        # Output: 0
 print(add(5))       # Output: 5
 print(add(5, 3))    # Output: 8
@@ -137,7 +143,6 @@ print(add(b=10))    # Output: 10 (overriding only b)
   def append_item(x, bucket=[]):  # `bucket` is mutable and shared across calls
       bucket.append(x)
       return bucket
-
   # ✅ Correct way
   def append_item(x, bucket=None):
       if bucket is None:
@@ -147,8 +152,6 @@ print(add(b=10))    # Output: 10 (overriding only b)
   ```
   - Default arguments must come after non-default arguments: `def func(a, b=10)` ✅, `def func(a=10, b)` ❌.
 - **Summary**: Default arguments provide optional configurations and reduce required parameters. Avoid using mutable objects as default values.
-
----
 
 ### 4. Return Values and the `return` Statement
 - **Motivation**: A function's computed result needs to be returned to the caller for subsequent use, rather than just being printed inside the function.
@@ -167,20 +170,16 @@ print(add(b=10))    # Output: 10 (overriding only b)
 # Calculates and returns the product of two numbers
 def multiply(a, b):
     return a * b
-
 result = multiply(4, 5)
 print(f"The product is {result}")  # Output: The product is 20
-
 # Returning multiple values (as a tuple)
 # Returns both the quotient and the remainder
 def divide_with_remainder(a, b):
     quotient = a // b
     remainder = a % b
     return quotient, remainder  # Returns a tuple
-
 q, r = divide_with_remainder(10, 3)
 print(f"Quotient: {q}, Remainder: {r}")  # Output: Quotient: 3, Remainder: 1
-
 # Conditional return
 # Returns early based on a condition
 def get_grade(score):
@@ -191,7 +190,6 @@ def get_grade(score):
     elif score >= 70:
         return 'C'
     return 'D'  # Default case
-
 print(get_grade(85))  # Output: B
 ```
 - **Notes/Best Practices**:
@@ -201,8 +199,6 @@ print(get_grade(85))  # Output: B
 - **Trade-offs and Alternatives**:
   - Returning multiple values via tuple unpacking is intuitive but requires remembering the order. A dictionary or a data class can improve readability.
 - **Summary**: `return` sends a result back to the caller. Functions that only print without returning are less reusable.
-
----
 
 ### 5. Variable Scope: Local and Global Variables
 - **Motivation**: Understand a variable's visibility to avoid naming conflicts and accidental modification of global state.
@@ -220,20 +216,16 @@ print(get_grade(85))  # Output: B
 # Variable shadowing example
 # The local variable `x` inside the function does not affect the global `x`
 x = 10  # Global variable
-
 def foo():
     x = 5  # Local variable, shadows the global x
     print(f"Inside function: x = {x}")
-
 foo()  # Output: Inside function: x = 5
 print(f"Outside function: x = {x}")  # Output: Outside function: x = 10
-
 # Parameters are also local variables
 # `width` and `height` are only visible inside draw_box
 def draw_box(width, height):
     for i in range(height):  # `i` is also a local variable
         print('*' * width)
-
 draw_box(3, 2)
 # print(width)  # Error! `width` does not exist outside the function
 ```
@@ -245,8 +237,6 @@ draw_box(3, 2)
   - To share state across functions, prefer passing arguments and returning values over using global variables.
   - For complex state management, consider using classes (object-oriented programming).
 - **Summary**: Local variables are visible only within a function; global variables are visible everywhere. Prefer local variables to keep functions independent.
-
----
 
 ### 6. Imports and Reuse: Built-in Functions and Modules
 - **Motivation**: Leverage Python's built-in functions and standard library to avoid reinventing the wheel. Organize code into modules for reuse across projects.
@@ -265,25 +255,19 @@ draw_box(3, 2)
 ```python
 # Importing a built-in module
 # Using math functions from the `math` module
-import math
 
 num = 16
 print(math.sqrt(num))  # Output: 4.0
 print(math.pi)         # Output: 3.141592653589793
-
 # Partial import
 # Importing only the needed functions simplifies calls
-from random import randint, choice
-
 dice = randint(1, 6)  # Generate a random integer from 1 to 6
 color = choice(['red', 'blue', 'green'])  # Randomly select a color
 print(f"Dice: {dice}, Color: {color}")
-
 # Custom module example (assuming you have myutils.py)
 # Contents of myutils.py:
 # def add(a, b):
 #     return a + b
-
 # In another file, you can import it:
 # import myutils
 # result = myutils.add(5, 3)
@@ -295,8 +279,6 @@ print(f"Dice: {dice}, Color: {color}")
   - In a custom module, place test code inside an `if __name__ == '__main__':` block to prevent it from running on import.
 - **Summary**: Use `import` to bring in built-in or custom modules and reuse existing functionality. The standard library offers a rich set of tools to reduce redundant development.
 
----
-
 ## Best Practices
 - Use `snake_case` for function names; keep them descriptive and avoid reserved words.
 - Avoid using mutable objects (`list`/`dict`) as default arguments. Use `None` and initialize in the function body instead.
@@ -304,8 +286,6 @@ print(f"Dice: {dice}, Color: {color}")
 - Prefer local variables. To share data between functions, pass it via arguments and return values, avoiding global variables.
 - Returning a value is better than just printing. Ensure functions have a clear input-output contract.
 - Place import statements at the top of the file. Avoid `import *`; explicitly import what you need.
-
----
 
 ## Update History
 - 2025-09-30: Initial version created.

@@ -3,6 +3,37 @@ title: "Colab"
 description: "在浏览器中编写/运行/分享代码；启用 GPU/TPU；文件与协作；最小 R 运行时"
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+```python
+
+```python
+```python
+import numpy as np
+```
+```
+
+```python
+```python
+import matplotlib.pyplot as plt
+```
+```
+
+import os; os.listdir(base)
+plt.plot(arr)
+plt.title("Random * 10")
+plt.show()
+
+```python
+```python
+from google.colab import drive
+```
+```
+
+drive.mount('/content/drive')
+```
+
 ## 概要
 - 目标：快速上手 Google Colab（云端 Jupyter 环境），完成从创建到分享与协作的闭环。
 - 范围：创建与运行、GPU/TPU、依赖安装、Drive 文件、协作与修订、最小 R 支持。
@@ -21,8 +52,6 @@ print("Hello, Colab!")
 ```
 - 说明：在 Markdown 单元记录用途与步骤；首个代码单元建议放依赖安装命令。
 
----
-
 ### 2. 硬件加速（GPU/TPU）与绘图
 - 步骤：Runtime → Change runtime type → Hardware accelerator 选择 GPU（或 TPU）。
 - 安装与绘图：
@@ -30,35 +59,23 @@ print("Hello, Colab!")
 pip -q install numpy matplotlib
 ```
 ```python
-import numpy as np
-import matplotlib.pyplot as plt
+
 arr = np.random.rand(100) * 10
-plt.plot(arr)
-plt.title("Random * 10")
-plt.show()
 ```
 - 提示：固定关键库版本可降低环境漂移；绘图需先导入 `matplotlib.pyplot`。
-
----
 
 ### 3. 协作与版本历史
 - 共享：右上角 Share → 添加协作者邮箱与权限。
 - 历史：File → Revision history 查看并回滚。
 
----
-
 ### 4. 挂载 Drive 与文件 IO
 ```python
-from google.colab import drive
-drive.mount('/content/drive')
 base = '/content/drive/MyDrive'
-import os; os.listdir(base)
+
 with open(f"{base}/colab-demo.txt", "w") as f:
     f.write("Saved from Colab.")
 ```
 - 注意：运行时重置会清空临时存储；重要文件应写入 Drive。
-
----
 
 ### 5. R 运行时（最小示例）
 ```bash
@@ -70,12 +87,8 @@ R -e "install.packages('IRkernel'); IRkernel::installspec(user = FALSE)"
 print("Hello, R in Colab!")
 ```
 
----
-
 ## 最佳实践
 - 固定依赖与可复现环境
 - 持久化重要文件并管理共享
-
----
 
 ## 更新记录

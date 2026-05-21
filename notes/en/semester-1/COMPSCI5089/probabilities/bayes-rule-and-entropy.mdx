@@ -4,6 +4,7 @@ description: "Understanding conditional probability with Bayes' Rule, and measur
 ---
 
 import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
 
 ## Overview
 - **Objective**: To understand and apply Bayes' Rule to solve problems involving conditional probabilities, and to calculate and interpret the entropy of a probability distribution.
@@ -39,8 +40,6 @@ import { Callout } from 'fumadocs-ui/components/callout';
     - For independent events, `P(X,Y) = P(X)P(Y)` and `P(X|Y) = P(X)`. This is a special case and not generally true.
 - **Summary**: Joint, marginal, and conditional probabilities are the building blocks for reasoning about multiple variables and their dependencies.
 
----
-
 ### 2. Bayes' Rule
 - **Motivation**: Often, we can easily measure `P(B|A)` (the probability of observing evidence B given an event A), but what we really want to know is `P(A|B)` (the probability of the event A given that we've seen the evidence B). Bayes' rule provides a way to "invert" the conditional probability.
 - **Core Concepts**:
@@ -65,8 +64,6 @@ import { Callout } from 'fumadocs-ui/components/callout';
     - Be aware of the "base rate fallacy": a low prior probability `P(A)` can mean the posterior `P(A|B)` is still low even with strong evidence `P(B|A)`.
 - **Summary**: Bayes' rule is a fundamental tool for updating beliefs in the light of new evidence, allowing us to move from a prior to a posterior probability.
 
----
-
 ### 3. Entropy
 - **Motivation**: How can we quantify the amount of "surprise" or "uncertainty" in a probability distribution? A flat, uniform distribution is very unpredictable, while a sharply peaked one is very predictable.
 - **Core Concepts**:
@@ -90,6 +87,5 @@ import { Callout } from 'fumadocs-ui/components/callout';
 - **Use Log-Likelihood**: When calculating the likelihood of a long sequence of events, use the sum of log-probabilities (log-likelihood) to avoid numerical underflow from multiplying many small probabilities.
 - **Entropy as a Measure of Surprise**: Use entropy to reason about the predictability of systems. A drop in entropy after a Bayesian update signifies a gain in knowledge.
 
----
 ## Update History
 - 2025-11-12: Created initial version based on Lecture 7 slides.

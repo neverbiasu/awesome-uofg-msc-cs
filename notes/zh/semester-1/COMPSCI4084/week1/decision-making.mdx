@@ -3,6 +3,9 @@ title: "Python - Decision Making"
 description: "if/elif/else、真值与短路、比较与逻辑运算、三元表达式、早返回与数据校验"
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## 概要
 - 目标：掌握 if/elif/else、条件表达式与短路求值，提升分支逻辑的清晰性。
 - 适用：输入校验、分级判定、边界处理等常见任务。
@@ -28,8 +31,6 @@ else:
 ```
 - 建议：从高到低（或互斥区间）排列条件；避免重叠。
 
----
-
 ### 2. 真值测试（truthiness）与短路
 ```python
 items = []
@@ -37,13 +38,10 @@ if items:  # 空容器为 False，非空为 True
     first = items[0]
 else:
     first = None
-
 user = None
 name = (user and user.get("name")) or "anonymous"  # and/or 短路
 ```
 - 规则：`None/0/""/[]/{}/set()` 等为 False；其余多为 True。
-
----
 
 ### 3. 比较与逻辑运算
 - 链式比较：`0 < x < 10`
@@ -52,13 +50,10 @@ name = (user and user.get("name")) or "anonymous"  # and/or 短路
 x = 5
 if 0 < x < 10:
     pass
-
 s1 = "a" * 3; s2 = "aaa"
 print(s1 == s2)  # True（值相等）
 print(s1 is s2)  # 实现相关，不保证 True；勿用 is 比较值
 ```
-
----
 
 ### 4. 条件表达式（“三元运算”）
 ```python
@@ -66,8 +61,6 @@ age = 19
 status = "adult" if age >= 18 else "minor"
 ```
 - 用于简单赋值分支；复杂逻辑仍用多行 if。
-
----
 
 ### 5. 守卫式早返回（Guard Clauses）
 ```python
@@ -84,14 +77,10 @@ def parse_score(raw: str) -> int | None:
 ```
 - 思路：先排除非法/边界情况，主路径更清晰扁平。
 
----
-
 ## 最佳实践
 - 按互斥顺序组织条件；必要时提取为函数提高可测性。
 - 用真值测试与短路精简判空/取值；避免链式嵌套。
 - 值比较用 `==`；仅在确认“同一对象”时使用 `is`。
 - 简单分支用条件表达式；复杂分支保持多行可读。
-
----
 
 ## 更新记录

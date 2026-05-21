@@ -1,7 +1,10 @@
 ---
-title: "Week 4"
+title: "Week 4: Specialized Systems"
 description: "Week 4 精简学习笔记（Unix Basics, File System, Vim, Shell Scripting, C Programming, Makefiles）"
 ---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
 
 ## 概要
 - 节奏：tAPP + Lab
@@ -9,57 +12,7 @@ description: "Week 4 精简学习笔记（Unix Basics, File System, Vim, Shell S
 
 ## 本周安排
 | Session | 主题 | 说明 |
-|---|---|---|
-| Class 6 | Java Basics & Unix Fundamentals | Java基础与Unix基础 |
-| Lab 6 | Unix File System & Vim | Unix文件系统与Vim编辑器实践 |
-| Class 7 | More Java & Unix Shell | 更多Java特性与Unix Shell基础 |
-| Lab 7 | Unix C Programming & Makefiles | Unix C语言编程与Makefile实践 |
-
-## 学习目标
-1. 掌握UNIX操作系统的核心特性、文件管理、进程管理和权限控制。
-2. 能够熟练使用`ls`, `cd`, `pwd`, `mkdir`, `rm`, `cp`, `mv`等命令进行文件系统导航和操作。
-3. 熟悉Vim文本编辑器的基本使用，包括模式切换、插入、保存和退出。
-4. 理解UNIX标准设备、输入/输出重定向和管道（`|`）的用法。
-5. 掌握Shell元字符和变量的特性，并能编写简单的Shell脚本。
-6. 了解C语言编程基础，包括基本语法、编译过程和Makefile自动化构建。
-
-## 关键知识点
-- **Unix 基础**：
-  - 多用户、多任务、分层目录结构
-  - 内核、Shell、实用工具
-  - 常用命令速查
-- **文件系统与Vim**：
-  - 文件系统导航 (`ls`, `cd`, `pwd`)
-  - 文件/目录操作 (`mkdir`, `rm`, `cp`, `mv`)
-  - Vim模式切换、插入、保存、退出、复制、粘贴、删除
-- **Shell 基础**：
-  - 标准设备 (`stdin`, `stdout`, `stderr`)
-  - 输入/输出重定向 (`>`, `>>`, `<`)
-  - 管道 (`|`)
-  - Shell元字符与引用 (`*`, `$`, `"`, `'`, `\`)
-  - Shell变量定义与引用
-  - 命令组合 (` ;`, `&&`, `||`)
-- **C 编程与Makefile**：
-  - C语言基本语法、数据类型、变量、函数、指针
-  - C程序编译过程（预处理、编译、汇编、链接）
-  - `gcc`/`clang`编译器使用
-  - Makefile规则（目标、依赖、命令）、变量、伪目标
-
-## 实践清单（自检）
-- [ ] 成功在UNIX终端中导航文件系统，并创建、复制、移动、删除文件和目录。
-- [ ] 使用Vim编辑器创建并编辑一个文本文件，并进行保存和退出操作。
-- [ ] 使用管道和重定向组合多个UNIX命令，完成数据处理任务。
-- [ ] 编写一个简单的Shell脚本，包含变量定义和条件判断。
-- [ ] 编写一个简单的C程序，并使用`gcc`或`clang`编译运行。
-- [ ] 为C程序编写一个Makefile，实现自动化编译和清理。
-
-## 评估提醒
-- **Assessed Exercise 3 (Java OR Unix)**: 15% (24/10/2025) - 基于Java或Unix内容。
-- **Participation to peer review (tAPP)**: 5% (Weekly) - 积极参与每周tAPP小组讨论。
-
-## 内容索引（Week 4 子页）
-| 模块 | 页面 |
-|---|---|
+|||---|
 | Unix 特性 | [Unix 特性](/zh/notes/semester-1/COMPSCI4084/week4/unix-features) |
 | Unix 命令参考 | [Unix 命令参考](/zh/notes/semester-1/COMPSCI4084/week4/unix-command-reference) |
 | 文件系统操作 | [文件系统导航与操作](/zh/notes/semester-1/COMPSCI4084/week4/fs-navigation-ops) |
@@ -88,8 +41,6 @@ description: "Week 4 精简学习笔记（Unix Basics, File System, Vim, Shell S
 
 ### Lab material - Class 7 Unix
 - [makefiles (MD)](../../materials/semester-1/COMPSCI4084-programming-systems/resources/4_makefiles.md)
-
----
 
 ## 更新记录
 - 2025-10-19：创建初版.

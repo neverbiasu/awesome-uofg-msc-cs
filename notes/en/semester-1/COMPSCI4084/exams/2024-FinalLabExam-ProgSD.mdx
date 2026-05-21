@@ -2,229 +2,149 @@
 title: "2024 COMPSCI4084 Final Lab Exam (ProgSD)"
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 # ProgSD Final Lab Exam 2024
-
-Programming and Systems Development  
+Programming and Systems Development
 Final Lab Exam – December 2024
-
 __During the exam__
-
 The exam is open book, meaning you can refer to your practice materials and notes\.
-
 As in a normal examination, communication between candidates during the laboratory exam is strictly forbidden\.
-
 Any candidate who experiences a hardware or software problem during the examination should summon an invigilator at once\.
-
 __Overview__
-
 This exam consists of two parts: part 1 requires you to write a Python program, and part 2 requires you to write a Java program\. The instructions, allocated marks, and submission instructions are given below for each part\. Note that the exam has a total of __80 marks__; each part has a total of __40 marks__ allocated for correctness, as indicated\.
-
 __Part 1: Python Question__
-
-This exam consists of three tasks\. You are required to write the code for each task in the same Python source file\. 
+This exam consists of three tasks\. You are required to write the code for each task in the same Python source file\.
 
 ## Python Task 1: Python Basics and Data Manipulation \[13 Marks\]
-
 You have been provided with a CSV file __sales\_data\.csv__ containing sales data for a corner shop\. The file contains the following columns: Date, Product, Quantity, Price, and Total\. Your task is to write a Python program that performs the following operations:
 
-### Task 1a: Data Loading and Preprocessing 
-
+### Task 1a: Data Loading and Preprocessing
 1. Load the Data: Load the CSV file into a Pandas DataFrame\. __\[2 mark\]__
 2. Data Cleaning:
 	- Ensure there are no missing values\. If any are found, fill them with appropriate values\. __\[3 mark\]__
 	- Convert the Date column to a datetime object\. __\[2 mark\]__
 	- Ensure the Total column correctly represents the product of Quantity and Price\. If any discrepancies are found, correct them\. __\[2 mark\]__
 
-### Task 1b: Data Visualisation 
-
+### Task 1b: Data Visualisation
 1. Product Sales Distribution: Create a bar chart showing the total quantity sold for each product\. __\[2 mark\]__
-
 ![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAckAAAGDCAIAAADPnnwsAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAOxAAADsQBlSsOGwAAVX1JREFUeF7tnQeYFUXWhpcMImnIOUfJogiCSEaQJCCIIgLmXQWVqIsB3QUWCe5iABQEWVRAEFBccZAMEkSSIBkk55xB/xdq9zr/MHOn5073vd3TXz8881zura7wVdVXp845dSpF3uIV/qRHCAgBISAEbEUgRYBb929bZ2vOykwICAEh4DsE8pWoaNqc0ndNV4OFgBAQAs4jIG51HmOVIASEgP8QELf6r8/VYiEgBJxHQNzqPMYqQQgIAf8hIG71X5+rxUJACDiPgLjVeYxVghAQAv5DQNzqvz5Xi4WAEHAegVSZonKbUl56/hnni1MJyQSBpUuXDhs27MqVK8WKFUuVKlXEWzVmzJjo6GhqUrBgQecqc+nSJUr54IMPsmfPni9fvpAL6tWr1759+3LlyrV///4JEyZ8//33d911V8gwHj58mEy++uqrUqVKZc6cOeRa6UVbEBj6z/dNPjo7YAuebs/k3LlzL7/88qFDh3777bfUqVPnzp27Ro0azZs3T58+fYoUKUKo/XfffTdq1KhWrVo9+OCDadOmTVQOe/funTNnzsWLF5999tmbX4SvDxw4MHny5E2bNp0/fz5jxozlypWrW7dulSpVgpTy97///ciRI02bNm3YsGGiKhMr8apVq2bMmLFx40ZQ4qds2bJBWLVr165QoQJYXbt2jbrxFC1aNEeOHHEW9NNPPy1btqxAgQItWrSIryaUkiVLlvz582/ZsuXTTz+ld4YOHZouXTorNacHN2/e/O9//7tJkya1atXilQsXLvz6669Aqqw9oWUYHmB9WIp0Ar7odITEcePGtW/f/qGHHkIKg0ZXrFhx+vTpevXqISEeO3YMUeiHH36AF+AOPkO7y5cv37ZtG1yAhIUQxytsYBcuXLhkyRKIY8eOHbt27Spbtuxtt932yy+/IOiBY9asWWHtgwcPQo7oCpjz/Hf37t0oEHhr9erV0AFp4IX//Oc/JIPxoaFChQrBnilT/lf1T6FDhgxp1KjRww8/fO+995YvX54qIT/yIkWYClB5Sjx58iRfIk7y/aJFixDcICwYmZ07dWOjTYuoG6XceuutFAE5UtyCBQv4fv369byOUMwTcwTApMiAsOpzzz0Hh8LsVAwxk/YiPlMNqgcysFimTJloAm0hwx9//BHQkN9ZA6gelYH+eJDQYWFWkQ0bNoAeP61cubJMmTIoFk6dOkXR1MHUBKz4lSUHxMiZrEgwduzYvHnz8hOcDoxr1qzhS7oDrgdSegQJ+ujRo4BAJrSUsmjm8ePHaSY9SLXBgdyAiBxIQMXo9MWLF9ME6sb3/BpA3hczwflGBnQC4lbnwXZBCYZboQwEHIgGUmCmoQ1gXwmFwSZ79uxhYsNKSGoffvihYSX4C4KAUNAhwFyff/454hvzlmnJVOenSpUqwa1solERMMPJnBx4CxJ/5JFHcubMCQt/++23vIUcCvsgk5IeXkCIhlCY5+Rzzz33MMMD2kZqQkH169fPkycPFENtoQxDrDwfffQRdEYRsAnEAcfBpzG5FaamOZ999pmhKlrBgkEmqEf5MHLkSBiHymzfvp1lA9ZG6RmLW6knX4IVVaJi5E+1KY7P0OvcuXNRbvIlraMh7M0pBUaGfNnjw4zQFjWEBFmxgJ21gTTTpk2DB2...
-
 1. Sales Over Time: Create a line plot to show the trend of total sales over the months of 2023\. The x\-axis should represent the months, and the y\-axis should represent the total sales__\. \[2 mark\]__
-
 __![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAhsAAAGECAIAAAAQnXXhAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAOxAAADsMB2mqY3AAAlNpJREFUeF7tnQeYVNXZx9nee99l6b0svaM0EWzYe4kVNbHEmMTyxWg0ahKjSSxRiQ17F0RFlC69911gWdjee58tfL87BzcE2N2Z2en3vY/uM8zce8r/nHv+563HI6Hv8G5yCQKCgCAgCAgCXUbAs8slSAGCgCAgCAgCgoCGgAcySl76HgFDEBAEBAFBQBCwGIHEfik8KzKKxQDKg4KAICAICAL/g4AwikwIQUAQEAQEAesgIIxiHRylFEFAEBAEBAFhFJkDgoAgIAgIAtZBQBjFOjhKKYKAICAICALCKDIHBAFBQBAQBKyDgDCKdXCUUgQBQUAQEASEUWQOCAKCgCAgCFgHAWEU6+AopTgVAh9//PETTzxRUFBgMBis2LBdu3b99a9/Xbp0KSVbsVhnLuqHH3545JFHjh071tDQ4MztlLY5CQISM+8kA6GLZlRWVn777bd1dXX09vjx4y0tLR4eHp6envzlmyFDhvTv3z8mJuYULEpLSw8dOlReXj5nzhwvLy9TkHr00Ud/+umnd955Jykpyd/f/+RH4JiKiop9+/YVFhbW19dTdWBgYG/jdXrVp9QFl7zyyiuzZ8++4IIL+vXrZ0pLTLmHxZrGHDx4sKioiM/0MTY2tm/fvj179gwICDClBMvuAYqSkpJVq1aBQ9uIMBxcqsDRo0fn5OTs3bv3pptuokl+fn6WVSRP6QEBFTMvjKKHsXaWPmZnZ99xxx3FxcU0iKXz6NGj4cZLrZtXX331+eefP2zYsFOau2fPnnfffTctLe3zzz8/hR7a61gHjMKqvXHjxiVLlhw5cqSmpgZGoQHnnHPOueeeO3LkyI6RsgWjNDY2AsuKFSvWrl2LKADdent7JycnT5s2bebMmbBsG+N2fRRhce2dN/I3V21tbWpqKiJIWVmZGhGYOz4+PiIiwsfHh2/uvPPOuXPn9ujRo+tVSwluj4AwitsPsdN1EKEE+aC1tZWWQSewy4UXXsh+H9GEb2ALLrWWnXxZl1FWr179u9/9bvr06VAI63Vzc3NGRgZNSkhI4J/2ZxQWceS2F1544cYbb4TYevXqBamgtdu6dWv37t2ff/754OBgOMYqYwn+lNMm59Frul9VVaWY5vDhw5dccsmvf/3rSy+9NDo6mm+Q3pBLrFW7VboghTgtAsIoTjs0umgYIgJCyeWXX876NXDgQJa2NWvWbNmyhX06/eebKVOmoHVh1fvTn/60aNEiFj627ayGKJ1Qf/HPZcuWoSmqrq6GhCCDs846CyFDLX/tyShsw5FOfvWrX7300kuQCmouyqcEllpfX1/WbvQ/iAubNm3CUsJPcXFx48aNmzVrVmhoKFWfIqOw9O/YsWPDhg2wI+2HANjR0xLKoQ0rV66kHLpJ4SEhIZMmTaIcdEdtOiXuYSn/xHhR/i233DJixAiepSieQixD3XTDDTcgqYAMy/3NN9+sVE9NTU1IFf/4xz/Gjx8PFHwDLa1bt477kbro1IwZM8aOHauUeB988AGlgSfEnJ+fP2bMmLvuuuuMcg9SIAj/3//937XXXtumAITtMKXcd9996A+5gc6CMNpLiuIvAs0VV1yBmEVPMTIFBQUxatQOPVM1+MDWgJaZmUmbuRkQJkyYgAykiymus05KpkidDbgTd1ctzSzB6enprEpcLI4so1g7WNZZZNkss+KzcWal4598iazD6s9iyvLEXxRZaI1YvzruJQofiIEL8wA3syxiSwgLC6Nk1nSeZeGDYFgilTqO2ygWsUZZGk6+oLQDBw4sXrw4NzcXrR1thgthIxZuCuFBlni6owpH9qLNfH9KIdQFVVACshpUpNRN3Mzn4cOH02swoadYWXbv3r19+3b0VJTAUyAD+/I9ZfI4jEtj...
-
 __
 
 ## Python Task 2: Python Database Management \[15 marks\]
-
 Problem: Managing Sales Data with SQLite\. You are required to create a database to store and manage the sales data processed in Part 1\.
 
-### Task 2a: Database Creation and Data Insertion 
-
+### Task 2a: Database Creation and Data Insertion
 1. Create an SQLite database named __SalesDB__\. __\[2 mark\]__
 2. Create a table named __Sales__ with appropriate columns to store the data \(Date, Product, Quantity, Price, Total\)\. __\[3 mark\]__
 3. Insert the cleaned and processed __data from Part 1__ into the Sales table\. Ensure no duplicate entries are added\. __\[4 marks\]__
 
-### Task 2b: Querying the Database 
-
+### Task 2b: Querying the Database
 1. Total Sales Calculation: Write a query to calculate the total sales for the year 2023 and display the result\. __\[3 marks\]__
-
 ![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAg0AAABuCAIAAAArhbceAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAOwwAADsQBiC4+owAAG01JREFUeF7tnc1q3MgWx3XvW9ysutt2iME3foEsTNODxxia4I13WYQ40ISEmEC8sVeTTQyDjcPQEAcvsvMmGIPJmDSNF/MCuRhmiJPuXuU5blXpq1o6JZ1SSS3JdYQZQs+pqnP+9amS9Kt//Wfuvw5dpAApQAqQAqSAQoF/kzKkAClACpACpECCAjRPUPMgBUgBUoAUSFLgtswTSy//+n60ialrvCUmN9cmU56b7//38zv/+7iBL8nMMpOfZkVSalKAFKi9AtA8sXHkjl/iL3XwXdz7kn2kW945/2tnsfYqIgIIZoWf38/3lniC06f378xv9seIxGRCCpACpEB5CijuJ8Yna/NsFLu/dtw4SJ8qynO/HiXzqfTA2WV6ir/ub9f18Ju8JAVIAVKAKZCy7/T17U5/vPJcLPmlFbF3A8HuBn5+P+01nc6+e/PhrZTjlnpa8+2R6J4MnGdgefa4FZQBJRdbQyJP2RJyCyqo+/H70R4PlucQ3gAh81xaXW1ebT89R4mAjT3NJXk7S+WnuHGc3a4XKn4yIgVIgcopkPp84u9v/saI2CcRfw9PWvt8P+rr2667czJ4PbVSjltqxM0GtbP25cOgIHmXZqp0x+l+PHs8cot+eDLyymA/tt55K/ddZ99NDlrCTimcX+nNfeAFvb5qbfXEgxBsnsvr7dZ49A9KAtB5d4cqEjvLDnTJKHaUj2RECpAClimQOk9IegTPLdKW5A7eMiY3H1WHH7ydmevDd8PGwl1hFM9zo9MZn/z+aTqLpVbLWTnwbkfedNz/CVqqahp23r8h+DbyJiStPJGtCnQejJ1nGHNJN/ZPL9j08ygiINJVMiMFSAFrFEidJxbvNp3Rzd98+bzf6PvLfH/xDuqEt8TLjM7zbqvlP1zJ9DAAXRDa9683E6fZuoexh51Hu2QaO8ZFsiEFSAHrFEiZJzbfs8cPVxdsycnXqt61+UJ6GODwjanWgvTOktISJe7Xi+Go/cR9I4g9VHjentx8U5TOlvbNdpdbLu4d+C59Ggyaj19F3jQFLUF38M7j8/zUZ894Dt530+MHnce7pBs7PZ9IrxKyIAVIAdVz7Objz2Lr5qDJXnx6ccqEEltAvTP+4/MfJwNJutOjE2frNHyOrbYE9W55af0vCa4PH7yeuAX95A8qxNtBYJ5Xh8+OHWF5utDf9V06f8Qfn/jv9X55uSychywhd/DO4/N0/v7tl91B+43/qrH7yIS/BCW/BSCeJ8POq5SPBWAWO3UHUoAUIAUgBf5FfCdqGKQAKUAKkAIJCqQ+nyD1SAFSgBQgBaxWgOYJq6ufgicFSAFSIFUBmidSJSIDUoAUIAWsVoDmCaurn4InBUgBUiBVAZonUiUiA1KAFCAFrFaA5gmbqv/Wc8UFyapaxKoKuoRr8iVw73GOYa3wyuMtY2XXWSXOiEOdxZDKAcRWSSl2M+SflxKfXyirzgDzXsogaISODwmMeY7geJfwlshKLr06on4KHGfYQqZQlUBMWEGw3HtbuiHcPLAqIRuXyoyL7JHu3A6lvxjC1jvoQs3vJ2zhn19thxxAv7kYtrwZJZ+iJbY8LGNhZbOPNGdBrNKpjuJdEjhOholkn5p6jj14y0A7M7yq2Q3xyuMtZyiqXNTyQmM0dlbXOfZieb01Gk6mEBjFe1XzecIXKBv/vJilbpGVdn15OfbAiOyG9+NOAGD37x+xTHXplnN6M0rCqvM8Veh4ZJDLO09CVqP41l20dbh0JNE9lWYfLLVAS/6j+5U+v/giK/tJWWnVodqUiIjMHQErDqmyyiyWZ6p0hpz5wruhgrof7wiw8lO3Pl69Q5YwtN/0uATD2hx8uJxbXXYWu87g9x9+XoAggPNJvdjXJLkX3JJ5wh...
-
 1. Product Sales Summary: Write a query to list each product and its total quantity sold in 2023\. Display the result in descending order of quantity\. __\[3 marks\]__
-
 ![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAVoAAACKCAIAAABkehW6AAAAAXNSR0IArs4c6QAAAAlwSFlzAAAOwwAADsQBiC4+owAAGdhJREFUeF7tnU9rFM23x/u57+K6ykyMKPjTN+AiDPMQQyBXssnOhRhhEMX8hGSTrHRj4LmRyMOAShbusgm5A0GDw5DF8wYUQTFmZla+jd89p6v/Tfep7tP/u2dOk4W01V1V36o+XdVTn/r+8d/z//rjf/73P//3b0MOUUAUmG0F/mu2qy+1FwVEAVeBaoeDm8/++fX1w1r1GgwLdrAeXq6KFX797dffv/CvinpWr4Vns0Qxw8HagepS5l/U82Dc2P1ci85XbjnT5W4GHatF3q6GdOKjR7euXF3vjhL1c7rdVz+4naEWDZ2o7rN0UcxwANKMDpevQse6tfxubj86IqTT8tvrO1dv3T9Od5Oyri6g8BALTlpn97A58O9RL8e60u1+vqmy3jpv70W+HnIsndw6EwXihwM72y+vtrujxSfbN+CEMxB1xqK3t3u/fx11GkZ7T727ers38cpgSl01qMEtvI4OdvHOeM9/zKzx8LwhyZPO8Bju+WHbeZ1i99WV03tPd3TtZHTyoBkqP7Pw8XJnNzhf5IhqekWm2n2iRKPhD3YJJWE1FUgeDgzj+0975GkORM2/e4dN8y3x5dWqGpr2t9R/rb74hgoEU+p00QxuFzvz79XrqLnRUbP39acPhlYut+68+m6eW/1w0nyjinR1x9izghH8R7ttPDbPbw4WV9Z05SQvh5N2RvcOh6HtySw8rZL3nY96uoX35/nt9eN3Rufk6+/Pz257/o8tMq0Spac3Z7fdDWNxX80X9ua6m6+/VLOPS6nYCqQJB55MnLll1GvT4Kek63C+qYbEP4fOA/njcoxjEO/M+Waz6fTUXy/bnlv1u1avhWdGOw0hL19rt0eHf6WauRCFD9by9kqrOXivoqfx7fWbwdzCNW17mgHl1nK/9RGeSScoMEXWqEToqc3fnizcGyyd6MMWuztKwnIVSBMOblxrGMMLeBuvfoCXg5rBRrw2+SljyKIeiSuf2viaUkHhWrNpz3W9YxPuTVNezs0ms3SmAjv9xoPn+CsMW2RNNQk9J0rqtLvn7Lezs2QfKTPTQG6UgQLJw8H6W/g0cH4Kb0t8yVgHjDM9k2ocVTYX7Bk+JNGmzKAmxvFTDEatNs4gjvv2s8G5c6Cc5OUwHmm0VvELyI3d/YhvB5xc7TT+3L+cDoath+pTC8ztn7TGFz8Z90NtzZR8kcNV8urpyd9td2+hbi4tNcY/1YgGDnN4Ir9oMpqtWknih4PGAxyX/vq634CfGJ4eQXXMAS3OYH99fXJ52PdU8Ojg0Ng4cj8l6lMGVMGf37wfI/V9S6U0/3BubxbJ6N3HWbd9fnJqHWwBfznJy52J+q+jhe6Ot5opCo+XBlW6szVWev7GHw6szy5Ex/H+/od1N1PSIpN6kiqRehpGsN2xQPa3AyynUh6P2wtz1ermUhqeAn/IImWeUJJKFJh+BeKPDqZfE6mhKDCjCkg4mNGGl2qLAkEFJBxIrxAFRAFLAQkH0hVEAVFAwoH0AVFAFJhUoOjRQR6YbR73RJUqRihL1xUF8lZAGw5MusZhmSeRIaJQXEo3BmZbDLqbk8Bu4T1Ld9knPQxSopW/3vUIztpt96QHPWQXidaJvDwnSeW2+SugDQfWSlVY+mpY69JtOij/Qqk3c2Horq5CyQllWLZoAVTLgBjtK77IS0DBCn/1TJIpXdDLczlfdlikbFjcMTSfWuAIejont4x9a10WWSTyJJk7PyW/8JKyTAXiTxY8L221UjA9y8wXIFd011sMJqGsKfn3F39aS/S+XIyNRvM6pPMQUAgpGchTAhVKpPTddDR0SUHW4t+LCxs8NzMd9GCpIuAJg761ahDXJpurrcki0eWkKspPyW9gSVmqAjHDAcXepmeZCQ...
 
 ## Python Task 3: Basic Neural Network Implementation \[12 marks\]
-
 In this task, you will define a simple fully connected neural network using PyTorch\. You will train the network on synthetic data, evaluate its performance by tracking the loss during training, and visualize the results\.
-
 __Instructions:__
-
 __Neural Network Definition: __Define a class SimpleNN that extends torch\.nn\.Module\.
-
 The network should have the following layers:
-
 __Input Layer:__ 10 input features\.
-
 __Hidden Layer 1:__ A fully connected layer with 5 neurons and ReLU activation\.
-
 __Hidden Layer 2:__ A fully connected layer with 3 neurons and ReLU activation\.
-
 __Output Layer:__ A fully connected layer with 1 neuron and Sigmoid activation\.
 
 ### Task 3a: Model Initialization __\[4 marks\]__
-
 Instantiate the SimpleNN model\.
-
 Use torch\.nn\.MSELoss\(\) as the loss function\.
-
 Use torch\.optim\.SGD as the optimizer with a learning rate of 0\.01\.
 
 ### Task 3b: Data Generation __\[2 mark\]__
-
 Generate synthetic data with 100 samples, each having 10 features\. The target should be a tensor with 100 values\.
-
 Use torch\.randn to generate the synthetic input data and target values\.
 
 ### Taks 3c: Training the Network __\[3 marks\]__
-
 Train the network for 20 epochs\.
-
 During each epoch, compute the loss, perform backpropagation, and update the model's weights\.
-
 Record the training loss for each epoch\.
 
 ### Task 3d: Loss Visualisation __\[3 marks\]__
-
 Plot the training loss over epochs using matplotlib\.
-
 __Example Output:__
-
 Your plot should display the training loss decreasing over time, indicating that the model is learning\.
-
 ![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAisAAAGBCAIAAAAoo2ZqAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAOxAAADsQBlSsOGwAAg7VJREFUeF7tnQeYlcXVx2V77733pS1l6b0KiHTsBUuMJfbyqdHERI1GjUZUYo1RAbsoovTeO8vSlu29997J91vG3GwWBHa5e/eWcx+efS7vnXfmzH/mnf97ypzp5Rsec4V8BAFBQBAQBAQBnSPQS8NAeSnHdN66NCgICAKCgCBgcgj4RQxQfTYzua5LhwUBQUAQEAT0AwFhIP0YB5FCEBAEBAHTQ0AYyPTGXHosCAgCgoB+ICAMpB/jIFIIAoKAIGB6CAgDmd6YS48FAUFAENAPBISB9GMcRApBQBAQBEwPAWEg0xtz6bEgIAgIAvqBgDCQfoyDSCEICAKCgOkhIAxkemNupD2uqKjYsmVLfHx8UVHRRbvY2Ni4d+/ew4cP5+bm/vvf/75oeSmgRQRaWlqKi4t37dq1f/9+LVYrVRkiApITwRBHzUhkrq+vr6ysVJ1pTwO9evXiiu3Zj5WV1SX2Njk5+a9//WtMTMy4ceOGDh164bvKy8tfeeUVJyensWPHjh8/XrWorQ8rbENDQ21traur66XLr63WFZJNTU2wLGKcOXOGK2ZmZtbW1ho8tdvfDpLTIk3X1dU1Nzd3YHfVLrIVFhZ++eWXDg4OL7zwgrY6LvUYEAKanAjCQAY0asYm6s8//6xZgFpbW1mwLCwsWCv50NU5c+bMnDkzNjb2ErvNaltQUMAiy7pmb29/4bsgCQqbm5tTmI92V+TMzMzt27d//vnnr7766qBBgy5Rfm0VU4v+8ePHN23atHPnTrQNKAEuHD58+IwZM8ATkLXb3w6S81aBcvP1118jA8LwAW3KWFpaqnaDg4P/9re/AT4fPz8/bXVc6jEgBISBDGiwjFbUU6dObdy4UXUvNTV1+fLlEyZM6Nu3r5eXF1f69evXu3fvgIAAvmte5Lt16dQW0GhjkOtbb731xRdfjB49WlvVXmI9YLV79+5t27adPn06KCgIPQ/QUMjS0tJY+tH5rrrqKu3CqEYHOlESotpmZWUdPXoUjod78vLyMHjyfnDrrbeqdws3N7d58+Y5OjpeYo+kmPEhIAxkfGNq2D3asWPHokWLHnnkEfSesLCw6urq7OxszDUuLi68xbNysWyxnnKxpKSENY7eou54eHhAUVi6KFBTU5OUlMSC6+7uzupWevaDOcjOzo5bULBQjAIDA6nQxsaGmuEJtAEK8ykrK6MMNVCGV3jq54Wd5viJ22mLehADpxHGJcxZXKRR9DbI0tvbuwP0F2AgFmulq+GsUq3QL2pAKlZwWsGblZOTgyRUzhVPT09+pQzys5RjvEIApU9wMTIysoNCw12QDQZG2B314o477ggPD6cMlAAdopSAAHonNdNf2sJoSXcgJATjv9RPDX369AHPqqoqhKQYWFEDwAKI0heRE3qDXeh+fn4+twAUrwvnTkHuxTP3z3/+E1RRChVLUZ7K6SbV0hZXMjIyaJrOIgN9V0qbr68vbSE5VyjJFSaGGmsKcBEYEQ9hQIN7fXx8GHdFcvLRcwQ0DGTu6PbL8/P4Q/fpudAinhEjgOXqhx9+GDlyJKsq6/uJEyfeeOMNrrBUYbHBqMXKO2DAgA8//PDtt9/+6KOPvvrqq3379rHaoirBKKxQrPtPP/00PMEyxHqEEoBStWrVqvT09DfffHPZsmXEHbBI8RMFWOmef/75kydPcm9ERARe8W+++YYlkqWQyvkQ1MCSR2EWemCHzFavXv2Xv/zlgw8+QJhjx44lJCTwBRZEaeswLvAZXIglauHChaz47X9l8YXGcIHQu/fee2/9+vUITCustiyjrPioL6+99ho/KeFZuBEjJCQESoZCuOsf//gHom7evJkle9KkSYo/NE3AapA0EEE/Dz/8MODAqZSBIfr37w...
-
 # __Part 2– Java question__
-
 You are going to make a system that manages a pet care service: that is, a service that looks after animals when the owners may be away\. Each animal is housed in its own __enclosure __at the service\.
-
 The tasks will get harder as you progress, and build on each other, so try to ensure that you complete each stage before moving on\. Be sure to read through the entire specification before you begin to get a sense of all the features that might be needed\.
-
-  
 In each task, marks will be awarded for clean code and sensible object\-oriented design choices as well as functionality\.
 
 ## Java Task 1: Representing an animal \(10 marks\)
-
 We have provided initial versions of an enumerated type __AnimalSize__ and the skeleton of the __Animal__ class that you should use for this task, which are both in the __petcare__ package\. You must use these classes:__ do not change the name of the classes or the package\.__
-
 For our purposes, an animal has the following properties:
-
 - __Name__: Each animal has a name which must be at least 3 characters long\.
-- __Size__: An animal can be one of three sizes: small, medium, or large\. 
-- __Comfortable temperature__: Animals need to be kept within a specific temperature range to be comfortable\. Each animal will have a range they must stay within, which must be expressed as a lower and upper bounding integer, both in the range 0 to 50 – an animal is comfortable in an enclosure as long as the temperature is between those two values\.  
+- __Size__: An animal can be one of three sizes: small, medium, or large\.
+- __Comfortable temperature__: Animals need to be kept within a specific temperature range to be comfortable\. Each animal will have a range they must stay within, which must be expressed as a lower and upper bounding integer, both in the range 0 to 50 – an animal is comfortable in an enclosure as long as the temperature is between those two values\.
 
 ### Task 1a \[4 marks\]
-
 Write some code to represent an animal so it can be stored in the system\. You should use the provided __Animal__ class as the starting point for this class, but the specific details of the implementation are up to you\. Make sure to include a constructor that sets all properties\.
 
 ### Task 1b \[2 marks\]
-
 Add getter and setter methods for all the values and override the __toString\(\)__ method and __equals\(\)/hashCode\(\)__ methods\. The __equals__ method should return true when two animals are the same size and have the same name\.
 
 ### Task 1c \[4 marks\]
-
-Ensure that all the values that are stored are valid, following the specification above\. If someone tries to create or update an animal with invalid values, then an IllegalArgumentException should be thrown, and the change should not take effect\. 
+Ensure that all the values that are stored are valid, following the specification above\. If someone tries to create or update an animal with invalid values, then an IllegalArgumentException should be thrown, and the change should not take effect\.
 
 ## Java Task 2: Enclosures and checks \(15 marks\)
-
 An __enclosure __is a cage or pen that the pet care service maintains to keep one of the animals they are looking after in\. Enclosures have:
-
 - __Size__: Each specific enclosure is rated to look after animals up to the size of small, medium or large\.
 - __Temperature__: Each enclosure has a specific temperature that it is maintained at\.
 - __Running costs__: Each enclosure costs a certain amount to run each day, which can be expressed as an integer\.
-- __Current occupant__: If there is an animal in the enclosure, they should be stored, otherwise the value of occupant should be __null__\. 
+- __Current occupant__: If there is an animal in the enclosure, they should be stored, otherwise the value of occupant should be __null__\.
 
 ### Task 2a \[4 marks\]
-
 Create a class called __Enclosure __that stores this information\. The class should have a constructor that takes in a size, temperature, and running costs when it is created and set the occupant to null\. The class should have getter methods for all the variables but no setters\.
 
 ### Task 2b \[5 marks\]
-
-Write a method with the signature:  
-	
-
-public boolean checkCompatibility\(Animal animal\) 
-
+Write a method with the signature:
+public boolean checkCompatibility\(Animal animal\)
 When passed an animal, the method checks whether the enclosure can take the animal and returns true if it can\. For an animal to be compatible with an enclosure, the animal must be of the same size or smaller than the size an enclosure is rated for, and the enclosure’s temperature should fall within the animal’s comfort range\.
 
 ### Task 2c \[6 marks\]
-
 Write a pair of methods with the signatures:
-
 public void addAnimal\(Animal animal\)
-
 	public void removeAnimal\(\)
-
 When called, these methods should, respectively, add an animal to the Enclosure if it is compatible and does not already have an occupant, and remove the animal currently in the enclosure\. If the animal cannot be added, then throw an IllegalArgumentExcepion\. If __removeAnimal__ is called on an empty enclosure, nothing should happen\.
 
 ## Java task 3: The pet care service \(15 marks\)
-
 The pet care service manages a collection of enclosures, and animals are allocated to enclosures as they arrive\. Additional enclosures can be added to the service as needed\.
 
 ### Task 3a \[3 mark\]
-
 Write a class called __PetService __to represent the pet care service, which stores a single piece of information: the collection of enclosures that it manages, which should be initially empty\.
 
 ### Task 3b \[4 marks\]
-
-Add methods to the __PetService __class to maintain and print the enclosures that it manages\.  
-  
+Add methods to the __PetService __class to maintain and print the enclosures that it manages\.
 Add a method to the class with the following signature:
-
-	
-
 public void addEnclosure\(Enclosure enclosure\)
-
-When called, this method should add the given enclosure to the enclosures that the pet service has\. 
-
+When called, this method should add the given enclosure to the enclosures that the pet service has\.
 Add a second method with the signature:
-
-public void printAllEnclosures\(\)	
-
+public void printAllEnclosures\(\)
 This should print out the details of all the enclosures that the service maintains\.
 
 ### Task 3c \[4 marks\]
-
-In this task you will handle adding an animal into the pet service’s care\.  
-  
+In this task you will handle adding an animal into the pet service’s care\.
 Add a method with the signature:
-
-public boolean allocateAnimal\(Animal animal\) 
-
+public boolean allocateAnimal\(Animal animal\)
 When called, this method should find the best enclosure to allocate an animal based on the following criteria:
-
 - The enclosure must meet all the requirements for the animal \(size, temperature\)\.
 - The enclosure cannot have another animal staying within it\.
 - If more than one enclosure meets the requirements, the animal should be allocated to the cheapest one \(i\.e\., the one with the lowest running cost\), and the method should return __true__\.
 - If no appropriate enclosure is available, then no changes should be made to the pet service and the method should return __false__\.
 
 ### Task 3d \[4 marks\]
-
 Finally, add a method with the signature:
-
-public void removeAnimal\(Animal animal\) 
-
+public void removeAnimal\(Animal animal\)
 When called, this method should search for a matching animal within the enclosures of the pet service\. If a matching animal exists, it should be removed from its enclosure\. If the animal does not exist in the system, then the method should throw an IllegalArgumentException\.

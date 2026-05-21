@@ -3,6 +3,9 @@ title: "Introduction to Machine Learning"
 description: "An overview of learning from data, including regression, classification, clustering, and the full ML workflow."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## Overview
 - **Objective**: To understand the fundamental concepts of machine learning, its main problem types, and the standard process of a data-driven project.
 - **Scope**: This note covers the definition of learning from data, introduces regression, classification, and clustering, and outlines the stages from training to deployment.
@@ -40,10 +43,7 @@ description: "An overview of learning from data, including regression, classific
 - **Underfitting**: The model is too simple to capture the underlying patterns in the data, resulting in poor performance on both training and test data.
 - **Data Leakage**: Information from outside the training dataset is used to create the model, leading to overly optimistic performance estimates.
 
----
-
 ## Best Practices
 - Always split your data into training, validation, and test sets.
 - Start with a simple baseline model to understand the problem's difficulty.
 - Choose performance metrics that are appropriate for your specific problem.
-

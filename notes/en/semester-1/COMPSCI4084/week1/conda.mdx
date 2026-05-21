@@ -3,6 +3,9 @@ title: "Conda"
 description: "Environment and package management, environment lifecycle, package installation and updates, exporting for reproducibility, and best practices."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## Overview
 - **Goal**: Master Conda for environment and package management, including creating, activating, exporting, and reproducing environments.
 - **Scope**: Covers installation, updates, environment management, package management, exporting/importing YAML files, and avoiding development in the base environment.
@@ -24,8 +27,6 @@ conda update conda
 - **Notes/Best Practices**: Always verify after installation. Updates can be slow, so be patient.
 - **Summary**: Verify first, then use. Keeping Conda updated reduces compatibility issues.
 
----
-
 ### 2. Creating & Activating Environments (with a specific Python version)
 - **Core Concept**: Isolate dependencies in separate environments to prevent conflicts between projects.
 - **Commands**:
@@ -37,8 +38,6 @@ conda deactivate
 - **Use Case**: Create one environment per project or course. Different projects can be maintained in parallel.
 - **Summary**: One environment per project. Deactivate an environment before switching to or deleting another.
 
----
-
 ### 3. Managing Environments (list/remove/clone)
 - **Commands**:
 ```bash
@@ -48,8 +47,6 @@ conda create --name newenv --clone myenv
 ```
 - **Notes**: The `--all` flag is required to remove an environment completely. Cloning quickly duplicates a dependency state.
 - **Summary**: Listing, removing, and cloning cover typical lifecycle operations.
-
----
 
 ### 4. Package Management (install/update/remove)
 - **Commands**:
@@ -61,8 +58,6 @@ conda remove numpy
 - **Notes**: Install a minimal set of required packages to reduce solver time and conflicts.
 - **Summary**: The install/update/remove trio keeps environments lean and manageable.
 
----
-
 ### 5. Exporting & Reproducing (YAML)
 - **Commands**:
 ```bash
@@ -71,8 +66,6 @@ conda env create -f environment.yml
 ```
 - **Use Case**: Sharing with a team, migrating across machines, or reproducing a class experiment environment.
 - **Summary**: The `environment.yml` file is a reproducible recipe for your environment and should be committed to version control.
-
----
 
 ## Best Practices
 - Create a separate environment for each project to avoid polluting the base environment.

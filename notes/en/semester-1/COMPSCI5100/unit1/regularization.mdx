@@ -3,6 +3,9 @@ title: "Regularization for Regression"
 description: "Controlling model complexity and preventing overfitting using Ridge (L2) and Lasso (L1) regularization."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## Overview
 - **Goal**: To learn techniques that prevent overfitting by constraining the complexity of a model.
 - **Scope**: This note covers the theory and application of Ridge (L2) and Lasso (L1) regularization, including how to choose the regularization strength using cross-validation.
@@ -33,7 +36,7 @@ description: "Controlling model complexity and preventing overfitting using Ridg
 - **Core Concept**: Ridge Regression uses the **L2 norm** of the weights as its penalty term. The penalty is the sum of the squared weights, scaled by a hyperparameter `λ` (lambda).
   `L_penalty = λ * Σ_{k=1 to K} w_k² = λ * ||w||²`
 - **Effect**: The L2 penalty forces the weights to be small, but it rarely forces them to be exactly zero. It shrinks all weights towards zero, resulting in a smoother, less complex model function.
-- **The `λ` Hyperparameter**: `λ` (called `alpha` in `scikit-learn`) controls the strength of the regularization. 
+- **The `λ` Hyperparameter**: `λ` (called `alpha` in `scikit-learn`) controls the strength of the regularization.
   - If `λ = 0`, it's the same as ordinary least squares.
   - As `λ` increases, the weights are shrunk more and more, leading to a simpler model (higher bias, lower variance).
 - **Example**:
@@ -42,10 +45,8 @@ description: "Controlling model complexity and preventing overfitting using Ridg
   from sklearn.linear_model import Ridge
   from sklearn.pipeline import make_pipeline
   from sklearn.preprocessing import PolynomialFeatures
-
   # Create a pipeline
   model = make_pipeline(PolynomialFeatures(8), Ridge(alpha=0.001))
-  
   # Fit the model
   model.fit(x_reshaped, t_reshaped)
   ```
@@ -63,10 +64,8 @@ description: "Controlling model complexity and preventing overfitting using Ridg
   ```python
   # Example: Applying Lasso regression
   from sklearn.linear_model import Lasso
-
   model = make_pipeline(PolynomialFeatures(8), Lasso(alpha=0.0001))
   model.fit(x_reshaped, t_reshaped)
-  
   # We could inspect the model's coefficients to see which are zero
   # print(model.named_steps['lasso'].coef_)
   ```
@@ -82,10 +81,7 @@ description: "Controlling model complexity and preventing overfitting using Ridg
   Always scale your features before applying Ridge or Lasso regression, as regularization is sensitive to feature scale.
 </Callout>
 
----
-
 ## Key Takeaway
 - Regularization (Ridge/Lasso) prevents overfitting by penalizing large model weights.
 - Ridge (L2) shrinks weights towards zero; Lasso (L1) can force some weights to exactly zero, enabling feature selection.
 - Cross-validation is essential for selecting the optimal regularization strength (λ).
-

@@ -3,6 +3,9 @@ title: "Using Git and GitHub"
 description: "Local-remote workflow, branching and merging, commit conventions, conflict resolution, .gitignore, and common issues."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 # Using Git and GitHub
 
 ## Overview
@@ -17,19 +20,15 @@ description: "Local-remote workflow, branching and merging, commit conventions, 
 5) **Commit Message Style**: A single summary line (`<=` 50 chars, imperative mood), followed by a detailed explanation if necessary.
 6) **Ignore Rules**: `.gitignore` only ignores untracked files. Tracked files must first be removed from the index with `git rm --cached`.
 
----
-
 ## Basic Workflow (From Scratch to Remote)
 
 ### 1. Installation & Configuration (One-time)
 ```bash
 # Recommended for macOS:
 brew install git
-
 # Basic identity configuration (global)
 git config --global user.name "Your Name"
 git config --global user.email "your.email@example.com"
-
 # Set default branch name to main (for new repositories)
 git config --global init.defaultBranch main
 ```
@@ -39,7 +38,6 @@ git config --global init.defaultBranch main
 # Create a new directory and initialize
 mkdir demo && cd demo
 git init  # Will use 'main' as the default branch if configured above
-
 # Or: Clone from a remote repository (SSH recommended)
 # Copy the SSH address from GitHub, e.g., git@github.com:org/repo.git
 git clone git@github.com:org/repo.git
@@ -57,10 +55,8 @@ git commit -m "init: add README"  # Commit
 ```bash
 # If you initialized a local repository, add the remote first
 git remote add origin git@github.com:org/repo.git
-
 # First push and set the upstream branch (-u)
 git push -u origin main
-
 # Subsequent pushes can be simplified to:
 git push
 ```
@@ -71,26 +67,20 @@ git push
 git pull --ff-only origin main
 ```
 
----
-
 ## Branching & Merging
 ```bash
 # Create and switch to a new branch 'feature/login'
 git switch -c feature/login
 # Alternative: git checkout -b feature/login
-
 # After making some commits, switch back to main and merge
 git switch main
 # Alternative: git checkout main
 git merge feature/login   # Aim for small commits and frequent merges
-
 # Delete the merged branch
 git branch -d feature/login
 ```
 - **Recommendation**: Create branches based on features (e.g., `feature/...`, `fix/...`).
 - **Merge Strategy**: Prefer fast-forward merges. Consider `rebase` only for maintaining a clean history, as agreed upon by the team.
-
----
 
 ## Commit Message Style (Recommended)
 - **Structure**:
@@ -99,28 +89,21 @@ git branch -d feature/login
   - Detailed explanation (optional): motivation, changes, compatibility impact.
 - Group related changes into a single commit; avoid mixing unrelated files.
 
----
-
 ## .gitignore (Common Snippets)
 ```text
 # macOS
 .DS_Store
-
 # Node
 node_modules/
-
 # Python
 __pycache__/
 *.pyc
 .venv/
-
 # IDE / Editor
 .vscode/
 .idea/
 ```
 > Files already tracked by Git will not be automatically ignored by adding them to `.gitignore`. You must first run `git rm --cached <path>` and then commit.
-
----
 
 ## Conflict Resolution (Workflow)
 1) When a conflict occurs during a merge or pull, use `git status` to see the conflicted files.
@@ -130,8 +113,6 @@ Your local changes
 ```
 3) After editing and saving, mark the conflict as resolved with `git add <conflicted_file>`.
 4) Complete the merge with `git commit`. If the conflict was triggered by `git pull`, this commit finalizes the pull.
-
----
 
 ## Best Practices
 - **Push requires setting upstream**: Use `git push -u origin main` for the first push, then `git push` is sufficient.

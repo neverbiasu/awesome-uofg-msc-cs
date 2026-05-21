@@ -3,6 +3,7 @@ title: "概率论与统计 III：连续随机变量与推断"
 description: "探索连续随机变量、正态分布、多维分布、蒙特卡洛方法以及各种统计推断方法。"
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
 import { Steps } from 'fumadocs-ui/components/steps';
 
 ## 概要
@@ -58,7 +59,6 @@ import { Steps } from 'fumadocs-ui/components/steps';
     - **参数 (Parameter)**: 描述总体的数值（例如，真实均值 `μ`）。
     - **样本 (Sample)**: 我们观测到的总体的一个子集。
     - **统计量 (Statistic)**: 样本数据的函数（例如，样本均值 `μ̂`）。它通常用作总体参数的估计量。
-
 <Steps>
 
 #### 1. 直接估计
@@ -78,5 +78,4 @@ import { Steps } from 'fumadocs-ui/components/steps';
     - `P(θ)`: **先验概率 (Prior)** - 在看到数据之前我们对参数的初始信念。
     - `P(D)`: **证据 (Evidence)** - 一个归一化常数。
 - **马尔可夫链蒙特卡洛 (MCMC)**: 一类算法（如 Metropolis-Hastings），用于在后验分布 `P(θ|D)` 过于复杂而无法直接计算时，从中抽取样本。这使我们能够近似后验分布并理解参数估计中的不确定性。
-
 </Steps>

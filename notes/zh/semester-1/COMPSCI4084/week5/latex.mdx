@@ -3,6 +3,9 @@ title: "LaTeX 文档处理"
 description: "LaTeX 高质量文档准备的入门，涵盖安装、基本结构、文本和数学格式化以及编译。"
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## 概要
 - **目标**：本笔记介绍了 LaTeX 这一强大而专业的文档准备系统，特别适用于学术论文、技术报告和学位论文。旨在为学习者提供创建结构化且美观文档的基础知识。
 - **范围**：涵盖 LaTeX 的基础知识，包括其安装（本地和通过 Overleaf 的云端）、最小文档结构、基本文本格式化命令（字体、大小）、文档分节以及强大的数学排版功能。它还涉及使用 Makefile 自动化编译和实际练习。
@@ -40,8 +43,6 @@ sudo apt install texlive-full
   - 本地安装提供更多控制，但需要大量的磁盘空间和维护。
 - **小结**：LaTeX 是专业文档创建的强大工具，具有本地和云端设置选项，非常适合学术和技术写作。
 
----
-
 ### 2. 基本文档结构与文本格式化
 - **动机**：结构良好的文档易于阅读和导航。LaTeX 提供了简单的命令来定义文档类、分节和应用各种文本样式，确保一致性和专业性。
 - **核心概念**：
@@ -68,19 +69,15 @@ sudo apt install texlive-full
 % Description: A simple LaTeX document demonstrating document class, text styles, and sectioning with cross-references.
 \documentclass{article}
 \begin{document}
-
 In \LaTeX, you may use \textit{italic} and \textbf{bold} face fonts.
 It is also possible to have \texttt{typewriter} and \textsf{sans-serif} fonts.
 You may change the font size from {\tiny very small} to {\Huge very large}.
-
 \section{Introduction}
 \label{sec:intro}
 Some intro text.
-
 \section{Another Section}
 \label{sec:nother}
 Please refer back to Section \ref{sec:intro}.
-
 \end{document}
 ```
 - **注意事项/最佳实践**：
@@ -88,8 +85,6 @@ Please refer back to Section \ref{sec:intro}.
   - 交叉引用（`\label`、`\ref`）自动更新页码/节号，防止手动错误。
   - 明智地选择字体样式以提高可读性和强调。
 - **小结**：LaTeX 提供了强大的命令来构建和格式化文本，从而创建清晰、有组织且专业的文档。
-
----
 
 ### 3. 数学排版
 - **动机**：LaTeX 最强大的优势之一是其无与伦比地排版复杂数学方程式和符号的能力，使其成为科学和工程文档的标准。
@@ -108,17 +103,14 @@ Please refer back to Section \ref{sec:intro}.
 % Description: Demonstrates a De Morgan rewrite rule and a distributivity rule using LaTeX's equation environment.
 \documentclass{article}
 \begin{document}
-
 Below is an instance of a De Morgan rewrite rule:
 \begin{equation}
 \lnot (A \land B) \equiv \lnot A \lor \lnot B
 \end{equation}
-
 Remember all the set equivalences you learnt in Algorithmic Foundations? Typeset them in a \LaTeX document. Here's a distributivity rule:
 \begin{equation}
 A \cup (B \cap C) \equiv (A \cup B) \cap (A \cup C)
 \end{equation}
-
 \end{document}
 ```
 - **注意事项/最佳实践**：
@@ -126,8 +118,6 @@ A \cup (B \cap C) \equiv (A \cup B) \cap (A \cup C)
   - 利用在线资源查找特定的数学符号。
   - 定期练习以熟练掌握数学语法。
 - **小结**：LaTeX 擅长数学排版，对方程式和符号的外观提供精确控制，这对于技术文档至关重要。
-
----
 
 ### 4. 使用 Makefile 自动化 LaTeX 编译
 - **动机**：编译 LaTeX 文档通常涉及多个步骤（例如，`pdflatex`、`bibtex`、两次 `pdflatex`）。Makefile 自动化了这一过程，确保文档始终正确高效地编译，尤其适用于复杂的项目。
@@ -144,15 +134,11 @@ A \cup (B \cap C) \equiv (A \cup B) \cap (A \cup C)
 ```makefile
 # Example: Makefile for LaTeX document compilation
 # Description: A simple Makefile to automate the compilation of a LaTeX document (firstdoc.tex) to PDF.
-
 PDF = firstdoc.pdf
 TEX = firstdoc.tex
-
 all: $(PDF)
-
 $(PDF): $(TEX)
 	pdflatex $(TEX)
-
 clean:
 	rm -f *.aux *.log *.out $(PDF)
 ```
@@ -161,8 +147,6 @@ clean:
   - 对于包含参考文献或索引的复杂文档，Makefile 可能需要额外的 `bibtex` 或 `makeindex` 命令。
 - **小结**：Makefile 对于自动化 LaTeX 编译非常宝贵，可以简化工作流程并确保任何项目规模的可靠文档生成。
 
----
-
 ## 最佳实践
 - **使用 Overleaf 进行协作**：利用 Overleaf 等基于云的平台，方便协作并随时随地访问 LaTeX。
 - **逻辑结构化**：始终使用节、子节和适当的环境来清晰地组织文档内容。
@@ -170,6 +154,5 @@ clean:
 - **自动化编译**：使用 Makefile 或集成开发环境（IDE）自动化编译过程，节省时间并减少错误。
 - **参考资源**：利用在线文档和维基（例如，Overleaf 教程、Wikibooks）查找特定命令和故障排除。
 
----
 ## Update History
 - 2025-10-22：初次创建。

@@ -2,6 +2,9 @@
 title: "2021 COMPSCI4084 Final Lab Exam (Python + Java)"
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 # 2021 COMPSCI4084 Final Lab Exam (Python + Java)
 
 ## 考试概述
@@ -22,7 +25,6 @@ title: "2021 COMPSCI4084 Final Lab Exam (Python + Java)"
 - 程序应在点击“Save”按钮时，将有效的用户名和密码保存到名为 `Users` 的数据库中 (4 Marks)。
 - 点击“Clear”按钮时，应清除所有窗口 (2 Marks)。
 - 点击“Display”按钮时，系统应显示数据库中保存的所有用户名和密码 (3 Marks)。
-
 **关键概念/知识点:**
 - tkinter GUI 界面设计
 - 数据库操作 (保存、显示、清除)
@@ -34,7 +36,6 @@ title: "2021 COMPSCI4084 Final Lab Exam (Python + Java)"
     a) 密码至少包含 8 个字符。
     b) 密码应包含数字。
 - 如果密码不满足以上两个条件，系统应拒绝并显示不符合要求的消息 (6 Marks)。
-
 **关键概念/知识点:**
 - 用户名唯一性验证
 - 密码复杂度验证 (长度、包含数字)
@@ -45,7 +46,6 @@ title: "2021 COMPSCI4084 Final Lab Exam (Python + Java)"
 ### 任务 1: Goods (3 Marks)
 **题目描述:**
 创建一个枚举类型 `Goods`，包含以下值：`BREAD, COAL, FISH, HELMET, IRON, PAPER, SHIELD, SWORD, WOOD, WOOL`。所有类应放在 `trading` 包中。
-
 **关键概念/知识点:**
 - Java 枚举类型
 
@@ -59,7 +59,6 @@ title: "2021 COMPSCI4084 Final Lab Exam (Python + Java)"
 - 完整的 `get` 方法集，但没有 `set` 方法。
 - 适当的 `equals()` 和 `hashCode()` 实现（基于所有三个字段的值）。
 - `toString()` 实现，生成类似“1 gem for 3 BREAD”的字符串表示。
-
 **关键概念/知识点:**
 - Java 类设计 (属性、构造函数、getter)
 - `equals()` 和 `hashCode()` 方法重写
@@ -74,7 +73,6 @@ title: "2021 COMPSCI4084 Final Lab Exam (Python + Java)"
     - `public int getAmount(Goods goods)`：返回当前某种商品的数量。
     - `public boolean canAfford(Trade trade)`：检查公民是否能负担某笔交易。
     - `public void executeTrade(Trade trade)`：执行交易，更新宝石和商品数量。
-
 **关键概念/知识点:**
 - Java 类设计 (属性、构造函数、方法)
 - 游戏逻辑实现 (交易、库存管理)
@@ -89,7 +87,6 @@ title: "2021 COMPSCI4084 Final Lab Exam (Python + Java)"
         - `gems` 值应在 1 到 5 之间（包含）。
         - `amount` 值应在 1 到 5 之间（包含）。
         - `Goods` 值应从 `Goods` 枚举中随机选择。
-
 **关键概念/知识点:**
 - Java 类设计 (属性、构造函数、方法)
 - 随机数生成
@@ -103,7 +100,6 @@ title: "2021 COMPSCI4084 Final Lab Exam (Python + Java)"
 - 如果当前 `Trade` 不包含在 `trader` 支持的交易列表中，则抛出 `IllegalArgumentException`。
 - 否则，调用 `citizen.executeTrade()` 并传入当前交易。
     - 如果 `executeTrade()` 返回 true，则该方法还应调用 `trader.addRandomTrade()`。
-
 **关键概念/知识点:**
 - 异常处理
 - 类之间的方法调用和交互

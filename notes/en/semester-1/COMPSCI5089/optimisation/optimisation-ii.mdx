@@ -3,81 +3,65 @@ title: "Optimisation II: Advanced Algorithms"
 description: "Exploring advanced optimisation algorithms beyond Gradient Descent, including Momentum, RMSprop, and Adam, to accelerate model training."
 ---
 
-import { Callout } from "fumadocs-ui/components/callout";
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
 
 ## Overview
 - **Goal**: To understand advanced optimisation algorithms that improve upon standard Gradient Descent by adapting the learning rate or using momentum.
 - **Scope**: This note covers Momentum, Nesterov Accelerated Gradient (NAG), AdaGrad, RMSprop, Adam, and Newton's Method.
 
 ## The Need for Advanced Optimisers
-
 While standard Gradient Descent and its variants (SGD, Mini-Batch) can find a minimum, they often struggle with:
 - **Slow convergence** in areas with low curvature (ravines).
 - Getting **stuck in local minima** or saddle points.
 - The need to **manually tune the learning rate**.
-
 Advanced optimisers aim to solve these issues.
 
 ## Momentum
-
 - **Intuition**: Momentum introduces a "velocity" component that helps the optimiser continue moving in the right direction and smooths out oscillations. Imagine a ball rolling down a hill; it accumulates momentum and doesn't stop instantly, helping it roll over small bumps.
 - **Update Rule**: It adds a fraction ($$\gamma$$) of the previous update vector ($$v_{t-1}$$) to the current gradient step.
-
   $$v_t = \gamma v_{t-1} + \alpha \nabla J(\theta)$$
   $$\theta = \theta - v_t$$
-
 <Callout title="Key Idea">
 Momentum helps accelerate SGD in the relevant direction and dampens oscillations.
 </Callout>
 
 ## Nesterov Accelerated Gradient (NAG)
-
 - **Intuition**: A smarter version of Momentum. Instead of calculating the gradient at the current position, it first makes a "lookahead" step in the direction of its accumulated velocity and then calculates the gradient from there to make a correction.
 - **Update Rule**: It applies the momentum step *before* computing the gradient.
-
   $$\theta_{\text{lookahead}} = \theta - \gamma v_{t-1}$$
   $$v_t = \gamma v_{t-1} + \alpha \nabla J(\theta_{\text{lookahead}})$$
   $$\theta = \theta - v_t$$
-
 <Callout title="Key Idea">
 NAG is a "smarter" momentum that anticipates where it's going and corrects its course, often leading to faster convergence.
 </Callout>
 
 ## AdaGrad (Adaptive Gradient)
-
 - **Intuition**: Adapts the learning rate for each parameter individually. It performs smaller updates for parameters that are frequently updated and larger updates for parameters that are infrequently updated.
 - **Key Feature**: It accumulates the square of the gradients in a cache, $$G_t$$. The learning rate for each parameter is then divided by the square root of this cache.
-
 <Callout title="Pros and Cons" type="warn">
   - **Pro**: Well-suited for sparse data (e.g., in NLP), as it boosts updates for infrequent features.
   - **Con**: The learning rate monotonically decreases and can eventually become infinitesimally small, stopping learning entirely.
 </Callout>
 
 ## RMSprop (Root Mean Square Propagation)
-
 - **Intuition**: An improvement over AdaGrad that resolves its diminishing learning rate problem.
 - **Key Feature**: Instead of accumulating all past squared gradients, RMSprop uses an exponentially decaying average. This means it gives more weight to recent gradients and "forgets" older ones, preventing the learning rate from vanishing.
-
 <Callout title="Key Idea">
 RMSprop adapts learning rates like AdaGrad but prevents them from shrinking to zero too quickly.
 </Callout>
 
 ## Adam (Adaptive Moment Estimation)
-
 - **Intuition**: The most popular and often default choice for deep learning. Adam combines the ideas of **Momentum** (using a moving average of the gradient) and **RMSprop** (using a moving average of the squared gradient).
 - **Key Feature**: It maintains two moving averages: one for the gradients themselves (like momentum) and another for the squared gradients (like RMSprop). This allows it to benefit from both adaptive learning rates and momentum.
-
 <Callout title="Default Choice">
 Adam is generally considered a robust and effective optimiser that works well across a wide range of problems with little hyperparameter tuning.
 </Callout>
 
 ## Newton's Method (Second-Order Optimisation)
-
 - **Intuition**: A more powerful method that uses second-order information (the curvature of the function) to find the minimum.
 - **Update Rule**: It uses the Hessian matrix ($$H$$), which is the matrix of second derivatives.
-
   $$\theta_{\text{new}} = \theta_{\text{old}} - H^{-1} \nabla J(\theta)$$
-
 <Callout title="Power vs. Cost" type="warn">
   - **Pro**: Converges much faster than first-order methods like Gradient Descent if the function is well-behaved.
   - **Con**: Computing the inverse of the Hessian matrix ($$H^{-1}$$) is extremely computationally expensive ($$O(n^3)$$) and impractical for large models.

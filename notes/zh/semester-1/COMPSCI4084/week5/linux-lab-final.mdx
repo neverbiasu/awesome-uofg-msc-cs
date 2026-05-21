@@ -3,6 +3,9 @@ title: "Linux 实验：命令行基础与 Shell 脚本编程"
 description: "Linux 命令行简介，涵盖基本导航、文件操作、基本实用程序和 Shell 脚本基础。"
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## 概要
 - **目标**：本笔记旨在全面指导掌握 Linux 命令行，实现与操作系统的有效交互、高效的文件管理、进程控制以及通过 Shell 脚本进行基本自动化。它旨在为桌面和远程服务器环境构建基础技能。
 - **范围**：涵盖基本的命令行概念，从基本导航（`pwd`、`cd`、`ls`）和文件操作（`echo`、`mkdir`、`mv`、`cp`、`rm`）到强大的实用程序（`cat`、`head`、`tail`、`ps`、`kill`、`man`）。它还介绍了 Shell 脚本编程的基础知识，包括创建、运行脚本以及通过用户输入和命令行参数使脚本具有交互性。
@@ -51,12 +54,10 @@ pwd
   - 理解分层文件系统结构。
 - **小结**：掌握基本的命令行导航是高效管理 Linux 系统的第一步，使用户能够移动和检查文件系统。
 
----
-
 ### 2. 文件和目录管理
 - **动机**：高效地创建、移动、复制和删除文件和目录是任何 Linux 用户的日常任务。这些命令提供了对数据组织的精确控制。
 - **核心概念**：
-  - `echo [text]`：将文本写入屏幕。可以使用 `>` 将输出重定向到文件。 
+  - `echo [text]`：将文本写入屏幕。可以使用 `>` 将输出重定向到文件。
   - `> [filename]`：将标准输出重定向到文件。如果文件不存在则创建，如果存在则覆盖。
   - `mkdir [directory_name]`：创建新目录。
   - `mv [source] [destination]`：移动或重命名文件/目录。
@@ -83,8 +84,6 @@ ls test_dir
   - `mv` 移动文件，`cp` 创建副本。
   - `rmdir` 仅用于空目录；`rm -r` 用于非空目录（谨慎使用）。
 - **小结**：Linux 提供了一套强大的命令来管理文件和目录，对数据组织和操作提供了精细的控制。
-
----
 
 ### 3. 基本实用程序：`cat`、`head`、`tail`、`ps`、`kill`、`man`
 - **动机**：除了基本的文件管理，一系列强大的实用程序帮助用户查看文件内容、检查进程和访问文档，这对于故障排除和系统理解至关重要。
@@ -118,8 +117,6 @@ man ls
   - `man` 是学习任何命令的最佳工具。
 - **小结**：基本实用程序提供了强大的功能，用于检查文件内容、监控和控制进程以及访问全面的文档，增强了用户管理和故障排除 Linux 系统的能力。
 
----
-
 ### 4. Shell 脚本编程基础
 - **动机**：Shell 脚本编程允许您通过将一系列命令组合到一个可执行文本文件中来自动化重复性任务。这显著提高了系统管理和开发工作流程的效率和一致性。
 - **核心概念**：
@@ -137,15 +134,11 @@ man ls
 ```bash
 # Example: Simple shell script with user input and arguments
 # Description: A script that greets the user and lists files in a specified directory.
-
 #!/bin/bash
-
 # Script: greet_and_list.sh
 # Usage: ./greet_and_list.sh [directory]
-
 read -p "Enter your name: " NAME
 echo "Hello, $NAME!"
-
 if [ -z "$1" ]; then
   echo "No directory specified. Listing current directory:"
   ls
@@ -161,8 +154,6 @@ fi
   - 逐步测试脚本以调试错误。
 - **小结**：Shell 脚本编程是 Linux 用户的一项基本技能，通过组合现有命令，可以实现任务自动化、创建自定义工具和高效管理复杂工作流程。
 
----
-
 ## 最佳实践
 - **定期练习**：持续练习命令行是提高熟练度和速度的最佳方式。
 - **使用 `man` 获取帮助**：当对命令或其选项有疑问时，请使用 `man [command]` 查阅其手册页。
@@ -171,6 +162,5 @@ fi
 - **使用管道组合命令**：学习使用 `|` 链接命令以创建强大的数据处理管道。
 - **从简单的脚本开始**：从小型、简单的脚本开始，逐步增加复杂性。
 
----
 ## Update History
 - 2025-10-22: Initial creation.

@@ -3,6 +3,9 @@ title: "Python Loops"
 description: "for loops, while loops, the range function, nested loops, and break/continue control flow."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## Overview
 - **Goal**: Master Python's loop structures to implement repetitive execution and conditional control.
 - **Scope**: Covers `for`/`while` loops, the `range` function, nested loops, and control statements. Does not cover the iterator protocol or generators.
@@ -32,7 +35,6 @@ description: "for loops, while loops, the range function, nested loops, and brea
 # range(1, 5) generates 1, 2, 3, 4 (5 is not included)
 for i in range(1, 5):
     print(i)  # Output: 1, 2, 3, 4
-
 # Iterating over a string
 # In each iteration, `ch` becomes one character from the string
 word = "Python"
@@ -44,8 +46,6 @@ for ch in word:
   - `range(start, stop)` goes from `start` to `stop-1`.
   - Loop variable names should be meaningful (`i`/`j`/`k` are only for simple counters).
 - **Summary**: `for` loops are suitable for scenarios with a known number of iterations or for iterating over a collection. `range` provides flexible control over the number of iterations.
-
----
 
 ### 2. The `range()` Function in Detail
 - **Motivation**: To generate integer sequences for controlling loop iterations or step sizes, supporting both forward and backward counting.
@@ -64,7 +64,6 @@ for ch in word:
 # step=2 means the counter increases by 2 each time
 for i in range(1, 10, 2):
     print(i)  # Output: 1, 3, 5, 7, 9
-
 # Reverse loop
 # step=-4 means the counter decreases by 4 each time
 for i in range(20, 0, -4):
@@ -75,8 +74,6 @@ for i in range(20, 0, -4):
   - For reverse order, `start` must be greater than `stop`, and `step` must be negative.
   - `range` returns a lazy sequence (saving memory). Use `list(range(...))` if you need an actual list.
 - **Summary**: The three-parameter form of `range` (start, stop, step) provides flexible sequence generation, supporting forward, reverse, and skipped steps.
-
----
 
 ### 3. `while` Loops
 - **Motivation**: Used when the number of iterations is unknown and depends on a dynamic condition.
@@ -98,7 +95,6 @@ while total < 100:
     num = int(input("Enter a number: "))
     total += num
 print(f"Total: {total}")
-
 # Condition-controlled loop
 # Continues based on user input
 again = "yes"
@@ -114,8 +110,6 @@ while again == "yes":
   - Use `for` for a known number of iterations, `while` for an unknown number.
   - A `while True` with a `break` can implement a post-check loop (execute first, then check).
 - **Summary**: `while` loops are for scenarios with an unknown number of iterations. You must ensure the condition can become `False` to avoid infinite loops.
-
----
 
 ### 4. Nested Loops
 - **Motivation**: To process 2D structures (like tables or matrices) or scenarios requiring multiple levels of iteration.
@@ -138,10 +132,9 @@ for row in range(3):
         col += 1
     print()  # Newline
 # Output:
-# (0,0) (0,1) (0,2) (0,3) 
-# (1,0) (1,1) (1,2) (1,3) 
-# (2,0) (2,1) (2,2) (2,3) 
-
+# (0,0) (0,1) (0,2) (0,3)
+# (1,0) (1,1) (1,2) (1,3)
+# (2,0) (2,1) (2,2) (2,3)
 # Simple multiplication table (partial)
 # The outer loop controls the multiplicand, the inner loop the multiplier
 for i in range(1, 4):
@@ -154,8 +147,6 @@ for i in range(1, 4):
   - Nesting should not be too deep (generally no more than 3 levels). Consider splitting into functions for more complex logic.
   - The inner loop runs completely for each outer iteration. Be mindful of time complexity (O(n²) or higher).
 - **Summary**: Nested loops are for multi-level iteration. Pay attention to variable scope and performance implications.
-
----
 
 ### 5. `break` and `continue`
 - **Motivation**: To exit a loop early or skip the current iteration based on a specific condition.
@@ -175,7 +166,6 @@ for num in numbers:
     if num % 2 == 0:
         print(f"Found first even: {num}")
         break  # Exit the loop immediately after finding it
-
 # `continue` example: skip items that don't meet a condition
 # Prints only odd numbers, skipping even ones
 for num in range(1, 11):
@@ -192,8 +182,6 @@ for num in range(1, 11):
   - A function `return` can be an alternative to `break` (the early return pattern).
 - **Summary**: `break` is for early exit, `continue` is for skipping an iteration. Use them judiciously, being mindful of their impact on control flow.
 
----
-
 ## Best Practices
 - For a known number of iterations, prefer `for` + `range`. For an unknown number, use `while`.
 - Loop variable names should be descriptive; `i`/`j`/`k` are only for simple counters.
@@ -201,8 +189,6 @@ for num in range(1, 11):
 - Nested loops should not be deeper than 3 levels. Consider extracting complex logic into functions.
 - Use `break`/`continue` sparingly. Prefer conditional expressions or guard clauses to maintain clarity.
 - `range` uses a half-open interval; the `stop` value is not included in the sequence.
-
----
 
 ## Update History
 - 2025-09-30: Initial version created.

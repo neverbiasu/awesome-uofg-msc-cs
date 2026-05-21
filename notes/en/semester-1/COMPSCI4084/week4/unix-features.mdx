@@ -3,6 +3,9 @@ title: "Unix Core Features"
 description: "An overview of the core features of the Unix operating system, including its multi-user/multi-tasking nature, kernel/shell architecture, and design philosophy."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## Overview
 - **Goal**: To understand the foundational features and design principles of the Unix operating system.
 - **Scope**: Covers the concepts of multi-user, multi-tasking, the kernel/shell architecture, processes, and the basic structure of the file system. This note focuses on the 'what' and 'why' of Unix's design.
@@ -25,8 +28,6 @@ description: "An overview of the core features of the Unix operating system, inc
   - **Development Tools**: Unix provides a rich ecosystem of support tools for developers, such as compilers and debuggers.
 - **Summary**: Unix's core features provided a powerful, flexible, and portable environment that set it apart from other systems of its time.
 
----
-
 ### 2. Basic Unix Structure
 - **Motivation**: To understand the fundamental components of the Unix operating system and how they interact.
 - **Core Concepts**:
@@ -35,26 +36,20 @@ description: "An overview of the core features of the Unix operating system, inc
   - **Utilities**: A collection of programs that provide standard functionality, such as file management (`ls`, `rm`), process management (`ps`, `kill`), and user management (`passwd`).
 - **Summary**: Unix uses a layered architecture: the kernel manages the system's core, utilities provide common functions, and the shell acts as the command interpreter for the user.
 
----
-
 ### 3. Process Management
 - **Motivation**: Understanding how Unix handles running programs (processes) is key to managing system resources and troubleshooting.
 - **Core Concepts**:
   - **Process**: Every program running on a Unix system is a process. When a command is typed, the OS creates a Process Control Block (PCB) to hold its state, priority, and other information.
-  - **Process Management Utilities**: 
+  - **Process Management Utilities**:
     - `ps`: Lists currently running processes.
     - `kill`: Sends a signal (e.g., terminate) to a process.
     - `&`: An operator to run a process in the background.
   - **Memory Management**: When there is not enough RAM, the kernel swaps a process out to disk to free up memory. Excessive swapping, known as 'disk thrashing', degrades system performance.
 - **Summary**: Unix manages concurrent programs as processes, providing tools like `ps` and `kill` to monitor and control them.
 
----
-
 ## Best Practices
 - **Choose a modern shell**: While several shells exist, `bash` (Bourne-Again Shell) or `zsh` are modern standards that offer significant improvements (like history and scripting) over older shells.
 - **Leverage the tools**: Understand that most operations are performed by small, focused utility programs, which is a core part of the Unix philosophy.
 
----
 ## Update History
 - 2025-10-20: Created based on the `UnixFeatures.md` source material as part of a major refactoring.
-

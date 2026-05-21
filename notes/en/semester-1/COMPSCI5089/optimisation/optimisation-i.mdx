@@ -3,14 +3,14 @@ title: "Optimisation I: Gradient Descent"
 description: "An introduction to the principles of optimisation, focusing on Gradient Descent and its variants as foundational methods for training machine learning models."
 ---
 
-import { Callout } from "fumadocs-ui/components/callout";
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
 
 ## Overview
 - **Goal**: To understand how optimisation is used to "learn" the parameters of a model by minimizing an objective function.
 - **Scope**: This note covers objective functions, constraints, convexity, and an in-depth look at Gradient Descent, Stochastic Gradient Descent (SGD), and Mini-Batch Gradient Descent.
 
 ## Core Concepts of Optimisation
-
 Optimisation is the process of finding the best set of parameters (or weights) for a model that minimizes or maximizes a certain function, known as the objective function.
 
 ### Objective Function
@@ -22,7 +22,6 @@ Optimisation is the process of finding the best set of parameters (or weights) f
 - **Unconstrained optimisation** problems have no such conditions.
 
 ## Convex vs. Non-Convex Optimisation
-
 <Callout title="The Shape of the Problem">
 The geometry of the objective function's surface determines the difficulty of the optimisation problem.
 </Callout>
@@ -38,21 +37,16 @@ The geometry of the objective function's surface determines the difficulty of th
 - Most deep learning problems are highly non-convex.
 
 ## Gradient Descent
-
 Gradient Descent is an iterative optimisation algorithm used to find a local minimum of a differentiable function.
-
 - **Intuition**: Imagine you are standing on a hillside and want to get to the bottom. You would look around to see which direction goes downhill most steeply and take a step in that direction. You repeat this process until you can't go any further down.
 - The "steepest direction" is the **negative of the gradient** of the objective function, $$- \nabla J(\theta)$$.
 
 ### The Update Rule
 The core of Gradient Descent is the update rule, applied iteratively:
-
 $$\theta_{\text{new}} = \theta_{\text{old}} - \alpha \nabla J(\theta_{\text{old}})$$
-
 - $$\theta$$: The parameters of the model.
 - $$\alpha$$: The **learning rate**, a small scalar that controls the size of each step.
 - $$\nabla J(\theta)$$: The gradient of the objective function with respect to the parameters.
-
 <Callout title="The Learning Rate α" type="warn">
 Choosing the right learning rate is critical:
 - **Too small**: The algorithm will converge very slowly.
@@ -60,7 +54,6 @@ Choosing the right learning rate is critical:
 </Callout>
 
 ## Variants of Gradient Descent
-
 The main difference between the variants of Gradient Descent is how much data is used to compute the gradient at each step.
 
 ### Batch Gradient Descent

@@ -3,6 +3,7 @@ title: "Probability & Statistics III: Continuous Random Variables and Inference"
 description: "Exploring continuous random variables, the normal distribution, multivariate distributions, Monte Carlo methods, and various approaches to statistical inference."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
 import { Steps } from 'fumadocs-ui/components/steps';
 
 ## Summary
@@ -58,7 +59,6 @@ import { Steps } from 'fumadocs-ui/components/steps';
     - **Parameter**: A value that describes the population (e.g., the true mean `μ`).
     - **Sample**: A subset of the population that we have observed.
     - **Statistic**: A function of the sample data (e.g., the sample mean `μ̂`). It is often used as an estimator for a population parameter.
-
 <Steps>
 
 #### 1. Direct Estimation
@@ -78,5 +78,4 @@ import { Steps } from 'fumadocs-ui/components/steps';
     - `P(θ)`: **Prior** - our initial belief about the parameters before seeing data.
     - `P(D)`: **Evidence** - a normalization constant.
 - **Markov Chain Monte Carlo (MCMC)**: A class of algorithms (like Metropolis-Hastings) used to draw samples from the posterior distribution `P(θ|D)` when it's too complex to compute directly. This allows us to approximate the posterior distribution and understand the uncertainty in our parameter estimates.
-
 </Steps>

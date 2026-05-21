@@ -3,6 +3,9 @@ title: "文件系统：导航与操作"
 description: "一份关于 Unix 文件系统的综合指南，涵盖目录导航、文件和目录操作，以及访问 Unix 环境的方法。"
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## 概要
 - **目标**：掌握 Unix 文件系统的导航，以及创建、删除、复制和移动文件与目录的命令。
 - **范围**：涵盖访问 Unix 终端、文件系统层次结构、核心导航与操作命令，以及文件压缩。
@@ -24,8 +27,6 @@ description: "一份关于 Unix 文件系统的综合指南，涵盖目录导航
   - **macOS/Linux 终端**：这两种操作系统都提供了内置的终端应用程序，可直接访问类 Unix 的 shell。
 - **小结**：无论您的机器是本地的还是远程的，像 SSH、WSL 和内置终端这样的工具都提供了进入 Unix shell 的入口点。
 
----
-
 ### 2. 文件系统层次结构
 - **动机**：为了有效地导航，您必须首先理解地图。Unix 文件系统是一个分层的树状结构。
 - **核心概念**：
@@ -36,8 +37,6 @@ description: "一份关于 Unix 文件系统的综合指南，涵盖目录导航
   - **绝对路径**：从根目录开始的路径（例如 `/home/user/documents`）。无论您当前的位置在哪里，它都是明确的。
   - **相对路径**：从您当前目录开始的路径（例如 `../images` 或 `./notes`）。
 - **小结**：理解树状结构以及绝对路径和相对路径之间的区别，是所有文件系统操作的基础。
-
----
 
 ### 3. 核心导航命令
 - **动机**：这三个命令是在文件系统中定位自己和四处移动的基本工具。
@@ -51,8 +50,6 @@ description: "一份关于 Unix 文件系统的综合指南，涵盖目录导航
     - `cd ../project`：导航到相对路径。
     - `cd`：不带参数时，导航到您的主目录 (`~`)。
 - **小结**：使用 `pwd` 知道您在哪里，使用 `ls` 查看周围有什么，使用 `cd` 进行移动。
-
----
 
 ### 4. 文件和目录操作
 - **动机**：这些命令允许您创建、组织和删除构成文件系统的文件和目录。
@@ -68,22 +65,16 @@ description: "一份关于 Unix 文件系统的综合指南，涵盖目录导航
   ```bash
   # 创建一个项目目录并进入
   mkdir my_project && cd my_project
-
   # 创建一个笔记文件
   touch notes.txt
-
   # 复制它作为备份
   cp notes.txt notes.bak
-
   # 创建一个归档目录并将备份文件移入
   mkdir archive
   mv notes.bak archive/
-
   # 删除原始文件
   rm notes.txt
   ```
-
----
 
 ### 5. 归档与压缩
 - **动机**：将多个文件捆绑成一个单独的归档文件，以便于传输或存储。
@@ -94,21 +85,16 @@ description: "一份关于 Unix 文件系统的综合指南，涵盖目录导航
   ```bash
   # 压缩整个目录
   zip -r project_archive.zip my_project/
-
   # 将归档文件解压到新位置
   mkdir restored_project
   cd restored_project
   unzip ../project_archive.zip
   ```
 
----
-
 ## 最佳实践
 - **确认位置**：在运行像 `rm` 这样的破坏性命令之前，始终使用 `pwd` 来确保您在正确的目录中。
 - **使用 Tab 自动补全**：按 `Tab` 键自动补全文件名和目录名。这可以减少拼写错误并节省时间。
 - **警惕 `rm -rf`**：此命令会强制递归删除文件。一个小小的拼写错误就可能清除重要数据。在按 Enter 键之前，请仔细检查您的命令。
 
----
 ## 更新记录
 - 2025-10-20：作为重大重构的一部分，通过合并 `Exploring_Files_and_Directories...`、`0_getting_started.md` 和 `1_files.md` 创建。
-

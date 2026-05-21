@@ -3,6 +3,9 @@ title: "Conda"
 description: "环境与包管理、环境生命周期、包安装与更新、导出与复现、最佳实践"
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## 概要
 - 目标：掌握 Conda 的环境与包管理，能创建、激活、导出与复现环境。
 - 范围：安装与更新、环境管理、包管理、导出/导入 YAML、避免在 base 环境开发。
@@ -24,8 +27,6 @@ conda update conda
 - 注意事项/最佳实践：安装后首要验证；更新可能较慢，耐心等待。
 - 小结：先验再用，保持 Conda 最新可减少兼容问题。
 
----
-
 ### 2. 创建与激活环境（指定 Python 版本）
 - 核心概念：独立环境隔离依赖，避免项目之间相互影响。
 - 命令
@@ -37,8 +38,6 @@ conda deactivate
 - 使用场景：按项目/课程一环境；不同项目可并行维护。
 - 小结：每个项目一环境；退出环境再切换或删除。
 
----
-
 ### 3. 管理环境（列出/删除/克隆）
 - 命令
 ```bash
@@ -48,8 +47,6 @@ conda create --name newenv --clone myenv
 ```
 - 注意事项：删除需加 `--all`；克隆可快速复制依赖状态。
 - 小结：列出/删除/克隆覆盖典型生命周期操作。
-
----
 
 ### 4. 包管理（安装/更新/移除）
 - 命令
@@ -61,8 +58,6 @@ conda remove numpy
 - 注意事项：按需安装最小集合，减少求解时间与冲突。
 - 小结：安装/更新/移除三步，保持环境精简可控。
 
----
-
 ### 5. 导出与复现（YAML）
 - 命令
 ```bash
@@ -72,13 +67,9 @@ conda env create -f environment.yml
 - 使用场景：团队共享、跨机迁移、课堂复现实验环境。
 - 小结：`environment.yml` 是可复现的环境说明书，应纳入版本控制。
 
----
-
 ## 最佳实践
 - 为每个项目单独创建环境，避免污染 base。
 - 定期更新环境与包；升级前备份或导出 environment.yml。
 - 在项目仓库记录环境信息与使用方法（README + environment.yml）。
-
----
 
 ## 更新记录

@@ -1,22 +1,59 @@
 ---
-title: Week 3 Lab Exercises
-description: This page collects lab exercises and reference solution points for Week 3 (NumPy / Pandas / Matplotlib).
+title: "Week 3 Lab Exercises"
+description: "This page collects lab exercises and reference solution points for Week 3 (NumPy / Pandas / Matplotlib)."
 ---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+```python
+
+```python
+```python
+import numpy as np
+```
+```
+
+```python
+```python
+import pandas as pd
+```
+```
+
+```python
+```python
+import numpy as np
+```
+```
+
+```python
+```python
+import matplotlib.pyplot as plt
+```
+```
+
+plt.plot(x, y, label='y=2x')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Example Plot')
+plt.legend()
+plt.show()
+```
 
 ## Overview
 - This page lists the exercises from Lab 4 and Lab 5 and provides key solution ideas and reference code snippets to help with review and self-assessment.
 
 ## Exercise Points and Reference Implementations
+
 ### NumPy Exercises
 - **Problem**: Test if no element in an array is zero (`all`).
 - **Key Point**: Use `np.all(arr != 0)` or `not np.any(arr == 0)` to check.
 - **Reference**:
 ```python
-import numpy as np
+
 arr = np.array([1, 2, 3])
 print(np.all(arr != 0))  # True
 ```
-
 - **Problem**: Perform element-wise comparison of two arrays (`>`, `>=`, `<`, `<=`).
 - **Key Point**: Directly use comparison operators to get a boolean array.
 - **Reference**:
@@ -25,7 +62,6 @@ a = np.array([45, 67, 23])
 b = np.array([56, 23, 89])
 print(a > b)
 ```
-
 - **Problem**: Create a 1D array composed of 8 zeros, 5 ones, and 10 fives.
 - **Key Point**: Use `np.concatenate` or `np.repeat`.
 - **Reference**:
@@ -38,8 +74,6 @@ arr = np.concatenate([np.zeros(8), np.ones(5), np.repeat(5, 10)])
 - **Key Points**: Use `df.head(3)`, `df[df['attempts'] > 2]`, `df.shape`, `df[(df['score'] >= 14) & (df['score'] <= 20)]`, `df.loc['c', 'score'] = 11.5`, `df['score'].mean()`.
 - **Reference**:
 ```python
-import pandas as pd
-import numpy as np
 
 labels = list('abcdefghij')
 assessment_results = {
@@ -48,7 +82,6 @@ assessment_results = {
     'attempts': [1, 3, 2, 3, 2, 3, 1, 1, 2, 1],
     'qualify': ['yes', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'no', 'no', 'yes']
 }
-
 df = pd.DataFrame(assessment_results, index=labels)
 print(df.head(3))
 print(df[df['attempts'] > 2])
@@ -63,15 +96,9 @@ print(df['score'].mean())
 - **Key Points**: Use APIs like `plt.plot`, `plt.legend`, `plt.bar` + `yerr`, `plt.subplots`.
 - **Reference**:
 ```python
-import matplotlib.pyplot as plt
+
 x = list(range(1, 31))
 y = [2 * i for i in x]
-plt.plot(x, y, label='y=2x')
-plt.xlabel('x')
-plt.ylabel('y')
-plt.title('Example Plot')
-plt.legend()
-plt.show()
 ```
 
 ## Tips and Grading Points
@@ -79,6 +106,5 @@ plt.show()
 - **Pandas problems** focus on the use of indexing, boolean filtering, and handling of missing values.
 - **Matplotlib problems** focus on chart clarity (labels/legends) and subplot layout.
 
----
 ## Update History
 - 2025-10-08: Organized reference points based on Lab 4 and Lab 5 exercises.

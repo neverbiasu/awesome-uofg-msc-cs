@@ -3,6 +3,25 @@ title: "Python Basics"
 description: "Variables and types, operators, sequences/mappings, string formatting, input/output, code style, and type hints."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+```python
+
+```python
+```python
+import re
+```
+```
+
+```python
+```python
+from typing import Iterable, List
+```
+```
+
+```
+
 ## Overview
 - **Goal**: Familiarize with core built-in types and common operations. Build a solid foundation in expressions, I/O, string formatting, and code style.
 - **Applicable for**: The foundation for subsequent topics like conditionals, loops, data processing, and object-oriented programming.
@@ -34,11 +53,9 @@ print(animal)
 ```python
 x, y = 10, 3
 print(x // y, x % y, x ** y)
-
 s = "ProgSD"
 print(s[:3], s[-2:])
 print(f"{s} length={len(s)}")
-
 info = {"name": "Alice", "score": 90}
 keys = set(info)
 ```
@@ -92,8 +109,6 @@ except ValueError:
 
 ### 7. Code Style and Type Hinting
 ```python
-from typing import Iterable, List
-
 def head(xs: Iterable[int], n: int = 5) -> List[int]:
     return list(xs)[:n]
 ```
@@ -126,15 +141,13 @@ print(s[1:4])       # yth
 ### 9. Introduction to Regular Expressions (`re` module)
 - **Common functions**: `findall`, `search`, `split`, `sub`
 ```python
-import re
+
 text = "ab1 cd2 ef3"
 print(re.findall(r"\d", text))         # ['1','2','3']
 print(re.search(r"cd\d", text).group()) # 'cd2'
 print(re.split(r"\s+", text))           # ['ab1','cd2','ef3']
 print(re.sub(r"\d", "*", text))        # 'ab* cd* ef*'
 ```
-
----
 
 ## Best Practices
 - Choose the right data structure to express your intent. Avoid sharing mutable objects to prevent hidden side effects.

@@ -3,6 +3,20 @@ title: "Object-Oriented Programming (OOP) in Python"
 description: "Classes and objects, encapsulation (name mangling), inheritance vs. composition, data classes, immutable objects, and dunder methods for representation."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+```python
+acc.deposit(25)
+
+```python
+```python
+from dataclasses import dataclass
+```
+```
+
+```
+
 ## Overview
 - **Goal**: Understand classes, objects, encapsulation, inheritance, and composition, and be able to model problems and constraints using an appropriate object model.
 - **Scope**: Covers class definition and instantiation, constructors and methods, attributes and encapsulation, inheritance and method overriding, composition, common dunder methods, and simple data classes.
@@ -24,14 +38,10 @@ class Account:
         self.balance += amount
     def __str__(self) -> str:
         return f"Account({self.owner}, balance={self.balance:.2f})"
-
 acc = Account("Alice", 100)
-acc.deposit(25)
 print(acc)  # Account(Alice, balance=125.00)
 ```
 - **Key Points**: `__init__` initializes the instance's state. The first parameter of an instance method is conventionally named `self`.
-
----
 
 ### 2. Attributes, Encapsulation, and Name Mangling
 ```python
@@ -41,7 +51,6 @@ class SafeBox:
         self.__password = password        # Triggers name mangling → _SafeBox__password
     def check(self, guess: str) -> bool:
         return guess == self.__password
-
 box = SafeBox("1234")
 print(box._hint)
 # This is not recommended, but demonstrates the effect of name mangling:
@@ -49,8 +58,6 @@ print(box._SafeBox__password)
 ```
 - **Key Points**: A single underscore is a convention. A double underscore rewrites the attribute name to reduce accidental access from subclasses or external code.
 - You can use `@property` to expose read-only or computed attributes and control invariants.
-
----
 
 ### 3. Inheritance and Method Overriding (Polymorphism)
 ```python
@@ -63,16 +70,12 @@ class Dog(Animal):
 class Cat(Animal):
     def speak(self) -> str:
         return "meow"
-
 def chorus(pets: list[Animal]) -> None:
     for p in pets:
         print(p.speak())
-
 chorus([Dog(), Cat()])  # Polymorphic call
 ```
 - **Key Points**: Subclasses can override parent class methods. Use `super().__init__()` when necessary to initialize the parent part of the object.
-
----
 
 ### 4. Composition Over Inheritance
 ```python
@@ -84,12 +87,9 @@ class Car:
         self.engine = engine
     def drive(self) -> str:
         return self.engine.start() + ", driving"
-
 print(Car(Engine()).drive())
 ```
 - **Key Points**: Use composition when a "has-a" relationship is more appropriate than an "is-a" relationship. It reduces coupling and improves reusability.
-
----
 
 ### 5. Common Dunder Methods: `__str__`/`__repr__`/`__eq__`
 ```python
@@ -104,29 +104,21 @@ class Point:
         if not isinstance(other, Point):
             return NotImplemented
         return (self.x, self.y) == (other.x, other.y)
-
 print(Point(1,2) == Point(1,2))  # True (value equality)
 ```
 - **Key Points**: `__repr__` should be as "reproducible" as possible. `__eq__` defines value semantics; avoid using `is` for value comparison.
 
----
-
 ### 6. Dataclasses and Immutable Objects
 ```python
-from dataclasses import dataclass
-
 @dataclass(frozen=True)
 class User:
     name: str
     email: str
-
 u = User("Alice", "a@example.com")
 print(u)           # User(name='Alice', email='a@example.com')
 # u.name = "Bob"   # This will raise an error: frozen dataclasses are immutable
 ```
 - **Key Points**: Dataclasses automatically generate `__init__`, `__repr__`, `__eq__`, etc. `frozen=True` helps in creating immutable objects.
-
----
 
 ## Best Practices
 - **Single Responsibility**: A class should focus on one abstraction. Methods should be short and have descriptive names.
@@ -134,4 +126,3 @@ print(u)           # User(name='Alice', email='a@example.com')
 - **Avoid Exposing Mutable Internal State**: Use properties or return copies.
 - **Implement `__repr__`** for developer-friendly debugging and `__eq__` for value semantics as needed.
 - **Use double underscores for privacy sparingly**, as it can increase the cost of testing and extension.
-

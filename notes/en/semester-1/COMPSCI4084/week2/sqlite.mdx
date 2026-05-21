@@ -3,6 +3,30 @@ title: "Introduction to SQLite"
 description: "Using Python's sqlite3 module for local relational database operations: creating tables, inserting/querying/updating/deleting data, parameterized queries, and transaction management."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+```python
+
+```python
+```python
+import sqlite3
+```
+```
+
+cursor.execute('''
+cursor.execute('INSERT INTO students (id, name, class, grade) VALUES (1, "Mary", "Python", 67)')
+conn.commit()
+cursor.execute('SELECT id, name, grade FROM students')
+cursor.execute('UPDATE students SET name = ? WHERE id = ?', ("Richard", 1))
+conn.commit()
+cursor.execute('DELETE FROM students WHERE id = ?', (1,))
+conn.commit()
+cursor.execute('SELECT * FROM students WHERE class = ?', (which_class,))
+cur.execute('INSERT INTO students (name, class, grade) VALUES (?, ?, ?)', ('Alice', 'Python', 85))
+conn.commit()
+```
+
 ## Overview
 - This document introduces the basic concepts of SQLite and common patterns for performing database operations in Python using the `sqlite3` module.
 - It covers the idea of relational databases, table design (primary keys/data types/constraints), basic SQL operations (CREATE/INSERT/SELECT/UPDATE/DELETE), parameterized queries to prevent SQL injection, and transaction/connection management.
@@ -32,7 +56,6 @@ description: "Using Python's sqlite3 module for local relational database operat
 - Split repetitive information into separate tables (e.g., `students` and `classes`) and connect them via foreign keys or JOINs.
 
 #### Example
-
 ```sql
 -- Example schema for a students table
 CREATE TABLE IF NOT EXISTS students (
@@ -41,7 +64,6 @@ CREATE TABLE IF NOT EXISTS students (
     class TEXT NOT NULL,
     grade INTEGER
 );
-
 -- Example schema for a class table
 CREATE TABLE IF NOT EXISTS class (
     class TEXT PRIMARY KEY,
@@ -57,8 +79,6 @@ CREATE TABLE IF NOT EXISTS class (
 #### Summary
 Good table design is the foundation of database performance and maintainability. Primary keys and constraints help ensure data consistency.
 
----
-
 ### 2. Using `sqlite3` in Python: Connection and Cursor
 
 #### Motivation
@@ -73,9 +93,7 @@ Good table design is the foundation of database performance and maintainability.
 - Data persistence in small applications, educational examples, development prototypes, and utility scripts.
 
 #### Example
-
 ```python
-import sqlite3
 
 with sqlite3.connect('company.db') as conn:
     cursor = conn.cursor()
@@ -90,8 +108,6 @@ with sqlite3.connect('company.db') as conn:
 #### Summary
 `sqlite3` provides a simple connection and cursor interface. Using `with` to manage transactions and connections is the recommended practice.
 
----
-
 ### 3. CRUD: Create, Read, Update, Delete
 
 #### Motivation
@@ -105,10 +121,8 @@ with sqlite3.connect('company.db') as conn:
 - Initializing a database and inserting seed data; querying for specific records; updating user information; deleting expired records, etc.
 
 #### Example
-
 ```python
 # Create a table (one-time operation)
-cursor.execute('''
 CREATE TABLE IF NOT EXISTS students(
     id INTEGER PRIMARY KEY,
     name TEXT NOT NULL,
@@ -116,23 +130,12 @@ CREATE TABLE IF NOT EXISTS students(
     grade INTEGER
 )
 ''')
-
 # Insert (see next section for parameterized example)
-cursor.execute('INSERT INTO students (id, name, class, grade) VALUES (1, "Mary", "Python", 67)')
-conn.commit()
-
 # Query
-cursor.execute('SELECT id, name, grade FROM students')
 for row in cursor.fetchall():
     print(row)
-
 # Update
-cursor.execute('UPDATE students SET name = ? WHERE id = ?', ("Richard", 1))
-conn.commit()
-
 # Delete
-cursor.execute('DELETE FROM students WHERE id = ?', (1,))
-conn.commit()
 ```
 
 #### Notes/Best Practices
@@ -141,8 +144,6 @@ conn.commit()
 
 #### Summary
 Proficient use of CRUD statements combined with transaction management enables reliable data operations.
-
----
 
 ### 4. Parameterized Queries and Injection Prevention
 
@@ -156,10 +157,8 @@ Proficient use of CRUD statements combined with transaction management enables r
 - Receiving user input (e.g., via `input()`, command line, or web API) and executing queries or updates based on it.
 
 #### Example
-
 ```python
 which_class = input('Enter a class: ')
-cursor.execute('SELECT * FROM students WHERE class = ?', (which_class,))
 rows = cursor.fetchall()
 for row in rows:
     print(row)
@@ -171,8 +170,6 @@ for row in rows:
 
 #### Summary
 Parameterized queries are the simplest and most effective way to prevent SQL injection. Make it a habit.
-
----
 
 ### 5. Transaction Management: `commit` and `rollback`
 
@@ -188,7 +185,6 @@ Parameterized queries are the simplest and most effective way to prevent SQL inj
 - **Batch inserts**: Commit only if all insertions succeed; otherwise, roll back.
 
 #### Example
-
 ```python
 try:
     with sqlite3.connect('company.db') as conn:
@@ -207,8 +203,6 @@ except Exception as e:
 #### Summary
 Transactions guarantee the atomicity of a series of database operations. Proper use of `commit`/`rollback` is fundamental to database programming.
 
----
-
 ### 6. Table Joins (`JOIN`) and Data Extraction
 
 #### Motivation
@@ -221,7 +215,6 @@ Transactions guarantee the atomicity of a series of database operations. Proper 
 - When querying for students and their class lecturers, join the `students` and `class` tables on the shared `class` field.
 
 #### Example
-
 ```sql
 SELECT students.id, students.name, class.lecturer
 FROM students
@@ -236,8 +229,6 @@ WHERE students.grade > 70;
 #### Summary
 `JOIN` is a powerful feature of relational databases, used to combine and extract desired information from multiple tables.
 
----
-
 ### 7. Common Errors and Debugging Tips
 
 #### Motivation
@@ -248,13 +239,9 @@ WHERE students.grade > 70;
 - Use `cursor.lastrowid` to get the primary key of the most recently inserted record. Use `cursor.rowcount` to check the number of affected rows (support for `rowcount` is limited in SQLite).
 
 #### Example
-
 ```python
 # Get the auto-generated id after an insert
-cur.execute('INSERT INTO students (name, class, grade) VALUES (?, ?, ?)', ('Alice', 'Python', 85))
 print('New id:', cur.lastrowid)
-conn.commit()
-
 # Query and print error context
 try:
     cur.execute('SELECT * FROM non_existing_table')
@@ -269,16 +256,11 @@ except sqlite3.OperationalError as e:
 #### Summary
 Printing error messages, logging SQL, and using transactions properly can significantly improve debugging efficiency and reduce production incidents.
 
----
-
 ## Best Practices (Quick Reference)
-
 - Use parameterized queries (`?`) to avoid SQL injection.
 - Use `with sqlite3.connect(...) as conn:` to manage transactions and ensure connections are closed.
 - Create indexes on frequently queried columns to improve performance.
 - Use `executemany()` for batch insertions to improve performance.
 - Verify SQL logic in a test database before modifying important data.
-
----
 
 ## Update History

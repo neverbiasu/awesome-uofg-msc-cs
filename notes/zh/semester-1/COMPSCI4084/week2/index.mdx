@@ -1,7 +1,10 @@
 ---
-title: "Week 2"
+title: "Week 2: Core Concepts"
 description: "Week 2 精简学习笔记（Python 函数, 循环, 数据结构, 文件处理, SQLite, PyTorch 入门）"
 ---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
 
 ## 概要
 - 本周延续 tAPP + Lab 形式，深化 Python 编程能力。
@@ -9,55 +12,7 @@ description: "Week 2 精简学习笔记（Python 函数, 循环, 数据结构, �
 
 ## 本周安排（按顺序）
 | Session | 主题 | 说明 |
-|---|---|---|
-| Class 2 | 函数、循环、数据结构 | 函数参数与返回值；for/while 循环；列表、元组、字典基础操作 |
-| Class 3 | 文件处理、SQLite、PyTorch | 文件读写与异常处理；SQL 基础与 SQLite3；PyTorch 张量与基本操作 |
-
-## 学习目标
-1. 掌握函数定义、参数传递（位置/关键字/默认参数）与返回值。
-2. 熟练使用 for/while 循环及 range 函数；理解循环中的 break/continue。
-3. 掌握列表、元组、字典的创建、访问、修改与遍历操作。
-4. 能够进行文件读写操作并处理常见异常。
-5. 理解 SQLite 基础操作（创建表、插入、查询、更新、删除）。
-6. 了解 PyTorch 基础概念及张量（Tensor）的基本操作。
-
-## 关键知识点
-- **函数与变量管理**：
-  - 函数定义、参数（位置、关键字、默认值）、返回值、作用域
-  - 变量管理与副作用（side effects）；纯函数 vs 副作用函数
-- **循环结构**：
-  - for 循环（range、字符串、列表遍历）；while 循环与条件控制
-  - break/continue 语句；嵌套循环
-- **数据结构**：
-  - 列表（list）：可变、索引、切片、append/insert/remove/sort
-  - 元组（tuple）：不可变、打包与解包
-  - 字典（dict）：键值对、访问、更新、遍历（keys/values/items）
-- **文件与异常**：
-  - 文件打开模式（r/w/a）；with 语句与上下文管理
-  - 异常处理（try/except/finally）；常见异常类型
-- **SQLite 数据库**：
-  - 连接与游标；CREATE TABLE、INSERT、SELECT、UPDATE、DELETE
-  - 参数化查询与 SQL 注入防护
-- **PyTorch 入门**：
-  - 张量（Tensor）创建与操作；设备管理（CPU/GPU）
-  - 基本运算与张量形状操作
-
-## 实践清单（自检）
-- [ ] 编写带有多个参数（含默认值）的函数，并测试不同调用方式。
-- [ ] 使用 for 和 while 循环实现数字序列生成与条件遍历。
-- [ ] 创建并操作列表、元组、字典，完成增删改查操作。
-- [ ] 实现文件读写功能，并用 try/except 处理文件不存在等异常。
-- [ ] 使用 sqlite3 创建数据库表，执行插入与查询操作。
-- [ ] 安装 PyTorch 并创建张量，完成基本的张量运算。
-
-## 评估提醒
-- **Lab Assessment 1**（10%）：2025年10月3日，覆盖 Week 1 及 Week 2 第一部分（函数、循环、数据结构），时长 1 小时，20 道题。
-- **Lab Assessment 2**（15%）：2025年10月10日，覆盖 Week 2 与 Week 3，时长 1 小时，30 道题。
-- tAPP 每周参与计分（总 5%）。
-
-## 内容索引（Week 2 子页）
-| 模块 | 页面 |
-|---|---|
+|||---|
 | Python 循环 | [Python 循环](/zh/notes/semester-1/COMPSCI4084/week2/repetition) |
 | Python 函数 | [Python 函数](/zh/notes/semester-1/COMPSCI4084/week2/functions) |
 | 变量管理与副作用 | [变量管理与副作用](/zh/notes/semester-1/COMPSCI4084/week2/variable-management) |
@@ -68,7 +23,6 @@ description: "Week 2 精简学习笔记（Python 函数, 循环, 数据结构, �
 | 实验练习 | [实验练习](/zh/notes/semester-1/COMPSCI4084/week2/lab-exercises) |
 
 ## 材料索引
-
 > 注意：下列链接仅指向仓库内已存在的 Markdown（.md）版本，作为笔记内容的唯一溯源。
 
 ### Pre-reading Material for tAPP and Lab 2
@@ -93,7 +47,5 @@ description: "Week 2 精简学习笔记（Python 函数, 循环, 数据结构, �
 - [Lab 3 Exercises (MD)](../../../../materials/semester-1/COMPSCI4084-programming-systems/resources/Lab_3_Exercises.md)
 - [PyTorch Practical Exercises (MD)](../../../../materials/semester-1/COMPSCI4084-programming-systems/resources/PyTorch_practical_exercises.md)
 - [Simulating ChatGPT Locally (MD)](../../../../materials/semester-1/COMPSCI4084-programming-systems/resources/Simulating_ChatGPT_Locally.md)
-
----
 
 ## 更新记录

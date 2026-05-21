@@ -1,7 +1,22 @@
 ---
-title: Dates and Missing Data
-description: Using pandas to parse dates, handle `dayfirst`, preserve original date columns, and deal with missing values (dropna/fillna with mean/median).
+title: "Dates and Missing Data"
+description: "Using pandas to parse dates, handle `dayfirst`, preserve original date columns, and deal with missing values (dropna/fillna with mean/median)."
 ---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+```python
+
+```python
+```python
+import pandas as pd
+```
+```
+
+df.isnull().sum()
+df.fillna({'Quantity':0, 'Product':'Unknown'}, inplace=True)
+```
 
 ## Overview
 - **Goal**: Master how to parse string dates into `datetime` objects and learn common strategies for handling missing values to enable time-series analysis and reliable aggregations.
@@ -13,12 +28,13 @@ description: Using pandas to parse dates, handle `dayfirst`, preserve original d
 3. Master functions for detecting and handling missing values (`isnull`, `notnull`, `dropna`, `fillna`) and choose appropriate strategies.
 
 ## Key Concepts
+
 ### 1. Parsing Dates and `dayfirst`
 - **Motivation**: Parsing dates into `datetime` objects facilitates indexing, filtering, and grouping by time.
 - **Core Concepts**: `parse_dates` automatically converts columns to `datetime`; `dayfirst=True` is used for `DD/MM/YYYY` formatted data.
 - **Example**:
 ```python
-import pandas as pd
+
 # Specify columns to parse during reading
 df = pd.read_csv('shopping.csv', parse_dates=['Date'], dayfirst=True)
 # Back up the original date
@@ -28,18 +44,15 @@ df['Month'] = df['Date_original'].dt.to_period('M')
 ```
 - **Summary**: Parsing dates early reduces subsequent processing errors and improves readability.
 
----
 ### 2. Handling Missing Values
 - **Motivation**: Missing values can affect aggregate statistics and visualizations and need to be handled strategically.
 - **Core Concepts**: Detect with `df.isnull().sum()`, remove with `dropna()`, or fill with `fillna()` using a constant, mean, or median.
 - **Example**:
 ```python
 # Check the number of missing values
-df.isnull().sum()
 # Fill the 'Price' column with its mean
 df['Price'].fillna(df['Price'].mean(), inplace=True)
 # Or specify default values by column
-df.fillna({'Quantity':0, 'Product':'Unknown'}, inplace=True)
 ```
 - **Notes**: The filling strategy should be based on business semantics; random filling can introduce bias.
 - **Summary**: A reasonable missing value strategy helps produce stable analysis results.
@@ -49,6 +62,5 @@ df.fillna({'Quantity':0, 'Product':'Unknown'}, inplace=True)
 - For key numerical columns, prefer filling with the median to reduce the impact of outliers.
 - For time-series data, consider interpolation (`interpolate()`) rather than blindly filling with a fixed value.
 
----
 ## Update History
 - 2025-10-08: Created initial version based on course materials.

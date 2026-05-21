@@ -3,6 +3,36 @@ title: "实验练习（Lab 2）"
 description: "Week 2 实验练习题目汇总：循环、函数、数据结构、随机与 Turtle 练习，含示例解答与评分要点。"
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+```python
+
+```python
+```python
+import random
+```
+```
+
+```python
+```python
+import random
+```
+```
+
+```python
+```python
+import random
+```
+```
+
+turtle.done()
+```
+
+```python
+import turtle, random
+```
+
 ## 概要
 - 本页汇总 Lab 2 的所有练习题（循环、函数、列表/字典/元组/数组、随机、Turtle 图形），并为每类题目提供动机、解法要点、短示例与评分标准。
 - 目标：帮助你快速理解每道题目的考点、实现方法与常见陷阱，便于在实验中高效完成并通过自动/人工评测。
@@ -27,7 +57,6 @@ description: "Week 2 实验练习题目汇总：循环、函数、数据结构�
 - 输入校验：将用户输入转换为 `int` 并处理可能的 `ValueError`。
 
 #### 示例（练习 1）
-
 ```python
 # 练习1：根据用户输入重复输出名字或提示 Too high 三次
 name = input('Enter your name: ')
@@ -51,8 +80,6 @@ else:
 #### 小结
 考点：range、循环次数控制、输入校验、条件分支。
 
----
-
 ### 2. while 循环与累加 / 猜数游戏（练习 4–6）
 
 #### 动机
@@ -62,7 +89,6 @@ else:
 - `while` 循环、状态变量、计数器（attempts）、用户交互循环。
 
 #### 示例（练习 5 猜数）
-
 ```python
 compnum = 50
 attempts = 0
@@ -89,8 +115,6 @@ while True:
 #### 小结
 考点：while 循环、交互式状态管理、计数器与输入容错。
 
----
-
 ### 3. 函数与结构化（练习 7）
 
 #### 动机
@@ -100,7 +124,6 @@ while True:
 - 函数定义 `def`、参数传递、返回值、函数调用顺序。
 
 #### 示例
-
 ```python
 def read_num():
     while True:
@@ -108,11 +131,9 @@ def read_num():
             return int(input('Enter a number: '))
         except ValueError:
             print('请输入整数')
-
 def count_to(n):
     for i in range(1, n+1):
         print(i)
-
 num = read_num()
 count_to(num)
 ```
@@ -124,8 +145,6 @@ count_to(num)
 #### 小结
 考点：函数封装、职责分离、提高测试性。
 
----
-
 ### 4. 列表管理菜单（练习 8）——小型 CRUD 应用
 
 #### 动机
@@ -136,10 +155,8 @@ count_to(num)
 - 菜单循环：在用户选择退出前持续显示菜单。
 
 #### 示例（菜单骨架）
-
 ```python
 names = []
-
 def show_menu():
     print('\nMenu:')
     print('1. Add name')
@@ -147,7 +164,6 @@ def show_menu():
     print('3. Delete name')
     print('4. View names')
     print('5. Quit')
-
 while True:
     show_menu()
     choice = input('Choose an option: ')
@@ -176,8 +192,6 @@ while True:
 #### 小结
 考点：列表 CRUD、菜单循环、输入校验与用户友好提示。
 
----
-
 ### 5. 随机练习（练习 9–12）
 
 #### 动机
@@ -187,17 +201,15 @@ while True:
 - `random.choice`, `random.randint`，基本概率与猜测交互逻辑。
 
 #### 示例（练习 9 随机水果）
-
 ```python
-import random
+
 fruits = ['apple', 'banana', 'orange', 'pear', 'kiwi']
 print(random.choice(fruits))
 ```
 
 #### 示例（练习 11 猜数，两次机会）
-
 ```python
-import random
+
 num = random.randint(1, 5)
 first = int(input('Guess a number (1-5): '))
 if first == num:
@@ -219,8 +231,6 @@ else:
 #### 小结
 考点：`random` 使用、提示与控制流设计。
 
----
-
 ### 6. Turtle 图形（练习 13–15）
 
 #### 动机
@@ -230,16 +240,13 @@ else:
 - `turtle` 模块：画笔前进 `forward()`、旋转 `right()`/`left()`、颜色 `pencolor()`、画笔状态 `penup()`/`pendown()`。
 
 #### 示例（绘制正八边形并为每边选随机颜色）
-
 ```python
-import turtle, random
+
 colors = ['red','green','blue','orange','purple','yellow']
 for _ in range(8):
     turtle.pencolor(random.choice(colors))
     turtle.forward(100)
     turtle.right(45)
-
-turtle.done()
 ```
 
 #### 注意事项/最佳实践
@@ -248,8 +255,6 @@ turtle.done()
 
 #### 小结
 考点：循环控制、几何角度、随机化颜色与图形参数。
-
----
 
 ### 7. 列表/字典/元组/数组 进阶（练习 16–25）
 
@@ -260,7 +265,6 @@ turtle.done()
 - 列表索引与查找、`list.sort()`/`sorted()`、`dict` 基本操作、`tuple` 的不可变性、数组（或用列表模拟）排序与格式化。
 
 #### 示例（练习 16）
-
 ```python
 nums = [123, 456, 789, 234]
 x = int(input('Enter a three-digit number: '))
@@ -278,8 +282,6 @@ else:
 #### 小结
 考点：列表查找与索引、排序、格式化与字典基本操作。
 
----
-
 ### 8. 2D 列表与表格操作（练习 26–30）
 
 #### 动机
@@ -290,7 +292,6 @@ else:
 - 显示整行、追加元素、删除行或列等常见操作。
 
 #### 示例（访问/修改）
-
 ```python
 matrix = [
     [0, 2, 5, 8],
@@ -312,37 +313,26 @@ matrix[row][col] = int(input('New value: '))
 #### 小结
 考点：二维索引访问、行列操作、边界检查与数据一致性。
 
----
-
 ## 示例解答（参考）
 - 本节提供若干练习的简短参考实现（用于理解思路，不是唯一答案）。
 - 建议将每题拆分为小函数并添加 docstring，便于自动测试。
-
 示例：练习 9（随机水果）解答参考：
-
 ```python
 # exercise_9.py
-import random
 
 def random_fruit():
     fruits = ['apple', 'banana', 'orange', 'pear', 'kiwi']
     return random.choice(fruits)
-
 if __name__ == '__main__':
     print(random_fruit())
 ```
-
 示例：练习 8（管理名字的菜单）建议拆分函数以便单元测试：
-
 ```python
 # name_manager.py (核心函数示例)
-
 def add_name(names, name):
     names.append(name)
-
 def change_name(names, index, new_name):
     names[index] = new_name
-
 def delete_name(names, index):
     return names.pop(index)
 ```
@@ -352,7 +342,6 @@ def delete_name(names, index):
 - 鲁棒性（20%）：对非法输入有合理处理（非整数、超出索引、空列表等）。
 - 代码质量（10%）：结构清晰、函数化、适当注释、变量命名规范。
 - 用户体验（10%）：交互提示清晰、菜单友好、错误信息有帮助。
-
 自动化测试建议：把 I/O 抽离到可注入的函数（比如传入 `input` 的替代函数或把逻辑写成返回值明确的函数），方便使用 pytest 模拟输入/断言输出。
 
 ## 常见陷阱与调试提示

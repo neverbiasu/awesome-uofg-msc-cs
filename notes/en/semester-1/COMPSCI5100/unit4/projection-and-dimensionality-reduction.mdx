@@ -3,6 +3,9 @@ title: "Projection & Dimensionality Reduction"
 description: "An introduction to dimensionality reduction and Principal Component Analysis (PCA)."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## Overview
 - **Objective**: To understand why dimensionality reduction is important and learn the principles of Principal Component Analysis (PCA).
 - **Scope**: This note covers the curse of dimensionality, the concept of projection, and the workflow of PCA.
@@ -32,8 +35,6 @@ description: "An introduction to dimensionality reduction and Principal Componen
   4. **Feature Vector**: Create a feature vector to decide which principal components to keep.
   5. **Recast Data**: Recast the data along the principal components' axes.
 - **Use Cases**: Speeding up model training, data visualization (by reducing to 2 or 3 dimensions).
-
----
 
 ## Best Practices
 - Always standardize your data before applying PCA.

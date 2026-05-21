@@ -2,6 +2,9 @@
 title: "2019 COMPSCI4084 Lab Exam Past Paper (Python + Java)"
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 # 2019 COMPSCI4084 Lab Exam Past Paper (Python + Java)
 
 ## 考试概述
@@ -24,7 +27,6 @@ title: "2019 COMPSCI4084 Lab Exam Past Paper (Python + Java)"
 `Books` 表包含 `ID`, `Title`, `Author`, `Data Published`。
 并插入给定的数据。
 将解决方案保存到 `python_task1.py`。
-
 **关键概念/知识点:**
 - SQL 数据库创建和数据插入
 - 数据库表设计
@@ -33,7 +35,6 @@ title: "2019 COMPSCI4084 Lab Exam Past Paper (Python + Java)"
 **题目描述:**
 使用 `BookInfo` 数据库，显示作者及其出生地列表。程序应要求用户输入出生地，然后显示在该地点出生的作者的所有图书的标题、出版日期和作者姓名。
 将解决方案保存到 `python_task2.py`。
-
 **关键概念/知识点:**
 - 数据库查询和数据显示
 - 用户输入处理
@@ -42,7 +43,6 @@ title: "2019 COMPSCI4084 Lab Exam Past Paper (Python + Java)"
 **题目描述:**
 程序应要求用户输入一个年份，并显示在该年份之后出版的所有图书，按出版年份排序。
 将解决方案保存到 `python_task3.py`。
-
 **关键概念/知识点:**
 - 数据库查询 (按年份过滤、排序)
 - 用户输入处理
@@ -51,7 +51,6 @@ title: "2019 COMPSCI4084 Lab Exam Past Paper (Python + Java)"
 **题目描述:**
 程序应要求用户输入作者姓名，然后将该作者的所有图书保存到名为 `Booklist.txt` 的文本文件中，每个字段用破折号分隔。最后，应显示文本文件的内容。
 将解决方案保存到 `python_task4.py`。
-
 **关键概念/知识点:**
 - 文件 I/O 操作
 - 字符串格式化
@@ -61,7 +60,6 @@ title: "2019 COMPSCI4084 Lab Exam Past Paper (Python + Java)"
 ### 任务 1: Power (2 Marks)
 **题目描述:**
 创建一个枚举类型 `Power`，包含以下值：`CLONING, COMPUTER, ENERGY_BLAST, FLIGHT, INVINCIBILITY, MAGIC, MAGNETISM, SCIENCE, SMALL, SPEED, STRENGTH, TELEPATHY, TRANSFORMATION, WEAPONS, WATER`。所有类应放在 `superhero` 包中。
-
 **关键概念/知识点:**
 - Java 枚举类型
 
@@ -76,7 +74,6 @@ title: "2019 COMPSCI4084 Lab Exam Past Paper (Python + Java)"
 - 必须有完整的 `get` 方法集，但没有 `set` 方法。
 - 提供适当的 `equals()`, `hashCode()` 和 `toString()` 实现。`toString()` 必须手动编写。
 - 为类和所有成员编写描述性 Javadoc 注释。
-
 **关键概念/知识点:**
 - Java 类设计 (属性、构造函数、getter)
 - 不可变类
@@ -91,7 +88,6 @@ title: "2019 COMPSCI4084 Lab Exam Past Paper (Python + Java)"
 - 构造函数初始化角色集合。
 - 添加角色的方法。
 - 获取字段值的 `get` 方法。
-
 **关键概念/知识点:**
 - Java 类设计 (属性、构造函数、方法)
 - 集合操作
@@ -101,7 +97,6 @@ title: "2019 COMPSCI4084 Lab Exam Past Paper (Python + Java)"
 在 `GameCharacter` 类中实现一个额外的公共方法：
 - `public Set<GameCharacter> chooseCharacters(Power... neededPowers)`
 该方法应根据所需能力返回提供所有所需能力的角色集合，如果不可能提供，则返回 `null`。如果存在多个有效集合，则返回其中任何一个。
-
 **关键概念/知识点:**
 - 集合操作
 - 算法设计 (寻找满足条件的角色组合)

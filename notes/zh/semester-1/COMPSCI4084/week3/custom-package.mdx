@@ -1,7 +1,44 @@
 ---
-title: 自定义包
-description: 如何组织 Python 包（目录结构、__init__.py、模块导入、相对导入）与实用示例（创建简单数据加载/清洗包）
+title: "自定义包"
+description: "如何组织 Python 包（目录结构、__init__.py、模块导入、相对导入）与实用示例（创建简单数据加载/清洗包）"
 ---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+```python
+
+```python
+```python
+import pandas as pd
+```
+```
+
+```python
+```python
+from .io import load_csv
+```
+```
+
+```python
+```python
+from .clean import clean_df
+```
+```
+
+```python
+```python
+from .io import load_csv
+```
+```
+
+```python
+```python
+from mydata_package import load_csv, clean_df
+```
+```
+
+```
 
 ## 概要
 - 目标：教你如何把重复的数据加载与清洗代码封装为可复用的 Python 包，提高项目结构清晰度与可维护性。
@@ -14,6 +51,7 @@ description: 如何组织 Python 包（目录结构、__init__.py、模块导入
 4. 能将包用于项目并通过 `pip install -e .` 本地开发安装（可选）。
 
 ## 关键知识点
+
 ### 1. 包与模块基础
 - **动机**：分割代码能提升可读性与复用，避免脚本重复。
 - **核心概念**：模块 = 单个 .py 文件；包 = 带 `__init__.py` 的目录，可包含子包和模块。
@@ -27,43 +65,35 @@ mydata_package/
 ```
 - **小结**：使用包把职责明确的函数组织在模块中。
 
----
 ### 2. __init__.py 与接口暴露
 - **动机**：通过 `__init__.py` 提供包的顶层 API，隐藏实现细节。
 - **核心概念**：在 `__init__.py` 中导入常用函数或设置 `__all__`，简化 `from mypkg import func` 的用法。
 - **示例**：
 ```python
 # mydata_package/__init__.py
-from .io import load_csv
-from .clean import clean_df
 __all__ = ['load_csv', 'clean_df']
 ```
 - **注意事项**：避免在 `__init__.py` 中放置重量级初始化代码（如长时间 I/O）。
 - **小结**：`__init__` 能塑造良好的包使用体验。
 
----
 ### 3. 相对导入与绝对导入
 - **动机**：在包内部调用其他模块时保持路径稳定与可重构。
 - **核心概念**：`from .module import func`（同一级别）; `from ..subpackage import x`（父级）；绝对导入 `from mypkg.module import func`。
 - **示例**：
 ```python
 # 在 clean.py 中
-from .io import load_csv
 ```
 - **注意事项**：相对导入在脚本直接运行时可能失效，推荐通过包方式执行（`python -m mydata_package`）或使用 `pip install -e .` 本地开发安装。
 - **小结**：选择合适导入方式，保证包在不同上下文下都可用。
 
----
 ### 4. 示例包：简单数据加载与清洗
 - **动机**：把常见的 `read_csv + 简单清洗` 封装成函数，便于在多个 Notebook/脚本复用。
 - **示例代码**：
 ```python
 # mydata_package/io.py
-import pandas as pd
 
 def load_csv(path, parse_dates=None, dayfirst=False):
     return pd.read_csv(path, parse_dates=parse_dates, dayfirst=dayfirst)
-
 # mydata_package/clean.py
 def clean_df(df):
     # 填充缺失值的示例
@@ -73,7 +103,6 @@ def clean_df(df):
 ```
 - **使用方法**：
 ```python
-from mydata_package import load_csv, clean_df
 df = load_csv('shopping.csv', parse_dates=['Date'], dayfirst=True)
 df = clean_df(df)
 ```
@@ -84,6 +113,5 @@ df = clean_df(df)
 - 写测试（pytest）覆盖 API 的主要路径与边界情况。
 - 在 `setup.cfg` 或 `pyproject.toml` 中维护可重复安装的元数据，便于团队共享。
 
----
 ## 更新记录
 - 2025-10-08：根据课程材料与练习创建初版示例。

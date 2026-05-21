@@ -3,7 +3,18 @@ title: "Computational Linear Algebra"
 description: "An in-depth exploration of computational linear algebra, covering graphs, matrix decompositions (Eigen, SVD), Principal Component Analysis (PCA), and solving linear systems."
 ---
 
-import { Callout } from "fumadocs-ui/components/callout";
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+```python
+
+```python
+```python
+import numpy as np
+```
+```
+
+```
 
 ## Overview
 This note explores the application of continuous mathematics, specifically matrix operations, to model and solve discrete problems. We will cover how graphs can be represented as matrices, how to analyze network flows, and delve into powerful matrix decomposition techniques like Eigendecomposition and Singular Value Decomposition (SVD) to understand the structure of data.
@@ -20,7 +31,6 @@ This note explores the application of continuous mathematics, specifically matri
 
 ## Graphs as Matrices
 Many real-world systems can be modeled as a network of connected nodes (vertices) and connections (edges). This can be represented mathematically as a graph $$G = (V, E)$$
-
 An **adjacency matrix** $$A$$ is a square matrix used to represent a finite graph. The elements of the matrix indicate whether pairs of vertices are adjacent or not in the graph.
 - For an unweighted graph, $$A_{ij} = 1$$ if there is an edge from vertex $$i$$ to $$j$$, and $$0$$ otherwise.
 - For a **weighted graph**, $$A_{ij}$$ represents the weight of the connection.
@@ -32,28 +42,21 @@ An **adjacency matrix** $$A$$ is a square matrix used to represent a finite grap
 
 ## Flow Analysis: Modeling Discrete Problems
 We can use matrices to model dynamic systems, such as packages flowing between distribution depots.
-
 - **State Vector $$x_t$$**: A vector representing the state of the system at time $$t$$ (e.g., the proportion of packages at each depot).
 - **Adjacency Matrix $$A$$**: Represents the linear map of how the system evolves from one step to the next.
-
 The state at the next time step $$t+1$$ can be calculated as:
 $$x_{t+1} = A^T x_t$$
-
 This allows us to analyze a discrete problem using tools from continuous mathematics. If we want to know the state after 7 days, we can compute:
 $$x_7 = (A^T)^7 x_0$$
-
 <Callout title="The Power of Vectorization">
   By representing problems in terms of vectors and matrices, we can leverage optimized hardware like GPUs to perform these computations much faster than iterating through discrete steps.
 </Callout>
 
 ## Eigenvalues and Eigenvectors
 An eigenvector of a linear transformation is a nonzero vector that changes at most by a scalar factor when that linear transformation is applied to it. The corresponding scalar is the eigenvalue.
-
 $$Av = \lambda v$$
-
 - $$v$$: Eigenvector of matrix A.
 - $$\lambda$$: Eigenvalue corresponding to v.
-
 Eigenvectors represent the "fundamental" or "characteristic" directions of the matrix transformation. Along these directions, the matrix only scales the vector, it does not rotate it.
 
 ### Steady State and The Leading Eigenvector
@@ -61,28 +64,21 @@ In a flow network, if we repeatedly apply the transformation matrix, the system 
 
 ### Power Iteration Method
 The power iteration method is an algorithm to find the leading eigenvector of a matrix. It works by repeatedly multiplying a random vector by the matrix and normalizing the result.
-
 ```python
 # Example of Power Iteration
-import numpy as np
 
 def power_iteration(A, num_simulations: int):
     # Ideally choose a random vector
     # To make this reproducible, we will start with a vector of all ones
     b_k = np.ones(A.shape[1])
-
     for _ in range(num_simulations):
         # calculate the matrix-by-vector product Ab
         b_k1 = np.dot(A, b_k)
-
         # calculate the norm
         b_k1_norm = np.linalg.norm(b_k1)
-
         # re-normalize the vector
         b_k = b_k1 / b_k1_norm
-
     return b_k
-
 # The resulting b_k is the leading eigenvector
 ```
 
@@ -90,45 +86,33 @@ def power_iteration(A, num_simulations: int):
 
 ### Eigendecomposition
 Eigendecomposition is the factorization of a matrix into a canonical form, representing the matrix in terms of its eigenvalues and eigenvectors. For a square matrix $$A$$, it is:
-
 $$A = Q\Lambda Q^{-1}$$
-
 - $$Q$$: Matrix whose columns are the eigenvectors of $$A$$.
 - $$\Lambda$$: Diagonal matrix whose diagonal entries are the corresponding eigenvalues.
-
 <Callout title="Not Always Possible">
 Eigendecomposition is only possible for square matrices that are *diagonalizable*.
 </Callout>
 
 ### Principal Component Analysis (PCA)
 PCA is a statistical procedure that uses eigendecomposition to convert a set of observations of possibly correlated variables into a set of linearly uncorrelated variables called **principal components**.
-
 The eigenvectors of the **covariance matrix** of the data are the principal components. They point in the directions of maximum variance in the data. The eigenvalues indicate how much variance is captured by each principal component. This is extremely useful for dimensionality reduction.
 
 ## Matrix Inversion
 The inverse of a square, non-singular matrix $$A$$ is $$A^{-1}$$, defined such that:
-
 $$A^{-1}A = I$$
-
 (where $$I$$ is the identity matrix)
-
 Inversion allows us to "undo" a matrix transformation. It is crucial for solving linear systems of equations:
-
 If $$Ax = y$$, then $$x = A^{-1}y$$.
-
 <Callout title="Singularity" type="warn">
 A matrix has an inverse only if it is **non-singular**, which means its **determinant is non-zero**. A singular matrix collapses at least one dimension of the space, losing information and making the transformation irreversible.
 </Callout>
 
 ## Singular Value Decomposition (SVD)
 SVD is the "powerhouse" of computational linear algebra. It is a generalization of eigendecomposition that works for **any** $$m \times n$$ matrix.
-
 $$A = U\Sigma V^T$$
-
 - $$U$$: An $$m \times m$$ orthogonal matrix (left singular vectors). Represents a rotation.
 - $$\Sigma$$: An $$m \times n$$ diagonal matrix (singular values). Represents a scaling.
 - $$V^T$$: An $$n \times n$$ orthogonal matrix (right singular vectors). Represents a rotation.
-
 SVD states that any matrix transformation can be broken down into a sequence of three fundamental operations: **rotate, scale, and rotate back**.
 
 ### Applications of SVD

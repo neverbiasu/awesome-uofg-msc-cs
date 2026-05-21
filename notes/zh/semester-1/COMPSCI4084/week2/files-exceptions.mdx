@@ -3,6 +3,40 @@ title: "文件与异常处理"
 description: "Python 中文件读写、CSV 操作、上下文管理 (with)、异常处理 (try/except/finally) 与命令行参数示例"
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+```python
+
+```python
+```python
+import csv
+```
+```
+
+```python
+```python
+import sys
+```
+```
+
+```python
+```python
+import sys
+```
+```
+
+```python
+```python
+import argparse
+```
+```
+
+f.close()
+parser.add_argument('filename')
+parser.add_argument('--lines', action='store_true', help='仅输出行数')
+```
+
 ## 概要
 - 本文档总结 Python 常见的文件 I/O 操作与异常处理模式。涵盖文本/二进制文件、打开模式、读取与写入方法、CSV 文件处理、上下文管理器、异常捕获与命令行参数。
 - 目标是掌握安全、可读、可维护的文件操作写法，并学会处理常见错误情形。
@@ -32,16 +66,13 @@ description: "Python 中文件读写、CSV 操作、上下文管理 (with)、异
 - 二进制：图片、音频、压缩文件、机器学习模型的二进制序列化（如 .pth/.bin）等。
 
 #### 示例
-
 ```python
 # 文本模式
 with open('notes.txt', 'w', encoding='utf-8') as f:
     f.write('这是一些文本\n')
-
 # 二进制模式（保存图片/模型）
 with open('image.jpg', 'rb') as f:
     data = f.read()  # bytes
-
 with open('model.bin', 'wb') as f:
     f.write(b"\x00\x01\x02")
 ```
@@ -55,8 +86,6 @@ with open('model.bin', 'wb') as f:
 
 #### 小结
 选择正确的文件类型和打开模式是文件操作的第一步，能避免大多数读写错误。
-
----
 
 ### 2. 打开文件与访问模式
 
@@ -75,19 +104,14 @@ with open('model.bin', 'wb') as f:
 - `x`：创建新文件，若存在则抛出 `FileExistsError`。
 
 #### 示例
-
 ```python
 # 读取
 f = open('data.txt', 'r', encoding='utf-8')
 content = f.read()
-f.close()
-
 # 推荐：使用 with（见下节）
-
 # 写入（覆盖）
 with open('out.txt', 'w', encoding='utf-8') as f:
     f.write('覆盖写入\n')
-
 # 追加
 with open('out.txt', 'a', encoding='utf-8') as f:
     f.write('追加一行\n')
@@ -102,8 +126,6 @@ with open('out.txt', 'a', encoding='utf-8') as f:
 
 #### 小结
 正确选择 `open()` 的模式并结合上下文管理器能最大限度降低数据丢失风险。
-
----
 
 ### 3. 读取方法：`read`, `readline`, `readlines`, 迭代
 
@@ -122,13 +144,11 @@ with open('out.txt', 'a', encoding='utf-8') as f:
 - 大文件或流式处理：逐行迭代或 `read(size)` 分块读取。
 
 #### 示例
-
 ```python
 # 逐行遍历（推荐）
 with open('large.log', 'r', encoding='utf-8') as f:
     for line in f:
         process(line)
-
 # readline() 循环
 with open('data.txt', 'r', encoding='utf-8') as f:
     while True:
@@ -136,7 +156,6 @@ with open('data.txt', 'r', encoding='utf-8') as f:
         if not line:
             break
         print(line.rstrip())
-
 # read(size) 分块处理（适合二进制或超大文件）
 with open('big.bin', 'rb') as f:
     chunk_size = 1024 * 1024  # 1 MB
@@ -155,8 +174,6 @@ with open('big.bin', 'rb') as f:
 #### 小结
 针对不同文件大小与处理需求选择合适的读取方法，优先逐行迭代以节省内存。
 
----
-
 ### 4. 写入方法与 CSV 文件处理
 
 #### 动机
@@ -173,21 +190,17 @@ with open('big.bin', 'rb') as f:
 - 表格数据读写使用 `csv` 模块或 `pandas`（当需要更强大的数据处理时）。
 
 #### 示例
-
 ```python
-import csv
 
 rows = [
     ['name', 'age'],
     ['Alice', '30'],
     ['Bob', '25'],
 ]
-
 # 写 CSV（推荐写法）
 with open('people.csv', 'w', encoding='utf-8', newline='') as csvfile:
     writer = csv.writer(csvfile)
     writer.writerows(rows)
-
 # 读 CSV
 with open('people.csv', 'r', encoding='utf-8', newline='') as csvfile:
     reader = csv.reader(csvfile)
@@ -206,8 +219,6 @@ with open('people.csv', 'r', encoding='utf-8', newline='') as csvfile:
 #### 小结
 使用 `csv` 模块并搭配 `newline=''` 与 `encoding` 可以确保跨平台、正确的 CSV 读写。
 
----
-
 ### 5. 上下文管理器（`with`）与资源安全
 
 #### 动机
@@ -222,7 +233,6 @@ with open('people.csv', 'r', encoding='utf-8', newline='') as csvfile:
 - 需要在异常路径也确保资源释放时使用上下文管理器。
 
 #### 示例
-
 ```python
 # 推荐写法：自动关闭文件
 with open('data.txt', 'r', encoding='utf-8') as f:
@@ -241,8 +251,6 @@ with open('data.txt', 'r', encoding='utf-8') as f:
 #### 小结
 使用 `with` 是保证文件与其它资源安全释放的优雅方式，应作为默认模式。
 
----
-
 ### 6. 异常处理：`try` / `except` / `finally` / `else`
 
 #### 动机
@@ -257,12 +265,9 @@ with open('data.txt', 'r', encoding='utf-8') as f:
 - 对特定异常做精确处理，避免用裸 `except:` 捕获所有异常（会掩盖 bug）。
 
 #### 示例
-
 ```python
-import sys
 
 filename = sys.argv[1] if len(sys.argv) > 1 else 'data.txt'
-
 try:
     with open(filename, 'r', encoding='utf-8') as f:
         print(f.read())
@@ -293,8 +298,6 @@ finally:
 #### 小结
 使用 `try/except` 精确地捕获并处理异常，结合日志记录与用户提示，能显著提高程序的健壮性。
 
----
-
 ### 7. 命令行参数与脚本化（`sys.argv`）
 
 #### 动机
@@ -308,15 +311,12 @@ finally:
 - 简单脚本读取一个或两个参数时使用 `sys.argv`。当需要选项、帮助信息或类型转换时使用 `argparse`。
 
 #### 示例
-
 ```python
 # simple_arg.py
-import sys
 
 if len(sys.argv) < 2:
     print('用法: python simple_arg.py <filename>')
     sys.exit(1)
-
 filename = sys.argv[1]
 try:
     with open(filename, 'r', encoding='utf-8') as f:
@@ -324,18 +324,12 @@ try:
 except FileNotFoundError:
     print('文件未找到')
 ```
-
 使用 `argparse` 的更好示例：
-
 ```python
 # better_arg.py
-import argparse
 
 parser = argparse.ArgumentParser(description='读取文件并统计行数')
-parser.add_argument('filename')
-parser.add_argument('--lines', action='store_true', help='仅输出行数')
 args = parser.parse_args()
-
 with open(args.filename, 'r', encoding='utf-8') as f:
     if args.lines:
         print(sum(1 for _ in f))
@@ -353,17 +347,12 @@ with open(args.filename, 'r', encoding='utf-8') as f:
 #### 小结
 命令行参数使脚本更灵活，选择合适的解析工具能提升用户体验与脚本可维护性。
 
----
-
 ## 最佳实践（速查）
-
 - 总是使用 `with open(..., encoding='utf-8')` 来打开文本文件。
 - 处理 CSV 时使用 `csv` 模块并指定 `newline=''`。
 - 对可能失败的 IO 操作使用精确的 `try/except` 捕获并记录异常。
 - 避免 `read()` 加载超大文件到内存，使用逐行或分块读取。
 - 写入前考虑写到临时文件，然后原子替换以防止意外数据丢失。
 - 使用 `argparse` 构建健壮的命令行接口。
-
----
 
 ## 更新记录

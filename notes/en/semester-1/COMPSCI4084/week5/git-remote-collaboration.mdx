@@ -3,6 +3,9 @@ title: "Git Remote Collaboration: Working with Shared Repositories"
 description: "An introduction to Git for team collaboration, covering SSH key setup, cloning remote repositories, pushing/pulling changes, and resolving merge conflicts."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## Overview
 - **Objective**: This note aims to introduce the fundamental concepts and commands of Git for collaborative development with remote repositories. It focuses on how teams can effectively share code, manage project history, and synchronize changes in a distributed environment.
 - **Scope**: Covers the importance of version control in team settings, setting up secure access with SSH keys, cloning remote repositories, the core workflow of pushing local changes and pulling remote changes, and strategies for resolving merge conflicts. It also introduces advanced features like `git tag` for release management and `git blame` for code authorship tracking.
@@ -39,8 +42,6 @@ git push origin main
   - The remote repository acts as a central hub for team collaboration; keeping it up-to-date is crucial.
 - **Summary**: Git facilitates powerful team collaboration through distributed repositories and remote synchronization mechanisms, ensuring codebase consistency and traceability.
 
----
-
 ### 2. SSH Key Setup for Secure Authentication
 - **Motivation**: For secure interaction with remote Git repositories, especially private ones, SSH key pairs offer a more secure authentication method than usernames and passwords, avoiding the need to enter credentials for every operation.
 - **Core Concepts**:
@@ -56,7 +57,6 @@ git push origin main
 # Description: Runs the ssh-keygen command to create a new RSA SSH key pair.
 ssh-keygen -t rsa
 # Follow prompts, press Enter three times for default options.
-
 # Example: Displaying public key content for registration
 # Description: Uses cat to display the content of the public key file.
 cat ~/.ssh/id_rsa.pub
@@ -66,8 +66,6 @@ cat ~/.ssh/id_rsa.pub
   - Regularly check and update your SSH keys.
   - Prefer cloning over SSH rather than HTTPS for a more secure experience.
 - **Summary**: SSH keys are crucial for secure and convenient interaction with remote Git repositories, enabling authentication via a public/private key mechanism.
-
----
 
 ### 3. Cloning, Pushing, and Pulling Remote Repositories
 - **Motivation**: The core of team collaboration involves sharing and synchronizing code. `git clone` obtains a local copy of a remote repository, `git push` uploads local changes, and `git pull` downloads and merges remote changes, ensuring all members' code is up-to-date.
@@ -85,11 +83,9 @@ cat ~/.ssh/id_rsa.pub
 # Example: Cloning a repository over SSH
 # Description: Clones the 'test-repo' from GitHub using SSH.
 git clone git@github.com:YOURNAME/test-repo
-
 # Example: Pushing local changes to remote
 # Description: Sends committed local changes to the remote repository.
 git push
-
 # Example: Pulling remote changes to local
 # Description: Fetches and merges changes from the remote repository.
 git pull
@@ -98,8 +94,6 @@ git pull
   - **Always `git pull` before `git push`** to avoid conflicts and ensure your local repository is up-to-date.
   - `git clone` creates a new working directory, typically named after the repository.
 - **Summary**: Cloning, pushing, and pulling are core Git operations for remote collaboration, forming the cycle of code sharing and synchronization among team members.
-
----
 
 ### 4. Resolving Merge Conflicts
 - **Motivation**: Merge conflicts occur when multiple team members modify the same part of a file, and Git cannot automatically reconcile the changes. Resolving conflicts is an inevitable part of team collaboration, requiring manual intervention to integrate different code versions.
@@ -128,8 +122,6 @@ please contact Jeremy on MS Teams
   - After resolution, `git add` the conflicted file and `git commit` to complete the merge.
 - **Summary**: Merge conflicts are a common challenge in Git collaboration; understanding markers and manual editing enables effective resolution and code integration.
 
----
-
 ### 5. Advanced Features: `git tag` and `git blame`
 - **Motivation**: Beyond daily version control, Git offers advanced features like `git tag` for marking important versions and `git blame` for tracing code authorship, valuable for project management, release management, and code review.
 - **Core Concepts**:
@@ -145,7 +137,6 @@ please contact Jeremy on MS Teams
 # Example: Tagging a release version
 # Description: Creates an annotated tag 'v1.0' for the current commit.
 git tag -a v1.0 -m "Release version 1.0"
-
 # Example: Using git blame to see line-by-line authorship
 # Description: Shows who last modified each line of 'file.txt'.
 git blame file.txt
@@ -155,8 +146,6 @@ git blame file.txt
   - `git blame` can be combined with other commands (`cut`, `sort -u`, `grep -c`) for contribution analysis.
 - **Summary**: `git tag` and `git blame` are powerful advanced Git features for version marking and code authorship tracking, aiding project management and quality control.
 
----
-
 ## Best Practices
 - **Pull Before Push**: Always pull the latest changes from the remote repository before pushing your local changes.
 - **Resolve Conflicts Promptly**: Address merge conflicts immediately to avoid further complications.
@@ -164,6 +153,5 @@ git blame file.txt
 - **Meaningful Tags**: Use `git tag` to mark important release versions or milestones with clear descriptions.
 - **Leverage `git blame`**: Utilize `git blame` during code reviews or debugging to understand the modification history and authorship of code lines.
 
----
 ## Update History
 - 2025-10-22: Initial creation.

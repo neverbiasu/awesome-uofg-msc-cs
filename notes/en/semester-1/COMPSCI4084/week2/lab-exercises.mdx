@@ -3,6 +3,36 @@ title: "Lab Exercises (Lab 2)"
 description: "A summary of Week 2 lab exercises covering loops, functions, data structures, random, and Turtle graphics, with sample solutions and grading criteria."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+```python
+
+```python
+```python
+import random
+```
+```
+
+```python
+```python
+import random
+```
+```
+
+```python
+```python
+import random
+```
+```
+
+turtle.done()
+```
+
+```python
+import turtle, random
+```
+
 ## Overview
 - This page summarizes all the exercises from Lab 2 (covering loops, functions, lists/dictionaries/tuples/arrays, random, and Turtle graphics) and provides key points for solutions, short examples, and grading criteria for each category.
 - **Goal**: To help you quickly understand the key concepts, implementation methods, and common pitfalls for each problem, enabling you to complete the lab efficiently and pass automated/manual grading.
@@ -27,7 +57,6 @@ description: "A summary of Week 2 lab exercises covering loops, functions, data 
 - **Input Validation**: Converting user input to `int` and handling potential `ValueError`.
 
 #### Example (Exercise 1)
-
 ```python
 # Exercise 1: Repeat a name based on user input or print "Too high" three times.
 name = input('Enter your name: ')
@@ -51,8 +80,6 @@ else:
 #### Summary
 - **Key concepts**: `range`, loop count control, input validation, conditional branching.
 
----
-
 ### 2. `while` Loops with Accumulation / Guessing Games (Exercises 4–6)
 
 #### Motivation
@@ -62,7 +89,6 @@ else:
 - `while` loops, state variables, counters (`attempts`), and interactive loops.
 
 #### Example (Exercise 5: Number Guessing)
-
 ```python
 compnum = 50
 attempts = 0
@@ -89,8 +115,6 @@ while True:
 #### Summary
 - **Key concepts**: `while` loops, interactive state management, counters, and input error handling.
 
----
-
 ### 3. Functions and Structuring (Exercise 7)
 
 #### Motivation
@@ -100,7 +124,6 @@ while True:
 - Function definition (`def`), parameter passing, return values, and the order of function calls.
 
 #### Example
-
 ```python
 def read_num():
     while True:
@@ -108,11 +131,9 @@ def read_num():
             return int(input('Enter a number: '))
         except ValueError:
             print('Please enter an integer.')
-
 def count_to(n):
     for i in range(1, n + 1):
         print(i)
-
 num = read_num()
 count_to(num)
 ```
@@ -124,8 +145,6 @@ count_to(num)
 #### Summary
 - **Key concepts**: Function encapsulation, separation of concerns, and improving testability.
 
----
-
 ### 4. List Management Menu (Exercise 8) — A Mini CRUD App
 
 #### Motivation
@@ -136,10 +155,8 @@ count_to(num)
 - **Menu Loop**: Continuously display the menu until the user chooses to quit.
 
 #### Example (Menu Skeleton)
-
 ```python
 names = []
-
 def show_menu():
     print('\nMenu:')
     print('1. Add name')
@@ -147,7 +164,6 @@ def show_menu():
     print('3. Delete name')
     print('4. View names')
     print('5. Quit')
-
 while True:
     show_menu()
     choice = input('Choose an option: ')
@@ -176,8 +192,6 @@ while True:
 #### Summary
 - **Key concepts**: List CRUD, menu loops, input validation, and user-friendly prompts.
 
----
-
 ### 5. Random Exercises (Exercises 9–12)
 
 #### Motivation
@@ -187,17 +201,15 @@ while True:
 - `random.choice`, `random.randint`, and basic probability/guessing interaction logic.
 
 #### Example (Exercise 9: Random Fruit)
-
 ```python
-import random
+
 fruits = ['apple', 'banana', 'orange', 'pear', 'kiwi']
 print(random.choice(fruits))
 ```
 
 #### Example (Exercise 11: Guessing Game, Two Chances)
-
 ```python
-import random
+
 num = random.randint(1, 5)
 first = int(input('Guess a number (1-5): '))
 if first == num:
@@ -219,8 +231,6 @@ else:
 #### Summary
 - **Key concepts**: `random` module usage, prompts, and control flow design.
 
----
-
 ### 6. Turtle Graphics (Exercises 13–15)
 
 #### Motivation
@@ -230,16 +240,13 @@ else:
 - `turtle` module: `forward()`, `right()`/`left()`, `pencolor()`, `penup()`/`pendown()`.
 
 #### Example (Draw a regular octagon with random colors for each side)
-
 ```python
-import turtle, random
+
 colors = ['red','green','blue','orange','purple','yellow']
 for _ in range(8):
     turtle.pencolor(random.choice(colors))
     turtle.forward(100)
     turtle.right(45)
-
-turtle.done()
 ```
 
 #### Notes/Best Practices
@@ -248,8 +255,6 @@ turtle.done()
 
 #### Summary
 - **Key concepts**: Loop control, geometric angles, randomized colors, and graphics parameters.
-
----
 
 ### 7. Advanced Lists/Dictionaries/Tuples/Arrays (Exercises 16–25)
 
@@ -260,7 +265,6 @@ turtle.done()
 - List indexing and searching, `list.sort()`/`sorted()`, `dict` basic operations, `tuple` immutability, and array (or list-based) sorting and formatting.
 
 #### Example (Exercise 16)
-
 ```python
 nums = [123, 456, 789, 234]
 x = int(input('Enter a three-digit number: '))
@@ -278,8 +282,6 @@ else:
 #### Summary
 - **Key concepts**: List searching and indexing, sorting, formatting, and basic dictionary operations.
 
----
-
 ### 8. 2D Lists and Table Operations (Exercises 26–30)
 
 #### Motivation
@@ -290,7 +292,6 @@ else:
 - Common operations like displaying a whole row, appending elements, and deleting rows or columns.
 
 #### Example (Accessing/Modifying)
-
 ```python
 matrix = [
     [0, 2, 5, 8],
@@ -312,37 +313,26 @@ matrix[row][col] = int(input('New value: '))
 #### Summary
 - **Key concepts**: 2D indexing, row/column operations, boundary checks, and data consistency.
 
----
-
 ## Sample Solutions (Reference)
 - This section provides brief reference implementations for a few exercises (to understand the approach, not the only answer).
 - It is recommended to break each problem into small functions with docstrings for automated testing.
-
 **Example: Exercise 9 (Random Fruit) Solution Reference:**
-
 ```python
 # exercise_9.py
-import random
 
 def random_fruit():
     fruits = ['apple', 'banana', 'orange', 'pear', 'kiwi']
     return random.choice(fruits)
-
 if __name__ == '__main__':
     print(random_fruit())
 ```
-
 **Example: Exercise 8 (Name Management Menu) Recommended Function Splitting:**
-
 ```python
 # name_manager.py (core function examples)
-
 def add_name(names, name):
     names.append(name)
-
 def change_name(names, index, new_name):
     names[index] = new_name
-
 def delete_name(names, index):
     return names.pop(index)
 ```
@@ -352,7 +342,6 @@ def delete_name(names, index):
 - **Robustness (20%)**: Handles illegal inputs gracefully (non-integers, out-of-bounds indices, empty lists, etc.).
 - **Code Quality (10%)**: Clear structure, functional decomposition, appropriate comments, and standard variable naming.
 - **User Experience (10%)**: Clear interactive prompts, friendly menu, and helpful error messages.
-
 For automated testing, it's recommended to abstract I/O into injectable functions (e.g., passing a substitute for `input()` or writing logic with clear return values) to facilitate simulation with `pytest`.
 
 ## Common Pitfalls and Debugging Tips

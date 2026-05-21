@@ -3,6 +3,9 @@ title: "Introduction to Classification"
 description: "An overview of classification, its core components, feature representation, and the concept of dimensionality reduction with PCA."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## Overview
 - **Goal**: To understand the fundamental concepts of classification as a supervised learning task.
 - **Scope**: This note defines classification, outlines the essential components of a classification system, discusses data representation through features, and introduces dimensionality reduction.
@@ -16,11 +19,11 @@ description: "An overview of classification, its core components, feature repres
 ## Key Concepts
 
 ### 1. What is Classification?
-- **Motivation**: Many real-world problems require assigning items to predefined categories. For example, is an email spam or not? Does a medical image show a tumor or not? 
+- **Motivation**: Many real-world problems require assigning items to predefined categories. For example, is an email spam or not? Does a medical image show a tumor or not?
 <Callout type="info" title="Core Concept: Classification">
   Classification is a supervised learning task to predict a discrete or categorical label, contrasting with regression's continuous value prediction.
 </Callout>
-- **Example**: 
+- **Example**:
   - **Classification**: Predicting if a fruit is an `apple`, `orange`, or `banana`.
   - **Regression**: Predicting the `weight` in grams of a fruit.
 
@@ -33,7 +36,7 @@ description: "An overview of classification, its core components, feature repres
 
 ### 3. Feature Representation
 - **Motivation**: Machine learning models cannot work with raw data (like images or text) directly. They require numerical input.
-- **Core Concept**: **Features** are measurable properties or characteristics of the data, extracted and converted into a numerical **feature vector**. 
+- **Core Concept**: **Features** are measurable properties or characteristics of the data, extracted and converted into a numerical **feature vector**.
 - **Examples**:
   - **Tabular Data**: For classifying animals, features could be binary values for `is_mammal`, `has_scales`, `is_poisonous`.
   - **Text Data**: A common representation is the **Bag-of-Words (BoW)** model, where a document is represented by a vector of word counts or frequencies.
@@ -41,7 +44,6 @@ description: "An overview of classification, its core components, feature repres
 
 ### 4. Dimensionality Reduction and PCA
 - **Core Concept**: **Dimensionality reduction** aims to reduce the number of features while retaining as much important information as possible. **Principal Component Analysis (PCA)** is a popular technique for this.
-
 <Callout type="warn" title="Curse of Dimensionality">
   Using too many features (high dimensionality) can lead to models that are harder to train, more prone to overfitting, and computationally expensive.
 </Callout>
@@ -54,9 +56,6 @@ description: "An overview of classification, its core components, feature repres
 
 ## Best Practices
 - **Understand Your Data**: Before choosing features or a model, it's crucial to explore and understand the properties of your dataset.
-
 <Callout type="info" title="Feature Engineering is Key">
   In traditional machine learning, the quality of hand-designed features often has the biggest impact on model performance.
 </Callout>
-
----

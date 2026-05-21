@@ -3,6 +3,9 @@ title: "k-Nearest Neighbors (k-NN)"
 description: "Understanding the k-Nearest Neighbors algorithm, an intuitive, instance-based classifier, and learning how to select the optimal 'k' using cross-validation."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## Overview
 - **Goal**: To understand and implement the k-Nearest Neighbors (k-NN) algorithm for classification.
 - **Scope**: This note covers the mechanics of k-NN, the importance of the hyperparameter `k`, the role of distance metrics and feature scaling, and how to choose `k` using cross-validation.
@@ -33,7 +36,7 @@ description: "Understanding the k-Nearest Neighbors algorithm, an intuitive, ins
 
 ### 3. Choosing the Optimal `k`
 - **Motivation**: Since `k` controls the bias-variance trade-off, we need a principled way to find the best value for our specific dataset.
-- **Best Practice**: Use **cross-validation**. 
+- **Best Practice**: Use **cross-validation**.
   1.  Test a range of different values for `k` (e.g., from 1 to 30).
   2.  For each `k`, calculate the average cross-validation score.
   3.  Choose the value of `k` that results in the best score (e.g., lowest error or highest accuracy).
@@ -43,33 +46,28 @@ description: "Understanding the k-Nearest Neighbors algorithm, an intuitive, ins
   from sklearn.neighbors import KNeighborsClassifier
   from sklearn.model_selection import cross_val_score
   import numpy as np
-
   # Assume X_scaled and y are our pre-processed data
   k_range = range(1, 31)
   k_scores = []
-
   for k in k_range:
       knn = KNeighborsClassifier(n_neighbors=k)
       # Use 5-fold CV to get scores
       scores = cross_val_score(knn, X_scaled, y, cv=5, scoring='accuracy')
       k_scores.append(scores.mean())
-
   # Find the k with the best score
   best_k = k_range[np.argmax(k_scores)]
   ```
 
 ### 4. Distance Metrics and Feature Scaling
-- **Distance Metric**: The most common choice for calculating distance is the **Euclidean distance** (L2 norm). 
+- **Distance Metric**: The most common choice for calculating distance is the **Euclidean distance** (L2 norm).
 <Callout type="warn" title="Important: Feature Scaling for k-NN">
   k-NN is extremely sensitive to feature scales. Always scale your features (e.g., Standardization) before applying k-NN to prevent features with larger ranges from dominating distance calculations.
 </Callout>
 
 ## Pros and Cons of k-NN
 | Pros | Cons |
-|---|---|
+||
 | Simple to understand and implement. | Computationally expensive at test time (must compare to all training points). |
 | No training phase is required. | Requires a large amount of memory to store the entire dataset. |
 | Can learn complex, non-linear decision boundaries. | Performance is very sensitive to the choice of `k`. |
 | | Highly sensitive to irrelevant features and the scale of the data. |
-
----

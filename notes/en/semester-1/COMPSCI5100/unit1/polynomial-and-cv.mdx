@@ -3,6 +3,9 @@ title: "Polynomial Regression and Cross-Validation"
 description: "Using polynomial models to capture non-linear trends, and using cross-validation to combat overfitting and select the best model."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## Overview
 - **Goal**: To model non-linear relationships and to select a model that generalizes well to new, unseen data.
 - **Scope**: This note covers polynomial regression, the concept of overfitting, and the use of validation sets and K-fold cross-validation for model selection.
@@ -26,18 +29,15 @@ description: "Using polynomial models to capture non-linear trends, and using cr
   ```python
   # Example: Manually creating polynomial features
   import numpy as np
-  
   def make_polynomial(x, maxorder):
       """Creates a design matrix with polynomial features."""
       X = np.ones_like(x) # Bias term (for w_0)
       for i in range(1, maxorder + 1):
           X = np.hstack((X, x**i))
       return X
-  
   # x_train is a column vector of single feature values
   # X_poly will have columns for 1, x, x^2
   X_poly = make_polynomial(x_train, 2)
-  
   # This matrix can then be used with sklearn.linear_model.LinearRegression
   ```
 
@@ -45,7 +45,6 @@ description: "Using polynomial models to capture non-linear trends, and using cr
 - **Motivation**: As we increase model complexity (e.g., the polynomial order `K`), the training error will always decrease. However, a model that is too complex may learn the noise in the training data, not the underlying trend.
 - **Core Concept**: **Overfitting** occurs when a model performs exceptionally well on the training data but poorly on new, unseen data. The model has high variance. An overfitted model does not generalize well.
 - **Visual Cue**: An overfitted polynomial often exhibits wild oscillations, especially at the edges of the data range.
-
 <Callout type="error" title="Overfitting">
   Overfitting occurs when a model performs exceptionally well on training data but poorly on new, unseen data. An overfitted model does not generalize well.
 </Callout>
@@ -79,14 +78,11 @@ description: "Using polynomial models to capture non-linear trends, and using cr
   from sklearn.preprocessing import PolynomialFeatures
   from sklearn.pipeline import make_pipeline
   from sklearn.model_selection import cross_val_score
-  
   # Create a pipeline that first creates polynomial features, then fits a linear model
   model = make_pipeline(PolynomialFeatures(3), LinearRegression())
-  
   # Perform 10-fold cross-validation
   # 'neg_mean_squared_error' is used because cross_val_score expects a utility score (higher is better)
   scores = cross_val_score(model, x_reshaped, t_reshaped, cv=10, scoring='neg_mean_squared_error')
-  
   # The scores are negative MSE, so we take the mean and flip the sign
   average_mse = -scores.mean()
   ```
@@ -98,10 +94,7 @@ description: "Using polynomial models to capture non-linear trends, and using cr
     </Callout>
 - **Choose K carefully**: A common choice for K is 5 or 10. A larger K is more computationally expensive but gives a more robust estimate.
 
----
-
 ## Key Takeaway
 - Polynomial regression extends linear models to capture non-linear trends.
 - Overfitting occurs when complex models learn noise; cross-validation helps prevent this.
 - Validation sets and K-fold cross-validation are crucial for robust model selection and hyperparameter tuning.
-

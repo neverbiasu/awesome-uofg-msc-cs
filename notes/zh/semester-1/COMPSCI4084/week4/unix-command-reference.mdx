@@ -3,6 +3,9 @@ title: "Unix 命令参考"
 description: "一个针对常用和核心 Unix/Linux 命令的快速参考指南（速查表），涵盖文件操作、进程管理、权限等。"
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## 概要
 - **目标**：为最常见的 Unix 命令提供一个快速、易于使用的参考。
 - **范围**：涵盖文件管理、进程管理、文件权限、SSH、搜索、系统信息和压缩等命令。
@@ -37,8 +40,6 @@ description: "一个针对常用和核心 Unix/Linux 命令的快速参考指南
 - `tail file`: 显示 `file` 的后10行。
 - `tail -f file`: 实时显示 `file` 增长的内容。
 
----
-
 ### 2. 进程管理
 - `ps`: 显示您当前活动的进程。
 - `top`: 实时显示所有正在运行的进程。
@@ -46,8 +47,6 @@ description: "一个针对常用和核心 Unix/Linux 命令的快速参考指南
 - `killall proc`: 终止所有名为 `proc` 的进程（*请谨慎使用*）。
 - `bg`: 列出已停止或后台的作业；在后台恢复一个已停止的作业。
 - `fg`: 将最近的作业带到前台。
-
----
 
 ### 3. 文件权限
 - `chmod octal file`: 将 `file` 的权限更改为 `octal`。
@@ -59,21 +58,15 @@ description: "一个针对常用和核心 Unix/Linux 命令的快速参考指南
   - `chmod 777 file`: 为所有人（所有者、组、其他）设置读、写、执行权限。
   - `chmod 755 file`: 为所有者设置 rwx，为组和其他人设置 r-x。
 
----
-
 ### 4. SSH
 - `ssh user@host`: 以 `user` 用户连接到 `host`。
 - `ssh -p port user@host`: 在 `port` 端口上以 `user` 用户连接到 `host`。
 - `ssh-copy-id user@host`: 将您的公钥添加到 `host` 的 `user` 用户下，以实现免密登录。
 
----
-
 ### 5. 搜索
 - `grep pattern files`: 在 `files` 文件中搜索 `pattern`。
 - `grep -r pattern dir`: 在 `dir` 目录中递归搜索 `pattern`。
 - `find dir -name pattern`: 在 `dir` 目录中查找名为 `pattern` 的文件。
-
----
 
 ### 6. 系统信息
 - `date`: 显示当前日期和时间。
@@ -85,22 +78,16 @@ description: "一个针对常用和核心 Unix/Linux 命令的快速参考指南
 - `du`: 显示目录空间使用情况。
 - `free`: 显示内存和交换空间使用情况。
 
----
-
 ### 7. 压缩
 - `tar cf file.tar files`: 创建一个名为 `file.tar` 的 tar 归档文件，其中包含 `files`。
 - `tar xf file.tar`: 从 `file.tar` 中提取文件。
 - `zip file.zip files`: 创建一个 zip 压缩文件。
 - `unzip file.zip`: 解压一个 zip 文件。
 
----
-
 ## 最佳实践
 - **使用 `man`**：如有疑问，`man <command>` 能提供最详细、最准确的信息。
 - **谨慎使用 `rm`**：特别是 `rm -rf`，因为它会永久删除文件且没有确认提示。
 - **Tab 自动补全**：使用 `Tab` 键自动补全命令和文件名，以节省时间并防止拼写错误。
 
----
 ## 更新记录
 - 2025-10-20：作为重大重构的一部分，基于 `fwunixref.md` 源材料创建。
-

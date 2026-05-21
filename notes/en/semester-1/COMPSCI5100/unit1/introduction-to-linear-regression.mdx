@@ -3,6 +3,9 @@ title: "Introduction to Linear Regression"
 description: "Understanding the fundamentals of linear regression, from model definition to loss functions and implementation with scikit-learn."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## Overview
 - **Goal**: To understand how to model a linear relationship between a single input feature and a continuous target variable.
 - **Scope**: This note covers the definition of a simple linear model, the concept of a loss function (MSE), and the practical implementation of model fitting.
@@ -51,18 +54,14 @@ description: "Understanding the fundamentals of linear regression, from model de
   # Assumes 'x' is a NumPy array of years and 't' is an array of times.
   from sklearn.linear_model import LinearRegression
   import numpy as np
-
   # Reshape data for scikit-learn: needs to be a 2D array
   x_reshaped = x[:, np.newaxis]
   t_reshaped = t[:, np.newaxis]
-
   # Create and fit the model
   reg = LinearRegression().fit(x_reshaped, t_reshaped)
-
   # The optimal parameters are stored in the model object
   w_0 = reg.intercept_[0]  # Intercept
   w_1 = reg.coef_[0][0]    # Slope
-
   # Make a prediction for the year 2012
   prediction_2012 = reg.predict(np.array([[2012]]))
   ```
@@ -80,5 +79,3 @@ description: "Understanding the fundamentals of linear regression, from model de
 - Mean Squared Error (MSE) is used to quantify model error, and the goal is to minimize it.
 - `scikit-learn` automates the process of finding optimal parameters.
 - The model assumes linearity and continuation of trends.
-
----

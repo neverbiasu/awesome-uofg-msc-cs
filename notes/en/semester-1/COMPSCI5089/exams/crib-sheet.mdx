@@ -3,13 +3,15 @@ title: "Crib Sheet"
 description: "A formula and key concept crib sheet for COMPSCI5089 Data Science and Systems."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 # IDSS_Crib_Sheet_2025_26
 
 ## Introduction to Data Science and Systems Crib Sheet 2025-26
 Nicolas Pugeault & Iraklis Klampanos
 
 ## I. LINEAR ALGEBRA
-
 *   For vectors x , y ∈ R n , a ∈ R :
     *   Inner Product: x · y = ⟨ x , y ⟩ = x T y = P n i =1 x i y i
     *   Orthogonality: x ⊥ y ⇐⇒ x · y = 0
@@ -39,7 +41,6 @@ Nicolas Pugeault & Iraklis Klampanos
     *   Σ − (1 / 2) is the diagonal matrix with elements σ − (1 / 2) i .
 
 ## II. OPTIMISATION
-
 *   If f ( x ) is a scalar function of a scalar x
     *   f ′ ( x ) is the first derivative of f w.r.t. x, d / dx f ( x ) .
     *   The second derivative is written f ′′ ( x ) = d ^ 2 / dx ^ 2 f ( x ) .
@@ -53,7 +54,6 @@ Nicolas Pugeault & Iraklis Klampanos
 *   The gradient vector is the transpose of the Jacobian for a scalar function f : R n → R .
 
 ## III. PROBABILITIES
-
 *   Axioms of probability:
     *   Boundedness: 0 ≤ P ( A ) ≤ 1
     *   Unitarity: P x P ( x ) = 1
@@ -83,7 +83,6 @@ Nicolas Pugeault & Iraklis Klampanos
     *   ˆ σ ^ 2 = (1 / N) P N i =1 ( x i − ˆ μ ) ^ 2 .
 
 ## IV. DATABASES
-
 *   Data Storage & I/O Cost
     *   I/O Cost: Measured by the number of block accesses (reads/writes) to disk.
     *   Blocking Factor (bfr): Number of records per disk block. – bf r = ⌊ Block Size / Record Size ⌋

@@ -3,6 +3,9 @@ title: "多项式回归与交叉验证"
 description: "使用多项式模型捕捉非线性趋势，并利用交叉验证来对抗过拟合及选择最佳模型。"
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## 概要
 - **目标**：学习如何为非线性关系建模，并选择一个能很好地泛化到新数据的模型。
 - **范围**：本笔记涵盖多项式回归、过拟合的概念，以及使用验证集和K-折交叉验证进行模型选择的方法。
@@ -26,18 +29,15 @@ description: "使用多项式模型捕捉非线性趋势，并利用交叉验证
   ```python
   # 示例：手动创建多项式特征
   import numpy as np
-  
   def make_polynomial(x, maxorder):
       """创建一个包含多项式特征的设计矩阵。"""
       X = np.ones_like(x) # 偏置项 (对应 w_0)
       for i in range(1, maxorder + 1):
           X = np.hstack((X, x**i))
       return X
-  
   # x_train 是单特征值的列向量
   # X_poly 将包含 1, x, x^2 的列
   X_poly = make_polynomial(x_train, 2)
-  
   # 此矩阵随后可用于 sklearn.linear_model.LinearRegression
   ```
 
@@ -45,7 +45,6 @@ description: "使用多项式模型捕捉非线性趋势，并利用交叉验证
 - **动机**：随着模型复杂度（例如，多项式阶数 `K`）的增加，训练误差总是会减小。然而，一个过于复杂的模型可能会学习到训练数据中的噪声，而不是潜在的趋势。
 - **核心概念**：**过拟合**指模型在训练数据上表现极好，但在新的、未见过的数据上表现很差。该模型具有高方差。过拟合的模型泛化能力差。
 - **视觉线索**：过拟合的多项式曲线通常表现出剧烈波动，尤其是在数据范围的边缘。
-
 <Callout type="error" title="过拟合">
   过拟合指模型在训练数据上表现极好，但在新的、未见过的数据上表现很差。过拟合的模型泛化能力差。
 </Callout>
@@ -79,14 +78,11 @@ description: "使用多项式模型捕捉非线性趋势，并利用交叉验证
   from sklearn.preprocessing import PolynomialFeatures
   from sklearn.pipeline import make_pipeline
   from sklearn.model_selection import cross_val_score
-  
   # 创建一个流水线，首先创建多项式特征，然后拟合线性模型
   model = make_pipeline(PolynomialFeatures(3), LinearRegression())
-  
   # 执行10折交叉验证
   # 使用 'neg_mean_squared_error' 是因为 cross_val_score 期望一个效用分数（越高越好）
   scores = cross_val_score(model, x_reshaped, t_reshaped, cv=10, scoring='neg_mean_squared_error')
-  
   # 分数是负的MSE，所以我们取平均值并取反
   average_mse = -scores.mean()
   ```
@@ -98,10 +94,7 @@ description: "使用多项式模型捕捉非线性趋势，并利用交叉验证
     </Callout>
 - **谨慎选择K值**：K的常见选择是5或10。更大的K值计算成本更高，但能提供更稳健的估计。
 
----
-
 ## 关键要点
 - 多项式回归扩展线性模型以捕捉非线性趋势。
 - 过拟合发生在复杂模型学习噪声时；交叉验证有助于防止这种情况。
 - 验证集和K-折交叉验证对于稳健的模型选择和超参数调整至关重要。
-

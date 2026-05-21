@@ -1,7 +1,10 @@
 ---
-title: Week 3
-description: Condensed study notes for Week 3 (Data Processing, NumPy, Pandas, Data Visualization).
+title: "Week 3"
+description: "Condensed study notes for Week 3 (Data Processing, NumPy, Pandas, Data Visualization)."
 ---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
 
 ## Overview
 - This week uses a tAPP + Lab format, focusing on data processing, manipulation, and visualization.
@@ -9,49 +12,7 @@ description: Condensed study notes for Week 3 (Data Processing, NumPy, Pandas, D
 
 ## This Week's Schedule (in order)
 | Session | Topic | Description |
-|---|---|---|
-| Class 4 | NumPy, Pandas Data Structures & Ops, Custom Packages | Array operations, DataFrame manipulation, fancy indexing, date and missing data handling. |
-| Class 5 | Data Visualization | Matplotlib plotting basics: line plots, scatter plots, bar charts, histograms, etc. |
-
-## Learning Objectives
-1. Master NumPy array creation, indexing, slicing, and broadcasting mechanisms.
-2. Become proficient in using Pandas for data reading, writing, filtering, cleaning, and transformation.
-3. Understand and handle date formats and missing data (NaN).
-4. Create a custom Python package to reuse data analysis code.
-5. Use Matplotlib to create basic charts and customize their styles.
-
-## Key Concepts
-- **NumPy Core**:
-  - `ndarray` creation (`array`, `arange`, `zeros`, `ones`), `shape` and `dtype` attributes.
-  - Indexing and slicing: integer indexing, boolean masking, and fancy indexing (integer array indexing).
-  - Array arithmetic and broadcasting rules.
-- **Pandas Data Manipulation**:
-  - `Series` and `DataFrame` data structures; reading/writing CSV/Excel/JSON.
-  - Data selection: `loc` (label-based), `iloc` (position-based), boolean indexing.
-  - Data cleaning: handling missing values (`dropna`, `fillna`), data type conversion.
-  - Date handling: `pd.to_datetime()`, `date_range`, time-series indexing.
-- **Custom Packages**:
-  - Directory structure and `__init__.py`; module imports and relative imports.
-- **Data Visualization (Matplotlib)**:
-  - `pyplot` interface: `plot`, `scatter`, `bar`, `hist`, `pie`.
-  - Customizing chart elements: title, axis labels, legend, grid.
-  - Subplot layouts (`subplots`) for displaying multiple charts.
-
-## Practice Checklist (Self-assessment)
-- [ ] Create a NumPy array and use a boolean mask to filter elements that meet a condition.
-- [ ] Use Pandas to read a CSV file, view descriptive statistics (`describe`), and handle missing values.
-- [ ] Convert a date string column to a `datetime` type and extract year/month/day information.
-- [ ] Create a simple custom package (e.g., `mydata_package`) containing data loading and cleaning functions.
-- [ ] Plot a line chart and a scatter plot for a dataset, adding a title and axis labels.
-- [ ] Use `subplots` to display multiple charts on a single canvas.
-
-## Assessment Reminder
-- tAPP participation is graded weekly (5% total).
-- **Lab Exercise Week 3 Python (15%)** was completed on Oct 10, covering content from Weeks 2–3.
-
-## Content Index (Week 3 Subpages)
-| Module | Page |
-|---|---|
+|||---|
 | NumPy Library | [NumPy](/en/notes/semester-1/COMPSCI4084/week3/numpy) |
 | Pandas Data Structures & I/O | [Pandas I/O](/en/notes/semester-1/COMPSCI4084/week3/pandas-io) |
 | Pandas Data Manipulation | [Pandas Manipulation](/en/notes/semester-1/COMPSCI4084/week3/pandas-manipulation) |
@@ -61,7 +22,6 @@ description: Condensed study notes for Week 3 (Data Processing, NumPy, Pandas, D
 | Lab Exercises | [Lab Exercises](/en/notes/semester-1/COMPSCI4084/week3/lab-exercises) |
 
 ## Materials Index
-
 > Note: The following links point only to the Markdown (.md) versions that exist within the repository, serving as the sole source of truth for the note content.
 
 ### Pre-reading Material - Class 4
@@ -83,7 +43,5 @@ description: Condensed study notes for Week 3 (Data Processing, NumPy, Pandas, D
 
 ### Python Lab Material - Class 5
 - [Lab5 Exercises (MD)](../../../../materials/semester-1/COMPSCI4084-programming-systems/resources/Lab_exercise_5.md)
-
----
 Update History
 - 2025-10-08: Initial version created.

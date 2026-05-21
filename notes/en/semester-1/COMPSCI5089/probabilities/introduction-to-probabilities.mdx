@@ -3,10 +3,10 @@ title: "Probabilities I: Introduction to Probabilities"
 description: "An introduction to the fundamental concepts of probability theory, including core definitions, axioms, random variables, and expectation."
 ---
 
-import { Callout } from "fumadocs-ui/components/callout";
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
 
 ## Learning Outcomes
-
 *   Understand what probability is and its different philosophical interpretations.
 *   Define inverse and forward probability.
 *   Define random variables, distributions, and probability mass/density functions (PMF/PDF).
@@ -14,36 +14,24 @@ import { Callout } from "fumadocs-ui/components/callout";
 *   Define expectation (expected value).
 *   Learn the axioms of probability theory.
 
----
-
 ## Core Definitions
-
 *   **Experiment (or trial)**: An occurrence with an uncertain outcome (e.g., losing a submarine).
 *   **Outcome**: The result of an experiment; a single state of the world (e.g., the submarine is in grid square [2,3]).
 *   **Sample Space**: The set of all possible outcomes for an experiment.
 *   **Event**: A subset of possible outcomes with a common property (e.g., all grid squares south of the Equator).
 *   **Probability**: The probability of an event is the ratio of the number of outcomes in the event to the total number of outcomes in the sample space. It is always a real number between 0 and 1.
 
----
-
 ## Philosophy of Probability
-
 There are two main schools of thought regarding the interpretation of probability.
-
 <Callout title="Bayesian (Laplacian) View">
   Treats probability as a **calculus of belief**. A probability $$P(A)$$ measures our *degree of belief* that event A is true. This view allows us to update our beliefs (from a **prior** to a **posterior**) when presented with new **evidence**.
 </Callout>
-
 <Callout title="Frequentist View">
   Considers probability to be the **long-term frequency** of repeated events. In this view, it only makes sense to talk about the probability of events that can be repeated. One cannot assign a probability to a one-time event, like the location of the USS Scorpion.
 </Callout>
 
----
-
 ## Axioms of Probability
-
 Probability theory is built on a formal basis of three axioms.
-
 <Callout title="Axioms of Probability">
 *   **Boundedness**: For any event A, $$0 \le P(A) \le 1$$.
 *   **Unitarity**: For the complete set of all possible outcomes $$x$$ in a sample space $$\sigma$$, the sum of their probabilities is 1. $$\sum_{x \in \sigma} P(x) = 1$$
@@ -52,26 +40,20 @@ Probability theory is built on a formal basis of three axioms.
 
 ### Conditional Probability
 The conditional probability $$P(A|B)$$ is the probability that event A will happen *given* that we already know event B has happened.
-
 ```math
 P(A|B) = \frac{P(A \land B)}{P(B)}
 ```
 
----
-
 ## Random Variables and Distributions
-
 - A **random variable** (e.g., $$X$$) is a variable that can take on different values, but we don't know its specific value. It might represent the outcome of a dice throw (discrete) or the height of a person (continuous).
 - A **probability distribution** ($$P(X)$$) defines how likely the different states of a random variable are.
 
 ### PMF vs. PDF
-
 *   **Discrete Variables** are described by a **Probability Mass Function (PMF)**, $$f_X(x)$$, which gives the probability of each specific outcome. For a PMF, $$P(X=x) = f_X(x)$$.
 *   **Continuous Variables** are described by a **Probability Density Function (PDF)**, $$f_X(x)$$, which specifies the spread of probability over a range of outcomes. For a PDF, it is **not** the case that $$P(X=x) = f_X(x)$$; instead, probability is found by integrating over an interval.
 
 ### Integration to Unity
 Any PMF or PDF must sum or integrate to 1 over all possible outcomes.
-
 ```math
 \sum_i f_X(x_i) = 1 \quad \text{(for discrete PMFs)}
 ```
@@ -79,26 +61,16 @@ Any PMF or PDF must sum or integrate to 1 over all possible outcomes.
 \int f_X(x) dx = 1 \quad \text{(for continuous PDFs)}
 ```
 
----
-
 ## Expectation
-
 The **expectation** or **expected value**, $$E[X]$$, is the "average" value of a random variable, weighted by the probability of each outcome.
-
 - For a continuous RV: $$E[X] = \int x f_X(x) dx$$
 - For a discrete RV: $$E[X] = \sum_x x f_X(x)$$
-
 - The **mean** of a random variable is its expectation, $$E[X]$$.
 - The **variance** is $$var(X) = E[(X-E[X])^2]$$, a measure of spread.
 
----
-
 ## Log-Probabilities and Likelihood
-
 To avoid numerical underflow when multiplying many small probabilities, we often work with **log-probabilities**, which can be summed instead.
-
 - **Likelihood**, $$L(x_i)$$, is a function of data and is not a probability. It is often more convenient to work with the **log-likelihood**.
-
 - Product of probabilities:
   ```math
   P(x_1, ..., x_n) = \prod_{i=1}^{n} P(x_i)

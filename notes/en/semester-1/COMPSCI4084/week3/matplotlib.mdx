@@ -1,7 +1,40 @@
 ---
-title: Matplotlib
-description: Basic plotting with Matplotlib (line plots, scatter plots, bar charts, histograms, subplots, and style customization).
+title: "Matplotlib"
+description: "Basic plotting with Matplotlib (line plots, scatter plots, bar charts, histograms, subplots, and style customization)."
 ---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+```python
+
+```python
+```python
+import matplotlib.pyplot as plt
+```
+```
+
+```python
+```python
+import numpy as np
+```
+```
+
+plt.plot(x, y, label='y=2x')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Linear Relationship Example')
+plt.legend()
+plt.show()
+plt.scatter(x1, y1, s=50, c='r', alpha=0.7)
+plt.show()
+plt.bar(langs, pop, yerr=std, alpha=0.8, error_kw={'capsize': 5})
+plt.show()
+plt.hist(data, bins=20)
+plt.show()
+plt.tight_layout()
+plt.show()
+```
 
 ## Overview
 - **Goal**: Master Matplotlib's `pyplot` interface to create common charts (line, scatter, bar, histogram, pie) and understand subplot layouts and style customization.
@@ -13,24 +46,18 @@ description: Basic plotting with Matplotlib (line plots, scatter plots, bar char
 3. Understand the common parameters for histograms and box plots (`bins`, `alpha`) and be able to display error bars.
 
 ## Key Concepts
+
 ### 1. Line Plots and Labels
 - **Motivation**: To observe trends that change over time or sequence.
 - **Core Concepts**: `plt.plot(x, y, label=..., linewidth=..., color=...)`. Use `plt.title`, `plt.xlabel`, `plt.ylabel` to add metadata.
 - **Example**:
 ```python
-import matplotlib.pyplot as plt
+
 x = list(range(1, 31))
 y = [2 * i for i in x]
-plt.plot(x, y, label='y=2x')
-plt.xlabel('x')
-plt.ylabel('y')
-plt.title('Linear Relationship Example')
-plt.legend()
-plt.show()
 ```
 - **Summary**: Good titles and labels significantly improve chart readability.
 
----
 ### 2. Scatter Plots and Point Styles
 - **Motivation**: To display the distribution and relationship between variables.
 - **Core Concepts**: `plt.scatter(x, y, s=size, c=color, alpha=transparency)`.
@@ -38,12 +65,9 @@ plt.show()
 ```python
 x1 = [20, 30, 50, 60, 80]
 y1 = [10, 50, 100, 180, 200]
-plt.scatter(x1, y1, s=50, c='r', alpha=0.7)
-plt.show()
 ```
 - **Summary**: Scatter plots, combined with color/size encoding, can display multidimensional information.
 
----
 ### 3. Bar Charts and Error Bars
 - **Motivation**: To display categorical data and its uncertainty.
 - **Core Concepts**: `plt.bar`, `yerr`, `error_kw`, `alpha`.
@@ -52,25 +76,19 @@ plt.show()
 langs = ['Python', 'Java', 'C', 'C++']
 pop = [100, 96.3, 94.4, 87.5]
 std = [1.2, 2.3, 1.5, 1.0]
-plt.bar(langs, pop, yerr=std, alpha=0.8, error_kw={'capsize': 5})
-plt.show()
 ```
 - **Summary**: Error bars add statistical information to visualizations.
 
----
 ### 4. Histograms, Box Plots, and Pie Charts
 - **Motivation**: Histograms are for distributions, box plots show quartiles and outliers, and pie charts show composition proportions.
 - **Core Concepts**: `plt.hist`, `df.plot(kind='box')`, `plt.pie`.
 - **Example**:
 ```python
-import numpy as np
+
 data = np.random.randint(0, 101, size=100)
-plt.hist(data, bins=20)
-plt.show()
 ```
 - **Summary**: Choosing the right chart type helps reveal data characteristics.
 
----
 ### 5. Multi-plot Layouts and Subplots
 - **Motivation**: To display multiple perspectives or different series simultaneously.
 - **Core Concepts**: `plt.subplot(nrows, ncols, index)` or `fig, axs = plt.subplots()`.
@@ -79,8 +97,6 @@ plt.show()
 fig, axs = plt.subplots(1, 2, figsize=(8, 4))
 axs[0].plot(x, y)
 axs[1].scatter(x1, y1)
-plt.tight_layout()
-plt.show()
 ```
 - **Summary**: Using subplots effectively makes report pages more compact.
 
@@ -89,6 +105,5 @@ plt.show()
 - When using a log scale or normalized data, label the axis ticks for easier interpretation (`plt.xscale('log')`).
 - Encapsulate plotting code into functions for reusability and testing.
 
----
 ## Update History
 - 2025-10-08: Created initial version with examples for plot/scatter/bar/hist/subplots based on course materials.

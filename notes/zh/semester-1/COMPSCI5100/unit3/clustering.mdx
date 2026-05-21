@@ -3,6 +3,9 @@ title: "聚类算法"
 description: "聚类、K-Means 和其他常见聚类方法的介绍。"
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## 概要
 - **目标**: 理解聚类的原理，并学习如何应用像 K-Means 这样的常用算法。
 - **范围**: 本笔记涵盖无监督学习的基础知识、K-Means 算法以及评估聚类结果的方法。
@@ -38,8 +41,6 @@ description: "聚类、K-Means 和其他常见聚类方法的介绍。"
 ### 其他聚类方法
 - **层次聚类 (Hierarchical Clustering)**: 从下至上（凝聚型）或从上至下（分裂型）构建簇的层次结构。
 - **DBSCAN (Density-Based Spatial Clustering of Applications with Noise)**: 将紧密相连的点分组在一起，并将位于低密度区域的孤立点标记为异常值。
-
----
 
 ## 最佳实践
 - 在应用 K-Means 之前缩放您的特征，因为它对数据的尺度很敏感。

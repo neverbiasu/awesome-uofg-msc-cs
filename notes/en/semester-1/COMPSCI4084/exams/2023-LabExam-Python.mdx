@@ -2,6 +2,9 @@
 title: "2023 COMPSCI4084 Python Lab Exam"
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 # 2023 COMPSCI4084 Python Lab Exam
 
 ## Exam Overview
@@ -21,7 +24,6 @@ Create a library management system and integrate a simulated virtual librarian.
 2.  The user should be able to enter the book's ISBN, title, author, and publication year, and save valid book details to a database named `LibraryDB` when the "Save" button is clicked. An appropriate message should be displayed upon successful saving (4 Marks).
 3.  When the "Clear" button is clicked, the system should clear all fields in the window (2 Marks).
 4.  When the "Display Books" button is clicked, the system should display all book details saved in the database (3 Marks).
-
 **Key Concepts/Knowledge Points:**
 - tkinter GUI interface design
 - Database operations (save, display, clear)
@@ -32,7 +34,6 @@ Create a library management system and integrate a simulated virtual librarian.
 1.  The system should ensure that duplicate ISBNs are not stored. If an entered ISBN already exists, the system should display an appropriate message (1 Mark).
 2.  Ensure the entered year is not later than the current year and not earlier than 1450 (1 Mark).
 3.  The system should ensure that both the title and author fields are not empty. If any field is empty, the system should display an appropriate message (1 Mark).
-
 **Key Concepts/Knowledge Points:**
 - Data validation (duplicate ISBN, year range, non-empty check)
 - Error message prompts
@@ -43,7 +44,6 @@ Create a chat window to simulate interaction with ChatGPT. The system should con
 - “Recommend me a book by [author name].” (3.5 Marks)
 - “When was [book title] published.” (3.5 Marks)
 Only these two sentence structures need to be handled; support for other sentences is not required.
-
 **Key Concepts/Knowledge Points:**
 - Simulated Natural Language Processing (NLP)
 - Database queries to respond to user requests

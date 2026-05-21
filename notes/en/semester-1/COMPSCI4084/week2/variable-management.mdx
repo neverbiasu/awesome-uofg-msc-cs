@@ -3,6 +3,9 @@ title: "Variable Management and Side Effects"
 description: "Local/global scope, identifying and avoiding side effects, variable naming conflicts, and best practices for variable management in Jupyter Notebooks."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## Overview
 - **Goal**: Understand the concepts of variable scope and side effects, master techniques for avoiding side effects, and improve code maintainability and testability.
 - **Scope**: Covers local/global scope, identifying and avoiding side effects, and best practices for variable naming. Does not cover advanced topics like closures or decorators.
@@ -32,22 +35,17 @@ description: "Local/global scope, identifying and avoiding side effects, variabl
 # Local vs. Global Scope Example
 # Modifications to a local variable do not affect a global variable
 x = 10  # Global variable
-
 def modify_local():
     x = 5  # Local variable, unrelated to the global x
     print(f"Inside function: x = {x}")
-
 modify_local()  # Output: Inside function: x = 5
 print(f"Outside function: x = {x}")  # Output: Outside function: x = 10
-
 # Using `global` to modify a global variable (not recommended)
 # `global` declaration allows modification of the global variable, but introduces side effects
 count = 0  # Global variable
-
 def increment_global():
     global count  # Declare intent to modify the global variable
     count += 1
-
 increment_global()
 print(count)  # Output: 1 (the global count was modified)
 ```
@@ -56,8 +54,6 @@ print(count)  # Output: 1 (the global count was modified)
   - Avoid modifying global variables inside functions. If you need to share state, pass it as a parameter.
   - Use uppercase with underscores for global constants (`CONFIG_FILE`) to indicate they should not be modified.
 - **Summary**: Local variables are only visible inside a function. Modifying a global variable requires the `global` keyword but introduces side effects and should be avoided.
-
----
 
 ### 2. What Are Side Effects?
 - **Motivation**: To identify when a function modifies external state and understand how side effects impact program behavior.
@@ -77,20 +73,16 @@ print(count)  # Output: 1 (the global count was modified)
 # Function with a side effect
 # This function modifies the global variable `count`, creating a side effect
 count = 0  # Global variable
-
 def increment():
     global count
     count += 1  # Modifies global state (a side effect)
-
 print(f"Before: {count}")  # Output: Before: 0
 increment()
 print(f"After: {count}")   # Output: After: 1
-
 # Modifying a mutable parameter is also a side effect
 # This function modifies the list passed to it
 def append_item(lst, item):
     lst.append(item)  # Modifies the passed-in argument (a side effect)
-
 numbers = [1, 2, 3]
 append_item(numbers, 4)
 print(numbers)  # Output: [1, 2, 3, 4] (the original list was modified)
@@ -100,8 +92,6 @@ print(numbers)  # Output: [1, 2, 3, 4] (the original list was modified)
   - Function names should reflect their side effects: e.g., `update_count()` instead of `get_count()`.
   - When debugging, the behavior of a function with side effects depends on its call order and context.
 - **Summary**: A side effect is a modification of external state by a function. Identifying them helps in understanding program behavior and debugging issues.
-
----
 
 ### 3. Writing Side-Effect-Free Functions (Pure Function Pattern)
 - **Motivation**: To write predictable, testable, and reusable functions by avoiding side effects.
@@ -122,23 +112,18 @@ print(numbers)  # Output: [1, 2, 3, 4] (the original list was modified)
 # It passes the result via a return value and does not modify global state
 def increment(value):
     return value + 1  # Returns a new value, does not modify external state
-
 count = 0
 count = increment(count)  # Update via the return value
 print(count)  # Output: 1
-
 # Comparison: With vs. Without Side Effects
 # Avoid modifying the passed-in list; return a new one instead
-
 # ❌ With side effects
 def add_item_side_effect(lst, item):
     lst.append(item)  # Modifies the original list
     return lst
-
 # ✅ Without side effects (pure)
 def add_item_pure(lst, item):
     return lst + [item]  # Returns a new list, does not modify the original
-
 numbers = [1, 2, 3]
 new_numbers = add_item_pure(numbers, 4)
 print(numbers)      # Output: [1, 2, 3] (original list is unchanged)
@@ -152,8 +137,6 @@ print(new_numbers)  # Output: [1, 2, 3, 4] (a new list)
   - Pure functions might increase memory usage (by creating new objects).
   - In performance-critical scenarios, in-place modification might be considered, but it must be clearly documented.
 - **Summary**: Pure functions pass results via return values and do not modify external state, improving code predictability and testability.
-
----
 
 ### 4. The Challenge of Variable Naming Conflicts
 - **Motivation**: To avoid confusion and errors caused by variables with the same name in different scopes.
@@ -169,30 +152,23 @@ print(new_numbers)  # Output: [1, 2, 3, 4] (a new list)
 # Variable naming conflict example
 # Multiple variables with the same name exist in different scopes, which can be confusing
 x = 100  # Global variable
-
 def outer():
     x = 50  # Local variable in the outer function
-    
     def inner():
         x = 10  # Local variable in the inner function
         print(f"Inner x: {x}")
-    
     inner()  # Output: Inner x: 10
     print(f"Outer x: {x}")  # Output: Outer x: 50
-
 outer()
 print(f"Global x: {x}")  # Output: Global x: 100
-
 # A debugging trap
 # Accidental use of a same-named variable causes a logic error
 total = 0  # Global accumulator
-
 def calculate_sum(numbers):
     total = 0  # Local variable, shadows the global `total`
     for num in numbers:
         total += num
     return total
-
 result = calculate_sum([1, 2, 3])
 print(f"Result: {result}, Global total: {total}")
 # Output: Result: 6, Global total: 0 (the global `total` was not modified)
@@ -203,8 +179,6 @@ print(f"Result: {result}, Global total: {total}")
   - Keep functions short and focused to reduce the number of local variables.
   - Pay attention to same-named variables during code reviews.
 - **Summary**: Variables with the same name can coexist in different scopes but can be confusing. Using descriptive, unique names reduces the risk of conflict.
-
----
 
 ### 5. Variable Management in Jupyter Notebooks
 - **Motivation**: Jupyter Notebooks allow for non-linear execution, which can lead to inconsistent variable states. It's important to understand how execution order affects results.
@@ -219,19 +193,15 @@ print(f"Result: {result}, Global total: {total}")
 - **Example**:
 ```python
 # Jupyter Notebook variable management trap
-
 # Cell 1 (first execution)
 x = 10
 print(x)  # Output: 10
-
 # Cell 2 (modifies x)
 x = 20
 print(x)  # Output: 20
-
 # Cell 1 (executed again)
 x = 10
 print(x)  # Output: 10 (overwrites the modification from Cell 2)
-
 # Cell 3 (depends on execution order)
 print(x)  # The output depends on the execution order of Cells 1 and 2!
 ```
@@ -246,8 +216,6 @@ print(x)  # The output depends on the execution order of Cells 1 and 2!
   - For complex logic, consider extracting it into a `.py` module and importing it into the notebook.
 - **Summary**: Jupyter Notebooks allow non-linear execution, so be mindful of variable state consistency. Sequential execution and regular kernel restarts are key practices.
 
----
-
 ## Best Practices
 - Prefer local variables. When data needs to be shared between functions, pass it via parameters and return values, avoiding global variables.
 - Write pure functions (side-effect-free): same input produces the same output, and no external state is modified.
@@ -255,8 +223,6 @@ print(x)  # The output depends on the execution order of Cells 1 and 2!
 - Function names should reflect their side effects: use `update_*` or `set_*` for state modification; use `get_*` or `calculate_*` for pure computation.
 - In Jupyter Notebooks, execute cells in order and restart the kernel regularly to verify code correctness.
 - When side effects are unavoidable (I/O operations), separate the side-effect logic from pure functions to facilitate testing and maintenance.
-
----
 
 ## Update History
 - 2025-09-30: Initial version created.

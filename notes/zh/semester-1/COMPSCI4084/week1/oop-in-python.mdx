@@ -3,6 +3,20 @@ title: "Object-Oriented Programming (OOP) in Python"
 description: "类与对象、封装（name mangling）、继承 vs 组合、数据类与不可变对象、dunder 方法与表示"
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+```python
+acc.deposit(25)
+
+```python
+```python
+from dataclasses import dataclass
+```
+```
+
+```
+
 ## 概要
 - 目标：理解类/对象、封装、继承与组合，并能用合适的对象模型表达问题与约束。
 - 范围：类定义与实例、构造器与方法、属性与封装、继承与方法重写、组合、常见 dunder 方法与表示、简单数据类。
@@ -24,14 +38,10 @@ class Account:
         self.balance += amount
     def __str__(self) -> str:
         return f"Account({self.owner}, balance={self.balance:.2f})"
-
 acc = Account("Alice", 100)
-acc.deposit(25)
 print(acc)  # Account(Alice, balance=125.00)
 ```
 - 要点：`__init__` 初始化实例状态；实例方法第一个参数约定为 `self`。
-
----
 
 ### 2. 属性、封装与 name mangling
 ```python
@@ -41,15 +51,12 @@ class SafeBox:
         self.__password = password        # 触发 name mangling → _SafeBox__password
     def check(self, guess: str) -> bool:
         return guess == self.__password
-
 box = SafeBox("1234")
 print(box._hint)
 print(box._SafeBox__password)  # 不建议：仅演示 name mangling 的效果
 ```
 - 要点：单下划线是约定；双下划线会改写名称以减少子类/外部误用。
 - 可用 `@property` 暴露只读/计算属性，控制不变量。
-
----
 
 ### 3. 继承与方法重写（多态）
 ```python
@@ -62,16 +69,12 @@ class Dog(Animal):
 class Cat(Animal):
     def speak(self) -> str:
         return "meow"
-
 def chorus(pets: list[Animal]) -> None:
     for p in pets:
         print(p.speak())
-
 chorus([Dog(), Cat()])  # 多态调用
 ```
 - 要点：子类可重写父类方法；必要时用 `super().__init__()` 初始化父类部分。
-
----
 
 ### 4. 组合优先于继承
 ```python
@@ -83,12 +86,9 @@ class Car:
         self.engine = engine
     def drive(self) -> str:
         return self.engine.start() + ", driving"
-
 print(Car(Engine()).drive())
 ```
 - 要点：当“有一个”优于“是一个”时使用组合，降低耦合、提升可复用性。
-
----
 
 ### 5. 常见 dunder 方法：__str__/__repr__/__eq__
 ```python
@@ -103,29 +103,21 @@ class Point:
         if not isinstance(other, Point):
             return NotImplemented
         return (self.x, self.y) == (other.x, other.y)
-
 print(Point(1,2) == Point(1,2))  # True（值相等）
 ```
 - 要点：`__repr__` 应尽量“可重建”；`__eq__` 定义值语义，避免用 `is` 比较值。
 
----
-
 ### 6. 数据类（dataclass）与不可变对象
 ```python
-from dataclasses import dataclass
-
 @dataclass(frozen=True)
 class User:
     name: str
     email: str
-
 u = User("Alice", "a@example.com")
 print(u)           # User(name='Alice', email='a@example.com')
 # u.name = "Bob"   # 会报错：frozen 数据类不可变
 ```
 - 要点：数据类自动生成 `__init__/__repr__/__eq__` 等；`frozen=True` 帮助表达不可变对象。
-
----
 
 ## 最佳实践
 - 单一职责：类聚焦一种抽象；方法短小且命名表达意图。
@@ -133,7 +125,5 @@ print(u)           # User(name='Alice', email='a@example.com')
 - 避免暴露可变内部状态；使用属性访问或返回副本。
 - 为对象实现 `__repr__`（调试友好）、按需实现 `__eq__`（值语义）。
 - 谨慎使用双下划线私有化，避免过度增加测试与扩展成本。
-
----
 
 ## 更新记录

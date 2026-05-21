@@ -3,6 +3,9 @@ title: "Linear Models for Classification: Logistic Regression & SVMs"
 description: "An exploration of two fundamental linear classifiers: Logistic Regression for probabilistic modeling and Support Vector Machines (SVMs) for maximum-margin classification."
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
 ## Overview
 - **Goal**: To understand and compare two powerful linear models for classification: Logistic Regression and Support Vector Machines (SVMs).
 - **Scope**: This note covers the core mechanics of Logistic Regression, including its probabilistic interpretation, and the maximum-margin principle of SVMs, along with the kernel trick.
@@ -29,14 +32,11 @@ description: "An exploration of two fundamental linear classifiers: Logistic Reg
   from sklearn.linear_model import LogisticRegression
   from sklearn.model_selection import train_test_split
   from sklearn.preprocessing import StandardScaler
-
   # It's good practice to scale data for logistic regression
   scaler = StandardScaler()
   X_scaled = scaler.fit_transform(X)
-
   # Create and fit the model
   clf = LogisticRegression().fit(X_scaled, y)
-
   # Predict probabilities for new data
   probabilities = clf.predict_proba(X_new_scaled)
   ```
@@ -54,20 +54,16 @@ description: "An exploration of two fundamental linear classifiers: Logistic Reg
   ```python
   # Example: Fitting a Support Vector Classifier (SVC)
   from sklearn.svm import SVC
-
   # Using a linear kernel is similar to logistic regression
   # clf_linear = SVC(kernel='linear').fit(X_scaled, y)
-
   # The RBF kernel is a popular choice for non-linear problems
   clf_rbf = SVC(kernel='rbf', gamma='auto').fit(X_scaled, y)
   ```
 
 ## Comparison
 | Feature | Logistic Regression | Support Vector Machine (SVM) |
-|---|---|---|
+||---|
 | **Output** | Probabilities | Class labels (based on which side of the margin) |
 | **Principle** | Probabilistic (maximizes likelihood) | Geometric (maximizes margin) |
 | **Core Idea** | Fits a line and squashes output to be a probability | Finds the widest possible "street" between classes |
 | **Non-linearity**| Requires manual feature engineering | Handles non-linearity easily with the kernel trick |
-
----
