@@ -1,0 +1,54 @@
+---
+title: "Week 4: Spark Deep Dive"
+description: "Advanced Spark architecture, wide vs. narrow dependencies, and optimization techniques for big data processing."
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## Key Takeaway
+Efficient Spark programming requires understanding the physical execution plan, specifically how shuffle operations create stage boundaries and how data locality impacts performance.
+
+## 1. Spark Architecture: Driver & Executors
+Spark uses a Master-Worker architecture.
+-   **Driver**: The process where your `main()` method runs. It builds the DAG and schedules tasks.
+-   **Executor**: Worker processes that execute the tasks and store data (cache).
+-   **Cluster Manager**: Allocates resources (e.g., YARN, Kubernetes).
+![Spark Runtime Architecture](/images/COMPSCI5088/week4/04-01-SparkArchitectuire-005.png)
+
+## 2. Dependencies and Stages
+The DAG is divided into **Stages** based on the type of dependency between RDDs.
+
+### Narrow Dependency
+-   Each partition of the parent RDD is used by at most one partition of the child RDD.
+-   Examples: `map`, `filter`, `union`.
+-   **Performance**: Can be executed in parallel as a single stage (Pipelining).
+
+### Wide Dependency (Shuffle)
+-   Multiple child partitions may depend on a single parent partition.
+-   Examples: `groupByKey`, `reduceByKey`, `join`.
+-   **Performance**: Requires a **Shuffle** (data movement across nodes), creating a new Stage.
+<Callout type="warn">
+**Optimization**: Avoid wide dependencies whenever possible. Prefer `reduceByKey` over `groupByKey` because it performs local aggregation before shuffling.
+</Callout>
+
+## 3. Caching and Persistence
+Spark allows you to store an RDD in memory or on disk for reused computation.
+-   `cache()`: Shortcut for `persist(MEMORY_ONLY)`.
+-   `persist(level)`: Allows choosing storage level (Memory, Disk, Serialized).
+
+## 4. Examiner's Perspective: Technical Nuances
+
+### Accumulators vs. Broadcast Variables
+-   **Accumulator**: Write-only for tasks; used for counters or sums. Only the Driver can read.
+-   **Broadcast Variable**: Read-only for tasks; used to efficiently distribute large lookup tables.
+- *Exam Tip*: If asked how to join a huge table with a small "lookup" table, use **Broadcast Join** to avoid a shuffle.
+
+### Data Locality
+-   Spark tries to schedule tasks on nodes where the data already resides (NODE_LOCAL). If not possible, it falls back to RACK_LOCAL or ANY.
+
+## Review & Self-Check
+- [ ] Why does a "Wide Dependency" trigger a new Stage?
+- [ ] Explain the "N+1" problem in the context of Spark shuffles.
+- [ ] Under what circumstances is `persist(DISK_ONLY)` useful?

@@ -1,0 +1,54 @@
+---
+title: "第4周：Spark 深度剖析"
+description: "高级 Spark 架构、宽依赖与窄依赖对比，以及大数据处理的优化技术。"
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## 核心要点
+高效的 Spark 编程需要理解物理执行计划，特别是 Shuffle 操作如何创建阶段边界，以及数据本地性 (Data Locality) 如何影响性能。
+
+## 1. Spark 架构：Driver 与 Executor
+Spark 采用主从架构。
+-   **Driver**：运行 `main()` 方法的进程。它构建 DAG 并调度任务。
+-   **Executor**：执行任务并存储数据（缓存）的 Worker 进程。
+-   **资源管理器**：分配资源（如 YARN, Kubernetes）。
+![Spark 运行架构](/images/COMPSCI5088/week4/04-01-SparkArchitectuire-005.png)
+
+## 2. 依赖关系与阶段 (Stages)
+DAG 根据 RDD 之间的依赖类型被划分为多个 **阶段 (Stages)**。
+
+### 窄依赖 (Narrow Dependency)
+-   父 RDD 的每个分区最多被子 RDD 的一个分区使用。
+-   示例：`map`, `filter`, `union`。
+-   **性能**：可以作为单个阶段并行执行（流水线化）。
+
+### 宽依赖 (Wide Dependency / Shuffle)
+-   多个子分区可能依赖于单个父分区。
+-   示例：`groupByKey`, `reduceByKey`, `join`。
+-   **性能**：需要进行 **洗牌 (Shuffle)**（跨节点数据移动），从而创建一个新的阶段。
+<Callout type="warn">
+**优化提示**：尽可能避免宽依赖。优先选择 `reduceByKey` 而非 `groupByKey`，因为它在洗牌前会执行本地聚合。
+</Callout>
+
+## 3. 缓存与持久化 (Caching & Persistence)
+Spark 允许你将 RDD 存储在内存或磁盘中，以便重复使用计算结果。
+-   `cache()`：`persist(MEMORY_ONLY)` 的简写。
+-   `persist(level)`：允许选择存储级别（内存、磁盘、序列化）。
+
+## 4. 出卷人视角：技术细微差别
+
+### 累加器 vs. 广播变量
+-   **累加器 (Accumulator)**：对任务只写；用于计数器或求和。只有 Driver 可以读取。
+-   **广播变量 (Broadcast Variable)**：对任务只读；用于高效分发大型查找表。
+- *考试技巧*：如果被问及如何将巨型表与小型“查找表”连接，请使用 **广播连接 (Broadcast Join)** 以避免洗牌。
+
+### 数据本地性 (Data Locality)
+-   Spark 尝试在数据所在的节点上调度任务 (NODE_LOCAL)。如果不可能，它会退而求其次选择 RACK_LOCAL 或 ANY。
+
+## 复习与自测
+- [ ] 为什么“宽依赖”会触发新的阶段？
+- [ ] 在 Spark 洗牌的背景下解释“N+1”问题。
+- [ ] 在什么情况下 `persist(DISK_ONLY)` 是有用的？

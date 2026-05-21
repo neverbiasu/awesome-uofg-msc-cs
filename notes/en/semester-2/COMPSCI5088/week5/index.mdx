@@ -1,31 +1,17 @@
 ---
-title: "Week 5: Distributed Storage & HDFS"
-description: Persistent storage evolution, NFS, and the Hadoop Distributed File System.
+title: "Week 5: HDFS & Storage"
+description: "Persistent storage evolution, NFS, and the Hadoop Distributed File System (HDFS)."
 ---
 
-import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+## Overview
+- Theme: Evolution of Distributed Storage
+- Key Topics: Storage Media, RAID, NFS Limitations, HDFS Master/Worker Architecture, Replication Pipelines.
 
-## Summary
-
-This week shifts focus from computation (Spark/MapReduce) to storage. It explores the evolution from local persistent storage to Network File Systems (NFS) and finally to the Hadoop Distributed File System (HDFS), designed for massive scale and fault tolerance on commodity hardware.
-
-<Accordions>
-  <Accordion title="Persistent Storage Primer">
-    Understanding storage media (HDD vs SSD), RAID configurations for redundancy and performance, and the limitations of local storage for big data.
-  </Accordion>
-  <Accordion title="Network File Systems (NFS)">
-    The first step towards distributed storage. Allowing remote access to files over a network. Limitations: Single point of failure (central server) and network bottlenecks.
-  </Accordion>
-  <Accordion title="HDFS Architecture">
-    **NameNode** (Metadata Master) vs. **DataNode** (Block Storage). How HDFS splits large files into blocks (default 128MB) and replicates them (default 3x) for fault tolerance.
-  </Accordion>
-  <Accordion title="HDFS Operations">
-    Detailed workflows for **Reading** (Client contacts NameNode for locations, then reads from DataNodes) and **Writing** (Pipeline replication strategy).
-  </Accordion>
-</Accordions>
-
-## Quick Links
-
-- [Persistent Storage & NFS](./persistent-storage)
-- [HDFS Architecture](./hdfs-architecture)
-- [HDFS Advanced Concepts](./hdfs-advanced)
+## Schedule
+| Session | Topic | Description |
+|||---|
+| Basics | [Persistent Storage & NFS](/en/notes/semester-2/COMPSCI5088/week5/persistent-storage) |
+| Core | [HDFS Architecture](/en/notes/semester-2/COMPSCI5088/week5/hdfs-architecture) |
+| Advanced | [HDFS Advanced Concepts](/en/notes/semester-2/COMPSCI5088/week5/hdfs-advanced) |
+Update Log
+- 2026-05-17: Updated formatting to match template.

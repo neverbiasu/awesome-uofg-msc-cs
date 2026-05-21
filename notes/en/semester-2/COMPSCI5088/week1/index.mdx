@@ -1,27 +1,26 @@
 ---
 title: "Week 1: Big Data Fundamentals"
-description: Big data definition, hardware fundamentals, and parallel computing concepts.
+description: "Big data definition, hardware fundamentals, and parallel computing concepts."
 ---
 
-import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+## Overview
+- Theme: Big Data Fundamentals
+- Key Topics: 3Vs/5Vs, Hardware limitations, Vertical vs Horizontal scaling, Parallelism.
 
-## Summary
+## Schedule
+| Session | Topic | Description |
+|||---|
+| Introduction | [Big Data Overview](/en/notes/semester-2/COMPSCI5088/week1/big-data-overview) |
+| Architecture | [Scaling & Parallelism](/en/notes/semester-2/COMPSCI5088/week1/scaling-and-parallelism) |
 
-This week introduces the "Three Vs" of Big Data (Volume, Velocity, Variety) and explores the hardware and software paradigms required to process it. It contrasts vertical scaling (adding more power to one machine) with horizontal scaling (adding more machines), which is the foundation of modern distributed computing.
+## Review & Self-Check
 
-<Accordions>
-  <Accordion title="The Big Data Problem">
-    Why traditional databases fail at scale. Understanding the explosion of data from social media, IoT, and scientific research.
-  </Accordion>
-  <Accordion title="Scaling Strategies">
-    **Vertical Scaling (Scale-up)** vs. **Horizontal Scaling (Scale-out)**. Why horizontal scaling is preferred for fault tolerance and cost-effectiveness in big data.
-  </Accordion>
-  <Accordion title="Compute Parallelism">
-    The concept of splitting a task into smaller sub-tasks to run concurrently. Introduction to Amdahl's Law and the limits of parallelization.
-  </Accordion>
-</Accordions>
+### 1. Key Questions
+1. [ ] Can you explain the 5Vs of Big Data?
+2. [ ] What is the main difference between horizontal and vertical scaling?
+3. [ ] Why does Amdahl's Law imply that not all problems can be solved by adding more CPUs?
 
-## Quick Links
-
-- [Big Data Overview](./big-data-overview)
-- [Scaling and Parallelism](./scaling-and-parallelism)
+### 2. Practice Task
+Calculate the maximum speed-up for a task that is 90% parallelizable on 10 processors.
+Update Log
+- 2026-05-17: Standardized titles and added review mechanism.

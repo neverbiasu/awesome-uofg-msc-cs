@@ -1,0 +1,44 @@
+---
+title: "Week 7: Distributed Databases & Storage"
+description: "Mastering HBase, Zookeeper, and Cassandra architecture for large-scale decentralized storage."
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## Key Takeaway
+NoSQL systems evolve from distributed master-slave architectures (HBase) to fully decentralized peer-to-peer rings (Cassandra), using coordination services like Zookeeper or protocols like Gossip to maintain global state.
+
+## 1. HBase Architecture: Master-Slave
+HBase scales Google's BigTable design on top of HDFS.
+-   **Region Server**: Manages data partitions (Regions).
+-   **HMaster**: Assigns regions but is not in the data read/write path.
+-   **Zookeeper**: Coordinates the cluster, tracks server health, and stores root region locations.
+![HBase Internal Structure](/images/COMPSCI5088/week7/08-02-HBaseStructure-001.png)
+
+## 2. Zookeeper & Coordination
+Zookeeper is a distributed coordination service that prevents single points of failure in HBase.
+-   **Master Election**: Ensures only one active Master.
+-   **Service Discovery**: Clients use Zookeeper to find which Region Server holds their data.
+
+## 3. Cassandra: Decentralized P2P
+Cassandra uses a "Ring" architecture with no master node.
+-   **Consistent Hashing**: Minimizes data movement during scaling.
+-   **Gossip Protocol**: Peer-to-peer communication to share cluster state.
+-   **Tunable Consistency**: Balancing $R + W > N$ for strong consistency.
+![Cassandra Data Distribution](/images/COMPSCI5088/week8/09-01-Cassandra-005.png)
+
+## 4. Examiner's Perspective: Technical Nuances
+
+### HBase vs. Cassandra
+-   **HBase**: Distributed (Master-Slave). Strong consistency by default. High write throughput via LSM.
+-   **Cassandra**: Decentralized (P2P). Eventual consistency (tunable). High availability.
+
+### Consistent Hashing
+-   **Hard Red Line**: Essential for horizontal scaling. It maps keys to a virtual circle, ensuring that adding a node only affects its immediate neighbors in the ring.
+
+## Review & Self-Check
+- [ ] Why is Zookeeper called the "heart" of an HBase cluster?
+- [ ] Compare Master-Slave and P2P architectures for big data storage.
+- [ ] How does Cassandra handle a node failure?

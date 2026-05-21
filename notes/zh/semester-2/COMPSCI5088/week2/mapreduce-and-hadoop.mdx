@@ -1,0 +1,55 @@
+---
+title: "第2周：MapReduce 与 Hadoop"
+description: "分布式计算挑战以及 Hadoop 生态系统中的 MapReduce 编程模型。"
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## 核心要点
+MapReduce 通过将数据分区、任务调度和容错的复杂性抽象为两个主要函数（Map 和 Reduce），解决了分布式工作分配的挑战。
+
+## 1. 分布式计算的挑战
+在多台机器上分配工作引入了几个复杂性：
+-   **工作分配**：如何均匀地拆分任务？
+-   **容错性**：如果一个节点故障了怎么办？
+-   **数据本地性 (Data Locality)**：将计算移动到数据端比将数据移动到计算端更便宜。
+![MapReduce 执行模型](/images/COMPSCI5088/week2/02-02-MapReduce-001.png)
+
+## 2. MapReduce 模型
+MapReduce 是一种在集群上使用并行、分布式算法处理大型数据集的编程模型。
+
+### 两个函数
+1.  **Map**：处理输入对 $(k1, v1)$ 以产生中间对 $(k2, v2)$。
+2.  **Reduce**：合并所有与相同中间键 $k2$ 关联的中间值。
+<Steps>
+
+### MapReduce 生命周期
+1.  **输入分片 (Input Split)**：数据被划分为块。
+2.  **Map 阶段**：并行执行 Map 任务。
+3.  **洗牌与排序 (Shuffle and Sort)**：中间数据按键分组并传输到 Reducer。
+4.  **Reduce 阶段**：Reducer 处理分组后的数据以产生最终输出。
+</Steps>
+
+## 3. Hadoop：实现方案
+Apache Hadoop 是 MapReduce 的开源实现。
+-   **JobTracker (Hadoop 1.x)**：协调作业，将任务分配给 TaskTracker。
+-   **TaskTracker**：执行任务并报告进度。
+<Callout type="info">
+**LSM 联系**：MapReduce 处理中间数据的方式（在内存中排序并溢写到磁盘）在概念上与 **LSM Tree** 的写入协议相似。
+</Callout>
+
+## 4. 出卷人视角：技术细微差别
+
+### 拖后者 (Stragglers)
+-   **概念**：执行时间异常长的任务，会拖慢整个作业。
+-   **解决方案**：**推测执行 (Speculative Execution)**。Hadoop 识别拖后者并在其他节点上调度“备份”任务。第一个完成的胜出。
+
+### 序列化开销
+-   **细微差别**：MapReduce 在 Shuffle 阶段严重依赖磁盘 I/O 和网络传输。大量时间花在数据的序列化/反序列化上，这是与 Spark 等内存系统相比的主要性能瓶颈。
+
+## 复习与自测
+- [ ] 你能解释“洗牌与排序 (Shuffle and Sort)”阶段的作用吗？
+- [ ] 为什么 MapReduce 不适合迭代算法（如机器学习）？
+- [ ] 如果 JobTracker 故障，作业会发生什么？

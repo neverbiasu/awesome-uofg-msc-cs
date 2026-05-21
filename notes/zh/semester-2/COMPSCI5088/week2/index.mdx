@@ -1,28 +1,17 @@
 ---
 title: "第2周：MapReduce 与 Hadoop"
-description: 分布式计算挑战、MapReduce 模型以及 Hadoop 生态系统。
+description: "分布式计算挑战、MapReduce 模型以及 Hadoop 生态系统。"
 ---
 
-import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+## 概要
+- 节奏：讲座 + 阅读
+- 主题：分布式挑战、Map & Reduce 阶段、Hadoop 架构 (HDFS/YARN)。
 
-## 总结
-
-本周深入探讨处理大数据的解决方案：MapReduce 编程模型及其开源实现——Apache Hadoop。解决了分布式计算的核心挑战，如容错和数据局部性。
-
-<Accordions>
-  <Accordion title="分布式挑战">
-    当与数千台机器一起工作时，如何处理部分故障、网络延迟和同步问题。
-  </Accordion>
-  <Accordion title="MapReduce 模型">
-    一种函数式编程方法，其中数据处理分为 **Map** 阶段（过滤/排序）和 **Reduce** 阶段（汇总操作）。
-  </Accordion>
-  <Accordion title="Apache Hadoop">
-    包含 **HDFS**（存储）和 **YARN**（资源管理）的生态系统。Hadoop 如何实现 MapReduce 以在数据驻留的地方处理数据（数据局部性）。
-  </Accordion>
-</Accordions>
-
-## 快速链接
-
-- [计算挑战](./compute-challenges)
-- [MapReduce 模型](./mapreduce)
-- [Hadoop 框架](./hadoop)
+## 本周安排
+| 会议 | 主题 | 说明 |
+|||---|
+| 理论 | [计算挑战](/zh/notes/semester-2/COMPSCI5088/week2/compute-challenges) |
+| 编程 | [MapReduce 模型](/zh/notes/semester-2/COMPSCI5088/week2/mapreduce) |
+| 基础设施 | [Hadoop 框架](/zh/notes/semester-2/COMPSCI5088/week2/hadoop) |
+最后更新
+- 2026-05-17：更新格式以匹配模板。

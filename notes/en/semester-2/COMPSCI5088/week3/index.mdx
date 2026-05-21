@@ -1,27 +1,15 @@
 ---
-title: "Week 3: Hadoop Execution & Spark Intro"
-description: MapReduce internals, limitations of Hadoop, and the rise of Apache Spark.
+title: "Week 3: Spark Basics"
+description: "MapReduce internals, limitations of Hadoop, and the rise of Apache Spark."
 ---
 
-import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+## Overview
+- Theme: Hadoop Internals & Spark Evolution
+- Key Topics: Hadoop Execution Flow, Hadoop Limitations, Spark RDDs & DAGs.
 
-## Summary
-
-This week bridges the gap between Hadoop and Spark. It details the complex execution flow of Hadoop MapReduce, identifies its limitations (disk I/O, latency), and introduces Apache Spark as a memory-centric alternative featuring Resilient Distributed Datasets (RDDs) and Directed Acyclic Graphs (DAGs).
-
-<Accordions>
-  <Accordion title="Hadoop Execution Flow">
-    A deep dive into how a MapReduce job runs: JobTracker, TaskTrackers, HDFS reads/writes, sorting, and shuffling. Understanding the heavy reliance on disk I/O.
-  </Accordion>
-  <Accordion title="Hadoop Limitations">
-    Why Hadoop is slow for iterative algorithms (like ML) and interactive queries. Issues with small files and high latency.
-  </Accordion>
-  <Accordion title="Introduction to Spark">
-    Spark's core value proposition: **In-Memory Computing**. Introduction to **RDDs** (immutable, partitioned collections) and **DAGs** (optimizing execution plans before running).
-  </Accordion>
-</Accordions>
-
-## Quick Links
-
-- [Hadoop and Spark Fundamentals](./hadoop-and-spark-intro)
-- [Key Takeaways](./hadoop-and-spark-intro#key-takeaways)
+## Schedule
+| Session | Topic | Description |
+|||---|
+| Evolution | [Hadoop & Spark Fundamentals](/en/notes/semester-2/COMPSCI5088/week3/hadoop-and-spark-intro) |
+Update Log
+- 2026-05-17: Updated formatting to match template.

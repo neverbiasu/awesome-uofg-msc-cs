@@ -1,28 +1,15 @@
 ---
-title: "Week 4: Apache Spark & Streaming"
-description: Spark Architecture, Transformations, Actions, and Batch vs Streaming
+title: "Week 4: Spark Deep Dive"
+description: "Spark Architecture, Transformations, Actions, and Batch vs Streaming processing models."
 ---
 
-import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+## Overview
+- Theme: Spark Internals & Data Streams
+- Key Topics: Spark Cluster Architecture, Lazy Evaluation, Narrow vs Wide Transformations, Batch vs Streaming.
 
-## Summary
-
-This week covers the architecture and operational model of Apache Spark, including its fundamental data structure (RDD), lazy evaluation, and the distinction between transformations and actions. It also explores the trade-offs between batch and streaming processing models.
-
-<Accordions>
-  <Accordion title="Spark Architecture">
-    Introduction to the Spark ecosystem: Client, Driver, Master, Workers, and Executors. Comparison with the Hadoop MapReduce model.
-  </Accordion>
-  <Accordion title="Transformations & Actions">
-    Deep dive into Spark's API: Basic transformations (map, filter), set operations (union, intersection), and key-based operations (reduceByKey, groupByKey). Understanding the concept of Lazy Evaluation.
-  </Accordion>
-  <Accordion title="Batch vs. Streaming">
-    Exploration of static data (Batch) versus real-time data (Streaming). Analysis of challenges in streaming such as state management, buffering, and back-pressure.
-  </Accordion>
-</Accordions>
-
-## Quick Links
-
-- [Spark Architecture and Streaming](./spark-architecture-and-streaming)
-- [Key Spark Operations](./spark-architecture-and-streaming#transformations--actions)
-- [Streaming Challenges](./spark-architecture-and-streaming#streaming-challenges)
+## Schedule
+| Session | Topic | Description |
+|||---|
+| Architecture | [Spark & Streaming](/en/notes/semester-2/COMPSCI5088/week4/spark-architecture-and-streaming) |
+Update Log
+- 2026-05-17: Updated formatting to match template.

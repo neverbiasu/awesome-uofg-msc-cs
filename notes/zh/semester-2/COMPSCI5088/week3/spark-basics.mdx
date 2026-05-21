@@ -1,0 +1,49 @@
+---
+title: "第3周：Spark 基础"
+description: "Apache Spark 简介、弹性分布式数据集 (RDD) 以及 DAG 执行模型。"
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## 核心要点
+Apache Spark 通过将数据保留在内存中并使用有向无环图 (DAG) 进行任务调度，克服了 MapReduce 的局限性，使其成为低延迟和迭代工作负载的理想选择。
+
+## 1. 为什么选择 Spark？
+MapReduce 的“输入-Map-Reduce-输出”循环强制每个阶段都持久化到磁盘。这对于以下场景效率低下：
+-   **迭代作业**：(例如：机器学习训练循环)。
+-   **交互式查询**：实时数据探索。
+
+### Spark 解决方案：内存计算
+Spark 允许将数据缓存在整个集群的 RAM 中，显著减少了磁盘 I/O。
+![Spark vs MapReduce 迭代](/images/COMPSCI5088/week3/03-04-ApacheSpark-005.png)
+
+## 2. 弹性分布式数据集 (RDD)
+RDD 是 Spark 的基本数据结构。
+-   **弹性 (Resilient)**：如果分区丢失，可以根据血缘 (lineage) 重新计算。
+-   **分布式 (Distributed)**：数据分布在集群中。
+-   **不可变 (Immutable)**：一旦创建，RDD 就不能更改；你只能将其转换为新的 RDD。
+
+## 3. 执行模型：DAG
+Spark 不会立即执行代码。它构建一个操作的 **有向无环图 (DAG)**。
+-   **惰性求值 (Lazy Evaluation)**：仅当调用 **行动 (Action)**（如 `collect()` 或 `save()`）时，才会执行转换。
+-   **流水线化 (Pipelining)**：Spark 可以将多个转换合并为一个阶段，以减少数据移动。
+<Callout type="info">
+**DAG 优势**：允许 Spark 优化执行计划（例如：重新排列过滤器以尽早减小数据规模）。
+</Callout>
+
+## 4. 出卷人视角：技术细微差别
+
+### 通过血缘 (Lineage) 实现容错
+-   **概念**：RDD 不通过复制数据，而是跟踪它们是如何派生出来的（血缘）。
+-   **细微差别**：这节省了磁盘空间和网络带宽，但如果作业后期发生故障，重新计算很长的血缘链可能会非常昂贵。
+
+### 转换 (Transformation) vs. 行动 (Action)
+-   **转换**：返回一个新的 RDD（例如：`map`, `filter`）。始终是惰性的。
+-   **行动**：向 Driver 返回一个值或写入存储（例如：`count`, `collect`）。触发执行。
+
+## 复习与自测
+- [ ] 在 RDD 的背景下定义“不可变性 (Immutability)”。
+- [ ] Spark 的“阶段 (Stage)”和“任务 (Task)”之间有什么区别？
+- [ ] 为什么“惰性求值”对性能有益？

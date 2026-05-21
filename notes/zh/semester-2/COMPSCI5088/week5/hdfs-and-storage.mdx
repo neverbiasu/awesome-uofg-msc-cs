@@ -1,0 +1,53 @@
+---
+title: "第5周：HDFS 与存储"
+description: "Hadoop 分布式文件系统 (HDFS) 的架构、元数据管理和副本协议。"
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## 核心要点
+HDFS 通过将文件元数据 (NameNode) 与物理数据块 (DataNodes) 解耦，并使用机架感知副本机制，为大数据提供了一个高吞吐、容错的存储层。
+
+## 1. HDFS 架构
+HDFS 遵循主从模式。
+-   **NameNode (主节点)**：管理文件系统命名空间和元数据（文件到数据块的映射）。
+-   **DataNode (从节点)**：存储实际的数据块，并执行来自客户端的读/写请求。
+![HDFS 组件交互](/images/COMPSCI5088/week5/05-04-HDFS-001.png)
+
+## 2. 元数据与检查点 (Checkpointing)
+NameNode 将所有元数据保存在 RAM 中以便快速访问。
+-   **Edit Log (编辑日志)**：记录对文件系统进行的每一次更改的事务日志。
+-   **FsImage**：文件系统在特定时间点的状态快照。
+-   **Secondary NameNode**：定期将编辑日志合并到 FsImage 中（检查点过程），以防止编辑日志过大。
+<Callout type="warn">
+**硬核红线**：检查点 (FsImage) **不存储** 数据块的物理位置。块位置是在 DataNode 启动时动态汇报给 NameNode 的。
+</Callout>
+
+## 3. 副本与容错
+HDFS 将文件拆分为大型块（默认 128MB），并在集群中复制。
+-   **副本系数 (Replication Factor)**：通常为 3。
+-   **机架感知 (Rack Awareness)**：HDFS 将副本放置在不同的机架上，以在整个机架失效时幸存。
+<Steps>
+
+### 写入协议
+1.  客户端向 NameNode 请求权限和位置。
+2.  NameNode 返回第一个块的 DataNode 列表。
+3.  客户端写入第一个 DataNode。
+4.  第一个 DataNode 将数据通过管道传输给第二个，第二个再传输给第三个 (**副本管道**)。
+5.  确认 (Acks) 返回给客户端。
+</Steps>
+
+## 4. 出卷人视角：技术细微差别
+
+### 解耦块位置
+-   **为什么？**：如果位置存储在 FsImage 中，简单的硬件升级或 DataNode IP 更改都将要求 NameNode 进行昂贵的磁盘更新。通过使用动态的 **块汇报 (Block Reports)**，系统保持了灵活性和 I/O 效率。
+
+### 副本权衡
+-   **更高的副本数**：更好的读取性能（并行度）、更好的可靠性，但 **写入吞吐量更低**（需要同步更多节点）且存储成本更高。
+
+## 复习与自测
+- [ ] Secondary NameNode 的作用是什么？（提示：它**不是**备份主节点）。
+- [ ] 为什么 HDFS 的默认块大小与传统操作系统块相比这么大？
+- [ ] HDFS 如何处理 DataNode 故障？

@@ -1,0 +1,49 @@
+---
+title: "Week 6: LSM & Bloom Filters"
+description: "Optimization strategies for low-latency random reads and high-throughput writes in NoSQL systems."
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## Key Takeaway
+NoSQL systems like HBase optimize for write performance using LSM Trees while mitigating the resulting read latency through specialized structures like Bloom Filters.
+
+## 1. LSM Tree (Log-Structured Merge-Tree)
+The LSM Tree is a data structure designed to provide high write throughput by turning random writes into sequential writes.
+
+### The Write Protocol
+1.  **WAL (Write-Ahead Log)**: Write the operation to a persistent log for recovery.
+2.  **MemStore**: Store the data in a sorted memory buffer.
+3.  **Flush**: When MemStore is full, it's flushed to disk as a sorted file (SSTable/HFile).
+![LSM Tree Write Path](/images/COMPSCI5088/week6/06-03-LSM-004.png)
+
+## 2. Bloom Filters
+Since data is spread across multiple HFiles on disk, reading a single key could require scanning many files. Bloom Filters prevent this.
+
+### Core Properties
+-   **Space Efficient**: A bit array with multiple hash functions.
+-   **Probabilistic**:
+    -   If it says **"NO"**, the element is definitely not there.
+    -   If it says **"YES"**, the element **might** be there (False Positive).
+<Callout type="info">
+**Performance Optimization**: HBase checks the Bloom Filter for each HFile. If the filter says "NO", the system skips the expensive disk read for that file entirely.
+</Callout>
+
+## 3. Compaction
+Over time, too many HFiles accumulate, slowing down reads. **Compaction** is the process of merging multiple small HFiles into fewer, larger ones, and removing deleted/old data.
+
+## 4. Examiner's Perspective: Technical Nuances
+
+### Random Read Latency
+-   **Nuance**: Even with LSM Trees, random reads are slower than in RDBMS because a key might be in the MemStore OR any of the HFiles.
+-   **Solution**: Systems use **Block Caches** and **Bloom Filters** to bring random read latency back down.
+
+### False Positives
+-   Increasing the size of the Bloom Filter bit array or the number of hash functions reduces the false positive rate but increases memory usage.
+
+## Review & Self-Check
+- [ ] Why does an LSM tree turn random writes into sequential ones?
+- [ ] Can a Bloom Filter ever return a "False Negative"? (Hint: No).
+- [ ] Explain the relationship between MemStore flushing and HFile generation.

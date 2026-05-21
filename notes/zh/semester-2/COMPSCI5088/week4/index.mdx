@@ -1,28 +1,15 @@
 ---
 title: "第4周：Apache Spark与流处理"
-description: Spark架构、转换、动作以及批处理与流处理的对比
+description: "Spark 架构、转换 (Transformations)、动作 (Actions) 以及批处理与流处理模型。"
 ---
 
-import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+## 概要
+- 节奏：讲座 + 实验 (Spark 编程)
+- 主题：Spark 集群架构、惰性评估、窄转换与宽转换、批处理与流处理。
 
-## 总结
-
-本周涵盖了 Apache Spark 的架构和运行模型，包括其基础数据结构 (RDD)、惰性评估（Lazy Evaluation）以及转换（Transformations）与动作（Actions）之间的区别。此外，还探讨了批处理与流处理模型之间的权衡。
-
-<Accordions>
-  <Accordion title="Spark 架构">
-    Spark 生态系统介绍：客户端 (Client)、驱动程序 (Driver)、主节点 (Master)、工作节点 (Worker) 和执行器 (Executor)。与 Hadoop MapReduce 模型的对比。
-  </Accordion>
-  <Accordion title="转换与动作">
-    深入了解 Spark API：基础转换（map, filter）、集合操作（union, intersection）以及基于键的操作（reduceByKey, groupByKey）。理解惰性评估的概念。
-  </Accordion>
-  <Accordion title="批处理 vs. 流处理">
-    探讨静态数据（批处理）与实时数据（流处理）。分析流处理中的挑战，如状态管理、缓冲和背压（Back-pressure）。
-  </Accordion>
-</Accordions>
-
-## 快速链接
-
-- [Spark 架构与流处理](./spark-architecture-and-streaming)
-- [Spark 关键操作](./spark-architecture-and-streaming#transformations--actions)
-- [流处理挑战](./spark-architecture-and-streaming#streaming-challenges)
+## 本周安排
+| 会议 | 主题 | 说明 |
+|||---|
+| 架构与流 | [Spark 与流处理](/zh/notes/semester-2/COMPSCI5088/week4/spark-architecture-and-streaming) |
+最后更新
+- 2026-05-17：更新格式以匹配模板。

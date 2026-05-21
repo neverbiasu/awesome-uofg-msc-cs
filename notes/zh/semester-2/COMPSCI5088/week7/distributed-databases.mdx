@@ -1,0 +1,44 @@
+---
+title: "第7周：分布式数据库与存储"
+description: "掌握 HBase、Zookeeper 和 Cassandra 架构，用于大规模去中心化存储。"
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## 核心要点
+NoSQL 系统从分布式主从架构（HBase）演进到完全去中心化的对等网络环（Cassandra），使用 Zookeeper 等协调服务或 Gossip 等协议来维护全局状态。
+
+## 1. HBase 架构：主从模式
+HBase 在 HDFS 之上实现了 Google 的 BigTable 设计。
+-   **Region Server**：管理数据分区（Region）。
+-   **HMaster**：分配 Region，但不在数据读写路径上。
+-   **Zookeeper**：协调集群，追踪服务器健康状况，并存储根 Region 位置。
+![HBase 内部结构](/images/COMPSCI5088/week7/08-02-HBaseStructure-001.png)
+
+## 2. Zookeeper 与协调
+Zookeeper 是一个分布式协调服务，防止 HBase 集群出现单点故障。
+-   **Master 选举**：确保只有一个活跃的 Master。
+-   **服务发现**：客户端使用 Zookeeper 查找哪个 Region Server 持有其数据。
+
+## 3. Cassandra：去中心化 P2P
+Cassandra 使用“环形”架构，没有主节点。
+-   **一致性哈希**：在扩展时尽量减少数据迁移。
+-   **Gossip 协议**：对等通信以共享集群状态。
+-   **可调一致性**：权衡 $R + W > N$ 以实现强一致性。
+![Cassandra 数据分布](/images/COMPSCI5088/week8/09-01-Cassandra-005.png)
+
+## 4. 出卷人视角：技术细微差别
+
+### HBase vs. Cassandra
+-   **HBase**：分布式（主从）。默认强一致性。通过 LSM 实现高写入吞吐量。
+-   **Cassandra**：去中心化（P2P）。最终一致性（可调）。高可用性。
+
+### 一致性哈希 (Consistent Hashing)
+-   **硬核红线**：对于水平扩展至关重要。它将键映射到一个虚拟圆环，确保添加节点仅影响环中其直接相邻的节点。
+
+## 复习与自测
+- [ ] 为什么 Zookeeper 被称为 HBase 集群的“心脏”？
+- [ ] 比较大数据存储中的主从架构和 P2P 架构。
+- [ ] Cassandra 如何处理节点故障？

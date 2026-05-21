@@ -1,27 +1,15 @@
 ---
 title: "第3周：Hadoop执行与Spark入门"
-description: MapReduce内部机制、Hadoop的局限性以及Apache Spark的兴起。
+description: "MapReduce 内部机制、Hadoop 的局限性以及 Apache Spark 的兴起。"
 ---
 
-import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+## 概要
+- 节奏：讲座 + 实验 (Lab 1)
+- 主题：Hadoop 执行流程、Hadoop 局限性、Spark RDD 与 DAG。
 
-## 总结
-
-本周连接了 Hadoop 和 Spark。它详细介绍了 Hadoop MapReduce 复杂的执行流程，指出了其局限性（磁盘 I/O、延迟），并介绍了作为内存中心替代方案的 Apache Spark，其特点包括弹性分布式数据集 (RDD) 和有向无环图 (DAG)。
-
-<Accordions>
-  <Accordion title="Hadoop 执行流程">
-    深入了解 MapReduce 作业的运行方式：JobTracker、TaskTrackers、HDFS 读/写、排序和洗牌 (Shuffling)。理解其对磁盘 I/O 的严重依赖。
-  </Accordion>
-  <Accordion title="Hadoop 的局限性">
-    为什么 Hadoop 在迭代算法（如机器学习）和交互式查询方面速度较慢。小文件问题和高延迟问题。
-  </Accordion>
-  <Accordion title="Spark 入门">
-    Spark 的核心价值主张：**内存计算**。介绍 **RDD**（不可变、分区的集合）和 **DAG**（在运行前优化执行计划）。
-  </Accordion>
-</Accordions>
-
-## 快速链接
-
-- [Hadoop 与 Spark 基础](./hadoop-and-spark-intro)
-- [关键要点](./hadoop-and-spark-intro#key-takeaways)
+## 本周安排
+| 会议 | 主题 | 说明 |
+|||---|
+| 演变 | [Hadoop 与 Spark 基础](/zh/notes/semester-2/COMPSCI5088/week3/hadoop-and-spark-intro) |
+最后更新
+- 2026-05-17：更新格式以匹配模板。

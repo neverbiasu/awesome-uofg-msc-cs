@@ -1,0 +1,49 @@
+---
+title: "第6周：LSM 与布隆过滤器"
+description: "NoSQL 系统中低延迟随机读和高吞吐写的优化策略。"
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## 核心要点
+像 HBase 这样的 NoSQL 系统通过使用 LSM 树来优化写入性能，同时通过布隆过滤器 (Bloom Filters) 等专门结构来缓解由此产生的读取延迟。
+
+## 1. LSM 树 (Log-Structured Merge-Tree)
+LSM 树是一种旨在通过将随机写入转换为顺序写入来提供高写入吞吐量的数据结构。
+
+### 写入协议
+1.  **WAL (预写日志)**：将操作写入持久日志以供恢复。
+2.  **MemStore**：将数据存储在排序后的内存缓冲区中。
+3.  **刷新 (Flush)**：当 MemStore 满时，将其作为排序文件 (SSTable/HFile) 刷新到磁盘。
+![LSM 树写入路径](/images/COMPSCI5088/week6/06-03-LSM-004.png)
+
+## 2. 布隆过滤器 (Bloom Filters)
+由于数据分布在磁盘上的多个 HFile 中，读取单个键可能需要扫描许多文件。布隆过滤器可以防止这种情况。
+
+### 核心特性
+-   **空间效率高**：一个带有多个哈希函数的位数组。
+-   **概率性**：
+    -   如果它说 **“不”**，则元素肯定不在那里。
+    -   如果它说 **“是”**，则元素 **可能** 在那里（假阳性）。
+<Callout type="info">
+**性能优化**：HBase 检查每个 HFile 的布隆过滤器。如果过滤器说“不”，系统将完全跳过对该文件的昂贵磁盘读取。
+</Callout>
+
+## 3. 合并 (Compaction)
+随着时间的推移，会积累太多的 HFile，从而减慢读取速度。**合并** 是将多个小 HFile 合并为更少、更大的 HFile 并删除已删除/旧数据的过程。
+
+## 4. 出卷人视角：技术细微差别
+
+### 随机读延迟
+-   **细微差别**：即使有 LSM 树，随机读取也比 RDBMS 慢，因为一个键可能在 MemStore 中，也可能在任何一个 HFile 中。
+-   **解决方案**：系统使用 **块缓存 (Block Caches)** 和 **布隆过滤器** 来降低随机读延迟。
+
+### 假阳性 (False Positives)
+-   增加布隆过滤器位数组的大小或哈希函数的数量可以降低假阳性率，但会增加内存使用量。
+
+## 复习与自测
+- [ ] 为什么 LSM 树能将随机写转换为顺序写？
+- [ ] 布隆过滤器会返回“假阴性 (False Negative)”吗？（提示：不会）。
+- [ ] 解释 MemStore 刷新与 HFile 生成之间的关系。
