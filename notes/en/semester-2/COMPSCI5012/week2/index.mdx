@@ -1,32 +1,25 @@
 ---
 title: "Week 2: Web Frameworks & Django"
-description: MVC vs MVT patterns, Django core components, and URL routing.
+description: "Introduction to Web Application Frameworks (WAFs) and a deep dive into the Django MTV architecture."
 ---
 
-import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+## Overview
+- Theme: Server-side Development
+- Key Topics: WAF Motivation, MVC vs. MTV, Django Components (Models, Templates, Views, URLs).
 
-## Summary
+## Schedule
+| Session | Topic | Description |
+|||---|
+| Django | [Web Frameworks & Django](/en/notes/semester-2/COMPSCI5012/week2/web-frameworks-and-django) |
 
-This week introduces the tools used to build scalable web applications. It defines what a web framework is (vs. a library) and dives into Django, a high-level Python web framework, explaining its specific architectural pattern (MVT).
+## Review & Self-Check
 
-<Accordions>
-  <Accordion title="Frameworks vs. Libraries">
-    **Inversion of Control**: The key difference. A library is a tool you call; a framework calls your code. Why frameworks are essential for complex web apps (security, scalability, speed).
-  </Accordion>
-  <Accordion title="Architectural Patterns">
-    **MVC (Model-View-Controller)**: The industry standard pattern.
-    **MVT (Model-View-Template)**: Django's variation.
-    - **Model**: Data Access Layer.
-    - **View**: Business Logic (Controller).
-    - **Template**: Presentation Layer (View).
-  </Accordion>
-  <Accordion title="Django Fundamentals">
-    The request lifecycle in Django: `URLconf` -> `View` -> `Model` -> `Template` -> `Response`. Setting up a project, creating apps, and mapping URLs.
-  </Accordion>
-</Accordions>
+### 1. Key Questions
+1. [ ] What is an ORM (Object-Relational Mapper)?
+2. [ ] In MTV, where does the "Business Logic" reside?
+3. [ ] What is the purpose of `urls.py`?
 
-## Quick Links
-
-- [Web Frameworks and Django](./web-frameworks-and-django)
-- [MVC vs MVT](./web-frameworks-and-django#mvc-and-django-mvt-architecture)
-- [Django Request Lifecycle](./web-frameworks-and-django#django-fundamentals)
+### 2. Practice Task
+Trace a request for `/blog/1/` through the Django architecture: URLconf $\rightarrow$ View $\rightarrow$ Model $\rightarrow$ Template.
+Update Log
+- 2026-05-17: Standardized titles and added review mechanism.

@@ -1,0 +1,59 @@
+---
+title: "Week 8: Sketching & Prototyping"
+description: "Exploring design ideas through sketching, paper prototyping, Wizard of Oz, and video prototyping."
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## Key Takeaway
+Sketching explores the design space, while prototyping explores the user experience over time. Low-fidelity methods like paper prototyping are essential for early, honest feedback.
+
+## 1. Sketching vs. Prototyping
+Bill Buxton's distinction is crucial for understanding the design process.
+-   **Sketching**: Explores the **composition in space**. It is about invention and generating many alternatives.
+-   **Prototyping**: Explores the **idea in time**. It is about manifesting a specific design choice to test how it functions.
+![Sketching vs Prototyping](/images/COMPSCI5057/week8/week_8__creative_design-037.png)
+
+## 2. Paper Prototyping
+Paper prototyping is a low-fidelity method where users interact with a paper version of an interface.
+
+### The "Playing Computer" Role
+A member of the design team acts as the computer, moving paper elements in response to user actions **without explaining** how the interface works.
+<Steps>
+
+### Advantages of Paper Prototyping
+1.  **Early Problem Identification**: Find usability issues before a single line of code is written.
+2.  **Better Feedback**: Users are less "nitpicky" about aesthetics and focus on workflow.
+3.  **Avoids Opinion Wars**: Data from interaction overrides personal preferences.
+</Steps>
+
+## 3. Advanced Prototyping Methods
+
+### Wizard of Oz (WoZ)
+A technique where a human "wizard" simulates system responses that aren't yet implemented (e.g., an AI response being typed by a human behind the scenes). The user believes they are interacting with a fully functional system.
+
+### Video Prototyping
+A storyboard-like video that illustrates how a user would interact with a system in a specific context.
+-   **Purpose**: Communicate the "solution" to stakeholders and evaluate the conceptual design.
+-   **Key Component**: Storyboarding (similar to a comic book).
+![Video Prototype Storyboard](/images/COMPSCI5057/week8/week_8__creative_design-041.png)
+
+## 4. Examiner's Perspective
+
+### Hard Red Lines: Wizard of Oz Setup
+In an exam, if asked how to test a complex AI system that hasn't been built yet, **Wizard of Oz** is the correct answer. You must mention that the user is "fooled" to ensure authentic behavior.
+
+### Technical Nuance: Fidelity
+-   **Low-fidelity (Lo-fi)**: Fast, cheap, focus on structure.
+-   **High-fidelity (Hi-fi)**: Realistic, focus on detail and performance.
+-   *Tip*: Do not jump to Hi-fi too early; it makes designers "attached" to their first idea.
+
+### Failure Analysis: "Playing Computer"
+If the "computer" person starts explaining the interface to the user, the test is **invalid**. The system must speak for itself through the interaction.
+
+## Review & Self-Check
+- [ ] What is the main difference between sketching and prototyping?
+- [ ] Why is it beneficial that paper prototypes look "unfinished"?
+- [ ] In what scenario would you choose a Wizard of Oz prototype over a paper one?

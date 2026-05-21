@@ -1,0 +1,54 @@
+---
+title: "Week 2: WAFs & Django"
+description: "Introduction to Web Application Frameworks (WAFs), MVT pattern, and the Django framework."
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## Key Takeaway
+Web Application Frameworks automate common development patterns, with Django specifically enforcing the MVT (Model-View-Template) architecture to ensure separation of concerns and rapid development.
+
+## 1. Web Application Frameworks (WAFs)
+A WAF is a software framework designed to support the development of dynamic websites. It automates overhead associated with common activities (e.g., session management, database access).
+
+### Advantages of WAFs
+-   **Productivity**: Reusable code and components.
+-   **Security**: Built-in protection against SQL injection, CSRF, etc.
+-   **Standardization**: Promotes clean, maintainable code structures.
+
+## 2. Django Architecture: MVT
+Django uses a variation of the MVC pattern called **MVT (Model-View-Template)**.
+
+### The MVT Components
+1.  **Model**: Data access layer (Relational mapping).
+2.  **View**: Business logic layer. It processes requests and returns responses.
+3.  **Template**: Presentation layer (HTML with Django Template Language).
+![Django MVT Flow](/images/COMPSCI5012/week2/L2-WAFsDjango-013.png)
+
+## 3. Django Development Workflow
+<Steps>
+
+### Creating a Django Project
+1.  **Setup**: Create a virtual environment and install Django.
+2.  **Model Definition**: Define your data schema in `models.py`.
+3.  **Migrations**: Run `makemigrations` and `migrate` to update the DB.
+4.  **View Logic**: Write your request handlers in `views.py`.
+5.  **Template Design**: Create HTML files in the `templates/` folder.
+6.  **URL Routing**: Map URLs to views in `urls.py`.
+</Steps>
+
+## 4. Examiner's Perspective: Technical Nuances
+
+### ORM (Object-Relational Mapping)
+-   **Concept**: Django allows you to interact with the database using Python objects instead of raw SQL.
+-   **Nuance**: While convenient, poorly optimized ORM queries (e.g., the N+1 problem) can significantly degrade performance.
+
+### Configuration vs. Convention
+-   Django follows the **"Don't Repeat Yourself" (DRY)** principle and provides many defaults (Convention), but allows extensive customization (Configuration).
+
+## Review & Self-Check
+- [ ] What is the difference between Django's `Project` and `App`?
+- [ ] How does the ORM prevent SQL Injection?
+- [ ] What is the role of `settings.py` in a Django project?

@@ -1,0 +1,63 @@
+---
+title: "第1周：系统架构与数据库"
+description: "Web 应用程序中的三层架构、信息架构和数据库基础介绍。"
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## 核心要点
+理解表现层、逻辑层和数据层的解耦是构建可扩展且易于维护的 Web 系统的基础。
+
+## 1. Web 系统架构
+大多数现代 Web 应用程序遵循 **三层架构 (3-Tier Architecture)**。这种分离允许每个组件独立进行扩展和维护。
+
+### 三层模型
+1.  **表现层 (Presentation Tier/前端)**：用户界面，通常是在浏览器中运行的 HTML、CSS 和 JavaScript。
+2.  **逻辑层 (Logic Tier/中间件/后端)**：处理业务逻辑，处理请求并与数据层通信（例如 Django, Express）。
+3.  **数据层 (Data Tier/数据库)**：存储和管理应用程序的持久数据（例如 PostgreSQL, MongoDB）。
+![系统架构](/images/COMPSCI5012/week1/L1-IntroSysArchDBInfoArch-005.png)
+<Callout type="info">
+**为什么要使用三层架构？** 它防止了“单体式”失败。如果 UI 需要重新设计，数据库模式不一定非要改变。
+</Callout>
+
+## 2. 信息架构 (Information Architecture, IA)
+IA 是关于以有效且可持续的方式组织、结构化和标记内容。
+
+### IA 的核心组件
+-   **组织方案 (Organization Schemes)**：如何对信息进行分组（按字母顺序、按时间顺序、按主题）。
+-   **标记系统 (Labeling Systems)**：如何表示信息（术语一致性）。
+-   **导航系统 (Navigation Systems)**：用户如何在信息中移动。
+-   **搜索系统 (Search Systems)**：用户如何寻找信息。
+
+## 3. 数据库基础
+在本课程中，我们重点关注使用 SQL 的 **关系型数据库 (RDBMS)**。
+
+### 关系模型概念
+-   **表 (Table/Relation)**：使用纵列和横行模型组织的一组数据元素。
+-   **主键 (Primary Key)**：表中每条记录的唯一标识符。
+-   **外键 (Foreign Key)**：一个表中的字段，用于唯一标识另一个表中的一行，从而建立关联。
+<Steps>
+
+### 数据库设计工作流
+1.  **需求分析**：需要存储哪些数据？
+2.  **概念设计**：实体-关系 (ER) 建模。
+3.  **逻辑设计**：将 ER 图映射到表。
+4.  **物理设计**：索引和性能调优。
+</Steps>
+
+## 4. 出卷人视角：技术细微差别
+
+### 扩展：垂直 vs. 水平
+-   **垂直扩展 (Vertical Scaling/向上扩展)**：向现有机器添加更多算力（CPU、RAM）。受硬件天花板限制。
+-   **水平扩展 (Horizontal Scaling/向外扩展)**：向资源池添加更多机器。是大数据和高流量 Web 应用的首选。
+
+### 数据完整性 vs. 性能
+-   严格的 **规范化 (Normalization/3NF)** 减少了冗余，但可能导致复杂的连接 (joins)，从而降低读取密集型应用的性能。
+-   **反规范化 (Denormalization)** 可以提高读取性能，但存在数据不一致的风险。
+
+## 复习与自测
+- [ ] 你能解释瘦客户端 (Thin Client) 和胖客户端 (Thick Client) 之间的区别吗？
+- [ ] 持久化存储的 4 个基本操作 (CRUD) 是什么？
+- [ ] 外键如何维护参照完整性？

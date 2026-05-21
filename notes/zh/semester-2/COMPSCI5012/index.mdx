@@ -1,37 +1,61 @@
 ---
-title: "COMPSCI5012: Internet Technology"
-description: "COMPSCI5012 (Internet Technology) 课程笔记，涵盖 Web 系统架构、Django 开发、前端技术与信息架构。"
+title: "COMPSCI 5012: 互联网技术"
+description: "探索驱动现代 Web 的架构、协议和技术，从前端框架到后端系统和数据库。"
 ---
+
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 import { Card, Cards } from 'fumadocs-ui/components/card';
 
-## 课程模块
+# 课程概览
+本课程涵盖 Web 开发的全栈技术和互联网基础设施。核心主题包括客户端-服务器架构、Web 安全、性能优化和数据库管理。
+<Accordions>
+  <Accordion title="评估信息">
+    - 每周实验练习
+    - 小组项目 (Web 应用程序)
+    - 期末考试
+  </Accordion>
+</Accordions>
 
-本课程涵盖互联网技术的核心概念与实践。
-
+## 每周笔记
 <Cards>
-  <Card
-    href="/zh/notes/semester-2/COMPSCI5012/week0"
-    title="第零周：课程介绍"
-    description="课程目标、结构、评估方式与教学团队介绍。"
-  />
-  <Card
-    href="/zh/notes/semester-2/COMPSCI5012/week1"
-    title="第一周：系统架构与信息架构"
-    description="Web 应用类型、分层架构（2-Tier/3-Tier/N-Tier）、数据库建模与信息架构基础（User Flows, Wireframes）。"
-  />
-  <Card
-    href="/zh/notes/semester-2/COMPSCI5012/week2"
-    title="第二周：Web 框架与 Django"
-    description="Web 框架的作用、Django 基础、MVT 模式与 URL 路由。"
-  />
-  <Card
-    href="/zh/notes/semester-2/COMPSCI5012/week3"
-    title="第三周：HTML, CSS 与 Bootstrap"
-    description="前端基础技术、响应式设计与 Bootstrap 框架应用。"
-  />
-  <Card
-    href="/zh/notes/semester-2/COMPSCI5012/week4"
-    title="第四周：网络通信与协议"
-    description="网络基础 (OSI/TCP-IP)、HTTP 协议详解 (GET/POST)、REST API 与进程间通信。"
-  />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5012/week1"
+      title="第1周：系统架构"
+      description="三层架构、信息架构 (IA) 和关系型数据库 (RDBMS) 简介。"
+    />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5012/week2"
+      title="第2周：WAFs 与 Django"
+      description="模型-视图-模板 (MVT) 模式和后端开发基础。"
+    />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5012/week3"
+      title="第3周：HTML, CSS 与 Bootstrap"
+      description="Web 表现层和响应式设计基础。"
+    />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5012/week4"
+      title="第4周：协议与消息传递"
+      description="理解 HTTP、无状态性以及安全通信。"
+    />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5012/week5"
+      title="第5周：客户端环境"
+      description="浏览器渲染引擎和客户端存储。"
+    />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5012/week6"
+      title="第6周：客户端脚本"
+      description="使用 JavaScript 和 DOM 操作实现动态行为。"
+    />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5012/week7"
+      title="第7周：JQuery 与 AJAX"
+      description="异步数据更新和简化 JS 库的使用。"
+    />
+    <Card
+      href="/zh/notes/semester-2/COMPSCI5012/week8"
+      title="第8周：XML 与 JSON 处理"
+      description="数据交换格式和结构验证。"
+    />
 </Cards>

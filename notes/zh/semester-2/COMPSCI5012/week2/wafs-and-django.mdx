@@ -1,0 +1,54 @@
+---
+title: "第2周：WAFs 与 Django"
+description: "Web 应用程序框架 (WAFs)、MVT 模式和 Django 框架简介。"
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## 核心要点
+Web 应用程序框架将常见的开发模式自动化，Django 特别强制执行 MVT（模型-视图-模板）架构，以确保关注点分离和快速开发。
+
+## 1. Web 应用程序框架 (WAFs)
+WAF 是旨在支持动态网站开发的软件框架。它将与常见活动相关的开销（如会话管理、数据库访问）自动化。
+
+### WAF 的优势
+-   **生产力**：可重用的代码和组件。
+-   **安全性**：内置针对 SQL 注入、CSRF 等的保护。
+-   **标准化**：促进清晰、易于维护的代码结构。
+
+## 2. Django 架构：MVT
+Django 使用一种称为 **MVT (Model-View-Template)** 的 MVC 模式变体。
+
+### MVT 组件
+1.  **模型 (Model)**：数据访问层（关系映射）。
+2.  **视图 (View)**：业务逻辑层。它处理请求并返回响应。
+3.  **模板 (Template)**：表现层（带有 Django 模板语言的 HTML）。
+![Django MVT 流程](/images/COMPSCI5012/week2/L2-WAFsDjango-013.png)
+
+## 3. Django 开发工作流
+<Steps>
+
+### 创建 Django 项目
+1.  **环境搭建**：创建虚拟环境并安装 Django。
+2.  **模型定义**：在 `models.py` 中定义数据模式。
+3.  **迁移**：运行 `makemigrations` 和 `migrate` 来更新数据库。
+4.  **视图逻辑**：在 `views.py` 中编写请求处理程序。
+5.  **模板设计**：在 `templates/` 文件夹中创建 HTML 文件。
+6.  **URL 路由**：在 `urls.py` 中将 URL 映射到视图。
+</Steps>
+
+## 4. 出卷人视角：技术细微差别
+
+### ORM (对象关系映射)
+-   **概念**：Django 允许你使用 Python 对象而不是原始 SQL 与数据库交互。
+-   **细微差别**：虽然方便，但优化不佳的 ORM 查询（例如 N+1 问题）会显著降低性能。
+
+### 配置 vs. 约定
+-   Django 遵循 **“不要重复自己” (DRY)** 原则，并提供许多默认值（约定），但允许进行广泛的定制（配置）。
+
+## 复习与自测
+- [ ] Django 中的“项目 (Project)”和“应用 (App)”有什么区别？
+- [ ] ORM 如何防止 SQL 注入？
+- [ ] `settings.py` 在 Django 项目中的作用是什么？

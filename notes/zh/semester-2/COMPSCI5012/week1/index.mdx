@@ -1,28 +1,25 @@
 ---
 title: "第1周：系统与信息架构"
-description: Web 应用架构 (2/3/N-Tier)、数据库建模与信息架构。
+description: "Web 应用架构 (2/3/N 层)、数据库建模以及 Web 信息架构简介。"
 ---
 
-import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+## 概要
+- 主题：Web 系统基础
+- 核心知识点：3 层架构、数据库建模 (ERD)、信息架构 (IA)。
 
-## 总结
+## 本周安排
+| 会议 | 主题 | 说明 |
+|||---|
+| 架构 | [系统与信息架构](/zh/notes/semester-2/COMPSCI5012/week1/system-and-information-architecture) |
 
-本周确立了 Web 应用的结构基础。涵盖了系统如何分层（系统架构）、数据如何结构化（数据库建模）以及信息如何组织以供用户导航（信息架构）。
+## 复习与自测
 
-<Accordions>
-  <Accordion title="系统架构">
-    从 **1-Tier** (单体) 到 **2-Tier** (客户端-服务器)、**3-Tier** (表现层、逻辑层、数据层) 和 **N-Tier** 架构的演变。
-  </Accordion>
-  <Accordion title="数据库建模">
-    数据完整性的重要性。用于概念设计的**实体关系图 (ERD)** 和用于逻辑设计的**关系模式**。一对一、一对多和多对多关系。
-  </Accordion>
-  <Accordion title="信息架构 (IA)">
-    为可用性构建内容结构。创建**站点地图 (Site Maps)** 以展示层级结构，创建**用户流程 (User Flows)** 以可视化用户在应用中的旅程。
-  </Accordion>
-</Accordions>
+### 1. 核心问题
+1. [ ] 与 2 层架构相比，3 层架构有哪些优势？
+2. [ ] 如何在关系模式中表示多对多 (Many-to-Many) 关系？
+3. [ ] 站点地图 (Sitemap) 与原型图 (Wireframe) 有什么区别？
 
-## 快速链接
-
-- [系统与信息架构](./system-and-information-architecture)
-- [数据库关系](./system-and-information-architecture#database-modelling)
-- [站点地图与线框图](./system-and-information-architecture#information-architecture)
+### 2. 实践任务
+画出一个包含负载均衡器 (Load Balancer) 和多个 Web 服务器的 3 层架构图。
+最后更新
+- 2026-05-17：标准化标题并添加了复习机制。

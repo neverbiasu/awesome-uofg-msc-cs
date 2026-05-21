@@ -1,28 +1,25 @@
 ---
-title: "Week 4: Messaging & Protocols"
-description: Network models, HTTP fundamentals, and Inter-Process Communication.
+title: "Week 4: Protocols & Messaging"
+description: "How the web communicates: HTTP, Cookies, Sessions, and State Management."
 ---
 
-import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+## Overview
+- Theme: Web Communications
+- Key Topics: HTTP Request/Response, Cookies vs. Sessions, RESTful principles, Messaging patterns.
 
-## Summary
+## Schedule
+| Session | Topic | Description |
+|||---|
+| Protocols | [Protocols & Messaging](/en/notes/semester-2/COMPSCI5012/week4/messaging-and-protocols) |
 
-This week explores how computers communicate over the internet. It covers the theoretical models (OSI, TCP/IP), the practical details of the HTTP protocol (Requests, Responses, Methods), and how distributed systems exchange data via Inter-Process Communication (IPC) using technologies like REST and gRPC.
+## Review & Self-Check
 
-<Accordions>
-  <Accordion title="Network Models">
-    The 7-layer **OSI Model** vs. the 4-layer **TCP/IP Model**. Understanding how data moves from the Physical layer up to the Application layer.
-  </Accordion>
-  <Accordion title="HTTP Fundamentals">
-    The request-response cycle. Key methods (**GET** vs **POST**), status codes, headers, and the stateless nature of HTTP (and how Cookies/Sessions fix this).
-  </Accordion>
-  <Accordion title="Inter-Process Communication (IPC)">
-    Protocols for systems to talk to each other: **REST** (Representational State Transfer) APIs using JSON, compared to legacy **SOAP** (XML) and modern **gRPC** (Protocol Buffers).
-  </Accordion>
-</Accordions>
+### 1. Key Questions
+1. [ ] Why is HTTP considered a "stateless" protocol?
+2. [ ] What is the difference between `GET` and `POST` methods?
+3. [ ] What does a `404` status code represent versus a `500`?
 
-## Quick Links
-
-- [Messaging and Protocols](./messaging-and-protocols)
-- [HTTP Methods (GET vs POST)](./messaging-and-protocols#http-methods)
-- [IPC Protocols](./messaging-and-protocols#inter-process-communication-ipc)
+### 2. Practice Task
+List the HTTP status code ranges (e.g., 2xx, 3xx, 4xx, 5xx) and their general meanings.
+Update Log
+- 2026-05-17: Standardized titles and added review mechanism.

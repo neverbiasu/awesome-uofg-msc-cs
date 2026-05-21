@@ -1,0 +1,53 @@
+---
+title: "Week 6: Client-Side Scripting"
+description: "Core JavaScript concepts, event-driven programming, and manipulating the DOM."
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## Key Takeaway
+JavaScript is the "behavioral" layer of the web, enabling dynamic updates and user interaction through an event-driven model and direct manipulation of the Document Object Model (DOM).
+
+## 1. JavaScript Fundamentals
+JavaScript is a high-level, interpreted, multi-paradigm language.
+
+### Core Concepts
+-   **Loosely Typed**: Variables don't have fixed types (use `let` and `const`).
+-   **First-Class Functions**: Functions can be assigned to variables and passed as arguments.
+-   **Event-Driven**: Code execution is triggered by user actions (clicks, keypresses) or system events.
+![JavaScript Event Loop](/images/COMPSCI5012/week6/L6-Client-Side-Scripting-018.png)
+
+## 2. DOM Manipulation
+The DOM API allows JavaScript to interact with HTML.
+
+### Common Operations
+-   **Selecting**: `document.getElementById()`, `document.querySelector()`.
+-   **Modifying**: `element.innerHTML`, `element.style.color`.
+-   **Events**: `element.addEventListener('click', callback)`.
+<Callout type="warn">
+**Performance Tip**: Minimizing direct DOM access is crucial. Batch your updates or use a Virtual DOM (in frameworks) to avoid constant Reflows.
+</Callout>
+
+## 3. Asynchronous JavaScript
+JS is single-threaded but handles async tasks using the **Callback Queue**.
+-   **Callbacks**: Functions passed to be executed later.
+-   **Promises**: Objects representing the eventual completion (or failure) of an async operation.
+-   **Async/Await**: Modern syntax for writing clean asynchronous code.
+
+## 4. Examiner's Perspective: Technical Nuances
+
+### Scoping: var vs. let vs. const
+-   `var`: Function-scoped, hoisted. (Avoid in modern JS).
+-   `let`: Block-scoped.
+-   `const`: Block-scoped, read-only reference.
+- *Exam Tip*: Always use `const` by default, `let` only if the value changes.
+
+### The "This" Keyword
+-   The value of `this` depends on *how* a function is called, not where it is defined. This is a common source of bugs in event handlers.
+
+## Review & Self-Check
+- [ ] What is the difference between `==` and `===` in JavaScript?
+- [ ] How does a Closure work in JavaScript?
+- [ ] Explain the "Bubbling" and "Capturing" phases of an event.

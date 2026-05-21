@@ -1,28 +1,25 @@
 ---
-title: "第4周：消息传递与协议"
-description: 网络模型、HTTP 基础以及进程间通信。
+title: "第4周：协议与消息传递"
+description: "Web 通信机制：HTTP、Cookie、Session 以及状态管理。"
 ---
 
-import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+## 概要
+- 主题：Web 通信
+- 核心知识点：HTTP 请求/响应、Cookie vs. Session、RESTful 原则、消息传递模式。
 
-## 总结
+## 本周安排
+| 会议 | 主题 | 说明 |
+|||---|
+| 协议 | [协议与消息传递](/zh/notes/semester-2/COMPSCI5012/week4/messaging-and-protocols) |
 
-本周探讨计算机如何在互联网上进行通信。涵盖了理论模型（OSI、TCP/IP）、HTTP 协议的实际细节（请求、响应、方法），以及分布式系统如何使用 REST 和 gRPC 等技术通过进程间通信 (IPC) 交换数据。
+## 复习与自测
 
-<Accordions>
-  <Accordion title="网络模型">
-    7 层 **OSI 模型** vs. 4 层 **TCP/IP 模型**。理解数据如何从物理层向上传输到应用层。
-  </Accordion>
-  <Accordion title="HTTP 基础">
-    请求-响应周期。关键方法（**GET** vs **POST**）、状态码、标头，以及 HTTP 的无状态性质（以及 Cookies/Sessions 如何解决此问题）。
-  </Accordion>
-  <Accordion title="进程间通信 (IPC)">
-    系统间通信的协议：使用 JSON 的 **REST** (表现层状态转换) API，与传统的 **SOAP** (XML) 和现代的 **gRPC** (Protocol Buffers) 进行对比。
-  </Accordion>
-</Accordions>
+### 1. 核心问题
+1. [ ] 为什么 HTTP 被认为是一种“无状态”协议？
+2. [ ] `GET` 与 `POST` 方法之间有什么区别？
+3. [ ] `404` 状态码与 `500` 状态码分别代表什么？
 
-## 快速链接
-
-- [消息传递与协议](./messaging-and-protocols)
-- [HTTP 方法 (GET vs POST)](./messaging-and-protocols#http-methods)
-- [IPC 协议](./messaging-and-protocols#inter-process-communication-ipc)
+### 2. Practice Task
+列出 HTTP 状态码的范围（如 2xx, 3xx, 4xx, 5xx）及其通用含义。
+最后更新
+- 2026-05-17：标准化标题并添加了复习机制。

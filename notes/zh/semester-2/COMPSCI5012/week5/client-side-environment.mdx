@@ -1,0 +1,56 @@
+---
+title: "第5周：客户端环境"
+description: "浏览器环境、渲染引擎以及客户端在现代 Web 应用程序中的角色。"
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## 核心要点
+客户端（浏览器）是一个复杂的环境，它将 HTML/CSS 解析为 DOM/CSSOM 并执行 JavaScript 以实现交互，从而将大量的处理负载从服务器转移到了客户端。
+
+## 1. 现代浏览器
+浏览器不仅仅是一个文档查看器；它是一个完整的执行环境。
+
+### 主要组件
+-   **渲染引擎**：负责显示内容（例如：Blink, WebKit）。
+-   **JavaScript 解释器**：执行代码（例如：V8, SpiderMonkey）。
+-   **浏览器 API**：提供对本地存储、地理位置等的访问。
+![浏览器架构](/images/COMPSCI5012/week5/L5-Client-Side-Environment-2025-013.png)
+
+## 2. 关键渲染路径 (Critical Rendering Path)
+<Steps>
+
+### 页面是如何渲染的
+1.  **解析 HTML**：构建 **DOM 树**。
+2.  **解析 CSS**：构建 **CSSOM 树**。
+3.  **渲染树 (Render Tree)**：将 DOM 和 CSSOM 结合。
+4.  **布局 (Layout)**：计算每个盒子的几何形状。
+5.  **绘制 (Paint)**：在屏幕上绘制像素。
+</Steps>
+
+## 3. 客户端存储
+现代浏览器允许应用程序在本地存储数据。
+-   **LocalStorage**：持久数据（无过期时间）。
+-   **SessionStorage**：标签页关闭时清除数据。
+-   **IndexedDB**：用于存储大量结构化数据。
+<Callout type="info">
+**细微差别**：与 Cookie 不同，LocalStorage 数据**从不**自动发送到服务器，从而减小了请求大小。
+</Callout>
+
+## 4. 出卷人视角：技术细微差别
+
+### 渲染性能
+-   **重排 (Reflow/Layout)**：重新计算元素的位置。非常昂贵。
+-   **重绘 (Repaint)**：在不改变元素大小/位置的情况下重新绘制元素。开销较小。
+- *考试技巧*：改变 `width` 会触发重排；改变 `background-color` 只会触发重绘。
+
+### 安全：同源策略 (Same-Origin Policy, SOP)
+-   **概念**：浏览器限制从一个源加载的文档或脚本如何与来自另一个源的资源进行交互。
+-   **例外**：**CORS (跨源资源共享)** 允许服务器显式许可跨源请求。
+
+## 复育与自测
+- [ ] DOM 和 BOM (浏览器对象模型) 之间有什么区别？
+- [ ] 解释为什么“布局”通常是 Web 应用中的性能瓶颈。
+- [ ] 同源策略如何保护用户数据？

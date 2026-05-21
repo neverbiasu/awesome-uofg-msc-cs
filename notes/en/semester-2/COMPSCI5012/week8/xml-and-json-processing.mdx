@@ -1,0 +1,53 @@
+---
+title: "Week 8: XML & JSON Processing"
+description: "Deep dive into data interchange formats, structure validation, and server-side processing."
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## Key Takeaway
+Choosing between XML and JSON involves balancing XML's strict schema validation and document structure against JSON's lightweight footprint and native language integration.
+
+## 1. XML (Extensible Markup Language)
+XML is used to store and transport data. It is self-descriptive.
+
+### XML Components
+-   **Prolog**: `<?xml version="1.0" ... ?>`.
+-   **Elements**: Tags that define data.
+-   **Attributes**: Metadata about elements.
+![XML Structure Example](/images/COMPSCI5012/week8/L8-XML_and_XHTML,_XML_JSON_Processing-007.png)
+
+## 2. JSON (JavaScript Object Notation)
+JSON is a syntax for storing and exchanging data.
+
+### JSON Syntax Rules
+-   Data is in name/value pairs.
+-   Data is separated by commas.
+-   Curly braces hold objects.
+-   Square brackets hold arrays.
+<Callout type="info">
+**Why JSON won?** JSON is much smaller than XML because it doesn't use closing tags, saving bandwidth and reducing parsing time.
+</Callout>
+
+## 3. Validation and Schemas
+To ensure data is correct, we use schemas.
+-   **DTD (Document Type Definition)**: Older way to define XML structure.
+-   **XML Schema (XSD)**: Modern, XML-based way to define types and structure.
+
+## 4. Examiner's Perspective: Technical Nuances
+
+### XML vs. HTML
+-   XML is for **transporting/storing** data (custom tags).
+-   HTML is for **displaying** data (predefined tags).
+- *Exam Tip*: XML tags are case-sensitive, HTML tags are not.
+
+### Server-Side Parsing
+-   In Python (Django), use `json.loads()` and `json.dumps()`.
+-   **Nuance**: Serialization is the process of converting an object into a format (like JSON) that can be stored or transmitted.
+
+## Review & Self-Check
+- [ ] What makes an XML document "Well-Formed"?
+- [ ] What makes an XML document "Valid"?
+- [ ] Convert a simple student object (name, age, grade) from XML to JSON.

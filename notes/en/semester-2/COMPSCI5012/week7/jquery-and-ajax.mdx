@@ -1,0 +1,55 @@
+---
+title: "Week 7: JQuery & AJAX"
+description: "Simplifying DOM manipulation with JQuery and enabling seamless data updates with AJAX."
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## Key Takeaway
+AJAX revolutionized the web by allowing pages to update asynchronously, sending and receiving data from a server without requiring a full page reload.
+
+## 1. JQuery: Write Less, Do More
+JQuery is a fast, small, and feature-rich JavaScript library.
+
+### Why JQuery?
+-   **Browser Compatibility**: Handles cross-browser inconsistencies automatically.
+-   **Simplified Syntax**: Concise CSS-like selectors (e.g., `$('.my-class').hide()`).
+-   **Chainability**: Allows running multiple methods on the same selection.
+![JQuery Selection Logic](/images/COMPSCI5012/week7/L7-JQueryAJAX-2025-010.png)
+
+## 2. AJAX (Asynchronous JavaScript and XML)
+AJAX is not a programming language, but a technique for using existing standards.
+
+### How AJAX Works
+1.  An event occurs (e.g., button click).
+2.  `XMLHttpRequest` (or modern `fetch`) sends a request to the server.
+3.  The server processes the request and sends back data (usually JSON).
+4.  JavaScript updates the page content without a reload.
+<Steps>
+
+### The AJAX Lifecycle
+1.  **Request**: Client sends background request.
+2.  **Wait**: User continues interacting with the page.
+3.  **Callback**: Server responds, triggering a JS function.
+4.  **Update**: Part of the DOM is modified.
+</Steps>
+
+## 3. JSON (JavaScript Object Notation)
+While the 'X' in AJAX stands for XML, most modern applications use **JSON** for data exchange because it is more lightweight and natively compatible with JS.
+
+## 4. Examiner's Perspective: Technical Nuances
+
+### Asynchronicity
+-   **Mistake**: Expecting data from an AJAX call to be available immediately on the next line of code.
+-   **Reality**: You must handle the data inside a `.then()` block or after an `await`.
+
+### UX and AJAX
+-   **Advantage**: Smooth, app-like feel.
+-   **Disadvantage**: Can break the "Back" button functionality and bookmarking if not handled correctly (requires History API).
+
+## Review & Self-Check
+- [ ] What is the "Same-Origin Policy" restriction on AJAX?
+- [ ] Compare JSON and XML in terms of parsing speed and readability.
+- [ ] How do you show a "loading" spinner while an AJAX request is in progress?

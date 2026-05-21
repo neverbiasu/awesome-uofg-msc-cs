@@ -1,0 +1,56 @@
+---
+title: "Week 5: Client-Side Environment"
+description: "The browser environment, rendering engines, and the role of the client in modern web applications."
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## Key Takeaway
+The client (browser) is a complex environment that parses HTML/CSS into the DOM/CSSOM and executes JavaScript to enable interactivity, shifting significant processing load from the server.
+
+## 1. The Modern Browser
+A browser is much more than a document viewer; it is a full execution environment.
+
+### Major Components
+-   **Rendering Engine**: Responsible for displaying content (e.g., Blink, WebKit).
+-   **JavaScript Interpreter**: Executes code (e.g., V8, SpiderMonkey).
+-   **Browser API**: Provides access to local storage, location, etc.
+![Browser Architecture](/images/COMPSCI5012/week5/L5-Client-Side-Environment-2025-013.png)
+
+## 2. Critical Rendering Path
+<Steps>
+
+### How a Page is Rendered
+1.  **Parse HTML**: Build the **DOM Tree**.
+2.  **Parse CSS**: Build the **CSSOM Tree**.
+3.  **Render Tree**: Combine DOM and CSSOM.
+4.  **Layout**: Calculate the geometry of each box.
+5.  **Paint**: Draw pixels on the screen.
+</Steps>
+
+## 3. Client-Side Storage
+Modern browsers allow applications to store data locally.
+-   **LocalStorage**: Persistent data (no expiration).
+-   **SessionStorage**: Data cleared when the tab is closed.
+-   **IndexedDB**: For large amounts of structured data.
+<Callout type="info">
+**Nuance**: Unlike Cookies, LocalStorage data is **never** sent to the server automatically, reducing request sizes.
+</Callout>
+
+## 4. Examiner's Perspective: Technical Nuances
+
+### Rendering Performance
+-   **Reflow (Layout)**: Recalculating positions of elements. Very expensive.
+-   **Repaint**: Redrawing elements without changing their size/position. Less expensive.
+- *Exam Tip*: Changing `width` triggers Reflow; changing `background-color` triggers only Repaint.
+
+### Security: Same-Origin Policy (SOP)
+-   **Concept**: A browser restricts how a document or script loaded from one origin can interact with a resource from another origin.
+-   **Exception**: **CORS (Cross-Origin Resource Sharing)** allows servers to explicitly permit cross-origin requests.
+
+## Review & Self-Check
+- [ ] What is the difference between the DOM and the BOM (Browser Object Model)?
+- [ ] Explain why "Layout" is often a performance bottleneck in web apps.
+- [ ] How does the "Same-Origin Policy" protect user data?

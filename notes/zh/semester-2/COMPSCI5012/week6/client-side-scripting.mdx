@@ -1,0 +1,53 @@
+---
+title: "第6周：客户端脚本"
+description: "核心 JavaScript 概念、事件驱动编程以及操作 DOM。"
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## 核心要点
+JavaScript 是 Web 的“行为”层，通过事件驱动模型和对文档对象模型 (DOM) 的直接操作，实现动态更新和用户交互。
+
+## 1. JavaScript 基础
+JavaScript 是一种高级的、解释型的、多范式语言。
+
+### 核心概念
+-   **弱类型 (Loosely Typed)**：变量没有固定类型（使用 `let` 和 `const`）。
+-   **一等公民函数 (First-Class Functions)**：函数可以赋值给变量并作为参数传递。
+-   **事件驱动 (Event-Driven)**：代码执行由用户操作（点击、按键）或系统事件触发。
+![JavaScript 事件循环](/images/COMPSCI5012/week6/L6-Client-Side-Scripting-018.png)
+
+## 2. DOM 操作
+DOM API 允许 JavaScript 与 HTML 进行交互。
+
+### 常用操作
+-   **选择**：`document.getElementById()`, `document.querySelector()`。
+-   **修改**：`element.innerHTML`, `element.style.color`。
+-   **事件**：`element.addEventListener('click', callback)`。
+<Callout type="warn">
+**性能提示**：尽量减少直接的 DOM 访问。批量更新或使用虚拟 DOM（在框架中）以避免不断的重排。
+</Callout>
+
+## 3. 异步 JavaScript
+JS 是单线程的，但使用**回调队列 (Callback Queue)** 处理异步任务。
+-   **回调 (Callbacks)**：传递给稍后执行的函数。
+-   **Promise**：表示异步操作最终完成（或失败）的对象。
+-   **Async/Await**：编写整洁异步代码的现代语法。
+
+## 4. 出卷人视角：技术细微差别
+
+### 作用域：var vs. let vs. const
+-   `var`：函数作用域，会提升 (hoisted)。（在现代 JS 中应避免使用）。
+-   `let`：块级作用域。
+-   `const`：块级作用域，只读引用。
+- *考试技巧*：默认情况下始终使用 `const`，仅当值会改变时才使用 `let`。
+
+### "This" 关键字
+-   `this` 的值取决于函数*如何*被调用，而不是它在哪里定义。这是事件处理程序中常见的 Bug 来源。
+
+## 复习与自测
+- [ ] JavaScript 中 `==` 和 `===` 之间有什么区别？
+- [ ] JavaScript 中的闭包 (Closure) 是如何工作的？
+- [ ] 解释事件的“冒泡 (Bubbling)”和“捕获 (Capturing)”阶段。

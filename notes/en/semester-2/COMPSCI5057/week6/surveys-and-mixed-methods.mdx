@@ -1,0 +1,54 @@
+---
+title: "Week 6: Surveys & Mixed Methods"
+description: "A guide to designing effective questionnaires, identifying survey biases, and conducting mixed-methods research."
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## Key Takeaway
+Surveys are powerful for capturing broad user sentiment, but their validity depends entirely on mitigating systematic biases in question design and sampling.
+
+## 1. Survey Design Fundamentals
+Surveys are used to collect **quantitative data** about user attitudes, behaviors, and demographics.
+
+### Choosing the Right Scales
+-   **Likert Scales**: Used to measure agreement (e.g., Strongly Disagree to Strongly Agree).
+-   **Semantic Differential**: Measures polar opposites (e.g., Boring to Exciting).
+![Survey Bias Classifications](/images/COMPSCI5057/week6/HCIDE2026_week_6_surveys_mixedmethods-019.png)
+
+## 2. Mitigating Survey Biases
+In an exam context, identifying these biases is a "Hard Red Line".
+-   **Satisficing**: Users provide "good enough" answers to finish quickly (e.g., choosing the middle option for everything).
+-   **Acquiescence Bias**: The tendency to agree with all statements.
+-   **Social Desirability Bias**: Users answer in a way they think the researcher wants to hear or what is socially "correct".
+-   **Response Order Bias**: Users are more likely to pick the first few options in a long list (Primacy effect).
+<Callout type="warn">
+**Mitigation Strategy**: Use a mix of positively and negatively phrased questions to detect "straight-lining" or acquiescence.
+</Callout>
+
+## 3. Mixed-Methods Research
+Mixed methods combine **Qualitative** (the 'why') and **Quantitative** (the 'how much') data to provide a holistic view.
+
+### The System Usability Scale (SUS)
+SUS is a "quick and dirty" way to measure usability.
+-   10 questions with Likert scales.
+-   **Nuance**: A SUS score is a number from 0-100, but it is **not a percentage**. A score of 68 is considered average.
+
+## 4. Examiner's Perspective
+
+### Hard Red Lines: Bias Identification
+If an exam scenario shows a survey with only positive questions, you **must** identify "Acquiescence Bias" as a risk.
+
+### Technical Nuance: Sampling
+-   **Random Sampling**: Every member of the population has an equal chance.
+-   **Convenience Sampling**: Choosing whoever is available. **Warning**: This leads to low external validity (results can't be generalized).
+
+### Failure Analysis: Double-Barreled Questions
+Avoid questions like "Is this app fast and easy to use?". If a user says "No", you don't know if it was slow or hard to use.
+
+## Review & Self-Check
+- [ ] Can you define the difference between a unipolar and bipolar Likert scale?
+- [ ] Why should you conduct a "Pilot Study" before releasing a large survey?
+- [ ] What is the "Social Desirability Bias" in the context of health apps?

@@ -1,32 +1,25 @@
 ---
 title: "第2周：Web 框架与 Django"
-description: MVC vs MVT 模式、Django 核心组件与 URL 路由。
+description: "Web 应用框架 (WAF) 简介以及 Django MTV 架构深度解析。"
 ---
 
-import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+## 概要
+- 主题：服务端开发
+- 核心知识点：WAF 的动机、MVC vs. MTV、Django 组件（模型、模板、视图、URL）。
 
-## 总结
+## 本周安排
+| 会议 | 主题 | 说明 |
+|||---|
+| Django | [Web 框架与 Django](/zh/notes/semester-2/COMPSCI5012/week2/web-frameworks-and-django) |
 
-本周介绍了用于构建可扩展 Web 应用的工具。定义了什么是 Web 框架（相对于库），并深入探讨了 Django——一个高级 Python Web 框架，解释了其特定的架构模式 (MVT)。
+## 复习与自测
 
-<Accordions>
-  <Accordion title="框架 vs. 库">
-    **控制反转 (Inversion of Control)**：关键区别。库是你调用的工具；框架调用你的代码。为什么框架对复杂的 Web 应用至关重要（安全性、可扩展性、速度）。
-  </Accordion>
-  <Accordion title="架构模式">
-    **MVC (模型-视图-控制器)**：行业标准模式。
-    **MVT (模型-视图-模板)**：Django 的变体。
-    - **Model**：数据访问层。
-    - **View**：业务逻辑（控制器）。
-    - **Template**：表现层（视图）。
-  </Accordion>
-  <Accordion title="Django 基础">
-    Django 中的请求生命周期：`URLconf` -> `View` -> `Model` -> `Template` -> `Response`。设置项目、创建应用以及映射 URL。
-  </Accordion>
-</Accordions>
+### 1. 核心问题
+1. [ ] 什么是 ORM (对象关系映射)？
+2. [ ] 在 MTV 模式中，“业务逻辑”驻留在哪里？
+3. [ ] `urls.py` 的作用是什么？
 
-## 快速链接
-
-- [Web 框架与 Django](./web-frameworks-and-django)
-- [MVC vs MVT](./web-frameworks-and-django#mvc-and-django-mvt-architecture)
-- [Django 请求生命周期](./web-frameworks-and-django#django-fundamentals)
+### 2. 实践任务
+追踪一个对 `/blog/1/` 的请求在 Django 架构中的流转：URLconf $\rightarrow$ View $\rightarrow$ Model $\rightarrow$ Template。
+最后更新
+- 2026-05-17：标准化标题并添加了复习机制。

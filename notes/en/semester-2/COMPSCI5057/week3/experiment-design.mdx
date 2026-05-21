@@ -1,20 +1,22 @@
 ---
-title: "Experiment Design"
-description: Scientific methods for designing reliable user studies
+title: "Week 3: Experimental Design"
+description: "Designing controlled experiments in HCI, defining variables, and ensuring ethical compliance."
 ---
 
-Designing a robust experiment is crucial for gathering valid empirical data in Human-Computer Interaction.
+import { Callout } from 'fumadocs-ui/components/callout';
+
+## Key Takeaway
+A robust HCI experiment requires carefully defined Independent and Dependent variables, and must account for individual differences or order effects through Between-Subjects or Within-Subjects designs.
+# Experimental Design
+![Variables in HCI Experiments](/images/COMPSCI5057/week1/week_1__introduction-009.png)
 
 ## Variables
-
 In any experiment, we manipulate and measure specific factors:
-
 - **Independent Variable (IV)**: The factor that the researcher manipulates (e.g., Input Method: Mouse vs. Trackpad).
 - **Dependent Variable (DV)**: The outcome that is measured (e.g., Task Completion Time, Error Rate).
 - **Control Variable**: Factors that are kept constant to prevent interference (e.g., Screen size, Lighting conditions).
 
 ## Experimental Designs
-
 We must decide how to assign participants to different conditions.
 
 ### Within-Subjects Design (Repeated Measures)
@@ -30,16 +32,12 @@ Each participant performs **only one** experimental condition.
 - **Mitigation**: Random assignment of participants to groups.
 
 ## Hypothesis Testing
-
 Experiments are designed to test hypotheses.
-
 - **Null Hypothesis ($H_0$)**: Assumes there is **no difference** between conditions (e.g., "There is no difference in speed between Layout A and Layout B").
 - **Alternative Hypothesis ($H_1$)**: Assumes there **is a difference** (e.g., "Layout A is faster than Layout B").
-
 Our goal is to gather enough evidence to **reject the null hypothesis** with a certain level of confidence (typically $p < 0.05$).
 
 ## Key Takeaway
-
 - **Control is Key**: Always identify and control confounding variables.
 - **Counterbalancing**: Essential for Within-Subjects designs to neutralize order effects.
 - **Validity**: Internal validity (did the IV cause the change in DV?) vs. External validity (do results generalize to the real world?).

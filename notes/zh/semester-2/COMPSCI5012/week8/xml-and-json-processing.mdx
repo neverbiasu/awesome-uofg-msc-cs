@@ -1,0 +1,53 @@
+---
+title: "第8周：XML 与 JSON 处理"
+description: "深入探讨数据交换格式、结构验证以及服务器端处理。"
+date: "2026-05-18"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Steps } from 'fumadocs-ui/components/steps';
+
+## 核心要点
+在 XML 和 JSON 之间做出选择，需要在 XML 的严格模式验证和文档结构与 JSON 的轻量级占用和原生语言集成之间进行权衡。
+
+## 1. XML (可扩展标记语言)
+XML 用于存储和传输数据。它是自我描述的。
+
+### XML 组件
+-   **声明 (Prolog)**：`<?xml version="1.0" ... ?>`。
+-   **元素 (Elements)**：定义数据的标签。
+-   **属性 (Attributes)**：有关元素的元数据。
+![XML 结构示例](/images/COMPSCI5012/week8/L8-XML_and_XHTML,_XML_JSON_Processing-007.png)
+
+## 2. JSON (JavaScript 对象表示法)
+JSON 是一种存储和交换数据的语法。
+
+### JSON 语法规则
+-   数据以名称/值对的形式存在。
+-   数据由逗号分隔。
+-   大括号保存对象。
+-   方括号保存数组。
+<Callout type="info">
+**为什么 JSON 胜出了？** JSON 比 XML 小得多，因为它不使用结束标签，从而节省了带宽并减少了解析时间。
+</Callout>
+
+## 3. 验证与模式 (Schemas)
+为了确保数据正确，我们使用模式。
+-   **DTD (文档类型定义)**：定义 XML 结构的旧方法。
+-   **XML Schema (XSD)**：现代的、基于 XML 的定义类型和结构的方法。
+
+## 4. 出卷人视角：技术细微差别
+
+### XML vs. HTML
+-   XML 用于**传输/存储**数据（自定义标签）。
+-   HTML 用于**显示**数据（预定义标签）。
+- *考试技巧*：XML 标签区分大小写，而 HTML 标签不区分。
+
+### 服务器端解析
+-   在 Python (Django) 中，使用 `json.loads()` 和 `json.dumps()`。
+-   **细微差别**：序列化 (Serialization) 是将对象转换为可以存储或传输的格式（如 JSON）的过程。
+
+## 复习与自测
+- [ ] 什么使 XML 文档成为“格式良好的 (Well-Formed)”？
+- [ ] 什么使 XML 文档成为“有效的 (Valid)”？
+- [ ] 将一个简单的学生对象（姓名、年龄、成绩）从 XML 转换为 JSON。
