@@ -18,7 +18,7 @@ dotenv.config();
  */
 const API_KEY = process.env.MODELSCOPE_API_KEY;
 const BASE_URL = process.env.MODELSCOPE_API_ENDPOINT || "https://api-inference.modelscope.cn/v1"; // Allow BASE_URL to be overridden by .env
-const MODEL_ID = "Qwen/Qwen2.5-VL-3B-Instruct"; // The smaller model that seemed more lenient
+const MODEL_ID = "qwen/Qwen2.5-VL-3B-Instruct"; // The smaller model that seemed more lenient
 const PROMPT_TEXT = "Describe this image in detail. What is its content and purpose? Is it a diagram, a screenshot, an icon, or something else? If it's a diagram, explain what it shows.";
 
 // --- DEBUG ---
