@@ -1,0 +1,52 @@
+[
+  {
+    "file": "SSE-Lecture_1-010.png",
+    "isDiagram": true,
+    "caption": "Course Timetable for Secured Software Engineering"
+  },
+  {
+    "file": "SSE-Lecture_1-011.png",
+    "isDiagram": true,
+    "caption": "Course Timetable for Secured Software Engineering"
+  },
+  {
+    "file": "SSE-Lecture_1-014.png",
+    "isDiagram": true,
+    "caption": "Bar chart illustrating the recommended breaks during lectures and tutorials."
+  },
+  {
+    "file": "SSE-Lecture_1-022.png",
+    "isDiagram": true,
+    "caption": "A diagram illustrating the concept of vulnerabilities in software engineering."
+  },
+  {
+    "file": "SSE-Lecture_1-031.png",
+    "isDiagram": true,
+    "caption": "A bar chart illustrating the immediate software-related cause of failure in the Mariner 1 case study."
+  },
+  {
+    "file": "SSE-Lecture_1-047.png",
+    "isDiagram": true,
+    "caption": "Waterfall Model diagram showing stages of software development: Requirements, Design, Implementation, Verification, and Maintenance."
+  },
+  {
+    "file": "SSE-Lecture_1-048.png",
+    "isDiagram": true,
+    "caption": "V-model (Validation and Verification Model)"
+  },
+  {
+    "file": "SSE-Lecture_1-049.png",
+    "isDiagram": true,
+    "caption": "Software Development Models'3"
+  },
+  {
+    "file": "SSE-Lecture_1-054.png",
+    "isDiagram": true,
+    "caption": "A slide from a lecture introducing software development models and security, with a QR code for additional resources."
+  },
+  {
+    "file": "SSE-Lecture_1-071.png",
+    "isDiagram": true,
+    "caption": "Secure software design principle violation chart"
+  }
+]

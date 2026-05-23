@@ -1,0 +1,701 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Image Extraction Report</title>
+      <style>
+        body { font-family: sans-serif; margin: 2em; background-color: #f8f9fa; color: #212529; }
+        h1 { text-align: center; color: #343a40; }
+        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5em; }
+        .card { background-color: #ffffff; border: 1px solid #dee2e6; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); overflow: hidden; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-5px); }
+        .card img { max-width: 100%; height: auto; display: block; }
+        .card-info { padding: 1em; }
+        .card-info p { margin: 0; font-size: 0.9em; word-wrap: break-word; }
+        .card-info .filename { font-weight: bold; color: #007bff; margin-bottom: 0.5em; }
+        .card-info .path { color: #6c757d; }
+      </style>
+    </head>
+    <body>
+      <h1>Image Extraction Report</h1>
+      <p>Found 84 images in <strong>/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3</strong>.</p>
+      <div class="gallery">
+        
+          <div class="card">
+            <img src="SSE-Lecture3-000.png" alt="SSE-Lecture3-000.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-000.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-000.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-001.png" alt="SSE-Lecture3-001.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-001.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-001.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-002.png" alt="SSE-Lecture3-002.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-002.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-002.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-003.png" alt="SSE-Lecture3-003.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-003.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-003.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-004.png" alt="SSE-Lecture3-004.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-004.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-004.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-005.png" alt="SSE-Lecture3-005.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-005.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-005.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-006.png" alt="SSE-Lecture3-006.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-006.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-006.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-007.png" alt="SSE-Lecture3-007.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-007.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-007.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-008.png" alt="SSE-Lecture3-008.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-008.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-008.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-009.png" alt="SSE-Lecture3-009.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-009.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-009.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-010.png" alt="SSE-Lecture3-010.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-010.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-010.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-011.png" alt="SSE-Lecture3-011.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-011.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-011.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-012.png" alt="SSE-Lecture3-012.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-012.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-012.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-013.png" alt="SSE-Lecture3-013.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-013.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-013.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-014.png" alt="SSE-Lecture3-014.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-014.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-014.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-015.png" alt="SSE-Lecture3-015.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-015.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-015.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-016.png" alt="SSE-Lecture3-016.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-016.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-016.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-017.png" alt="SSE-Lecture3-017.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-017.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-017.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-018.png" alt="SSE-Lecture3-018.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-018.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-018.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-019.png" alt="SSE-Lecture3-019.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-019.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-019.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-020.png" alt="SSE-Lecture3-020.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-020.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-020.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-021.png" alt="SSE-Lecture3-021.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-021.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-021.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-022.png" alt="SSE-Lecture3-022.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-022.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-022.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-023.png" alt="SSE-Lecture3-023.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-023.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-023.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-024.png" alt="SSE-Lecture3-024.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-024.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-024.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-025.png" alt="SSE-Lecture3-025.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-025.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-025.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-026.png" alt="SSE-Lecture3-026.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-026.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-026.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-027.png" alt="SSE-Lecture3-027.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-027.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-027.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-028.png" alt="SSE-Lecture3-028.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-028.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-028.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-029.png" alt="SSE-Lecture3-029.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-029.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-029.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-030.png" alt="SSE-Lecture3-030.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-030.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-030.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-031.png" alt="SSE-Lecture3-031.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-031.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-031.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-032.png" alt="SSE-Lecture3-032.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-032.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-032.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-033.png" alt="SSE-Lecture3-033.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-033.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-033.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-034.png" alt="SSE-Lecture3-034.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-034.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-034.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-035.png" alt="SSE-Lecture3-035.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-035.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-035.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-036.png" alt="SSE-Lecture3-036.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-036.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-036.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-037.png" alt="SSE-Lecture3-037.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-037.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-037.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-038.png" alt="SSE-Lecture3-038.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-038.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-038.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-039.png" alt="SSE-Lecture3-039.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-039.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-039.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-040.png" alt="SSE-Lecture3-040.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-040.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-040.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-041.png" alt="SSE-Lecture3-041.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-041.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-041.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-042.png" alt="SSE-Lecture3-042.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-042.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-042.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-043.png" alt="SSE-Lecture3-043.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-043.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-043.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-044.png" alt="SSE-Lecture3-044.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-044.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-044.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-045.png" alt="SSE-Lecture3-045.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-045.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-045.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-046.png" alt="SSE-Lecture3-046.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-046.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-046.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-047.png" alt="SSE-Lecture3-047.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-047.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-047.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-048.png" alt="SSE-Lecture3-048.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-048.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-048.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-049.png" alt="SSE-Lecture3-049.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-049.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-049.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-050.png" alt="SSE-Lecture3-050.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-050.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-050.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-051.png" alt="SSE-Lecture3-051.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-051.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-051.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-052.png" alt="SSE-Lecture3-052.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-052.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-052.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-053.png" alt="SSE-Lecture3-053.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-053.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-053.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-054.png" alt="SSE-Lecture3-054.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-054.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-054.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-055.png" alt="SSE-Lecture3-055.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-055.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-055.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-056.png" alt="SSE-Lecture3-056.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-056.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-056.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-057.png" alt="SSE-Lecture3-057.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-057.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-057.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-058.png" alt="SSE-Lecture3-058.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-058.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-058.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-059.png" alt="SSE-Lecture3-059.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-059.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-059.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-060.png" alt="SSE-Lecture3-060.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-060.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-060.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-061.png" alt="SSE-Lecture3-061.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-061.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-061.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-062.png" alt="SSE-Lecture3-062.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-062.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-062.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-063.png" alt="SSE-Lecture3-063.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-063.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-063.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-064.png" alt="SSE-Lecture3-064.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-064.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-064.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-065.png" alt="SSE-Lecture3-065.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-065.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-065.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-066.png" alt="SSE-Lecture3-066.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-066.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-066.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-067.png" alt="SSE-Lecture3-067.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-067.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-067.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-068.png" alt="SSE-Lecture3-068.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-068.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-068.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-069.png" alt="SSE-Lecture3-069.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-069.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-069.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-070.png" alt="SSE-Lecture3-070.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-070.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-070.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-071.png" alt="SSE-Lecture3-071.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-071.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-071.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-072.png" alt="SSE-Lecture3-072.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-072.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-072.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-073.png" alt="SSE-Lecture3-073.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-073.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-073.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-074.png" alt="SSE-Lecture3-074.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-074.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-074.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-075.png" alt="SSE-Lecture3-075.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-075.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-075.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-076.png" alt="SSE-Lecture3-076.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-076.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-076.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-077.png" alt="SSE-Lecture3-077.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-077.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-077.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-078.png" alt="SSE-Lecture3-078.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-078.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-078.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-079.png" alt="SSE-Lecture3-079.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-079.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-079.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-080.png" alt="SSE-Lecture3-080.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-080.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-080.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-081.png" alt="SSE-Lecture3-081.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-081.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-081.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-082.png" alt="SSE-Lecture3-082.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-082.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-082.png</p>
+            </div>
+          </div>
+        
+          <div class="card">
+            <img src="SSE-Lecture3-083.png" alt="SSE-Lecture3-083.png">
+            <div class="card-info">
+              <p class="filename">SSE-Lecture3-083.png</p>
+              <p class="path">/Users/nev4rb14su/workspace/awesome-uofg-msc-cs/public/images/COMPSCI5104/week3/SSE-Lecture3-083.png</p>
+            </div>
+          </div>
+        
+      </div>
+    </body>
+    </html>
+  

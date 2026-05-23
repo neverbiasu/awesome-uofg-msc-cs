@@ -116,7 +116,7 @@ async function main(dirPath, courseCode = 'COMPSCI5012', reportHint = 'analysis'
   reportStream.write('[\n');
 
   const allFiles = fs.readdirSync(dirPath);
-  let imageFiles = allFiles.filter(file => file.startsWith('L2-WAFsDjango-') && /\.(png|jpg|jpeg|webp)$/i.test(file));
+  let imageFiles = allFiles.filter(file => /\.(png|jpg|jpeg|webp)$/i.test(file));
 
   // Apply slicing for batch processing
   if (limit) {

@@ -1,0 +1,169 @@
+---
+title: "访问控制：认证与授权"
+description: "深入解析访问控制的工作流、数字身份认证机制（密码、OTP）以及主流授权模型（DAC, RBAC, ABAC, MAC）。"
+---
+
+## 概要
+- **目标**：理解系统如何识别用户身份并决定其资源访问权限。
+- **范围**：涵盖从认证（Authentication）到授权（Authorization）的完整流程，以及不同安全需求下的模型选择。
+
+## 学习目标
+1. 区分 **认证 (Authentication)** 与 **授权 (Authorization)** 的概念与职责。
+2. 理解数字身份的生命周期及常见认证方式（密码、OTP、生物识别）。
+3. 能够分析并选择合适的授权模型：DAC、RBAC、ABAC 或 MAC。
+4. 掌握基于 Python 的 OTP 生成与验证原理。
+
+## 关键知识点
+
+### 1. 访问控制基础 (Access Control Basics)
+
+![访问控制工作流](/images/COMPSCI5104/week3/SSE-Lecture3-006.png)
+
+![访问控制系统](/images/COMPSCI5104/week3/SSE-Lecture3-007.png)
+- **定义**：访问控制是通过识别用户凭证（Credentials）并验证其身份，进而授权其对特定资源进行访问的过程。
+- **核心工作流**：
+  1. **用户 (User)**：请求访问资源的主体。
+  2. **认证机制 (Authentication Mechanism)**：验证用户身份（如登录）。
+  3. **系统管理员 (System Administrator)**：管理权限数据库。
+  4. **授权数据库 (Authorization Database)**：存储用户权限与访问规则。
+  5. **访问控制 (Access Control)**：根据身份和规则决定是否允许访问。
+  6. **系统资源 (System Resources)**：最终被访问的文件、数据或应用。
+
+- **核心区别**：
+  - **认证 (Authentication)**：你是谁？(Who you are?) / 你是否被允许使用系统？
+  - **授权 (Authorization)**：你能做什么？(What you can do?) / 你是否有权访问特定资源？
+
+---
+
+### 2. 数字身份与生命周期 (Digital Identity Lifecycle)
+- **定义**：数字身份是一组唯一标识用户或实体的属性（如用户名、生物特征、PIN码等）。
+- **生命周期**：
+  1. **注册 (Enrolment)**：首次捕获身份，收集 PII (个人身份信息)，设置凭证。
+  2. **维护 (Maintenance)**：更新信息、修改密码、刷新生物特征数据。
+  3. **注销/删除 (Deactivation/Deletion)**：暂停或永久移除身份（如离职、隐私请求）。
+
+
+
+---
+
+### 3. 认证机制详解 (Authentication Methods)
+
+#### 3.1 基于密码的认证 (Password-Based)
+- **原理**：基于“用户所知 (Something you know)”。
+- **挑战**：
+  - 容易被猜测或窃取。
+  - **撞库 (Credential Stuffing)**：用户在多处复用相同密码导致的连锁泄露风险。
+- **最佳实践**：
+  - 使用强密码且不重复。
+  - 密码哈希存储（严禁明文）。
+  - 限制登录尝试次数（防止暴力破解）。
+  - 使用 CAPTCHA 防止自动化攻击。
+  - 启用 HTTPS 防止传输拦截。
+
+#### 3.2 基于令牌的认证 (Token-Based / OTP)
+
+![OTP 示例](/images/COMPSCI5104/week3/SSE-Lecture3-050.png)
+- **原理**：基于“用户所有 (Something you have)”。
+- **类型**：
+  - **物理令牌**：如银行U盾、芯片卡。
+  - **数字令牌**：如 OTP (一次性密码)。
+- **OTP 类型**：
+  - **HOTP (HMAC-based)**：基于计数器（Counter-based）。
+  - **TOTP (Time-based)**：基于时间窗口（通常30秒）。
+
+- **Python 实现示例 (使用 `pyotp`)**：
+```python
+import pyotp
+import time
+
+# 1. 生成密钥 (通常由服务端生成并绑定到用户)
+# base32secret3232 是示例密钥
+totp = pyotp.TOTP('base32secret3232')
+
+# 2. 生成当前 OTP
+current_otp = totp.now()
+print(f"Current OTP: {current_otp}")
+
+# 3. 验证 OTP
+# 模拟用户立即输入
+is_valid = totp.verify(current_otp)
+print(f"Verify immediately: {is_valid}") # => True
+
+# 模拟 30秒后过期
+# time.sleep(30)
+# is_expired = totp.verify(current_otp)
+# print(f"Verify after 30s: {is_expired}") # => False
+```
+
+#### 3.3 认证保障级别 (AAL - Authenticator Assurance Levels)
+
+![AAL 认证级别](/images/COMPSCI5104/week3/SSE-Lecture3-018.png)
+- **AAL 1**：单因素认证 (SFA)，如仅密码。
+- **AAL 2**：双因素认证 (2FA)，如密码 + OTP。
+- **AAL 3**：多因素认证 (MFA) 且包含硬件级令牌，适用于高安全环境。
+
+
+
+---
+
+### 4. 授权模型 (Authorization Models)
+
+#### 4.1 自主访问控制 (DAC - Discretionary Access Control)
+
+![DAC 模型](/images/COMPSCI5104/week3/SSE-Lecture3-058.png)
+- **核心概念**：资源的所有者（Owner）有权决定谁可以访问该资源。
+- **实现方式**：通常通过 **ACL (访问控制列表)** 实现（如 Windows/Linux 文件权限）。
+- **优点**：灵活、易用、去中心化管理。
+- **缺点**：
+  - **安全性低**：容易受到“特洛伊木马”攻击（如果Owner被攻破，权限即被滥用）。
+  - 管理混乱：随着用户增多，权限维护困难。
+
+#### 4.2 基于角色的访问控制 (RBAC - Role-Based Access Control)
+
+![RBAC 模型](/images/COMPSCI5104/week3/SSE-Lecture3-068.png)
+- **核心概念**：权限分配给“角色 (Role)”，用户通过被赋予角色来获取权限。
+- **关系**：用户 -> 角色 -> 权限。
+- **优点**：
+  - **简化管理**：无需为每个用户单独配置权限。
+  - **安全性高**：符合最小权限原则。
+  - **扩展性强**：适应组织架构变化。
+- **缺点**：角色定义可能变得复杂（Role Creep）。
+
+#### 4.3 基于属性的访问控制 (ABAC - Attribute-Based Access Control)
+- **核心概念**：基于用户属性、资源属性、环境条件（时间、地点）和策略规则动态决定访问权限。
+- **公式**：`Decision = Policy(Subject Attributes, Object Attributes, Environment)`
+- **优点**：
+  - **极高的细粒度**：可以实现“仅在工作时间的内网环境下允许访问”。
+  - **动态适应**：无需预定义所有角色。
+- **缺点**：实现复杂，策略维护成本高，可能有性能损耗。
+
+#### 4.4 强制访问控制 (MAC - Mandatory Access Control)
+
+![MAC 模型](/images/COMPSCI5104/week3/SSE-Lecture3-078.png)
+
+![MAC 安全密级](/images/COMPSCI5104/week3/SSE-Lecture3-079.png)
+- **核心概念**：由中央权威机构制定统一策略，基于安全标签（Label）进行控制。
+- **机制**：主体（用户）有“安全许可 (Clearance)”，客体（文件）有“安全密级 (Classification)”。
+- **规则示例**：
+  - **Confidential < Secret < Top Secret**
+  - 用户只能访问其许可级别 >= 文件密级的内容（通常还需要遵循 Bell-LaPadula 模型的“不上读，不下写”原则）。
+- **优点**：极高的安全性，用户无法私自泄露权限。
+- **缺点**：极不灵活，管理成本高，通常仅用于军事或高机密政府机构。
+
+
+
+---
+
+## 最佳实践与总结
+1. **优先选择**：在大多数企业应用中，**RBAC** 是默认且最佳的选择，因为它平衡了管理成本与安全性。
+2. **细粒度补充**：如果需要基于时间或地理位置的控制，可以在 RBAC 之上叠加 **ABAC**。
+3. **安全底线**：
+   - 认证必须至少达到 AAL2（启用 2FA）。
+   - 密码存储必须加盐哈希。
+   - 权限分配遵循“最小权限原则 (Least Privilege)”。
+
+---
+更新记录
+- 2026-02-06：基于 Lecture 3 课件整理。
+
+

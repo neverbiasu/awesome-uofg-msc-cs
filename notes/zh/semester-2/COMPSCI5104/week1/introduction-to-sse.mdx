@@ -41,6 +41,9 @@ import { Callout } from 'fumadocs-ui/components/callout';
 ## 安全性导论
 
 ### 什么是漏洞？
+
+
+
 在安全软件工程的背景下，漏洞是指可被攻击者利用的**设计缺陷或实现错误**。它是系统中的弱点，而非攻击本身。
 
 ### 软件在关键领域的重要性
@@ -50,7 +53,10 @@ import { Callout } from 'fumadocs-ui/components/callout';
 - **通信**: 实现安全的消息传递、视频会议和数据传输。
 - **交通**: 对 GPS、航空系统和自动驾驶汽车至关重要。
 
-<Callout title="案例研究：水手1号 (1962年)">
+<Callout title="案例研究：水手1号 (1962年)
+
+![Mariner 1 Failure Cause](/images/COMPSCI5104/week1/SSE-Lecture_1-031.png)
+">
 水手1号宇宙飞船在升空后不久因硬件和软件双重故障而失败。一名程序员在将公式转录到代码中时，错误地遗漏了一个下标横杠。这个微小的错误导致了任务的失败，突显了即使是最小的 bug 也可能带来灾难性的后果。
 </Callout>
 
@@ -90,10 +96,19 @@ import { Callout } from 'fumadocs-ui/components/callout';
 
 ## 软件开发模型与安全性
 
+![Software Development Models](/images/COMPSCI5104/week1/SSE-Lecture_1-049.png)
+
+
 没有任何一种软件开发模型能天生保证软件的安全性。安全性必须是任何生命周期中有意为之和不可或缺的一部分。
 
 - **瀑布模型**: 一种线性的、顺序的方法。死板且文档繁重。
+
+![Waterfall Model](/images/COMPSCI5104/week1/SSE-Lecture_1-047.png)
+
 - **V-模型**: 瀑布模型的扩展，每个开发阶段都有相应的测试阶段。强调验证和确认。
+
+![V-Model](/images/COMPSCI5104/week1/SSE-Lecture_1-048.png)
+
 - **增量/迭代模型**: 软件以小的、重复的周期（迭代）开发，允许灵活性和演进。
 - **螺旋模型**: 通过迭代的原型设计和评估，专注于风险评估。
 - **敏捷开发**: 强调快速迭代（冲刺）和客户反馈，以降低项目风险。虽然流行，但它本身并不能确保安全性。
@@ -107,6 +122,9 @@ import { Callout } from 'fumadocs-ui/components/callout';
 ---
 
 ## 安全软件设计原则
+
+![Secure Design Principles](/images/COMPSCI5104/week1/SSE-Lecture_1-071.png)
+
 
 这些是构建健壮和安全系统的基本概念。
 
@@ -161,3 +179,4 @@ import { Callout } from 'fumadocs-ui/components/callout';
 **场景**: 一个系统验证所有用户输入，但攻击者通过一个未记录的内部接口发送数据，从而绕过了验证。
 **违反的原则**: **完全中介 (Complete Mediation)**。该系统未能检查*每一个*访问点，留下了一个未受保护的内部接口。
 </Callout>
+

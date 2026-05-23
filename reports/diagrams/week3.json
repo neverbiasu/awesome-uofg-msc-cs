@@ -1,0 +1,57 @@
+[
+  {
+    "file": "SSE-Lecture3-006.png",
+    "isDiagram": true,
+    "caption": "Access Control Workflow Diagram"
+  },
+  {
+    "file": "SSE-Lecture3-007.png",
+    "isDiagram": true,
+    "caption": "Access Control System Diagram"
+  },
+  {
+    "file": "SSE-Lecture3-008.png",
+    "isDiagram": true,
+    "caption": "Access Control Diagram"
+  },
+  {
+    "file": "SSE-Lecture3-009.png",
+    "isDiagram": true,
+    "caption": "Access Control Diagram"
+  },
+  {
+    "file": "SSE-Lecture3-018.png",
+    "isDiagram": true,
+    "caption": "AAL 2 Authentication Levels Diagram"
+  },
+  {
+    "file": "SSE-Lecture3-050.png",
+    "isDiagram": true,
+    "caption": "QR Code for Google Authenticator and other OTP apps"
+  },
+  {
+    "file": "SSE-Lecture3-053.png",
+    "isDiagram": true,
+    "caption": "Access Control Diagram"
+  },
+  {
+    "file": "SSE-Lecture3-058.png",
+    "isDiagram": true,
+    "caption": "Discretionary Access Control (DAC) - Owner Controlled Access"
+  },
+  {
+    "file": "SSE-Lecture3-068.png",
+    "isDiagram": true,
+    "caption": "Role-Based Access Control (RBAC) Illustration"
+  },
+  {
+    "file": "SSE-Lecture3-078.png",
+    "isDiagram": true,
+    "caption": "Mandatory Access Control (MAC) Illustration with Security Clearances"
+  },
+  {
+    "file": "SSE-Lecture3-079.png",
+    "isDiagram": true,
+    "caption": "Mandatory Access Control (MAC) Illustration with Security Clearances"
+  }
+]
