@@ -10,7 +10,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 ## Key Takeaway
 Apache Spark overcomes MapReduce's limitations by keeping data in memory and using a Directed Acyclic Graph (DAG) for task scheduling, making it ideal for low-latency and iterative workloads.
 
-## 1. Why Spark?
+## Why Spark?
 MapReduce's "Input-Map-Reduce-Output" cycle forces every stage to persist to disk. This is inefficient for:
 -   **Iterative Jobs**: (e.g., Machine Learning training loops).
 -   **Interactive Queries**: Real-time data exploration.
@@ -19,13 +19,13 @@ MapReduce's "Input-Map-Reduce-Output" cycle forces every stage to persist to dis
 Spark allows data to be cached in RAM across the cluster, reducing Disk I/O significantly.
 ![Spark vs MapReduce Iteration](/images/COMPSCI5088/week3/03-04-ApacheSpark-005.png)
 
-## 2. Resilient Distributed Datasets (RDDs)
+## Resilient Distributed Datasets (RDDs)
 RDD is the fundamental data structure of Spark.
 -   **Resilient**: If a partition is lost, it can be recomputed from lineage.
 -   **Distributed**: Data is spread across the cluster.
 -   **Immutable**: Once created, an RDD cannot be changed; you transform it into a new RDD.
 
-## 3. The Execution Model: DAG
+## The Execution Model: DAG
 Spark does not execute code immediately. It builds a **Directed Acyclic Graph (DAG)** of operations.
 -   **Lazy Evaluation**: Transformations are only executed when an **Action** (like `collect()` or `save()`) is called.
 -   **Pipelining**: Spark can collapse multiple transformations into a single stage to minimize data movement.
@@ -33,7 +33,7 @@ Spark does not execute code immediately. It builds a **Directed Acyclic Graph (D
 **DAG Advantage**: Allows Spark to optimize the execution plan (e.g., reordering filters to reduce data size early).
 </Callout>
 
-## 4. Examiner's Perspective: Technical Nuances
+## Examiner's Perspective: Technical Nuances
 
 ### Fault Tolerance via Lineage
 -   **Concept**: Instead of replicating data, RDDs keep track of how they were derived (Lineage).

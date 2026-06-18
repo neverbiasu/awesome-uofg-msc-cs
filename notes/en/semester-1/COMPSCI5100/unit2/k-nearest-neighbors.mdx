@@ -19,13 +19,13 @@ import { Steps } from 'fumadocs-ui/components/steps';
 
 ## Key Concepts
 
-### 1. The k-NN Algorithm
+### The k-NN Algorithm
 - **Motivation**: Sometimes the simplest approach is the most effective. Instead of building a complex model, what if we just let the data "speak for itself"?
 <Callout type="info" title="Core Concept: k-NN Algorithm">
   k-NN is a non-parametric, instance-based learning algorithm that classifies new points by majority vote of their `k` nearest neighbors.
 </Callout>
 
-### 2. The Hyperparameter `k` and the Bias-Variance Trade-off
+### The Hyperparameter `k` and the Bias-Variance Trade-off
 - **The Role of `k`**: The number of neighbors, `k`, is a critical hyperparameter that you must choose. It controls the complexity of the model.
 <Callout type="warn" title="Small k: Overfitting Risk">
   A small `k` leads to a flexible model with low bias but high variance, making it sensitive to noise and prone to overfitting.
@@ -34,7 +34,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
   A large `k` leads to a less flexible model with high bias but low variance, making it prone to underfitting.
 </Callout>
 
-### 3. Choosing the Optimal `k`
+### Choosing the Optimal `k`
 - **Motivation**: Since `k` controls the bias-variance trade-off, we need a principled way to find the best value for our specific dataset.
 - **Best Practice**: Use **cross-validation**.
   1.  Test a range of different values for `k` (e.g., from 1 to 30).
@@ -58,7 +58,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
   best_k = k_range[np.argmax(k_scores)]
   ```
 
-### 4. Distance Metrics and Feature Scaling
+### Distance Metrics and Feature Scaling
 - **Distance Metric**: The most common choice for calculating distance is the **Euclidean distance** (L2 norm).
 <Callout type="warn" title="Important: Feature Scaling for k-NN">
   k-NN is extremely sensitive to feature scales. Always scale your features (e.g., Standardization) before applying k-NN to prevent features with larger ranges from dominating distance calculations.

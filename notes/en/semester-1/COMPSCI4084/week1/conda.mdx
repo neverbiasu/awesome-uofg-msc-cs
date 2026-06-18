@@ -17,7 +17,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 
 ## Key Concepts
 
-### 1. Installation & Verification
+### Installation & Verification
 - **Core Concept**: After installing Anaconda/Miniconda, verify the installation via the command line and keep it updated.
 - **Commands**:
 ```bash
@@ -27,7 +27,7 @@ conda update conda
 - **Notes/Best Practices**: Always verify after installation. Updates can be slow, so be patient.
 - **Summary**: Verify first, then use. Keeping Conda updated reduces compatibility issues.
 
-### 2. Creating & Activating Environments (with a specific Python version)
+### Creating & Activating Environments (with a specific Python version)
 - **Core Concept**: Isolate dependencies in separate environments to prevent conflicts between projects.
 - **Commands**:
 ```bash
@@ -38,7 +38,7 @@ conda deactivate
 - **Use Case**: Create one environment per project or course. Different projects can be maintained in parallel.
 - **Summary**: One environment per project. Deactivate an environment before switching to or deleting another.
 
-### 3. Managing Environments (list/remove/clone)
+### Managing Environments (list/remove/clone)
 - **Commands**:
 ```bash
 conda env list
@@ -48,7 +48,7 @@ conda create --name newenv --clone myenv
 - **Notes**: The `--all` flag is required to remove an environment completely. Cloning quickly duplicates a dependency state.
 - **Summary**: Listing, removing, and cloning cover typical lifecycle operations.
 
-### 4. Package Management (install/update/remove)
+### Package Management (install/update/remove)
 - **Commands**:
 ```bash
 conda install numpy
@@ -58,7 +58,7 @@ conda remove numpy
 - **Notes**: Install a minimal set of required packages to reduce solver time and conflicts.
 - **Summary**: The install/update/remove trio keeps environments lean and manageable.
 
-### 5. Exporting & Reproducing (YAML)
+### Exporting & Reproducing (YAML)
 - **Commands**:
 ```bash
 conda env export > environment.yml

@@ -10,14 +10,14 @@ import { Steps } from 'fumadocs-ui/components/steps';
 ## Key Takeaway
 Efficient Spark programming requires understanding the physical execution plan, specifically how shuffle operations create stage boundaries and how data locality impacts performance.
 
-## 1. Spark Architecture: Driver & Executors
+## Spark Architecture: Driver & Executors
 Spark uses a Master-Worker architecture.
 -   **Driver**: The process where your `main()` method runs. It builds the DAG and schedules tasks.
 -   **Executor**: Worker processes that execute the tasks and store data (cache).
 -   **Cluster Manager**: Allocates resources (e.g., YARN, Kubernetes).
 ![Spark Runtime Architecture](/images/COMPSCI5088/week4/04-01-SparkArchitectuire-005.png)
 
-## 2. Dependencies and Stages
+## Dependencies and Stages
 The DAG is divided into **Stages** based on the type of dependency between RDDs.
 
 ### Narrow Dependency
@@ -33,12 +33,12 @@ The DAG is divided into **Stages** based on the type of dependency between RDDs.
 **Optimization**: Avoid wide dependencies whenever possible. Prefer `reduceByKey` over `groupByKey` because it performs local aggregation before shuffling.
 </Callout>
 
-## 3. Caching and Persistence
+## Caching and Persistence
 Spark allows you to store an RDD in memory or on disk for reused computation.
 -   `cache()`: Shortcut for `persist(MEMORY_ONLY)`.
 -   `persist(level)`: Allows choosing storage level (Memory, Disk, Serialized).
 
-## 4. Examiner's Perspective: Technical Nuances
+## Examiner's Perspective: Technical Nuances
 
 ### Accumulators vs. Broadcast Variables
 -   **Accumulator**: Write-only for tasks; used for counters or sums. Only the Driver can read.

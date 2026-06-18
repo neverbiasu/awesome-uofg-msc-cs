@@ -51,7 +51,7 @@ parser.add_argument('--lines', action='store_true', help='Only output the number
 
 ## Key Concepts
 
-### 1. File Types: Text vs. Binary
+### File Types: Text vs. Binary
 
 #### Motivation
 - Different data requires different representations: readable text (logs, configs, CSV) and binary (images, audio, model weights). Choosing the wrong mode can lead to data corruption or decoding errors.
@@ -87,7 +87,7 @@ with open('model.bin', 'wb') as f:
 #### Summary
 Choosing the correct file type and open mode is the first step in file operations and can prevent most read/write errors.
 
-### 2. Opening Files and Access Modes
+### Opening Files and Access Modes
 
 #### Motivation
 - Before opening a file, you need to determine your access intent (read-only, overwrite, append, create new). The wrong mode can lead to data loss or program crashes.
@@ -127,7 +127,7 @@ with open('out.txt', 'a', encoding='utf-8') as f:
 #### Summary
 Choosing the right `open()` mode and combining it with a context manager minimizes the risk of data loss.
 
-### 3. Reading Methods: `read`, `readline`, `readlines`, Iteration
+### Reading Methods: `read`, `readline`, `readlines`, Iteration
 
 #### Motivation
 - Files can be very large (several GB). A one-time `read()` can exhaust memory. Sometimes you need to process line by line or in chunks to save memory and improve efficiency.
@@ -174,7 +174,7 @@ with open('big.bin', 'rb') as f:
 #### Summary
 Choose the appropriate reading method for different file sizes and processing needs. Prioritize line-by-line iteration to save memory.
 
-### 4. Writing Methods and CSV File Handling
+### Writing Methods and CSV File Handling
 
 #### Motivation
 - Writing text is simple, but handling tabular data (CSV) requires attention to newlines, quotes, delimiters, and encoding. Manual concatenation can lead to format errors or CSV injection risks.
@@ -219,7 +219,7 @@ with open('people.csv', 'r', encoding='utf-8', newline='') as csvfile:
 #### Summary
 Using the `csv` module with `newline=''` and `encoding` ensures cross-platform, correct CSV reading and writing.
 
-### 5. Context Managers (`with`) and Resource Safety
+### Context Managers (`with`) and Resource Safety
 
 #### Motivation
 - Forgetting to close a file can lead to resource leaks, file handle exhaustion, or un-flushed written data (especially when exceptions occur). `with` ensures resources are properly released.
@@ -251,7 +251,7 @@ with open('data.txt', 'r', encoding='utf-8') as f:
 #### Summary
 Using `with` is an elegant way to ensure the safe release of files and other resources and should be the default pattern.
 
-### 6. Exception Handling: `try` / `except` / `finally` / `else`
+### Exception Handling: `try` / `except` / `finally` / `else`
 
 #### Motivation
 - I/O operations (file not found, permission denied, decoding errors) often throw exceptions. Properly catching and handling them improves program robustness and provides meaningful feedback to the user.
@@ -299,7 +299,7 @@ finally:
 #### Summary
 Using `try/except` to precisely catch and handle exceptions, combined with logging and user feedback, significantly improves program robustness.
 
-### 7. Command-Line Arguments and Scripting (`sys.argv`)
+### Command-Line Arguments and Scripting (`sys.argv`)
 
 #### Motivation
 - Command-line arguments make scripts reusable and automatable, facilitating the creation of small tools, pipelines, and batch processing tasks.

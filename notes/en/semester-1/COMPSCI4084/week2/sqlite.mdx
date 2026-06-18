@@ -41,7 +41,7 @@ conn.commit()
 
 ## Key Concepts
 
-### 1. Relational Databases and Table Design
+### Relational Databases and Table Design
 
 #### Motivation
 - When data has duplicate values (e.g., multiple students taking the same course), splitting related information into different tables and linking them with keys can avoid data redundancy and maintain consistency.
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS class (
 #### Summary
 Good table design is the foundation of database performance and maintainability. Primary keys and constraints help ensure data consistency.
 
-### 2. Using `sqlite3` in Python: Connection and Cursor
+### Using `sqlite3` in Python: Connection and Cursor
 
 #### Motivation
 - When you need to persist data locally in a lightweight manner without deploying a database server, SQLite is an ideal choice. The Python standard library includes `sqlite3`, making it quick to get started.
@@ -108,7 +108,7 @@ with sqlite3.connect('company.db') as conn:
 #### Summary
 `sqlite3` provides a simple connection and cursor interface. Using `with` to manage transactions and connections is the recommended practice.
 
-### 3. CRUD: Create, Read, Update, Delete
+### CRUD: Create, Read, Update, Delete
 
 #### Motivation
 - The core work of a database is performing CRUD operations on table data. Mastering these SQL statements and how to execute them in Python is fundamental to daily use.
@@ -145,7 +145,7 @@ for row in cursor.fetchall():
 #### Summary
 Proficient use of CRUD statements combined with transaction management enables reliable data operations.
 
-### 4. Parameterized Queries and Injection Prevention
+### Parameterized Queries and Injection Prevention
 
 #### Motivation
 - Directly concatenating user input into SQL statements can lead to SQL injection vulnerabilities. Parameterized queries allow you to safely pass user input as parameters.
@@ -171,7 +171,7 @@ for row in rows:
 #### Summary
 Parameterized queries are the simplest and most effective way to prevent SQL injection. Make it a habit.
 
-### 5. Transaction Management: `commit` and `rollback`
+### Transaction Management: `commit` and `rollback`
 
 #### Motivation
 - A set of related database operations should be treated as an atomic transaction. If any step fails, the entire transaction should be rolled back to avoid data inconsistency.
@@ -203,7 +203,7 @@ except Exception as e:
 #### Summary
 Transactions guarantee the atomicity of a series of database operations. Proper use of `commit`/`rollback` is fundamental to database programming.
 
-### 6. Table Joins (`JOIN`) and Data Extraction
+### Table Joins (`JOIN`) and Data Extraction
 
 #### Motivation
 - Data is often split across multiple tables. You must use `JOIN` to combine them to get complete information (e.g., a student's name and their class lecturer).
@@ -229,7 +229,7 @@ WHERE students.grade > 70;
 #### Summary
 `JOIN` is a powerful feature of relational databases, used to combine and extract desired information from multiple tables.
 
-### 7. Common Errors and Debugging Tips
+### Common Errors and Debugging Tips
 
 #### Motivation
 - Beginners often run into issues due to SQL syntax errors, misspelled field names, uncommitted transactions, or unclosed connections. Knowing how to debug can help locate problems faster.

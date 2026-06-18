@@ -18,7 +18,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 
 ## Key Concepts
 
-### 1. What is Classification?
+### What is Classification?
 - **Motivation**: Many real-world problems require assigning items to predefined categories. For example, is an email spam or not? Does a medical image show a tumor or not?
 <Callout type="info" title="Core Concept: Classification">
   Classification is a supervised learning task to predict a discrete or categorical label, contrasting with regression's continuous value prediction.
@@ -27,14 +27,14 @@ import { Steps } from 'fumadocs-ui/components/steps';
   - **Classification**: Predicting if a fruit is an `apple`, `orange`, or `banana`.
   - **Regression**: Predicting the `weight` in grams of a fruit.
 
-### 2. Components of a Classification System
+### Components of a Classification System
 - **A complete system requires four components**:
   1.  **Labeled Training Data**: A dataset where each example `x` has a corresponding correct label `y`.
   2.  **Features**: A numerical representation of the raw data. The quality of features is critical to the model's success.
   3.  **Model**: An algorithm (e.g., Logistic Regression, SVM) that learns the relationship between the features and the labels.
   4.  **Evaluation Metrics**: A way to measure the model's performance (e.g., accuracy, precision, recall).
 
-### 3. Feature Representation
+### Feature Representation
 - **Motivation**: Machine learning models cannot work with raw data (like images or text) directly. They require numerical input.
 - **Core Concept**: **Features** are measurable properties or characteristics of the data, extracted and converted into a numerical **feature vector**.
 - **Examples**:
@@ -42,7 +42,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
   - **Text Data**: A common representation is the **Bag-of-Words (BoW)** model, where a document is represented by a vector of word counts or frequencies.
   - **Image Data**: Traditionally, this involved hand-crafting features like color histograms or textures. In deep learning, features are learned automatically by the model.
 
-### 4. Dimensionality Reduction and PCA
+### Dimensionality Reduction and PCA
 - **Core Concept**: **Dimensionality reduction** aims to reduce the number of features while retaining as much important information as possible. **Principal Component Analysis (PCA)** is a popular technique for this.
 <Callout type="warn" title="Curse of Dimensionality">
   Using too many features (high dimensionality) can lead to models that are harder to train, more prone to overfitting, and computationally expensive.

@@ -18,7 +18,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 
 ## Key Concepts
 
-### 1. `for` Loop Basics
+### `for` Loop Basics
 - **Motivation**: To perform the same operation on each element of a collection (list, string, range), avoiding repetitive code.
 - **Core Concepts**:
   - A `for` loop is also known as a "counting loop."
@@ -47,7 +47,7 @@ for ch in word:
   - Loop variable names should be meaningful (`i`/`j`/`k` are only for simple counters).
 - **Summary**: `for` loops are suitable for scenarios with a known number of iterations or for iterating over a collection. `range` provides flexible control over the number of iterations.
 
-### 2. The `range()` Function in Detail
+### The `range()` Function in Detail
 - **Motivation**: To generate integer sequences for controlling loop iterations or step sizes, supporting both forward and backward counting.
 - **Core Concepts**:
   - `range(stop)`: 0 to `stop-1`.
@@ -75,7 +75,7 @@ for i in range(20, 0, -4):
   - `range` returns a lazy sequence (saving memory). Use `list(range(...))` if you need an actual list.
 - **Summary**: The three-parameter form of `range` (start, stop, step) provides flexible sequence generation, supporting forward, reverse, and skipped steps.
 
-### 3. `while` Loops
+### `while` Loops
 - **Motivation**: Used when the number of iterations is unknown and depends on a dynamic condition.
 - **Core Concepts**:
   - **Syntax**: `while <condition>: <body>`
@@ -111,7 +111,7 @@ while again == "yes":
   - A `while True` with a `break` can implement a post-check loop (execute first, then check).
 - **Summary**: `while` loops are for scenarios with an unknown number of iterations. You must ensure the condition can become `False` to avoid infinite loops.
 
-### 4. Nested Loops
+### Nested Loops
 - **Motivation**: To process 2D structures (like tables or matrices) or scenarios requiring multiple levels of iteration.
 - **Core Concepts**:
   - A loop contained within another loop.
@@ -148,7 +148,7 @@ for i in range(1, 4):
   - The inner loop runs completely for each outer iteration. Be mindful of time complexity (O(n²) or higher).
 - **Summary**: Nested loops are for multi-level iteration. Pay attention to variable scope and performance implications.
 
-### 5. `break` and `continue`
+### `break` and `continue`
 - **Motivation**: To exit a loop early or skip the current iteration based on a specific condition.
 - **Core Concepts**:
   - `break`: Immediately exits the current (innermost) loop. No subsequent code or iterations are executed.

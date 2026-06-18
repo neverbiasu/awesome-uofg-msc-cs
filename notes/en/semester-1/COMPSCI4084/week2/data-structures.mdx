@@ -28,7 +28,7 @@ numbers.reverse()              # In-place reverse
 
 ## Key Concepts
 
-### 1. List Basics
+### List Basics
 
 #### 1.1 Motivation
 - A single variable can only store one value. When you need to manage multiple related pieces of data (like a class roster, color options, or measurement data), you need a data structure that can hold multiple values together.
@@ -77,7 +77,7 @@ print(numbers[3:])      # Output: [3, 4, 5]
 #### 1.6 Summary
 Lists are Python's most flexible data structure, supporting dynamic modification and a wide range of operations. Mastering indexing, slicing, and nested list access is fundamental.
 
-### 2. List Methods
+### List Methods
 
 #### 2.1 Motivation
 - After creating a list, you often need to perform operations like adding new elements, removing unwanted ones, sorting, or finding specific values.
@@ -133,7 +133,7 @@ print(colors.count("blue"))    # Output: 2 (number of occurrences)
 #### 2.6 Summary
 List methods provide powerful data manipulation capabilities. Understanding the difference between in-place modification (`sort()`, `reverse()`) and returning a new object (`sorted()`), as well as the use cases for each method, is key to using lists effectively.
 
-### 3. Lists and Loops
+### Lists and Loops
 
 #### 3.1 Motivation
 - One of the core uses of lists is to process data in bulk. Loops allow us to access each element individually or by index.
@@ -197,7 +197,7 @@ while i < len(numbers) and numbers[i] < 20:
 #### 3.6 Summary
 Choosing the right loop pattern improves code readability and efficiency. Use direct iteration for read-only tasks, index iteration for modifications, `enumerate()` for both, and `while` for condition-driven scenarios.
 
-### 4. Tuples
+### Tuples
 
 #### 4.1 Motivation
 - Some data should not be modified after creation (e.g., configuration parameters, coordinates, database records). Using an immutable data structure prevents accidental changes.
@@ -255,7 +255,7 @@ for item in menu_items:
 #### 4.6 Summary
 Tuples are immutable ordered collections, suitable for scenarios where data integrity needs to be protected. Mastering tuple unpacking and understanding their differences from lists will help you choose the right data structure.
 
-### 5. Dictionaries
+### Dictionaries
 
 #### 5.1 Motivation
 - Lists and tuples access elements by a numeric index, but many scenarios require looking up data by a meaningful key (like a name, ID, or product code).
@@ -319,7 +319,7 @@ print(student_grades.items())   # Output: dict_items([("Alice", 90), ("Bob", 92)
 #### 5.7 Summary
 Dictionaries enable efficient lookups and flexible data organization through key-value pairs. Mastering their creation, access, modification, and safe handling is fundamental for working with associated data.
 
-### 6. Dictionaries and Loops
+### Dictionaries and Loops
 
 #### 6.1 Motivation
 - Dictionaries often require bulk processing: iterating over all key-value pairs, finding entries that meet a condition, or aggregating data.

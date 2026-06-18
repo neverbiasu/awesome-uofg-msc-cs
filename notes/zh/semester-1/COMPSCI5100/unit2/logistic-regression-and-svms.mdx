@@ -19,7 +19,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 
 ## Key Concepts
 
-### 1. Logistic Regression
+### Logistic Regression
 - **Motivation**: While linear regression can be adapted for classification, it performs poorly in the presence of outliers. We need a model designed specifically for classification that outputs probabilities.
 - **Core Concept**: Logistic Regression passes the output of a linear model `z = wᵀx` through a **sigmoid (or logistic) function**: `σ(z) = 1 / (1 + e⁻ᶻ)`.
   - The sigmoid function squashes any real-valued number into a range between 0 and 1, making it suitable for interpreting as a class probability: `P(y=1|x) = σ(wᵀx)`.
@@ -40,7 +40,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
   probabilities = clf.predict_proba(X_new_scaled)
   ```
 
-### 2. 支持向量机 (SVM)
+### 支持向量机 (SVM)
 - **动机**：对于一个线性可分的数据集，可能有无数条线可以将两个类别分开。哪一条是最好的？离两边数据都最远的那一条。
 - **核心概念（最大间隔）**：SVM的目标是找到能够**最大化间隔**的超平面。间隔是决策边界与任一类别最近的数据点之间的距离。
   - 这使得模型对噪声更具鲁棒性，并且更有可能很好地泛化到新数据。

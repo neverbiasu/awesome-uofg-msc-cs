@@ -18,7 +18,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 
 ## Key Knowledge Points
 
-### 1. Standard I/O Streams
+### Standard I/O Streams
 - **Motivation**: Every command you run in the shell operates with three standard data streams, which allows for predictable input and output handling.
 - **Core Concepts**:
   - **`stdin` (Standard Input)**: File descriptor `0`. The default source of input for a command, typically the keyboard.
@@ -26,7 +26,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
   - **`stderr` (Standard Error)**: File descriptor `2`. The default destination for a command's error messages, also typically the screen.
 - **Summary**: Understanding these three streams is the key to controlling where your data comes from and where it goes.
 
-### 2. I/O Redirection
+### I/O Redirection
 - **Motivation**: To save a command's output to a file, or have it read input from a file, instead of interacting with the terminal.
 - **Core Concepts**:
   - **`>` (Redirect stdout)**: Sends the standard output of a command to a file, **overwriting** the file if it exists.
@@ -39,7 +39,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
     - `find / -name "*.log" > results.txt 2> errors.log`
 - **Summary**: Redirection operators give you file-level control over a command's input and output.
 
-### 3. The Pipe (`|`)
+### The Pipe (`|`)
 - **Motivation**: To connect multiple commands together, feeding the output of one directly as the input to another, without needing temporary files. This embodies the Unix philosophy of small, single-purpose tools that combine to perform complex tasks.
 - **Core Concepts**:
   - The pipe `|` operator takes the `stdout` of the command on its left and uses it as the `stdin` for the command on its right.
@@ -52,7 +52,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
   ```
 - **Summary**: Pipes are a powerful feature for creating sophisticated data processing workflows on the command line.
 
-### 4. Shell Fundamentals: Variables and Quoting
+### Shell Fundamentals: Variables and Quoting
 - **Motivation**: To write more complex and robust commands or scripts, you must understand how the shell interprets variables and special characters (metacharacters).
 - **Core Concepts**:
   - **Variables**: Store data. Assign with `MY_VAR="some value"` (no spaces around `=`) and reference with `$MY_VAR`.

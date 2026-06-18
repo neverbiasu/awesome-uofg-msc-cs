@@ -61,16 +61,16 @@ import { Steps } from 'fumadocs-ui/components/steps';
     - **Statistic**: A function of the sample data (e.g., the sample mean `μ̂`). It is often used as an estimator for a population parameter.
 <Steps>
 
-#### 1. Direct Estimation
+#### Direct Estimation
 - **Concept**: Use specially derived functions of the data (statistics) to directly estimate population parameters.
 - **Example**: The sample mean `μ̂ = (1/n) * Σx_i` is an unbiased estimator for the population mean `μ`. The sample variance `s²` is an estimator for the population variance `σ²`.
 
-#### 2. Maximum Likelihood Estimation (MLE)
+#### Maximum Likelihood Estimation (MLE)
 - **Concept**: Find the parameter values `θ` that maximize the likelihood `P(D|θ)` of observing the collected data `D`.
 - **Method**: This is an optimization problem. We define the likelihood function (often the log-likelihood for convenience) and use optimization algorithms (like gradient descent) to find the parameters `θ` that maximize it.
 - **Advantage**: It's a general technique that can be applied to complex models (e.g., Gaussian Mixture Models) where direct estimators are not available.
 
-#### 3. Bayesian Inference
+#### Bayesian Inference
 - **Concept**: Update our beliefs about model parameters `θ` in light of new evidence `D`. It treats parameters themselves as random variables.
 - **Bayes' Rule**: `P(θ|D) = [P(D|θ) * P(θ)] / P(D)`
     - `P(θ|D)`: **Posterior** - our updated belief about the parameters.

@@ -33,7 +33,7 @@ from typing import Iterable, List
 
 ## 关键知识点
 
-### 0. 变量与命名
+### 变量与命名
 - 变量通过赋值创建；名称应具描述性，避免使用内置名与保留字（如 `for`、`class`）。
 - 赋值示例：
 ```python
@@ -45,7 +45,7 @@ print(answer)
 - 字符串与数字的区别：参与计算前需显式转换；拼接前可用 `str(x)`。
 - 多行字符串：使用三引号 `""" ... """`，或使用换行符 `\n`。
 
-### 1. 基础类型与数据结构
+### 基础类型与数据结构
 - 数值：int/float/complex；布尔：bool；空值：None。
 - 字符串：不可变；切片、拼接、格式化。
 - 序列：list（可变）、tuple（不可变）、range。
@@ -60,7 +60,7 @@ info = {"name": "Alice", "score": 90}
 keys = set(info)
 ```
 
-### 2. 名称绑定与可变性
+### 名称绑定与可变性
 ```python
 def append_item(x, bucket=None):
     bucket = [] if bucket is None else bucket
@@ -69,7 +69,7 @@ def append_item(x, bucket=None):
 ```
 > 避免将 list/dict/set 作为函数默认值；使用 `None` 占位并在函数体内初始化。
 
-### 3. 运算符与表达式
+### 运算符与表达式
 - 比较：`==`、`!=`、`<`、`<=`、`>`、`>=`；链式比较：`0 < x < 10`。
 - 逻辑：`and` / `or` / `not`（短路）。
 - 同一性 vs 相等性：`is` 与 `==`。
@@ -78,13 +78,13 @@ user = None
 name = (user and user.get("name")) or "anonymous"
 ```
 
-### 4. 序列操作与推导式
+### 序列操作与推导式
 ```python
 squares = [i * i for i in range(10) if i % 2 == 0]
 lookup = {ch: ord(ch) for ch in "abc"}
 ```
 
-### 5. 字符串处理与格式化
+### 字符串处理与格式化
 ```python
 name, score = "Bob", 87.5
 print(f"{name:>10s} | {score:6.2f}")
@@ -96,7 +96,7 @@ print("%d" % x)        # 十进制整数
 print("%5.2f" % y)     # 宽度>=5，小数2位
 ```
 
-### 6. 输入与输出
+### 输入与输出
 ```python
 raw = input().strip()
 try:
@@ -106,13 +106,13 @@ except ValueError:
     print("INVALID")
 ```
 
-### 7. 代码风格与类型提示
+### 代码风格与类型提示
 ```python
 def head(xs: Iterable[int], n: int = 5) -> List[int]:
     return list(xs)[:n]
 ```
 
-### 8. 字符串常用方法（strip/split/case）
+### 字符串常用方法（strip/split/case）
 - 去空白与指定字符：`strip()`/`lstrip()`/`rstrip()`
 ```python
 s = "  hello.  "
@@ -137,7 +137,7 @@ print(s[0], s[-1])  # P n
 print(s[1:4])       # yth
 ```
 
-### 9. 正则表达式入门（re 模块）
+### 正则表达式入门（re 模块）
 - 常用函数：`findall`、`search`、`split`、`sub`
 ```python
 

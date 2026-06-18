@@ -22,7 +22,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 
 ## Basic Workflow (From Scratch to Remote)
 
-### 1. Installation & Configuration (One-time)
+### Installation & Configuration (One-time)
 ```bash
 # Recommended for macOS:
 brew install git
@@ -33,7 +33,7 @@ git config --global user.email "your.email@example.com"
 git config --global init.defaultBranch main
 ```
 
-### 2. Create or Clone
+### Create or Clone
 ```bash
 # Create a new directory and initialize
 mkdir demo && cd demo
@@ -43,7 +43,7 @@ git init  # Will use 'main' as the default branch if configured above
 git clone git@github.com:org/repo.git
 ```
 
-### 3. Modify, Stage, Commit
+### Modify, Stage, Commit
 ```bash
 echo "hello" > README.md
 git status              # Check changes
@@ -51,7 +51,7 @@ git add README.md       # Stage the file
 git commit -m "init: add README"  # Commit
 ```
 
-### 4. Connect to Remote & Push
+### Connect to Remote & Push
 ```bash
 # If you initialized a local repository, add the remote first
 git remote add origin git@github.com:org/repo.git
@@ -61,7 +61,7 @@ git push -u origin main
 git push
 ```
 
-### 5. Pull Updates
+### Pull Updates
 ```bash
 # Fetch and merge from the remote 'main' branch
 git pull --ff-only origin main

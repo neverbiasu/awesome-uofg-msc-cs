@@ -19,7 +19,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 
 ## Key Concepts
 
-### 1. Local vs. Global Scope
+### Local vs. Global Scope
 - **Motivation**: To understand a variable's visibility and lifecycle to avoid accidentally modifying global state.
 - **Core Concepts**:
   - **Local Scope**: Variables defined inside a function are only visible within that function and are destroyed after the function returns.
@@ -55,7 +55,7 @@ print(count)  # Output: 1 (the global count was modified)
   - Use uppercase with underscores for global constants (`CONFIG_FILE`) to indicate they should not be modified.
 - **Summary**: Local variables are only visible inside a function. Modifying a global variable requires the `global` keyword but introduces side effects and should be avoided.
 
-### 2. What Are Side Effects?
+### What Are Side Effects?
 - **Motivation**: To identify when a function modifies external state and understand how side effects impact program behavior.
 - **Core Concepts**:
   - A **side effect** occurs when a function modifies state outside of its local environment.
@@ -93,7 +93,7 @@ print(numbers)  # Output: [1, 2, 3, 4] (the original list was modified)
   - When debugging, the behavior of a function with side effects depends on its call order and context.
 - **Summary**: A side effect is a modification of external state by a function. Identifying them helps in understanding program behavior and debugging issues.
 
-### 3. Writing Side-Effect-Free Functions (Pure Function Pattern)
+### Writing Side-Effect-Free Functions (Pure Function Pattern)
 - **Motivation**: To write predictable, testable, and reusable functions by avoiding side effects.
 - **Core Concepts**:
   - A **pure function**:
@@ -138,7 +138,7 @@ print(new_numbers)  # Output: [1, 2, 3, 4] (a new list)
   - In performance-critical scenarios, in-place modification might be considered, but it must be clearly documented.
 - **Summary**: Pure functions pass results via return values and do not modify external state, improving code predictability and testability.
 
-### 4. The Challenge of Variable Naming Conflicts
+### The Challenge of Variable Naming Conflicts
 - **Motivation**: To avoid confusion and errors caused by variables with the same name in different scopes.
 - **Core Concepts**:
   - Variables with the same name can exist in different scopes (local shadowing global).
@@ -180,7 +180,7 @@ print(f"Result: {result}, Global total: {total}")
   - Pay attention to same-named variables during code reviews.
 - **Summary**: Variables with the same name can coexist in different scopes but can be confusing. Using descriptive, unique names reduces the risk of conflict.
 
-### 5. Variable Management in Jupyter Notebooks
+### Variable Management in Jupyter Notebooks
 - **Motivation**: Jupyter Notebooks allow for non-linear execution, which can lead to inconsistent variable states. It's important to understand how execution order affects results.
 - **Core Concepts**:
   - Notebook cells can be executed in any order, and the state of variables depends on the execution history.

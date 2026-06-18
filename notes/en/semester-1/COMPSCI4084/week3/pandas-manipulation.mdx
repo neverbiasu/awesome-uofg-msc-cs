@@ -30,7 +30,7 @@ df.drop('value', axis=1, inplace=True)  # Delete a column
 
 ## Key Concepts
 
-### 1. Merging and Joining (`merge` / `concat` / `join` / `combine_first`)
+### Merging and Joining (`merge` / `concat` / `join` / `combine_first`)
 - **Motivation**: To integrate data from different sources into a single table based on common keys or indexes, or to fill missing values in one dataset with another.
 - **Core Concepts**: `merge` is based on column keys; `join` is based on indexes; `concat` stacks along rows/columns; `combine_first` fills missing values using a second object.
 - **Use Cases/Patterns**:
@@ -52,7 +52,7 @@ filled = left.set_index('id')['val'].combine_first(right.set_index('id')['score'
 - **Trade-offs and Alternatives**: For flexible merging on column keys, choose `merge`. For index-only merges, use `join`. For simple stacking, choose `concat`. For filling missing data, choose `combine_first`.
 - **Summary**: First, identify the source of the keys, then select the appropriate merge pattern to ensure data integrity and traceability.
 
-### 2. Pivoting and Reshaping (`pivot` / `stack` / `unstack`)
+### Pivoting and Reshaping (`pivot` / `stack` / `unstack`)
 - **Motivation**: To convert long-format log-style tables into wide-format reports, or to switch between rows, columns, and hierarchical indexes for subsequent analysis.
 - **Core Concepts**: `pivot(index, columns, values)` for long-to-wide; `stack()` for column-to-row; `unstack(level)` for row-to-column, all while preserving labels.
 - **Use Cases/Patterns**:
@@ -75,7 +75,7 @@ restored = stacked.unstack()  # Back to wide format
 - **Trade-offs and Alternatives**: For aggregation needs, choose `pivot_table`. For just changing shape without regard to labels, NumPy's `reshape` can be used.
 - **Summary**: Master the three parameters and stack/unstack operations to efficiently switch between long/wide formats and multi-level indexes.
 
-### 3. Grouping and Aggregation (`groupby`)
+### Grouping and Aggregation (`groupby`)
 - **Motivation**: To summarize metrics by category or level, such as calculating the average price by color or total sales by city and month.
 - **Core Concepts**: Splitting → Applying a function → Combining results. `agg`, `sum`, `mean`, `count` are common aggregation functions.
 - **Use Cases/Patterns**:
@@ -95,7 +95,7 @@ result = summary.reset_index()
 - **Trade-offs and Alternatives**: For cross-tabulation needs, `pivot_table` can be used. For complex row-wise logic, consider `apply`, but be aware of its lower performance.
 - **Summary**: By setting the grouping keys and aggregation functions correctly, you can quickly obtain hierarchical statistical results.
 
-### 4. Mapping and Replacing (`map` / `replace` / `rename`)
+### Mapping and Replacing (`map` / `replace` / `rename`)
 - **Motivation**: To supplement numerical columns based on a mapping table, unify labels, or adjust column/index names.
 - **Core Concepts**: `Series.map` generates a new column based on a dictionary; `Series.replace` substitutes existing values based on a mapping; `DataFrame.rename(columns/index=...)` renames labels.
 - **Use Cases/Patterns**:
@@ -114,7 +114,7 @@ df = df.rename(columns={'item':'product'})
 - **Trade-offs and Alternatives**: For simple mappings, choose `map`/`replace`. For custom logic, use `apply`.
 - **Summary**: First, build a mapping table, then use `map`/`replace`/`rename` to quickly standardize field meanings.
 
-### 5. Deduplication and Deletion (`duplicated` / `drop_duplicates` / `drop` / `del`)
+### Deduplication and Deletion (`duplicated` / `drop_duplicates` / `drop` / `del`)
 - **Motivation**: Merged data often contains duplicate records or useless columns that need to be cleaned to ensure data quality.
 - **Core Concepts**: `duplicated` detects duplicates, `drop_duplicates` removes duplicate rows, and `drop`/`del` removes specified rows or columns.
 - **Use Cases/Patterns**:

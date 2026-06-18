@@ -19,7 +19,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 
 ## Key Knowledge Points
 
-### 1. Git for Collaboration and Remote Repositories
+### Git for Collaboration and Remote Repositories
 - **Motivation**: In team projects, multiple contributors need to work on the same codebase simultaneously. Git, as a distributed VCS, allows each user to have a complete local repository and easily synchronize changes via remote repository servers (like GitHub), enabling efficient collaboration.
 - **Core Concepts**:
   - **Distributed Version Control**: Each user has a full local copy of the repository, including all history.
@@ -42,7 +42,7 @@ git push origin main
   - The remote repository acts as a central hub for team collaboration; keeping it up-to-date is crucial.
 - **Summary**: Git facilitates powerful team collaboration through distributed repositories and remote synchronization mechanisms, ensuring codebase consistency and traceability.
 
-### 2. SSH Key Setup for Secure Authentication
+### SSH Key Setup for Secure Authentication
 - **Motivation**: For secure interaction with remote Git repositories, especially private ones, SSH key pairs offer a more secure authentication method than usernames and passwords, avoiding the need to enter credentials for every operation.
 - **Core Concepts**:
   - **SSH Key Pair**: Consists of a public key and a private key. The public key is registered with the remote repository service (e.g., GitHub), and the private key is kept locally.
@@ -67,7 +67,7 @@ cat ~/.ssh/id_rsa.pub
   - Prefer cloning over SSH rather than HTTPS for a more secure experience.
 - **Summary**: SSH keys are crucial for secure and convenient interaction with remote Git repositories, enabling authentication via a public/private key mechanism.
 
-### 3. Cloning, Pushing, and Pulling Remote Repositories
+### Cloning, Pushing, and Pulling Remote Repositories
 - **Motivation**: The core of team collaboration involves sharing and synchronizing code. `git clone` obtains a local copy of a remote repository, `git push` uploads local changes, and `git pull` downloads and merges remote changes, ensuring all members' code is up-to-date.
 - **Core Concepts**:
   - `git clone [repository_URL]`: Copies the entire remote repository to your local machine. It creates a new working directory containing all files and the complete Git history.
@@ -95,7 +95,7 @@ git pull
   - `git clone` creates a new working directory, typically named after the repository.
 - **Summary**: Cloning, pushing, and pulling are core Git operations for remote collaboration, forming the cycle of code sharing and synchronization among team members.
 
-### 4. Resolving Merge Conflicts
+### Resolving Merge Conflicts
 - **Motivation**: Merge conflicts occur when multiple team members modify the same part of a file, and Git cannot automatically reconcile the changes. Resolving conflicts is an inevitable part of team collaboration, requiring manual intervention to integrate different code versions.
 - **Core Concepts**:
   - **Merge Conflict**: Happens when Git cannot automatically merge changes from two branches.
@@ -122,7 +122,7 @@ please contact Jeremy on MS Teams
   - After resolution, `git add` the conflicted file and `git commit` to complete the merge.
 - **Summary**: Merge conflicts are a common challenge in Git collaboration; understanding markers and manual editing enables effective resolution and code integration.
 
-### 5. Advanced Features: `git tag` and `git blame`
+### Advanced Features: `git tag` and `git blame`
 - **Motivation**: Beyond daily version control, Git offers advanced features like `git tag` for marking important versions and `git blame` for tracing code authorship, valuable for project management, release management, and code review.
 - **Core Concepts**:
   - `git tag -a [tag_name] -m "message"`: Creates an annotated tag for a specific commit, typically used for release versions (e.g., `v1.0`).

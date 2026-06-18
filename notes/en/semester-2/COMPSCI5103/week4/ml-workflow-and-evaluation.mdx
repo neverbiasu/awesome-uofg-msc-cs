@@ -10,7 +10,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 ## Key Takeaway
 A rigorous ML workflow requires a clear separation between training, validation, and testing sets to prevent data leakage and ensure that the model's performance generalizes to unseen data.
 
-## 1. The ML Pipeline
+## The ML Pipeline
 <Steps>
 
 ### The Standard Workflow
@@ -22,7 +22,7 @@ A rigorous ML workflow requires a clear separation between training, validation,
 6.  **Testing**: Final evaluation on the test set (Must be done only ONCE).
 </Steps>
 
-## 2. Evaluation Metrics
+## Evaluation Metrics
 Choosing the right metric depends on the task and data distribution.
 -   **Accuracy**: Percentage of correct predictions. (Bad for imbalanced data).
 -   **Precision/Recall**: Trade-off between "finding only targets" and "finding all targets".
@@ -30,10 +30,10 @@ Choosing the right metric depends on the task and data distribution.
 -   **Confusion Matrix**: Visual representation of True Positives, False Positives, etc.
 ![Evaluation Metrics Table](/images/COMPSCI5103/week4/2025_26_DL_Lecture4_Machine_Learning_Workflow-026.png)
 
-## 3. Cross-Validation
+## Cross-Validation
 -   **K-Fold Cross-Validation**: Splitting the data into $K$ parts and training $K$ times, using each part as a validation set once. This provides a more robust estimate of model performance.
 
-## 4. Examiner's Perspective: Technical Nuances
+## Examiner's Perspective: Technical Nuances
 
 ### Data Leakage
 -   **Hard Red Line**: Data leakage occurs when information from the test set "leaks" into the training process (e.g., calculating the global mean/variance before splitting). This leads to overly optimistic but fake results.

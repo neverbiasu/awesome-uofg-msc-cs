@@ -35,7 +35,7 @@ from random import randint, choice
 
 ## Key Concepts
 
-### 1. Function Definition and Invocation Basics
+### Function Definition and Invocation Basics
 - **Motivation**: Encapsulate repetitive code into reusable functions to improve maintainability and readability.
 - **Core Concepts**:
   - A function is a block of statements that performs a specific task and can be called from multiple places.
@@ -65,7 +65,7 @@ greet_user("Alice")  # Output: Hello, Alice!
   - A function must be defined before it is called (or loaded automatically when a module is imported).
 - **Summary**: Functions are defined with `def` and called by their name followed by parentheses. They are the basic unit of code reuse.
 
-### 2. Parameter Types: Positional and Keyword Arguments
+### Parameter Types: Positional and Keyword Arguments
 - **Motivation**: Different scenarios require different ways of passing arguments. Positional arguments are concise, while keyword arguments are highly readable.
 - **Core Concepts**:
   - **Positional Arguments**: Passed in order and must match the parameter order in the definition.
@@ -110,7 +110,7 @@ draw_box(height=2, width=6, fill='.')
   - If a function has too many parameters (>5), consider passing a configuration object or dictionary.
 - **Summary**: Positional arguments are passed in order, keyword arguments by name. Follow the order rule when mixing them.
 
-### 3. Default Arguments
+### Default Arguments
 - **Motivation**: Provide default values for optional parameters to reduce the number of arguments required at invocation and improve API flexibility.
 - **Core Concepts**:
   - Specify a default value at definition: `def func(a, b=10):`
@@ -153,7 +153,7 @@ print(add(b=10))    # Output: 10 (overriding only b)
   - Default arguments must come after non-default arguments: `def func(a, b=10)` ✅, `def func(a=10, b)` ❌.
 - **Summary**: Default arguments provide optional configurations and reduce required parameters. Avoid using mutable objects as default values.
 
-### 4. Return Values and the `return` Statement
+### Return Values and the `return` Statement
 - **Motivation**: A function's computed result needs to be returned to the caller for subsequent use, rather than just being printed inside the function.
 - **Core Concepts**:
   - The `return` statement returns a value and terminates the function's execution.
@@ -200,7 +200,7 @@ print(get_grade(85))  # Output: B
   - Returning multiple values via tuple unpacking is intuitive but requires remembering the order. A dictionary or a data class can improve readability.
 - **Summary**: `return` sends a result back to the caller. Functions that only print without returning are less reusable.
 
-### 5. Variable Scope: Local and Global Variables
+### Variable Scope: Local and Global Variables
 - **Motivation**: Understand a variable's visibility to avoid naming conflicts and accidental modification of global state.
 - **Core Concepts**:
   - **Local Variables**: Defined inside a function, visible only within that function, and destroyed after the function returns.
@@ -238,7 +238,7 @@ draw_box(3, 2)
   - For complex state management, consider using classes (object-oriented programming).
 - **Summary**: Local variables are visible only within a function; global variables are visible everywhere. Prefer local variables to keep functions independent.
 
-### 6. Imports and Reuse: Built-in Functions and Modules
+### Imports and Reuse: Built-in Functions and Modules
 - **Motivation**: Leverage Python's built-in functions and standard library to avoid reinventing the wheel. Organize code into modules for reuse across projects.
 - **Core Concepts**:
   - **Built-in Functions**: Available directly, e.g., `print()`, `input()`, `len()`, `round()`.

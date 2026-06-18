@@ -10,7 +10,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 ## 核心要点
 像 HBase 这样的 NoSQL 系统通过使用 LSM 树来优化写入性能，同时通过布隆过滤器 (Bloom Filters) 等专门结构来缓解由此产生的读取延迟。
 
-## 1. LSM 树 (Log-Structured Merge-Tree)
+## LSM 树 (Log-Structured Merge-Tree)
 LSM 树是一种旨在通过将随机写入转换为顺序写入来提供高写入吞吐量的数据结构。
 
 ### 写入协议
@@ -19,7 +19,7 @@ LSM 树是一种旨在通过将随机写入转换为顺序写入来提供高写�
 3.  **刷新 (Flush)**：当 MemStore 满时，将其作为排序文件 (SSTable/HFile) 刷新到磁盘。
 ![LSM 树写入路径](/images/COMPSCI5088/week6/06-03-LSM-004.png)
 
-## 2. 布隆过滤器 (Bloom Filters)
+## 布隆过滤器 (Bloom Filters)
 由于数据分布在磁盘上的多个 HFile 中，读取单个键可能需要扫描许多文件。布隆过滤器可以防止这种情况。
 
 ### 核心特性
@@ -31,10 +31,10 @@ LSM 树是一种旨在通过将随机写入转换为顺序写入来提供高写�
 **性能优化**：HBase 检查每个 HFile 的布隆过滤器。如果过滤器说“不”，系统将完全跳过对该文件的昂贵磁盘读取。
 </Callout>
 
-## 3. 合并 (Compaction)
+## 合并 (Compaction)
 随着时间的推移，会积累太多的 HFile，从而减慢读取速度。**合并** 是将多个小 HFile 合并为更少、更大的 HFile 并删除已删除/旧数据的过程。
 
-## 4. 出卷人视角：技术细微差别
+## 出卷人视角：技术细微差别
 
 ### 随机读延迟
 -   **细微差别**：即使有 LSM 树，随机读取也比 RDBMS 慢，因为一个键可能在 MemStore 中，也可能在任何一个 HFile 中。

@@ -20,7 +20,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 
 ## Key Knowledge Points
 
-### 1. Finding Lines: `grep`
+### Finding Lines: `grep`
 - **Motivation**: `grep` is indispensable for quickly locating specific information within large text files, such as system logs, configuration files, or codebases, making it a cornerstone for troubleshooting and security analysis.
 - **Core Concepts**:
   - Searches for lines matching a pattern.
@@ -42,7 +42,7 @@ grep "ALERT" security.log
   - Be mindful of case sensitivity; use `-i` if needed.
 - **Summary**: `grep` is a powerful tool for pattern-based text searching, crucial for log analysis and data filtering.
 
-### 2. Sorting and Counting Unique Lines: `sort` and `uniq`
+### Sorting and Counting Unique Lines: `sort` and `uniq`
 - **Motivation**: In log analysis, data often contains repeated entries. `sort` and `uniq` are used together to group similar entries, count their occurrences, and identify patterns, which is vital for detecting anomalies like brute-force attacks.
 - **Core Concepts**:
   - `sort`: Sorts lines of text files. Common options: `-r` (reverse order), `-n` (numeric sort), `-k` (sort by key/column).
@@ -63,7 +63,7 @@ grep "ALERT" security.log | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{
   - Use `sort -nr` to order counts from highest to lowest.
 - **Summary**: `sort` and `uniq` are a powerful combination for aggregating and analyzing repetitive data, especially in log files.
 
-### 3. Counting Words, Lines, and Characters: `wc`
+### Counting Words, Lines, and Characters: `wc`
 - **Motivation**: `wc` provides quick statistics about text files, such as their length (lines), complexity (words), or size (characters/bytes), useful for quick assessments or scripting.
 - **Core Concepts**:
   - `wc`: Stands for "word count". Prints counts of lines, words, and characters/bytes.
@@ -83,7 +83,7 @@ wc -l security.log
   - Can be used in pipelines to count output from other commands.
 - **Summary**: `wc` is a simple yet effective utility for obtaining basic statistical counts from text data.
 
-### 4. Translating and Deleting Characters: `tr`
+### Translating and Deleting Characters: `tr`
 - **Motivation**: `tr` is used for character-by-character translation or deletion, useful for cleaning data, standardizing formats, or simple encryption/decryption tasks.
 - **Core Concepts**:
   - `tr`: Substitutes or deletes characters from standard input.
@@ -105,7 +105,7 @@ echo "hello world" | tr 'aeiou' 'AEIOU'
   - Character sets can be defined using ranges (e.g., `a-z`).
 - **Summary**: `tr` is a versatile command for character-level data transformation and cleaning.
 
-### 5. Stream Editor: `sed`
+### Stream Editor: `sed`
 - **Motivation**: `sed` is a powerful stream editor that processes text line by line, allowing for automated non-interactive editing, such as finding and replacing text, inserting, or deleting lines. It's more powerful than `grep` for modifications.
 - **Core Concepts**:
   - `sed`: Processes text line by line.
@@ -128,7 +128,7 @@ sed 's/Holmes/Detective/g' test.txt
   - Regular expressions can be used in patterns.
 - **Summary**: `sed` is an essential tool for automated text manipulation and transformation, especially useful for scripting and batch processing.
 
-### 6. Client URL: `curl`
+### Client URL: `curl`
 - **Motivation**: `curl` is a command-line tool for transferring data with URL syntax, supporting various protocols. It's invaluable in cybersecurity for reconnaissance, testing APIs, automating downloads, and incident response.
 - **Core Concepts**:
   - `curl`: Stands for "Client URL". Transfers data to or from a server.

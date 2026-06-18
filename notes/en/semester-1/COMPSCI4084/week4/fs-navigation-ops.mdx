@@ -19,7 +19,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 
 ## Key Knowledge Points
 
-### 1. Accessing the Unix Terminal
+### Accessing the Unix Terminal
 - **Motivation**: Before you can manage a file system, you need to access the command-line environment.
 - **Core Concepts**:
   - **SSH (Secure Shell)**: The standard way to connect to a remote Linux server. The command is typically `ssh your_username@remote_host.com`.
@@ -27,7 +27,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
   - **macOS/Linux Terminals**: Both operating systems provide a built-in terminal application for direct access to a Unix-like shell.
 - **Summary**: Whether your machine is local or remote, tools like SSH, WSL, and built-in terminals provide the entry point to the Unix shell.
 
-### 2. The File System Hierarchy
+### The File System Hierarchy
 - **Motivation**: To navigate effectively, you must first understand the map. The Unix file system is a hierarchical tree structure.
 - **Core Concepts**:
   - **Root Directory (`/`)**: The single, top-level directory of the entire file system.
@@ -38,7 +38,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
   - **Relative Path**: A path that starts from your current directory (e.g., `../images` or `./notes`).
 - **Summary**: Understanding the tree structure and the difference between absolute and relative paths is fundamental to all file system operations.
 
-### 3. Core Navigation Commands
+### Core Navigation Commands
 - **Motivation**: These three commands are the essential tools for orienting yourself and moving around within the file system.
 - **Core Concepts**:
   - **`pwd` (Print Working Directory)**: Shows you the absolute path of the directory you are currently in.
@@ -51,7 +51,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
     - `cd`: With no arguments, navigates to your home directory (`~`).
 - **Summary**: Use `pwd` to know where you are, `ls` to see what's around you, and `cd` to move.
 
-### 4. File and Directory Manipulation
+### File and Directory Manipulation
 - **Motivation**: These commands allow you to create, organize, and remove the files and directories that make up the file system.
 - **Core Concepts**:
   - `mkdir dir`: Creates a new directory named `dir`.
@@ -76,7 +76,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
   rm notes.txt
   ```
 
-### 5. Archiving and Compression
+### Archiving and Compression
 - **Motivation**: To bundle multiple files into a single archive for easier transfer or storage.
 - **Core Concepts**:
   - `zip archive.zip files...`: Compresses one or more `files` into a single `archive.zip`.

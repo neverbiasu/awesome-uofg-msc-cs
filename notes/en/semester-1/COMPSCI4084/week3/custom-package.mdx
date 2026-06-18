@@ -52,7 +52,7 @@ from mydata_package import load_csv, clean_df
 
 ## Key Concepts
 
-### 1. Packages and Modules Basics
+### Packages and Modules Basics
 - **Motivation**: Splitting code improves readability and reusability, avoiding script repetition.
 - **Core Concepts**: A **module** is a single `.py` file. A **package** is a directory containing an `__init__.py` file, and can contain sub-packages and modules.
 - **Example**:
@@ -65,7 +65,7 @@ mydata_package/
 ```
 - **Summary**: Use packages to organize functions with clear responsibilities into modules.
 
-### 2. `__init__.py` and Exposing Interfaces
+### `__init__.py` and Exposing Interfaces
 - **Motivation**: Provide a top-level API for the package through `__init__.py`, hiding implementation details.
 - **Core Concepts**: Import common functions in `__init__.py` or set `__all__` to simplify usage like `from mypkg import func`.
 - **Example**:
@@ -76,7 +76,7 @@ __all__ = ['load_csv', 'clean_df']
 - **Notes**: Avoid placing heavyweight initialization code (like long I/O operations) in `__init__.py`.
 - **Summary**: A well-crafted `__init__.py` can create a good package user experience.
 
-### 3. Relative and Absolute Imports
+### Relative and Absolute Imports
 - **Motivation**: Maintain stable and refactorable paths when calling other modules within a package.
 - **Core Concepts**: `from .module import func` (same level); `from ..subpackage import x` (parent level); absolute import `from mypkg.module import func`.
 - **Example**:
@@ -86,7 +86,7 @@ __all__ = ['load_csv', 'clean_df']
 - **Notes**: Relative imports may fail when a script is run directly. It is recommended to execute as a package (`python -m mydata_package`) or install for local development with `pip install -e .`.
 - **Summary**: Choose the appropriate import style to ensure the package works in different contexts.
 
-### 4. Example Package: Simple Data Loading and Cleaning
+### Example Package: Simple Data Loading and Cleaning
 - **Motivation**: Encapsulate common `read_csv + simple cleaning` logic into a function for reuse across multiple notebooks or scripts.
 - **Example Code**:
 ```python

@@ -31,7 +31,7 @@ np.save('arr.npy', np.arange(6))
 
 ## Key Concepts
 
-### 1. Array Creation and `dtype`
+### Array Creation and `dtype`
 - **Motivation**: To replace Python list loops with more memory-efficient and vectorized operations.
 - **Core Concepts**: `np.array`, `np.zeros`, `np.ones`, `np.arange`, `np.linspace`, `np.random`, and `dtype` for specifying data types.
 - **Example**:
@@ -51,7 +51,7 @@ normal = np.random.normal(loc=0.0, scale=1.0, size=(3,))  # Vector from a normal
 - **Notes/Best Practices**: Try to specify the `dtype` at creation to avoid performance or precision issues from implicit type conversions.
 - **Summary**: Mastering common creation functions allows for the rapid construction of data for analysis.
 
-### 2. Indexing, Slicing, Masking, and Fancy Indexing
+### Indexing, Slicing, Masking, and Fancy Indexing
 - **Motivation**: To efficiently select or modify subsets of an array.
 - **Core Concepts**: Integer indexing, slicing `a[start:stop:step]`, boolean masking, and integer array indexing (fancy indexing).
 - **Example**:
@@ -72,7 +72,7 @@ sel = arr[idx]  # Selects the 0th and 2nd rows
 - **Notes**: Boolean masking returns a 1D array. Fancy indexing always returns a copy of the array, not a view.
 - **Summary**: Choosing the right indexing method can make code both concise and efficient.
 
-### 3. Broadcasting and Element-wise Operations
+### Broadcasting and Element-wise Operations
 - **Motivation**: To improve performance by replacing explicit loops with vectorized expressions.
 - **Core Concepts**: Arrays of different shapes are aligned and expanded according to rules to perform element-wise operations.
 - **Example**:
@@ -87,7 +87,7 @@ res2 = A * 2
 - **Notes**: Broadcasting succeeds if, for each dimension (starting from the end), the dimension sizes are equal or one of them is 1. Misusing broadcasting can lead to unexpected shapes.
 - **Summary**: Broadcasting is key to writing concise, vectorized code.
 
-### 4. Matrix Multiplication and Common Linear Algebra Transforms
+### Matrix Multiplication and Common Linear Algebra Transforms
 - **Motivation**: Many data analysis/machine learning operations require matrix products, transposes, and inverses.
 - **Core Concepts**: `np.dot` or `@` for matrix multiplication; tools like `transpose()`, `trace()`, `linalg.inv()`.
 - **Example**:
@@ -114,7 +114,7 @@ mat = A @ B    # Matrix product -> [[4,4],[10,8]]
 - **Notes**: Arithmetic operators (`+`, `-`, `*`, `/`, etc.) perform element-wise operations by default. Ensure a matrix is invertible (non-zero determinant). For high-dimensional linear algebra, use specialized libraries and be mindful of numerical stability.
 - **Summary**: Mastering `dot`/`@` and common linear algebra functions meets basic matrix operation needs.
 
-### 5. Shape Manipulation, Stacking, and Splitting
+### Shape Manipulation, Stacking, and Splitting
 - **Motivation**: To prepare data in the right shape for algorithms or visualization.
 - **Core Concepts**: `reshape`, `ravel`, `reshape(-1, n)`, `vstack`, `hstack`, `column_stack`, `vsplit`, `hsplit`, `split`.
 - **Example**:
@@ -135,7 +135,7 @@ left, right = np.hsplit(M, [2])
 - **Notes**: `reshape` returns a new view or a copy depending on memory layout. Using `-1` for a dimension allows it to be inferred automatically.
 - **Summary**: Flexible reshaping and stacking are common operations in data preparation.
 
-### 6. Views vs. Copies
+### Views vs. Copies
 - **Motivation**: To understand whether modifying an array will affect the original, avoiding hard-to-find side effects.
 - **Core Concepts**: Simple assignment is just a reference. Slicing usually returns a view. `copy()` creates an independent duplicate.
 - **Example**:
@@ -150,7 +150,7 @@ s[0] = 99
 - **Notes**: When performance is critical and you are only reading data, you can leverage views to avoid memory duplication. When you need to modify independently, you must use `copy()`.
 - **Summary**: Be explicit about when to copy to avoid hidden bugs or unnecessary memory usage.
 
-### 7. Masking, Ufuncs, and Iteration
+### Masking, Ufuncs, and Iteration
 - **Motivation**: To perform efficient element-wise functions and conditional bulk modifications on arrays.
 - **Core Concepts**: Ufuncs (like `np.sqrt`, `np.sin`) are broadcast over the array. Masks are used for conditional selection and assignment.
 - **Example**:
@@ -164,7 +164,7 @@ A[mask] = -1  # Replace even numbers with -1
 - **Notes**: Always prefer built-in ufuncs over Python loops for performance.
 - **Summary**: The combination of ufuncs and masking is a powerful tool for array computation.
 
-### 8. Saving and Loading Arrays
+### Saving and Loading Arrays
 - **Motivation**: To persist intermediate results or share data between disk and memory.
 - **Core Concepts**: Text format `savetxt/loadtxt` and binary format `save/load` (.npy), which is more efficient and preserves `dtype`.
 - **Example**:

@@ -10,14 +10,14 @@ import { Steps } from 'fumadocs-ui/components/steps';
 ## Key Takeaway
 MapReduce addresses the challenges of distributed work distribution by abstracting the complexity of data partitioning, task scheduling, and fault tolerance into two primary functions: Map and Reduce.
 
-## 1. Challenges of Distributed Computing
+## Challenges of Distributed Computing
 Distributing work across multiple machines introduces several complexities:
 -   **Work Distribution**: How to split tasks evenly?
 -   **Fault Tolerance**: What if a node fails?
 -   **Data Locality**: Moving computation to the data is cheaper than moving data to the computation.
 ![MapReduce Execution Model](/images/COMPSCI5088/week2/02-02-MapReduce-001.png)
 
-## 2. The MapReduce Model
+## The MapReduce Model
 MapReduce is a programming model for processing large data sets with a parallel, distributed algorithm on a cluster.
 
 ### The Two Functions
@@ -32,7 +32,7 @@ MapReduce is a programming model for processing large data sets with a parallel,
 4.  **Reduce Phase**: Reducers process grouped data to produce the final output.
 </Steps>
 
-## 3. Hadoop: The Implementation
+## Hadoop: The Implementation
 Apache Hadoop is the open-source implementation of MapReduce.
 -   **JobTracker (Hadoop 1.x)**: Coordinates jobs, assigns tasks to TaskTrackers.
 -   **TaskTracker**: Executes tasks and reports progress.
@@ -40,7 +40,7 @@ Apache Hadoop is the open-source implementation of MapReduce.
 **LSM Connection**: The way MapReduce handles intermediate data (sorting in memory and spilling to disk) is conceptually similar to the **LSM Tree** write protocol.
 </Callout>
 
-## 4. Examiner's Perspective: Technical Nuances
+## Examiner's Perspective: Technical Nuances
 
 ### Stragglers
 -   **Concept**: A task that takes unusually long to finish, slowing down the entire job.

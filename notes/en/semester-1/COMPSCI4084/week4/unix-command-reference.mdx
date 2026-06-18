@@ -18,7 +18,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 
 ## Key Knowledge Points
 
-### 1. File Commands
+### File Commands
 - `ls`: Directory listing.
 - `ls -al`: Formatted listing with hidden files.
 - `cd dir`: Change directory to `dir`.
@@ -40,7 +40,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 - `tail file`: Output the last 10 lines of `file`.
 - `tail -f file`: Output the contents of `file` as it grows.
 
-### 2. Process Management
+### Process Management
 - `ps`: Display your currently active processes.
 - `top`: Display all running processes in real-time.
 - `kill pid`: Kill process with ID `pid`.
@@ -48,7 +48,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 - `bg`: Lists stopped or background jobs; resumes a stopped job in the background.
 - `fg`: Brings the most recent job to the foreground.
 
-### 3. File Permissions
+### File Permissions
 - `chmod octal file`: Change the permissions of `file` to `octal`.
 - The octal value is calculated by summing the values for user, group, and world:
   - `4`: read (r)
@@ -58,17 +58,17 @@ import { Steps } from 'fumadocs-ui/components/steps';
   - `chmod 777 file`: read, write, execute for all (owner, group, world).
   - `chmod 755 file`: rwx for owner, r-x for group and world.
 
-### 4. SSH
+### SSH
 - `ssh user@host`: Connect to `host` as `user`.
 - `ssh -p port user@host`: Connect to `host` on port `port` as `user`.
 - `ssh-copy-id user@host`: Add your key to `host` for `user` to enable passwordless login.
 
-### 5. Searching
+### Searching
 - `grep pattern files`: Search for `pattern` in `files`.
 - `grep -r pattern dir`: Search recursively for `pattern` in `dir`.
 - `find dir -name pattern`: Find files named `pattern` in `dir`.
 
-### 6. System Info
+### System Info
 - `date`: Show the current date and time.
 - `cal`: Show this month's calendar.
 - `uptime`: Show current uptime.
@@ -78,7 +78,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 - `du`: Show directory space usage.
 - `free`: Show memory and swap usage.
 
-### 7. Compression
+### Compression
 - `tar cf file.tar files`: Create a tar archive named `file.tar` containing `files`.
 - `tar xf file.tar`: Extract the files from `file.tar`.
 - `zip file.zip files`: Create a zip archive.

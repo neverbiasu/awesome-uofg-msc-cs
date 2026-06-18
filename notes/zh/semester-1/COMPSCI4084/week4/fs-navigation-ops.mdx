@@ -19,7 +19,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 
 ## 关键知识点
 
-### 1. 访问 Unix 终端
+### 访问 Unix 终端
 - **动机**：在管理文件系统之前，您需要先进入命令行环境。
 - **核心概念**：
   - **SSH (Secure Shell)**：连接到远程 Linux 服务器的标准方式。命令通常是 `ssh your_username@remote_host.com`。
@@ -27,7 +27,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
   - **macOS/Linux 终端**：这两种操作系统都提供了内置的终端应用程序，可直接访问类 Unix 的 shell。
 - **小结**：无论您的机器是本地的还是远程的，像 SSH、WSL 和内置终端这样的工具都提供了进入 Unix shell 的入口点。
 
-### 2. 文件系统层次结构
+### 文件系统层次结构
 - **动机**：为了有效地导航，您必须首先理解地图。Unix 文件系统是一个分层的树状结构。
 - **核心概念**：
   - **根目录 (`/`)**：整个文件系统的唯一的顶级目录。
@@ -38,7 +38,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
   - **相对路径**：从您当前目录开始的路径（例如 `../images` 或 `./notes`）。
 - **小结**：理解树状结构以及绝对路径和相对路径之间的区别，是所有文件系统操作的基础。
 
-### 3. 核心导航命令
+### 核心导航命令
 - **动机**：这三个命令是在文件系统中定位自己和四处移动的基本工具。
 - **核心概念**：
   - **`pwd` (Print Working Directory)**：显示您当前所在目录的绝对路径。
@@ -51,7 +51,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
     - `cd`：不带参数时，导航到您的主目录 (`~`)。
 - **小结**：使用 `pwd` 知道您在哪里，使用 `ls` 查看周围有什么，使用 `cd` 进行移动。
 
-### 4. 文件和目录操作
+### 文件和目录操作
 - **动机**：这些命令允许您创建、组织和删除构成文件系统的文件和目录。
 - **核心概念**：
   - `mkdir dir`: 创建一个名为 `dir` 的新目录。
@@ -76,7 +76,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
   rm notes.txt
   ```
 
-### 5. 归档与压缩
+### 归档与压缩
 - **动机**：将多个文件捆绑成一个单独的归档文件，以便于传输或存储。
 - **核心概念**：
   - `zip archive.zip files...`: 将一个或多个 `files` 压缩成一个 `archive.zip` 文件。

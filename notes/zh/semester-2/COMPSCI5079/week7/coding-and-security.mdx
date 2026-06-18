@@ -10,7 +10,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 ## 核心要点
 安全编码需要主动采取输入验证、输出编码和内存管理等措施，以防止攻击者向子系统注入恶意命令或数据。
 
-## 1. SQL 注入 (SQL Injection)
+## SQL 注入 (SQL Injection)
 当不受信任的数据被插入到数据库查询中时，就会发生 SQL 注入，允许攻击者操纵查询逻辑。
 
 ### 攻击类型
@@ -22,7 +22,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 **缓解措施**：始终使用 **参数化查询 (Prepared Statements)** 或 **存储过程**。严禁使用字符串拼接用户输入来构建查询。
 </Callout>
 
-## 2. 跨站脚本攻击 (XSS)
+## 跨站脚本攻击 (XSS)
 XSS 涉及将恶意脚本（通常是 JavaScript）注入到其他用户查看的网页中。
 
 ### 分类
@@ -33,7 +33,7 @@ XSS 涉及将恶意脚本（通常是 JavaScript）注入到其他用户查看�
 **会话劫持 (Session Hijacking)**：攻击者利用 XSS 窃取 `document.cookie`，从而允许他们冒充受害者。
 </Callout>
 
-## 3. 编程语言漏洞
+## 编程语言漏洞
 
 ### 缓冲区溢出 (C/C++)
 C/C++ 不会自动检查数组边界。攻击者可以提供比分配的缓冲区更长的输入，以覆盖相邻内存。
@@ -42,7 +42,7 @@ C/C++ 不会自动检查数组边界。攻击者可以提供比分配的缓冲�
 ### 毒化零字节 (Poisoned Null Byte)
 使用空终止符 (C) 的语言与使用显式长度 (Python/PHP) 的语言之间的不匹配。攻击者可以绕过文件扩展名检查（例如：`attack.php%00.jpg`）。
 
-## 4. 出卷人视角
+## 出卷人视角
 
 ### 硬核红线：Java Crypto API
 在 Java 中实现加密时：

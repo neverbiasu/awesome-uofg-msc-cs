@@ -29,7 +29,7 @@ df.fillna({'Quantity':0, 'Product':'Unknown'}, inplace=True)
 
 ## 关键知识点
 
-### 1. 解析日期与 dayfirst
+### 解析日期与 dayfirst
 - **动机**：将日期解析为 `datetime` 方便索引、过滤与按时间分组。
 - **核心概念**：`parse_dates` 自动将列解析为 `datetime`；`dayfirst=True` 用于 `DD/MM/YYYY` 格式数据。
 - **示例**：
@@ -44,7 +44,7 @@ df['Month'] = df['Date_original'].dt.to_period('M')
 ```
 - **小结**：提前解析日期能减少后续处理错误并提升可读性。
 
-### 2. 处理缺失值
+### 处理缺失值
 - **动机**：缺失值会影响聚合统计与可视化，需要有策略地处理。
 - **核心概念**：检测 `df.isnull().sum()`，删除 `dropna()`，或用 `fillna()` 填充常数/均值/中位数。
 - **示例**：

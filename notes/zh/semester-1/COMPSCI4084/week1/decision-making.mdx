@@ -17,7 +17,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 
 ## 关键知识点
 
-### 1. if / elif / else 基本形态
+### if / elif / else 基本形态
 ```python
 score = 85
 if score >= 90:
@@ -31,7 +31,7 @@ else:
 ```
 - 建议：从高到低（或互斥区间）排列条件；避免重叠。
 
-### 2. 真值测试（truthiness）与短路
+### 真值测试（truthiness）与短路
 ```python
 items = []
 if items:  # 空容器为 False，非空为 True
@@ -43,7 +43,7 @@ name = (user and user.get("name")) or "anonymous"  # and/or 短路
 ```
 - 规则：`None/0/""/[]/{}/set()` 等为 False；其余多为 True。
 
-### 3. 比较与逻辑运算
+### 比较与逻辑运算
 - 链式比较：`0 < x < 10`
 - 相等 vs 同一性：值比较用 `==`，对象同一性才用 `is`。
 ```python
@@ -55,14 +55,14 @@ print(s1 == s2)  # True（值相等）
 print(s1 is s2)  # 实现相关，不保证 True；勿用 is 比较值
 ```
 
-### 4. 条件表达式（“三元运算”）
+### 条件表达式（“三元运算”）
 ```python
 age = 19
 status = "adult" if age >= 18 else "minor"
 ```
 - 用于简单赋值分支；复杂逻辑仍用多行 if。
 
-### 5. 守卫式早返回（Guard Clauses）
+### 守卫式早返回（Guard Clauses）
 ```python
 def parse_score(raw: str) -> int | None:
     if raw is None:

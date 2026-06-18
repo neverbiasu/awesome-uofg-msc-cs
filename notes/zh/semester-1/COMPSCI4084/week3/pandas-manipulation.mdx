@@ -30,7 +30,7 @@ df.drop('value', axis=1, inplace=True)  # 删除列
 
 ## 关键知识点
 
-### 1. 合并与连接（merge / concat / join / combine_first）
+### 合并与连接（merge / concat / join / combine_first）
 - **动机**：把来源不同的数据按公共键或索引整合到同一张表，或用一个数据集补齐另一个的缺失值。
 - **核心概念**：`merge` 基于列键；`join` 基于索引；`concat` 沿行/列堆叠；`combine_first` 用第二个对象填补缺失值。
 - **使用场景/模式**：
@@ -52,7 +52,7 @@ filled = left.set_index('id')['val'].combine_first(right.set_index('id')['score'
 - **权衡与替代**：按列键灵活合并选 `merge`，只改索引合并时用 `join`，简单堆叠选 `concat`，缺失互补选 `combine_first`。
 - **小结**：先判断键来源，再挑选合适的合并模式确保数据完整与来源可追溯。
 
-### 2. 透视与重塑（pivot / stack / unstack）
+### 透视与重塑（pivot / stack / unstack）
 - **动机**：将日志式长表转换成宽表报表，或在行、列、层次索引之间切换以便后续分析。
 - **核心概念**：`pivot(index, columns, values)` 长转宽；`stack()` 列转行；`unstack(level)` 行转列，均保持标签信息。
 - **使用场景/模式**：
@@ -74,7 +74,7 @@ restored = stacked.unstack()  # 回到宽表
 - **权衡与替代**：需要聚合时选 `pivot_table`；仅改变形状不关心标签时可用 NumPy reshape。
 - **小结**：掌握三参数和堆栈操作，可在长宽表与多级索引之间高效切换。
 
-### 3. 分组聚合（groupby）
+### 分组聚合（groupby）
 - **动机**：按类别/层级汇总指标，如按颜色求均价、按城市与月份求销售总量。
 - **核心概念**：分组（Splitting）→ 应用函数（Applying）→ 合并结果（Combining）；`agg`, `sum`, `mean`, `count` 等聚合函数。
 - **使用场景/模式**：
@@ -94,7 +94,7 @@ result = summary.reset_index()
 - **权衡与替代**：交叉表需求可用 `pivot_table`；复杂逐行逻辑可考虑 `apply`，但性能较低。
 - **小结**：合理设置分组键与聚合函数，能快速得到层次化统计结果。
 
-### 4. 映射与替换（map / replace / rename）
+### 映射与替换（map / replace / rename）
 - **动机**：依据映射表补充数值列、统一标签语言或调整列/索引名称。
 - **核心概念**：`Series.map` 按字典生成新列；`Series.replace` 按映射替换现有值；`DataFrame.rename(columns/index=...)` 重命名标签。
 - **使用场景/模式**：
@@ -113,7 +113,7 @@ df = df.rename(columns={'item':'product'})
 - **权衡与替代**：简单映射选 `map`/`replace`，涉及自定义逻辑再用 `apply`。
 - **小结**：先构建映射表，再用 map/replace/rename 快速统一字段含义。
 
-### 5. 去重与删除（duplicated / drop_duplicates / drop / del）
+### 去重与删除（duplicated / drop_duplicates / drop / del）
 - **动机**：合并后常出现重复记录或无用列，需要清理以保证数据质量。
 - **核心概念**：`duplicated` 检测重复，`drop_duplicates` 删除重复行，`drop`/`del` 删除指定行列。
 - **使用场景/模式**：

@@ -22,7 +22,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 
 ## 基础操作闭环（从零到远程）
 
-### 1. 安装与配置（一次性）
+### 安装与配置（一次性）
 ```bash
 # macOS 推荐：
 brew install git
@@ -33,7 +33,7 @@ git config --global user.email "你的邮箱"
 git config --global init.defaultBranch main
 ```
 
-### 2. 新建或克隆
+### 新建或克隆
 ```bash
 # 新建并初始化
 mkdir demo && cd demo
@@ -43,7 +43,7 @@ git init  # 将使用默认分支 main（若已按上面配置）
 git clone git@github.com:org/repo.git
 ```
 
-### 3. 修改、暂存、提交
+### 修改、暂存、提交
 ```bash
 echo "hello" > README.md
 git status              # 查看变更
@@ -51,7 +51,7 @@ git add README.md       # 暂存
 git commit -m "init: add README"  # 提交
 ```
 
-### 4. 连接远程与推送
+### 连接远程与推送
 ```bash
 # 如果是本地 init 的仓库，先添加远程
 git remote add origin git@github.com:org/repo.git
@@ -61,7 +61,7 @@ git push -u origin main
 git push
 ```
 
-### 5. 拉取更新
+### 拉取更新
 ```bash
 # 获取并合并远程 main
 git pull --ff-only origin main

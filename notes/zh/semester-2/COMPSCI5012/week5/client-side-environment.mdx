@@ -10,7 +10,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 ## 核心要点
 客户端（浏览器）是一个复杂的环境，它将 HTML/CSS 解析为 DOM/CSSOM 并执行 JavaScript 以实现交互，从而将大量的处理负载从服务器转移到了客户端。
 
-## 1. 现代浏览器
+## 现代浏览器
 浏览器不仅仅是一个文档查看器；它是一个完整的执行环境。
 
 ### 主要组件
@@ -19,7 +19,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 -   **浏览器 API**：提供对本地存储、地理位置等的访问。
 ![浏览器架构](/images/COMPSCI5012/week5/L5-Client-Side-Environment-2025-013.png)
 
-## 2. 关键渲染路径 (Critical Rendering Path)
+## 关键渲染路径 (Critical Rendering Path)
 <Steps>
 
 ### 页面是如何渲染的
@@ -30,7 +30,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 5.  **绘制 (Paint)**：在屏幕上绘制像素。
 </Steps>
 
-## 3. 客户端存储
+## 客户端存储
 现代浏览器允许应用程序在本地存储数据。
 -   **LocalStorage**：持久数据（无过期时间）。
 -   **SessionStorage**：标签页关闭时清除数据。
@@ -39,7 +39,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 **细微差别**：与 Cookie 不同，LocalStorage 数据**从不**自动发送到服务器，从而减小了请求大小。
 </Callout>
 
-## 4. 出卷人视角：技术细微差别
+## 出卷人视角：技术细微差别
 
 ### 渲染性能
 -   **重排 (Reflow/Layout)**：重新计算元素的位置。非常昂贵。

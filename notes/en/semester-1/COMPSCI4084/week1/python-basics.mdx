@@ -33,7 +33,7 @@ from typing import Iterable, List
 
 ## Key Concepts
 
-### 0. Variables and Naming
+### Variables and Naming
 - Variables are created by assignment. Names should be descriptive. Avoid using built-in names and reserved words (like `for`, `class`).
 - **Assignment Examples**:
 ```python
@@ -45,7 +45,7 @@ print(animal)
 - **Strings vs. Numbers**: Explicit conversion is needed before calculation. Use `str(x)` before concatenation.
 - **Multi-line Strings**: Use triple quotes `""" ... """` or the newline character `\n`.
 
-### 1. Basic Types and Data Structures
+### Basic Types and Data Structures
 - **Numeric**: `int`, `float`, `complex`; **Boolean**: `bool`; **Null**: `None`.
 - **Strings**: Immutable; support slicing, concatenation, and formatting.
 - **Sequences**: `list` (mutable), `tuple` (immutable), `range`.
@@ -60,7 +60,7 @@ info = {"name": "Alice", "score": 90}
 keys = set(info)
 ```
 
-### 2. Name Binding and Mutability
+### Name Binding and Mutability
 ```python
 def append_item(x, bucket=None):
     if bucket is None:
@@ -70,7 +70,7 @@ def append_item(x, bucket=None):
 ```
 > Avoid using mutable objects like `list`, `dict`, or `set` as default function arguments. Use `None` as a placeholder and initialize inside the function body.
 
-### 3. Operators and Expressions
+### Operators and Expressions
 - **Comparison**: `==`, `!=`, `<`, `<=`, `>`, `>=`; **Chained comparison**: `0 < x < 10`.
 - **Logical**: `and` / `or` / `not` (short-circuiting).
 - **Identity vs. Equality**: `is` vs. `==`.
@@ -79,13 +79,13 @@ user = None
 name = (user and user.get("name")) or "anonymous"
 ```
 
-### 4. Sequence Operations and Comprehensions
+### Sequence Operations and Comprehensions
 ```python
 squares = [i * i for i in range(10) if i % 2 == 0]
 lookup = {ch: ord(ch) for ch in "abc"}
 ```
 
-### 5. String Handling and Formatting
+### String Handling and Formatting
 ```python
 name, score = "Bob", 87.5
 print(f"{name:>10s} | {score:6.2f}")
@@ -97,7 +97,7 @@ print("%d" % x)        # Decimal integer
 print("%5.2f" % y)     # Width >= 5, 2 decimal places
 ```
 
-### 6. Input and Output
+### Input and Output
 ```python
 raw = input().strip()
 try:
@@ -107,13 +107,13 @@ except ValueError:
     print("INVALID")
 ```
 
-### 7. Code Style and Type Hinting
+### Code Style and Type Hinting
 ```python
 def head(xs: Iterable[int], n: int = 5) -> List[int]:
     return list(xs)[:n]
 ```
 
-### 8. Common String Methods (strip/split/case)
+### Common String Methods (strip/split/case)
 - **Removing whitespace and characters**: `strip()`, `lstrip()`, `rstrip()`
 ```python
 s = "  hello.  "
@@ -138,7 +138,7 @@ print(s[0], s[-1])  # P n
 print(s[1:4])       # yth
 ```
 
-### 9. Introduction to Regular Expressions (`re` module)
+### Introduction to Regular Expressions (`re` module)
 - **Common functions**: `findall`, `search`, `split`, `sub`
 ```python
 

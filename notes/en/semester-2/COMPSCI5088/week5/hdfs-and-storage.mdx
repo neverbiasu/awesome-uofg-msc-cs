@@ -10,13 +10,13 @@ import { Steps } from 'fumadocs-ui/components/steps';
 ## Key Takeaway
 HDFS provides a high-throughput, fault-tolerant storage layer for big data by decoupling file metadata (NameNode) from physical data blocks (DataNodes) and using rack-aware replication.
 
-## 1. HDFS Architecture
+## HDFS Architecture
 HDFS follows a Master-Slave pattern.
 -   **NameNode (Master)**: Manages the file system namespace and metadata (file-to-block mapping).
 -   **DataNode (Slave)**: Stores the actual data blocks and performs read/write requests from clients.
 ![HDFS Component Interaction](/images/COMPSCI5088/week5/05-04-HDFS-001.png)
 
-## 2. Metadata & Checkpointing
+## Metadata & Checkpointing
 The NameNode keeps all metadata in RAM for fast access.
 -   **Edit Log**: A transaction log that records every change to the file system.
 -   **FsImage**: A snapshot of the file system state at a specific point in time.
@@ -25,7 +25,7 @@ The NameNode keeps all metadata in RAM for fast access.
 **Hard Red Line**: The Checkpoint **does not** store the physical location of blocks. Block locations are reported dynamically by DataNodes when they start up.
 </Callout>
 
-## 3. Replication & Fault Tolerance
+## Replication & Fault Tolerance
 HDFS splits files into large blocks (default 128MB) and replicates them across the cluster.
 -   **Replication Factor**: Usually 3.
 -   **Rack Awareness**: HDFS places replicas on different racks to survive entire rack failures.
@@ -39,7 +39,7 @@ HDFS splits files into large blocks (default 128MB) and replicates them across t
 5.  Acks flow back to the client.
 </Steps>
 
-## 4. Examiner's Perspective: Technical Nuances
+## Examiner's Perspective: Technical Nuances
 
 ### Decoupling Block Locations
 -   **Why?**: If locations were stored in FsImage, a simple hardware upgrade or DataNode IP change would require an expensive disk update on the NameNode. By using dynamic **Block Reports**, the system remains flexible and I/O efficient.

@@ -10,22 +10,22 @@ import { Steps } from 'fumadocs-ui/components/steps';
 ## Key Takeaway
 Autoencoders learn a compressed representation (latent space) of data by attempting to reconstruct the input from a bottleneck layer, enabling applications like denoising and anomaly detection.
 
-## 1. Basic Autoencoder Structure
+## Basic Autoencoder Structure
 An Autoencoder consists of two symmetric networks:
 1.  **Encoder**: Maps input $X$ to a low-dimensional bottleneck $Z$ (Latent Code).
 2.  **Decoder**: Reconstructs the input $\hat{X}$ from $Z$.
 -   **Loss**: Reconstruction error (e.g., $MSE(X, \hat{X})$).
 ![Autoencoder Bottleneck](/images/COMPSCI5103/week8/Lecture_8_Autoencoders_-AG-005.png)
 
-## 2. Dimensionality Reduction
+## Dimensionality Reduction
 Autoencoders can be viewed as a non-linear generalization of **PCA (Principal Component Analysis)**.
 -   If the activation functions are linear, the Autoencoder learns to span the same subspace as PCA.
 
-## 3. Denoising Autoencoders (DAE)
+## Denoising Autoencoders (DAE)
 -   **Concept**: Feed corrupted/noisy data into the encoder and train the decoder to reconstruct the original clean data.
 -   **Benefit**: Forces the model to learn more robust features rather than just an identity mapping.
 
-## 4. Examiner's Perspective: Technical Nuances
+## Examiner's Perspective: Technical Nuances
 
 ### The Bottleneck
 -   **Hard Red Line**: Without a bottleneck (dimension of $Z <$ dimension of $X$), the network could simply learn to copy the input (Identity Function), failing to learn any useful features.

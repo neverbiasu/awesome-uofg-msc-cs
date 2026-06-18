@@ -10,7 +10,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 ## Key Takeaway
 NoSQL systems like HBase optimize for write performance using LSM Trees while mitigating the resulting read latency through specialized structures like Bloom Filters.
 
-## 1. LSM Tree (Log-Structured Merge-Tree)
+## LSM Tree (Log-Structured Merge-Tree)
 The LSM Tree is a data structure designed to provide high write throughput by turning random writes into sequential writes.
 
 ### The Write Protocol
@@ -19,7 +19,7 @@ The LSM Tree is a data structure designed to provide high write throughput by tu
 3.  **Flush**: When MemStore is full, it's flushed to disk as a sorted file (SSTable/HFile).
 ![LSM Tree Write Path](/images/COMPSCI5088/week6/06-03-LSM-004.png)
 
-## 2. Bloom Filters
+## Bloom Filters
 Since data is spread across multiple HFiles on disk, reading a single key could require scanning many files. Bloom Filters prevent this.
 
 ### Core Properties
@@ -31,10 +31,10 @@ Since data is spread across multiple HFiles on disk, reading a single key could 
 **Performance Optimization**: HBase checks the Bloom Filter for each HFile. If the filter says "NO", the system skips the expensive disk read for that file entirely.
 </Callout>
 
-## 3. Compaction
+## Compaction
 Over time, too many HFiles accumulate, slowing down reads. **Compaction** is the process of merging multiple small HFiles into fewer, larger ones, and removing deleted/old data.
 
-## 4. Examiner's Perspective: Technical Nuances
+## Examiner's Perspective: Technical Nuances
 
 ### Random Read Latency
 -   **Nuance**: Even with LSM Trees, random reads are slower than in RDBMS because a key might be in the MemStore OR any of the HFiles.

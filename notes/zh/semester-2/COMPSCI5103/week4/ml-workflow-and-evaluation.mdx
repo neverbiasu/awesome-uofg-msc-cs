@@ -10,7 +10,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 ## 核心要点
 严谨的机器学习工作流要求在训练集、验证集和测试集之间进行清晰的分离，以防止数据泄露并确保模型的性能能够泛化到未见过的数据。
 
-## 1. 机器学习流水线 (ML Pipeline)
+## 机器学习流水线 (ML Pipeline)
 <Steps>
 
 ### 标准工作流
@@ -22,7 +22,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 6.  **测试**：在测试集上进行最终评估（只能做一次）。
 </Steps>
 
-## 2. 评估指标
+## 评估指标
 选择正确的指标取决于任务和数据分布。
 -   **准确率 (Accuracy)**：正确预测的百分比。（不适用于不平衡数据）。
 -   **精确率 (Precision) / 召回率 (Recall)**：在“只找目标”和“找到所有目标”之间进行权衡。
@@ -30,10 +30,10 @@ import { Steps } from 'fumadocs-ui/components/steps';
 -   **混淆矩阵 (Confusion Matrix)**：真正例 (TP)、假正例 (FP) 等的视觉表示。
 ![评估指标表格](/images/COMPSCI5103/week4/2025_26_DL_Lecture4_Machine_Learning_Workflow-026.png)
 
-## 3. 交叉验证 (Cross-Validation)
+## 交叉验证 (Cross-Validation)
 -   **K 折交叉验证**：将数据拆分为 $K$ 个部分并训练 $K$ 次，每次使用其中一个部分作为验证集。这提供了对模型性能更稳健的估计。
 
-## 4. 出卷人视角：技术细微差别
+## 出卷人视角：技术细微差别
 
 ### 数据泄露 (Data Leakage)
 -   **硬核红线**：当来自测试集的信息“泄露”到训练过程中（例如：在拆分前计算全局均值/方差）时，就会发生数据泄露。这会导致过于乐观但虚假的结果。

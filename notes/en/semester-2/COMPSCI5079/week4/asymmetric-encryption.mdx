@@ -10,7 +10,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 ## Key Takeaway
 Asymmetric encryption solves the key distribution problem of symmetric systems by using pairs of public and private keys, where security is derived from the mathematical difficulty of factoring large numbers or solving discrete logarithms.
 
-## 1. The Concept of Public-Key Crypto
+## The Concept of Public-Key Crypto
 Unlike symmetric crypto, each user has two keys:
 -   **Public Key**: Shared with everyone. Used for encryption.
 -   **Private Key**: Kept secret. Used for decryption.
@@ -20,7 +20,7 @@ Unlike symmetric crypto, each user has two keys:
 2.  **Digital Signature**: Prove origin using your private key.
 ![Asymmetric Encryption Process](/images/COMPSCI5079/week4/CSD_All_slides-312.png)
 
-## 2. Diffie-Hellman Key Exchange (DH)
+## Diffie-Hellman Key Exchange (DH)
 DH allows two parties to agree on a shared secret key over an insecure channel.
 <Steps>
 
@@ -31,7 +31,7 @@ DH allows two parties to agree on a shared secret key over an insecure channel.
 4.  Shared secret $K = B^a \mod p = A^b \mod p = g^{ab} \mod p$.
 </Steps>
 
-## 3. RSA (Rivest-Shamir-Adleman)
+## RSA (Rivest-Shamir-Adleman)
 The most widely used public-key algorithm.
 
 ### Key Generation
@@ -42,7 +42,7 @@ The most widely used public-key algorithm.
 -   **Public Key**: $(e, n)$
 -   **Private Key**: $(d, n)$
 
-## 4. Examiner's Perspective: Technical Nuances
+## Examiner's Perspective: Technical Nuances
 
 ### Asymmetric vs. Symmetric Speed
 -   **Hard Red Line**: Asymmetric encryption is significantly **slower** (100x to 1000x) than symmetric encryption (AES).

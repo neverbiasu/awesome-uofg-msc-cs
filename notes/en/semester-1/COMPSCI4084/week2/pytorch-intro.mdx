@@ -83,7 +83,7 @@ model.to(device)
 
 ## Key Concepts
 
-### 1. PyTorch Introduction and Installation
+### PyTorch Introduction and Installation
 
 #### Motivation
 - A deep learning library that supports dynamic computation graphs (eager execution), is tightly integrated with Python, and is widely used in both research and production.
@@ -110,7 +110,7 @@ print('CUDA available: ', torch.cuda.is_available())
 #### Summary
 First, confirm that PyTorch is correctly installed and can be imported before proceeding to learn about tensors and model building.
 
-### 2. Tensors and Basic Operations
+### Tensors and Basic Operations
 
 #### Motivation
 - Tensors are the fundamental unit of all computation. Mastering tensor creation, indexing, and shape transformation is the foundation for subsequent model implementation.
@@ -153,7 +153,7 @@ print(t)
 #### Summary
 Tensor operations are central to using PyTorch. Familiarity with common creation and transformation APIs will allow you to implement models and data pipelines faster.
 
-### 3. Automatic Differentiation (`autograd`) and Gradients
+### Automatic Differentiation (`autograd`) and Gradients
 
 #### Motivation
 - Training a neural network requires computing the gradient of the loss with respect to its parameters. `autograd` automatically builds a computation graph and performs backpropagation, reducing errors from manual differentiation.
@@ -186,7 +186,7 @@ with torch.no_grad():
 #### Summary
 `autograd` makes backpropagation simple and reliable, but be mindful of gradient accumulation and disabling it during inference.
 
-### 4. Defining Models with `nn.Module` (Network Structure)
+### Defining Models with `nn.Module` (Network Structure)
 
 #### Motivation
 - `nn.Module` provides a unified way to organize parameters (weights/biases) and define forward logic, making models reusable and easy to save.
@@ -223,7 +223,7 @@ print(sum(p.numel() for p in model.parameters()))  # Total number of parameters
 #### Summary
 `nn.Module` is the core abstraction for organizing model code and managing parameters. Mastering its use leads to clear and extensible model structures.
 
-### 5. Loss Functions and Optimizers
+### Loss Functions and Optimizers
 
 #### Motivation
 - A loss function measures the discrepancy between predictions and true values. An optimizer adjusts parameters based on gradients to minimize this loss.
@@ -258,7 +258,7 @@ loss = criterion(outputs, labels)
 #### Summary
 Choosing the right loss and optimizer and following the standard update steps are core to the deep model training process.
 
-### 6. The Standard Training Loop (Train/Validation/Test)
+### The Standard Training Loop (Train/Validation/Test)
 
 #### Motivation
 - The training loop is where a model learns from data: a forward pass computes the loss, a backward pass computes gradients, and the optimizer updates parameters. Performance is periodically evaluated on a validation set to check for generalization.
@@ -302,7 +302,7 @@ for epoch in range(5):
 #### Summary
 A standard training loop includes both training and validation phases. A proper evaluation and checkpointing strategy is crucial for tuning and fault recovery.
 
-### 7. Device Management (CPU/GPU) and Performance Tips
+### Device Management (CPU/GPU) and Performance Tips
 
 #### Motivation
 - GPUs can significantly accelerate most deep learning tasks, but require correct management of device movement and memory to avoid errors and performance issues.

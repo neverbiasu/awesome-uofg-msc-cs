@@ -18,7 +18,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 
 ## Key Concepts
 
-### 1. The Linear Model
+### The Linear Model
 - **Motivation**: We often assume a simple, straight-line relationship exists between an input and an output. For example, predicting a future Olympic 100m winning time based on the year.
 - **Core Concept**: The relationship is modeled by the equation of a straight line:
   ```math
@@ -30,7 +30,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
   - `w_1` is the slope or weight associated with `x`. It controls the line's steepness.
 - **Goal of Learning**: To find the optimal parameter values (`w_0`, `w_1`) that make the line best fit the training data.
 
-### 2. The Loss Function
+### The Loss Function
 - **Motivation**: To find the "best" line, we need a way to numerically measure how well a given line fits the data. A line is "good" if its predictions are close to the actual data points.
 - **Core Concept**: The **Squared Loss** (or Squared Error) measures the error for a single data point `n`:
   ```math
@@ -45,7 +45,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
   The goal of training is to find the parameters `w_0` and `w_1` that minimize this MSE value.
 </Callout>
 
-### 3. Model Fitting with Scikit-Learn
+### Model Fitting with Scikit-Learn
 - **Motivation**: Manually calculating the parameters that minimize the loss is tedious and complex. Libraries like `scikit-learn` automate this process.
 - **Usage Pattern**: The `sklearn.linear_model.LinearRegression` object can fit a model to data automatically.
 - **Example**:

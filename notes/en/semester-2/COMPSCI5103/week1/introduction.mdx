@@ -10,25 +10,25 @@ import { Steps } from 'fumadocs-ui/components/steps';
 ## Key Takeaway
 Deep learning simulates biological neural processes through mathematical abstractions, where the choice of activation function and network depth determines the model's ability to approximate complex functions.
 
-## 1. Biological to Artificial Neurons
+## Biological to Artificial Neurons
 Modern neural networks are inspired by the structure of the human brain.
 -   **Biological Neuron**: Dendrites (input), Cell Body (processing), Axon (output).
 -   **Artificial Neuron (Perceptron)**: Receives inputs $x_i$ with weights $w_i$, adds a bias $b$, and applies an activation function $f$.
 ![Artificial Neuron Model](/images/COMPSCI5103/week1/2025_26_DL_Lecture1_Introduction_final-012.png)
 
-## 2. Activation Functions
+## Activation Functions
 Activation functions introduce **non-linearity** into the network, allowing it to learn complex patterns.
 -   **Sigmoid**: $\sigma(x) = \frac{1}{1+e^{-x}}$. (Range 0 to 1). Suffer from vanishing gradients.
 -   **Tanh**: (Range -1 to 1). Centered at zero.
 -   **ReLU (Rectified Linear Unit)**: $f(x) = \max(0, x)$. Most common in deep networks due to faster convergence.
 
-## 3. History and Evolution
+## History and Evolution
 Deep learning has gone through several cycles:
 1.  **Cybernetics (1940s-60s)**: Simple linear models.
 2.  **Connectionism (1980s-90s)**: Backpropagation and MLP.
 3.  **Modern Deep Learning (2006+)**: Driven by Big Data and GPU acceleration.
 
-## 4. Examiner's Perspective: Technical Nuances
+## Examiner's Perspective: Technical Nuances
 
 ### Linearity vs. Non-linearity
 -   **Hard Red Line**: A network with only linear activation functions, regardless of depth, is equivalent to a single linear layer. Non-linearity is **essential** for "Deep" learning.

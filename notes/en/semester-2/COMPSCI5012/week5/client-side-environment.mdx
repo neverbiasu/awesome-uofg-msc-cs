@@ -10,7 +10,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 ## Key Takeaway
 The client (browser) is a complex environment that parses HTML/CSS into the DOM/CSSOM and executes JavaScript to enable interactivity, shifting significant processing load from the server.
 
-## 1. The Modern Browser
+## The Modern Browser
 A browser is much more than a document viewer; it is a full execution environment.
 
 ### Major Components
@@ -19,7 +19,7 @@ A browser is much more than a document viewer; it is a full execution environmen
 -   **Browser API**: Provides access to local storage, location, etc.
 ![Browser Architecture](/images/COMPSCI5012/week5/L5-Client-Side-Environment-2025-013.png)
 
-## 2. Critical Rendering Path
+## Critical Rendering Path
 <Steps>
 
 ### How a Page is Rendered
@@ -30,7 +30,7 @@ A browser is much more than a document viewer; it is a full execution environmen
 5.  **Paint**: Draw pixels on the screen.
 </Steps>
 
-## 3. Client-Side Storage
+## Client-Side Storage
 Modern browsers allow applications to store data locally.
 -   **LocalStorage**: Persistent data (no expiration).
 -   **SessionStorage**: Data cleared when the tab is closed.
@@ -39,7 +39,7 @@ Modern browsers allow applications to store data locally.
 **Nuance**: Unlike Cookies, LocalStorage data is **never** sent to the server automatically, reducing request sizes.
 </Callout>
 
-## 4. Examiner's Perspective: Technical Nuances
+## Examiner's Perspective: Technical Nuances
 
 ### Rendering Performance
 -   **Reflow (Layout)**: Recalculating positions of elements. Very expensive.

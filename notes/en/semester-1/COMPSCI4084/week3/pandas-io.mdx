@@ -38,12 +38,12 @@ df.to_csv('out.csv', index=False)
 
 ## Key Concepts
 
-### 1. DataFrame and Series Briefly
+### DataFrame and Series Briefly
 - **Motivation**: `DataFrame` provides a labeled 2D table structure, facilitating column-based analysis and visualization.
 - **Core Concepts**: A `DataFrame` is a collection of columns (each a `Series`). A `Series` is a 1D labeled array that interoperates seamlessly with NumPy functions.
 - **Summary**: Understanding the structure of `DataFrame`/`Series` helps in choosing the right I/O and manipulation functions.
 
-### 2. Reading CSV/TXT
+### Reading CSV/TXT
 - **Motivation**: CSV is the most common format for data exchange.
 - **Core Concepts**: `pd.read_csv('file.csv', header=None, names=[...], delimiter=',', parse_dates=[...], dayfirst=True, nrows=..., skiprows=...)`.
 - **Example**:
@@ -61,7 +61,7 @@ df_re = pd.read_csv('data.txt', sep=r'\s+', engine='python')
 - **Notes**: Use regular expressions for irregular delimiters. Setting `parse_dates` and `dayfirst` can automatically parse date columns.
 - **Summary**: Using the parameters of `read_csv` effectively can significantly simplify subsequent cleaning processes.
 
-### 3. Reading/Writing Excel / HTML
+### Reading/Writing Excel / HTML
 - **Motivation**: Excel and HTML are often used as data sources or reporting formats.
 - **Core Concepts**: `pd.read_excel`, `DataFrame.to_excel`, `pd.read_html`, `DataFrame.to_html`.
 - **Example**:
@@ -75,7 +75,7 @@ tables = pd.read_html('https://example.com')
 - **Notes**: Reading Excel requires installing an engine like `openpyxl` or `xlrd`. `read_html` returns a list of DataFrames.
 - **Summary**: Mastering Excel/HTML I/O facilitates handling data from multiple sources.
 
-### 4. Interacting with Databases (SQLite / SQLAlchemy)
+### Interacting with Databases (SQLite / SQLAlchemy)
 - **Motivation**: To interface DataFrames with relational databases for persistence and querying.
 - **Core Concepts**: `sqlalchemy.create_engine`, `pd.read_sql`, `DataFrame.to_sql`.
 - **Example**:
@@ -88,7 +88,7 @@ df2 = pd.read_sql(q, engine)
 - **Notes**: `to_sql` can take `if_exists='append'|'replace'|'fail'`. For large tables, it's recommended to write in chunks.
 - **Summary**: The SQL API is suitable for project-level persistence and complex filtering queries.
 
-### 5. Common Options for Writing CSVs
+### Common Options for Writing CSVs
 - **Motivation**: To control the format and metadata when sharing data with others.
 - **Core Concepts**: `df.to_csv('out.csv', index=False, header=True, sep=',', encoding='utf-8')`.
 - **Example**:

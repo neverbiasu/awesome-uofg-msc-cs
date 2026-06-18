@@ -28,7 +28,7 @@ from dataclasses import dataclass
 
 ## 关键知识点
 
-### 1. 类、实例与构造器
+### 类、实例与构造器
 ```python
 class Account:
     def __init__(self, owner: str, balance: float = 0.0):
@@ -43,7 +43,7 @@ print(acc)  # Account(Alice, balance=125.00)
 ```
 - 要点：`__init__` 初始化实例状态；实例方法第一个参数约定为 `self`。
 
-### 2. 属性、封装与 name mangling
+### 属性、封装与 name mangling
 ```python
 class SafeBox:
     def __init__(self, password: str):
@@ -58,7 +58,7 @@ print(box._SafeBox__password)  # 不建议：仅演示 name mangling 的效果
 - 要点：单下划线是约定；双下划线会改写名称以减少子类/外部误用。
 - 可用 `@property` 暴露只读/计算属性，控制不变量。
 
-### 3. 继承与方法重写（多态）
+### 继承与方法重写（多态）
 ```python
 class Animal:
     def speak(self) -> str:
@@ -76,7 +76,7 @@ chorus([Dog(), Cat()])  # 多态调用
 ```
 - 要点：子类可重写父类方法；必要时用 `super().__init__()` 初始化父类部分。
 
-### 4. 组合优先于继承
+### 组合优先于继承
 ```python
 class Engine:
     def start(self) -> str:
@@ -90,7 +90,7 @@ print(Car(Engine()).drive())
 ```
 - 要点：当“有一个”优于“是一个”时使用组合，降低耦合、提升可复用性。
 
-### 5. 常见 dunder 方法：__str__/__repr__/__eq__
+### 常见 dunder 方法：__str__/__repr__/__eq__
 ```python
 class Point:
     def __init__(self, x: int, y: int):
@@ -107,7 +107,7 @@ print(Point(1,2) == Point(1,2))  # True（值相等）
 ```
 - 要点：`__repr__` 应尽量“可重建”；`__eq__` 定义值语义，避免用 `is` 比较值。
 
-### 6. 数据类（dataclass）与不可变对象
+### 数据类（dataclass）与不可变对象
 ```python
 @dataclass(frozen=True)
 class User:

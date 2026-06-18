@@ -45,14 +45,14 @@ drive.mount('/content/drive')
 
 ## Key Concepts
 
-### 1. Getting Started
+### Getting Started
 - **Steps**: Go to https://colab.research.google.com → "New Notebook" → Run sample code.
 ```python
 print("Hello, Colab!")
 ```
 - **Notes**: Use Markdown cells to document purpose and steps. It's good practice to place dependency installation commands in the first code cell.
 
-### 2. Hardware Acceleration (GPU/TPU) & Plotting
+### Hardware Acceleration (GPU/TPU) & Plotting
 - **Steps**: Runtime → Change runtime type → Select GPU (or TPU) from the Hardware accelerator dropdown.
 - **Installation & Plotting**:
 ```bash
@@ -64,11 +64,11 @@ arr = np.random.rand(100) * 10
 ```
 - **Tips**: Pinning key library versions can reduce environment drift. Plotting requires importing `matplotlib.pyplot`.
 
-### 3. Collaboration & Version History
+### Collaboration & Version History
 - **Sharing**: Click "Share" in the top right → Add collaborator emails and set permissions.
 - **History**: File → Revision history to view and revert to previous versions.
 
-### 4. Mounting Drive & File I/O
+### Mounting Drive & File I/O
 ```python
 base = '/content/drive/MyDrive'
 
@@ -77,7 +77,7 @@ with open(f"{base}/colab-demo.txt", "w") as f:
 ```
 - **Caution**: Resetting the runtime will clear temporary storage. Important files should be saved to Drive.
 
-### 5. R Runtime (Minimal Example)
+### R Runtime (Minimal Example)
 ```bash
 !apt-get -y update && apt-get -y install r-base
 !R -e "install.packages('IRkernel'); IRkernel::installspec(user = FALSE)"

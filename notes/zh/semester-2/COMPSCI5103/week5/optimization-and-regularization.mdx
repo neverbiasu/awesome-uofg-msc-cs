@@ -10,18 +10,18 @@ import { Steps } from 'fumadocs-ui/components/steps';
 ## 核心要点
 有效的深度学习需要在优化（最小化训练损失）和正则化（防止过拟合）之间取得平衡，以确保模型能够很好地泛化到新数据。
 
-## 1. 高级优化器
+## 高级优化器
 标准 SGD 通常太慢或容易陷入局部最小值。
 -   **动量 (Momentum)**：将先前更新的一部分添加到当前更新中，以加速向正确方向移动。
 -   **RMSProp**：根据梯度最近的幅度为每个参数调整学习率。
 -   **Adam (自适应矩估计)**：结合了动量和 RMSProp。是目前大多数任务的行业标准。
 ![优化曲面](/images/COMPSCI5103/week5/2025_26_DL_Lecture5A_Optimization,_Generalization,_Regularization-019.png)
 
-## 2. 泛化与过拟合
+## 泛化与过拟合
 -   **过拟合 (Overfitting)**：模型在训练数据上表现良好，但在验证数据上表现较差（高方差）。
 -   **欠拟合 (Underfitting)**：模型未能学习训练数据（高偏差）。
 
-## 3. 正则化技术
+## 正则化技术
 通过惩罚模型复杂度来防止过拟合的方法。
 -   **L2 正则化 (权重衰减)**：将 $\lambda \sum w^2$ 添加到损失函数中。
 -   **Dropout**：在训练期间随机“丢弃”神经元，以防止共适应 (co-adaptation)。
@@ -30,7 +30,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 **批归一化 (Batch Normalization)**：对每层的输入进行归一化，以减少内部协变量偏移，允许更高的学习率，并起到一定的正则化作用。
 </Callout>
 
-## 4. 出卷人视角：技术细微差别
+## 出卷人视角：技术细微差别
 
 ### 偏差-方差权衡 (Bias-Variance Trade-off)
 -   **硬核红线**：你无法同时最小化偏差和方差。正则化通常会略微增加偏差，但会显著降低方差。

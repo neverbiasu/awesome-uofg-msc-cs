@@ -47,7 +47,7 @@ plt.show()
 
 ## Key Concepts
 
-### 1. Line Plots and Labels
+### Line Plots and Labels
 - **Motivation**: To observe trends that change over time or sequence.
 - **Core Concepts**: `plt.plot(x, y, label=..., linewidth=..., color=...)`. Use `plt.title`, `plt.xlabel`, `plt.ylabel` to add metadata.
 - **Example**:
@@ -58,7 +58,7 @@ y = [2 * i for i in x]
 ```
 - **Summary**: Good titles and labels significantly improve chart readability.
 
-### 2. Scatter Plots and Point Styles
+### Scatter Plots and Point Styles
 - **Motivation**: To display the distribution and relationship between variables.
 - **Core Concepts**: `plt.scatter(x, y, s=size, c=color, alpha=transparency)`.
 - **Example**:
@@ -68,7 +68,7 @@ y1 = [10, 50, 100, 180, 200]
 ```
 - **Summary**: Scatter plots, combined with color/size encoding, can display multidimensional information.
 
-### 3. Bar Charts and Error Bars
+### Bar Charts and Error Bars
 - **Motivation**: To display categorical data and its uncertainty.
 - **Core Concepts**: `plt.bar`, `yerr`, `error_kw`, `alpha`.
 - **Example**:
@@ -79,7 +79,7 @@ std = [1.2, 2.3, 1.5, 1.0]
 ```
 - **Summary**: Error bars add statistical information to visualizations.
 
-### 4. Histograms, Box Plots, and Pie Charts
+### Histograms, Box Plots, and Pie Charts
 - **Motivation**: Histograms are for distributions, box plots show quartiles and outliers, and pie charts show composition proportions.
 - **Core Concepts**: `plt.hist`, `df.plot(kind='box')`, `plt.pie`.
 - **Example**:
@@ -89,7 +89,7 @@ data = np.random.randint(0, 101, size=100)
 ```
 - **Summary**: Choosing the right chart type helps reveal data characteristics.
 
-### 5. Multi-plot Layouts and Subplots
+### Multi-plot Layouts and Subplots
 - **Motivation**: To display multiple perspectives or different series simultaneously.
 - **Core Concepts**: `plt.subplot(nrows, ncols, index)` or `fig, axs = plt.subplots()`.
 - **Example**:

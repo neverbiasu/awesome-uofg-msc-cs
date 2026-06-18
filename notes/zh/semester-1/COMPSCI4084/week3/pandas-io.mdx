@@ -38,12 +38,12 @@ df.to_csv('out.csv', index=False)
 
 ## 关键知识点
 
-### 1. DataFrame 与 Series 简述
+### DataFrame 与 Series 简述
 - **动机**：DataFrame 提供标签化二维表结构，便于进行基于列的分析与可视化。
 - **核心概念**：DataFrame 是列字典（每列为 Series）的集合；Series 为一维带标签数组，能与 NumPy 函数无缝互操作。
 - **小结**：理解 DataFrame/Series 的结构有助于选择合适的 IO 与操作函数。
 
-### 2. 读取 CSV/TXT
+### 读取 CSV/TXT
 - **动机**：CSV 是数据交换最常见的格式。
 - **核心概念**：`pd.read_csv('file.csv', header=None, names=[...], delimiter=',', parse_dates=[...], dayfirst=True, nrows=..., skiprows=...)`。
 - **示例**：
@@ -61,7 +61,7 @@ df_re = pd.read_csv('data.txt', sep=r'\s+', engine='python')
 - **注意事项**：当分隔符不规则时，可使用正则表达式；设置 `parse_dates` 与 `dayfirst` 可自动解析日期列。
 - **小结**：用好 `read_csv` 的参数能显著简化后续清洗流程。
 
-### 3. 读写 Excel / HTML
+### 读写 Excel / HTML
 - **动机**：Excel/HTML 常作为数据来源或报告格式。
 - **核心概念**：`pd.read_excel`, `DataFrame.to_excel`, `pd.read_html`, `DataFrame.to_html`。
 - **示例**：
@@ -75,7 +75,7 @@ tables = pd.read_html('https://example.com')
 - **注意事项**：读取 Excel 需要安装 `openpyxl` / `xlrd` 等引擎；`read_html` 返回表格列表。
 - **小结**：掌握 Excel/HTML IO 便于处理多来源数据。
 
-### 4. 与数据库交互（SQLite / SQLAlchemy）
+### 与数据库交互（SQLite / SQLAlchemy）
 - **动机**：将 DataFrame 与关系型数据库互通，便于持久化与查询。
 - **核心概念**：`sqlalchemy.create_engine`, `pd.read_sql`, `DataFrame.to_sql`。
 - **示例**：
@@ -88,7 +88,7 @@ df2 = pd.read_sql(q, engine)
 - **注意事项**：`to_sql` 可以选择 `if_exists='append'|'replace'|'fail'`，传输大表时建议分批次写入。
 - **小结**：SQL API 适用于项目性持久化与复杂过滤查询。
 
-### 5. 写出 CSV 的常见选项
+### 写出 CSV 的常见选项
 - **动机**：与他人共享数据时需要控制格式与元信息。
 - **核心概念**：`df.to_csv('out.csv', index=False, header=True, sep=',', encoding='utf-8')`。
 - **示例**：

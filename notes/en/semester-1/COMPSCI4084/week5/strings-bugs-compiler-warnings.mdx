@@ -19,7 +19,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 
 ## Key Knowledge Points
 
-### 1. Basic C String Functions and Their Risks
+### Basic C String Functions and Their Risks
 - **Motivation**: C provides fundamental string manipulation functions, but their design often prioritizes performance over safety, leading to common vulnerabilities if not used carefully. Understanding these basics is crucial before moving to safer alternatives.
 - **Core Concepts**:
   - `strcmp(s1, s2)`: Compares two strings. Returns 0 if equal, `<0` if s1 is less than s2, `>0` if s1 is greater than s2.
@@ -53,7 +53,7 @@ int main() {
   - Always ensure destination buffers are large enough to hold the source string plus the null terminator.
 - **Summary**: Basic C string functions are powerful but inherently unsafe due to their lack of bounds checking, making them a significant source of security vulnerabilities.
 
-### 2. Safe String Handling Alternatives
+### Safe String Handling Alternatives
 - **Motivation**: To mitigate the risks associated with basic C string functions, safer alternatives that incorporate buffer size checks or read with length limits are essential for robust and secure C programming.
 - **Core Concepts**:
   - `fgets(buffer, size, stream)`: Reads a full line safely from `stream` into `buffer`, up to `size-1` characters. Prevents buffer overflow and handles spaces. Includes the newline character if present.
@@ -90,7 +90,7 @@ int main() {
   - Be aware of the return values and edge cases for each safe function.
 - **Summary**: Safe string functions are crucial for preventing buffer overflows and other memory-related vulnerabilities in C, requiring careful attention to buffer sizes and null-termination.
 
-### 3. Compiler Warnings: Your Security Assistant
+### Compiler Warnings: Your Security Assistant
 - **Motivation**: Many vulnerabilities originate from seemingly minor coding mistakes that compilers can often detect. Enabling robust compiler warnings transforms the compiler into a powerful security assistant, catching potential flaws early.
 - **Core Concepts**:
   - `-Wall`: Enables a broad set of common warnings (e.g., uninitialized variables, assignment vs. comparison mistakes, unused variables).

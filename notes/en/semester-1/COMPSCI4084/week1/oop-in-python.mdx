@@ -28,7 +28,7 @@ from dataclasses import dataclass
 
 ## Key Concepts
 
-### 1. Classes, Instances, and Constructors
+### Classes, Instances, and Constructors
 ```python
 class Account:
     def __init__(self, owner: str, balance: float = 0.0):
@@ -43,7 +43,7 @@ print(acc)  # Account(Alice, balance=125.00)
 ```
 - **Key Points**: `__init__` initializes the instance's state. The first parameter of an instance method is conventionally named `self`.
 
-### 2. Attributes, Encapsulation, and Name Mangling
+### Attributes, Encapsulation, and Name Mangling
 ```python
 class SafeBox:
     def __init__(self, password: str):
@@ -59,7 +59,7 @@ print(box._SafeBox__password)
 - **Key Points**: A single underscore is a convention. A double underscore rewrites the attribute name to reduce accidental access from subclasses or external code.
 - You can use `@property` to expose read-only or computed attributes and control invariants.
 
-### 3. Inheritance and Method Overriding (Polymorphism)
+### Inheritance and Method Overriding (Polymorphism)
 ```python
 class Animal:
     def speak(self) -> str:
@@ -77,7 +77,7 @@ chorus([Dog(), Cat()])  # Polymorphic call
 ```
 - **Key Points**: Subclasses can override parent class methods. Use `super().__init__()` when necessary to initialize the parent part of the object.
 
-### 4. Composition Over Inheritance
+### Composition Over Inheritance
 ```python
 class Engine:
     def start(self) -> str:
@@ -91,7 +91,7 @@ print(Car(Engine()).drive())
 ```
 - **Key Points**: Use composition when a "has-a" relationship is more appropriate than an "is-a" relationship. It reduces coupling and improves reusability.
 
-### 5. Common Dunder Methods: `__str__`/`__repr__`/`__eq__`
+### Common Dunder Methods: `__str__`/`__repr__`/`__eq__`
 ```python
 class Point:
     def __init__(self, x: int, y: int):
@@ -108,7 +108,7 @@ print(Point(1,2) == Point(1,2))  # True (value equality)
 ```
 - **Key Points**: `__repr__` should be as "reproducible" as possible. `__eq__` defines value semantics; avoid using `is` for value comparison.
 
-### 6. Dataclasses and Immutable Objects
+### Dataclasses and Immutable Objects
 ```python
 @dataclass(frozen=True)
 class User:

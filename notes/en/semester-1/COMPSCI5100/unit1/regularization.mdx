@@ -19,20 +19,20 @@ import { Steps } from 'fumadocs-ui/components/steps';
 
 ## Key Concepts
 
-### 1. The Problem of Overfitting and Large Weights
+### The Problem of Overfitting and Large Weights
 - **Motivation**: As seen with high-order polynomials, complex models that overfit the training data often have extremely large positive and negative weights. These large weights cause the model function to fluctuate wildly to catch every data point, including noise.
 <Callout type="info" title="Core Idea of Regularization">
   Preventing model weights from becoming too large helps control complexity and reduce overfitting.
 </Callout>
 
-### 2. Regularization: Penalizing the Loss Function
+### Regularization: Penalizing the Loss Function
 - **Core Concept**: Regularization works by adding a **penalty term** to the original loss function. This penalty term is a function of the model's weights. The new regularized loss function is:
   `L_reg = L_data + L_penalty`
   - `L_data` is the original Mean Squared Error (MSE).
   - `L_penalty` discourages large weights.
   - The model now has to find a balance between fitting the data well (minimizing `L_data`) and keeping its weights small (minimizing `L_penalty`).
 
-### 3. Ridge Regression (L2 Regularization)
+### Ridge Regression (L2 Regularization)
 - **Core Concept**: Ridge Regression uses the **L2 norm** of the weights as its penalty term. The penalty is the sum of the squared weights, scaled by a hyperparameter `λ` (lambda).
   `L_penalty = λ * Σ_{k=1 to K} w_k² = λ * ||w||²`
 - **Effect**: The L2 penalty forces the weights to be small, but it rarely forces them to be exactly zero. It shrinks all weights towards zero, resulting in a smoother, less complex model function.
@@ -51,7 +51,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
   model.fit(x_reshaped, t_reshaped)
   ```
 
-### 4. Lasso Regression (L1 Regularization)
+### Lasso Regression (L1 Regularization)
 - **Core Concept**: Lasso Regression uses the **L1 norm** of the weights as its penalty term. The penalty is the sum of the absolute values of the weights, scaled by `λ`.
   ```math
   L_\text{penalty} = \lambda \sum_{k=1}^{K} |w_k| = \lambda \|w\|_1
@@ -70,7 +70,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
   # print(model.named_steps['lasso'].coef_)
   ```
 
-### 5. Choosing the Regularization Parameter `λ`
+### Choosing the Regularization Parameter `λ`
 - **Motivation**: The choice of `λ` is critical. If `λ` is too small, the model will still overfit. If `λ` is too large, the model will be too simple and will underfit (not capture the underlying trend).
 <Callout type="info" title="Choosing Optimal λ">
   Treat `λ` as a hyperparameter and use cross-validation to find the value that minimizes validation error.

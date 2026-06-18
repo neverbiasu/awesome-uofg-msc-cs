@@ -19,7 +19,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 
 ## Key Knowledge Points
 
-### 1. User and Permissions Management
+### User and Permissions Management
 - **Motivation**: Proper user and permissions management is the cornerstone of Unix-like system security. It ensures that only authorized individuals and processes can access, modify, or execute specific files and resources, preventing unauthorized access and data breaches.
 - **Core Concepts**:
   - `whoami`: Displays the current user's effective username.
@@ -53,7 +53,7 @@ ls -l sensitive_data.txt
   - Be cautious with `sudo`; understand the implications of running commands as root.
 - **Summary**: Effective user and permissions management is paramount for system security, controlling access to resources and preventing unauthorized actions.
 
-### 2. Processes and Jobs Control
+### Processes and Jobs Control
 - **Motivation**: Understanding and managing processes is crucial for system performance, troubleshooting, and identifying malicious activity. Processes are running instances of programs, and jobs are processes managed by the shell.
 - **Core Concepts**:
   - `ps aux`: Lists all running processes on the system, showing user, PID, CPU/memory usage, command, etc.
@@ -81,7 +81,7 @@ fg %1 # Assuming %1 is the job ID for sleep 100
   - Malware often disguises itself as legitimate processes; look for unusual names, paths, or parent/child relationships.
 - **Summary**: Process and job control are essential for system administration, enabling efficient resource management, troubleshooting, and security incident response.
 
-### 3. System Monitoring and File Utilities
+### System Monitoring and File Utilities
 - **Motivation**: Beyond user and process management, monitoring system resources and having versatile file utilities are vital for maintaining system health, diagnosing issues, and performing forensic analysis.
 - **Core Concepts**:
   - `df -h`: Displays disk space usage in a human-readable format.

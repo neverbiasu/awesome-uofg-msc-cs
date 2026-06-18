@@ -10,18 +10,18 @@ import { Steps } from 'fumadocs-ui/components/steps';
 ## Key Takeaway
 Effective deep learning requires a balance between optimization (minimizing training loss) and regularization (preventing overfitting) to ensure the model generalizes well to new data.
 
-## 1. Advanced Optimizers
+## Advanced Optimizers
 Standard SGD is often too slow or gets stuck in local minima.
 -   **Momentum**: Adds a fraction of the previous update to the current one to accelerate in the right direction.
 -   **RMSProp**: Adapts the learning rate for each parameter based on recent magnitudes of gradients.
 -   **Adam (Adaptive Moment Estimation)**: Combines Momentum and RMSProp. The current industry standard for most tasks.
 ![Optimization Surfaces](/images/COMPSCI5103/week5/2025_26_DL_Lecture5A_Optimization,_Generalization,_Regularization-019.png)
 
-## 2. Generalization and Overfitting
+## Generalization and Overfitting
 -   **Overfitting**: Model performs well on training data but poorly on validation data (high variance).
 -   **Underfitting**: Model fails to learn the training data (high bias).
 
-## 3. Regularization Techniques
+## Regularization Techniques
 Methods to prevent overfitting by penalizing model complexity.
 -   **L2 Regularization (Weight Decay)**: Adds $\lambda \sum w^2$ to the loss function.
 -   **Dropout**: Randomly "drops out" neurons during training to prevent co-adaptation.
@@ -30,7 +30,7 @@ Methods to prevent overfitting by penalizing model complexity.
 **Batch Normalization**: Normalizes the inputs of each layer to reduce internal covariate shift, allowing for higher learning rates and acting as a form of regularization.
 </Callout>
 
-## 4. Examiner's Perspective: Technical Nuances
+## Examiner's Perspective: Technical Nuances
 
 ### Bias-Variance Trade-off
 -   **Hard Red Line**: You cannot simultaneously minimize both bias and variance. Regularization typically increases bias slightly but significantly reduces variance.

@@ -18,7 +18,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 
 ## Key Concepts
 
-### 1. Polynomial Regression
+### Polynomial Regression
 - **Motivation**: Simple linear regression cannot capture curves in data. If the underlying relationship is not a straight line, we need a more flexible model.
 - **Core Concept**: We can extend linear regression by adding new features that are powers of the original feature `x`. The model becomes:
   ```math
@@ -41,7 +41,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
   # This matrix can then be used with sklearn.linear_model.LinearRegression
   ```
 
-### 2. Overfitting
+### Overfitting
 - **Motivation**: As we increase model complexity (e.g., the polynomial order `K`), the training error will always decrease. However, a model that is too complex may learn the noise in the training data, not the underlying trend.
 - **Core Concept**: **Overfitting** occurs when a model performs exceptionally well on the training data but poorly on new, unseen data. The model has high variance. An overfitted model does not generalize well.
 - **Visual Cue**: An overfitted polynomial often exhibits wild oscillations, especially at the edges of the data range.
@@ -49,7 +49,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
   Overfitting occurs when a model performs exceptionally well on training data but poorly on new, unseen data. An overfitted model does not generalize well.
 </Callout>
 
-### 3. Model Selection using a Validation Set
+### Model Selection using a Validation Set
 - **Motivation**: Since training error is a poor guide for model selection, we need another way to estimate how the model will perform in the real world.
 - **Core Concept**: We can split our data into two parts:
   1.  **Training Set**: Used to fit the model parameters (`w`).
@@ -61,7 +61,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
       Always select the model with the lowest validation error, as this model is expected to generalize best to new, unseen data.
       </Callout>
 
-### 4. K-Fold Cross-Validation
+### K-Fold Cross-Validation
 - **Motivation**: A simple train/validation split can be sensitive to how the data is divided. A different split might lead to a different "best" model.
 - **Core Concept**: **K-Fold Cross-Validation (CV)** provides a more robust estimate of a model's performance. The process is as follows:
   1.  Shuffle the dataset randomly.

@@ -10,23 +10,23 @@ import { Steps } from 'fumadocs-ui/components/steps';
 ## Key Takeaway
 Mobile security relies on strong OS-level isolation (sandboxing) and permissions, but remains vulnerable to insecure data storage and communication if developers don't implement platform-specific security APIs correctly.
 
-## 1. Mobile Platform Architecture
+## Mobile Platform Architecture
 Mobile OSs use a more restrictive model than traditional desktops.
 -   **Sandboxing**: Each app runs in its own restricted environment (unique User ID). It cannot access files of other apps.
 -   **Permissions**: Apps must explicitly request access to sensitive resources (Camera, Contacts).
 ![Android Sandboxing Model](/images/COMPSCI5104/week6/SSE-Lecture6-010.png)
 
-## 2. Common Mobile Vulnerabilities
+## Common Mobile Vulnerabilities
 -   **Insecure Data Storage**: Storing sensitive data in cleartext in SharedPreferences (Android) or Plist (iOS) files.
 -   **Broken Cryptography**: Implementing custom encryption or hardcoding keys in the source code.
 -   **Insecure Communication**: Failing to validate SSL/TLS certificates (MITM risk).
 
-## 3. Reverse Engineering and Protection
+## Reverse Engineering and Protection
 Mobile apps are easily decompiled (e.g., using JADX).
 -   **Obfuscation**: Changing variable/method names to nonsensical strings to make the code hard to read.
 -   **Tamper Detection**: Code that checks if the app has been modified or is running on a rooted/jailbroken device.
 
-## 4. Examiner's Perspective: Technical Nuances
+## Examiner's Perspective: Technical Nuances
 
 ### Rooting/Jailbreaking
 -   **Nuance**: Rooting breaks the OS-level sandbox. If an app runs on a rooted device, its sensitive data is no longer protected by the OS from other malicious apps.

@@ -10,7 +10,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 ## Key Takeaway
 Digital signatures provide non-repudiation and authentication by signing a message hash with a private key. PKI establishes trust in public keys through hierarchical Certificate Authorities (CAs).
 
-## 1. Digital Signatures
+## Digital Signatures
 A digital signature proves that a message originated from a specific sender and has not been altered.
 
 ### The Signing Process
@@ -19,17 +19,17 @@ A digital signature proves that a message originated from a specific sender and 
 3.  **Verify**: Recipient decrypts the signature with the sender's **Public Key** and compares it to a fresh hash of the received message.
 ![Digital Signature Workflow](/images/COMPSCI5079/week5/CSD_All_slides-412.png)
 
-## 2. Elliptic Curve Cryptography (ECC)
+## Elliptic Curve Cryptography (ECC)
 ECC provides the same level of security as RSA but with **much smaller keys**.
 -   **Advantage**: Faster computation and lower bandwidth. Ideal for mobile devices and IoT.
 -   **Comparison**: A 256-bit ECC key is equivalent to a 3072-bit RSA key.
 
-## 3. Public Key Infrastructure (PKI)
+## Public Key Infrastructure (PKI)
 PKI solves the problem of: "How do I know this public key belongs to Bob?".
 -   **Digital Certificate**: A document signed by a **Certificate Authority (CA)** that binds a public key to an identity.
 -   **X.509**: The standard format for digital certificates used in HTTPS.
 
-## 4. Examiner's Perspective: Technical Nuances
+## Examiner's Perspective: Technical Nuances
 
 ### Non-Repudiation
 -   **Hard Red Line**: Digital signatures provide **Non-repudiation** (the sender cannot deny sending the message) because only the sender has the private key. Standard MACs (Message Authentication Codes) do NOT provide this because they use a shared secret.

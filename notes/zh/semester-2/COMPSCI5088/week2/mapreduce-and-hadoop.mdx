@@ -10,14 +10,14 @@ import { Steps } from 'fumadocs-ui/components/steps';
 ## 核心要点
 MapReduce 通过将数据分区、任务调度和容错的复杂性抽象为两个主要函数（Map 和 Reduce），解决了分布式工作分配的挑战。
 
-## 1. 分布式计算的挑战
+## 分布式计算的挑战
 在多台机器上分配工作引入了几个复杂性：
 -   **工作分配**：如何均匀地拆分任务？
 -   **容错性**：如果一个节点故障了怎么办？
 -   **数据本地性 (Data Locality)**：将计算移动到数据端比将数据移动到计算端更便宜。
 ![MapReduce 执行模型](/images/COMPSCI5088/week2/02-02-MapReduce-001.png)
 
-## 2. MapReduce 模型
+## MapReduce 模型
 MapReduce 是一种在集群上使用并行、分布式算法处理大型数据集的编程模型。
 
 ### 两个函数
@@ -32,7 +32,7 @@ MapReduce 是一种在集群上使用并行、分布式算法处理大型数据�
 4.  **Reduce 阶段**：Reducer 处理分组后的数据以产生最终输出。
 </Steps>
 
-## 3. Hadoop：实现方案
+## Hadoop：实现方案
 Apache Hadoop 是 MapReduce 的开源实现。
 -   **JobTracker (Hadoop 1.x)**：协调作业，将任务分配给 TaskTracker。
 -   **TaskTracker**：执行任务并报告进度。
@@ -40,7 +40,7 @@ Apache Hadoop 是 MapReduce 的开源实现。
 **LSM 联系**：MapReduce 处理中间数据的方式（在内存中排序并溢写到磁盘）在概念上与 **LSM Tree** 的写入协议相似。
 </Callout>
 
-## 4. 出卷人视角：技术细微差别
+## 出卷人视角：技术细微差别
 
 ### 拖后者 (Stragglers)
 -   **概念**：执行时间异常长的任务，会拖慢整个作业。

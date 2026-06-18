@@ -29,7 +29,7 @@ df.fillna({'Quantity':0, 'Product':'Unknown'}, inplace=True)
 
 ## Key Concepts
 
-### 1. Parsing Dates and `dayfirst`
+### Parsing Dates and `dayfirst`
 - **Motivation**: Parsing dates into `datetime` objects facilitates indexing, filtering, and grouping by time.
 - **Core Concepts**: `parse_dates` automatically converts columns to `datetime`; `dayfirst=True` is used for `DD/MM/YYYY` formatted data.
 - **Example**:
@@ -44,7 +44,7 @@ df['Month'] = df['Date_original'].dt.to_period('M')
 ```
 - **Summary**: Parsing dates early reduces subsequent processing errors and improves readability.
 
-### 2. Handling Missing Values
+### Handling Missing Values
 - **Motivation**: Missing values can affect aggregate statistics and visualizations and need to be handled strategically.
 - **Core Concepts**: Detect with `df.isnull().sum()`, remove with `dropna()`, or fill with `fillna()` using a constant, mean, or median.
 - **Example**:

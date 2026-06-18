@@ -17,7 +17,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 
 ## 关键知识点
 
-### 1. 安装与验证
+### 安装与验证
 - 核心概念：Anaconda / Miniconda 安装后，用命令验证并保持更新。
 - 命令
 ```bash
@@ -27,7 +27,7 @@ conda update conda
 - 注意事项/最佳实践：安装后首要验证；更新可能较慢，耐心等待。
 - 小结：先验再用，保持 Conda 最新可减少兼容问题。
 
-### 2. 创建与激活环境（指定 Python 版本）
+### 创建与激活环境（指定 Python 版本）
 - 核心概念：独立环境隔离依赖，避免项目之间相互影响。
 - 命令
 ```bash
@@ -38,7 +38,7 @@ conda deactivate
 - 使用场景：按项目/课程一环境；不同项目可并行维护。
 - 小结：每个项目一环境；退出环境再切换或删除。
 
-### 3. 管理环境（列出/删除/克隆）
+### 管理环境（列出/删除/克隆）
 - 命令
 ```bash
 conda env list
@@ -48,7 +48,7 @@ conda create --name newenv --clone myenv
 - 注意事项：删除需加 `--all`；克隆可快速复制依赖状态。
 - 小结：列出/删除/克隆覆盖典型生命周期操作。
 
-### 4. 包管理（安装/更新/移除）
+### 包管理（安装/更新/移除）
 - 命令
 ```bash
 conda install numpy
@@ -58,7 +58,7 @@ conda remove numpy
 - 注意事项：按需安装最小集合，减少求解时间与冲突。
 - 小结：安装/更新/移除三步，保持环境精简可控。
 
-### 5. 导出与复现（YAML）
+### 导出与复现（YAML）
 - 命令
 ```bash
 conda env export > environment.yml

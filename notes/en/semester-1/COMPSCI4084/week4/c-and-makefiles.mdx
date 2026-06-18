@@ -18,7 +18,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 
 ## Key Knowledge Points
 
-### 1. C I/O and File Handling (Security Focus)
+### C I/O and File Handling (Security Focus)
 - **Motivation**: C's input/output functions are fundamental for program interaction, but if used improperly, they can introduce severe security vulnerabilities like buffer overflows.
 - **Core Concepts**:
   - **`fopen()`**: Opens a file and returns a file pointer. Common modes include `"r"` (read), `"w"` (write), and `"a"` (append).
@@ -35,7 +35,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
   ```
 - **Summary**: Always prefer safe, bounded functions like `fgets()` for handling user input to prevent common security flaws.
 
-### 2. Pointers and Structs (Security Focus)
+### Pointers and Structs (Security Focus)
 - **Motivation**: Pointers are a core feature of C that allow direct memory manipulation, but they are also a common source of critical security vulnerabilities.
 - **Core Concepts**:
   - **`&` (Address-of Operator)**: Gets the memory address of a variable.
@@ -44,7 +44,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
   - **Pointer Misuse**: Common vulnerabilities include buffer overflows (writing past a buffer's boundary), null pointer dereferences (accessing a `NULL` address), and using dangling pointers (pointers to freed memory).
 - **Summary**: Understanding how pointers work is essential for seeing how attackers can control program memory and for writing secure code.
 
-### 3. C Operators and Control Flow (Security Focus)
+### C Operators and Control Flow (Security Focus)
 - **Motivation**: Program logic is built with operators and control flow statements. Simple errors in this logic can lead to significant security flaws.
 - **Core Concepts**:
   - **Relational & Logical Operators**: These (`==`, `!=`, `&&`, `||`) are critical for input validation and access control. A classic bug is using the assignment operator `=` instead of the equality operator `==` in a condition, which can lead to authentication bypasses.
@@ -52,7 +52,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
   - **Loops (`for`, `while`)**: Off-by-one errors in loop conditions are a frequent cause of buffer overflows.
 - **Summary**: Pay close attention to conditional logic and loop boundaries, as they are common weak points in program security.
 
-### 4. Automating Compilation with Makefiles
+### Automating Compilation with Makefiles
 - **Motivation**: Manually recompiling a project every time a file changes is tedious and error-prone. The `make` utility automates this process based on a `Makefile`.
 - **Core Concepts**:
   - **Makefile**: A script that specifies how to build target files (like an executable) from source files (like `.c` files).

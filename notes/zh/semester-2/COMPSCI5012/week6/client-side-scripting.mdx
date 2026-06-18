@@ -10,7 +10,7 @@ import { Steps } from 'fumadocs-ui/components/steps';
 ## 核心要点
 JavaScript 是 Web 的“行为”层，通过事件驱动模型和对文档对象模型 (DOM) 的直接操作，实现动态更新和用户交互。
 
-## 1. JavaScript 基础
+## JavaScript 基础
 JavaScript 是一种高级的、解释型的、多范式语言。
 
 ### 核心概念
@@ -19,7 +19,7 @@ JavaScript 是一种高级的、解释型的、多范式语言。
 -   **事件驱动 (Event-Driven)**：代码执行由用户操作（点击、按键）或系统事件触发。
 ![JavaScript 事件循环](/images/COMPSCI5012/week6/L6-Client-Side-Scripting-018.png)
 
-## 2. DOM 操作
+## DOM 操作
 DOM API 允许 JavaScript 与 HTML 进行交互。
 
 ### 常用操作
@@ -30,13 +30,13 @@ DOM API 允许 JavaScript 与 HTML 进行交互。
 **性能提示**：尽量减少直接的 DOM 访问。批量更新或使用虚拟 DOM（在框架中）以避免不断的重排。
 </Callout>
 
-## 3. 异步 JavaScript
+## 异步 JavaScript
 JS 是单线程的，但使用**回调队列 (Callback Queue)** 处理异步任务。
 -   **回调 (Callbacks)**：传递给稍后执行的函数。
 -   **Promise**：表示异步操作最终完成（或失败）的对象。
 -   **Async/Await**：编写整洁异步代码的现代语法。
 
-## 4. 出卷人视角：技术细微差别
+## 出卷人视角：技术细微差别
 
 ### 作用域：var vs. let vs. const
 -   `var`：函数作用域，会提升 (hoisted)。（在现代 JS 中应避免使用）。

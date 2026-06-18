@@ -10,12 +10,12 @@ import { Steps } from 'fumadocs-ui/components/steps';
 ## Key Takeaway
 CNNs exploit the spatial local correlation of images through shared weights and pooling, drastically reducing the number of parameters compared to fully connected networks while achieving translation invariance.
 
-## 1. Why CNN for Images?
+## Why CNN for Images?
 Fully connected networks (MLPs) fail on images because:
 1.  **Parameter Explosion**: A $1000 \times 1000$ image would require millions of weights per neuron.
 2.  **Loss of Spatial Structure**: MLPs flatten images into 1D vectors, losing the relative positions of pixels.
 
-## 2. Core Components of CNN
+## Core Components of CNN
 
 ### Convolutional Layer
 -   **Kernels/Filters**: Small matrices that slide across the image to detect features (edges, textures).
@@ -28,11 +28,11 @@ Fully connected networks (MLPs) fail on images because:
 -   **Advantage**: Provides **Invariance** to small translations and distortions.
 ![CNN Architecture Example](/images/COMPSCI5103/week3/2025_26_DL_Lecture3_Convolutional_Neural_Networks-044.png)
 
-## 3. Calculation Formulas
+## Calculation Formulas
 -   **Output Width ($W_{out}$)**: $\frac{W_{in} - F + 2P}{S} + 1$
 -   *Where*: $W$ = Width, $F$ = Filter size, $P$ = Padding, $S$ = Stride.
 
-## 4. Examiner's Perspective: Technical Nuances
+## Examiner's Perspective: Technical Nuances
 
 ### Receptive Field
 -   **Concept**: The specific area of the input image that a neuron in a deep layer "sees".

@@ -10,17 +10,17 @@ import { Steps } from 'fumadocs-ui/components/steps';
 ## Key Takeaway
 Backpropagation is an efficient application of the chain rule from calculus, allowing us to calculate gradients for every parameter in a deep network by traversing the computational graph in reverse.
 
-## 1. Multi-Layer Perceptrons (MLP)
+## Multi-Layer Perceptrons (MLP)
 An MLP consists of an input layer, one or more hidden layers, and an output layer.
 -   **Fully Connected**: Each neuron in one layer is connected to all neurons in the next.
 -   **Forward Pass**: Data flows from input to output to compute the loss.
 
-## 2. Gradient Descent Optimization
+## Gradient Descent Optimization
 To minimize the **Loss Function** (e.g., Mean Squared Error, Cross-Entropy), we update weights in the opposite direction of the gradient.
 $$w_{new} = w_{old} - \eta \cdot \frac{\partial L}{\partial w}$$
 -   **Learning Rate ($\eta$)**: Determines the size of the step. Too high causes oscillation; too low causes slow convergence.
 
-## 3. The Backpropagation Algorithm
+## The Backpropagation Algorithm
 Backpropagation uses the **Chain Rule** to compute the gradient of the loss with respect to each weight.
 <Steps>
 
@@ -32,7 +32,7 @@ Backpropagation uses the **Chain Rule** to compute the gradient of the loss with
 </Steps>
 ![Computational Graph for Backprop](/images/COMPSCI5103/week2/2025_26_DL_Lecture2B_Backpropagation_using_Computational_Graphs-014.png)
 
-## 4. Examiner's Perspective: Technical Nuances
+## Examiner's Perspective: Technical Nuances
 
 ### Vanishing and Exploding Gradients
 -   **Vanishing**: Gradients become extremely small in early layers (common with Sigmoid), preventing learning.
