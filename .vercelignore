@@ -1,0 +1,38 @@
+# Dependencies and local build output
+node_modules/
+.next/
+.source/
+coverage/
+out/
+build/
+*.tsbuildinfo
+
+# Local and CI-only metadata
+.git/
+.github/
+.vercel/
+.env
+.env*.local
+*.log
+
+# Source materials used to author notes, not to render the site
+materials/
+downloads/
+reports/
+anki-cards/
+image_analysis_report.md
+image_review_filtered.html
+logs/
+skills/
+templates/
+
+# Large media/source assets should never be uploaded as deployment source
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+*.wav
+*.mp3
+*.zip
+*.pptx
