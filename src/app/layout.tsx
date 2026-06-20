@@ -2,6 +2,7 @@ import '@/app/global.css';
 import { AISearchTrigger } from '@/components/search';
 import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
+import { Analytics } from "@vercel/analytics/next"
 import 'katex/dist/katex.css';
 
 type LayoutProps = {
@@ -25,6 +26,7 @@ export default function Layout({ children }: LayoutProps) {
       <body className="flex flex-col min-h-screen" suppressHydrationWarning>
         {children}
         <AISearchTrigger />
+        <Analytics />
       </body>
     </html>
   );
