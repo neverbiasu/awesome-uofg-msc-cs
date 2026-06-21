@@ -25,6 +25,7 @@
     "fumadocs-ui": "15.7.12",
     "hast-util-to-jsx-runtime": "^2.3.6",
     "katex": "^0.16.25",
+    "lightningcss": "^1.32.0",
     "lucide-react": "^0.544.0",
     "mammoth": "^1.11.0",
     "next": "15.5.12",
@@ -63,5 +64,8 @@
     "puppeteer": "^24.22.0",
     "tailwindcss": "^4.1.13",
     "typescript": "^5.9.2"
+  },
+  "optionalDependencies": {
+    "@tailwindcss/oxide-linux-x64-gnu": "^4.1.13"
   }
 }
