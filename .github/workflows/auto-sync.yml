@@ -25,7 +25,10 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --include=optional
+
+      - name: Ensure native build deps are present
+        run: npm install --no-save sharp lightningcss
 
       - name: Run linting
         run: npm run lint
@@ -63,7 +66,10 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --include=optional
+
+      - name: Ensure native build deps are present
+        run: npm install --no-save sharp lightningcss
 
       - name: Run material extraction
         run: |

@@ -22,7 +22,10 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --include=optional
+
+      - name: Ensure native build deps are present
+        run: npm install --no-save sharp lightningcss
 
       - name: Install Playwright Browsers
         run: npx playwright install
