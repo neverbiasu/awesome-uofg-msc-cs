@@ -28,7 +28,7 @@ jobs:
         run: npm ci --include=optional
 
       - name: Ensure native build deps are present
-        run: npm install --no-save sharp lightningcss
+        run: npm install --no-save sharp lightningcss @tailwindcss/oxide-linux-x64-gnu
 
       - name: Run linting
         run: npm run lint
@@ -69,7 +69,7 @@ jobs:
         run: npm ci --include=optional
 
       - name: Ensure native build deps are present
-        run: npm install --no-save sharp lightningcss
+        run: npm install --no-save sharp lightningcss @tailwindcss/oxide-linux-x64-gnu
 
       - name: Run material extraction
         run: |
