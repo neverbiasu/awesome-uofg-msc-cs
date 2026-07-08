@@ -46,10 +46,6 @@ function parseMdx(content) {
  */
 async function translateFrontmatter(yamlStr, targetLang = 'zh') {
   if (!yamlStr.trim()) return '';
-  if (!API_KEY) {
-    console.warn("MODELSCOPE_API_KEY is not configured. Skipping LLM translation for frontmatter.");
-    return yamlStr.replace(/title:\s*"(.*?)"/g, `title: "$1 (Translated)"`);
-  }
 
   const prompt = `Translate only the values of the YAML frontmatter keys (such as 'title' and 'description') to ${
     targetLang === 'zh' ? 'Simplified Chinese' : 'English'
