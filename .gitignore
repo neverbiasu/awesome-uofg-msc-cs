@@ -43,3 +43,6 @@ build-output.log
 *.avi
 *.mkv
 *.webm
+
+# generated scraper state
+scripts/scraped_cache.json

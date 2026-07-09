@@ -9,6 +9,7 @@
     "start": "next start",
     "postinstall": "fumadocs-mdx",
     "lint": "eslint",
+    "test": "vitest run",
     "scrape:moodle": "node scripts/complete-scraper.js",
     "extract:materials": "node scripts/extract-materials.js"
   },
@@ -63,7 +64,8 @@
     "postcss": "^8.5.6",
     "puppeteer": "^24.22.0",
     "tailwindcss": "^4.1.13",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "vitest": "^4.1.10"
   },
   "optionalDependencies": {
     "@tailwindcss/oxide-linux-x64-gnu": "^4.1.13"
