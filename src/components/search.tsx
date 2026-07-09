@@ -34,7 +34,11 @@ const smallButtonClass = 'px-2 py-1.5 text-xs';
 const iconSmallButtonClass = 'p-1.5 [&_svg]:size-4.5';
 
 function useChatContext() {
-  return use(Context)!.chat;
+  const ctx = use(Context);
+  if (!ctx) {
+    throw new Error('SearchAIContext is missing. <AISearchTrigger /> must wrap the search UI.');
+  }
+  return ctx.chat;
 }
 
 function SearchAIActions() {
