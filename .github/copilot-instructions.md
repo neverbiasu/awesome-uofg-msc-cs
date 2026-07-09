@@ -16,7 +16,7 @@
 | 第一学期 | COMPSCI4084 | Programming and Systems Development | `COMPSCI4084-programming-systems/` |
 | 第一学期 | COMPSCI5089 | Introduction to Data Science and Systems | `COMPSCI5089-data-science-systems/` |
 | 第一学期 | COMPSCI5100 | Machine Learning & Artificial Intelligence for Data Scientists | `COMPSCI5100-ml-ai/` |
-| 第一学期 | COMPSCI5092 | Research Professional Skills | `research-professional-skills/` |
+| 第一学期 | COMPSCI5092 | Research Professional Skills | `COMPSCI5092-research-professional-skills/` |
 | 根目录 | - | MSc (IT+) & MSc (CS+) Handbook | `handbook/` |
 
 ### Index.md 文件要求
@@ -57,7 +57,7 @@
    - `npm run extract:materials` - 提取文档内容
    - 支持环境变量配置登录信息
 
-**注意**: `complete-scraper.js` 中 COMPSCI5092 的路径配置为 `COMPSCI5092-research-professional-skills`, 但实际目录名为 `research-professional-skills`, 需要保持一致。
+**注意**: `complete-scraper.js` 中 COMPSCI5092 的路径配置为 `COMPSCI5092-research-professional-skills`, 与磁盘上的实际目录一致, 是最权威的来源。任何课程目录改名都需同步更新 `complete-scraper.js` 的 `COURSES` 与本文档的「当前课程列表」。
 
 ### 文档内容 (content/) 要求
 

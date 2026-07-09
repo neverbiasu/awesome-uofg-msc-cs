@@ -8,7 +8,7 @@ Read this file first when syncing course config.
 - `copilot-instructions.md` documents the derived directory names and must stay aligned.
 
 ## Known gotcha
-- `COMPSCI5092` uses `research-professional-skills` as the real directory name. Do not recreate the old `COMPSCI5092-research-professional-skills` alias.
+- `COMPSCI5092` uses `COMPSCI5092-research-professional-skills` as the real directory name (it holds the `lectures/` and `resources/`). The scraper `COURSES` map is the source of truth; keep `copilot-instructions.md` and `materials/semester-1/index.md` aligned to this exact path.
 
 ## Do
 - Compare only the affected course entry and its matching folder.

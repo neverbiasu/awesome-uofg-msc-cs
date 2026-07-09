@@ -17,7 +17,7 @@ Complete collection of course materials for Semester 1 of MSc Computing Science 
 | COMPSCI4084-programming-systems/ | Programming and Systems Development |
 | COMPSCI5089-data-science-systems/ | Introduction to Data Science and Systems |
 | COMPSCI5100-ml-ai/ | Machine Learning & Artificial Intelligence |
-| research-professional-skills/ | Research Professional Skills |
+| COMPSCI5092-research-professional-skills/ | Research Professional Skills |
 
 ## Related Links
 1. [Semester 1 Timetable](https://moodle.gla.ac.uk/)
