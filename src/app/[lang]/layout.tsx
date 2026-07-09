@@ -3,7 +3,12 @@ import '@/app/global.css';
 import { RootProvider } from 'fumadocs-ui/provider';
 import { defineI18nUI } from 'fumadocs-ui/i18n';
 import { i18n } from '@/lib/i18n';
+import { Inter } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
+import { AISearchTrigger } from '@/components/search';
 import type { ReactNode } from 'react';
+
+const inter = Inter({ subsets: ['latin'] });
 
 const { provider } = defineI18nUI(i18n, {
   translations: {
@@ -32,8 +37,14 @@ export default async function Layout({ children, params }: LayoutProps) {
   const { lang } = await params;
 
   return (
-    <RootProvider i18n={provider(lang)}>
-      {children}
-    </RootProvider>
+    <html lang={lang} className={inter.className}>
+      <body className="flex flex-col min-h-screen">
+        <RootProvider i18n={provider(lang)}>
+          {children}
+        </RootProvider>
+        <AISearchTrigger />
+        <Analytics />
+      </body>
+    </html>
   );
 }
