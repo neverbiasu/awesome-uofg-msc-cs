@@ -1,3 +1,0 @@
-2025-10-20 08:12:14 login attempt user=root@server01 result=FAIL
-2025-10-20 08:12:55 login attempt user=admin@server01 result=SUCCESS
-2025-10-20 08:13:40 connection dropped by root@server02

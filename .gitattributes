@@ -1,10 +1,9 @@
-*.png filter=lfs diff=lfs merge=lfs -text
+# Images are stored as regular git objects on purpose: the repo's binary
+# assets exceed GitHub's free Git LFS quota (1 GB), so LFS checkout fails in
+# CI. Images are needed at build time, so they must be plain git blobs.
 *.pdf filter=lfs diff=lfs merge=lfs -text
 *.zip filter=lfs diff=lfs merge=lfs -text
 *.pptx filter=lfs diff=lfs merge=lfs -text
 *.wav filter=lfs diff=lfs merge=lfs -text
 *.mp3 filter=lfs diff=lfs merge=lfs -text
 *.mp4 filter=lfs diff=lfs merge=lfs -text
-*.gif filter=lfs diff=lfs merge=lfs -text
-*.jpg filter=lfs diff=lfs merge=lfs -text
-public/images/COMPSCI5012/L0-Welcome_to_the_course* -filter -diff -merge

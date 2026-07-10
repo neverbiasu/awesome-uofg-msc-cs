@@ -1,3 +1,0 @@
-2025-10-20 09:45:22 password reset user=guest@server03
-2025-10-20 09:46:00 login attempt user=root@server03 result=FAIL
-2025-10-20 09:46:45 login attempt user=guest@server03 result=SUCCESS
